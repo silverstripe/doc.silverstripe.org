@@ -23,10 +23,20 @@ Director::addRules(20, array(
 ));
 DocumentationViewer::set_link_base('');
 DocumentationViewer::$check_permission = false;
-Director::addRules(10, array(
-	'$Action' => 'DocumentationViewer',
-	'' => '->current/en/cms'
-));
+
+// Hacky, but does the job. Without checking for this,
+// all tests relying on standard URL routing will fail (e.g. ContentControllerTest)
+$isRunningTest = (
+	(isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'dev/tests') !== FALSE)
+	|| (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], 'dev/tests') !== FALSE)
+);
+if(!$isRunningTest) {
+	Director::addRules(10, array(
+		'$Action' => 'DocumentationViewer',
+		'' => '->current/en/cms'
+	));
+}
+
 DocumentationService::set_automatic_registration(false);
 DocumentationService::register("cms", realpath("../src/github/master/cms/docs/"), '2.4');
 
