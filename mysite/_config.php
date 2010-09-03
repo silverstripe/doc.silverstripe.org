@@ -38,7 +38,10 @@ if(!$isRunningTest) {
 }
 
 DocumentationService::set_automatic_registration(false);
-DocumentationService::register("cms", realpath("../src/github/master/cms/docs/"), '2.4');
+try{
+	DocumentationService::register("cms", realpath("../src/github/master/cms/docs/"), '2.4');
+} catch(InvalidArgumentException $e) {} // Silence if path is not found (for CI environment)
+
 
 // We want this to be reviewed by the whole community
 BasicAuth::protect_entire_site(false);
