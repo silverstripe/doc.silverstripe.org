@@ -35,6 +35,31 @@ pre {
 	font-size: 11px;
 }
 
+/* Headings */
+h1 .heading-anchor-link,
+h2 .heading-anchor-link,
+h3 .heading-anchor-link,
+h4 .heading-anchor-link,
+h5 .heading-anchor-link,
+h6 .heading-anchor-link {
+	display: none;
+	color: #ddd;
+	text-decoration: none;
+}
+
+	h1.hover .heading-anchor-link,
+	h2.hover .heading-anchor-link,
+	h3.hover .heading-anchor-link,
+	h4.hover .heading-anchor-link,
+	h5.hover .heading-anchor-link,
+	h6.hover .heading-anchor-link {
+		display: inline;
+	}
+	
+	.heading-anchor-link:hover {
+		color: #aaa;
+	}
+
 /* Forms */
 fieldset { border: none; }
 
