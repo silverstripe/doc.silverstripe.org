@@ -130,13 +130,13 @@ fieldset { border: none; }
 }
 	.sidebar-box ul { margin: 0; padding: 0;}
 	.sidebar-box h4 { font-size: 12px; margin-bottom: 11px;}
-	.sidebar-box ul li {	list-style: none; }
+	.sidebar-box ul li { list-style: none; }
 	.sidebar-box ul li .current { font-weight: bold;}
 		.sidebar-box ul li.h1 { margin-top: 11px; font-weight: bold;}
 		.sidebar-box ul li.h2,
 		.sidebar-box ul ul { margin-top: 8px;}
-		.sidebar-box ul li li { font-size: 11px; margin-left: 10px;}
+		.sidebar-box ul li li { font-size: 11px; }
 		.sidebar-box ul li.h3,
-		.sidebar-box ul li li li { margin-left: 20px; font-size: 10px; margin-left: 20px;}
+		.sidebar-box ul li li li { margin-left: 20px; font-size: 11px; margin-left: 20px;}
 		.sidebar-box ul li.h4,
-		.sidebar-box ul li li li li { margin-right: 30px; font-size: 10px; 	margin-left: 20px; }
+		.sidebar-box ul li li li li { margin-right: 30px; font-size: 11px; 	margin-left: 20px; }
