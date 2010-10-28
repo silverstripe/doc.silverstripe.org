@@ -9,7 +9,9 @@
 		
 		<link rel="shortcut icon" href="favicon.ico">
 		
-		<% require css(themes/ssorgsites/css/ss.all.min.css) %>
+		<% require css(themes/ssorgsites/css/ss.screen.min.css, screen) %>
+		<% require css(themes/ssorgsites/css/ss.print.min.css, print) %>
+		
 		<% require css(themes/docs/css/documentation.css) %>
 	</head>
 <body>

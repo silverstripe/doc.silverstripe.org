@@ -1,11 +1,8 @@
 /**
- * Documentation Viewer Styles.
+ * Documentation Viewer Styles. Uses the base styles from ss.screen.min.css
  *
  * @author Will Rossiter <will@silverstripe.com>
  */
-
-/* Reset */
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{ margin:0;padding: 0;}
 
 /* Core */
 html { background: #f4f4f4;}
@@ -17,15 +14,6 @@ a { color: #1389ce; text-decoration: none; }
 	
 p { font-size: 14px; line-height: 22px; margin-bottom: 22px; }
 
-ul { margin: 11px 0 22px 20px; }
-	li { font-size: 12px; line-height: 13px; margin-bottom: 8px;}
-
-
-h1 { font-size: 33px; line-height: 33px; margin-bottom: 22px; color: #111; letter-spacing: -1px;}
-h2 { font-size: 24px; line-height: 33px; margin-bottom: 11px; color: #111; }
-h3 { font-size: 18px; line-height: 22px; margin-bottom: 11px; color: #111; }
-h4 { font-size: 16px; margin-bottom: 11px; line-height: 22px;}
-h5 { font-size: 14px; line-height: 22px; margin-bottom: 11px;}
 
 pre { 
 	margin-bottom: 22px; 

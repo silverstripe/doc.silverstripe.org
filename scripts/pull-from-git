@@ -28,7 +28,7 @@ else
 	# git pull must be performed in the folder with the checkout
 	echo "Updating documentation"
 	cd $temp
-	git pull
+	git pull origin master
 	cd ../
 fi
 		
