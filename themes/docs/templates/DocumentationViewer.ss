@@ -6,8 +6,13 @@
 		<meta charset="utf-8" />
 		<title><% if Title %>$Title<% end_if %> SilverStripe Documentation</title>
 		
+		<% require javascript(sapphire/thirdparty/jquery/jquery.js) %>
+		<% require javascript(toolbar/javascript/toolbar.js?site=doc) %>
+		<% require css(toolbar/css/toolbar.css) %>
+		
 		<% require css(themes/ssorgsites/css/ss.screen.min.css, screen) %>
 		<% require css(themes/ssorgsites/css/ss.print.min.css, print) %>
+		
 		<% require themedCSS(DocumentationViewer) %>
 	</head>
 	

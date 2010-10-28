@@ -52,7 +52,7 @@ fieldset { border: none; }
 
 /* Container */
 #container { width: 960px; margin: 44px auto 22px auto; padding: 22px 30px; background: #fff; overflow: hidden; 
-				-webkit-box-shadow: 0 0 20px #ccc; -moz-box-shadow: 0 0 20px #ccc;}
+				-webkit-box-shadow: 0 0 20px #ccc; -moz-box-shadow: 0 0 20px #ccc; position: relative;}
 	
 /* Header */
 #header { padding: 11px 0 0 0; margin-bottom: 22px; }
@@ -63,7 +63,7 @@ fieldset { border: none; }
 		#header #breadcrumbs p a { color: #798D85;}
 	
 /* Language Bar */
-#language { position: absolute; top: 12px; left: 50%; margin-left: -480px; width: 960px; }
+#language { position: absolute; top: 22px; right: 30px; width: 960px; }
 	#language label { float: left; width: 830px; line-height: 19px; text-align: right; font-size: 11px; color: #999;}
 	#language select { float: right; width: 120px;}
 	#language input.action { float: right; margin-top: 4px;}
