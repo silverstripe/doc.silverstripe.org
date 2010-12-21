@@ -28,6 +28,10 @@
 				<div id="breadcrumbs">
 					<% include DocBreadcrumbs %>
 				</div>	
+				
+				<div id="search">
+					$DocumentationSearchForm
+				</div>
 			</div>
 			
 			<div id="layout">
