@@ -33,14 +33,18 @@ $isRunningTest = (
 if(!$isRunningTest) {
 	Director::addRules(10, array(
 		'$Action' => 'DocumentationViewer',
-		'' => '->current/en/cms'
+		'' => '->current/en/sapphire'
 	));
 }
 
 DocumentationService::set_automatic_registration(false);
+DocumentationSearch::enable();
+
 try{
-	DocumentationService::register("cms", realpath("../src/github/master/cms/docs/"), '2.4');
-} catch(InvalidArgumentException $e) {} // Silence if path is not found (for CI environment)
+	DocumentationService::register("sapphire", BASE_PATH ."/src/github/master/sapphire/docs/", '2.4');
+} catch(InvalidArgumentException $e) {
+	Debug::show($e);
+} // Silence if path is not found (for CI environment)
 
 
 // We want this to be reviewed by the whole community
