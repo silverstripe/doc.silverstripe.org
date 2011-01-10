@@ -22,6 +22,11 @@ pre {
 	font-size: 11px;
 }
 
+.notice {
+	background-color: #FFFBCF;
+	padding: 0 .5em;
+}
+
 /* Headings */
 h1 .heading-anchor-link,
 h2 .heading-anchor-link,
@@ -117,6 +122,15 @@ fieldset { border: none; }
 }
 
 .module { margin: 10px -; }
+
+/* Comments */
+#comments {
+	clear: both;
+}
+
+	#comments .notice {
+		font-size: 12px;
+	}
 
 /** 
  * TOC 
