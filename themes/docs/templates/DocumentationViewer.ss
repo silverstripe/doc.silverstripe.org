@@ -7,7 +7,7 @@
 		<title><% if Title %>$Title<% end_if %> SilverStripe Documentation</title>
 		
 		<% require javascript(sapphire/thirdparty/jquery/jquery.js) %>
-		<% require javascript(toolbar/javascript/toolbar.js?site=doc) %>
+		<% require javascript(toolbar/javascript/toolbar.js?site=doc&searchShow=false) %>
 		<% require css(toolbar/css/toolbar.css) %>
 		
 		<% require css(themes/ssorgsites/css/ss.screen.min.css, screen) %>
