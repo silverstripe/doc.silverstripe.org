@@ -6,6 +6,9 @@
 #
 
 test:
+	if [ ! -d "src" ]; then \
+		git clone git://github.com/chillu/silverstripe-doc-restructuring.git src/github; \
+	fi
 	$(MAKE) QUERYSTRING="$(QUERYSTRING)" -C sapphire test
 
 getallmodules:
