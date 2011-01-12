@@ -24,11 +24,6 @@ pre {
 }
 .clear { clear: both; }
 
-.notice {
-	background-color: #FFFBCF;
-	padding: 0 .5em;
-}
-
 /* Headings */
 h1 .heading-anchor-link,
 h2 .heading-anchor-link,
@@ -53,65 +48,6 @@ h6 .heading-anchor-link {
 	.heading-anchor-link:hover {
 		color: #aaa;
 	}
-		
-table { background-color: #F8f9fa; margin-bottom: 18px; }
-td { padding: 0 9px; }
-tr:nth-child(even) {background: #e9efef; }
-
-/* Messages */
-.hint h5, .notice h5, .warning h5, .info h5 { margin-bottom: 0px; }
-.hint a.close, .notice a.close, .warning a.close, .info a.close {
-	background:url("../../ssorgsites/images/ico_close_off.png") no-repeat scroll left top transparent;
-	display:block;
-	font-size:0;
-	height:11px;
-	position:absolute;
-	right:3px;
-	text-indent:-9999px;
-	top:3px;
-	width:11px;
-}
-
-.hint {
-	border: 1px solid #a5b5b0;
-	padding: 13px 10px 0px 50px;
-	clear: both;
-	margin: 9px 0 18px;
-	background: #f9fafa url(../../ssorgsites/images/lightbulb.png) no-repeat 14px 14px;
-}
-.pageSkip {
-	background-color: #f9fafa;
-	border: 1px solid #a5b5b0;
-	padding: 8px 10px 8px 10px;
-	text-align: center;
-	margin: 9px 0 18px;
-}
-.notice {
-	border: 1px solid #D3C200;
-	padding: 13px 10px 0px 50px;
-	margin: 9px 0 18px;
-	position: relative;
-	background: #FFFAC6 url(../../ssorgsites/images/warning2.png) no-repeat 11px 11px;
-}
-	p.notice {
-		padding-bottom: 18px;
-	}
-.warning {
-	border: 1px solid #f8c3cd;
-	padding: 13px 10px 0px 50px;
-	clear: both;
-	margin: 9px 0 18px;
-	position: relative;
-	background: #fdf1f3 url(../../ssorgsites/images/error_button.png) no-repeat 11px 11px;
-}
-.info {
-	border: 1px solid #6baad8;
-	padding: 13px 10px 0px 50px;
-	clear: both;
-	margin: 9px 0 18px;
-	position: relative;
-	background: #f7fcff url(../../ssorgsites/images/info_button.png) no-repeat 11px 11px;
-}
 
 /* Forms */
 fieldset { border: none; }
@@ -289,27 +225,3 @@ a.ssLogo:hover { background: #fff url(../../ssorgsites/images/logo.png) no-repea
 	cursor: pointer;
 	background: url(../../ssorgsites/images/search.png) top right no-repeat;
 }
-
-/**
- * Pagination results
- */
-ul.pagination {
-	margin: 27px 0;	
-}
-	ul.pagination li {
-		display: inline;
-		background: none;
-		padding-left: 0px;
-		padding-right: 4px;
-	}
-	.pagination li strong, .pagination li a {
-		padding: 1px 4px;
-	}
-	.pagination li.active strong {
-		background-color: #c3dbd4;
-	}
-	.pagination li a:hover {
-		background-color: #0973A6;
-		color: #fff;
-		text-decoration: none;
-	}

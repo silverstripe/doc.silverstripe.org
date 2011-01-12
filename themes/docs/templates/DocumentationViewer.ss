@@ -59,6 +59,7 @@
 				</div>
 				
 				<div id="content" class="typography">
+					<!--
 					<div class="info">
 						<h5>This is a info message</h5>
 						<p>Vivamus scelerisque, lacus non elementum vestibulum, eros odio gravida sem, vitae hendrerit leo velit in eros.</p>
@@ -80,8 +81,11 @@ If some of your projects still use this version, consider <a href="">upgrading a
 						<h5>Tip: See also...</h5>
 						<p>This is an example of a hint to help users who are finding difficulty in understanding the full concept <a href="#">link to surporting document</a>.</p>
 					</div>
+					-->
+					
 					$Layout
 					
+					<!--
 					<h4>Table</h4>
 					<table>
 						<thead>
@@ -112,7 +116,7 @@ If some of your projects still use this version, consider <a href="">upgrading a
 			            <a href="">Next Page &raquo;</a>
     				</div>
     				
-    				
+    			-->	
 				</div>
 				
 				<div id="comments">
