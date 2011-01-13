@@ -44,11 +44,11 @@
 					<div id="search">
 						$DocumentationSearchForm
 					</div>
+					
+					<% if Versions %>
 					<div id="versions-nav">
 						<h2>Versions:</h2>
-						
-						<!--
-<ul>
+							<ul>
 							<% control Versions %>
 								<% if MajorRelease %>
 									<li class="major-release"><a href="$Link" class="$LinkingMode">$Title</a></li>
@@ -57,100 +57,13 @@
 								<% end_if %>
 							<% end_control %>
 						</ul>
--->
-						<ul>
-							<li class="major-release"><a href="$Link" class="$LinkingMode">2.2</a></li>
-							<li class="major-release current">2.4</li>
-							<li class="major-release"><a href="$Link" class="$LinkingMode">3.0</a></li>
-							<li class="module-only"><a href="$Link" class="$LinkingMode">1.3.2</a></li>
-						</ul>
 					</div>
+					<% end_if %>
+					
 				</div>
 				
 				<div id="content" class="typography">
-					
-					
-<div class="warningBox">
-						<div class="warningBoxTop">
-							<h1>We're sorry&#8230;</h1>
-							<p>The page you are looking for might have moved, no longer exists or is not currently available.</p>
-							<h5>Perhaps you could&#8230;</h5>
-							<p>return to the <a href="#">homepage</a> or <a href="#">try searching</a>.</p>
-							<h5>Search results for similar/related phrases</h5>
-							<ul class="resetStyle">
-								<li><a href="#">Installing</a></li>
-								<li><a href="#">Upgrading</a></li>
-								<li><a href="#">Server-requirements</a></li>
-								<li><a href="#">Suggested-web-hosts</a></li>
-							</ul>
-						</div>
-						<div class="warningBoxBottom">
-							
-							<ul>
-								<li><a href="#">Report a missing link</a></li>
-								<li><a href="#">Report a bug or a concren</a></li>
-							</ul>
-						</div>
-					</div>
-				<!--
-					<div class="info">
-						<h5>This is a info message</h5>
-						<p>Vivamus scelerisque, lacus non elementum vestibulum, eros odio gravida sem, vitae hendrerit leo velit in eros.</p>
-						<a href="#" class="close" title="Close notification">close</a>
-					</div>
-					<div class="notice">
-						<h5>This is a notification</h5>
-						<p>You are currently browsing the SilverStripe documentation for the 2.3 version. You can switch to another version: <a href="#">2.2</a>, <a href="#">2.3.6</a>, <a href="#">2.4</a>
-</p>
-						<a href="#" class="close" title="Close notification">close</a>
-					</div>
-					<div class="warning">
-						<h5>This is a warning message</h5>
-						<p>This version of SilverStripe is no longer maintained anymore.
-If some of your projects still use this version, consider <a href="">upgrading as soon as possible</a>.</p>
-						<a href="#" class="close" title="Close notification">close</a>
-					</div>
-					<div class="hint">
-						<h5>Tip: See also...</h5>
-						<p>This is an example of a hint to help users who are finding difficulty in understanding the full concept <a href="#">link to surporting document</a>.</p>
-					</div>
--->
-					
-					
 					$Layout
-					
-					<!--
-					<h4>Table</h4>
-					<table>
-						<thead>
-							<tr>
-								<td>Id</td><td>Model</td><td>Foreign Key</td><td>Key Data</td>
-							</tr>
-						</thead>
-						<tr>
-							<td>1</td><td>Resource</td><td>schema</td><td>2009-02-25</td>
-						</tr>
-						<tr>
-							<td>1</td><td>Resource</td><td>schema</td><td>2009-02-25</td>
-						</tr>
-						<tr>
-							<td>1</td><td>Resource</td><td>schema</td><td>2009-02-25</td>
-						</tr>
-						<tr>
-							<td>1</td><td>Resource</td><td>schema</td><td>2009-02-25</td>
-						</tr>
-						<tr>
-							<td>1</td><td>Resource</td><td>schema</td><td>2009-02-25</td>
-						</tr>
-					</table>
-					
-					<div class="pageSkip message">
-			            <a href="">&laquo; Previous Page</a> 
-			            <span class="separator">|</span>
-			            <a href="">Next Page &raquo;</a>
-    				</div>
-    				
-    			-->	
 				</div>
 				
 				<div id="comments">
