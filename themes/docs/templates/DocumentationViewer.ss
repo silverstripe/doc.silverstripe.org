@@ -4,7 +4,7 @@
 	<head>
 		<% base_tag %>
 		<meta charset="utf-8" />
-		<title><% if Title %>$Title<% end_if %> SilverStripe Documentation</title>
+		<title><% if PageTitle %>$PageTitle <% end_if %>SilverStripe Documentation</title>
 		
 		<% require javascript(sapphire/thirdparty/jquery/jquery.js) %>
 		<% require javascript(toolbar/javascript/toolbar.js?site=doc&searchShow=false) %>
