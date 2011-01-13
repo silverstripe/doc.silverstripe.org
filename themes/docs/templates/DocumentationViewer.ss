@@ -24,7 +24,7 @@
 				</div>
 				
 				<h1>
-					<a href="http://www.silverstripe.com" title="Visit SilverStripe.com" class="ssLogo">&nbsp;</a>
+					<a href="http://www.silverstripe.org" title="Visit SilverStripe.org" class="ssLogo">&nbsp;</a>
 					<a href="$Link" title="Documentation"><span><% _t('SILVERSTRIPEDOCUMENTATION', 'Documentation') %></span></a>
 				</h1>
 				
