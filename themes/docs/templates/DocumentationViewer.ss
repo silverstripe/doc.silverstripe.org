@@ -24,15 +24,11 @@
 				</div>
 				
 				<h1>
-					<a href="http://www.silverstripe.com" class="ssLogo">
-						<!-- <img alt="SilverStripe" src="themes/ssorgsites/images/logo.png" height=""> -->
-					</a>
-					<a href="$Link"><span><% _t('SILVERSTRIPEDOCUMENTATION', 'Documentation') %></span></a>
+					<a href="http://www.silverstripe.com" title="Visit SilverStripe.com" class="ssLogo">&nbsp;</a>
+					<a href="$Link" title="Documentation"><span><% _t('SILVERSTRIPEDOCUMENTATION', 'Documentation') %></span></a>
 				</h1>
 				
-				<div id="search">
-					$DocumentationSearchForm
-				</div>
+				
 				<div id="breadcrumbs">
 					<% include DocBreadcrumbs %>
 				</div>
@@ -44,22 +40,59 @@
 			
 			
 			<div id="layout">
-				<div id="versions-nav">
-					<h2>Versions:</h2>
-					
-					<ul>
-						<% control Versions %>
-							<% if MajorRelease %>
-								<li class="major-release"><a href="$Link" class="$LinkingMode">$Title</a></li>
-							<% else %>
-								<li class="module-only"><a href="$Link" class="$LinkingMode">$Title</a></li>
-							<% end_if %>
-						<% end_control %>
-					</ul>
+				<div class="searchBar">
+					<div id="search">
+						$DocumentationSearchForm
+					</div>
+					<div id="versions-nav">
+						<h2>Versions:</h2>
+						
+						<!--
+<ul>
+							<% control Versions %>
+								<% if MajorRelease %>
+									<li class="major-release"><a href="$Link" class="$LinkingMode">$Title</a></li>
+								<% else %>
+									<li class="module-only"><a href="$Link" class="$LinkingMode">$Title</a></li>
+								<% end_if %>
+							<% end_control %>
+						</ul>
+-->
+						<ul>
+							<li class="major-release"><a href="$Link" class="$LinkingMode">2.2</a></li>
+							<li class="major-release current">2.4</li>
+							<li class="major-release"><a href="$Link" class="$LinkingMode">3.0</a></li>
+							<li class="module-only"><a href="$Link" class="$LinkingMode">1.3.2</a></li>
+						</ul>
+					</div>
 				</div>
 				
 				<div id="content" class="typography">
-					<!--
+					
+					
+<div class="warningBox">
+						<div class="warningBoxTop">
+							<h1>We're sorry&#8230;</h1>
+							<p>The page you are looking for might have moved, no longer exists or is not currently available.</p>
+							<h5>Perhaps you could&#8230;</h5>
+							<p>return to the <a href="#">homepage</a> or <a href="#">try searching</a>.</p>
+							<h5>Search results for similar/related phrases</h5>
+							<ul class="resetStyle">
+								<li><a href="#">Installing</a></li>
+								<li><a href="#">Upgrading</a></li>
+								<li><a href="#">Server-requirements</a></li>
+								<li><a href="#">Suggested-web-hosts</a></li>
+							</ul>
+						</div>
+						<div class="warningBoxBottom">
+							
+							<ul>
+								<li><a href="#">Report a missing link</a></li>
+								<li><a href="#">Report a bug or a concren</a></li>
+							</ul>
+						</div>
+					</div>
+				<!--
 					<div class="info">
 						<h5>This is a info message</h5>
 						<p>Vivamus scelerisque, lacus non elementum vestibulum, eros odio gravida sem, vitae hendrerit leo velit in eros.</p>
@@ -81,7 +114,8 @@ If some of your projects still use this version, consider <a href="">upgrading a
 						<h5>Tip: See also...</h5>
 						<p>This is an example of a hint to help users who are finding difficulty in understanding the full concept <a href="#">link to surporting document</a>.</p>
 					</div>
-					-->
+-->
+					
 					
 					$Layout
 					
