@@ -49,3 +49,8 @@ try{
 
 // We want this to be reviewed by the whole community
 BasicAuth::protect_entire_site(false);
+
+Object::add_extension('DocumentationViewer', 'DocumentationViewerExtension');
+if(Director::isLive()) {
+	DocumentationViewerExtension::$google_analytics_code = 'UA-84547-8';
+}
