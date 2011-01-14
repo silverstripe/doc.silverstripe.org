@@ -33,7 +33,7 @@ $isRunningTest = (
 if(!$isRunningTest) {
 	Director::addRules(10, array(
 		'$Action' => 'DocumentationViewer',
-		'' => '->current/en/sapphire'
+		'' => '->sapphire/en/'
 	));
 }
 
