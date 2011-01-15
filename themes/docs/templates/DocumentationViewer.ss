@@ -79,7 +79,7 @@
 		</div>
 		
 		<div id="footer">
-			<p>Documentation powered by <a href="http://www.silverstripe.org">SilverStripe</a>. <a href="http://github.com/chillu/silverstripe-doc-restructuring">Contribute to the Documentation Project</a>.
+			<p>Documentation powered by <a href="http://www.silverstripe.org">SilverStripe</a>. <a href="{$BaseHref}sapphire/en/misc/contributing/#Writing-Documentation">Contribute to doc.silverstripe.org</a>, <a href="http://open.silverstripe.org/newticket/?component=Documentation">raise a bug or enhancement ticket</a>.
 			<br />Except where otherwise noted, content on this wiki is licensed under <a class="urlextern" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">CC Attribution-Noncommercial-Share Alike 3.0 Unported</a><a href="http://creativecommons.org/licenses/by/3.0/nz/" rel="license"><img class="ccLogo" src="http://i.creativecommons.org/l/by/3.0/nz/80x15.png" style="border-width: 0pt;" alt="Creative Commons License"></a></p>
 		</div>
 		
