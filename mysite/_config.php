@@ -43,7 +43,6 @@ DocumentationSearch::enable();
 try{
 	DocumentationService::register("sapphire", BASE_PATH ."/src/github/master/sapphire/docs/", '2.4');
 } catch(InvalidArgumentException $e) {
-	Debug::show($e);
 } // Silence if path is not found (for CI environment)
 
 
