@@ -206,6 +206,7 @@ a.ssLogo:hover { background: #fff url(../../ssorgsites/images/logo.png) no-repea
 	border-top:1px solid #E6EBE9;
 	border-bottom:1px solid #E6EBE9;
 	margin-bottom: 34px;
+	height: 38px;
 } 
 #search {
 	float: right;
