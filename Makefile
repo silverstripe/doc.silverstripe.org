@@ -5,6 +5,10 @@
 # Most users should simply visit the site root in your web browser.
 #
 
+update:
+	cd $(CURDIR)/src/github/; git pull
+	cd $(CURDIR); php sapphire/cli-script.php dev/tasks/RebuildLuceneDocsIndex flush=1
+
 test:
 	if [ ! -d "src" ]; then \
 		git clone git://github.com/chillu/silverstripe-doc-restructuring.git src/github; \
