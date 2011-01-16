@@ -1,0 +1,189 @@
+<Files *.ss>
+	Order deny,allow
+	Deny from all
+	Allow from 127.0.0.1
+</Files>
+
+<Files web.config>
+	Order deny,allow
+	Deny from all
+</Files>
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	
+	# Redirect legacy URLs (assumes we're not redirecting other assets, for performance reasons)
+	# Note: Just works on top-level domains, not if the webroot is in a subfolder
+	RewriteCond %{REQUEST_URI} ^(.*)$
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt)$
+	#RewriteRule ^execution-pipeline$ http://doc.silverstripe.org/current/en/sapphire/reference/ [R=301,L]
+	RewriteRule ^arraydata$ http://api.silverstripe.org/search/lookup/?q=ArrayData&module=sapphire [R=301,L]
+	RewriteRule ^autocompletefield$ http://api.silverstripe.org/search/lookup/?q=AutocompleteField&module=sapphire [R=301,L]
+	RewriteRule ^bbcode$ http://doc.silverstripe.org/current/en/sapphire/reference/ [R=301,L]
+	RewriteRule ^building-for-modularity$ http://doc.silverstripe.org/current/en/sapphire/topics/module-development [R=301,L]
+	RewriteRule ^built-in-page-controls$ http://doc.silverstripe.org/current/en/sapphire/reference/built-in-page-controls [R=301,L]
+	RewriteRule ^cache-control$ http://wiki.silverstripe.org/howto:cache-control [R=301,L]
+	RewriteRule ^casting$ http://doc.silverstripe.org/current/en/sapphire/topics/data-types [R=301,L]
+	RewriteRule ^checkboxfield$ http://api.silverstripe.org/search/lookup/?q=CheckboxField&module=sapphire [R=301,L]
+	RewriteRule ^checkboxsetfield$ http://api.silverstripe.org/search/lookup/?q=CheckboxSetField&module=sapphire [R=301,L]
+	RewriteRule ^cmsmain$ http://doc.silverstripe.org/current/en/sapphire/topics/extending-the-cms [R=301,L]
+	RewriteRule ^cmsmenu$ http://api.silverstripe.org/search/lookup/?q=CMSMenu&module=sapphire [R=301,L]
+	RewriteRule ^common-problems$ http://doc.silverstripe.org/current/en/sapphire/installation/common-problems [R=301,L]
+	RewriteRule ^complextablefield$ http://doc.silverstripe.org/current/en/sapphire/reference/complextablefield [R=301,L]
+	RewriteRule ^compositefield$ http://api.silverstripe.org/search/lookup/?q=CompositeField&module=sapphire [R=301,L]
+	RewriteRule ^configuration$ http://doc.silverstripe.org/current/en/sapphire/topics/configuration [R=301,L]
+	RewriteRule ^controller$ http://doc.silverstripe.org/current/en/sapphire/topics/controller [R=301,L]
+	RewriteRule ^controllers$ http://doc.silverstripe.org/current/en/sapphire/topics/controller [R=301,L]
+	RewriteRule ^creating-modules$ http://doc.silverstripe.org/current/en/sapphire/topics/module-development [R=301,L]
+	RewriteRule ^css$ http://doc.silverstripe.org/current/en/sapphire/reference/theme-development [R=301,L]
+	RewriteRule ^csvbulkloader$ http://api.silverstripe.org/search/lookup/?q=CSVBulkLoader&module=sapphire [R=301,L]
+	RewriteRule ^currencyfield$ http://api.silverstripe.org/search/lookup/?q=CurrencyField&module=sapphire [R=301,L]
+	RewriteRule ^data-types$ http://doc.silverstripe.org/current/en/sapphire/topics/data-types [R=301,L]
+	RewriteRule ^database-structure$ http://doc.silverstripe.org/current/en/sapphire/reference/database-structure [R=301,L]
+	RewriteRule ^database-troubleshooting$ http://doc.silverstripe.org/current/en/sapphire/reference/database-troubleshooting [R=301,L]
+	RewriteRule ^datamodel$ http://doc.silverstripe.org/current/en/sapphire/topics/datamodel [R=301,L]
+	RewriteRule ^dataobject$ http://doc.silverstripe.org/current/en/sapphire/reference/dataobject [R=301,L]
+	RewriteRule ^dataobjectdecorator$ http://doc.silverstripe.org/current/en/sapphire/reference/dataobjectdecorator [R=301,L]
+	RewriteRule ^dataobjectset$ http://doc.silverstripe.org/current/en/sapphire/reference/dataobjectset [R=301,L]
+	RewriteRule ^datefield$ http://api.silverstripe.org/search/lookup/?q=DateField&module=sapphire [R=301,L]
+	RewriteRule ^debugging$ http://doc.silverstripe.org/current/en/sapphire/topics/debugging [R=301,L]
+	RewriteRule ^deprecation$ http://doc.silverstripe.org/current/en/sapphire/misc/release-process [R=301,L]
+	RewriteRule ^director$ http://api.silverstripe.org/search/lookup/?q=Director&module=sapphire [R=301,L]
+	RewriteRule ^directory-structure$ http://doc.silverstripe.org/current/en/sapphire/topics/directory-structure [R=301,L]
+	RewriteRule ^documentation-guidelines$ http://doc.silverstripe.org/current/en/sapphire/misc/contributing [R=301,L]
+	RewriteRule ^dropdownfield$ http://api.silverstripe.org/search/lookup/?q=DropdownField&module=sapphire [R=301,L]
+	RewriteRule ^email$ http://doc.silverstripe.org/current/en/sapphire/topics/email [R=301,L]
+	RewriteRule ^emailfield$ http://api.silverstripe.org/search/lookup/?q=EmailField&module=sapphire [R=301,L]
+	RewriteRule ^environment-management$ http://doc.silverstripe.org/current/en/sapphire/topics/environment-management [R=301,L]
+	RewriteRule ^error-handling$ http://doc.silverstripe.org/current/en/sapphire/topics/error-handling [R=301,L]
+	RewriteRule ^escape-types$ http://doc.silverstripe.org/current/en/sapphire/topics/security [R=301,L]
+	RewriteRule ^fieldgroup$ http://api.silverstripe.org/search/lookup/?q=FieldGroup&module=sapphire [R=301,L]
+	RewriteRule ^filefield$ http://api.silverstripe.org/search/lookup/?q=FileField&module=sapphire [R=301,L]
+	RewriteRule ^form$ http://doc.silverstripe.org/current/en/sapphire/topics/forms [R=301,L]
+	RewriteRule ^form-field-types$ http://doc.silverstripe.org/current/en/sapphire/reference/form-field-types [R=301,L]
+	RewriteRule ^form-validation$ http://doc.silverstripe.org/current/en/sapphire/topics/form-validation [R=301,L]
+	RewriteRule ^formaction$ http://api.silverstripe.org/search/lookup/?q=FormAction&module=sapphire [R=301,L]
+	RewriteRule ^functionaltest$ http://api.silverstripe.org/search/lookup/?q=FunctionalTest&module=sapphire [R=301,L]
+	RewriteRule ^hasmanycomplextablefield$ http://api.silverstripe.org/search/lookup/?q=HasManyComplexTableField&module=sapphire [R=301,L]
+	RewriteRule ^hasonecomplextablefield$ http://api.silverstripe.org/search/lookup/?q=HasOneComplexTableField&module=sapphire [R=301,L]
+	RewriteRule ^headerfield$ http://api.silverstripe.org/search/lookup/?q=HeaderField&module=sapphire [R=301,L]
+	RewriteRule ^hiddenfield$ http://api.silverstripe.org/search/lookup/?q=HiddenField&module=sapphire [R=301,L]
+	RewriteRule ^hierarchy$ http://api.silverstripe.org/search/lookup/?q=Hierarchy&module=sapphire [R=301,L]
+	RewriteRule ^how-page-security-works$ http://doc.silverstripe.org/current/en/sapphire/topics/security [R=301,L]
+	RewriteRule ^html$ http://doc.silverstripe.org/current/en/sapphire/topics/theme-development [R=301,L]
+	RewriteRule ^htmleditorconfig$ http://api.silverstripe.org/search/lookup/?q=HTMLEditorConfig&module=sapphire [R=301,L]
+	RewriteRule ^htmleditorfield$ http://api.silverstripe.org/search/lookup/?q=HTMLEditorField&module=sapphire [R=301,L]
+	RewriteRule ^i18n$ http://doc.silverstripe.org/current/en/sapphire/topics/i18n [R=301,L]
+	RewriteRule ^image$ http://doc.silverstripe.org/current/en/sapphire/reference/image [R=301,L]
+	RewriteRule ^imagefield$ http://api.silverstripe.org/search/lookup/?q=ImageField&module=sapphire [R=301,L]
+	RewriteRule ^installation$ http://doc.silverstripe.org/current/en/sapphire/ [R=301,L]
+	RewriteRule ^installation-on-lighttpd$ http://doc.silverstripe.org/current/en/sapphire/installation/lighttpd [R=301,L]
+	RewriteRule ^installation-on-mac-osx$ http://doc.silverstripe.org/current/en/sapphire/installation/mac-osx [R=301,L]
+	RewriteRule ^installation-on-nginx$ http://doc.silverstripe.org/current/en/sapphire/installation/nginx [R=301,L]
+	RewriteRule ^installation-on-webserver$ http://doc.silverstripe.org/current/en/sapphire/installation/webserver [R=301,L]
+	RewriteRule ^installation-on-windows-manual-iis$ http://doc.silverstripe.org/current/en/sapphire/installation/windows-manual-iis [R=301,L]
+	RewriteRule ^installation-on-windows-pi$ http://doc.silverstripe.org/current/en/sapphire/installation/windows-pi [R=301,L]
+	RewriteRule ^installation-on-windows-wamp$ http://doc.silverstripe.org/current/en/sapphire/installation/windows-wamp [R=301,L]
+	RewriteRule ^installing-modules$ http://doc.silverstripe.org/current/en/sapphire/topics/modules [R=301,L]
+	RewriteRule ^javascript$ http://doc.silverstripe.org/current/en/sapphire/reference/javascript [R=301,L]
+	RewriteRule ^labelfield$ http://api.silverstripe.org/search/lookup/?q=LabelField&module=sapphire [R=301,L]
+	RewriteRule ^languagedropdownfield$ http://api.silverstripe.org/search/lookup/?q=LanguageDropdownField&module=sapphire [R=301,L]
+	RewriteRule ^leftandmain$ http://doc.silverstripe.org/current/en/sapphire/reference/leftandmain [R=301,L]
+	RewriteRule ^listboxfield$ http://api.silverstripe.org/search/lookup/?q=ListBoxField&module=sapphire [R=301,L]
+	RewriteRule ^literalfield$ http://api.silverstripe.org/search/lookup/?q=LiteralField&module=sapphire [R=301,L]
+	RewriteRule ^manifestbuilder$ http://api.silverstripe.org/search/lookup/?q=ManifestBuilder&module=sapphire [R=301,L]
+	RewriteRule ^member$ http://doc.silverstripe.org/current/en/sapphire/reference/member [R=301,L]
+	RewriteRule ^modeladmin$ http://doc.silverstripe.org/current/en/sapphire/reference/modeladmin [R=301,L]
+	RewriteRule ^module-releases$ http://doc.silverstripe.org/current/en/sapphire/misc/module-release-process [R=301,L]
+	RewriteRule ^module-maintainers$ http://doc.silverstripe.org/current/en/sapphire/misc/module-release-process [R=301,L]
+	RewriteRule ^multilingualcontent$ http://doc.silverstripe.org/current/en/sapphire/topics/translation [R=301,L]
+	RewriteRule ^numericfield$ http://api.silverstripe.org/search/lookup/?q=NumericField&module=sapphire [R=301,L]
+	RewriteRule ^object$ http://api.silverstripe.org/search/lookup/?q=Object&module=sapphire [R=301,L]
+	RewriteRule ^objectmodel$ http://doc.silverstripe.org/current/en/sapphire/topics/datamodel [R=301,L]
+	RewriteRule ^optionsetfield$ http://api.silverstripe.org/search/lookup/?q=OptionSetField&module=sapphire [R=301,L]
+	RewriteRule ^page$ http://doc.silverstripe.org/current/en/sapphire/reference/page-types [R=301,L]
+	RewriteRule ^page-types$ http://doc.silverstripe.org/current/en/sapphire/topics/page-types [R=301,L]
+	RewriteRule ^pagecomment$ http://api.silverstripe.org/search/lookup/?q=PageComment&module=sapphire [R=301,L]
+	RewriteRule ^partial-caching$ http://doc.silverstripe.org/current/en/sapphire/reference/partial-caching [R=301,L]
+	RewriteRule ^passwordfield$ http://api.silverstripe.org/search/lookup/?q=PasswordField&module=sapphire [R=301,L]
+	RewriteRule ^permission$ http://doc.silverstripe.org/current/en/sapphire/reference/permission [R=301,L]
+	RewriteRule ^readonlyfield$ http://api.silverstripe.org/search/lookup/?q=ReadonlyField&module=sapphire [R=301,L]
+	RewriteRule ^releases$ http://doc.silverstripe.org/current/en/sapphire/misc/release-process [R=301,L]
+	RewriteRule ^requirements$ http://doc.silverstripe.org/current/en/sapphire/reference/requirements [R=301,L]
+	RewriteRule ^restfulserver$ http://api.silverstripe.org/search/lookup/?q=RestfulServer&module=sapphire [R=301,L]
+	RewriteRule ^restfulservice$ http://doc.silverstripe.org/current/en/sapphire/reference/restfulservice [R=301,L]
+	RewriteRule ^rssfeed$ http://doc.silverstripe.org/current/en/sapphire/reference/rssfeed [R=301,L]
+	RewriteRule ^sake$ http://doc.silverstripe.org/current/en/sapphire/topics/commandline [R=301,L]
+	RewriteRule ^searchcontext$ http://doc.silverstripe.org/current/en/sapphire/topics/search [R=301,L]
+	RewriteRule ^searchform$ http://doc.silverstripe.org/current/en/sapphire/topics/search [R=301,L]
+	RewriteRule ^secure-development$ http://doc.silverstripe.org/current/en/sapphire/topics/security [R=301,L]
+	RewriteRule ^security$ http://doc.silverstripe.org/current/en/sapphire/topics/security [R=301,L]
+	RewriteRule ^selectiongroup$ http://api.silverstripe.org/search/lookup/?q=SelectionGroup&module=sapphire [R=301,L]
+	RewriteRule ^server-requirements$ http://doc.silverstripe.org/current/en/sapphire/installation/server-requirements [R=301,L]
+	RewriteRule ^sessions$ http://api.silverstripe.org/search/lookup/?q=Session&module=sapphire [R=301,L]
+	RewriteRule ^shortcodes$ http://doc.silverstripe.org/current/en/sapphire/reference/bbcode [R=301,L]
+	RewriteRule ^siteconfig$ http://doc.silverstripe.org/current/en/sapphire/reference/siteconfig [R=301,L]
+	RewriteRule ^sitetree$ http://doc.silverstripe.org/current/en/sapphire/reference/sitetree [R=301,L]
+	RewriteRule ^sqlquery$ http://doc.silverstripe.org/current/en/sapphire/reference/sqlquery [R=301,L]
+	RewriteRule ^start$ http://doc.silverstripe.org/current/en/sapphire/ [R=301,L]
+	RewriteRule ^staticexporter$ http://api.silverstripe.org/search/lookup/?q=StaticExporter&module=sapphire [R=301,L]
+	RewriteRule ^staticpublisher$ http://doc.silverstripe.org/current/en/sapphire/reference/staticpublisher [R=301,L]
+	RewriteRule ^tab$ http://api.silverstripe.org/search/lookup/?q=Tab&module=sapphire [R=301,L]
+	RewriteRule ^tablefield$ http://doc.silverstripe.org/current/en/sapphire/reference/tablefield [R=301,L]
+	RewriteRule ^tablelistfield$ http://doc.silverstripe.org/current/en/sapphire/reference/tablelistfield [R=301,L]
+	RewriteRule ^tabset$ http://api.silverstripe.org/search/lookup/?q=TabSet&module=sapphire [R=301,L]
+	RewriteRule ^templates$ http://doc.silverstripe.org/current/en/sapphire/topics/templates [R=301,L]
+	RewriteRule ^testing-guide$ http://doc.silverstripe.org/current/en/sapphire/topics/testing/ [R=301,L]
+	RewriteRule ^testing-guide-glossary$ http://doc.silverstripe.org/current/en/sapphire/topics/testing/ [R=301,L]
+	RewriteRule ^testing-guide-intro$ http://doc.silverstripe.org/current/en/sapphire/topics/testing/testing-guide [R=301,L]
+	RewriteRule ^testing-guide-troubleshooting$ http://doc.silverstripe.org/current/en/sapphire/topics/testing/testing-guide-troubleshooting [R=301,L]
+	RewriteRule ^testing-howto:create-functional-test$ http://doc.silverstripe.org/current/en/sapphire/topics/testing/create-functional-test [R=301,L]
+	RewriteRule ^testing-howto:create-sapphire-test$ http://doc.silverstripe.org/current/en/sapphire/topics/testing/create-sapphire-test [R=301,L]
+	RewriteRule ^testing-howto:test-email-sending$ http://doc.silverstripe.org/current/en/sapphire/topics/testing/email-sending [R=301,L]
+	RewriteRule ^textareafield$ http://api.silverstripe.org/search/lookup/?q=TextAreaField&module=sapphire [R=301,L]
+	RewriteRule ^textfield$ http://api.silverstripe.org/search/lookup/?q=TextField&module=sapphire [R=301,L]
+	RewriteRule ^themes$ http://doc.silverstripe.org/current/en/sapphire/topics/themes [R=301,L]
+	RewriteRule ^translation$ http://doc.silverstripe.org/current/en/sapphire/topics/translation [R=301,L]
+	RewriteRule ^translatable$ http://doc.silverstripe.org/current/en/sapphire/topics/translation [R=301,L]
+	RewriteRule ^treedropdownfield$ http://api.silverstripe.org/search/lookup/?q=TreeDropdownField&module=sapphire [R=301,L]
+	RewriteRule ^treemultiselectfield$ http://api.silverstripe.org/search/lookup/?q=TreeMultiSelectField&module=sapphire [R=301,L]
+	RewriteRule ^tutorial:1-building-a-basic-site$ http://doc.silverstripe.org/current/en/sapphire/tutorials/1-building-a-basic-site [R=301,L]
+	RewriteRule ^tutorial:2-extending-a-basic-site$ http://doc.silverstripe.org/current/en/sapphire/tutorials/2-extending-a-basic-site [R=301,L]
+	RewriteRule ^tutorial:3-forms$ http://doc.silverstripe.org/current/en/sapphire/tutorials/3-forms [R=301,L]
+	RewriteRule ^tutorial:4-site-search$ http://doc.silverstripe.org/current/en/sapphire/tutorials/4-site-search [R=301,L]
+	RewriteRule ^tutorial:5-dataobject-relationship-management$ http://doc.silverstripe.org/current/en/sapphire/tutorials/5-dataobject-relationship-management [R=301,L]
+	RewriteRule ^tutorials$ http://doc.silverstripe.org/current/en/sapphire/tutorials/ [R=301,L]
+	RewriteRule ^tutorials$ http://doc.silverstripe.org/current/en/sapphire/tutorials/ [R=301,L]
+	RewriteRule ^typography$ http://doc.silverstripe.org/current/en/sapphire/reference/typography [R=301,L]
+	RewriteRule ^upgrading$ http://doc.silverstripe.org/current/en/sapphire/installation/upgrading [R=301,L]
+	RewriteRule ^upgrading$ http://doc.silverstripe.org/current/en/sapphire/installation/upgrading/ [R=301,L]
+	RewriteRule ^urlvariabletools$ http://doc.silverstripe.org/current/en/sapphire/reference/urlvariabletools [R=301,L]
+	RewriteRule ^validator$ http://api.silverstripe.org/search/lookup/?q=Validator&module=sapphire [R=301,L]
+	RewriteRule ^versioned$ http://doc.silverstripe.org/current/en/sapphire/reference/versioned [R=301,L]
+	RewriteRule ^virtualpage$ http://api.silverstripe.org/search/lookup/?q=VirtualPage&module=sapphire [R=301,L]
+	RewriteRule ^widgets$ http://doc.silverstripe.org/current/en/sapphire/topics/widgets [R=301,L]
+
+
+	RewriteCond %{REQUEST_URI} ^(.*)$
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt)$
+	RewriteRule .* sapphire/main.php?url=%1&%{QUERY_STRING} [L]
+</IfModule>
+
+ErrorDocument 404 /assets/error-404.html
+ErrorDocument 500 /assets/error-500.html
+
+FileETag INode MTime
+
+<IfModule mod_expires.c>
+ExpiresActive on
+ExpiresByType image/* "access plus 7 days"
+ExpiresByType text/css "access plus 7 days"
+ExpiresByType application/x-javascript "access plus 7 days"
+ExpiresByType application/javascript "access plus 7 days"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  SetOutputFilter DEFLATE
+</IfModule>
