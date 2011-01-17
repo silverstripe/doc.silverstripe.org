@@ -10,10 +10,7 @@ update:
 	cd $(CURDIR); php sapphire/cli-script.php dev/tasks/RebuildLuceneDocsIndex flush=1
 
 test:
-	if [ ! -d "src" ]; then \
-		git clone git://github.com/chillu/silverstripe-doc-restructuring.git src/github; \
-	fi
-	$(MAKE) QUERYSTRING="$(QUERYSTRING)" -C sapphire test
+	$(MAKE) QUERYSTRING="$(QUERYSTRING)&SkipTests=RestfulServiceTest" -C sapphire test
 
 getallmodules:
 	if [ -d auth_openid ]; then svn update auth_openid; else svn co http://svn.silverstripe.com/open/modules/auth_openid/trunk auth_openid; fi
