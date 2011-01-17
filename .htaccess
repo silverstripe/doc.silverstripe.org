@@ -12,6 +12,11 @@
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	
+	# DokuWiki rewrite rules: Need to happen before other rules in order to redirect /doku.php?id=<pagename>
+	# to /pagename, which can then be matched by the legacy rewrite rules further down
+	RewriteCond %{QUERY_STRING}          ^(\bid\b=([^&]*)&?(.*)?)
+	RewriteRule ^doku.php$                http://doc.silverstripe.org/%2?%3 [R=301,L]
+	
 	# Redirect legacy URLs (assumes we're not redirecting other assets, for performance reasons)
 	# Note: Just works on top-level domains, not if the webroot is in a subfolder
 	RewriteCond %{REQUEST_URI} ^(.*)$
