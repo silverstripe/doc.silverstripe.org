@@ -6,7 +6,7 @@
 #
 
 update:
-	cd $(CURDIR)/src/github/; git pull
+	if [ -d $(CURDIR)/src/github ]; then cd $(CURDIR)/src/github; git pull; else git clone git://github.com/chillu/silverstripe-doc-restructuring.git $(CURDIR)/src/github; fi
 	cd $(CURDIR); php sapphire/cli-script.php dev/tasks/RebuildLuceneDocsIndex flush=1
 
 test:
