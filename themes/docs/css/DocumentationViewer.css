@@ -53,7 +53,7 @@ h6 .heading-anchor-link {
 fieldset { border: none; }
 
 /* Container */
-#container { width: 960px; margin: 44px auto 22px auto; padding: 22px 30px; background: #fff; overflow: hidden; 
+#container { width: 960px; margin: 22px auto; padding: 22px 30px; background: #fff; overflow: hidden; 
 				-webkit-box-shadow: 0 0 20px #ccc; -moz-box-shadow: 0 0 20px #ccc; position: relative;}
 	
 /* Header */
