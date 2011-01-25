@@ -9,10 +9,12 @@
 		
 		<link rel="shortcut icon" href="favicon.ico">
 		
+		<% require javascript(sapphire/thirdparty/jquery/jquery.js) %>
+		<% require javascript(http://silverstripe.org/toolbar/javascript/toolbar.js?site=doc&searchShow=false) %>
+		<% require css(http://silverstripe.org/toolbar/css/toolbar.css) %>
+		
 		<% require css(themes/ssorgsites/css/ss.screen.min.css, screen) %>
 		<% require css(themes/ssorgsites/css/ss.print.min.css, print) %>
-		
-		<% require css(themes/docs/css/documentation.css) %>
 	</head>
 <body>
 	<div id="header">
