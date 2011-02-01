@@ -279,6 +279,7 @@
 	RewriteRule ^textareafield$ http://api.silverstripe.org/search/lookup/?q=TextAreaField&module=sapphire [R=301,L]
 	RewriteRule ^textfield$ http://api.silverstripe.org/search/lookup/?q=TextField&module=sapphire [R=301,L]
 	RewriteRule ^themes$ http://doc.silverstripe.org/sapphire/en/topics/themes [R=301,L]
+	RewriteRule ^themes:developing$ http://doc.silverstripe.org/sapphire/en/topics/theme-development [R=301,L]
 	RewriteRule ^third-party-packages$ http://doc.silverstripe.org/old/third-party-packages [R=301,L]
 	RewriteRule ^tools$ http://doc.silverstripe.org/old/tools [R=301,L]
 	RewriteRule ^tools:dreamweaver$ http://doc.silverstripe.org/old/tools:dreamweaver [R=301,L]
