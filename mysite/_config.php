@@ -40,8 +40,10 @@ if(!$isRunningTest) {
 DocumentationService::set_automatic_registration(false);
 DocumentationSearch::enable();
 
-try{
-	DocumentationService::register("sapphire", BASE_PATH ."/src/github/master/sapphire/docs/", '2.4');
+try{	
+	DocumentationService::register("sapphire", BASE_PATH ."/src/sapphire_2.4/docs/", '2.4');
+	// DocumentationService::register("sapphire", BASE_PATH ."/src/sapphire_2.3/docs/", '2.3');
+	// DocumentationService::register("sapphire", BASE_PATH ."/src/sapphire_master/docs/", 'master');
 } catch(InvalidArgumentException $e) {
 } // Silence if path is not found (for CI environment)
 
