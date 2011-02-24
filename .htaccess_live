@@ -314,6 +314,8 @@
 	RewriteRule ^widgets$ http://doc.silverstripe.org/sapphire/en/topics/widgets [R=301,L]
 	RewriteRule ^buildbot-try-server$ http://doc.silverstripe.org/old/buildbot-try-server [R=301,L]
 
+	# Legacy rewrite: Can't use 'master' as it confuses api.ss.org linking
+	RewriteRule ^sapphire/en/master(.*) http://doc.silverstripe.org/sapphire/en/trunk$1 [R=301,L]
 
 	RewriteCond %{REQUEST_URI} ^(.*)$
 	RewriteCond %{REQUEST_FILENAME} !-f
