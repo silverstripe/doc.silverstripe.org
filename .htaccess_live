@@ -45,6 +45,7 @@
 	RewriteRule ^contentdeliverynetworkissues$ http://doc.silverstripe.org/old/contentdeliverynetworkissues [R=301,L]
 	RewriteRule ^contentnegotiator$ http://api.silverstripe.org/search/lookup/?q=ContentNegotiator&module=sapphire [R=301,L]
 	RewriteRule ^contributors$ http://doc.silverstripe.org/old/contributors [R=301,L]
+	RewriteRule ^contributing$ http://doc.silverstripe.org/sapphire/en/misc/contributing [R=301,L]
 	RewriteRule ^controller$ http://doc.silverstripe.org/sapphire/en/topics/controller [R=301,L]
 	RewriteRule ^controllers$ http://doc.silverstripe.org/sapphire/en/topics/controller [R=301,L]
 	RewriteRule ^creating-modules$ http://doc.silverstripe.org/sapphire/en/topics/module-development [R=301,L]
