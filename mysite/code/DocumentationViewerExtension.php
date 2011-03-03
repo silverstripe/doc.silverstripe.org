@@ -1,5 +1,6 @@
 <?php
 class DocumentationViewerExtension extends Extension {
+	
 	static $google_analytics_code = null;
 
 	public function init() {
@@ -18,5 +19,12 @@ class DocumentationViewerExtension extends Extension {
 	 */
 	function getGoogleAnalyticsCode() {
 		return self::$google_analytics_code;
+	}
+	
+	/**
+	 * @return Bool
+	 */
+	function IsDev() {
+		return (Director::isDev());
 	}
 }
