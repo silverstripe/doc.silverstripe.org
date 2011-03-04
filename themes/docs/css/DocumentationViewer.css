@@ -4,8 +4,6 @@
  * @author Will Rossiter <will@silverstripe.com>
  */
 
-/* Core */
-html { background: #f4f4f4;}
 
 a { color: #0973A6; text-decoration: none; }
 	a:hover,
@@ -15,67 +13,19 @@ p { font-size: 12px; line-height: 18px; margin-bottom: 18px; }
 /* p { font-size: 14px; line-height: 22px; margin-bottom: 22px; } */
 
 
-pre { 
-	margin-bottom: 22px; 
-	font-family:'Bitstream Vera Sans Mono',Monaco, 'Courier New', monospace; 
-	background: #f4f4f4;
-	padding: 11px;
-	font-size: 11px;
-}
+
+#Form_LanguageForm { margin-top: 18px; }
 .clear { clear: both; }
 
-/* Headings */
-h1 .heading-anchor-link,
-h2 .heading-anchor-link,
-h3 .heading-anchor-link,
-h4 .heading-anchor-link,
-h5 .heading-anchor-link,
-h6 .heading-anchor-link {
-	display: none;
-	color: #fff;
-	text-decoration: none;
-}
-
-	h1.hover .heading-anchor-link,
-	h2.hover .heading-anchor-link,
-	h3.hover .heading-anchor-link,
-	h4.hover .heading-anchor-link,
-	h5.hover .heading-anchor-link,
-	h6.hover .heading-anchor-link {
-		display: inline;
-	}
-	
-	.heading-anchor-link:hover {
-		color: #aaa;
-	}
-
-/* Forms */
-fieldset { border: none; }
-
-/* Container */
-#container { width: 960px; margin: 22px auto; padding: 22px 30px; background: #fff; overflow: hidden; 
-				-webkit-box-shadow: 0 0 20px #ccc; -moz-box-shadow: 0 0 20px #ccc; position: relative;}
-	
-/* Header */
-#header { height: 81px; }
-	#header h1 { margin-bottom: 0px; line-height: 33px;}
-		#header h1 a { text-decoration: none; font-size: 30px; color: #121929; letter-spacing: -1px;}
-	
-	#header #breadcrumbs { position: absolute; margin-top: 55px;}
-	#header #breadcrumbs p { font-size: 11px; margin: 0 0 10px 0; color: #798D85;}
-		/* #header #breadcrumbs p a { color: #798D85;} */
 	
 /* Language Bar */
-#language { position: absolute; top: 57px; right: 30px; width: 185px; }
+#language { position: absolute; top: 57px; right: 30px; width: 185px; display: none; /* not useful yet */}
 	#language label { float: left;/*  width: 830px; */ line-height: 19px; text-align: right; font-size: 11px; color: #999;}
 	#language select { float: right; width: 120px;}
 	#language input.action { float: right; margin-top: 4px;}
 	
 /* Footer */
-#footer { width: 960px; margin: 22px auto; }
-	#footer p { font-size: 11px; line-height: 18px; color: #798D85;}
-		#footer p a { color: #798D85; text-decoration: underline;}
-		.ccLogo { float: right; }
+
 		
 /* Content */
 #layout { }
@@ -84,8 +34,8 @@ fieldset { border: none; }
 
 /* Versions */
 #versions-nav { 
+	clear: both;
 	margin: 0 0 5px; 
-	padding: 10px 0 5px 0px; 
 	overflow: hidden; color: #999999; 
 	font-size: 11px;
 }
@@ -102,7 +52,7 @@ fieldset { border: none; }
 		}
 		#versions-nav li { display: inline; list-style: none; padding: 0; margin: 0; font-size: 11px; }
 			#versions-nav li a { margin-left: 5px; padding: 0px; }
-				#versions-nav li a.current { background: #fff;}
+				#versions-nav li a.current { background: #fff; color: #333;}
 #left-column { width: 640px; float: left; }
 
 #right-column {
@@ -171,80 +121,3 @@ fieldset { border: none; }
 		.sidebar-box ul li li li { margin-left: 20px; font-size: 11px; margin-left: 20px;}
 		.sidebar-box ul li.h4,
 		.sidebar-box ul li li li li { margin-right: 30px; font-size: 11px; 	margin-left: 20px; }
-	
-
-/**
- * Header
- */	
- 
-#Form_LanguageForm {
-	margin-top: 18px;
-}
-#header h1 { float: left; margin-top: -4px; }
-#header h1 a {
-	color: #0973A6;
-	text-decoration: none;
-	letter-spacing: 0;
-	float:left;
-}
-a.ssLogo { background: #fff url(../../ssorgsites/images/logo.png) no-repeat top left; height: 50px; width:168px; display: inline-block; }
-a.ssLogo:hover { background: #fff url(../../ssorgsites/images/logo.png) no-repeat 0 -47px; }
-
-#header h1 a span {
-	font-size: 22px;	
-	line-height: 2.5em;
-}
-#header h1 a span:hover {
-	/* color: #576a64; */
-	color: #667D76;
-}
-		
-/**
- * Search
- */
-.searchBar {
-	border-top:1px solid #E6EBE9;
-	border-bottom:1px solid #E6EBE9;
-	margin-bottom: 34px;
-	height: 38px;
-} 
-#search {
-	float: right;
-	width: 252px;
-	margin-top: 8px;
-}
-#Form_DocumentationSearchForm {
-	
-}
-#Search label {
-	float: left;
-	font-size: 11px;
-	color: #999;
-	margin: 3px;
-}
-#Form_DocumentationSearchForm_Search {
-	float: right;
-	width: 170px;
-	height: 22px;
-	background: url(../../ssorgsites/images/search.png) top left no-repeat;
-	font-size: 11px;
-	color: #495C56;
-	padding-left: 10px;
-	border: none;
-}
-#Form_DocumentationSearchForm fieldset {
-	width: 230px;
-	float: left;
-}
-#Form_DocumentationSearchForm .Actions { 
-
-}
-#Form_DocumentationSearchForm input#Form_DocumentationSearchForm_action_results {
-	float: left;
-	width: 22px;
-	height: 22px;
-	border: none;
-	text-indent: 99999px;
-	cursor: pointer;
-	background: url(../../ssorgsites/images/search.png) top right no-repeat;
-}

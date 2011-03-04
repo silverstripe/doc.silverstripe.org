@@ -7,9 +7,14 @@
 		<title><% if PageTitle %>$PageTitle <% end_if %>SilverStripe Documentation</title>
 		
 		<% require javascript(sapphire/thirdparty/jquery/jquery.js) %>
-		<% require javascript(http://silverstripe.org/toolbar/javascript/toolbar.min.js?site=doc&searchShow=false) %>
-		<% require css(http://silverstripe.org/toolbar/css/toolbar.css) %>
 		
+		<% if IsDev %>
+			<% require javascript(toolbar/javascript/toolbar.js?site=doc&searchShow=true) %>
+			<% require css(toolbar/css/toolbar.css) %>			
+		<% else %>
+			<% require javascript(http://silverstripe.org/toolbar/javascript/toolbar.min.js?site=doc&searchShow=false) %>
+			<% require css(http://silverstripe.org/toolbar/css/toolbar.css) %>
+		<% end_if %>
 		<% require css(themes/ssorgsites/css/ss.screen.min.css, screen) %>
 		<% require css(themes/ssorgsites/css/ss.print.min.css, print) %>
 		
@@ -27,25 +32,21 @@
 					<a href="http://www.silverstripe.org" title="Visit SilverStripe.org" class="ssLogo">&nbsp;</a>
 					<a href="$Top.Link" title="Documentation"><span><% _t('SILVERSTRIPEDOCUMENTATION', 'Documentation') %></span></a>
 				</h1>
-				
-				
-				<div id="breadcrumbs">
-					<% include DocBreadcrumbs %>
-				</div>
-				<div class="clear"></div>
-				
-				
 				<div class="clear"></div>
 			</div>
 			
 			
 			<div id="layout">
-				<div class="searchBar">
+				<div id="search-bar">					
+					<div id="breadcrumbs">
+						<% include DocBreadcrumbs %>
+					</div>
+
 					<div id="search">
 						$DocumentationSearchForm
 					</div>
 					
-					<% if Versions %>
+					<!-- <% if Versions %>
 					<div id="versions-nav">
 						<h2>Versions:</h2>
 							<ul>
@@ -58,7 +59,7 @@
 							<% end_control %>
 						</ul>
 					</div>
-					<% end_if %>
+					<% end_if %>-->
 					
 				</div>
 				
@@ -80,7 +81,7 @@
 		
 		<div id="footer">
 			<p>Documentation powered by <a href="http://www.silverstripe.org">SilverStripe</a>. <a href="{$BaseHref}sapphire/en/misc/contributing/#Writing-Documentation">Contribute to doc.silverstripe.org</a>, <a href="http://open.silverstripe.org/newticket/?component=Documentation">raise a bug or enhancement ticket</a>.
-			<br />Except where otherwise noted, content on this wiki is licensed under <a class="urlextern" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">CC Attribution-Noncommercial-Share Alike 3.0 Unported</a><a href="http://creativecommons.org/licenses/by/3.0/nz/" rel="license"><img class="ccLogo" src="http://i.creativecommons.org/l/by/3.0/nz/80x15.png" style="border-width: 0pt;" alt="Creative Commons License"></a></p>
+			<br />Except where otherwise noted, content on this wiki is licensed under <a class="urlextern" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">CC Attribution-Noncommercial-Share Alike 3.0 Unported</a><a href="http://creativecommons.org/licenses/by/3.0/nz/" rel="license"><img class="cc-logo" src="http://i.creativecommons.org/l/by/3.0/nz/80x15.png" style="border-width: 0pt;" alt="Creative Commons License"></a></p>
 		</div>
 		
 		<% if GoogleAnalyticsCode %>
