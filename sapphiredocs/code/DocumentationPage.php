@@ -102,6 +102,16 @@ class DocumentationPage extends ViewableData {
 	}
 	
 	/**
+	 * @param String
+	 * @return String
+	 */
+	function getBreadcrumbTitle($divider = ' &raquo; ') {
+		$pathParts = explode('/', $this->getRelativePath());
+		$titleParts = array_map(array('DocumentationService', 'clean_page_name'), $pathParts);
+		return implode($divider, $titleParts + array($this->getTitle()));
+	}
+	
+	/**
 	 * Returns the link for the web browser
 	 *
 	 * @return string

@@ -5,7 +5,7 @@
 		<% if Results %>
 	    	<p>Showing page $ThisPage of $TotalPages</p>
 			<% control Results %>
-				<h2><a href="$Link">$Title</a></h2>
+				<h3><a href="$Link">$BreadcrumbTitle</a></h3>
 				<p>$Content.LimitCharacters(200)</p>
 			<% end_control %>
 			

@@ -157,9 +157,10 @@ class DocumentationSearch {
 	 * Perform a search query on the index
 	 */
 	public function performSearch() {	
+		require_once 'Zend/Search/Lucene.php';
+		
 		try {
 			$index = Zend_Search_Lucene::open(self::get_index_location());
-		
 			Zend_Search_Lucene::setResultSetLimit(200);
 		
 			$this->results = $index->find($this->getQuery());
@@ -213,6 +214,7 @@ class DocumentationSearch {
 			// do a simple markdown parse of the file
 			$obj = new ArrayData(array(
 				'Title' => DBField::create('Varchar', $doc->getFieldValue('Title')),
+				'BreadcrumbTitle' => DBField::create('HTMLText', $doc->getFieldValue('BreadcrumbTitle')),
 				'Link' => DBField::create('Varchar',$doc->getFieldValue('Link')),
 				'Language' => DBField::create('Varchar',$doc->getFieldValue('Language')),
 				'Version' => DBField::create('Varchar',$doc->getFieldValue('Version')),

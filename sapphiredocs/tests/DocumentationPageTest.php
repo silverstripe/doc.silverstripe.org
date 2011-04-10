@@ -40,6 +40,20 @@ class DocumentationPageTest extends SapphireTest {
 		$this->assertStringEndsWith('versionlinks/en/1/test', $page->Link());
 	}
 	
+	function testGetBreadcrumbTitle() {
+		$page = new DocumentationPage();
+		$page->setRelativePath('test.md');
+		$page->setEntity(new DocumentationEntity('mymodule', null, BASE_PATH . '/sapphiredocs/tests/docs/'));
+		
+		$this->assertEquals('Test', $page->getBreadcrumbTitle());
+		
+		$page = new DocumentationPage();
+		$page->setRelativePath('subfolder/subpage.md');
+		$page->setEntity(new DocumentationEntity('mymodule', null, BASE_PATH . '/sapphiredocs/tests/docs/'));
+		
+		$this->assertEquals('Subfolder &raquo; Subpage', $page->getBreadcrumbTitle());
+	}
+	
 	
 	function testGetRelativePath() {
 		$page = new DocumentationPage();
