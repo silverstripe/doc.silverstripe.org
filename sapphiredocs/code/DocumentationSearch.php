@@ -220,7 +220,8 @@ class DocumentationSearch {
 				'Version' => DBField::create('Varchar',$doc->getFieldValue('Version')),
 				'Content' => DBField::create('HTMLText', $content),
 				'Score' => $hit->score,
-				'Number' => $k + 1
+				'Number' => $k + 1,
+				'ID' => md5($doc->getFieldValue('Link'))
 			));
 
 			$results->push($obj);
@@ -340,6 +341,10 @@ class DocumentationSearch {
 		);
 	}
 	
+	/**
+	 * Renders the search results into a template. Either
+	 * the search results template or the Atom feed
+	 */
 	public function renderResults() {
 		if(!$this->results) $this->performSearch();
 		if(!$this->outputController) return user_error('Call renderResults() on a DocumentationViewer instance.', E_USER_ERROR);
@@ -350,7 +355,7 @@ class DocumentationSearch {
 		
 		$templates = array('DocumentationViewer_results', 'DocumentationViewer');
 
-		if($request->requestVar('format') && $request->requestVar('format') == "rss") {
+		if($request->requestVar('format') && $request->requestVar('format') == "atom") {
 			// alter the fields for the opensearch xml.
 			$title = ($title = $this->getTitle()) ? ' - '. $title : "";
 			
@@ -391,7 +396,7 @@ class DocumentationOpenSearch_Controller extends Controller {
 			'results/?Search={searchTerms}&amp;start={startIndex}&amp;length={count}&amp;action_results=1'
 		);
 		
-		$data['SearchPageRss'] = $data['SearchPageLink'] . '&amp;format=rss';
+		$data['SearchPageAtom'] = $data['SearchPageLink'] . '&amp;format=atom';
 		
 		return $this->customise(new ArrayData($data))->renderWith(array('OpenSearchDescription'));
 	}
