@@ -57,3 +57,8 @@ if(Director::isLive()) {
 }
 
 Validator::set_javascript_validation_handler('none');
+
+DocumentationSearch::$boost_by_path = array(
+	// Changelogs have heaps of phrases, but are rarely relevant for content searches
+	'/^changelog/' => 0.05
+);
