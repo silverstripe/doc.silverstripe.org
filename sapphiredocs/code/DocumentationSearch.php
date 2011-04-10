@@ -33,6 +33,13 @@ class DocumentationSearch {
 	private static $meta_data = array();
 	
 	/**
+	 * @var Array Regular expression mapped to a "boost factor" for the searched document.
+	 * Defaults to 1.0, lower to decrease relevancy. Requires reindex.
+	 * Uses {@link DocumentationPage->getRelativePath()} for comparison.
+	 */
+	static $boost_by_path = array();
+	
+	/**
 	 * @var DataObjectSet - Results
 	 */
 	private $results;
