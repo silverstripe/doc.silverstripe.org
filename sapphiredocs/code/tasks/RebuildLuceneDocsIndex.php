@@ -84,7 +84,7 @@ class RebuildLuceneDocsIndex extends BuildTask {
 					$titleField->boost = 1.5;
 					$breadcrumbField->boost = 1.5;
 					foreach(DocumentationSearch::$boost_by_path as $pathExpr => $boost) {
-						// if(preg_match($pathExpr, $page->getRelativePath())) $doc->boost = $boost;
+						if(preg_match($pathExpr, $page->getRelativePath())) $doc->boost = $boost;
 					}
 					
 					$index->addDocument($doc);
