@@ -56,7 +56,13 @@ if(Director::isLive()) {
 	DocumentationViewerExtension::$google_analytics_code = 'UA-84547-8';
 }
 
-Validator::set_javascript_validation_handler('none');
+Validator::set_javascript_validation_handler('none');	
+
+DocumentationSearch::set_meta_data(array(
+	'ShortName' => 'SilverStripe Documentation',
+	'Description' => 'Documentation for SilverStripe CMS and the Sapphire Framework',
+	'Tags' => 'silverstripe, sapphire, php, framework, web'
+));
 
 DocumentationSearch::$boost_by_path = array(
 	// Changelogs have heaps of phrases, but are rarely relevant for content searches
