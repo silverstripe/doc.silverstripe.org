@@ -136,7 +136,12 @@ class DocumentationSearch {
 		self::$enabled = true;
 		
 		// include the zend search functionality
-		set_include_path(get_include_path() . PATH_SEPARATOR . dirname(dirname(__FILE__)) . '/thirdparty/');
+		set_include_path(
+		 	dirname(dirname(__FILE__)) . '/thirdparty/'. PATH_SEPARATOR .
+			get_include_path()
+		);
+		
+		require_once 'Zend/Search/Lucene.php';
 	}
 
 	/**
@@ -164,10 +169,9 @@ class DocumentationSearch {
 	 * Perform a search query on the index
 	 */
 	public function performSearch() {	
-		require_once 'Zend/Search/Lucene.php';
-		
 		try {
 			$index = Zend_Search_Lucene::open(self::get_index_location());
+		
 			Zend_Search_Lucene::setResultSetLimit(200);
 		
 			$this->results = $index->find($this->getQuery());

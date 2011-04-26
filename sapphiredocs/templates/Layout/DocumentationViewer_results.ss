@@ -4,10 +4,15 @@
 	
 		<% if Results %>
 	    	<p>Showing page $ThisPage of $TotalPages</p>
-			<% control Results %>
-				<h3><a href="$Link">$BreadcrumbTitle</a></h3>
-				<p>$Content.LimitCharacters(200)</p>
-			<% end_control %>
+			
+			<ul>
+				<% control Results %>
+					<li>
+						<h3><a href="$Link"><% if BreadcrumbTitle %>$BreadcrumbTitle<% else %>$Title<% end_if %></a></h3>
+						<p>$Content.LimitCharacters(200)</p>
+					</li>
+				<% end_control %>
+			</ul>
 			
 			<% if SearchPages %>
 				<ul class="pagination">
