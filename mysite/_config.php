@@ -61,7 +61,7 @@ Validator::set_javascript_validation_handler('none');
 DocumentationSearch::set_meta_data(array(
 	'ShortName' => 'SilverStripe Documentation',
 	'Description' => 'Documentation for SilverStripe CMS and the Sapphire Framework',
-	'Tags' => 'silverstripe, sapphire, php, framework, web'
+	'Tags' => 'silverstripe sapphire php framework cms content management system'
 ));
 
 DocumentationSearch::$boost_by_path = array(
