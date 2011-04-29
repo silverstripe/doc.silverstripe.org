@@ -102,10 +102,10 @@ class DocumentationPage extends ViewableData {
 	}
 	
 	/**
-	 * @param String
+	 * @param String - has to be plain text for open search compatibility.
 	 * @return String
 	 */
-	function getBreadcrumbTitle($divider = ' &raquo; ') {
+	function getBreadcrumbTitle($divider = ' - ') {
 		$pathParts = explode('/', $this->getRelativePath());
 		$titleParts = array_map(array('DocumentationService', 'clean_page_name'), $pathParts);
 		return implode($divider, $titleParts + array($this->getTitle()));

@@ -363,7 +363,6 @@ class DocumentationSearch {
 		$request = $this->outputController->getRequest();
 
 		$data = $this->getSearchResults($request);
-		
 		$templates = array('DocumentationViewer_results', 'DocumentationViewer');
 
 		if($request->requestVar('format') && $request->requestVar('format') == "atom") {
