@@ -51,7 +51,7 @@ class DocumentationPageTest extends SapphireTest {
 		$page->setRelativePath('subfolder/subpage.md');
 		$page->setEntity(new DocumentationEntity('mymodule', null, BASE_PATH . '/sapphiredocs/tests/docs/'));
 		
-		$this->assertEquals('Subfolder &raquo; Subpage', $page->getBreadcrumbTitle());
+		$this->assertEquals('Subfolder - Subpage', $page->getBreadcrumbTitle());
 	}
 	
 	
