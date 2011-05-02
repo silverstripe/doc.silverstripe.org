@@ -12,7 +12,7 @@
 			<% require javascript(toolbar/javascript/toolbar.js?site=doc&amp;searchShow=true) %>
 			<% require css(toolbar/css/toolbar.css) %>			
 		<% else %>
-			<% require javascript(http://silverstripe.org/toolbar/javascript/toolbar.min.js?site=doc&amp;searchShow=false) %>
+			<% require javascript(http://silverstripe.org/toolbar/javascript/toolbar.min.js?site=doc&amp;searchShow=true) %>
 			<% require css(http://silverstripe.org/toolbar/css/toolbar.css) %>
 		<% end_if %>
 		<% require css(themes/ssorgsites/css/ss.screen.min.css, screen) %>
