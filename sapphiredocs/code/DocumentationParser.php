@@ -168,7 +168,7 @@ class DocumentationParser {
 				$url = sprintf(self::$api_link_base, $subject, $page->getVersion(), $page->getEntity()->getModuleFolder());
 				$md = str_replace(
 					$match, 
-					sprintf('<code>[%s](%s)</code>', $title, $url),
+					sprintf('[%s](%s)', $title, $url),
 					$md
 				);
 			}
@@ -189,7 +189,7 @@ class DocumentationParser {
 				$url = sprintf(self::$api_link_base, $subject, $page->getVersion(), $page->getEntity()->getModuleFolder());
 				$md = str_replace(
 					$match, 
-					sprintf('<code>[%s](%s)</code>', $subject, $url),
+					sprintf('[%s](%s)', $subject, $url),
 					$md
 				);
 			}
