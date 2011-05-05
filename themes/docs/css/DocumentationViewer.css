@@ -96,6 +96,13 @@ p { font-size: 12px; line-height: 18px; margin-bottom: 18px; }
 		font-size: 12px;
 	}
 
+/* Links to API */
+#left-column a[href^="http://api."] {
+	padding: 2px;
+	font-family: Monaco, 'Bitstream Vera Sans Mono', Courier, monospace;
+	background: url(../../ssorgsites/images/external_link.png) no-repeat right 3px;
+	padding-right: 14px;
+}
 /** 
  * TOC 
  */
