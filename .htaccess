@@ -294,6 +294,7 @@
 	RewriteRule ^tools:textmate$ http://doc.silverstripe.org/old/tools:textmate [R=301,L]
 	RewriteRule ^translatable$ http://doc.silverstripe.org/sapphire/en/topics/translation [R=301,L]
 	RewriteRule ^translation$ http://doc.silverstripe.org/sapphire/en/topics/translation [R=301,L]
+	RewriteRule ^sapphire/en/topics/translation https://github.com/silverstripe/silverstripe-translatable [R=301,L]
 	RewriteRule ^treedropdownfield$ http://api.silverstripe.org/search/lookup/?q=TreeDropdownField&module=sapphire [R=301,L]
 	RewriteRule ^treemultiselectfield$ http://api.silverstripe.org/search/lookup/?q=TreeMultiSelectField&module=sapphire [R=301,L]
 	RewriteRule ^tutorial:1-building-a-basic-site$ http://doc.silverstripe.org/sapphire/en/tutorials/1-building-a-basic-site [R=301,L]
