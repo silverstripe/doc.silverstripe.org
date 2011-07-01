@@ -34,7 +34,7 @@ class DocumentationParser {
 		if(!$page || (!$page instanceof DocumentationPage)) return false;
 
 		$md = $page->getMarkdown();
-
+		
 		// Pre-processing
 		$md = self::rewrite_image_links($md, $page);
 		$md = self::rewrite_relative_links($md, $page, $baselink);
