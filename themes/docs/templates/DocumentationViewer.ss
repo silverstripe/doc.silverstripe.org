@@ -65,10 +65,6 @@
 				<div id="content" class="typography">
 					$Layout
 				</div>
-				
-				<% if Content %>
-					<% include Comments %>
-				<% end_if %>
 			</div>
 		</div>
 		
