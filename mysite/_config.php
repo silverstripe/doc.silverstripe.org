@@ -14,6 +14,11 @@ MySQLDatabase::set_connection_charset('utf8');
 // downloaded from http://www.silverstripe.org/themes/
 SSViewer::set_theme('docs');
 
+if(@$_GET['db'] == "sqlite3") {
+	global $databaseConfig;
+	$databaseConfig['type'] = 'SQLite3Database';
+}
+
 // enable nested URLs for this site (e.g. page/sub-page/)
 SiteTree::enable_nested_urls();
 
@@ -41,9 +46,9 @@ DocumentationService::set_automatic_registration(false);
 DocumentationSearch::enable();
 
 try{	
-	// DocumentationService::register("sapphire", BASE_PATH ."/src/sapphire_master/docs/", 'trunk');
+	DocumentationService::register("sapphire", BASE_PATH ."/src/sapphire_master/docs/", 'trunk');
 	DocumentationService::register("sapphire", BASE_PATH ."/src/sapphire_2.4/docs/", '2.4');
-	// DocumentationService::register("sapphire", BASE_PATH ."/src/sapphire_2.3/docs/", '2.3');
+	DocumentationService::register("sapphire", BASE_PATH ."/src/sapphire_2.3/docs/", '2.3');
 } catch(InvalidArgumentException $e) {
 } // Silence if path is not found (for CI environment)
 
