@@ -90,6 +90,7 @@ p { font-size: 12px; line-height: 18px; margin-bottom: 18px; }
 /* Comments */
 #comments {
 	clear: both;
+	padding-top: 20px;
 }
 
 	#comments .notice {
