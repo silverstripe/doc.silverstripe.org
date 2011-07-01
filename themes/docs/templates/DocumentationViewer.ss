@@ -24,15 +24,10 @@
 	<body>
 		<div id="container">
 			<div id="header">
-				<div id="language">
-				 	$LanguageForm
-				</div>
-				
 				<h1>
 					<a href="http://www.silverstripe.org" title="Visit SilverStripe.org" class="ssLogo">&nbsp;</a>
 					<a href="$Top.Link" title="Documentation"><span><% _t('SILVERSTRIPEDOCUMENTATION', 'Documentation') %></span></a>
 				</h1>
-				<div class="clear"></div>
 			</div>
 			
 			
@@ -45,17 +40,24 @@
 					<div id="search">
 						$DocumentationSearchForm
 					</div>
-					
+
+					<% if Entities %>
+					<div id="entities-nav" class="documentation-nav">
+						<h2>Modules:</h2>
+							<ul>
+							<% control Entities %>
+								<li><a href="$Link" class="$LinkingMode">$Title</a></li>
+							<% end_control %>
+						</ul>
+					</div>
+					<% end_if %>
+										
 					<% if Versions %>
-					<div id="versions-nav">
+					<div id="versions-nav" class="documentation-nav">
 						<h2>Versions:</h2>
 							<ul>
 							<% control Versions %>
-								<% if MajorRelease %>
-									<li class="major-release"><a href="$Link" class="$LinkingMode">$Title</a></li>
-								<% else %>
-									<li class="module-only"><a href="$Link" class="$LinkingMode">$Title</a></li>
-								<% end_if %>
+								<li><a href="$Link" class="$LinkingMode">$Title</a></li>
 							<% end_control %>
 						</ul>
 					</div>
