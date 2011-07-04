@@ -1,8 +1,0 @@
---- 
-format: 1
-handler: 
-  commit: aa0297d52ad0a7511246818809d61e5d5c9377ab
-  branch: master
-lock: false
-repository_class: Piston::Git::Repository
-repository_url: git://github.com/silverstripe/silverstripe-sapphiredocs.git

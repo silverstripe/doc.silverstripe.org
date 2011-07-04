@@ -12,7 +12,7 @@ update:
 	if [ -d $(CURDIR)/src/sapphire_2.4 ]; then cd $(CURDIR)/src/sapphire_2.4; git pull; else git clone --branch 2.4 git://github.com/silverstripe/sapphire.git $(CURDIR)/src/sapphire_2.4; fi
 	# sapphire 2.3
 	if [ -d $(CURDIR)/src/sapphire_2.3 ]; then cd $(CURDIR)/src/sapphire_2.3; git pull; else git clone --branch 2.3 git://github.com/silverstripe/sapphire.git $(CURDIR)/src/sapphire_2.3; fi
-	
+
 	# build index
 	cd $(CURDIR); php sapphire/cli-script.php dev/tasks/RebuildLuceneDocsIndex flush=1
 
