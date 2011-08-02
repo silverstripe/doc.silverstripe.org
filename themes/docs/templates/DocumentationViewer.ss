@@ -10,22 +10,29 @@
 		
 		<% if IsDev %>
 			<% require javascript(toolbar/javascript/toolbar.js?site=doc&amp;searchShow=true) %>
-			<% require css(toolbar/css/toolbar.css) %>			
+			<% require css(toolbar/css/toolbar.css) %>
+			
+			<% require css(themes/ssorgsites/css/core.css) %>
+			<% require css(themes/ssorgsites/css/grid.css) %>
+			<% require css(themes/ssorgsites/css/typography.css) %>
+			<% require css(themes/ssorgsites/css/form.css) %>
+			<% require css(themes/ssorgsites/css/print.css, print) %>
 		<% else %>
 			<% require javascript(http://silverstripe.org/toolbar/javascript/toolbar.min.js?site=doc&amp;searchShow=true) %>
 			<% require css(http://silverstripe.org/toolbar/css/toolbar.css) %>
+			<% require css(themes/ssorgsites/css/ss.screen.min.css, screen) %>
+			<% require css(themes/ssorgsites/css/ss.print.min.css, print) %>
 		<% end_if %>
-		<% require css(themes/ssorgsites/css/ss.screen.min.css, screen) %>
-		<% require css(themes/ssorgsites/css/ss.print.min.css, print) %>
+
 		
 		<% require themedCSS(DocumentationViewer) %>
 	</head>
 	
 	<body>
-		<div id="container">
+		<div id="container" class="container">
 			<div id="header">
 				<h1>
-					<a href="http://www.silverstripe.org" title="Visit SilverStripe.org" class="ssLogo">&nbsp;</a>
+					<a href="http://www.silverstripe.org" title="Visit SilverStripe.org" class="logo">&nbsp;</a>
 					<a href="$Top.Link" title="Documentation"><span><% _t('SILVERSTRIPEDOCUMENTATION', 'Documentation') %></span></a>
 				</h1>
 			</div>
@@ -42,18 +49,20 @@
 					</div>
 
 					<% if Entities %>
-					<div id="entities-nav" class="documentation-nav">
+					<div id="entities-nav" class="documentation-nav clearfix">
 						<h2>Modules:</h2>
 							<ul>
 							<% control Entities %>
 								<li><a href="$Link" class="$LinkingMode">$Title</a></li>
 							<% end_control %>
 						</ul>
+						
+						<div class="clear"><!-- --></div>
 					</div>
 					<% end_if %>
 										
 					<% if Versions %>
-					<div id="versions-nav" class="documentation-nav">
+					<div id="versions-nav" class="documentation-nav clearfix">
 						<h2>Versions:</h2>
 							<ul>
 							<% control Versions %>

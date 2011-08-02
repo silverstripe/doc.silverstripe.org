@@ -1,12 +1,12 @@
 <div id="documentation-page">
-	<div id="left-column">
+	<div id="content-column">
 		$Content
 		
 		<% include Comments %>
 	</div>
 
 	<% if Content %>
-	<div id="right-column">
+	<div id="sidebar-column">
 		<% include DocTableOfContents %>
 		<% include DocInThisModule %>
 	</div>
