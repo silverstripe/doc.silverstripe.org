@@ -44,13 +44,9 @@
 	</div>
 
 	<div id="sidebar-column">
-<<<<<<< HEAD
-		<!-- needs advanced search options -->
-=======
 		<div class="sidebar-box">
 			<h4><% _t('ADVANCEDSEARCH', 'Advanced Search') %></h4>
 			$AdvancedSearchForm
 		</div>
->>>>>>> origin/master
 	</div>
 </div>
