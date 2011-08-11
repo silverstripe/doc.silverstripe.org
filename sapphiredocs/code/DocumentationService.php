@@ -144,7 +144,7 @@ class DocumentationService {
 			if($version || $lang) {
 				foreach($entities as $entity) {
 					if(self::is_registered_entity($entity->getFolder(), $version, $lang)) {
-						$output[] = $entity;
+						$output[$entity->getFolder()] = $entity;
 					}
 				}
 			}
@@ -212,7 +212,7 @@ class DocumentationService {
 		}
 		
 		if($latest)
-			$output->setLatestVersion($version);
+			$output->setStableVersion($version);
 		
 		return $output;
 	}
@@ -265,7 +265,7 @@ class DocumentationService {
 					
 					if($dir && !$ignored) {
 						// check to see if it has docs
-						$docs = Controller::join_links($dir, 'docs');
+						$docs = Director::baseFolder() . '/' . Controller::join_links($entity, 'docs');
 	
 						if(is_dir($docs)) {
 							self::register($entity, $docs, '', $entity, true);

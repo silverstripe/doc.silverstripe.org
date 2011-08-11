@@ -1,6 +1,5 @@
 <% if EntityPages %>
 	<div id="sibling-pages" class="sidebar-box">
-		<h4>In this module:</h4>
 		<ul>
 			<% control EntityPages %>
 				<li>
