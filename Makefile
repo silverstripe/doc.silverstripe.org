@@ -7,11 +7,11 @@
 
 update:
 	# sapphire master
-	if [ -d $(CURDIR)/src/sapphire_master ]; then cd $(CURDIR)/src/sapphire_master; git pull; else git clone git://github.com/silverstripe/sapphire.git $(CURDIR)/src/sapphire_master; fi
+	if [ -d $(CURDIR)/src/sapphire_master ]; then cd $(CURDIR)/src/sapphire_master; git pull -q; else git clone -q git://github.com/silverstripe/sapphire.git $(CURDIR)/src/sapphire_master; fi
 	# sapphire 2.4
-	if [ -d $(CURDIR)/src/sapphire_2.4 ]; then cd $(CURDIR)/src/sapphire_2.4; git pull; else git clone --branch 2.4 git://github.com/silverstripe/sapphire.git $(CURDIR)/src/sapphire_2.4; fi
+	if [ -d $(CURDIR)/src/sapphire_2.4 ]; then cd $(CURDIR)/src/sapphire_2.4; git pull -q; else git clone -q --branch 2.4 git://github.com/silverstripe/sapphire.git $(CURDIR)/src/sapphire_2.4; fi
 	# sapphire 2.3
-	if [ -d $(CURDIR)/src/sapphire_2.3 ]; then cd $(CURDIR)/src/sapphire_2.3; git pull; else git clone --branch 2.3 git://github.com/silverstripe/sapphire.git $(CURDIR)/src/sapphire_2.3; fi
+	if [ -d $(CURDIR)/src/sapphire_2.3 ]; then cd $(CURDIR)/src/sapphire_2.3; git pull -q; else git clone -q --branch 2.3 git://github.com/silverstripe/sapphire.git $(CURDIR)/src/sapphire_2.3; fi
 
 	# build index
 	cd $(CURDIR); php sapphire/cli-script.php dev/tasks/RebuildLuceneDocsIndex flush=1
