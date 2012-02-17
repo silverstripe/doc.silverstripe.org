@@ -323,10 +323,11 @@
 	RewriteRule ^sapphire/en/changelogs(.*) http://doc.silverstripe.org/sapphire/en/trunk/changelogs/$1 [R=301,L]
 	RewriteRule ^cms/en/changelogs(.*) http://doc.silverstripe.org/cms/en/trunk/changelogs/$1 [R=301,L]
   
-  # Anything in sapphire/en/<version>/misc is redirected to trunk, the info in there is usually not version specific,
-  # and only updated on master (e.g. contribution and coding guidelines)
-  RewriteRule ^sapphire/en/misc/?(.*) http://doc.silverstripe.org/sapphire/en/trunk/misc/$1 [R=301,L]
-  RewriteRule ^sapphire/en/[^/]*/misc/?(.*) http://doc.silverstripe.org/sapphire/en/trunk/misc/$1 [R=301,L]
+	# Anything in sapphire/en/<version>/misc is redirected to trunk, the info in there is usually not version specific,
+	# and only updated on master (e.g. contribution and coding guidelines)
+	RewriteRule ^sapphire/en/misc/?(.*) http://doc.silverstripe.org/sapphire/en/trunk/misc/$1 [R=301,L]
+	RewriteRule ^sapphire/en/2.3/misc/?(.*) http://doc.silverstripe.org/sapphire/en/trunk/misc/$1 [R=301,L]
+	RewriteRule ^sapphire/en/2.4/misc/?(.*) http://doc.silverstripe.org/sapphire/en/trunk/misc/$1 [R=301,L]
 
 	RewriteCond %{REQUEST_URI} ^(.*)$
 	RewriteCond %{REQUEST_FILENAME} !-f
