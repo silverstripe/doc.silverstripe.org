@@ -38,7 +38,7 @@ $isRunningTest = (
 if(!$isRunningTest) {
 	Director::addRules(10, array(
 		'$Action' => 'DocumentationViewer',
-		'' => '->sapphire/en/'
+		'' => '->framework/en/'
 	));
 }
 
@@ -46,7 +46,7 @@ DocumentationService::set_automatic_registration(false);
 DocumentationSearch::enable();
 
 try{	
-	DocumentationService::register("sapphire", BASE_PATH ."/src/sapphire_master/docs/", 'trunk');
+	DocumentationService::register("framework", BASE_PATH ."/src/framework_master/docs/", 'trunk');
 	DocumentationService::register("sapphire", BASE_PATH ."/src/sapphire_2.4/docs/", '2.4');
 	DocumentationService::register("sapphire", BASE_PATH ."/src/sapphire_2.3/docs/", '2.3');
 } catch(InvalidArgumentException $e) {
@@ -65,7 +65,7 @@ Validator::set_javascript_validation_handler('none');
 
 DocumentationSearch::set_meta_data(array(
 	'ShortName' => 'SilverStripe Documentation',
-	'Description' => 'Documentation for SilverStripe CMS and the Sapphire Framework',
+	'Description' => 'Documentation for SilverStripe CMS / Framework',
 	'Tags' => 'silverstripe sapphire php framework cms content management system'
 ));
 
