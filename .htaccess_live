@@ -328,6 +328,9 @@
 	RewriteRule ^sapphire/en/2.3/misc/?(.*) http://doc.silverstripe.org/sapphire/en/trunk/misc/$1 [R=301,L]
 	RewriteRule ^sapphire/en/2.4/misc/?(.*) http://doc.silverstripe.org/sapphire/en/trunk/misc/$1 [R=301,L]
 
+	# TODO Rename all "sapphire" references to "framework". Until then, simply redirect.
+	RewriteRule ^framework/(.*) http://doc.silverstripe.org/sapphire/$1 [R=301,L]
+
 	RewriteCond %{REQUEST_URI} ^(.*)$
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt)$
