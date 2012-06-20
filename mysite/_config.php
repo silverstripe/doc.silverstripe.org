@@ -47,9 +47,9 @@ DocumentationSearch::enable();
 
 try{	
 	DocumentationService::register("framework", BASE_PATH ."/src/framework_master/docs/", 'trunk');
-	DocumentationService::register("sapphire", BASE_PATH ."/src/sapphire_3.0/docs/", '3.0');
-	DocumentationService::register("sapphire", BASE_PATH ."/src/sapphire_2.4/docs/", '2.4');
-	DocumentationService::register("sapphire", BASE_PATH ."/src/sapphire_2.3/docs/", '2.3');
+	DocumentationService::register("framework", BASE_PATH ."/src/framework_3.0/docs/", '3.0');
+	DocumentationService::register("framework", BASE_PATH ."/src/framework_2.4/docs/", '2.4');
+	DocumentationService::register("framework", BASE_PATH ."/src/framework_2.3/docs/", '2.3');
 } catch(InvalidArgumentException $e) {
 } // Silence if path is not found (for CI environment)
 
