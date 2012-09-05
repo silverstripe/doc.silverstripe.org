@@ -3,16 +3,16 @@ update:
 	if [ -d $(CURDIR)/src/sapphire_master ]; then rm -rf $(CURDIR)/src/sapphire_master; fi
 
 	# framework master
-	if [ -d $(CURDIR)/src/framework_master ]; then cd $(CURDIR)/src/framework_master; git pull -q; else git clone -q git://github.com/silverstripe/sapphire.git $(CURDIR)/src/framework_master; fi
+	if [ -d $(CURDIR)/src/framework_master ]; then cd $(CURDIR)/src/framework_master; git pull -q; else git clone --depth=100 -q git://github.com/silverstripe/sapphire.git $(CURDIR)/src/framework_master; fi
 
 	# framework 3.0
-	if [ -d $(CURDIR)/src/framework_3.0 ]; then cd $(CURDIR)/src/framework_3.0; git pull -q; else git clone -q --branch 3.0 git://github.com/silverstripe/sapphire.git $(CURDIR)/src/framework_3.0; fi
+	if [ -d $(CURDIR)/src/framework_3.0 ]; then cd $(CURDIR)/src/framework_3.0; git pull -q; else git clone --depth=100 -q --branch 3.0 git://github.com/silverstripe/sapphire.git $(CURDIR)/src/framework_3.0; fi
 
 	# framework 2.4
-	if [ -d $(CURDIR)/src/framework_2.4 ]; then cd $(CURDIR)/src/framework_2.4; git pull -q; else git clone -q --branch 2.4 git://github.com/silverstripe/sapphire.git $(CURDIR)/src/framework_2.4; fi
+	if [ -d $(CURDIR)/src/framework_2.4 ]; then cd $(CURDIR)/src/framework_2.4; git pull -q; else git clone --depth=100 -q --branch 2.4 git://github.com/silverstripe/sapphire.git $(CURDIR)/src/framework_2.4; fi
 
 	# framework 2.3
-	if [ -d $(CURDIR)/src/framework_2.3 ]; then cd $(CURDIR)/src/framework_2.3; git pull -q; else git clone -q --branch 2.3 git://github.com/silverstripe/sapphire.git $(CURDIR)/src/framework_2.3; fi
+	if [ -d $(CURDIR)/src/framework_2.3 ]; then cd $(CURDIR)/src/framework_2.3; git pull -q; else git clone --depth=100 -q --branch 2.3 git://github.com/silverstripe/sapphire.git $(CURDIR)/src/framework_2.3; fi
 
 	# build index
 	cd $(CURDIR); php sapphire/cli-script.php dev/tasks/RebuildLuceneDocsIndex flush=1
