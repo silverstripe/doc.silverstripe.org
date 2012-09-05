@@ -7,9 +7,8 @@
  * your project which this combines down to. 
  * It also ensures that you have all the core styles.
  *
- * @author Will Rossiter <will at silverstripe dot com>
  * 
- * Notes: our vertical grid is set to 8px.
+ * Notes: our vertical grid is set to 7px.
  * ------------------------------------------------------- */
 
 /* -------------------------------------------------------
@@ -25,7 +24,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
  * ------------------------------------------------------- */
 
 html { 
-	background: #F8F9FA; font: 12px/18px Arial, sans-serif; color: #333; 
+	background: #F8F9FA; font: 14px/21px Helvetica, arial, sans-serif; color: #333; 
 }
 
 img { 
@@ -197,10 +196,11 @@ a { color: #0973A6; text-decoration: none; }
 #sidebar-column .sidebar-box {
 	margin: 0 0 18px 0;
 	padding: 4.75%;
-	background: #f4f4f4;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
+	background: #f6fbfe;
+	border: 1px solid #DDE8ED;
+
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 }
 	#sidebar-column .sidebar-box ul { margin: 0; padding: 0;}
 	#sidebar-column .sidebar-box h4 { font-size: 14px; margin-bottom: 9px;}
@@ -221,7 +221,7 @@ a { color: #0973A6; text-decoration: none; }
 		
 		#sidebar-column a { 
 			display: block; width: 86%; padding: 5px 10px 4px;
-			border-bottom: 1px solid #dfdfdf;
+			border-bottom: 1px solid #efefef;
 			-webkit-border-radius: 3px;
 			-moz-border-radius: 3px;
 			border-radius: 3px;
@@ -391,9 +391,9 @@ ul.pagination {
 	}
 .warning {
 	border: 1px solid #f8c3cd;
-	padding: 13px 10px 0px 60px;
+	padding: 13px 10px 13px 60px;
 	clear: both;
-	margin: 9px 0 18px;
+	margin: 7px 0 21px;
 	position: relative;
 	background: #fdf1f3 url(../images/error_button.png) no-repeat 18px 11px;
 }
@@ -409,14 +409,14 @@ ul.pagination {
 /* Used on 404 page not found */
 .warningBox { margin:9px 0 18px; }
 #content .warningBox p { 
-	margin: 0 0 9px 0;
+	margin: 0;
 }
 
 .warningBoxTop {
 	background-color: #F9FAFA;
 	border: 1px solid #d3d9dc;
-	padding: 17px 9px 7px 66px;
-	background: #F9FAFA url(../../ssorgsites/images/warning.png) no-repeat 18px 20px;
+	padding: 13px 9px 13px 66px;
+	background: #F9FAFA url(../../ssorgsites/images/warning.png) no-repeat 18px 14px;
 }
 
 #content .warningBoxTop h1 { font-size: 27px; margin-bottom: 0; letter-spacing: 0; }
@@ -431,41 +431,6 @@ ul.pagination {
 	#content .warningBoxBottom a:hover { color: #f3fbfe; }
 	#content .warningBoxBottom ul { margin: 0 0 0 40px; }
 	#content .warningBoxBottom li { background: none; margin-bottom: 0; }
-	
-/* Code styles - each site should have syntaxhighlighter installed for
- code blocks */
-.syntaxhighlighter { padding: 9px 0; }
-
-
-/* documentation navigation */
-.documentation-nav { 
-	clear: both;
-	margin: 0 0 5px; 
-	padding: 2px 0;
-	overflow: hidden; color: #999999; 
-	font-size: 11px;
-}
-	.documentation-nav h2 { font-size: 11px; font-weight: normal; float: left; margin-right: 5px;}
-	.documentation-nav ul { margin: 0; padding: 0; float: left;}
-		.documentation-nav li { display: inline; list-style: none; padding: 0; margin: 0; font-size: 11px; }
-			.documentation-nav li a { margin-left: 5px; padding: 0px; }
-				.documentation-nav li a.current { 
-					background: #0973A6; color: #fff; font-weight: bold; 
-					padding: 4px;
-					-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; 
-				}
-					.documentation-nav li a.current:hover,
-					.documentation-nav li a.current:focus {
-						text-decoration: none;
-					}
-				
-					/* Links to API */
-					#left-column a[href^="http://api."] {
-						padding: 2px;
-						font-family: Monaco, 'Bitstream Vera Sans Mono', Courier, monospace;
-						background: url(../../ssorgsites/images/external_link.png) no-repeat right 3px;
-						padding-right: 14px;
-					}
 
 /* Comments */
 #comments {
