@@ -1,0 +1,9 @@
+---
+Name: docs
+After: framework/routes#coreroutes
+---
+Director:
+  rules:
+    'dev': 'DevelopmentAdmin'
+    '': '->framework/en/'
+    '$Action': 'DocumentationViewer'
