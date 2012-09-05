@@ -5,27 +5,14 @@
 		<% base_tag %>
 		<meta charset="utf-8" />
 		<title><% if PageTitle %>$PageTitle <% end_if %>SilverStripe Documentation</title>
-		
-		<% require javascript(sapphire/thirdparty/jquery/jquery.js) %>
-		
-		<% if IsDev %>
-			<% require javascript(toolbar/javascript/toolbar.js?site=doc&amp;searchShow=true) %>
-			<% require css(toolbar/css/toolbar.css) %>
-			
-			<% require css(themes/ssorgsites/css/core.css) %>
-			<% require css(themes/ssorgsites/css/grid.css) %>
-			<% require css(themes/ssorgsites/css/typography.css) %>
-			<% require css(themes/ssorgsites/css/form.css) %>
-			<% require css(themes/ssorgsites/css/print.css, print) %>
-		<% else %>
-			<% require javascript(http://silverstripe.org/toolbar/javascript/toolbar.min.js?site=doc&amp;searchShow=true) %>
-			<% require css(http://silverstripe.org/toolbar/css/toolbar.css) %>
-			<% require css(themes/ssorgsites/css/ss.screen.min.css, screen) %>
-			<% require css(themes/ssorgsites/css/ss.print.min.css, print) %>
-		<% end_if %>
 
-		
-		<% require themedCSS(DocumentationViewer) %>
+		<!-- not using requirements to avoid no styles on 404 -->
+		<link type="text/css" rel="stylesheet" href="/themes/ssorgsites/css/core.css" />
+		<link type="text/css" rel="stylesheet" href="/themes/ssorgsites/css/grid.css" />
+		<link type="text/css" rel="stylesheet" href="/themes/ssorgsites/css/form.css" />
+		<link type="text/css" rel="stylesheet" href="/docsviewer/css/DocumentationViewer.css" />
+
+		<link type="text/css" rel="stylesheet" href="http://silverstripe.org/toolbar/css/toolbar.css" />
 	</head>
 	
 	<body>
@@ -73,7 +60,7 @@
 					<% end_if %>
 				</div>
 				
-				<div id="content" class="typography">
+				<div id="content">
 					$Layout
 				</div>
 			</div>
@@ -84,6 +71,9 @@
 			<br />Except where otherwise noted, content on this wiki is licensed under <a class="urlextern" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">CC Attribution-Noncommercial-Share Alike 3.0 Unported</a><a href="http://creativecommons.org/licenses/by/3.0/nz/" rel="license"><img class="cc-logo" src="http://i.creativecommons.org/l/by/3.0/nz/80x15.png" style="border-width: 0pt;" alt="Creative Commons License"></a></p>
 		</div>
 		
+		<script src="framework/thirdparty/jquery/jquery.js"></script>
+		<script src="http://silverstripe.org/toolbar/javascript/toolbar.js?site=doc&amp;searchShow=true"></script>
+
 		<% if GoogleAnalyticsCode %>
 		<script type="text/javascript">
 
