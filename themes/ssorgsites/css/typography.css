@@ -1,0 +1,174 @@
+/** ----------------------------------------------------------
+ *
+ * Contains the generic theme typography styles
+ *
+ * Vertical alignment 7px.
+
+ * @author Will Rossiter <will at silverstripe dot com>
+ * ------------------------------------------------------- */
+
+.typography p { 
+	font-size: 12px; line-height: 18px; margin-bottom: 18px; color: #222; 
+}
+
+.typography h1 { 
+	font-size: 32px; line-height: 36px; letter-spacing: -1px;
+	margin-bottom: 24px; 
+	color: #222;
+}
+.typography h2 { 
+	font-size: 24px; line-height: 36px; 
+	margin-bottom: 18px; 
+	color: #222; 
+}
+.typography h3 { 
+	font-size: 18px; line-height: 18px; 
+	margin-bottom: 18px; color: #222; 
+}
+.typography h4 { 
+	font-size: 16px; line-height: 18px; 
+	margin-bottom: 18px; 
+}
+
+.typography h5 { 
+	font-size: 14px; line-height: 18px; 
+	margin-bottom: 18px; 
+}
+.typography h6 { 
+	font-size: 12px; line-height: 18px; 
+	margin-bottom: 8px; 
+}
+
+h1 .heading-anchor-link,
+h2 .heading-anchor-link,
+h3 .heading-anchor-link,
+h4 .heading-anchor-link,
+h5 .heading-anchor-link,
+h6 .heading-anchor-link {
+	display: none;
+	color: #fff;
+	text-decoration: none;
+}
+
+	h1.hover .heading-anchor-link,
+	h2.hover .heading-anchor-link,
+	h3.hover .heading-anchor-link,
+	h4.hover .heading-anchor-link,
+	h5.hover .heading-anchor-link,
+	h6.hover .heading-anchor-link {
+		display: inline;
+	}
+	
+	.heading-anchor-link:hover {
+		color: #aaa;
+	}
+
+
+/* Images */
+.typography img { border: none; max-width: 100%; }
+.typography img.right { float: right; margin: 0 0 7px 7px; }
+.typography img.left { float: left; margin: 0 7px 7px; }
+.typography img.left-alone, .typography img.leftAlone { margin: 7px 0 7px 0; }
+.typography img.center { margin: 0 auto 7px; display: block; text-align: center; }
+
+/* Quotes */
+.typography blockquote { 
+	margin: 27px 0; padding: 18px 18px 0 38px; 
+	background: #f8f9fa url(../images/quote.gif) no-repeat 9px 18px; 
+	overflow: hidden;
+}
+	.typography blockquote h1,
+	.typography blockquote h2,
+	.typography blockquote h3,
+	.typography blockquote h4,
+	.typography blockquote h5,
+	.typography blockquote h6 { font-style: italic; color: #627871; }
+	.typography blockquote h4 { font-size: 18px; }
+	.typography blockquote p { font-style: italic; font-size: 14px; color: #667D76; }
+	
+.typography q { font-size: 10px; }
+
+/* Code */
+.typography code { 
+	font: 12px/18px Monaco, 'Bitstream Vera Sans Mono', Courier, monospace; background: none repeat scroll 0 0 #FEFFF0;
+}
+	.typography code a { color: #444; }
+	
+.typography pre { 
+	margin-bottom: 28px; 
+	overflow-x: auto;
+	font-family:'Bitstream Vera Sans Mono',Monaco, 'Courier New', monospace; 
+	background: #f4f4f4;
+	padding: 7px;
+	font-size: 11px;
+}
+	.typography pre code { background: none; }
+	
+/* Lists */
+.typography ol,
+.typography ul,
+.typography dl { margin: 0 0 27px 18px; }
+	.typography ol ol,
+	.typography ul ul,
+	.typography dl dl { margin: 9px; }
+	.typography li { 
+		font-size: 12px; padding-left: 6px; line-height: 18px; margin-bottom: 9px; 
+	}
+
+/* Tables */
+.typography table { 
+	border-collapse: collapse; 
+	width: 100%; 
+	background-color: #F8f9fa; margin-bottom: 17px;
+	border: 1px solid #c3cdca;
+}
+	.typography table tr:nth-child(even) { 
+		background: #e9efef; 
+	}
+	.typography table caption { 
+		text-align: left; font-weight: bold; font-size: 18px; line-height: 21px; 
+	}
+	.typography table thead { }
+		.typography table thead th {
+			padding: 9px 5px;
+			font-size: 12px;
+			text-align: left;
+		}
+		
+	.typography table tbody tr { 
+		border-top: 1px solid #c3cdca; 
+	}
+	.typography table td { 
+		font-size: 12px; line-height: 18px; padding: 9px;
+	}
+
+/* Icons */
+.typography a[href$=".pdf"],
+.typography a[href$=".PDF"],
+.typography a.pdf { 
+	padding: 2px; padding-left: 20px; background: url(../images/icons/page_white_acrobat.png) no-repeat left center; }
+	
+.typography a[href$=".doc"],
+.typography a[href$=".DOC"],
+.typography a.doc {
+	padding: 2px; padding-left: 20px; background: url(../images/icons/page_word.png) no-repeat left center; }
+	
+.typography a[href$=".xls"],
+.typography a[href$=".XLS"],
+.typography a.xls {
+	padding: 2px; padding-left: 20px; background: url(../images/icons/page_excel.png) no-repeat left center; }
+	
+.typography a[href$=".gz"],
+.typography a[href$=".GZ"],
+.typography a[href$=".gzip"],
+.typography a[href$=".GZIP"],
+.typography a[href$=".zip"],
+.typography a[href$=".ZIP"],
+.typography a.archive {
+	padding: 2px; padding-left: 20px; background: url(../images/icons/page_white_zip.png) no-repeat left center; }
+	
+.typography a[href$=".exe"],
+.typography a[href$=".EXE"],
+.typography a.application {
+	padding: 2px; padding-left: 20px; background: url(../images/icons/application.png) no-repeat left center; }
+	

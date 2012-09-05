@@ -1,0 +1,18 @@
+/** ----------------------------------------------------------
+ *
+ * Print stylesheet for the ssorg sites. Handles common printing
+ * functionality and helper classes
+ *
+ * @author Michael Andrewartha <michael at silverstripe dot com>
+ * @author Will Rossiter <will at silverstripe dot com>
+ * ------------------------------------------------------- */
+
+* { float: none; }
+html { background: #fff; } 
+
+.ss-globaltoolbar { display: none; }
+
+#sidebar,
+#Sidebar,
+.ssLogo,
+#search-bar { display: none !important; }
