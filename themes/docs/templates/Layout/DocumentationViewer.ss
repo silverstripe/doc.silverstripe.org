@@ -6,6 +6,12 @@
 	<div id="content-column">
 		$Content
 		
+		<% if EditLink %>
+			<div id="edit-link">
+				<p><a target="_blank" href="$EditLink">Edit this page</a></p>
+			</div>
+		<% end_if %>
+		
 		<% include Comments %>
 	</div>
 

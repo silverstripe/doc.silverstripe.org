@@ -406,6 +406,10 @@ ul.pagination {
 	background: #f7fcff url(../images/info_button.png) no-repeat 18px 11px;
 }
 
+	.warning p {
+		margin-bottom: 0;
+	}
+
 /* Used on 404 page not found */
 .warningBox { margin:9px 0 18px; }
 #content .warningBox p { 
