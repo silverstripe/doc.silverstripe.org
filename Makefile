@@ -3,7 +3,7 @@ update:
 	@if [ -d $(CURDIR)/src/sapphire_master ]; then rm -rf $(CURDIR)/src/sapphire_master; fi
 
 	@echo "Checking out SilverStripe (Framework)..";
-	@if [ ! -d $(CURDIR)/src/framework ]; then cd $(CURDIR)/src/framework; git clone --depth=100 -q git://github.com/silverstripe/sapphire.git; fi
+	@if [ -d $(CURDIR)/src/framework ]; then cd $(CURDIR)/src/framework; git pull -q; else git clone --depth=100 -q git://github.com/silverstripe/sapphire.git $(CURDIR)/src/framework; fi
 
 	@echo "-- master";
 	@if [ -d $(CURDIR)/src/framework_master ]; then cd $(CURDIR)/src/framework_master; git pull -q; else cp -R $(CURDIR)/src/framework $(CURDIR)/src/framework_master; cd $(CURDIR)/src/framework_master; git pull -q; fi
