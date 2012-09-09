@@ -47,10 +47,6 @@ DocumentationViewer::set_edit_link(
 
 Object::add_extension('Controller', 'ControllerExtension');
 
-if(Director::isLive()) {
-	DocumentationViewerExtension::$google_analytics_code = 'UA-84547-8';
-}
-
 Validator::set_javascript_validation_handler('none');	
 
 DocumentationSearch::set_meta_data(array(
