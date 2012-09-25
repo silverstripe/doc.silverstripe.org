@@ -60,7 +60,7 @@
 					<% end_if %>
 				</div>
 				
-				<div id="content">
+				<div id="content" class="typography">
 					$Layout
 				</div>
 			</div>
