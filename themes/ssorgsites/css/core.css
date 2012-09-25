@@ -1,19 +1,3 @@
-/** ----------------------------------------------------------
- *
- * Contains the core styles for all the silverstripe sites.
- *
- * If you plan on including this file in a ss project you are doing it wrong.
- * you should link to the ss.screen.min.css and ss.print.min.css file in 
- * your project which this combines down to. 
- * It also ensures that you have all the core styles.
- *
- * 
- * Notes: our vertical grid is set to 7px.
- * ------------------------------------------------------- */
-
-/* -------------------------------------------------------
- * Reset Styles
- * ------------------------------------------------------- */
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td { 
 	margin:0; padding:0; 
 }
@@ -125,12 +109,12 @@ a { color: #0973A6; text-decoration: none; }
 		}
 		
 		#header h1 a.logo { 
-			background: #fff url(../../ssorgsites/images/logo.png) no-repeat bottom left; 
+			background: #fff url(../../../themes/ssorgsites/images/logo.png) no-repeat bottom left; 
 			height: 55px; width:162px; 
 			display: inline-block; 
 		}
 			#header h1 a.logo:hover { 
-				background: #fff url(../../ssorgsites/images/logo.png) no-repeat 0 -50px; 
+				background: #fff url(../../../themes/ssorgsites/images/logo.png) no-repeat 0 -50px; 
 			}
 
 /* Breadcrumbs  */
@@ -164,7 +148,7 @@ a { color: #0973A6; text-decoration: none; }
 		
 		#search input.text {
 			float: right; width: 170px; height: 22px;
-			background: url(../../ssorgsites/images/search.png) top left no-repeat;
+			background: url(../../../themes/ssorgsites/images/search.png) top left no-repeat;
 			font-size: 11px;
 			color: #495C56;
 			outline: none;
@@ -182,7 +166,7 @@ a { color: #0973A6; text-decoration: none; }
 			border: none;
 			text-indent: 99999px;
 			cursor: pointer;
-			background: url(../../ssorgsites/images/search.png) top right no-repeat;
+			background: url(../../../themes/ssorgsites/images/search.png) top right no-repeat;
 		}
 
 /* Search Results */
@@ -349,7 +333,7 @@ ul.pagination {
 .notice a.close, 
 .warning a.close, 
 .info a.close {
-	background:url("../images/ico_close_off.png") no-repeat scroll left top transparent;
+	background:url(../../../themes/ssorgsites/images/ico_close_off.png) no-repeat scroll left top transparent;
 	display:block;
 	font-size:0;
 	height:11px;
@@ -366,7 +350,7 @@ ul.pagination {
 	padding: 13px 10px 0px 60px;
 	clear: both;
 	margin: 9px 0 18px;
-	background: #f9fafa url(../images/lightbulb.png) no-repeat 21px 14px;
+	background: #f9fafa url(../../../themes/ssorgsites/images/lightbulb.png) no-repeat 21px 14px;
 }
 	.typography .note h3,
 	.typography .hint h3 {
@@ -384,7 +368,7 @@ ul.pagination {
 	padding: 13px 10px 0px 60px;
 	margin: 9px 0 18px;
 	position: relative;
-	background: #FFFAC6 url(../images/notification.png) no-repeat 18px 11px;
+	background: #FFFAC6 url(../../../themes/ssorgsites/images/notification.png) no-repeat 18px 11px;
 }
 	p.notice {
 		padding-bottom: 18px;
@@ -395,7 +379,7 @@ ul.pagination {
 	clear: both;
 	margin: 7px 0 21px;
 	position: relative;
-	background: #fdf1f3 url(../images/error_button.png) no-repeat 18px 11px;
+	background: #fdf1f3 url(../../../themes/ssorgsites/images/error_button.png) no-repeat 18px 11px;
 }
 .info {
 	border: 1px solid #6baad8;
@@ -403,7 +387,7 @@ ul.pagination {
 	clear: both;
 	margin: 9px 0 18px;
 	position: relative;
-	background: #f7fcff url(../images/info_button.png) no-repeat 18px 11px;
+	background: #f7fcff url(../../../themes/ssorgsites/images/info_button.png) no-repeat 18px 11px;
 }
 
 	.warning p {
@@ -420,16 +404,21 @@ ul.pagination {
 	background-color: #F9FAFA;
 	border: 1px solid #d3d9dc;
 	padding: 13px 9px 13px 66px;
-	background: #F9FAFA url(../../ssorgsites/images/warning.png) no-repeat 18px 14px;
+	background: #F9FAFA url(../../../themes/ssorgsites/images/warning.png) no-repeat 18px 14px;
 }
 
-#content .warningBoxTop h1 { font-size: 27px; margin-bottom: 0; letter-spacing: 0; }
-#content .warningBoxTop ul { margin: 9px 0 18px; }
-#content .warningBoxTop li { margin-bottom: 4px; }
+#content .warningBoxTop h1 { 
+	font-size: 27px; margin-bottom: 0; letter-spacing: 0; 
+}
+#content .warningBoxTop ul { 
+	margin: 9px 0 18px; 
+}
+#content .warningBoxTop li { 
+	margin-bottom: 4px; 
+}
 #content .warningBoxBottom { 
 	background-color: #0973A6; 
 	padding: 12px 0 16px;
-	/* background: url(../../ssorgsites/images/warning.png) no-repeat scroll 22px 13px #0973A6; */
 }
 	#content .warningBoxBottom a { color: #fff; }
 	#content .warningBoxBottom a:hover { color: #f3fbfe; }

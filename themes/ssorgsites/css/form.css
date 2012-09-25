@@ -1,12 +1,3 @@
-/** ----------------------------------------------------------
- *
- * Contains the generic theme form styles
- *
- * Vertical alignment 9px.
- *
- * @author Michael Andrewartha <michael at silverstripe dot com>
- * @author Will Rossiter <will at silverstripe dot com>
- * ------------------------------------------------------- */
 form fieldset {
 	border: 0;
 }
