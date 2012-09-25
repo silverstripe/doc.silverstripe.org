@@ -1,0 +1,18 @@
+{
+	"name": "silverstripe/doc.silverstripe.org",
+	"description": "This is the source code powering http://doc.silverstripe.org.",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe", "doc.silverstripe.org", "documentation"],
+	"authors": [
+	{
+		"name": "Ingo Schommer",
+		"email": "ingo@silverstripe.com"
+	}
+	],
+	"minimum-stability": "dev",
+	"require":
+	{
+		"silverstripe/framework": "3.*",
+		"silverstripe/docsviewer": "dev-master"
+	}
+}
