@@ -1,42 +1,52 @@
-/** ----------------------------------------------------------
- *
- * Contains the generic theme typography styles
- *
- * Vertical alignment 7px.
-
- * @author Will Rossiter <will at silverstripe dot com>
- * ------------------------------------------------------- */
+/*! vertical grid = 7px */
 
 .typography p { 
-	font-size: 12px; line-height: 18px; margin-bottom: 18px; color: #222; 
+	font-size: 14px; 
+	line-height: 21px; 
+	margin-bottom: 14px; 
+	color: #222; 
 }
 
 .typography h1 { 
-	font-size: 32px; line-height: 36px; letter-spacing: -1px;
-	margin-bottom: 24px; 
+	font-size: 32px; 
+	line-height: 35px; 
+	letter-spacing: -1px;
+	margin-bottom: 21px; 
 	color: #222;
 }
+	.typography h1 + p {
+		font-size: 18px;
+		line-height: 27px;
+	}
+
 .typography h2 { 
-	font-size: 24px; line-height: 36px; 
-	margin-bottom: 18px; 
+	font-size: 24px; 
+	line-height: 28px; 
+	margin: 28px 0 7px; 
 	color: #222; 
 }
+
 .typography h3 { 
-	font-size: 18px; line-height: 18px; 
-	margin-bottom: 18px; color: #222; 
+	font-size: 18px; 
+	line-height: 21px; 
+	margin-bottom: 14px; 
+	color: #222; 
 }
 .typography h4 { 
-	font-size: 16px; line-height: 18px; 
-	margin-bottom: 18px; 
+	font-size: 16px; 
+	line-height: 21px; 
+	margin-bottom: 14px; 
 }
 
 .typography h5 { 
-	font-size: 14px; line-height: 18px; 
-	margin-bottom: 18px; 
+	font-size: 14px; 
+	line-height: 21px; 
+	margin-bottom: 14px; 
 }
 .typography h6 { 
-	font-size: 12px; line-height: 18px; 
-	margin-bottom: 8px; 
+	font-size: 12px; 
+	line-height: 14px; 
+	margin-bottom: 7px; 
 }
 
 h1 .heading-anchor-link,
@@ -90,9 +100,12 @@ h6 .heading-anchor-link {
 
 /* Code */
 .typography code { 
-	font: 12px/18px Monaco, 'Bitstream Vera Sans Mono', Courier, monospace; background: none repeat scroll 0 0 #FEFFF0;
+	font: 13px/21px Monaco, 'Bitstream Vera Sans Mono', Courier, monospace; 
+	background: none repeat scroll 0 0 #FEFFF0;
 }
-	.typography code a { color: #444; }
+	.typography code a { 
+		color: #444; 
+	}
 	
 .typography pre { 
 	margin-bottom: 28px; 
@@ -119,27 +132,38 @@ h6 .heading-anchor-link {
 .typography table { 
 	border-collapse: collapse; 
 	width: 100%; 
-	background-color: #F8f9fa; margin-bottom: 17px;
+	background-color: #fafafa; 
+	margin-bottom: 28px;
 	border: 1px solid #c3cdca;
 }
 	.typography table tr:nth-child(even) { 
-		background: #e9efef; 
+		background: #eef4f6; 
 	}
 	.typography table caption { 
-		text-align: left; font-weight: bold; font-size: 18px; line-height: 21px; 
+		text-align: left; 
+		font-weight: bold; 
+		font-size: 18px; 
+		line-height: 21px; 
 	}
-	.typography table thead { }
+	.typography table thead { 
+		background: #fafafa;
+	}
 		.typography table thead th {
-			padding: 9px 5px;
+			padding: 7px 10px 6px;
 			font-size: 12px;
 			text-align: left;
+			border-right: 1px solid #c3cdca;
 		}
 		
 	.typography table tbody tr { 
 		border-top: 1px solid #c3cdca; 
 	}
+
 	.typography table td { 
-		font-size: 12px; line-height: 18px; padding: 9px;
+		font-size: 12px; 
+		line-height: 21px;
+		padding: 7px;
+		border-right: 1px solid #c3cdca;
 	}
 
 /* Icons */
