@@ -22,6 +22,7 @@ fi
 function checkout {
 	if [ ! -d $dir/src/$3 ]; then
 		echo "Cloning $1 "
+		mkdir $dir/src
 		cd $dir/src
 		git clone --depth=100 -q git://github.com/$1 $3 --quiet
 		cd $3
@@ -46,6 +47,7 @@ function checkout {
 	git pull -q
 }
 
+checkout 'silverstripe/sapphire.git' 'master' 'framework'
 checkout 'silverstripe/sapphire.git' '3.0' 'framework'
 checkout 'silverstripe/sapphire.git' '2.4' 'framework'
 checkout 'silverstripe/sapphire.git' '2.3' 'framework'
