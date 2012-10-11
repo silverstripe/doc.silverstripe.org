@@ -86,6 +86,7 @@
 	RewriteRule ^form-validation$ http://doc.silverstripe.org/framework/en/topics/form-validation [R=301,L]
 	RewriteRule ^formaction$ http://api.silverstripe.org/search/lookup/?q=FormAction&module=sapphire [R=301,L]
 	RewriteRule ^functionaltest$ http://api.silverstripe.org/search/lookup/?q=FunctionalTest&module=sapphire [R=301,L]
+	RewriteRule ^framework/en/trunk/misc/collaboration-on-git http://doc.silverstripe.org/framework/en/trunk/misc/contributing/code [R=301,L]
 	RewriteRule ^gsoc$ http://doc.silverstripe.org/old/gsoc [R=301,L]
 	RewriteRule ^hasmanycomplextablefield$ http://api.silverstripe.org/search/lookup/?q=HasManyComplexTableField&module=sapphire [R=301,L]
 	RewriteRule ^hasonecomplextablefield$ http://api.silverstripe.org/search/lookup/?q=HasOneComplexTableField&module=sapphire [R=301,L]
