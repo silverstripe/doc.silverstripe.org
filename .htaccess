@@ -324,10 +324,6 @@
 	# Legacy rewrite: Can't use 'master' as it confuses api.ss.org linking
 	RewriteRule ^framework/en/master(.*) http://doc.silverstripe.org/framework/en/trunk$1 [R=301,L]
 
-	# Changelogs are just kept up-to-date on trunk
-	RewriteRule ^framework/en/changelogs(.*) http://doc.silverstripe.org/framework/en/trunk/changelogs/$1 [R=301,L]
-	RewriteRule ^cms/en/changelogs(.*) http://doc.silverstripe.org/cms/en/trunk/changelogs/$1 [R=301,L]
-	
 	# Anything in sapphire/en/<version>/misc is redirected to trunk, the info in there is usually not version specific,
 	# and only updated on master (e.g. contribution and coding guidelines)
 	RewriteRule ^framework/en/misc/?(.*) http://doc.silverstripe.org/framework/en/trunk/misc/$1 [R=301,L]
