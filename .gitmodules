@@ -1,6 +1,0 @@
-[submodule "framework"]
-	path = framework
-	url = git@github.com:silverstripe/sapphire.git
-[submodule "docsviewer"]
-	path = docsviewer
-	url = git@github.com:silverstripe/silverstripe-docsviewer.git
