@@ -20,34 +20,50 @@ fi
 #===============================================================================
 # Parameters: github path
 function checkout {
-	if [ ! -d $dir/src/$3 ]; then
+	if [ ! -d $dir/src/$2 ]; then
 		echo "Cloning $1 "
 		cd $dir/src
-		git clone --depth=100 -q git://github.com/$1 $3 --quiet
-		cd $3
-		git checkout master -q
+		git clone --depth=100 -q git://github.com/$1 $2 --quiet
+		cd $2
+		git checkout -q origin/master
 	else
-		cd $dir/src/$3
-		git pull -q
-		git checkout master -q
+		cd $dir/src/$2
+		git pull -q origin master
+		git checkout -q origin/master 
 	fi
 
-	echo "Checking out $2 from $1 into $3_$2"
+	if [ $# == 3 ]; then
+		echo "Checking out $2 from $1 into $2_$3"
 
-	if [ -d $dir/src/$3_$2 ]; then
-		cd $dir/src/$3_$2
+		if [ -d $dir/src/$2_$3 ]; then
+			cd $dir/src/$2_$3
+		else
+			cp -R $dir/src/$2 $dir/src/$2_$3
+			cd $dir/src/$2_$3
+		fi
+
+		git reset --hard -q
+		git checkout $3 -q
 	else
-		cp -R $dir/src/$3 $dir/src/$3_$2
-		cd $dir/src/$3_$2
+		echo "Checking out $2 from $1 into $2"
 	fi
-
-	git reset --hard -q
-	git checkout $2 -q
-	git pull -q
 }
 
-checkout 'silverstripe/sapphire.git' '3.0' 'framework'
-checkout 'silverstripe/sapphire.git' '2.4' 'framework'
-checkout 'silverstripe/sapphire.git' '2.3' 'framework'
+# core
+checkout 'silverstripe/sapphire.git' 'framework' '3.0' 
+checkout 'silverstripe/sapphire.git' 'framework' '2.4'
+checkout 'silverstripe/sapphire.git' 'framework' '2.3' 
+
+# core modules with docs
+checkout 'silverstripe/silverstripe-cms.git' 'cms' '3.0'
+
+# checkout 'silverstripe/silverstripe-docsviewer.git' 'docsviewer'
+# checkout 'silverstripe/silverstripe-forum.git' 'forum'
+# checkout 'silverstripe/silverstripe-translatable.git' 'translatable'
+# checkout 'silverstripe/silverstripe-subsites.git' 'subsites'
+
+# popular labs projects
+# checkout 'silverstripe-labs/silverstripe-staticpublisher.git' 'staticpublisher'
+
 
 echo "Done."
