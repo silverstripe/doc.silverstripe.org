@@ -1,17 +1,19 @@
 # doc.silverstripe.org
 
 This is the source code powering http://doc.silverstripe.org.  It primarily
-consists of:
+consists of the SilverStripe framework and [docsviewer](https://github.com/silverstripe/silverstripe-docsviewer)
+module with minimal configuration.
 
- * SilverStripe 3.0 framework
- * The [docsviewer](https://github.com/silverstripe/silverstripe-docsviewer)
- module.
+For adding functionality or editing the style of the documentation see the 
+[docsviewer](http://github.com/silverstripe/silverstripe-docsviewer) module.
 
 ## Development
 
 To set up a test instance:
 
  * Clone this repository to a LAMP server.
+ * Install [Composer](http://doc.silverstripe.org/framework/en/installation/composer)
+ * After installing composer run `composer install --prefer-source` to grab the modules.
  * Run "make update" to check out the repositories from which is builds the
  docs (this will take a while the first time)
 
