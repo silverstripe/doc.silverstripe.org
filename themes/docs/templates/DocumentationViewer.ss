@@ -6,12 +6,6 @@
 		<meta charset="utf-8" />
 		<title><% if PageTitle %>$PageTitle <% end_if %>SilverStripe Documentation</title>
 
-		<!-- not using requirements to avoid no styles on 404 -->
-		<link type="text/css" rel="stylesheet" href="/themes/ssorgsites/css/core.css" />
-		<link type="text/css" rel="stylesheet" href="/themes/ssorgsites/css/grid.css" />
-		<link type="text/css" rel="stylesheet" href="/themes/ssorgsites/css/form.css" />
-		<link type="text/css" rel="stylesheet" href="/docsviewer/css/DocumentationViewer.css" />
-
 		<link type="text/css" rel="stylesheet" href="http://silverstripe.org/toolbar/css/toolbar.css" />
 	</head>
 	
@@ -26,38 +20,36 @@
 			
 			
 			<div id="layout">
-				<div id="search-bar">					
-					<div id="breadcrumbs">
-						<% include DocBreadcrumbs %>
-					</div>
-
+				<div id="search-bar">
 					<div id="search">
 						$DocumentationSearchForm
 					</div>
+					<div id="top-nav">
 
-					<% if Entities %>
-					<div id="entities-nav" class="documentation-nav clearfix">
-						<h2>Modules:</h2>
-							<ul>
-							<% control Entities %>
-								<li><a href="$Link" class="$LinkingMode">$Title</a></li>
-							<% end_control %>
-						</ul>
-						
-						<div class="clear"><!-- --></div>
+						<% if Entities %>
+						<div id="entities-nav" class="documentation-nav clearfix">
+							<h2>Modules:</h2>
+								<ul>
+								<% control Entities %>
+									<li><a href="$Link" class="$LinkingMode">$Title</a></li>
+								<% end_control %>
+							</ul>
+							
+							<div class="clear"><!-- --></div>
+						</div>
+						<% end_if %>
+											
+						<% if Versions %>
+						<div id="versions-nav" class="documentation-nav clearfix">
+							<h2>Versions:</h2>
+								<ul>
+								<% control Versions %>
+									<li><a href="$Link" class="$LinkingMode">$Title</a></li>
+								<% end_control %>
+							</ul>
+						</div>
+						<% end_if %>
 					</div>
-					<% end_if %>
-										
-					<% if Versions %>
-					<div id="versions-nav" class="documentation-nav clearfix">
-						<h2>Versions:</h2>
-							<ul>
-							<% control Versions %>
-								<li><a href="$Link" class="$LinkingMode">$Title</a></li>
-							<% end_control %>
-						</ul>
-					</div>
-					<% end_if %>
 				</div>
 				
 				<div id="content" class="typography">
