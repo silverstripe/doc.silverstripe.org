@@ -1,0 +1,9 @@
+{
+    "name": "silverstripe/doc.silverstripe.org",
+    "description": "The source code behind doc.silverstripe.org",
+    "require": {
+        "php": ">=5.3.2",
+        "silverstripe/docsviewer": "dev-master",
+        "silverstripe/docsviewer": "dev-master"
+    }
+}
