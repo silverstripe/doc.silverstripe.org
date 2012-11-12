@@ -45,6 +45,7 @@ function checkout {
 
 		git reset --hard -q
 		git checkout $3 -q
+		git pull -q
 	else
 		echo "Checking out $2 from $1 into $2"
 	fi
