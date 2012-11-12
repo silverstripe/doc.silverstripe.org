@@ -3,3 +3,5 @@ src/
 silverstripe-cache
 assets
 vendor/
+framework/
+docsviewer/
