@@ -30,7 +30,7 @@ DocumentationSearch::enable();
 try {
 	DocumentationService::register("framework", BASE_PATH ."/src/framework/docs/", 'trunk');
 	DocumentationService::register("framework", BASE_PATH ."/src/framework_3.1/docs/", '3.1');
-	DocumentationService::register("framework", BASE_PATH ."/src/framework_3.0/docs/", '3.0');
+	DocumentationService::register("framework", BASE_PATH ."/src/framework_3.0/docs/", '3.0', false, true);
 	DocumentationService::register("framework", BASE_PATH ."/src/framework_2.4/docs/", '2.4');
 	DocumentationService::register("framework", BASE_PATH ."/src/framework_2.3/docs/", '2.3');
 } catch(InvalidArgumentException $e) {
