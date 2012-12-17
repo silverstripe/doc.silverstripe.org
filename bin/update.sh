@@ -53,6 +53,7 @@ function checkout {
 
 # core
 checkout 'silverstripe/sapphire.git' 'framework' 'master' 
+checkout 'silverstripe/sapphire.git' 'framework' '3.1' 
 checkout 'silverstripe/sapphire.git' 'framework' '3.0' 
 checkout 'silverstripe/sapphire.git' 'framework' '2.4'
 checkout 'silverstripe/sapphire.git' 'framework' '2.3' 
