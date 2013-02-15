@@ -26,7 +26,6 @@
             "extra": {
                 "class": "Composer\\Installers\\Installer"
             },
-            "installation-source": "dist",
             "autoload": {
                 "psr-0": {
                     "Composer\\Installers\\": "src/"
@@ -72,21 +71,20 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "6df20c1f73602b4e910244d0c897a59481736055"
+                "reference": "9cf85b0c197ae9dc076c2f50d99173887bbd76ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/silverstripe/silverstripe-docsviewer/archive/6df20c1f73602b4e910244d0c897a59481736055.zip",
-                "reference": "6df20c1f73602b4e910244d0c897a59481736055",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/9cf85b0c197ae9dc076c2f50d99173887bbd76ab",
+                "reference": "9cf85b0c197ae9dc076c2f50d99173887bbd76ab",
                 "shasum": ""
             },
             "require": {
                 "silverstripe/framework": "3.*"
             },
-            "time": "2012-11-14 10:06:26",
+            "time": "2013-02-12 00:43:32",
             "type": "silverstripe-module",
-            "installation-source": "source",
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -123,7 +121,6 @@
             },
             "time": "2012-12-17 10:45:09",
             "type": "silverstripe-module",
-            "installation-source": "source",
             "autoload": {
                 "classmap": [
                     "tests/behat/features/bootstrap"
