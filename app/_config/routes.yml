@@ -4,6 +4,10 @@ After: framework/routes#coreroutes
 ---
 Director:
   rules:
+    'Security//$Action/$ID/$OtherID': 'Security'
+    'dev': 'DevelopmentAdmin'
+    'admin': 'AdminRootController'
+    'dev/buildcache/$Action': 'RebuildStaticCacheTask'
     'dev': 'DevelopmentAdmin'
     '': '->framework/en/'
     '$Action': 'DocumentationViewer'
