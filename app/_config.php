@@ -4,7 +4,7 @@ global $project;
 $project = 'app';
 
 global $database;
-$database = 'SS_ssnewdocstest';
+$database = 'SS_ss2doc';
 
 require_once('conf/ConfigureFromEnv.php');
 
