@@ -71,18 +71,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "9cf85b0c197ae9dc076c2f50d99173887bbd76ab"
+                "reference": "440a2cbaa50bcaeed335a606c8074b508c938eec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/9cf85b0c197ae9dc076c2f50d99173887bbd76ab",
-                "reference": "9cf85b0c197ae9dc076c2f50d99173887bbd76ab",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/440a2cbaa50bcaeed335a606c8074b508c938eec",
+                "reference": "440a2cbaa50bcaeed335a606c8074b508c938eec",
                 "shasum": ""
             },
             "require": {
                 "silverstripe/framework": "3.*"
             },
-            "time": "2013-02-12 00:43:32",
+            "time": "2013-02-15 10:13:40",
             "type": "silverstripe-module",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
