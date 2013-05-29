@@ -75,12 +75,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "8cacbe0a18b85f06c01017049c8887d2481adc1d"
+                "reference": "0a938877980e899a8a442de0988652827c683491"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/8cacbe0a18b85f06c01017049c8887d2481adc1d",
-                "reference": "8cacbe0a18b85f06c01017049c8887d2481adc1d",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/0a938877980e899a8a442de0988652827c683491",
+                "reference": "0a938877980e899a8a442de0988652827c683491",
                 "shasum": ""
             },
             "require": {
@@ -103,7 +103,7 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2013-03-29 08:37:04"
+            "time": "2013-05-29 19:19:28"
         },
         {
             "name": "silverstripe/framework",
