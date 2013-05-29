@@ -1,5 +1,9 @@
 {
-    "hash": "c131b61fcd90a294211c864caeecf1c1",
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "43da2aedbdbd15703c229ef358a3f6b0",
     "packages": [
         {
             "name": "composer/installers",
@@ -21,7 +25,6 @@
             "require-dev": {
                 "composer/composer": "1.0.*@dev"
             },
-            "time": "2012-09-07 21:17:33",
             "type": "composer-installer",
             "extra": {
                 "class": "Composer\\Installers\\Installer"
@@ -46,45 +49,45 @@
             "description": "A multi-framework Composer library installer",
             "homepage": "http://composer.github.com/installers/",
             "keywords": [
-                "symfony",
-                "installer",
-                "zend",
-                "wordpress",
                 "cakephp",
                 "codeigniter",
-                "fuelphp",
                 "drupal",
-                "lithium",
-                "li3",
+                "fuelphp",
+                "installer",
                 "joomla",
+                "kohana",
                 "laravel",
+                "li3",
+                "lithium",
+                "mako",
                 "phpbb",
                 "ppi",
                 "silverstripe",
-                "kohana",
-                "mako"
-            ]
+                "symfony",
+                "wordpress",
+                "zend"
+            ],
+            "time": "2012-09-07 21:17:33"
         },
         {
             "name": "silverstripe/docsviewer",
-            "version": "dev-master",
+            "version": "0.1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "440a2cbaa50bcaeed335a606c8074b508c938eec"
+                "reference": "8cacbe0a18b85f06c01017049c8887d2481adc1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/440a2cbaa50bcaeed335a606c8074b508c938eec",
-                "reference": "440a2cbaa50bcaeed335a606c8074b508c938eec",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/8cacbe0a18b85f06c01017049c8887d2481adc1d",
+                "reference": "8cacbe0a18b85f06c01017049c8887d2481adc1d",
                 "shasum": ""
             },
             "require": {
-                "silverstripe/framework": "3.*"
+                "silverstripe/framework": "3.0.*"
             },
-            "time": "2013-02-15 10:13:40",
             "type": "silverstripe-module",
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -99,7 +102,8 @@
             "keywords": [
                 "documentation",
                 "silverstripe"
-            ]
+            ],
+            "time": "2013-03-29 08:37:04"
         },
         {
             "name": "silverstripe/framework",
@@ -116,10 +120,9 @@
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2",
-                "composer/installers": "*"
+                "composer/installers": "*",
+                "php": ">=5.3.2"
             },
-            "time": "2012-12-17 10:45:09",
             "type": "silverstripe-module",
             "autoload": {
                 "classmap": [
@@ -145,10 +148,13 @@
             "keywords": [
                 "framework",
                 "silverstripe"
-            ]
+            ],
+            "time": "2012-12-17 10:45:09"
         }
     ],
-    "packages-dev": null,
+    "packages-dev": [
+
+    ],
     "aliases": [
 
     ],
@@ -156,5 +162,11 @@
     "stability-flags": {
         "silverstripe/docsviewer": 20,
         "silverstripe/framework": 20
-    }
+    },
+    "platform": {
+        "php": ">=5.3.2"
+    },
+    "platform-dev": [
+
+    ]
 }
