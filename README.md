@@ -47,7 +47,7 @@ their way onto the doc.silverstripe.org site in the next release.
 
 The content for doc.silverstripe.org is stored in the modules repository inside
 a "docs" folder (for example, the framework documentation is stored at
-(github.com/silverstripe/sapphire)[https://github.com/silverstripe/sapphire/tree/master/docs]).
+[github.com/silverstripe/sapphire](https://github.com/silverstripe/sapphire/tree/master/docs)).
 
 If you wish to edit the documentation content, submit a pull request on that
 Github project. Updates to the content are synced regularly with
