@@ -28,6 +28,11 @@
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt)$
 	#RewriteRule ^execution-pipeline$ http://doc.silverstripe.org/framework/en/reference/ [R=301,L]
+	
+	RewriteCond %{REQUEST_URI} !(3.0|2.4)
+	RewriteRule ^(.*)/topics/testing/create-silverstripe-test$ /$1/topics/testing/creating-a-silverstripe-test [R=301,L]
+	RewriteCond %{REQUEST_URI} !(3.0|2.4)
+	RewriteRule ^(.*)/topics/testing/create-functional-test$ /$1/topics/testing/creating-a-functional-test [R=301,L]
 		
 	RewriteRule ^arraydata$ http://api.silverstripe.org/search/lookup/?q=ArrayData&module=sapphire [R=301,L]
 	RewriteRule ^autocompletefield$ http://api.silverstripe.org/search/lookup/?q=AutocompleteField&module=sapphire [R=301,L]
