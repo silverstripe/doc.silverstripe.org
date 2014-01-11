@@ -3,38 +3,42 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "43da2aedbdbd15703c229ef358a3f6b0",
+    "hash": "edc15d70fab34d39f90088405d94ea90",
     "packages": [
         {
             "name": "composer/installers",
-            "version": "v1.0.0",
+            "version": "v1.0.8",
             "source": {
                 "type": "git",
-                "url": "https://github.com/composer/installers",
-                "reference": "v1.0.0"
+                "url": "https://github.com/composer/installers.git",
+                "reference": "c87cfc35882eb50df3eef1734bfa52fbcd6c782c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/composer/installers/zipball/v1.0.0",
-                "reference": "v1.0.0",
+                "url": "https://api.github.com/repos/composer/installers/zipball/c87cfc35882eb50df3eef1734bfa52fbcd6c782c",
+                "reference": "c87cfc35882eb50df3eef1734bfa52fbcd6c782c",
                 "shasum": ""
             },
             "replace": {
                 "shama/baton": "*"
             },
             "require-dev": {
-                "composer/composer": "1.0.*@dev"
+                "composer/composer": "1.0.*@dev",
+                "phpunit/phpunit": "3.7.*"
             },
             "type": "composer-installer",
             "extra": {
-                "class": "Composer\\Installers\\Installer"
+                "class": "Composer\\Installers\\Installer",
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
             },
             "autoload": {
                 "psr-0": {
                     "Composer\\Installers\\": "src/"
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -49,9 +53,15 @@
             "description": "A multi-framework Composer library installer",
             "homepage": "http://composer.github.com/installers/",
             "keywords": [
+                "TYPO3 CMS",
+                "TYPO3 Flow",
+                "TYPO3 Neos",
+                "agl",
                 "cakephp",
                 "codeigniter",
+                "concrete5",
                 "drupal",
+                "elgg",
                 "fuelphp",
                 "installer",
                 "joomla",
@@ -60,6 +70,7 @@
                 "li3",
                 "lithium",
                 "mako",
+                "modulework",
                 "phpbb",
                 "ppi",
                 "silverstripe",
@@ -67,7 +78,7 @@
                 "wordpress",
                 "zend"
             ],
-            "time": "2012-09-07 21:17:33"
+            "time": "2013-12-24 18:04:46"
         },
         {
             "name": "silverstripe/docsviewer",
@@ -75,19 +86,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "0a938877980e899a8a442de0988652827c683491"
+                "reference": "95fee5a9fffeba32e6d09a6bfba0f55d0ba1cefc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/0a938877980e899a8a442de0988652827c683491",
-                "reference": "0a938877980e899a8a442de0988652827c683491",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/95fee5a9fffeba32e6d09a6bfba0f55d0ba1cefc",
+                "reference": "95fee5a9fffeba32e6d09a6bfba0f55d0ba1cefc",
                 "shasum": ""
             },
             "require": {
                 "silverstripe/framework": "3.0.*"
             },
             "type": "silverstripe-module",
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -103,20 +114,20 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2013-05-29 19:19:28"
+            "time": "2013-10-30 22:06:02"
         },
         {
             "name": "silverstripe/framework",
             "version": "3.0.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/silverstripe/sapphire",
-                "reference": "3b59d4a7628ab984505fd2a0e37a85ec9ef976c5"
+                "url": "https://github.com/silverstripe/silverstripe-framework.git",
+                "reference": "dd801bdb0bfdd199d7bb6ce3269e1aedd7b1a8ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/silverstripe/sapphire/archive/3b59d4a7628ab984505fd2a0e37a85ec9ef976c5.zip",
-                "reference": "3b59d4a7628ab984505fd2a0e37a85ec9ef976c5",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/dd801bdb0bfdd199d7bb6ce3269e1aedd7b1a8ce",
+                "reference": "dd801bdb0bfdd199d7bb6ce3269e1aedd7b1a8ce",
                 "shasum": ""
             },
             "require": {
@@ -129,7 +140,7 @@
                     "tests/behat/features/bootstrap"
                 ]
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -149,7 +160,7 @@
                 "framework",
                 "silverstripe"
             ],
-            "time": "2012-12-17 10:45:09"
+            "time": "2014-01-10 23:19:12"
         }
     ],
     "packages-dev": [
