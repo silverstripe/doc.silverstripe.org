@@ -5,3 +5,5 @@ assets
 vendor/
 framework/
 docsviewer/
+cache/
+staticpublisher/

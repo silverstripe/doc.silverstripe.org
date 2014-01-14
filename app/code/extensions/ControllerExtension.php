@@ -15,7 +15,7 @@ class ControllerExtension extends Extension {
 	}
 	
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function IsDev() {
 		return (Director::isDev());

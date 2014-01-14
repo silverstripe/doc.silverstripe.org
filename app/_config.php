@@ -16,7 +16,7 @@ error_reporting(E_ALL);
 // downloaded from http://www.silverstripe.org/themes/
 SSViewer::set_theme('docs');
 
-if(@$_GET['db'] == "sqlite3") {
+if(Director::isDev() && @$_GET['db'] == "sqlite3") {
 	global $databaseConfig;
 	$databaseConfig['type'] = 'SQLite3Database';
 }
@@ -45,14 +45,9 @@ DocumentationViewer::set_edit_link(
 	)
 );
 
-
-Object::add_extension('Controller', 'ControllerExtension');
-
 if(Director::isLive()) {
 	ControllerExtension::$google_analytics_code = 'UA-84547-8';
 }
-
-Validator::set_javascript_validation_handler('none');	
 
 DocumentationSearch::set_meta_data(array(
 	'ShortName' => 'SilverStripe Documentation',

@@ -1,0 +1,7 @@
+StaticExporter:
+  extensions:
+    - DocumentationStaticPublisherExtension
+  disable_sitetree_export: true
+Controller:
+  extensions:
+    - ControllerExtension

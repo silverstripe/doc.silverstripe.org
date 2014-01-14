@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "edc15d70fab34d39f90088405d94ea90",
+    "hash": "0d2dbd6336d098b081f4f846fbd227a0",
     "packages": [
         {
             "name": "composer/installers",
@@ -82,20 +82,23 @@
         },
         {
             "name": "silverstripe/docsviewer",
-            "version": "0.1.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "95fee5a9fffeba32e6d09a6bfba0f55d0ba1cefc"
+                "reference": "95b982353b6188287257a542bc4fae0a1b10c16b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/95fee5a9fffeba32e6d09a6bfba0f55d0ba1cefc",
-                "reference": "95fee5a9fffeba32e6d09a6bfba0f55d0ba1cefc",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/95b982353b6188287257a542bc4fae0a1b10c16b",
+                "reference": "95b982353b6188287257a542bc4fae0a1b10c16b",
                 "shasum": ""
             },
             "require": {
-                "silverstripe/framework": "3.0.*"
+                "silverstripe/framework": "~3.1"
+            },
+            "suggest": {
+                "silverstripe/staticpublisher": "Allows publishing documentation as HTML"
             },
             "type": "silverstripe-module",
             "notification-url": "https://packagist.org/downloads/",
@@ -114,20 +117,20 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2013-10-30 22:06:02"
+            "time": "2014-01-14 07:41:59"
         },
         {
             "name": "silverstripe/framework",
-            "version": "3.0.x-dev",
+            "version": "3.1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-framework.git",
-                "reference": "dd801bdb0bfdd199d7bb6ce3269e1aedd7b1a8ce"
+                "reference": "9b5a9afe2be766e9830c795dc26636a82f59743c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/dd801bdb0bfdd199d7bb6ce3269e1aedd7b1a8ce",
-                "reference": "dd801bdb0bfdd199d7bb6ce3269e1aedd7b1a8ce",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/9b5a9afe2be766e9830c795dc26636a82f59743c",
+                "reference": "9b5a9afe2be766e9830c795dc26636a82f59743c",
                 "shasum": ""
             },
             "require": {
@@ -160,7 +163,46 @@
                 "framework",
                 "silverstripe"
             ],
-            "time": "2014-01-10 23:19:12"
+            "time": "2014-01-14 05:19:45"
+        },
+        {
+            "name": "silverstripe/staticpublisher",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silverstripe-labs/silverstripe-staticpublisher.git",
+                "reference": "ea1461acd7eb78b25e629b5c6fedf719b37f63e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silverstripe-labs/silverstripe-staticpublisher/zipball/ea1461acd7eb78b25e629b5c6fedf719b37f63e8",
+                "reference": "ea1461acd7eb78b25e629b5c6fedf719b37f63e8",
+                "shasum": ""
+            },
+            "require": {
+                "silverstripe/framework": "~3.1"
+            },
+            "type": "silverstripe-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Will Rossiter",
+                    "email": "will@fullscreen.io",
+                    "homepage": "http://wilr.github.com"
+                },
+                {
+                    "name": "Sam Minnee",
+                    "email": "sam@silverstripe.com"
+                }
+            ],
+            "description": "StaticPublisher provides an extensions for exporting a SilverStripe application to either a local or remote file systems.",
+            "keywords": [
+                "export",
+                "publisher",
+                "silverstripe-labs",
+                "static"
+            ],
+            "time": "2014-01-14 07:36:46"
         }
     ],
     "packages-dev": [
@@ -172,6 +214,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "silverstripe/docsviewer": 20,
+        "silverstripe/staticpublisher": 20,
         "silverstripe/framework": 20
     },
     "platform": {
