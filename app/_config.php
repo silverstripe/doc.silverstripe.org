@@ -59,3 +59,8 @@ DocumentationSearch::$boost_by_path = array(
 	// Changelogs have heaps of phrases, but are rarely relevant for content searches
 	'/^changelog/' => 0.05
 );
+
+// Set shared index (avoid issues with different temp paths between CLI and web users)
+if(file_exists(BASE_PATH . '/.lucene-index')) {
+	DocumentationSearch::set_index(BASE_PATH . '/.lucene-index');
+}
