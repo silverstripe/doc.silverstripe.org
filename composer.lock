@@ -229,12 +229,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-globaltoolbar.git",
-                "reference": "97738010cbc065643423430b1d9d535640a122ba"
+                "reference": "2f7acb38d6ee109d4fb17a7ab45c149b81585434"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-globaltoolbar/zipball/97738010cbc065643423430b1d9d535640a122ba",
-                "reference": "97738010cbc065643423430b1d9d535640a122ba",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-globaltoolbar/zipball/2f7acb38d6ee109d4fb17a7ab45c149b81585434",
+                "reference": "2f7acb38d6ee109d4fb17a7ab45c149b81585434",
                 "shasum": ""
             },
             "type": "silverstripe-module",
@@ -262,7 +262,7 @@
                 "source": "https://github.com/silverstripe/silverstripe-globaltoolbar/tree/master",
                 "issues": "https://github.com/silverstripe/silverstripe-globaltoolbar/issues"
             },
-            "time": "2014-07-22 22:49:26"
+            "time": "2014-07-23 03:42:37"
         }
     ],
     "packages-dev": [
