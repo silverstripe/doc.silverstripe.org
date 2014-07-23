@@ -1,30 +1,32 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "0d2dbd6336d098b081f4f846fbd227a0",
+    "hash": "9908c6f7b23a5287bb68374e37ee6e8c",
     "packages": [
         {
             "name": "composer/installers",
-            "version": "v1.0.8",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "c87cfc35882eb50df3eef1734bfa52fbcd6c782c"
+                "reference": "41cf781ed1271e25bf31b715416a349996aa2527"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/c87cfc35882eb50df3eef1734bfa52fbcd6c782c",
-                "reference": "c87cfc35882eb50df3eef1734bfa52fbcd6c782c",
+                "url": "https://api.github.com/repos/composer/installers/zipball/41cf781ed1271e25bf31b715416a349996aa2527",
+                "reference": "41cf781ed1271e25bf31b715416a349996aa2527",
                 "shasum": ""
             },
             "replace": {
+                "roundcube/plugin-installer": "*",
                 "shama/baton": "*"
             },
             "require-dev": {
                 "composer/composer": "1.0.*@dev",
-                "phpunit/phpunit": "3.7.*"
+                "phpunit/phpunit": "4.1.*"
             },
             "type": "composer-installer",
             "extra": {
@@ -46,20 +48,26 @@
                 {
                     "name": "Kyle Robinson Young",
                     "email": "kyle@dontkry.com",
-                    "homepage": "http://dontkry.com",
-                    "role": "Developer"
+                    "homepage": "https://github.com/shama"
                 }
             ],
             "description": "A multi-framework Composer library installer",
             "homepage": "http://composer.github.com/installers/",
             "keywords": [
-                "TYPO3 CMS",
-                "TYPO3 Flow",
-                "TYPO3 Neos",
+                "Craft",
+                "Dolibarr",
+                "Hurad",
+                "MODX Evo",
+                "OXID",
+                "WolfCMS",
                 "agl",
+                "annotatecms",
+                "bitrix",
                 "cakephp",
+                "chef",
                 "codeigniter",
                 "concrete5",
+                "croogo",
                 "drupal",
                 "elgg",
                 "fuelphp",
@@ -67,18 +75,26 @@
                 "joomla",
                 "kohana",
                 "laravel",
-                "li3",
                 "lithium",
+                "magento",
                 "mako",
+                "mediawiki",
                 "modulework",
+                "moodle",
                 "phpbb",
+                "piwik",
                 "ppi",
+                "puppet",
+                "roundcube",
+                "shopware",
                 "silverstripe",
                 "symfony",
+                "typo3",
                 "wordpress",
-                "zend"
+                "zend",
+                "zikula"
             ],
-            "time": "2013-12-24 18:04:46"
+            "time": "2014-07-22 17:04:15"
         },
         {
             "name": "silverstripe/docsviewer",
@@ -86,12 +102,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "e3c417113b5150655cb37167c031b4b708b183ab"
+                "reference": "17527f63d3f8ce60972fc0d3d4699c636433db36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/e3c417113b5150655cb37167c031b4b708b183ab",
-                "reference": "e3c417113b5150655cb37167c031b4b708b183ab",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/17527f63d3f8ce60972fc0d3d4699c636433db36",
+                "reference": "17527f63d3f8ce60972fc0d3d4699c636433db36",
                 "shasum": ""
             },
             "require": {
@@ -117,7 +133,7 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2014-01-14 08:16:39"
+            "time": "2014-07-05 07:43:47"
         },
         {
             "name": "silverstripe/framework",
@@ -125,17 +141,20 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-framework.git",
-                "reference": "9b5a9afe2be766e9830c795dc26636a82f59743c"
+                "reference": "350ee4d421d04a075464e84713cf4a5527f3948a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/9b5a9afe2be766e9830c795dc26636a82f59743c",
-                "reference": "9b5a9afe2be766e9830c795dc26636a82f59743c",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/350ee4d421d04a075464e84713cf4a5527f3948a",
+                "reference": "350ee4d421d04a075464e84713cf4a5527f3948a",
                 "shasum": ""
             },
             "require": {
                 "composer/installers": "*",
                 "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7@stable"
             },
             "type": "silverstripe-module",
             "autoload": {
@@ -163,7 +182,7 @@
                 "framework",
                 "silverstripe"
             ],
-            "time": "2014-01-14 05:19:45"
+            "time": "2014-07-22 20:54:18"
         },
         {
             "name": "silverstripe/staticpublisher",
@@ -171,12 +190,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe-labs/silverstripe-staticpublisher.git",
-                "reference": "ea1461acd7eb78b25e629b5c6fedf719b37f63e8"
+                "reference": "1a4e07c0360bb67038d752ef62d94f4f1ade9c29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe-labs/silverstripe-staticpublisher/zipball/ea1461acd7eb78b25e629b5c6fedf719b37f63e8",
-                "reference": "ea1461acd7eb78b25e629b5c6fedf719b37f63e8",
+                "url": "https://api.github.com/repos/silverstripe-labs/silverstripe-staticpublisher/zipball/1a4e07c0360bb67038d752ef62d94f4f1ade9c29",
+                "reference": "1a4e07c0360bb67038d752ef62d94f4f1ade9c29",
                 "shasum": ""
             },
             "require": {
@@ -202,7 +221,48 @@
                 "silverstripe-labs",
                 "static"
             ],
-            "time": "2014-01-14 07:36:46"
+            "time": "2014-03-23 05:09:04"
+        },
+        {
+            "name": "silverstripe/toolbar",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silverstripe/silverstripe-globaltoolbar.git",
+                "reference": "97738010cbc065643423430b1d9d535640a122ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-globaltoolbar/zipball/97738010cbc065643423430b1d9d535640a122ba",
+                "reference": "97738010cbc065643423430b1d9d535640a122ba",
+                "shasum": ""
+            },
+            "type": "silverstripe-module",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ingo Schommer",
+                    "homepage": "http://chillu.com",
+                    "email": "ingo@silverstripe.com"
+                },
+                {
+                    "name": "Uncle Cheese",
+                    "homepage": "http://leftandmain.com",
+                    "email": "unclecheese@leftandmain.com"
+                }
+            ],
+            "description": "Navigation bar include showing SilverStripe community sites",
+            "homepage": "https://github.com/silverstripe/silverstripe-globaltoolbar/",
+            "keywords": [
+                "silverstripe"
+            ],
+            "support": {
+                "source": "https://github.com/silverstripe/silverstripe-globaltoolbar/tree/master",
+                "issues": "https://github.com/silverstripe/silverstripe-globaltoolbar/issues"
+            },
+            "time": "2014-07-22 22:49:26"
         }
     ],
     "packages-dev": [
@@ -211,7 +271,7 @@
     "aliases": [
 
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "silverstripe/docsviewer": 20,
         "silverstripe/staticpublisher": 20,

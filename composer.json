@@ -1,11 +1,18 @@
 {
     "name": "silverstripe/doc.silverstripe.org",
     "description": "The source code behind doc.silverstripe.org",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/silverstripe/silverstripe-globaltoolbar.git"
+        }
+    ],
     "require": {
         "php": ">=5.3.2",
         "silverstripe/docsviewer": "dev-master",
         "silverstripe/staticpublisher": "dev-master",
-        "silverstripe/framework": "3.1.x-dev"
+        "silverstripe/framework": "3.1.x-dev",
+        "silverstripe/toolbar": "*"
     },
     "config": {
 	"process-timeout": 600	

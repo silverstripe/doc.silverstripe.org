@@ -6,10 +6,17 @@
 		<meta charset="utf-8" />
 		<title><% if PageTitle %>$PageTitle <% end_if %>SilverStripe Documentation</title>
 
+		<script type="text/javascript" src="//use.typekit.net/emt4dhq.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 		<link type="text/css" rel="stylesheet" href="http://silverstripe.org/toolbar/css/toolbar.css" />
 	</head>
 	
-	<body>
+	<body class="theme-theme1">
+		<header data-0="background-position: 50% 50%;" data-544="background-position: 50% -30%;">
+			<div class="global-nav header-mask">
+				$GlobalNav
+			</div>
+		</header>
 		<div id="container" class="container">
 			<div id="header">
 				<h1>
@@ -30,9 +37,9 @@
 						<div id="entities-nav" class="documentation-nav clearfix">
 							<h2>Modules:</h2>
 								<ul>
-								<% control Entities %>
+								<% loop Entities %>
 									<li><a href="$Link" class="$LinkingMode">$Title</a></li>
-								<% end_control %>
+								<% end_loop %>
 							</ul>
 							
 							<div class="clear"><!-- --></div>
@@ -43,9 +50,9 @@
 						<div id="versions-nav" class="documentation-nav clearfix">
 							<h2>Versions:</h2>
 								<ul>
-								<% control Versions %>
+								<% loop Versions %>
 									<li><a href="$Link" class="$LinkingMode">$Title</a></li>
-								<% end_control %>
+								<% end_loop %>
 							</ul>
 						</div>
 						<% end_if %>
@@ -64,7 +71,6 @@
 		</div>
 		
 		<script src="framework/thirdparty/jquery/jquery.js"></script>
-		<script src="http://silverstripe.org/toolbar/javascript/toolbar.js?site=doc&amp;searchShow=true"></script>
 
 		<% if GoogleAnalyticsCode %>
 		<script type="text/javascript">
