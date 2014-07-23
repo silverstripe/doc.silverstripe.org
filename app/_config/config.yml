@@ -1,3 +1,8 @@
+---
+After:
+  - framework/*
+  - cms/*
+---
 StaticExporter:
   extensions:
     - DocumentationStaticPublisherExtension
@@ -5,6 +10,11 @@ StaticExporter:
 Controller:
   extensions:
     - ControllerExtension
+
+---
+After:
+  - toolbar/*
+---
 GlobalNav:
   hostname: 'http://ssorg-another.test.silverstripe.com/'
   css_path: '/themes/ssv3/css/toolbar.css'
