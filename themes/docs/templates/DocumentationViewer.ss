@@ -8,7 +8,6 @@
 
 		<script type="text/javascript" src="//use.typekit.net/emt4dhq.js"></script>
 		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-		<link type="text/css" rel="stylesheet" href="http://silverstripe.org/toolbar/css/toolbar.css" />
 	</head>
 	
 	<body class="theme-theme1">
