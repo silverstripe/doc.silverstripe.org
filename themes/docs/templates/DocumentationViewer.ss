@@ -13,7 +13,10 @@
 	<body class="theme-theme1">
 		<header data-0="background-position: 50% 50%;" data-544="background-position: 50% -30%;">
 			<div class="global-nav header-mask">
-				$GlobalNav
+				<div id="navWrapper">
+					$GlobalNav
+					<% include SearchBox %>
+				</div>
 			</div>
 		</header>
 		<div id="container" class="container">
