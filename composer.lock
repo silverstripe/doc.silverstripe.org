@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9908c6f7b23a5287bb68374e37ee6e8c",
+    "hash": "bb8c3cbef9299e50dca7722a9f872c95",
     "packages": [
         {
             "name": "composer/installers",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "41cf781ed1271e25bf31b715416a349996aa2527"
+                "reference": "74fb0a7a1a23696d9c8cc2fba5903f6711cdd067"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/41cf781ed1271e25bf31b715416a349996aa2527",
-                "reference": "41cf781ed1271e25bf31b715416a349996aa2527",
+                "url": "https://api.github.com/repos/composer/installers/zipball/74fb0a7a1a23696d9c8cc2fba5903f6711cdd067",
+                "reference": "74fb0a7a1a23696d9c8cc2fba5903f6711cdd067",
                 "shasum": ""
             },
             "replace": {
@@ -94,7 +94,90 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2014-07-22 17:04:15"
+            "time": "2014-08-18 20:00:12"
+        },
+        {
+            "name": "erusev/parsedown",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/erusev/parsedown.git",
+                "reference": "d24439ada0704948deef0d3eda2ea20fd8db1747"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/d24439ada0704948deef0d3eda2ea20fd8db1747",
+                "reference": "d24439ada0704948deef0d3eda2ea20fd8db1747",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Parsedown": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuil Rusev",
+                    "email": "hello@erusev.com",
+                    "homepage": "http://erusev.com"
+                }
+            ],
+            "description": "Parser for Markdown.",
+            "homepage": "http://parsedown.org",
+            "keywords": [
+                "markdown",
+                "parser"
+            ],
+            "time": "2014-05-21 20:20:46"
+        },
+        {
+            "name": "erusev/parsedown-extra",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/erusev/parsedown-extra.git",
+                "reference": "bcd3930f7f10915e40513e1951a253f061d75463"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/erusev/parsedown-extra/zipball/bcd3930f7f10915e40513e1951a253f061d75463",
+                "reference": "bcd3930f7f10915e40513e1951a253f061d75463",
+                "shasum": ""
+            },
+            "require": {
+                "erusev/parsedown": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ParsedownExtra": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuil Rusev",
+                    "email": "hello@erusev.com",
+                    "homepage": "http://erusev.com"
+                }
+            ],
+            "description": "An extension of Parsedown that adds support for Markdown Extra.",
+            "homepage": "https://github.com/erusev/parsedown-extra",
+            "keywords": [
+                "markdown",
+                "markdown extra",
+                "parsedown",
+                "parser"
+            ],
+            "time": "2014-06-18 23:58:16"
         },
         {
             "name": "silverstripe/docsviewer",
@@ -102,15 +185,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "17527f63d3f8ce60972fc0d3d4699c636433db36"
+                "reference": "afe229d34366e0aef0d726727fd8e8d302c5ace4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/17527f63d3f8ce60972fc0d3d4699c636433db36",
-                "reference": "17527f63d3f8ce60972fc0d3d4699c636433db36",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/afe229d34366e0aef0d726727fd8e8d302c5ace4",
+                "reference": "afe229d34366e0aef0d726727fd8e8d302c5ace4",
                 "shasum": ""
             },
             "require": {
+                "erusev/parsedown-extra": "0.1.0",
                 "silverstripe/framework": "~3.1"
             },
             "suggest": {
@@ -125,7 +209,7 @@
                 {
                     "name": "Will Rossiter",
                     "email": "will@fullscreen.io",
-                    "homepage": "http://wilr.github.com"
+                    "homepage": "http://wilr.github.io"
                 }
             ],
             "description": "Documentation viewer module for SilverStripe",
@@ -133,7 +217,7 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2014-07-05 07:43:47"
+            "time": "2014-08-01 04:45:09"
         },
         {
             "name": "silverstripe/framework",
@@ -141,12 +225,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-framework.git",
-                "reference": "350ee4d421d04a075464e84713cf4a5527f3948a"
+                "reference": "a838e9bae6a1e40083f676a6494321f7aaf359e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/350ee4d421d04a075464e84713cf4a5527f3948a",
-                "reference": "350ee4d421d04a075464e84713cf4a5527f3948a",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/a838e9bae6a1e40083f676a6494321f7aaf359e7",
+                "reference": "a838e9bae6a1e40083f676a6494321f7aaf359e7",
                 "shasum": ""
             },
             "require": {
@@ -182,7 +266,7 @@
                 "framework",
                 "silverstripe"
             ],
-            "time": "2014-07-22 20:54:18"
+            "time": "2014-08-18 21:38:17"
         },
         {
             "name": "silverstripe/staticpublisher",
@@ -190,12 +274,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe-labs/silverstripe-staticpublisher.git",
-                "reference": "1a4e07c0360bb67038d752ef62d94f4f1ade9c29"
+                "reference": "9bdf8e68d97c97459c3b52a26490cb8b0860be97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe-labs/silverstripe-staticpublisher/zipball/1a4e07c0360bb67038d752ef62d94f4f1ade9c29",
-                "reference": "1a4e07c0360bb67038d752ef62d94f4f1ade9c29",
+                "url": "https://api.github.com/repos/silverstripe-labs/silverstripe-staticpublisher/zipball/9bdf8e68d97c97459c3b52a26490cb8b0860be97",
+                "reference": "9bdf8e68d97c97459c3b52a26490cb8b0860be97",
                 "shasum": ""
             },
             "require": {
@@ -205,13 +289,12 @@
             "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
-                    "name": "Will Rossiter",
-                    "email": "will@fullscreen.io",
-                    "homepage": "http://wilr.github.com"
-                },
-                {
                     "name": "Sam Minnee",
                     "email": "sam@silverstripe.com"
+                },
+                {
+                    "name": "Will Rossiter",
+                    "email": "will@fullscreen.io"
                 }
             ],
             "description": "StaticPublisher provides an extensions for exporting a SilverStripe application to either a local or remote file systems.",
@@ -221,20 +304,20 @@
                 "silverstripe-labs",
                 "static"
             ],
-            "time": "2014-03-23 05:09:04"
+            "time": "2014-08-03 10:04:35"
         },
         {
             "name": "silverstripe/toolbar",
-            "version": "dev-master",
+            "version": "dev-search",
             "source": {
                 "type": "git",
-                "url": "https://github.com/silverstripe/silverstripe-globaltoolbar.git",
-                "reference": "2f7acb38d6ee109d4fb17a7ab45c149b81585434"
+                "url": "https://github.com/mandrew/silverstripe-globaltoolbar.git",
+                "reference": "55a9784ecf1f5c18b13d090f0f81a2af57da4b04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-globaltoolbar/zipball/2f7acb38d6ee109d4fb17a7ab45c149b81585434",
-                "reference": "2f7acb38d6ee109d4fb17a7ab45c149b81585434",
+                "url": "https://api.github.com/repos/mandrew/silverstripe-globaltoolbar/zipball/55a9784ecf1f5c18b13d090f0f81a2af57da4b04",
+                "reference": "55a9784ecf1f5c18b13d090f0f81a2af57da4b04",
                 "shasum": ""
             },
             "type": "silverstripe-module",
@@ -259,10 +342,9 @@
                 "silverstripe"
             ],
             "support": {
-                "source": "https://github.com/silverstripe/silverstripe-globaltoolbar/tree/master",
-                "issues": "https://github.com/silverstripe/silverstripe-globaltoolbar/issues"
+                "source": "https://github.com/mandrew/silverstripe-globaltoolbar/tree/search"
             },
-            "time": "2014-07-23 03:42:37"
+            "time": "2014-08-17 23:55:02"
         }
     ],
     "packages-dev": [
@@ -275,8 +357,10 @@
     "stability-flags": {
         "silverstripe/docsviewer": 20,
         "silverstripe/staticpublisher": 20,
-        "silverstripe/framework": 20
+        "silverstripe/framework": 20,
+        "silverstripe/toolbar": 20
     },
+    "prefer-stable": false,
     "platform": {
         "php": ">=5.3.2"
     },

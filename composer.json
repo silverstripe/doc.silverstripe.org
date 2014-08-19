@@ -4,7 +4,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/silverstripe/silverstripe-globaltoolbar.git"
+            "url": "https://github.com/mandrew/silverstripe-globaltoolbar.git"
         }
     ],
     "require": {
@@ -14,8 +14,11 @@
         "silverstripe/framework": "3.1.x-dev",
         "silverstripe/toolbar": "*"
     },
+    "require-dev": {
+        "silverstripe/toolbar": "dev-search"
+    },
     "config": {
-	"process-timeout": 600	
+        "process-timeout": 600
     },
     "minimum-stability": "dev"
 }
