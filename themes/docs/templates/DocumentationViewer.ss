@@ -22,7 +22,6 @@
 		<div id="container" class="container">
 			<div id="header">
 				<h1>
-					<a href="http://www.silverstripe.org" title="Visit SilverStripe.org" class="logo">&nbsp;</a>
 					<a href="$Top.Link" title="Documentation"><span><% _t('SILVERSTRIPEDOCUMENTATION', 'Documentation') %></span></a>
 				</h1>
 			</div>
