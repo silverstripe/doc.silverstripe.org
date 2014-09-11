@@ -225,12 +225,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-framework.git",
-                "reference": "f0ca37fdea0f1b7f67d383e9cda968c8115ea0f1"
+                "reference": "12411b7aa3a3cf7fcc51e50f8bed1ffdfe618b94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/f0ca37fdea0f1b7f67d383e9cda968c8115ea0f1",
-                "reference": "f0ca37fdea0f1b7f67d383e9cda968c8115ea0f1",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/12411b7aa3a3cf7fcc51e50f8bed1ffdfe618b94",
+                "reference": "12411b7aa3a3cf7fcc51e50f8bed1ffdfe618b94",
                 "shasum": ""
             },
             "require": {
@@ -266,7 +266,7 @@
                 "framework",
                 "silverstripe"
             ],
-            "time": "2014-09-08 23:43:05"
+            "time": "2014-09-11 21:34:09"
         },
         {
             "name": "silverstripe/staticpublisher",
@@ -347,8 +347,12 @@
             "time": "2014-08-31 23:28:18"
         }
     ],
-    "packages-dev": [],
-    "aliases": [],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
         "silverstripe/docsviewer": 20,
@@ -360,5 +364,7 @@
     "platform": {
         "php": ">=5.3.2"
     },
-    "platform-dev": []
+    "platform-dev": [
+
+    ]
 }
