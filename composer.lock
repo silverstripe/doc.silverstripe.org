@@ -185,12 +185,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "afe229d34366e0aef0d726727fd8e8d302c5ace4"
+                "reference": "fab0cba8a821f14a35f173e0061d4d9c225599a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/afe229d34366e0aef0d726727fd8e8d302c5ace4",
-                "reference": "afe229d34366e0aef0d726727fd8e8d302c5ace4",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/fab0cba8a821f14a35f173e0061d4d9c225599a2",
+                "reference": "fab0cba8a821f14a35f173e0061d4d9c225599a2",
                 "shasum": ""
             },
             "require": {
@@ -217,7 +217,7 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2014-08-01 04:45:09"
+            "time": "2014-09-05 21:20:05"
         },
         {
             "name": "silverstripe/framework",
@@ -225,12 +225,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-framework.git",
-                "reference": "9f3506bf02352e006e550ab03d29912105914f4e"
+                "reference": "f0ca37fdea0f1b7f67d383e9cda968c8115ea0f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/9f3506bf02352e006e550ab03d29912105914f4e",
-                "reference": "9f3506bf02352e006e550ab03d29912105914f4e",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/f0ca37fdea0f1b7f67d383e9cda968c8115ea0f1",
+                "reference": "f0ca37fdea0f1b7f67d383e9cda968c8115ea0f1",
                 "shasum": ""
             },
             "require": {
@@ -266,7 +266,7 @@
                 "framework",
                 "silverstripe"
             ],
-            "time": "2014-09-04 02:08:40"
+            "time": "2014-09-08 23:43:05"
         },
         {
             "name": "silverstripe/staticpublisher",
