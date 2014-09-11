@@ -185,12 +185,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "afe229d34366e0aef0d726727fd8e8d302c5ace4"
+                "reference": "fab0cba8a821f14a35f173e0061d4d9c225599a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/afe229d34366e0aef0d726727fd8e8d302c5ace4",
-                "reference": "afe229d34366e0aef0d726727fd8e8d302c5ace4",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/fab0cba8a821f14a35f173e0061d4d9c225599a2",
+                "reference": "fab0cba8a821f14a35f173e0061d4d9c225599a2",
                 "shasum": ""
             },
             "require": {
@@ -217,7 +217,7 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2014-08-01 04:45:09"
+            "time": "2014-09-05 21:20:05"
         },
         {
             "name": "silverstripe/framework",
@@ -225,12 +225,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-framework.git",
-                "reference": "a838e9bae6a1e40083f676a6494321f7aaf359e7"
+                "reference": "f0ca37fdea0f1b7f67d383e9cda968c8115ea0f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/a838e9bae6a1e40083f676a6494321f7aaf359e7",
-                "reference": "a838e9bae6a1e40083f676a6494321f7aaf359e7",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/f0ca37fdea0f1b7f67d383e9cda968c8115ea0f1",
+                "reference": "f0ca37fdea0f1b7f67d383e9cda968c8115ea0f1",
                 "shasum": ""
             },
             "require": {
@@ -266,7 +266,7 @@
                 "framework",
                 "silverstripe"
             ],
-            "time": "2014-08-18 21:38:17"
+            "time": "2014-09-08 23:43:05"
         },
         {
             "name": "silverstripe/staticpublisher",
@@ -274,12 +274,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe-labs/silverstripe-staticpublisher.git",
-                "reference": "9bdf8e68d97c97459c3b52a26490cb8b0860be97"
+                "reference": "76ba1a8b25676bb1bc52ba40c14aa3fce5b71a22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe-labs/silverstripe-staticpublisher/zipball/9bdf8e68d97c97459c3b52a26490cb8b0860be97",
-                "reference": "9bdf8e68d97c97459c3b52a26490cb8b0860be97",
+                "url": "https://api.github.com/repos/silverstripe-labs/silverstripe-staticpublisher/zipball/76ba1a8b25676bb1bc52ba40c14aa3fce5b71a22",
+                "reference": "76ba1a8b25676bb1bc52ba40c14aa3fce5b71a22",
                 "shasum": ""
             },
             "require": {
@@ -304,7 +304,7 @@
                 "silverstripe-labs",
                 "static"
             ],
-            "time": "2014-08-03 10:04:35"
+            "time": "2014-09-03 09:04:56"
         },
         {
             "name": "silverstripe/toolbar",
@@ -312,12 +312,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mandrew/silverstripe-globaltoolbar.git",
-                "reference": "55a9784ecf1f5c18b13d090f0f81a2af57da4b04"
+                "reference": "9fb83b302a7d529e480d5564b03950a936cf5e4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mandrew/silverstripe-globaltoolbar/zipball/55a9784ecf1f5c18b13d090f0f81a2af57da4b04",
-                "reference": "55a9784ecf1f5c18b13d090f0f81a2af57da4b04",
+                "url": "https://api.github.com/repos/mandrew/silverstripe-globaltoolbar/zipball/9fb83b302a7d529e480d5564b03950a936cf5e4b",
+                "reference": "9fb83b302a7d529e480d5564b03950a936cf5e4b",
                 "shasum": ""
             },
             "type": "silverstripe-module",
@@ -344,7 +344,7 @@
             "support": {
                 "source": "https://github.com/mandrew/silverstripe-globaltoolbar/tree/search"
             },
-            "time": "2014-08-17 23:55:02"
+            "time": "2014-08-31 23:28:18"
         }
     ],
     "packages-dev": [
