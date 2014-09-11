@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bb8c3cbef9299e50dca7722a9f872c95",
+    "hash": "3eb2aa396f1f8115a345960560fa9f1b",
     "packages": [
         {
             "name": "composer/installers",
@@ -223,16 +223,16 @@
         },
         {
             "name": "silverstripe/framework",
-            "version": "3.1.x-dev",
+            "version": "3.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-framework.git",
-                "reference": "6610a6a8fb6dc3ec19dddc5515c65672f3126d90"
+                "reference": "9da3357e3a7348914a4778366efa053277097cc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/6610a6a8fb6dc3ec19dddc5515c65672f3126d90",
-                "reference": "6610a6a8fb6dc3ec19dddc5515c65672f3126d90",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/9da3357e3a7348914a4778366efa053277097cc4",
+                "reference": "9da3357e3a7348914a4778366efa053277097cc4",
                 "shasum": ""
             },
             "require": {
@@ -268,7 +268,7 @@
                 "framework",
                 "silverstripe"
             ],
-            "time": "2014-09-15 21:35:53"
+            "time": "2014-08-24 23:25:01"
         },
         {
             "name": "silverstripe/staticpublisher",
@@ -349,18 +349,24 @@
             "time": "2014-08-31 23:28:18"
         }
     ],
-    "packages-dev": [],
-    "aliases": [],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
         "silverstripe/docsviewer": 20,
         "silverstripe/staticpublisher": 20,
-        "silverstripe/framework": 20,
+        "silverstripe/framework": 0,
         "silverstripe/toolbar": 20
     },
     "prefer-stable": false,
     "platform": {
         "php": ">=5.3.2"
     },
-    "platform-dev": []
+    "platform-dev": [
+
+    ]
 }

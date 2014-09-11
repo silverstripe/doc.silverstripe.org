@@ -11,7 +11,7 @@
         "php": ">=5.3.2",
         "silverstripe/docsviewer": "dev-master",
         "silverstripe/staticpublisher": "dev-master",
-        "silverstripe/framework": "3.1.x-dev",
+        "silverstripe/framework": "3.1.*@stable",
         "silverstripe/toolbar": "*"
     },
     "require-dev": {
