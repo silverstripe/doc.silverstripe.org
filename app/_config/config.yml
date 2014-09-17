@@ -19,6 +19,9 @@ GlobalNav:
   hostname: 'http://ssorg-another.test.silverstripe.com/'
   css_path: '/themes/ssv3/css/toolbar.css'
   use_localhost: false
+GlobalNavTemplateProvider:
+  connection_timeout: 1000
+  transfer_timeout: 2000  
 SiteController:
   extensions:
     - GlobalNavExtension

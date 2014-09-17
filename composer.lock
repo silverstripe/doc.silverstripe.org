@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "74fb0a7a1a23696d9c8cc2fba5903f6711cdd067"
+                "reference": "5914f4a3e90a9176c93e5dd0c8ad2b3679fda6ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/74fb0a7a1a23696d9c8cc2fba5903f6711cdd067",
-                "reference": "74fb0a7a1a23696d9c8cc2fba5903f6711cdd067",
+                "url": "https://api.github.com/repos/composer/installers/zipball/5914f4a3e90a9176c93e5dd0c8ad2b3679fda6ed",
+                "reference": "5914f4a3e90a9176c93e5dd0c8ad2b3679fda6ed",
                 "shasum": ""
             },
             "replace": {
@@ -59,6 +59,7 @@
                 "Hurad",
                 "MODX Evo",
                 "OXID",
+                "Thelia",
                 "WolfCMS",
                 "agl",
                 "annotatecms",
@@ -71,6 +72,7 @@
                 "drupal",
                 "elgg",
                 "fuelphp",
+                "grav",
                 "installer",
                 "joomla",
                 "kohana",
@@ -94,7 +96,7 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2014-08-18 20:00:12"
+            "time": "2014-09-16 22:11:26"
         },
         {
             "name": "erusev/parsedown",
@@ -225,12 +227,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-framework.git",
-                "reference": "f0ca37fdea0f1b7f67d383e9cda968c8115ea0f1"
+                "reference": "6610a6a8fb6dc3ec19dddc5515c65672f3126d90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/f0ca37fdea0f1b7f67d383e9cda968c8115ea0f1",
-                "reference": "f0ca37fdea0f1b7f67d383e9cda968c8115ea0f1",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/6610a6a8fb6dc3ec19dddc5515c65672f3126d90",
+                "reference": "6610a6a8fb6dc3ec19dddc5515c65672f3126d90",
                 "shasum": ""
             },
             "require": {
@@ -266,7 +268,7 @@
                 "framework",
                 "silverstripe"
             ],
-            "time": "2014-09-08 23:43:05"
+            "time": "2014-09-15 21:35:53"
         },
         {
             "name": "silverstripe/staticpublisher",
