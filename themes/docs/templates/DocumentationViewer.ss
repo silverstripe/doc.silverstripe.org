@@ -5,7 +5,7 @@
 		<% base_tag %>
 		<meta charset="utf-8" />
 		<title><% if PageTitle %>$PageTitle <% end_if %>SilverStripe Documentation</title>
-
+		<link rel="stylesheet" href="themes/docs/css/ionicons.min.css" />
 		<script type="text/javascript" src="//use.typekit.net/emt4dhq.js"></script>
 		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 	</head>
