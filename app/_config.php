@@ -8,12 +8,12 @@ $database = 'SS_ssdoc';
 
 require_once('conf/ConfigureFromEnv.php');
 
+if (define('SS_DATABASE_NAME')) {
+	$database = SS_DATABASE_NAME;
+}
+
 MySQLDatabase::set_connection_charset('utf8');
 
-error_reporting(E_ALL);
-
-// This line set's the current theme. More themes can be
-// downloaded from http://www.silverstripe.org/themes/
 SSViewer::set_theme('docs');
 
 if(Director::isDev() && @$_GET['db'] == "sqlite3") {
@@ -39,7 +39,7 @@ try {
 
 DocumentationViewer::set_edit_link(
 	'framework',
-	'https://github.com/silverstripe/sapphire/edit/%version%/docs/%lang%/%path%',
+	'https://github.com/silverstripe/framework/edit/%version%/docs/%lang%/%path%',
 	array(
 		'rewritetrunktomaster' => true
 	)
