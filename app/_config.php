@@ -8,7 +8,7 @@ $database = 'SS_ssdoc';
 
 require_once('conf/ConfigureFromEnv.php');
 
-if (define('SS_DATABASE_NAME')) {
+if (defined('SS_DATABASE_NAME')) {
 	$database = SS_DATABASE_NAME;
 }
 
