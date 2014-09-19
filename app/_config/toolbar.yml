@@ -1,0 +1,14 @@
+---
+After:
+  - toolbar/*
+---
+GlobalNav:
+  hostname: 'http://www.silverstripe.org/'
+  css_path: '/themes/ssv3/css/toolbar.css'
+  use_localhost: false
+GlobalNavTemplateProvider:
+  connection_timeout: 2000
+  transfer_timeout: 6000  
+SiteController:
+  extensions:
+    - GlobalNavExtension
