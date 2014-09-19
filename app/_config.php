@@ -6,11 +6,11 @@ $project = 'app';
 global $database;
 $database = 'SS_ssdoc';
 
-require_once('conf/ConfigureFromEnv.php');
-
 if (defined('SS_DATABASE_NAME')) {
 	$database = SS_DATABASE_NAME;
 }
+
+require_once('conf/ConfigureFromEnv.php');
 
 MySQLDatabase::set_connection_charset('utf8');
 
