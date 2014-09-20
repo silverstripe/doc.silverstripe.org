@@ -10,7 +10,19 @@ if (defined('SS_DATABASE_NAME')) {
 	$database = SS_DATABASE_NAME;
 }
 
-require_once('conf/ConfigureFromEnv.php');
+if(isset($_ENV['CLEARDB_DATABASE_URL'])) {
+	global $databaseConfig;
+
+	$parts = parse_url($_ENV['CLEARDB_DATABASE_URL']);
+	
+	$databaseConfig['type'] = 'MySQLDatabase';
+	$databaseConfig['server'] = $parts['host'];
+	$databaseConfig['username'] = $parts['user'];
+	$databaseConfig['password'] = $parts['pass'];
+	$databaseConfig['database'] = trim($parts['path'], '/');
+} else {
+	require_once('conf/ConfigureFromEnv.php');
+}
 
 MySQLDatabase::set_connection_charset('utf8');
 
@@ -26,7 +38,7 @@ Config::inst()->update('DocumentationViewer', 'check_permission', false);
 
 DocumentationViewer::set_edit_link(
 	'framework',
-	'https://github.com/silverstripe/silverstripe-framework/edit/%version%/docs/%lang%/%path%',
+	'https://github.com/silverstripe/framework/edit/%version%/docs/%lang%/%path%',
 	array(
 		'rewritetrunktomaster' => true
 	)
@@ -51,3 +63,5 @@ Config::inst()->update('DocumentationSearch', 'boost_by_path', array(
 if(file_exists(BASE_PATH . '/.lucene-index')) {
 	DocumentationSearch::set_index(BASE_PATH . '/.lucene-index');
 }
+
+
