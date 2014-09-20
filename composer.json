@@ -8,17 +8,25 @@
         }
     ],
     "require": {
-        "php": ">=5.3.2",
-        "silverstripe/docsviewer": "dev-master",
-        "silverstripe/staticpublisher": "dev-master",
-        "silverstripe/framework": "3.1.*@stable",
+        "ext-gd": "*",
+        "ext-mbstring": "*",
+        "silverstripe/docsviewer": "dev-manifest",
+        "silverstripe/framework": "dev-docsrewrite as 3.1.x-dev",
+        "erusev/parsedown-extra": "0.1.0",
         "silverstripe/toolbar": "*"
     },
     "require-dev": {
-        "silverstripe/toolbar": "dev-search"
+        "phpunit/PHPUnit": "~3.7@stable"
     },
+    "repositories": [{
+        "type": "vcs",
+        "url": "git@github.com:wilr/sapphire.git"
+    }, {
+        "type": "vcs",
+        "url": "git@github.com:silverstripe/silverstripe-globaltoolbar.git"
+    }],
     "config": {
-        "process-timeout": 600
-    },
+		"process-timeout": 600	
+	},
     "minimum-stability": "dev"
 }

@@ -9,5 +9,5 @@ Director:
     'admin': 'AdminRootController'
     'dev/buildcache/$Action': 'RebuildStaticCacheTask'
     'dev': 'DevelopmentAdmin'
-    '': '->framework/en/'
-    '$Action': 'DocumentationViewer'
+    '': '->en/'
+    '$Lang/$Action': 'DocumentationViewer'
