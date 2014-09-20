@@ -35,9 +35,7 @@ in the bin/update.sh file.
 
 Once the `make fetch` command has executed and downloaded the latest files,
 those files are registered along with the module version the folder relates to.
-through the `app/_config.php` file.
-
-	DocumentationService::register("sapphire", BASE_PATH ."/src/github/master/sapphire/docs/", '2.4');
+through the `app/docsviewer.yml` file.
 
 ## Contribution
 

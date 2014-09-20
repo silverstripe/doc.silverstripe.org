@@ -1,0 +1,17 @@
+---
+name: docsviewer
+after: docsviewer#docsviewer
+---
+DocumentationViewer:
+  google_analytics_code: 'UA-84547-8'
+DocumentationSearch:
+  enabled: true
+DocumentationManifest:
+  automatic_registration: false
+  register_entities:
+    -
+      Path: "framework/docs/"
+      Title: "Framework"
+      Version: master
+      Stable: true
+      DefaultEntity: true

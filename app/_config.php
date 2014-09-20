@@ -21,21 +21,8 @@ if(Director::isDev() && @$_GET['db'] == "sqlite3") {
 	$databaseConfig['type'] = 'SQLite3Database';
 }
 
-DocumentationViewer::set_link_base('');
-DocumentationViewer::$check_permission = false;
-
-DocumentationService::set_automatic_registration(false);
-DocumentationSearch::enable();
-
-try {
-	DocumentationService::register("framework", BASE_PATH ."/src/framework_master/docs/", 'trunk');
-	DocumentationService::register("framework", BASE_PATH ."/src/framework_3.1/docs/", '3.1', false, true);
-	DocumentationService::register("framework", BASE_PATH ."/src/framework_3.0/docs/", '3.0');
-	DocumentationService::register("framework", BASE_PATH ."/src/framework_2.4/docs/", '2.4');
-	DocumentationService::register("framework", BASE_PATH ."/src/framework_2.3/docs/", '2.3');
-} catch(InvalidArgumentException $e) {
-	
-} // Silence if path is not found (for CI environment)
+Config::inst()->update('DocumentationViewer', 'link_base', '');
+Config::inst()->update('DocumentationViewer', 'check_permission', false);
 
 DocumentationViewer::set_edit_link(
 	'framework',
@@ -55,10 +42,10 @@ DocumentationSearch::set_meta_data(array(
 	'Tags' => 'silverstripe sapphire php framework cms content management system'
 ));
 
-DocumentationSearch::$boost_by_path = array(
 	// Changelogs have heaps of phrases, but are rarely relevant for content searches
+Config::inst()->update('DocumentationSearch', 'boost_by_path', array(
 	'/^changelog/' => 0.05
-);
+));
 
 // Set shared index (avoid issues with different temp paths between CLI and web users)
 if(file_exists(BASE_PATH . '/.lucene-index')) {
