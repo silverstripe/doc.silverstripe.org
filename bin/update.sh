@@ -13,50 +13,47 @@ fi
 #
 #				The master branch will checked out by default
 # PARAMETERS:
-#				$1 - module path on github (e.g silverstripe/sapphire.git)
+#				$1 - module path on github (e.g silverstripe/silverstripe.git)
 #				$2 - branch name (e.g 3.0)
-#				$3 - module name (e.g sapphire)
+#				$3 - module name (e.g framework)
 #
 #===============================================================================
 # Parameters: github path
 function checkout {
+	echo "Checking out $2/$3 from $1"
+	mkdir -p $dir/src
+	
 	if [ ! -d $dir/src/$2 ]; then
-		echo "Cloning $1 "
-		mkdir $dir/src
+		echo "Cloning git://github.com/$1 into $dir/src/$2"
 		cd $dir/src
-		git clone --depth=100 -q git://github.com/$1 $2 --quiet
-		cd $2
-		git checkout -q origin/master
+		git clone -q git://github.com/$1 $2
+		cd ../
 	else
 		cd $dir/src/$2
-		git pull -q origin master
-		git checkout -q origin/master 
+		git fetch origin
+		git reset --hard -q
+		cd ../../
 	fi
 
 	if [ $# == 3 ]; then
-		echo "Checking out $2 from $1 into $2_$3"
-
 		if [ -d $dir/src/$2_$3 ]; then
-			cd $dir/src/$2_$3
+			cd "$dir/src/$2_$3"
 		else
-			cp -R $dir/src/$2 $dir/src/$2_$3
-			cd $dir/src/$2_$3
+			cp -R "$dir/src/$2" "$dir/src/$2_$3"
+			cd "$dir/src/$2_$3"
 		fi
 
-		git reset --hard -q
-		git checkout $3 -q
-		git pull -q
-	else
-		echo "Checking out $2 from $1 into $2"
+		git reset --hard origin/$3 -q
+		cd ../../
 	fi
 }
 
 # core
-checkout 'silverstripe/sapphire.git' 'framework' 'master' 
-checkout 'silverstripe/sapphire.git' 'framework' '3.1' 
-checkout 'silverstripe/sapphire.git' 'framework' '3.0' 
-checkout 'silverstripe/sapphire.git' 'framework' '2.4'
-checkout 'silverstripe/sapphire.git' 'framework' '2.3' 
+checkout 'silverstripe/silverstripe-framework.git' 'framework' 'master' 
+checkout 'silverstripe/silverstripe-framework.git' 'framework' '3.1' 
+checkout 'silverstripe/silverstripe-framework.git' 'framework' '3.0' 
+checkout 'silverstripe/silverstripe-framework.git' 'framework' '2.4'
+checkout 'silverstripe/silverstripe-framework.git' 'framework' '2.3' 
 
 # core modules with docs
 checkout 'silverstripe/silverstripe-cms.git' 'cms' '3.0'
