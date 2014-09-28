@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3db49f8f06c35e18bea6b1696e713c3b",
+    "hash": "205ff3241068ccdd88390858891497fb",
     "packages": [
         {
             "name": "composer/installers",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "5914f4a3e90a9176c93e5dd0c8ad2b3679fda6ed"
+                "reference": "5ed225fe8545c4e4bf502d56fdd87791ecfdd078"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/5914f4a3e90a9176c93e5dd0c8ad2b3679fda6ed",
-                "reference": "5914f4a3e90a9176c93e5dd0c8ad2b3679fda6ed",
+                "url": "https://api.github.com/repos/composer/installers/zipball/5ed225fe8545c4e4bf502d56fdd87791ecfdd078",
+                "reference": "5ed225fe8545c4e4bf502d56fdd87791ecfdd078",
                 "shasum": ""
             },
             "replace": {
@@ -96,20 +96,20 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2014-09-16 22:11:26"
+            "time": "2014-09-25 03:36:45"
         },
         {
             "name": "erusev/parsedown",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "d24439ada0704948deef0d3eda2ea20fd8db1747"
+                "reference": "c62365adc4488e1c35a8f45ea86f7d4a22bd58a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/d24439ada0704948deef0d3eda2ea20fd8db1747",
-                "reference": "d24439ada0704948deef0d3eda2ea20fd8db1747",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/c62365adc4488e1c35a8f45ea86f7d4a22bd58a0",
+                "reference": "c62365adc4488e1c35a8f45ea86f7d4a22bd58a0",
                 "shasum": ""
             },
             "type": "library",
@@ -135,20 +135,20 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2014-05-21 20:20:46"
+            "time": "2014-09-25 23:06:16"
         },
         {
             "name": "erusev/parsedown-extra",
-            "version": "0.1.0",
+            "version": "0.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown-extra.git",
-                "reference": "bcd3930f7f10915e40513e1951a253f061d75463"
+                "reference": "910f726ab6c92ba24e5579f57507c7197d09a159"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown-extra/zipball/bcd3930f7f10915e40513e1951a253f061d75463",
-                "reference": "bcd3930f7f10915e40513e1951a253f061d75463",
+                "url": "https://api.github.com/repos/erusev/parsedown-extra/zipball/910f726ab6c92ba24e5579f57507c7197d09a159",
+                "reference": "910f726ab6c92ba24e5579f57507c7197d09a159",
                 "shasum": ""
             },
             "require": {
@@ -179,7 +179,7 @@
                 "parsedown",
                 "parser"
             ],
-            "time": "2014-06-18 23:58:16"
+            "time": "2014-09-16 11:54:01"
         },
         {
             "name": "silverstripe/docsviewer",
@@ -187,16 +187,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "3995e72c3a7dda28045aea8229ca8d62b1552e9a"
+                "reference": "45be91282c36501aa599759049e50a2f53ddcc6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/3995e72c3a7dda28045aea8229ca8d62b1552e9a",
-                "reference": "3995e72c3a7dda28045aea8229ca8d62b1552e9a",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/45be91282c36501aa599759049e50a2f53ddcc6c",
+                "reference": "45be91282c36501aa599759049e50a2f53ddcc6c",
                 "shasum": ""
             },
             "require": {
-                "erusev/parsedown-extra": "0.1.0",
+                "erusev/parsedown-extra": "0.2.2",
                 "silverstripe/framework": "~3.1"
             },
             "suggest": {
@@ -219,7 +219,7 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2014-09-20 02:20:36"
+            "time": "2014-09-28 03:58:23"
         },
         {
             "name": "silverstripe/framework",
@@ -227,12 +227,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wilr/sapphire.git",
-                "reference": "24e9de79379eda091e282559e0822f9d8f7fe540"
+                "reference": "8c3523036f2554e4179782ae1633bff0cba2d442"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wilr/sapphire/zipball/24e9de79379eda091e282559e0822f9d8f7fe540",
-                "reference": "24e9de79379eda091e282559e0822f9d8f7fe540",
+                "url": "https://api.github.com/repos/wilr/sapphire/zipball/8c3523036f2554e4179782ae1633bff0cba2d442",
+                "reference": "8c3523036f2554e4179782ae1633bff0cba2d442",
                 "shasum": ""
             },
             "require": {
@@ -270,7 +270,7 @@
             "support": {
                 "source": "https://github.com/wilr/sapphire/tree/docsrewrite"
             },
-            "time": "2014-09-20 02:10:49"
+            "time": "2014-09-28 03:59:48"
         },
         {
             "name": "silverstripe/toolbar",
@@ -744,12 +744,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "9f94dc5d8d7b49a9cb789853278af2b07a0aa4fd"
+                "reference": "6644c5c6b395e63a55186dea1817eed0ceb1c075"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/9f94dc5d8d7b49a9cb789853278af2b07a0aa4fd",
-                "reference": "9f94dc5d8d7b49a9cb789853278af2b07a0aa4fd",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/6644c5c6b395e63a55186dea1817eed0ceb1c075",
+                "reference": "6644c5c6b395e63a55186dea1817eed0ceb1c075",
                 "shasum": ""
             },
             "require": {
@@ -782,7 +782,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2014-09-17 09:54:14"
+            "time": "2014-09-22 11:59:59"
         }
     ],
     "aliases": [
