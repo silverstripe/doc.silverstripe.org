@@ -219,7 +219,7 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2014-09-28 03:58:23"
+            "time": "2014-10-13 08:55:16"
         },
         {
             "name": "silverstripe/framework",
@@ -227,12 +227,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wilr/sapphire.git",
-                "reference": "fc8ced219a737f51eb4791b28a08840b12794592"
+                "reference": "0c6779597608947e1e018f9dba65603d183da76e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wilr/sapphire/zipball/fc8ced219a737f51eb4791b28a08840b12794592",
-                "reference": "fc8ced219a737f51eb4791b28a08840b12794592",
+                "url": "https://api.github.com/repos/wilr/sapphire/zipball/0c6779597608947e1e018f9dba65603d183da76e",
+                "reference": "0c6779597608947e1e018f9dba65603d183da76e",
                 "shasum": ""
             },
             "require": {
@@ -270,7 +270,7 @@
             "support": {
                 "source": "https://github.com/wilr/sapphire/tree/docsrewrite"
             },
-            "time": "2014-09-28 03:59:48"
+            "time": "2014-10-13 08:52:19"
         },
         {
             "name": "silverstripe/toolbar",
@@ -318,16 +318,16 @@
         },
         {
             "name": "unclecheese/display-logic",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unclecheese/silverstripe-display-logic.git",
-                "reference": "051a860ebd65006493a19ce3381f9af3de8be875"
+                "reference": "4dbd6743046279c8ee8be31369a716a4eed42c2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unclecheese/silverstripe-display-logic/zipball/051a860ebd65006493a19ce3381f9af3de8be875",
-                "reference": "051a860ebd65006493a19ce3381f9af3de8be875",
+                "url": "https://api.github.com/repos/unclecheese/silverstripe-display-logic/zipball/4dbd6743046279c8ee8be31369a716a4eed42c2a",
+                "reference": "4dbd6743046279c8ee8be31369a716a4eed42c2a",
                 "shasum": ""
             },
             "require": {
@@ -347,8 +347,7 @@
             "authors": [
                 {
                     "name": "Uncle Cheese",
-                    "email": "unclecheese@leftandmain.com",
-                    "homepage": "http://leftandmain.com"
+                    "email": "unclecheese@leftandmain.com"
                 }
             ],
             "description": "Allows assignment of conditions for display and hide of specific form fields based on client side behavior.",
@@ -359,7 +358,7 @@
                 "logic",
                 "silverstripe"
             ],
-            "time": "2014-07-02 03:45:20"
+            "time": "2014-10-07 23:21:26"
         }
     ],
     "packages-dev": [
@@ -744,12 +743,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "6644c5c6b395e63a55186dea1817eed0ceb1c075"
+                "reference": "499f7d7aa96747ad97940089bd7a1fb24ad8182a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/6644c5c6b395e63a55186dea1817eed0ceb1c075",
-                "reference": "6644c5c6b395e63a55186dea1817eed0ceb1c075",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/499f7d7aa96747ad97940089bd7a1fb24ad8182a",
+                "reference": "499f7d7aa96747ad97940089bd7a1fb24ad8182a",
                 "shasum": ""
             },
             "require": {
@@ -782,7 +781,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2014-09-22 11:59:59"
+            "time": "2014-10-05 13:53:50"
         }
     ],
     "aliases": [
