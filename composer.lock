@@ -187,12 +187,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "f169aa65acf91619c2aa965de283f76c1edc0e47"
+                "reference": "fbe7c861a58403e6951fd4846cd08716421290b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/f169aa65acf91619c2aa965de283f76c1edc0e47",
-                "reference": "f169aa65acf91619c2aa965de283f76c1edc0e47",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/fbe7c861a58403e6951fd4846cd08716421290b7",
+                "reference": "fbe7c861a58403e6951fd4846cd08716421290b7",
                 "shasum": ""
             },
             "require": {
@@ -227,12 +227,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wilr/sapphire.git",
-                "reference": "bdee5234e4d0cd8eded758bab842f067cf224f3b"
+                "reference": "a475a6739b61996f6c65b434eee7d432a26d4162"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wilr/sapphire/zipball/bdee5234e4d0cd8eded758bab842f067cf224f3b",
-                "reference": "bdee5234e4d0cd8eded758bab842f067cf224f3b",
+                "url": "https://api.github.com/repos/wilr/sapphire/zipball/a475a6739b61996f6c65b434eee7d432a26d4162",
+                "reference": "a475a6739b61996f6c65b434eee7d432a26d4162",
                 "shasum": ""
             },
             "require": {
