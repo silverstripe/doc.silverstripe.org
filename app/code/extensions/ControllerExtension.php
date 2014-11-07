@@ -8,6 +8,13 @@ class ControllerExtension extends Extension {
 	public static $google_analytics_code = null;
 
 	/**
+	 * 
+	 */
+	public function onAfterInit(){
+		Requirements::javascript('themes/docs/javascript/main.js');
+	}
+
+	/**
 	 * @return string 
 	 */
 	public function getGoogleAnalyticsCode() {
@@ -20,4 +27,5 @@ class ControllerExtension extends Extension {
 	public function IsDev() {
 		return (Director::isDev());
 	}
+
 }
