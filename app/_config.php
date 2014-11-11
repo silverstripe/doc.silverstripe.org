@@ -39,7 +39,7 @@ try {
 
 DocumentationViewer::set_edit_link(
 	'framework',
-	'https://github.com/silverstripe/framework/edit/%version%/docs/%lang%/%path%',
+	'https://github.com/silverstripe/silverstripe-framework/edit/%version%/docs/%lang%/%path%',
 	array(
 		'rewritetrunktomaster' => true
 	)
