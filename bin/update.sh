@@ -19,7 +19,7 @@ fi
 #
 #===============================================================================
 # Parameters: github path
-function checkout {
+checkout () {
 	echo "Checking out $2/$3 from $1"
 	mkdir -p $dir/src
 	
