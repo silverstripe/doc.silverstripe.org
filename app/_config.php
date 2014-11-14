@@ -40,7 +40,7 @@ Config::inst()->update('DocumentationViewer', 'check_permission', false);
 
 DocumentationViewer::set_edit_link(
 	'framework',
-	'https://github.com/silverstripe/framework/edit/%version%/docs/%lang%/%path%',
+	'https://github.com/silverstripe/silverstripe-framework/edit/%version%/docs/%lang%/%path%',
 	array(
 		'rewritetrunktomaster' => true
 	)
@@ -56,7 +56,7 @@ DocumentationSearch::set_meta_data(array(
 	'Tags' => 'silverstripe sapphire php framework cms content management system'
 ));
 
-	// Changelogs have heaps of phrases, but are rarely relevant for content searches
+// Changelogs have heaps of phrases, but are rarely relevant for content searches
 Config::inst()->update('DocumentationSearch', 'boost_by_path', array(
 	'/^changelog/' => 0.05
 ));
@@ -65,5 +65,6 @@ Config::inst()->update('DocumentationSearch', 'boost_by_path', array(
 if(file_exists(BASE_PATH . '/.lucene-index')) {
 	DocumentationSearch::set_index(BASE_PATH . '/.lucene-index');
 }
+
 
 
