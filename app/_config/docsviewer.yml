@@ -12,6 +12,16 @@ DocumentationManifest:
     -
       Path: "framework/docs/"
       Title: "Framework"
-      Version: master
+      Version: "3.1"
       Stable: true
+      DefaultEntity: true
+    - 
+      Path: "src/framework_3.0/docs/"
+      Title: "Framework"
+      Version: "3.0"
+      DefaultEntity: true
+    -
+      Path: "src/framework_2.4/docs/"
+      Title: "Framework"
+      Version: "2.4"
       DefaultEntity: true
