@@ -231,8 +231,8 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wilr/sapphire/zipball/a475a6739b61996f6c65b434eee7d432a26d4162",
-                "reference": "a475a6739b61996f6c65b434eee7d432a26d4162",
+                "url": "https://api.github.com/repos/wilr/sapphire/zipball/df61b94d4675311d719da7efdcf4a23daba12519",
+                "reference": "df61b94d4675311d719da7efdcf4a23daba12519",
                 "shasum": ""
             },
             "require": {
