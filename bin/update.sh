@@ -35,7 +35,7 @@ checkout () {
 		cd ../../
 	fi
 
-	if [ $# == 3 ]; then
+	if [ $# = 3 ]; then
 		if [ -d $dir/src/$2_$3 ]; then
 			cd "$dir/src/$2_$3"
 		else
