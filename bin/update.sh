@@ -1,10 +1,3 @@
-dir=$1
-
-if [ ! "$dir" ]; then
-  echo "Usage: $0 /base/folder/to/docs"
-  exit 1
-fi
-
 #=== FUNCTION ================================================================
 # NAME: 		checkout
 # DESCRIPTION:	Checks out a specific branch of a module into a folder. Not
@@ -19,6 +12,9 @@ fi
 #
 #===============================================================================
 # Parameters: github path
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+dir="$(dirname "${dir}" )"
+
 function checkout {
 	if [ ! -d $dir/src/$2 ]; then
 		echo "Cloning $1 "

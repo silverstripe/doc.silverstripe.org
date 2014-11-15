@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "205ff3241068ccdd88390858891497fb",
+    "hash": "39c5abaf6514848e9a7668425847c7e5",
     "packages": [
         {
             "name": "composer/installers",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "09e2192a7cd08008e273355fddd38942d8de2992"
+                "reference": "8024be9aa3ee446272937f46a8807fa52b337767"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/09e2192a7cd08008e273355fddd38942d8de2992",
-                "reference": "09e2192a7cd08008e273355fddd38942d8de2992",
+                "url": "https://api.github.com/repos/composer/installers/zipball/8024be9aa3ee446272937f46a8807fa52b337767",
+                "reference": "8024be9aa3ee446272937f46a8807fa52b337767",
                 "shasum": ""
             },
             "replace": {
@@ -96,20 +96,20 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2014-10-15 03:40:33"
+            "time": "2014-11-01 17:51:50"
         },
         {
             "name": "erusev/parsedown",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "c62365adc4488e1c35a8f45ea86f7d4a22bd58a0"
+                "reference": "da5d75e97e1ed19e57bd54fa6cb595a6a0879a67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/c62365adc4488e1c35a8f45ea86f7d4a22bd58a0",
-                "reference": "c62365adc4488e1c35a8f45ea86f7d4a22bd58a0",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/da5d75e97e1ed19e57bd54fa6cb595a6a0879a67",
+                "reference": "da5d75e97e1ed19e57bd54fa6cb595a6a0879a67",
                 "shasum": ""
             },
             "type": "library",
@@ -135,7 +135,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2014-09-25 23:06:16"
+            "time": "2014-10-29 20:29:46"
         },
         {
             "name": "erusev/parsedown-extra",
@@ -219,7 +219,7 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2014-10-13 08:55:16"
+            "time": "2014-11-14 22:46:54"
         },
         {
             "name": "silverstripe/framework",
@@ -227,7 +227,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wilr/sapphire.git",
-                "reference": "a475a6739b61996f6c65b434eee7d432a26d4162"
+                "reference": "df61b94d4675311d719da7efdcf4a23daba12519"
             },
             "dist": {
                 "type": "zip",
@@ -270,7 +270,7 @@
             "support": {
                 "source": "https://github.com/wilr/sapphire/tree/docsrewrite"
             },
-            "time": "2014-10-20 08:57:35"
+            "time": "2014-11-12 19:31:40"
         },
         {
             "name": "silverstripe/toolbar",
@@ -738,17 +738,17 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "dev-master",
+            "version": "2.7.x-dev",
             "target-dir": "Symfony/Component/Yaml",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "499f7d7aa96747ad97940089bd7a1fb24ad8182a"
+                "reference": "6165f4b5224c22de2873deb6a3a4e622044f0705"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/499f7d7aa96747ad97940089bd7a1fb24ad8182a",
-                "reference": "499f7d7aa96747ad97940089bd7a1fb24ad8182a",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/6165f4b5224c22de2873deb6a3a4e622044f0705",
+                "reference": "6165f4b5224c22de2873deb6a3a4e622044f0705",
                 "shasum": ""
             },
             "require": {
@@ -757,7 +757,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev"
+                    "dev-master": "2.7-dev"
                 }
             },
             "autoload": {
@@ -781,7 +781,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2014-10-05 13:53:50"
+            "time": "2014-11-10 18:00:54"
         }
     ],
     "aliases": [
