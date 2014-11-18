@@ -227,12 +227,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wilr/sapphire.git",
-                "reference": "df61b94d4675311d719da7efdcf4a23daba12519"
+                "reference": "9543834ddfb998dd215d71e3d8ed2e2de2a892e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wilr/sapphire/zipball/df61b94d4675311d719da7efdcf4a23daba12519",
-                "reference": "df61b94d4675311d719da7efdcf4a23daba12519",
+                "url": "https://api.github.com/repos/wilr/sapphire/zipball/9543834ddfb998dd215d71e3d8ed2e2de2a892e6",
+                "reference": "9543834ddfb998dd215d71e3d8ed2e2de2a892e6",
                 "shasum": ""
             },
             "require": {
