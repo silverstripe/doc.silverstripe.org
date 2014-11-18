@@ -20,8 +20,6 @@ if(isset($_ENV['CLEARDB_DATABASE_URL'])) {
 	$databaseConfig['username'] = $parts['user'];
 	$databaseConfig['password'] = $parts['pass'];
 	$databaseConfig['database'] = trim($parts['path'], '/');
-
-	Security::setDefaultAdmin('heroku', 'yesletmeinplease');
 } else {
 	require_once('conf/ConfigureFromEnv.php');
 }
