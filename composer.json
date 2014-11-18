@@ -26,6 +26,9 @@
     "scripts": {
         "post-update-cmd": [
             "./bin/update.sh"
+        ],
+        "post-install-cmd": [
+            "./bin/update.sh"
         ]
     }
 }
