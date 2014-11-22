@@ -16,24 +16,28 @@
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_URI} !^framework/main\.php
 	RewriteRule ^sapphire/?(.*) http://doc.silverstripe.org/framework/$1 [R=301,L]
-	
+
 	# DokuWiki rewrite rules: Need to happen before other rules in order to redirect /doku.php?id=<pagename>
 	# to /pagename, which can then be matched by the legacy rewrite rules further down
 	RewriteCond %{QUERY_STRING}          ^(\bid\b=([^&]*)&?(.*)?)
 	RewriteRule ^doku.php$                http://doc.silverstripe.org/%2?%3 [R=301,L]
-	
+
 	# Redirect legacy URLs (assumes we're not redirecting other assets, for performance reasons)
 	# Note: Just works on top-level domains, not if the webroot is in a subfolder
 	RewriteCond %{REQUEST_URI} ^(.*)$
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt)$
 	#RewriteRule ^execution-pipeline$ http://doc.silverstripe.org/framework/en/reference/ [R=301,L]
-	
-	RewriteCond %{REQUEST_URI} !(3.0|2.4)
+
+	RewriteCond %{REQUEST_URI} !(3.0|2.4|2.3)
 	RewriteRule ^(.*)/topics/testing/create-silverstripe-test$ /$1/topics/testing/creating-a-silverstripe-test [R=301,L]
-	RewriteCond %{REQUEST_URI} !(3.0|2.4)
+	RewriteCond %{REQUEST_URI} !(3.0|2.4|2.3)
 	RewriteRule ^(.*)/topics/testing/create-functional-test$ /$1/topics/testing/creating-a-functional-test [R=301,L]
-		
+	RewriteCond %{REQUEST_URI} !(3.0|2.4|2.3)
+	RewriteRule ^(.*)/topics/testing/email-sending$ /$1/topics/testing/testing-email [R=301,L]
+	RewriteCond %{REQUEST_URI} !(3.0|2.4|2.3)
+	RewriteRule ^(.*)/topics/testing/why-test$ /$1/topics/testing/why-should-i-test [R=301,L]
+
 	RewriteRule ^arraydata$ http://api.silverstripe.org/search/lookup/?q=ArrayData&module=sapphire [R=301,L]
 	RewriteRule ^autocompletefield$ http://api.silverstripe.org/search/lookup/?q=AutocompleteField&module=sapphire [R=301,L]
 	RewriteRule ^bbcode$ http://doc.silverstripe.org/framework/en/reference/ [R=301,L]
