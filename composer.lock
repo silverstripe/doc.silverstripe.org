@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "39c5abaf6514848e9a7668425847c7e5",
+    "hash": "583c294ea82c1aaef6b7af9b296822b7",
     "packages": [
         {
             "name": "composer/installers",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "8024be9aa3ee446272937f46a8807fa52b337767"
+                "reference": "91e7724e6e75291d6f5512415fbdcec525ad4d7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/8024be9aa3ee446272937f46a8807fa52b337767",
-                "reference": "8024be9aa3ee446272937f46a8807fa52b337767",
+                "url": "https://api.github.com/repos/composer/installers/zipball/91e7724e6e75291d6f5512415fbdcec525ad4d7e",
+                "reference": "91e7724e6e75291d6f5512415fbdcec525ad4d7e",
                 "shasum": ""
             },
             "replace": {
@@ -69,6 +69,7 @@
                 "codeigniter",
                 "concrete5",
                 "croogo",
+                "dokuwiki",
                 "drupal",
                 "elgg",
                 "fuelphp",
@@ -96,20 +97,20 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2014-11-01 17:51:50"
+            "time": "2014-11-23 19:34:57"
         },
         {
             "name": "erusev/parsedown",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "da5d75e97e1ed19e57bd54fa6cb595a6a0879a67"
+                "reference": "9816507a75b27b61035671cd2fc6f524a9b4c25c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/da5d75e97e1ed19e57bd54fa6cb595a6a0879a67",
-                "reference": "da5d75e97e1ed19e57bd54fa6cb595a6a0879a67",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/9816507a75b27b61035671cd2fc6f524a9b4c25c",
+                "reference": "9816507a75b27b61035671cd2fc6f524a9b4c25c",
                 "shasum": ""
             },
             "type": "library",
@@ -135,7 +136,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2014-10-29 20:29:46"
+            "time": "2014-11-19 18:18:56"
         },
         {
             "name": "erusev/parsedown-extra",
@@ -219,7 +220,7 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2014-11-14 22:46:54"
+            "time": "2014-11-18 06:12:19"
         },
         {
             "name": "silverstripe/framework",
@@ -227,12 +228,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wilr/sapphire.git",
-                "reference": "9543834ddfb998dd215d71e3d8ed2e2de2a892e6"
+                "reference": "52f100822b614bb3c31cbd9201c4c871a30438dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wilr/sapphire/zipball/9543834ddfb998dd215d71e3d8ed2e2de2a892e6",
-                "reference": "9543834ddfb998dd215d71e3d8ed2e2de2a892e6",
+                "url": "https://api.github.com/repos/wilr/sapphire/zipball/52f100822b614bb3c31cbd9201c4c871a30438dd",
+                "reference": "52f100822b614bb3c31cbd9201c4c871a30438dd",
                 "shasum": ""
             },
             "require": {
@@ -270,7 +271,7 @@
             "support": {
                 "source": "https://github.com/wilr/sapphire/tree/docsrewrite"
             },
-            "time": "2014-11-12 19:31:40"
+            "time": "2014-11-26 04:53:45"
         },
         {
             "name": "silverstripe/toolbar",
@@ -318,16 +319,16 @@
         },
         {
             "name": "unclecheese/display-logic",
-            "version": "1.0.5",
+            "version": "1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unclecheese/silverstripe-display-logic.git",
-                "reference": "4dbd6743046279c8ee8be31369a716a4eed42c2a"
+                "reference": "3fb23e086bf08b27d475e480c1d73a8404234daf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unclecheese/silverstripe-display-logic/zipball/4dbd6743046279c8ee8be31369a716a4eed42c2a",
-                "reference": "4dbd6743046279c8ee8be31369a716a4eed42c2a",
+                "url": "https://api.github.com/repos/unclecheese/silverstripe-display-logic/zipball/3fb23e086bf08b27d475e480c1d73a8404234daf",
+                "reference": "3fb23e086bf08b27d475e480c1d73a8404234daf",
                 "shasum": ""
             },
             "require": {
@@ -358,7 +359,7 @@
                 "logic",
                 "silverstripe"
             ],
-            "time": "2014-10-07 23:21:26"
+            "time": "2014-11-25 10:19:38"
         }
     ],
     "packages-dev": [
@@ -743,12 +744,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "6165f4b5224c22de2873deb6a3a4e622044f0705"
+                "reference": "75deb1b183d2bbf12f4b54c644c0caafca338fbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/6165f4b5224c22de2873deb6a3a4e622044f0705",
-                "reference": "6165f4b5224c22de2873deb6a3a4e622044f0705",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/75deb1b183d2bbf12f4b54c644c0caafca338fbe",
+                "reference": "75deb1b183d2bbf12f4b54c644c0caafca338fbe",
                 "shasum": ""
             },
             "require": {
@@ -781,7 +782,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2014-11-10 18:00:54"
+            "time": "2014-11-20 13:24:30"
         }
     ],
     "aliases": [
