@@ -11,7 +11,10 @@ class ControllerExtension extends Extension {
 	 * 
 	 */
 	public function onAfterInit(){
+		Requirements::javascript('themes/docs/javascript/jquery.cookie.js');
 		Requirements::javascript('themes/docs/javascript/main.js');
+		Requirements::css('themes/docs//css/styles.css');
+
 	}
 
 	/**

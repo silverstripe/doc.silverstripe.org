@@ -1,3 +1,17 @@
+$(function() {
+ 		// Check if cookie 
+		if ($.cookie("beta") == "closed") {
+   			$('#Beta').addClass('hide');
+		}
+
+		// On button click close and add cookie (expires in 100 days)
+		$('.close').on('click', function(){
+			$('#Beta').addClass('hide');
+   			$.cookie("beta", "closed", { expires : 1 });
+    		
+		});
+});
+
 
 // Feedback button
 
