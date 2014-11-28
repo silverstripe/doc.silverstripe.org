@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "91e7724e6e75291d6f5512415fbdcec525ad4d7e"
+                "reference": "22208fc1360014587cfbc95d78d7aab8f25a6889"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/91e7724e6e75291d6f5512415fbdcec525ad4d7e",
-                "reference": "91e7724e6e75291d6f5512415fbdcec525ad4d7e",
+                "url": "https://api.github.com/repos/composer/installers/zipball/22208fc1360014587cfbc95d78d7aab8f25a6889",
+                "reference": "22208fc1360014587cfbc95d78d7aab8f25a6889",
                 "shasum": ""
             },
             "replace": {
@@ -97,7 +97,7 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2014-11-23 19:34:57"
+            "time": "2014-11-27 19:24:51"
         },
         {
             "name": "erusev/parsedown",
@@ -228,12 +228,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wilr/sapphire.git",
-                "reference": "52f100822b614bb3c31cbd9201c4c871a30438dd"
+                "reference": "837afd69db9bb01aa8cb06322ed452f3691aec77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wilr/sapphire/zipball/52f100822b614bb3c31cbd9201c4c871a30438dd",
-                "reference": "52f100822b614bb3c31cbd9201c4c871a30438dd",
+                "url": "https://api.github.com/repos/wilr/sapphire/zipball/837afd69db9bb01aa8cb06322ed452f3691aec77",
+                "reference": "837afd69db9bb01aa8cb06322ed452f3691aec77",
                 "shasum": ""
             },
             "require": {
@@ -271,7 +271,7 @@
             "support": {
                 "source": "https://github.com/wilr/sapphire/tree/docsrewrite"
             },
-            "time": "2014-11-26 04:53:45"
+            "time": "2014-11-27 02:27:52"
         },
         {
             "name": "silverstripe/toolbar",
