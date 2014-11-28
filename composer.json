@@ -4,7 +4,7 @@
     "require": {
         "ext-gd": "*",
         "ext-mbstring": "*",
-        "silverstripe/docsviewer": "dev-manifest",
+        "silverstripe/docsviewer": "dev-fixsearch",
         "silverstripe/framework": "dev-docsrewrite as 3.1.x-dev",
         "erusev/parsedown-extra": "0.2.2",
         "silverstripe/toolbar": "*"
@@ -18,6 +18,9 @@
     }, {
         "type": "vcs",
         "url": "git@github.com:silverstripe/silverstripe-globaltoolbar.git"
+    }, {
+        "type": "vcs",
+        "url": "git@github.com:camfindlay/silverstripe-docsviewer.git"
     }],
     "config": {
 		"process-timeout": 600	

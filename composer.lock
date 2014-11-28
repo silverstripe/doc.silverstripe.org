@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "583c294ea82c1aaef6b7af9b296822b7",
+    "hash": "0e30e64d8ef26da948e675b150189051",
     "packages": [
         {
             "name": "composer/installers",
@@ -184,16 +184,16 @@
         },
         {
             "name": "silverstripe/docsviewer",
-            "version": "dev-manifest",
+            "version": "dev-fixsearch",
             "source": {
                 "type": "git",
-                "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "bda0b00b18701654b8a257b012b55879e1d9017f"
+                "url": "https://github.com/camfindlay/silverstripe-docsviewer.git",
+                "reference": "7a7e1bc38a6c29b82b7625ded82ba7e6e36cd696"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/bda0b00b18701654b8a257b012b55879e1d9017f",
-                "reference": "bda0b00b18701654b8a257b012b55879e1d9017f",
+                "url": "https://api.github.com/repos/camfindlay/silverstripe-docsviewer/zipball/7a7e1bc38a6c29b82b7625ded82ba7e6e36cd696",
+                "reference": "7a7e1bc38a6c29b82b7625ded82ba7e6e36cd696",
                 "shasum": ""
             },
             "require": {
@@ -204,15 +204,14 @@
                 "silverstripe/staticpublisher": "Allows publishing documentation as HTML"
             },
             "type": "silverstripe-module",
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
                 {
                     "name": "Will Rossiter",
-                    "email": "will@fullscreen.io",
-                    "homepage": "http://wilr.github.io"
+                    "homepage": "http://wilr.github.io",
+                    "email": "will@fullscreen.io"
                 }
             ],
             "description": "Documentation viewer module for SilverStripe",
@@ -220,7 +219,14 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2014-11-18 06:12:19"
+            "support": {
+                "0": {
+                    "email": "will@fullscreen.io",
+                    "irc": "irc://irc.freenode.org/silverstripe"
+                },
+                "source": "https://github.com/camfindlay/silverstripe-docsviewer/tree/fixsearch"
+            },
+            "time": "2014-11-28 01:20:51"
         },
         {
             "name": "silverstripe/framework",
