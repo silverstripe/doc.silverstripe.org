@@ -188,12 +188,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/camfindlay/silverstripe-docsviewer.git",
-                "reference": "7a7e1bc38a6c29b82b7625ded82ba7e6e36cd696"
+                "reference": "2ad07337b144d16d5b6eaf28bf2d3ac52e055873"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/camfindlay/silverstripe-docsviewer/zipball/7a7e1bc38a6c29b82b7625ded82ba7e6e36cd696",
-                "reference": "7a7e1bc38a6c29b82b7625ded82ba7e6e36cd696",
+                "url": "https://api.github.com/repos/camfindlay/silverstripe-docsviewer/zipball/2ad07337b144d16d5b6eaf28bf2d3ac52e055873",
+                "reference": "2ad07337b144d16d5b6eaf28bf2d3ac52e055873",
                 "shasum": ""
             },
             "require": {
@@ -226,7 +226,7 @@
                 },
                 "source": "https://github.com/camfindlay/silverstripe-docsviewer/tree/fixsearch"
             },
-            "time": "2014-11-28 01:20:51"
+            "time": "2014-12-03 21:09:48"
         },
         {
             "name": "silverstripe/framework",
@@ -234,12 +234,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wilr/sapphire.git",
-                "reference": "195f1fb242abde26cd7b741e9b0af7334e82978b"
+                "reference": "55f021fd4e9e055a309976a3ee4e535fdd783aad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wilr/sapphire/zipball/195f1fb242abde26cd7b741e9b0af7334e82978b",
-                "reference": "195f1fb242abde26cd7b741e9b0af7334e82978b",
+                "url": "https://api.github.com/repos/wilr/sapphire/zipball/55f021fd4e9e055a309976a3ee4e535fdd783aad",
+                "reference": "55f021fd4e9e055a309976a3ee4e535fdd783aad",
                 "shasum": ""
             },
             "require": {
@@ -277,7 +277,7 @@
             "support": {
                 "source": "https://github.com/wilr/sapphire/tree/docsrewrite"
             },
-            "time": "2014-11-28 05:05:02"
+            "time": "2014-12-03 01:14:39"
         },
         {
             "name": "silverstripe/toolbar",
@@ -750,12 +750,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "db39f8dc540b80eaf62cf60e02659e681e79d98b"
+                "reference": "610f01968f2cd731fdf59dfeae904ed930afc35f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/db39f8dc540b80eaf62cf60e02659e681e79d98b",
-                "reference": "db39f8dc540b80eaf62cf60e02659e681e79d98b",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/610f01968f2cd731fdf59dfeae904ed930afc35f",
+                "reference": "610f01968f2cd731fdf59dfeae904ed930afc35f",
                 "shasum": ""
             },
             "require": {
@@ -788,7 +788,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2014-11-29 14:04:31"
+            "time": "2014-12-02 20:19:50"
         }
     ],
     "aliases": [
