@@ -10,7 +10,17 @@ DocumentationManifest:
   automatic_registration: false
   register_entities:
     -
-      Path: "framework/docs/"
+      Path: "src/framework_master/docs/"
+      Title: "Framework"
+      Version: "4.0"
+      DefaultEntity: true
+    -
+      Path: "src/framework_3/docs/"
+      Title: "Framework"
+      Version: "3.2"
+      DefaultEntity: true
+    -
+      Path: "src/framework_3.1/docs/"
       Title: "Framework"
       Version: "3.1"
       Stable: true

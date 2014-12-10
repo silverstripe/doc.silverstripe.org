@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0e30e64d8ef26da948e675b150189051",
+    "hash": "9f15589068a7501b66771a7f7eed8719",
     "packages": [
         {
             "name": "composer/installers",
@@ -184,16 +184,16 @@
         },
         {
             "name": "silverstripe/docsviewer",
-            "version": "dev-fixsearch",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/camfindlay/silverstripe-docsviewer.git",
-                "reference": "5b02bcc6f80ac22e1b8c5ffb36d6f608bfde4dd8"
+                "reference": "410312c6414eef69f32fdabafdfc3ebbd3e3e032"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/camfindlay/silverstripe-docsviewer/zipball/5b02bcc6f80ac22e1b8c5ffb36d6f608bfde4dd8",
-                "reference": "5b02bcc6f80ac22e1b8c5ffb36d6f608bfde4dd8",
+                "url": "https://api.github.com/repos/camfindlay/silverstripe-docsviewer/zipball/410312c6414eef69f32fdabafdfc3ebbd3e3e032",
+                "reference": "410312c6414eef69f32fdabafdfc3ebbd3e3e032",
                 "shasum": ""
             },
             "require": {
@@ -224,22 +224,22 @@
                     "email": "will@fullscreen.io",
                     "irc": "irc://irc.freenode.org/silverstripe"
                 },
-                "source": "https://github.com/camfindlay/silverstripe-docsviewer/tree/fixsearch"
+                "source": "https://github.com/camfindlay/silverstripe-docsviewer/tree/curentversionsearch"
             },
-            "time": "2014-12-10 00:12:28"
+            "time": "2014-12-16 22:18:00"
         },
         {
             "name": "silverstripe/framework",
-            "version": "dev-docsrewrite",
+            "version": "3.1.8",
             "source": {
                 "type": "git",
-                "url": "https://github.com/wilr/sapphire.git",
-                "reference": "43cd657695d86b81374acf32b3dc70d431b010b4"
+                "url": "https://github.com/silverstripe/silverstripe-framework.git",
+                "reference": "8b3695bd41e5fcd0fb2fe97811fcba4ed03ce214"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wilr/sapphire/zipball/43cd657695d86b81374acf32b3dc70d431b010b4",
-                "reference": "43cd657695d86b81374acf32b3dc70d431b010b4",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/8b3695bd41e5fcd0fb2fe97811fcba4ed03ce214",
+                "reference": "8b3695bd41e5fcd0fb2fe97811fcba4ed03ce214",
                 "shasum": ""
             },
             "require": {
@@ -255,6 +255,7 @@
                     "tests/behat/features/bootstrap"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -274,10 +275,7 @@
                 "framework",
                 "silverstripe"
             ],
-            "support": {
-                "source": "https://github.com/wilr/sapphire/tree/docsrewrite"
-            },
-            "time": "2014-12-08 20:44:24"
+            "time": "2014-11-18 05:30:19"
         },
         {
             "name": "silverstripe/toolbar",
@@ -285,12 +283,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-globaltoolbar.git",
-                "reference": "39189e894c88f987a72cacf53d7886741586e038"
+                "reference": "c512db4919b91acfd146243cc9fab757391bf460"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-globaltoolbar/zipball/39189e894c88f987a72cacf53d7886741586e038",
-                "reference": "39189e894c88f987a72cacf53d7886741586e038",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-globaltoolbar/zipball/c512db4919b91acfd146243cc9fab757391bf460",
+                "reference": "c512db4919b91acfd146243cc9fab757391bf460",
                 "shasum": ""
             },
             "require": {
@@ -318,10 +316,10 @@
                 "silverstripe"
             ],
             "support": {
-                "source": "https://github.com/silverstripe/silverstripe-globaltoolbar/tree/hotfix/js-issues",
+                "source": "https://github.com/silverstripe/silverstripe-globaltoolbar/tree/master",
                 "issues": "https://github.com/silverstripe/silverstripe-globaltoolbar/issues"
             },
-            "time": "2014-12-02 02:01:41"
+            "time": "2014-12-16 02:50:17"
         },
         {
             "name": "unclecheese/display-logic",
@@ -750,12 +748,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "a0913638efd5237ff700e92b8444b6a71278f1f6"
+                "reference": "b9c19ce1bd9a51d3f42665973088f2e2b82db240"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/a0913638efd5237ff700e92b8444b6a71278f1f6",
-                "reference": "a0913638efd5237ff700e92b8444b6a71278f1f6",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/b9c19ce1bd9a51d3f42665973088f2e2b82db240",
+                "reference": "b9c19ce1bd9a51d3f42665973088f2e2b82db240",
                 "shasum": ""
             },
             "require": {
@@ -788,24 +786,18 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2014-12-08 08:43:57"
+            "time": "2014-12-09 17:32:32"
         }
     ],
-    "aliases": [
-        {
-            "alias": "3.1.x-dev",
-            "alias_normalized": "3.1.9999999.9999999-dev",
-            "version": "dev-docsrewrite",
-            "package": "silverstripe/framework"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
         "silverstripe/docsviewer": 20,
-        "silverstripe/framework": 20,
+        "silverstripe/framework": 0,
         "phpunit/phpunit": 0
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "ext-gd": "*",
         "ext-mbstring": "*"

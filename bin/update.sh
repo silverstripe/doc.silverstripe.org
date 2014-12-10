@@ -48,6 +48,9 @@ function checkout {
 }
 
 # core
+checkout 'silverstripe/silverstripe-framework.git' 'framework' 'master'
+checkout 'silverstripe/silverstripe-framework.git' 'framework' '3'
+checkout 'silverstripe/silverstripe-framework.git' 'framework' '3.1'
 checkout 'silverstripe/silverstripe-framework.git' 'framework' '3.0' 
 checkout 'silverstripe/silverstripe-framework.git' 'framework' '2.4'
 

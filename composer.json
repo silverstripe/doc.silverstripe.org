@@ -1,32 +1,30 @@
 {
-    "name": "silverstripe/doc.silverstripe.org",
-    "description": "The source code behind doc.silverstripe.org",
-    "require": {
-        "ext-gd": "*",
-        "ext-mbstring": "*",
-        "silverstripe/docsviewer": "dev-fixsearch",
-        "silverstripe/framework": "dev-docsrewrite as 3.1.x-dev",
-        "erusev/parsedown-extra": "0.2.2",
-        "silverstripe/toolbar": "*"
-    },
-    "require-dev": {
-        "phpunit/PHPUnit": "~3.7@stable"
-    },
-    "repositories": [{
-        "type": "vcs",
-        "url": "git@github.com:wilr/sapphire.git"
-    }, {
-        "type": "vcs",
-        "url": "git@github.com:silverstripe/silverstripe-globaltoolbar.git"
-    }, {
-        "type": "vcs",
-        "url": "git@github.com:camfindlay/silverstripe-docsviewer.git"
-    }],
-    "config": {
-		"process-timeout": 600	
+	"name": "silverstripe/doc.silverstripe.org",
+	"description": "The source code behind doc.silverstripe.org",
+	"require": {
+		"ext-gd": "*",
+		"ext-mbstring": "*",
+		"silverstripe/docsviewer": "dev-master",
+		"silverstripe/framework": "3.1.*@stable",
+		"erusev/parsedown-extra": "0.2.2",
+		"silverstripe/toolbar": "*"
 	},
-    "minimum-stability": "dev",
-    "scripts": {
+	"require-dev": {
+		"phpunit/PHPUnit": "~3.7@stable"
+	},
+	"repositories": [{
+		"type": "vcs",
+		"url": "git@github.com:silverstripe/silverstripe-globaltoolbar.git"
+	},
+	{
+		"type": "vcs",
+		"url": "git@github.com:camfindlay/silverstripe-docsviewer.git"
+	}],
+	"config": {
+		"process-timeout": 600
+	},
+	"minimum-stability": "dev",
+	"scripts": {
 
-    }
+	}
 }
