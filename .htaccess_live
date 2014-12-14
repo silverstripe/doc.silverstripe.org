@@ -83,7 +83,7 @@
 	RewriteRule ^flickrservice$ http://doc.silverstripe.org/old/flickrservice [R=301,L]
 	RewriteRule ^form$ http://doc.silverstripe.org/framework/en/topics/forms [R=301,L]
 	RewriteRule ^form-field-types$ http://doc.silverstripe.org/framework/en/reference/form-field-types [R=301,L]
-	RewriteRule ^form-validation$ http://doc.silverstripe.org/framework/en/topics/form-validation [R=301,L]
+	RewriteRule ^form-validation$ "http://doc.silverstripe.org/framework/en/topics/forms#form-validation" [R=301,L,NE]
 	RewriteRule ^formaction$ http://api.silverstripe.org/search/lookup/?q=FormAction&module=sapphire [R=301,L]
 	RewriteRule ^functionaltest$ http://api.silverstripe.org/search/lookup/?q=FunctionalTest&module=sapphire [R=301,L]
 	RewriteRule ^framework/en/trunk/misc/collaboration-on-git http://doc.silverstripe.org/framework/en/trunk/misc/contributing/code [R=301,L]
