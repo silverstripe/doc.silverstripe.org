@@ -13,11 +13,13 @@ DocumentationManifest:
       Path: "src/framework_master/docs/"
       Title: "Framework"
       Version: "4.0"
+      Branch: "master"
       DefaultEntity: true
     -
       Path: "src/framework_3/docs/"
       Title: "Framework"
       Version: "3.2"
+      Branch: "3"
       DefaultEntity: true
     -
       Path: "src/framework_3.1/docs/"
@@ -25,7 +27,7 @@ DocumentationManifest:
       Version: "3.1"
       Stable: true
       DefaultEntity: true
-    - 
+    -
       Path: "src/framework_3.0/docs/"
       Title: "Framework"
       Version: "3.0"
