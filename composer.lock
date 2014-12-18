@@ -188,12 +188,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/camfindlay/silverstripe-docsviewer.git",
-                "reference": "75e194b8ec9e5a4f980073e6623df7ff0d1747c5"
+                "reference": "f8c1d0341f5fffdcaff3978b97942e1da19ab01f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/camfindlay/silverstripe-docsviewer/zipball/75e194b8ec9e5a4f980073e6623df7ff0d1747c5",
-                "reference": "75e194b8ec9e5a4f980073e6623df7ff0d1747c5",
+                "url": "https://api.github.com/repos/camfindlay/silverstripe-docsviewer/zipball/f8c1d0341f5fffdcaff3978b97942e1da19ab01f",
+                "reference": "f8c1d0341f5fffdcaff3978b97942e1da19ab01f",
                 "shasum": ""
             },
             "require": {
@@ -226,7 +226,7 @@
                 },
                 "source": "https://github.com/camfindlay/silverstripe-docsviewer/tree/master"
             },
-            "time": "2014-12-17 20:39:26"
+            "time": "2014-12-18 04:50:50"
         },
         {
             "name": "silverstripe/framework",
