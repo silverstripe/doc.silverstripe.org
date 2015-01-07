@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9f15589068a7501b66771a7f7eed8719",
+    "hash": "ac9102640666e8e76ce03316c08f30c2",
     "packages": [
         {
             "name": "composer/installers",
@@ -187,13 +187,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/camfindlay/silverstripe-docsviewer.git",
-                "reference": "f8c1d0341f5fffdcaff3978b97942e1da19ab01f"
+                "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
+                "reference": "7b1a37f430cf36ff44542d2cff3f32d33033558f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/camfindlay/silverstripe-docsviewer/zipball/f8c1d0341f5fffdcaff3978b97942e1da19ab01f",
-                "reference": "f8c1d0341f5fffdcaff3978b97942e1da19ab01f",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/7b1a37f430cf36ff44542d2cff3f32d33033558f",
+                "reference": "7b1a37f430cf36ff44542d2cff3f32d33033558f",
                 "shasum": ""
             },
             "require": {
@@ -204,14 +204,15 @@
                 "silverstripe/staticpublisher": "Allows publishing documentation as HTML"
             },
             "type": "silverstripe-module",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
                 {
                     "name": "Will Rossiter",
-                    "homepage": "http://wilr.github.io",
-                    "email": "will@fullscreen.io"
+                    "email": "will@fullscreen.io",
+                    "homepage": "http://wilr.github.io"
                 }
             ],
             "description": "Documentation viewer module for SilverStripe",
@@ -219,14 +220,7 @@
                 "documentation",
                 "silverstripe"
             ],
-            "support": {
-                "0": {
-                    "email": "will@fullscreen.io",
-                    "irc": "irc://irc.freenode.org/silverstripe"
-                },
-                "source": "https://github.com/camfindlay/silverstripe-docsviewer/tree/master"
-            },
-            "time": "2014-12-18 04:50:50"
+            "time": "2015-01-07 09:39:04"
         },
         {
             "name": "silverstripe/framework",
@@ -283,12 +277,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-globaltoolbar.git",
-                "reference": "c512db4919b91acfd146243cc9fab757391bf460"
+                "reference": "cd20eabf1537b99d52c7655ef2e7b7aa0d9af530"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-globaltoolbar/zipball/c512db4919b91acfd146243cc9fab757391bf460",
-                "reference": "c512db4919b91acfd146243cc9fab757391bf460",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-globaltoolbar/zipball/cd20eabf1537b99d52c7655ef2e7b7aa0d9af530",
+                "reference": "cd20eabf1537b99d52c7655ef2e7b7aa0d9af530",
                 "shasum": ""
             },
             "require": {
@@ -319,7 +313,7 @@
                 "source": "https://github.com/silverstripe/silverstripe-globaltoolbar/tree/master",
                 "issues": "https://github.com/silverstripe/silverstripe-globaltoolbar/issues"
             },
-            "time": "2014-12-16 02:50:17"
+            "time": "2015-01-03 17:43:43"
         },
         {
             "name": "unclecheese/display-logic",
@@ -748,12 +742,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "b9c19ce1bd9a51d3f42665973088f2e2b82db240"
+                "reference": "193d609c031e61eb2be7218e19de834e9957be04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/b9c19ce1bd9a51d3f42665973088f2e2b82db240",
-                "reference": "b9c19ce1bd9a51d3f42665973088f2e2b82db240",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/193d609c031e61eb2be7218e19de834e9957be04",
+                "reference": "193d609c031e61eb2be7218e19de834e9957be04",
                 "shasum": ""
             },
             "require": {
@@ -786,7 +780,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2014-12-09 17:32:32"
+            "time": "2015-01-05 15:02:28"
         }
     ],
     "aliases": [],

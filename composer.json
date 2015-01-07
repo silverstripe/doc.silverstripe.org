@@ -15,10 +15,6 @@
 	"repositories": [{
 		"type": "vcs",
 		"url": "git@github.com:silverstripe/silverstripe-globaltoolbar.git"
-	},
-	{
-		"type": "vcs",
-		"url": "git@github.com:camfindlay/silverstripe-docsviewer.git"
 	}],
 	"config": {
 		"process-timeout": 600
