@@ -1,24 +1,26 @@
 {
-    "name": "silverstripe/doc.silverstripe.org",
-    "description": "The source code behind doc.silverstripe.org",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/mandrew/silverstripe-globaltoolbar.git"
-        }
-    ],
-    "require": {
-        "php": ">=5.3.2",
-        "silverstripe/docsviewer": "dev-master",
-        "silverstripe/staticpublisher": "dev-master",
-        "silverstripe/framework": "3.1.*@stable",
-        "silverstripe/toolbar": "*"
-    },
-    "require-dev": {
-        "silverstripe/toolbar": "dev-search"
-    },
-    "config": {
-        "process-timeout": 600
-    },
-    "minimum-stability": "dev"
+	"name": "silverstripe/doc.silverstripe.org",
+	"description": "The source code behind doc.silverstripe.org",
+	"require": {
+		"ext-gd": "*",
+		"ext-mbstring": "*",
+		"silverstripe/docsviewer": "dev-master",
+		"silverstripe/framework": "3.1.*@stable",
+		"erusev/parsedown-extra": "0.2.2",
+		"silverstripe/toolbar": "*"
+	},
+	"require-dev": {
+		"phpunit/PHPUnit": "~3.7@stable"
+	},
+	"repositories": [{
+		"type": "vcs",
+		"url": "git@github.com:silverstripe/silverstripe-globaltoolbar.git"
+	}],
+	"config": {
+		"process-timeout": 600
+	},
+	"minimum-stability": "dev",
+	"scripts": {
+
+	}
 }
