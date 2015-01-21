@@ -53,7 +53,7 @@
 	RewriteRule ^(.*)/howto/navigation-menu$ /$1/developer_guides/templates/how_tos/navigation_menus [R=301,L]
 	RewriteRule ^(.*)/howto/pagination$ /$1/developer_guides/templates/how_tos/pagination [R=301,L]
 	RewriteRule ^(.*)/howto/simple-contact-form$ /$1/developer_guides/forms/how_tos/simple_contact_form [R=301,L]
-	RewriteRule ^(.*)/installation$ /$1/getting_started/installation [R=301,L]
+	RewriteRule ^([a-z]{2})/installation/?$ /$1/getting_started/installation [R=301,L]
 	RewriteRule ^(.*)/installation/common-problems$ /$1/getting_started/installation/common_problems [R=301,L]
 	RewriteRule ^(.*)/installation/composer$ /$1/getting_started/composer [R=301,L]
 	RewriteRule ^(.*)/installation/from-source$ /$1/getting_started/installation [R=301,L]
