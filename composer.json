@@ -7,15 +7,17 @@
 		"silverstripe/docsviewer": "dev-master",
 		"silverstripe/framework": "3.1.*@stable",
 		"erusev/parsedown-extra": "0.2.2",
-		"silverstripe/toolbar": "*"
+		"silverstripe/toolbar": "dev-master"
 	},
 	"require-dev": {
 		"phpunit/PHPUnit": "~3.7@stable"
 	},
-	"repositories": [{
-		"type": "vcs",
-		"url": "git@github.com:silverstripe/silverstripe-globaltoolbar.git"
-	}],
+	"repositories": [
+        {
+            "type": "vcs",
+            "url": "git://github.com/silverstripe/silverstripe-globaltoolbar.git"
+        }
+	],
 	"config": {
 		"process-timeout": 600
 	},
