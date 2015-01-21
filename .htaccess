@@ -18,7 +18,7 @@
 	RewriteRule ^sapphire/?(.*) http://doc.silverstripe.org/framework/$1 [R=301,L]
 	
 	#Rewrite framework to the new base url
-	RewriteCond %{REQUEST_URI} ^framework/en/
+	RewriteCond %{REQUEST_URI} ^/?framework/en/
 	RewriteRule ^framework/en/(.*)$ /en/$1 [R=301,NC,QSA,L]
 
 	# DokuWiki rewrite rules: Need to happen before other rules in order to redirect /doku.php?id=<pagename>
