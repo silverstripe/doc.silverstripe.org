@@ -83,7 +83,7 @@
 	RewriteRule ^(.*)/reference/configuration$ /$1/developer_guides/configuration [R=301,L]
 	RewriteRule ^(.*)/reference/controller$ /$1/developer_guides/controllers [R=301,L]
 	RewriteRule ^(.*)/reference/css$ /$1/developer_guides/templates [R=301,L]
-	RewriteRule ^(.*)/reference/data-types$ /$1/developer_guides/model/data_types_and_casting [R=301,L]
+	RewriteRule ^(.*)/topics/data-types$ /$1/developer_guides/model/data_types_and_casting [R=301,L]
 	RewriteRule ^(.*)/reference/database-structure$ /$1/developer_guides/model [R=301,L]
 	RewriteRule ^(.*)/reference/dataextension$ /$1/developer_guides/extending/extensions [R=301,L]
 	RewriteRule ^(.*)/reference/datamodel$ /$1/developer_guides/model [R=301,L]
