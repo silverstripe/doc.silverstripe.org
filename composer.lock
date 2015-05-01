@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0ff105a4a2c93f62269ee678a168d8a9",
+    "hash": "29d98754236ffc08ae881423ad77fefc",
     "packages": [
         {
             "name": "composer/installers",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "89d77bfbee79e16653f7162c86e602cc188471db"
+                "reference": "a66f93a541c2214b4865161426b077e2b7d951de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/89d77bfbee79e16653f7162c86e602cc188471db",
-                "reference": "89d77bfbee79e16653f7162c86e602cc188471db",
+                "url": "https://api.github.com/repos/composer/installers/zipball/a66f93a541c2214b4865161426b077e2b7d951de",
+                "reference": "a66f93a541c2214b4865161426b077e2b7d951de",
                 "shasum": ""
             },
             "replace": {
@@ -59,9 +59,11 @@
                 "Hurad",
                 "MODX Evo",
                 "OXID",
+                "SMF",
                 "Thelia",
                 "WolfCMS",
                 "agl",
+                "aimeos",
                 "annotatecms",
                 "bitrix",
                 "cakephp",
@@ -97,7 +99,7 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2014-11-29 01:29:17"
+            "time": "2015-04-21 19:54:55"
         },
         {
             "name": "erusev/parsedown",
@@ -188,15 +190,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "7b1a37f430cf36ff44542d2cff3f32d33033558f"
+                "reference": "3a239fcdfa7afb389f5304ac0e7b8cacc3afb642"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/7b1a37f430cf36ff44542d2cff3f32d33033558f",
-                "reference": "7b1a37f430cf36ff44542d2cff3f32d33033558f",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/3a239fcdfa7afb389f5304ac0e7b8cacc3afb642",
+                "reference": "3a239fcdfa7afb389f5304ac0e7b8cacc3afb642",
                 "shasum": ""
             },
             "require": {
+                "erusev/parsedown": "~1.1.0",
                 "erusev/parsedown-extra": "0.2.2",
                 "silverstripe/framework": "~3.1"
             },
@@ -220,20 +223,20 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2015-01-07 09:39:04"
+            "time": "2015-04-30 23:18:36"
         },
         {
             "name": "silverstripe/framework",
-            "version": "3.1.8",
+            "version": "3.1.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-framework.git",
-                "reference": "8b3695bd41e5fcd0fb2fe97811fcba4ed03ce214"
+                "reference": "ffcbeb581258764a01f498e3fb8fa6d9dccbc501"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/8b3695bd41e5fcd0fb2fe97811fcba4ed03ce214",
-                "reference": "8b3695bd41e5fcd0fb2fe97811fcba4ed03ce214",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/ffcbeb581258764a01f498e3fb8fa6d9dccbc501",
+                "reference": "ffcbeb581258764a01f498e3fb8fa6d9dccbc501",
                 "shasum": ""
             },
             "require": {
@@ -269,24 +272,24 @@
                 "framework",
                 "silverstripe"
             ],
-            "time": "2014-11-18 05:30:19"
+            "time": "2015-03-20 06:29:20"
         },
         {
             "name": "silverstripe/toolbar",
-            "version": "dev-master",
+            "version": "2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-globaltoolbar.git",
-                "reference": "ebb6ac79792534577d975ee335782593c11e2d12"
+                "reference": "cd20eabf1537b99d52c7655ef2e7b7aa0d9af530"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-globaltoolbar/zipball/ebb6ac79792534577d975ee335782593c11e2d12",
-                "reference": "ebb6ac79792534577d975ee335782593c11e2d12",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-globaltoolbar/zipball/cd20eabf1537b99d52c7655ef2e7b7aa0d9af530",
+                "reference": "cd20eabf1537b99d52c7655ef2e7b7aa0d9af530",
                 "shasum": ""
             },
             "require": {
-                "unclecheese/display-logic": "1.1.*"
+                "unclecheese/display-logic": "1.0.*"
             },
             "type": "silverstripe-module",
             "license": [
@@ -310,23 +313,23 @@
                 "silverstripe"
             ],
             "support": {
-                "source": "https://github.com/silverstripe/silverstripe-globaltoolbar/tree/master",
+                "source": "https://github.com/silverstripe/silverstripe-globaltoolbar/tree/2.0.6",
                 "issues": "https://github.com/silverstripe/silverstripe-globaltoolbar/issues"
             },
-            "time": "2015-01-14 01:48:59"
+            "time": "2015-01-03 17:43:43"
         },
         {
             "name": "unclecheese/display-logic",
-            "version": "1.1.0",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unclecheese/silverstripe-display-logic.git",
-                "reference": "ddbaa4d74901eca83a91ab5c091d78b9167ec3d9"
+                "reference": "df95d85a0886009ce5ccae2993bbb1d0d04bc182"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unclecheese/silverstripe-display-logic/zipball/ddbaa4d74901eca83a91ab5c091d78b9167ec3d9",
-                "reference": "ddbaa4d74901eca83a91ab5c091d78b9167ec3d9",
+                "url": "https://api.github.com/repos/unclecheese/silverstripe-display-logic/zipball/df95d85a0886009ce5ccae2993bbb1d0d04bc182",
+                "reference": "df95d85a0886009ce5ccae2993bbb1d0d04bc182",
                 "shasum": ""
             },
             "require": {
@@ -357,7 +360,7 @@
                 "logic",
                 "silverstripe"
             ],
-            "time": "2014-12-23 08:50:28"
+            "time": "2014-12-07 23:30:55"
         }
     ],
     "packages-dev": [
@@ -424,31 +427,33 @@
         },
         {
             "name": "phpunit/php-file-iterator",
-            "version": "1.3.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
-                "reference": "acd690379117b042d1c8af1fafd61bde001bf6bb"
+                "reference": "a923bb15680d0089e2316f7a4af8f437046e96bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/acd690379117b042d1c8af1fafd61bde001bf6bb",
-                "reference": "acd690379117b042d1c8af1fafd61bde001bf6bb",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/a923bb15680d0089e2316f7a4af8f437046e96bb",
+                "reference": "a923bb15680d0089e2316f7a4af8f437046e96bb",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
             "autoload": {
                 "classmap": [
-                    "File/"
+                    "src/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "include-path": [
-                ""
-            ],
             "license": [
                 "BSD-3-Clause"
             ],
@@ -465,7 +470,7 @@
                 "filesystem",
                 "iterator"
             ],
-            "time": "2013-10-10 15:34:57"
+            "time": "2015-04-02 05:19:05"
         },
         {
             "name": "phpunit/php-text-template",
@@ -737,30 +742,32 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "2.7.x-dev",
-            "target-dir": "Symfony/Component/Yaml",
+            "version": "2.8.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "193d609c031e61eb2be7218e19de834e9957be04"
+                "reference": "4ededb1d00dc2c65fcd16ae3dafc785f92b3f95f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/193d609c031e61eb2be7218e19de834e9957be04",
-                "reference": "193d609c031e61eb2be7218e19de834e9957be04",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/4ededb1d00dc2c65fcd16ae3dafc785f92b3f95f",
+                "reference": "4ededb1d00dc2c65fcd16ae3dafc785f92b3f95f",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7|~3.0.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
+                "psr-4": {
                     "Symfony\\Component\\Yaml\\": ""
                 }
             },
@@ -780,7 +787,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-05 15:02:28"
+            "time": "2015-04-24 07:03:44"
         }
     ],
     "aliases": [],
@@ -788,7 +795,6 @@
     "stability-flags": {
         "silverstripe/docsviewer": 20,
         "silverstripe/framework": 0,
-        "silverstripe/toolbar": 20,
         "phpunit/phpunit": 0
     },
     "prefer-stable": false,
