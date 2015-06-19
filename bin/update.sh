@@ -1,3 +1,12 @@
+#!/bin/bash
+
+dir=$1
+
+if [ ! "$dir" ]; then
+  echo "Usage: $0 /base/folder/to/docs"
+  exit 1
+fi
+
 #=== FUNCTION ================================================================
 # NAME: 		checkout
 # DESCRIPTION:	Checks out a specific branch of a module into a folder. Not
@@ -12,44 +21,29 @@
 #
 #===============================================================================
 # Parameters: github path
-dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-dir="$(dirname "${dir}" )"
-
 function checkout {
-	if [ ! -d $dir/src/$2 ]; then
-		echo "Cloning $1 "
+	# Create dirs
+	if [ ! -d $dir/src ]; then
 		mkdir $dir/src
-		cd $dir/src
-		git clone --depth=100 -q git://github.com/$1 $2 --quiet
-		cd $2
-		git checkout -q origin/master
-	else
-		cd $dir/src/$2
-		git pull -q origin master
-		git checkout -q origin/master 
 	fi
 
-	if [ $# == 3 ]; then
-		echo "Checking out $2 from $1 into $2_$3"
-
-		if [ -d $dir/src/$2_$3 ]; then
-			cd $dir/src/$2_$3
-		else
-			cp -R $dir/src/$2 $dir/src/$2_$3
-			cd $dir/src/$2_$3
-		fi
-
-		git reset --hard -q
-		git checkout $3 -q
-		git pull -q
+	if [ ! -d $dir/src/$2_$3 ]; then
+		echo "Cloning $1 branch $3"
+		cd $dir/src
+		git clone -b $3 --depth=100 git://github.com/$1 $dir/src/$2_$3 --quiet
 	else
-		echo "Checking out $2 from $1 into $2"
+		echo "Updating $2 from branch $3"
+		cd $dir/src/$2_$3
+		git reset --hard -q
+		git fetch origin -q
+		git pull -q origin $3
 	fi
 }
 
 # core
 checkout 'silverstripe/silverstripe-framework.git' 'framework' 'master'
 checkout 'silverstripe/silverstripe-framework.git' 'framework' '3'
+checkout 'silverstripe/silverstripe-framework.git' 'framework' '3.2'
 checkout 'silverstripe/silverstripe-framework.git' 'framework' '3.1'
 checkout 'silverstripe/silverstripe-framework.git' 'framework' '3.0' 
 checkout 'silverstripe/silverstripe-framework.git' 'framework' '2.4'

@@ -28,11 +28,7 @@ MySQLDatabase::set_connection_charset('utf8');
 
 SSViewer::set_theme('docs');
 
-if(Director::isDev() && @$_GET['db'] == "sqlite3") {
-	global $databaseConfig;
-	$databaseConfig['type'] = 'SQLite3Database';
-}
-
+Config::inst()->update('DocumentationManifest', 'automatic_registration', false);
 Config::inst()->update('DocumentationViewer', 'link_base', '');
 Config::inst()->update('DocumentationViewer', 'check_permission', false);
 
@@ -64,5 +60,10 @@ if(file_exists(BASE_PATH . '/.lucene-index')) {
 	Config::inst()->update('DocumentationSearch', 'index_location', BASE_PATH . '/.lucene-index');
 }
 
-
+// Fix invalid character in iconv
+// see http://stackoverflow.com/questions/4723135/invalid-characters-for-lucene-text-search
+Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('utf-8');
+Zend_Search_Lucene_Analysis_Analyzer::setDefault(
+    new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive ()
+);
 
