@@ -3,7 +3,7 @@ After:
   - toolbar/*
 ---
 GlobalNav:
-  hostname: 'http://www.silverstripe.org/'
+  hostname: 'https://www.silverstripe.org/'
   css_path: '/themes/ssv3/css/toolbar.css'
   use_localhost: false
 GlobalNavTemplateProvider:
