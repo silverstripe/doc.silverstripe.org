@@ -3,8 +3,9 @@ After:
   - toolbar/*
 ---
 GlobalNav:
-  hostname: 'http://www.silverstripe.org/'
+  hostname: '//www.silverstripe.org/'
   css_path: '/themes/ssv3/css/toolbar.css'
+  snippet_path: '/assets/global-nav.html'
   use_localhost: false
 GlobalNavTemplateProvider:
   connection_timeout: 2000
