@@ -5,11 +5,11 @@ After:
 GlobalNav:
   hostname: '//www.silverstripe.org/'
   css_path: '/themes/ssv3/css/toolbar.css'
-  snippet_path: '/assets/global-nav.html'
+  snippet_path: '/assets'
   use_localhost: false
 GlobalNavTemplateProvider:
   connection_timeout: 2000
-  transfer_timeout: 6000  
+  transfer_timeout: 6000
 SiteController:
   extensions:
     - GlobalNavExtension
