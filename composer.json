@@ -6,7 +6,7 @@
 		"ext-mbstring": "*",
 		"silverstripe/docsviewer": "1.0.1@stable",
 		"silverstripe/framework": "3.1.*@stable",
-		"silverstripe/toolbar": "dev-master"
+		"silverstripe/toolbar": "3.0.*@stable"
 	},
 	"require-dev": {
 		"phpunit/PHPUnit": "~3.7@stable"

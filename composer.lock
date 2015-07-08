@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "57dc658522e7400069270f840ff6377d",
+    "hash": "2ab3b01a5dd130a4a16bded53ab63508",
     "packages": [
         {
             "name": "composer/installers",
@@ -276,16 +276,16 @@
         },
         {
             "name": "silverstripe/toolbar",
-            "version": "dev-master",
+            "version": "3.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-globaltoolbar.git",
-                "reference": "c349b4f0126cb5945d1051588abac67803d3e186"
+                "reference": "aad67d0ebd2c1d469f732934f249836f636549fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-globaltoolbar/zipball/c349b4f0126cb5945d1051588abac67803d3e186",
-                "reference": "c349b4f0126cb5945d1051588abac67803d3e186",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-globaltoolbar/zipball/aad67d0ebd2c1d469f732934f249836f636549fd",
+                "reference": "aad67d0ebd2c1d469f732934f249836f636549fd",
                 "shasum": ""
             },
             "require": {
@@ -313,10 +313,10 @@
                 "silverstripe"
             ],
             "support": {
-                "source": "https://github.com/silverstripe/silverstripe-globaltoolbar/tree/master",
+                "source": "https://github.com/silverstripe/silverstripe-globaltoolbar/tree/3.0.5",
                 "issues": "https://github.com/silverstripe/silverstripe-globaltoolbar/issues"
             },
-            "time": "2015-07-07 02:01:10"
+            "time": "2015-07-08 02:55:08"
         },
         {
             "name": "unclecheese/display-logic",
@@ -789,7 +789,7 @@
     "stability-flags": {
         "silverstripe/docsviewer": 0,
         "silverstripe/framework": 0,
-        "silverstripe/toolbar": 20,
+        "silverstripe/toolbar": 0,
         "phpunit/phpunit": 0
     },
     "prefer-stable": false,
