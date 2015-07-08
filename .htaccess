@@ -37,6 +37,8 @@
 	RewriteRule ^(.*)/topics/testing/create-silverstripe-test$ /$1/topics/testing/creating-a-silverstripe-test [R=301,L]
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/topics/testing/create-functional-test$ /$1/topics/testing/creating-a-functional-test [R=301,L]
+	
+        RewriteRule ^changelog/?$ /en/changelogs [R=301,L] 
 
 	RewriteRule ^(.*)/howto$ /$1/developer_guides [R=301,L]
 	RewriteRule ^(.*)/howto/cache-control$ /$1/developer_guides/performance/caching [R=301,L]
@@ -54,10 +56,11 @@
 	RewriteRule ^(.*)/howto/pagination$ /$1/developer_guides/templates/how_tos/pagination [R=301,L]
 	RewriteRule ^(.*)/howto/simple-contact-form$ /$1/developer_guides/forms/how_tos/simple_contact_form [R=301,L]
 	
-	RewriteRule ^([a-z]{2})/installation/?$ /$1/getting_started/installation [R=301,L]
+	RewriteRule ^(.*)/installation/?$ /$1/getting_started/installation [R=301,L]
 	RewriteRule ^(.*)/installation/common-problems$ /$1/getting_started/installation/common_problems [R=301,L]
 	RewriteRule ^(.*)/installation/composer$ /$1/getting_started/composer [R=301,L]
 	RewriteRule ^(.*)/installation/from-source$ /$1/getting_started/installation [R=301,L]
+	RewriteRule ^installation-into-subversion/?$ /getting_started/composer/ [R=301,L]
 	RewriteRule ^(.*)/installation/lighttpd$ /$1/getting_started/installation/how_to/configure_lighttpd [R=301,L]
 	RewriteRule ^(.*)/installation/mac-osx$ /$1/getting_started/installation/mac_osx [R=301,L]
 	RewriteRule ^(.*)/installation/nginx$ /$1/getting_started/installation/how_to/configure_nginx [R=301,L]
@@ -119,6 +122,7 @@
 	RewriteRule ^(.*)/topics/authentication$ /$1/developer_guides/security/authentication [R=301,L]
 	RewriteRule ^(.*)/topics/caching$ /$1/developer_guides/performance/caching [R=301,L]
 	RewriteRule ^(.*)/topics/commandline$ /$1/developer_guides/cli [R=301,L]
+	RewriteRule ^(.*)/topics/datamodel/?$ /$1/developer_guides/model/data_model_and_orm  [R=301,L]
 	RewriteRule ^(.*)/topics/directory-structure$ /$1/getting_started/directory_structure [R=301,L]
 	RewriteRule ^(.*)/topics/environment-management$ /$1/getting_started/environment_management [R=301,L]
 	RewriteRule ^(.*)/topics/files$ /$1/developer_guides/files [R=301,L]
