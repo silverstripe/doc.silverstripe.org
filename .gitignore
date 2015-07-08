@@ -1,6 +1,5 @@
 /src/
 .DS_Store
-.idea/
 /silverstripe-cache
 /assets
 /vendor/
