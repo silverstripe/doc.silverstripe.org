@@ -60,7 +60,7 @@
 	RewriteRule ^(.*)/installation/common-problems$ /$1/getting_started/installation/common_problems [R=301,L]
 	RewriteRule ^(.*)/installation/composer$ /$1/getting_started/composer [R=301,L]
 	RewriteRule ^(.*)/installation/from-source$ /$1/getting_started/installation [R=301,L]
-	RewriteRule ^/installation-into-subversion/?$ /getting_started/composer/  [R=301,L]
+	RewriteRule ^installation-into-subversion/?$ /getting_started/composer/ [R=301,L]
 	RewriteRule ^(.*)/installation/lighttpd$ /$1/getting_started/installation/how_to/configure_lighttpd [R=301,L]
 	RewriteRule ^(.*)/installation/mac-osx$ /$1/getting_started/installation/mac_osx [R=301,L]
 	RewriteRule ^(.*)/installation/nginx$ /$1/getting_started/installation/how_to/configure_nginx [R=301,L]
