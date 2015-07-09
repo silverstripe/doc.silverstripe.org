@@ -38,7 +38,7 @@
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/topics/testing/create-functional-test$ /$1/topics/testing/creating-a-functional-test [R=301,L]
 	
-        RewriteRule ^changelog/?$ /changelogs [R=301,L] 
+        RewriteRule ^changelog/?$ /en/changelogs [R=301,L] 
 
 	RewriteRule ^(.*)/howto$ /$1/developer_guides [R=301,L]
 	RewriteRule ^(.*)/howto/cache-control$ /$1/developer_guides/performance/caching [R=301,L]
