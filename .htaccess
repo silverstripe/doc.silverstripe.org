@@ -38,7 +38,13 @@
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/topics/testing/create-functional-test$ /$1/topics/testing/creating-a-functional-test [R=301,L]
 
-	RewriteRule ^(.*)/changelog/?$ /$1//en/changelogs [R=301,L]
+	RewriteRule ^(.*)/authenticator/?$ /$1/en/developer_guides/security/authentication [R=301,L]
+
+	RewriteRule ^(.*)/changelog/?$ /$1/en/changelogs [R=301,L]
+
+	RewriteRule ^(.*)/datefield/?$ /$1/en/developer_guides/forms/field_types/datefield [R=301,L]
+	RewriteRule ^docs.silverstripe.org/modules:mssql/?$ addons.silverstripe.org/add-ons/silverstripe/mssql [R=301,L]
+	RewriteRule ^docs.silverstripe.org/modules:rssaggregator/?$ addons.silverstripe.org/add-ons/silverstripe/versionfeed [R=301,L]
 
 	RewriteRule ^(.*)/howto$ /$1/developer_guides [R=301,L]
 	RewriteRule ^(.*)/howto/cache-control$ /$1/developer_guides/performance/caching [R=301,L]
@@ -74,6 +80,8 @@
 	RewriteRule ^(.*)/installation/windows-pi$ /$1/getting_started/installation/other_installation_options/windows_platform_installer [R=301,L]
 	RewriteRule ^(.*)/installation/windows-wamp$ /$1/getting_started/installation/windows [R=301,L]
 	
+	RewriteRule ^(.*)/member/?$ /$1/en/developer_guides/security/member [R=301,L]
+	RewriteRule ^(.*)/memberauthenticator/?$ /$1/en/developer_guides/security/authentication [R=301,L]
 	RewriteRule ^(.*)/misc/coding-conventions$ /$1/getting_started/coding_conventions [R=301,L]
 	RewriteRule ^(.*)/misc/contributing$ /$1/contributing [R=301,L]
 	RewriteRule ^(.*)/misc/contributing/code$ /$1/contributing/code [R=301,L]
@@ -83,6 +91,7 @@
 	RewriteRule ^(.*)/misc/contributing/translation-process$ /$1/contributing/translation-process [R=301,L]
 	RewriteRule ^(.*)/misc/release-process$ /$1/contributing/release_process [R=301,L]
 	
+	RewriteRule ^(.*)/recipes:combining_files/?$ /$1/developer_guides/templates/requirements [R=301,L]
 	RewriteRule ^(.*)/reference$ /$1/developer_guides [R=301,L]
 	RewriteRule ^(.*)/reference/aspects$ /$1/developer_guides/extending/aspects [R=301,L]
 	RewriteRule ^(.*)/reference/cms-architecture$ /$1/developer_guides/customising_the_admin_interface/cms_architecture [R=301,L]
@@ -117,6 +126,7 @@
 	RewriteRule ^(.*)/reference/uploadfield$ /$1/developer_guides/forms/fields [R=301,L]
 	RewriteRule ^(.*)/reference/urlvariabletools$ /$1/developer_guides/debugging/url_variable_tools [R=301,L]
 	
+	RewriteRule ^(.*)/treedropdownfield/?$ /$1/en/developer_guides/forms/field_types/common_subclasses [R=301,L]
 	RewriteRule ^(.*)/topics$ /$1/developer_guides [R=301,L]
 	RewriteRule ^(.*)/topics/access-control$ /$1/developer_guides/security/access_control [R=301,L]
 	RewriteRule ^(.*)/topics/authentication$ /$1/developer_guides/security/authentication [R=301,L]
@@ -149,11 +159,11 @@
 	RewriteRule ^(.*)/topics/error-handling$ /$1/developer_guides/debugging/error_handling [R=301,L]
 	RewriteRule ^(.*)/topics/forms$ /$1/developer_guides/forms [R=301,L]
 
-	RewriteRule ^(.*)/tutorials/1-building-a-basic-site$ /$1/tutorials/building_a_basic_site [R=301,L]
-	RewriteRule ^(.*)/tutorials/2-extending-a-basic-site$ /$1/tutorials/extending_a_basic_site [R=301,L]
-	RewriteRule ^(.*)/tutorials/3-forms$ /$1/tutorials/forms [R=301,L]
-	RewriteRule ^(.*)/tutorials/4-site-search$ /$1/tutorials/site_search [R=301,L]
-	RewriteRule ^(.*)/tutorials/5-dataobject-relationship-management$ /$1/tutorials/dataobject_relationship_management [R=301,L]
+	RewriteRule ^(.*)/tutorials/1-building-a-basic-site/?$ /$1/tutorials/building_a_basic_site [R=301,L]
+	RewriteRule ^(.*)/tutorials/2-extending-a-basic-site/?$ /$1/tutorials/extending_a_basic_site [R=301,L]
+	RewriteRule ^(.*)/tutorials/3-forms/?$ /$1/tutorials/forms [R=301,L]
+	RewriteRule ^(.*)/tutorials/4-site-search/?$ /$1/tutorials/site_search [R=301,L]
+	RewriteRule ^(.*)/tutorials/5-dataobject-relationship-management/?$ /$1/tutorials/dataobject_relationship_management [R=301,L]
 
 	# Legacy rewrite: Can't use 'master' as it confuses api.ss.org linking
 	RewriteRule ^framework/en/master(.*) http://doc.silverstripe.org/framework/en/trunk$1 [R=301,L]
