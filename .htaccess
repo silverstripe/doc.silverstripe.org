@@ -13,157 +13,222 @@
 	RewriteEngine On
 
 	# Legacy rewrite from sapphire/ to framework/ namespace
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_URI} !^framework/main\.php
-	RewriteRule ^sapphire/?(.*) http://doc.silverstripe.org/framework/$1 [R=301,L]
+	# RewriteCond %{REQUEST_FILENAME} !-f
+	# RewriteCond %{REQUEST_URI} !^framework/main\.php
+	# RewriteRule ^sapphire/?(.*) http://doc.silverstripe.org/framework/$1 [R=301,L]
 	
 	#Rewrite framework to the new base url
-	RewriteCond %{REQUEST_URI} ^/?framework/en/
-	RewriteRule ^framework/en/(.*)$ /en/$1 [R=301,NC,QSA,L]
+	# RewriteCond %{REQUEST_URI} ^/?framework/en/
+	# RewriteRule ^framework/en/(.*)$ /en/$1 [R=301,NC,QSA,L]
 
 	# DokuWiki rewrite rules: Need to happen before other rules in order to redirect /doku.php?id=<pagename>
 	# to /pagename, which can then be matched by the legacy rewrite rules further down
-	RewriteCond %{QUERY_STRING}          ^(\bid\b=([^&]*)&?(.*)?)
-	RewriteRule ^doku.php$                http://doc.silverstripe.org/%2?%3 [R=301,L]
+	# RewriteCond %{QUERY_STRING}          ^(\bid\b=([^&]*)&?(.*)?)
+	# RewriteRule ^doku.php$                http://doc.silverstripe.org/%2?%3 [R=301,L]
 
 	# Redirect legacy URLs (assumes we're not redirecting other assets, for performance reasons)
 	# Note: Just works on top-level domains, not if the webroot is in a subfolder
-	RewriteCond %{REQUEST_URI} ^(.*)$
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt)$
-	#RewriteRule ^execution-pipeline$ http://doc.silverstripe.org/framework/en/reference/ [R=301,L]
+	# RewriteCond %{REQUEST_URI} ^(.*)$
+	# RewriteCond %{REQUEST_FILENAME} !-f
+	# RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt)$
+	# #RewriteRule ^execution-pipeline$ http://doc.silverstripe.org/framework/en/reference/ [R=301,L]
 
-	RewriteCond %{REQUEST_URI} !(3.0|2.4)
-	RewriteRule ^(.*)/topics/testing/create-silverstripe-test$ /$1/topics/testing/creating-a-silverstripe-test [R=301,L]
-	RewriteCond %{REQUEST_URI} !(3.0|2.4)
-	RewriteRule ^(.*)/topics/testing/create-functional-test$ /$1/topics/testing/creating-a-functional-test [R=301,L]
+	# RewriteCond %{REQUEST_URI} !(3.0|2.4)
+	# RewriteRule ^(.*)/topics/testing/create-silverstripe-test$ /$1/topics/testing/creating-a-silverstripe-test [R=301,L]
+	# RewriteCond %{REQUEST_URI} !(3.0|2.4)
+	# RewriteRule ^(.*)/topics/testing/create-functional-test$ /$1/topics/testing/creating-a-functional-test [R=301,L]
 
-	RewriteRule ^(.*)/howto$ /$1/developer_guides [R=301,L]
-	RewriteRule ^(.*)/howto/cache-control$ /$1/developer_guides/performance/caching [R=301,L]
-	RewriteRule ^(.*)/howto/cms-alternating-button$ /$1/developer_guides/customising_the_admin_interface/how_tos/cms_alternating_button [R=301,L]
-	RewriteRule ^(.*)/howto/cms-formfield-help-text$ /$1/developer_guides/customising_the_admin_interface/how_tos/cms_formfield_help_text [R=301,L]
-	RewriteRule ^(.*)/howto/csv-import$ /$1/developer_guides/integration/csv_import [R=301,L]
-	RewriteRule ^(.*)/howto/customize-cms-menu$ /$1/developer_guides/customising_the_admin_interface/how_tos/customise_cms_menu [R=301,L]
-	RewriteRule ^(.*)/howto/customize-cms-pages-list$ /$1/developer_guides/customising_the_admin_interface/how_tos/customise_cms_pages_list [R=301,L]
-	RewriteRule ^(.*)/howto/customize-cms-tree$ /$1/developer_guides/customising_the_admin_interface/how_tos/customise_cms_tree [R=301,L]
-	RewriteRule ^(.*)/howto/dynamic-default-fields$ /$1/developer_guides/model/how_tos/dynamic_default_fields [R=301,L]
-	RewriteRule ^(.*)/howto/extend-cms-interface$ /$1/developer_guides/customising_the_admin_interface/how_tos/extend_cms_interface [R=301,L]
-	RewriteRule ^(.*)/howto/gridfield-rowaction$ /$1/developer_guides/forms/how_tos/create_a_gridfield_actionprovider [R=301,L]
-	RewriteRule ^(.*)/howto/grouping-dataobjectsets$ /$1/developer_guides/model/how_tos/grouping_dataobject_sets [R=301,L]
-	RewriteRule ^(.*)/howto/navigation-menu$ /$1/developer_guides/templates/how_tos/navigation_menus [R=301,L]
-	RewriteRule ^(.*)/howto/pagination$ /$1/developer_guides/templates/how_tos/pagination [R=301,L]
-	RewriteRule ^(.*)/howto/simple-contact-form$ /$1/developer_guides/forms/how_tos/simple_contact_form [R=301,L]
+	# RewriteRule ^(.*)/howto$ /$1/developer_guides [R=301,L]
+	# RewriteRule ^(.*)/howto/cache-control$ /$1/developer_guides/performance/caching [R=301,L]
+	# RewriteRule ^(.*)/howto/cms-alternating-button$ /$1/developer_guides/customising_the_admin_interface/how_tos/cms_alternating_button [R=301,L]
+	# RewriteRule ^(.*)/howto/cms-formfield-help-text$ /$1/developer_guides/customising_the_admin_interface/how_tos/cms_formfield_help_text [R=301,L]
+	# RewriteRule ^(.*)/howto/csv-import$ /$1/developer_guides/integration/csv_import [R=301,L]
+	# RewriteRule ^(.*)/howto/customize-cms-menu$ /$1/developer_guides/customising_the_admin_interface/how_tos/customise_cms_menu [R=301,L]
+	# RewriteRule ^(.*)/howto/customize-cms-pages-list$ /$1/developer_guides/customising_the_admin_interface/how_tos/customise_cms_pages_list [R=301,L]
+	# RewriteRule ^(.*)/howto/customize-cms-tree$ /$1/developer_guides/customising_the_admin_interface/how_tos/customise_cms_tree [R=301,L]
+	# RewriteRule ^(.*)/howto/dynamic-default-fields$ /$1/developer_guides/model/how_tos/dynamic_default_fields [R=301,L]
+	# RewriteRule ^(.*)/howto/extend-cms-interface$ /$1/developer_guides/customising_the_admin_interface/how_tos/extend_cms_interface [R=301,L]
+	# RewriteRule ^(.*)/howto/gridfield-rowaction$ /$1/developer_guides/forms/how_tos/create_a_gridfield_actionprovider [R=301,L]
+	# RewriteRule ^(.*)/howto/grouping-dataobjectsets$ /$1/developer_guides/model/how_tos/grouping_dataobject_sets [R=301,L]
+	# RewriteRule ^(.*)/howto/navigation-menu$ /$1/developer_guides/templates/how_tos/navigation_menus [R=301,L]
+	# RewriteRule ^(.*)/howto/pagination$ /$1/developer_guides/templates/how_tos/pagination [R=301,L]
+	# RewriteRule ^(.*)/howto/simple-contact-form$ /$1/developer_guides/forms/how_tos/simple_contact_form [R=301,L]
 	
-	RewriteRule ^([a-z]{2})/installation/?$ /$1/getting_started/installation [R=301,L]
-	RewriteRule ^(.*)/installation/common-problems$ /$1/getting_started/installation/common_problems [R=301,L]
-	RewriteRule ^(.*)/installation/composer$ /$1/getting_started/composer [R=301,L]
-	RewriteRule ^(.*)/installation/from-source$ /$1/getting_started/installation [R=301,L]
-	RewriteRule ^(.*)/installation/lighttpd$ /$1/getting_started/installation/how_to/configure_lighttpd [R=301,L]
-	RewriteRule ^(.*)/installation/mac-osx$ /$1/getting_started/installation/mac_osx [R=301,L]
-	RewriteRule ^(.*)/installation/nginx$ /$1/getting_started/installation/how_to/configure_nginx [R=301,L]
-	RewriteRule ^(.*)/installation/nginx-hhvm$ /$1/getting_started/installation/how_to/setup_nginx_and_hhvm [R=301,L]
-	RewriteRule ^(.*)/installation/server-requirements$ /$1/getting_started/server_requirements [R=301,L]
-	RewriteRule ^(.*)/installation/upgrading$ /$1/upgrading [R=301,L]
-	RewriteRule ^(.*)/installation/webserver$ /$1/getting_started/installation [R=301,L]
-	RewriteRule ^(.*)/installation/windows-manual-iis$ /$1/getting_started/installation/windows [R=301,L]
-	RewriteRule ^(.*)/installation/windows-manual-iis-6$ /$1/getting_started/installation/other_installation_options/windows_iis6 [R=301,L]
-	RewriteRule ^(.*)/installation/windows-manual-iis-7$ /$1/getting_started/installation/other_installation_options/windows_iis7 [R=301,L]
-	RewriteRule ^(.*)/installation/windows-pi$ /$1/getting_started/installation/other_installation_options/windows_platform_installer [R=301,L]
-	RewriteRule ^(.*)/installation/windows-wamp$ /$1/getting_started/installation/windows [R=301,L]
+	# RewriteRule ^([a-z]{2})/installation/?$ /$1/getting_started/installation [R=301,L]
+	# RewriteRule ^(.*)/installation/common-problems$ /$1/getting_started/installation/common_problems [R=301,L]
+	# RewriteRule ^(.*)/installation/composer$ /$1/getting_started/composer [R=301,L]
+	# RewriteRule ^(.*)/installation/from-source$ /$1/getting_started/installation [R=301,L]
+	# RewriteRule ^(.*)/installation/lighttpd$ /$1/getting_started/installation/how_to/configure_lighttpd [R=301,L]
+	# RewriteRule ^(.*)/installation/mac-osx$ /$1/getting_started/installation/mac_osx [R=301,L]
+	# RewriteRule ^(.*)/installation/nginx$ /$1/getting_started/installation/how_to/configure_nginx [R=301,L]
+	# RewriteRule ^(.*)/installation/nginx-hhvm$ /$1/getting_started/installation/how_to/setup_nginx_and_hhvm [R=301,L]
+	# RewriteRule ^(.*)/installation/server-requirements$ /$1/getting_started/server_requirements [R=301,L]
+	# RewriteRule ^(.*)/installation/upgrading$ /$1/upgrading [R=301,L]
+	# RewriteRule ^(.*)/installation/webserver$ /$1/getting_started/installation [R=301,L]
+	# RewriteRule ^(.*)/installation/windows-manual-iis$ /$1/getting_started/installation/windows [R=301,L]
+	# RewriteRule ^(.*)/installation/windows-manual-iis-6$ /$1/getting_started/installation/other_installation_options/windows_iis6 [R=301,L]
+	# RewriteRule ^(.*)/installation/windows-manual-iis-7$ /$1/getting_started/installation/other_installation_options/windows_iis7 [R=301,L]
+	# RewriteRule ^(.*)/installation/windows-pi$ /$1/getting_started/installation/other_installation_options/windows_platform_installer [R=301,L]
+	# RewriteRule ^(.*)/installation/windows-wamp$ /$1/getting_started/installation/windows [R=301,L]
 	
-	RewriteRule ^(.*)/misc/coding-conventions$ /$1/getting_started/coding_conventions [R=301,L]
-	RewriteRule ^(.*)/misc/contributing$ /$1/contributing [R=301,L]
-	RewriteRule ^(.*)/misc/contributing/code$ /$1/contributing/code [R=301,L]
-	RewriteRule ^(.*)/misc/contributing/documentation$ /$1/contributing/documentation [R=301,L]
-	RewriteRule ^(.*)/misc/contributing/issues$ /$1/contributing/issues_and_bugs [R=301,L]
-	RewriteRule ^(.*)/misc/contributing/translation$ /$1/contributing/translations [R=301,L]
-	RewriteRule ^(.*)/misc/contributing/translation-process$ /$1/contributing/translation-process [R=301,L]
-	RewriteRule ^(.*)/misc/release-process$ /$1/contributing/release_process [R=301,L]
+	# RewriteRule ^(.*)/misc/coding-conventions$ /$1/getting_started/coding_conventions [R=301,L]
+	# RewriteRule ^(.*)/misc/contributing$ /$1/contributing [R=301,L]
+	# RewriteRule ^(.*)/misc/contributing/code$ /$1/contributing/code [R=301,L]
+	# RewriteRule ^(.*)/misc/contributing/documentation$ /$1/contributing/documentation [R=301,L]
+	# RewriteRule ^(.*)/misc/contributing/issues$ /$1/contributing/issues_and_bugs [R=301,L]
+	# RewriteRule ^(.*)/misc/contributing/translation$ /$1/contributing/translations [R=301,L]
+	# RewriteRule ^(.*)/misc/contributing/translation-process$ /$1/contributing/translation-process [R=301,L]
+	# RewriteRule ^(.*)/misc/release-process$ /$1/contributing/release_process [R=301,L]
 	
-	RewriteRule ^(.*)/reference$ /$1/developer_guides [R=301,L]
-	RewriteRule ^(.*)/reference/aspects$ /$1/developer_guides/extending/aspects [R=301,L]
-	RewriteRule ^(.*)/reference/cms-architecture$ /$1/developer_guides/customising_the_admin_interface/cms_architecture [R=301,L]
-	RewriteRule ^(.*)/reference/grid-field$ /$1/developer_guides/forms/field_types/gridfield [R=301,L]
-	RewriteRule ^(.*)/reference/database-structure$ /$1/developer_guides/model [R=301,L]
-	RewriteRule ^(.*)/reference/dataextension$ /$1/developer_guides/extending/extensions [R=301,L]
-	RewriteRule ^(.*)/reference/dataobject$ /$1/developer_guides/model [R=301,L]
-	RewriteRule ^(.*)/reference/datefield$ /$1/developer_guides/forms/fields/datefield [R=301,L]
-	RewriteRule ^(.*)/reference/director$ /$1/developer_guides/execution_pipeline/director [R=301,L]
-	RewriteRule ^(.*)/reference/execution-pipeline$ /$1/developer_guides/execution_pipeline [R=301,L]
-	RewriteRule ^(.*)/reference/flushable$ /$1/developer_guides/execution_pipeline/flushable [R=301,L]
-	RewriteRule ^(.*)/reference/form-field-types$ /$1/developer_guides/forms/fields/common_subclasses [R=301,L]
-	RewriteRule ^(.*)/reference/image$ /$1/developer_guides/files/image [R=301,L]
-	RewriteRule ^(.*)/reference/injector$ /$1/developer_guides/extending/injector [R=301,L]
-	RewriteRule ^(.*)/reference/layout$ /$1/developer_guides/customising_the_admin_interface/cms_layout [R=301,L]
-	RewriteRule ^(.*)/reference/member$ /$1/developer_guides/security/member [R=301,L]
-	RewriteRule ^(.*)/reference/modeladmin$ /$1/developer_guides/customising_the_admin_interface/modeladmin [R=301,L]
-	RewriteRule ^(.*)/reference/partial-caching$ /$1/developer_guides/performance/partial_caching [R=301,L]
-	RewriteRule ^(.*)/reference/permission$ /$1/developer_guides/security/permissions [R=301,L]
-	RewriteRule ^(.*)/reference/preview$ /$1/developer_guides/customising_the_admin_interface/preview [R=301,L]
-	RewriteRule ^(.*)/reference/requirements$ /$1/developer_guides/templates/requirements [R=301,L]
-	RewriteRule ^(.*)/reference/restfulservice$ /$1/developer_guides/integration/restfulservice [R=301,L]
-	RewriteRule ^(.*)/reference/rssfeed$ /$1/developer_guides/integration/rssfeed [R=301,L]
-	RewriteRule ^(.*)/reference/searchcontext$ /$1/developer_guides/search/searchcontext [R=301,L]
-	RewriteRule ^(.*)/reference/shortcodes$ /$1/developer_guides/extending/shortcodes [R=301,L]
-	RewriteRule ^(.*)/reference/siteconfig$ /$1/developer_guides/configuration/siteconfig [R=301,L]
-	RewriteRule ^(.*)/reference/sitetree$ /$1/developer_guides/model/data_model_and_orm [R=301,L]
-	RewriteRule ^(.*)/reference/sqlquery$ /$1/developer_guides/model/sqlquery [R=301,L]
-	RewriteRule ^(.*)/reference/templates$ /$1/developer_guides/templates [R=301,L]
-	RewriteRule ^(.*)/reference/templates-format-syntax$ /$1/developer_guides/templates/syntax [R=301,L]
-	RewriteRule ^(.*)/reference/typography$ /$1/developer_guides/customising_the_admin_interface/typography [R=301,L]
-	RewriteRule ^(.*)/reference/uploadfield$ /$1/developer_guides/forms/fields [R=301,L]
-	RewriteRule ^(.*)/reference/urlvariabletools$ /$1/developer_guides/debugging/url_variable_tools [R=301,L]
+	# RewriteRule ^(.*)/reference$ /$1/developer_guides [R=301,L]
+	# RewriteRule ^(.*)/reference/aspects$ /$1/developer_guides/extending/aspects [R=301,L]
+	# RewriteRule ^(.*)/reference/cms-architecture$ /$1/developer_guides/customising_the_admin_interface/cms_architecture [R=301,L]
+	# RewriteRule ^(.*)/reference/grid-field$ /$1/developer_guides/forms/field_types/gridfield [R=301,L]
+	# RewriteRule ^(.*)/reference/database-structure$ /$1/developer_guides/model [R=301,L]
+	# RewriteRule ^(.*)/reference/dataextension$ /$1/developer_guides/extending/extensions [R=301,L]
+	# RewriteRule ^(.*)/reference/dataobject$ /$1/developer_guides/model [R=301,L]
+	# RewriteRule ^(.*)/reference/datefield$ /$1/developer_guides/forms/fields/datefield [R=301,L]
+	# RewriteRule ^(.*)/reference/director$ /$1/developer_guides/execution_pipeline/director [R=301,L]
+	# RewriteRule ^(.*)/reference/execution-pipeline$ /$1/developer_guides/execution_pipeline [R=301,L]
+	# RewriteRule ^(.*)/reference/flushable$ /$1/developer_guides/execution_pipeline/flushable [R=301,L]
+	# RewriteRule ^(.*)/reference/form-field-types$ /$1/developer_guides/forms/fields/common_subclasses [R=301,L]
+	# RewriteRule ^(.*)/reference/image$ /$1/developer_guides/files/image [R=301,L]
+	# RewriteRule ^(.*)/reference/injector$ /$1/developer_guides/extending/injector [R=301,L]
+	# RewriteRule ^(.*)/reference/layout$ /$1/developer_guides/customising_the_admin_interface/cms_layout [R=301,L]
+	# RewriteRule ^(.*)/reference/member$ /$1/developer_guides/security/member [R=301,L]
+	# RewriteRule ^(.*)/reference/modeladmin$ /$1/developer_guides/customising_the_admin_interface/modeladmin [R=301,L]
+	# RewriteRule ^(.*)/reference/partial-caching$ /$1/developer_guides/performance/partial_caching [R=301,L]
+	# RewriteRule ^(.*)/reference/permission$ /$1/developer_guides/security/permissions [R=301,L]
+	# RewriteRule ^(.*)/reference/preview$ /$1/developer_guides/customising_the_admin_interface/preview [R=301,L]
+	# RewriteRule ^(.*)/reference/requirements$ /$1/developer_guides/templates/requirements [R=301,L]
+	# RewriteRule ^(.*)/reference/restfulservice$ /$1/developer_guides/integration/restfulservice [R=301,L]
+	# RewriteRule ^(.*)/reference/rssfeed$ /$1/developer_guides/integration/rssfeed [R=301,L]
+	# RewriteRule ^(.*)/reference/searchcontext$ /$1/developer_guides/search/searchcontext [R=301,L]
+	# RewriteRule ^(.*)/reference/shortcodes$ /$1/developer_guides/extending/shortcodes [R=301,L]
+	# RewriteRule ^(.*)/reference/siteconfig$ /$1/developer_guides/configuration/siteconfig [R=301,L]
+	# RewriteRule ^(.*)/reference/sitetree$ /$1/developer_guides/model/data_model_and_orm [R=301,L]
+	# RewriteRule ^(.*)/reference/sqlquery$ /$1/developer_guides/model/sqlquery [R=301,L]
+	# RewriteRule ^(.*)/reference/templates$ /$1/developer_guides/templates [R=301,L]
+	# RewriteRule ^(.*)/reference/templates-format-syntax$ /$1/developer_guides/templates/syntax [R=301,L]
+	# RewriteRule ^(.*)/reference/typography$ /$1/developer_guides/customising_the_admin_interface/typography [R=301,L]
+	# RewriteRule ^(.*)/reference/uploadfield$ /$1/developer_guides/forms/fields [R=301,L]
+	# RewriteRule ^(.*)/reference/urlvariabletools$ /$1/developer_guides/debugging/url_variable_tools [R=301,L]
 	
-	RewriteRule ^(.*)/topics$ /$1/developer_guides [R=301,L]
-	RewriteRule ^(.*)/topics/access-control$ /$1/developer_guides/security/access_control [R=301,L]
-	RewriteRule ^(.*)/topics/authentication$ /$1/developer_guides/security/authentication [R=301,L]
-	RewriteRule ^(.*)/topics/caching$ /$1/developer_guides/performance/caching [R=301,L]
-	RewriteRule ^(.*)/topics/commandline$ /$1/developer_guides/cli [R=301,L]
-	RewriteRule ^(.*)/topics/directory-structure$ /$1/getting_started/directory_structure [R=301,L]
-	RewriteRule ^(.*)/topics/environment-management$ /$1/getting_started/environment_management [R=301,L]
-	RewriteRule ^(.*)/topics/files$ /$1/developer_guides/files [R=301,L]
-	RewriteRule ^(.*)/topics/i18n$ /$1/developer_guides/i18n [R=301,L]
-	RewriteRule ^(.*)/topics/javascript$ /$1/developer_guides/customising_the_admin_interface/javascript_development [R=301,L]
-	RewriteRule ^(.*)/topics/module-development$ /$1/developer_guides/extending/how_tos/publish_a_module [R=301,L]
-	RewriteRule ^(.*)/topics/modules$ /$1/developer_guides/extending/modules [R=301,L]
-	RewriteRule ^(.*)/topics/page-type-templates$ /$1/developer_guides/templates/template_inheritance [R=301,L]
-	RewriteRule ^(.*)/topics/page-types$ /$1/developer_guides/model/data_model_and_orm [R=301,L]
-	RewriteRule ^(.*)/topics/rich-text-editing$ /$1/developer_guides/forms/fields/htmleditorfield [R=301,L]
-	RewriteRule ^(.*)/topics/search$ /$1/developer_guides/search [R=301,L]
-	RewriteRule ^(.*)/topics/security$ /$1/developer_guides/security/secure_coding [R=301,L]
-	RewriteRule ^(.*)/topics/testing$ /$1/developer_guides/testing [R=301,L]
-	RewriteRule ^(.*)/topics/theme-development$ /$1/developer_guides/templates/themes [R=301,L]
-	RewriteRule ^(.*)/topics/versioning$ /$1/developer_guides/model/versioning [R=301,L]
-	RewriteRule ^(.*)/topics/widgets$ https://github.com/silverstripe/silverstripe-widgets [R=301,L]
-	RewriteRule ^(.*)/topics/configuration$ /$1/developer_guides/configuration [R=301,L]
-	RewriteRule ^(.*)/topics/controller$ /$1/developer_guides/controllers [R=301,L]
-	RewriteRule ^(.*)/topics/css$ /$1/developer_guides/templates [R=301,L]
-	RewriteRule ^(.*)/topics/data-types$ /$1/developer_guides/model/data_types_and_casting [R=301,L]
-	RewriteRule ^(.*)/topics/datamodel$ /$1/developer_guides/model [R=301,L]
-	RewriteRule ^(.*)/topics/debugging$ /$1/developer_guides/debugging [R=301,L]
-	RewriteRule ^(.*)/topics/email$ /$1/developer_guides/email [R=301,L]
-	RewriteRule ^(.*)/topics/error-handling$ /$1/developer_guides/debugging/error_handling [R=301,L]
-	RewriteRule ^(.*)/topics/forms$ /$1/developer_guides/forms [R=301,L]
+	# RewriteRule ^(.*)/topics$ /$1/developer_guides [R=301,L]
+	# RewriteRule ^(.*)/topics/access-control$ /$1/developer_guides/security/access_control [R=301,L]
+	# RewriteRule ^(.*)/topics/authentication$ /$1/developer_guides/security/authentication [R=301,L]
+	# RewriteRule ^(.*)/topics/caching$ /$1/developer_guides/performance/caching [R=301,L]
+	# RewriteRule ^(.*)/topics/commandline$ /$1/developer_guides/cli [R=301,L]
+	# RewriteRule ^(.*)/topics/directory-structure$ /$1/getting_started/directory_structure [R=301,L]
+	# RewriteRule ^(.*)/topics/environment-management$ /$1/getting_started/environment_management [R=301,L]
+	# RewriteRule ^(.*)/topics/files$ /$1/developer_guides/files [R=301,L]
+	# RewriteRule ^(.*)/topics/i18n$ /$1/developer_guides/i18n [R=301,L]
+	# RewriteRule ^(.*)/topics/javascript$ /$1/developer_guides/customising_the_admin_interface/javascript_development [R=301,L]
+	# RewriteRule ^(.*)/topics/module-development$ /$1/developer_guides/extending/how_tos/publish_a_module [R=301,L]
+	# RewriteRule ^(.*)/topics/modules$ /$1/developer_guides/extending/modules [R=301,L]
+	# RewriteRule ^(.*)/topics/page-type-templates$ /$1/developer_guides/templates/template_inheritance [R=301,L]
+	# RewriteRule ^(.*)/topics/page-types$ /$1/developer_guides/model/data_model_and_orm [R=301,L]
+	# RewriteRule ^(.*)/topics/rich-text-editing$ /$1/developer_guides/forms/fields/htmleditorfield [R=301,L]
+	# RewriteRule ^(.*)/topics/search$ /$1/developer_guides/search [R=301,L]
+	# RewriteRule ^(.*)/topics/security$ /$1/developer_guides/security/secure_coding [R=301,L]
+	# RewriteRule ^(.*)/topics/testing$ /$1/developer_guides/testing [R=301,L]
+	# RewriteRule ^(.*)/topics/theme-development$ /$1/developer_guides/templates/themes [R=301,L]
+	# RewriteRule ^(.*)/topics/versioning$ /$1/developer_guides/model/versioning [R=301,L]
+	# RewriteRule ^(.*)/topics/widgets$ https://github.com/silverstripe/silverstripe-widgets [R=301,L]
+	# RewriteRule ^(.*)/topics/configuration$ /$1/developer_guides/configuration [R=301,L]
+	# RewriteRule ^(.*)/topics/controller$ /$1/developer_guides/controllers [R=301,L]
+	# RewriteRule ^(.*)/topics/css$ /$1/developer_guides/templates [R=301,L]
+	# RewriteRule ^(.*)/topics/data-types$ /$1/developer_guides/model/data_types_and_casting [R=301,L]
+	# RewriteRule ^(.*)/topics/datamodel$ /$1/developer_guides/model [R=301,L]
+	# RewriteRule ^(.*)/topics/debugging$ /$1/developer_guides/debugging [R=301,L]
+	# RewriteRule ^(.*)/topics/email$ /$1/developer_guides/email [R=301,L]
+	# RewriteRule ^(.*)/topics/error-handling$ /$1/developer_guides/debugging/error_handling [R=301,L]
+	# RewriteRule ^(.*)/topics/forms$ /$1/developer_guides/forms [R=301,L]
 
-	RewriteRule ^(.*)/tutorials/1-building-a-basic-site$ /$1/tutorials/building_a_basic_site [R=301,L]
-	RewriteRule ^(.*)/tutorials/2-extending-a-basic-site$ /$1/tutorials/extending_a_basic_site [R=301,L]
-	RewriteRule ^(.*)/tutorials/3-forms$ /$1/tutorials/forms [R=301,L]
-	RewriteRule ^(.*)/tutorials/4-site-search$ /$1/tutorials/site_search [R=301,L]
-	RewriteRule ^(.*)/tutorials/5-dataobject-relationship-management$ /$1/tutorials/dataobject_relationship_management [R=301,L]
+	# RewriteRule ^(.*)/tutorials/1-building-a-basic-site$ /$1/tutorials/building_a_basic_site [R=301,L]
+	# RewriteRule ^(.*)/tutorials/2-extending-a-basic-site$ /$1/tutorials/extending_a_basic_site [R=301,L]
+	# RewriteRule ^(.*)/tutorials/3-forms$ /$1/tutorials/forms [R=301,L]
+	# RewriteRule ^(.*)/tutorials/4-site-search$ /$1/tutorials/site_search [R=301,L]
+	# RewriteRule ^(.*)/tutorials/5-dataobject-relationship-management$ /$1/tutorials/dataobject_relationship_management [R=301,L]
 
 	# Legacy rewrite: Can't use 'master' as it confuses api.ss.org linking
-	RewriteRule ^framework/en/master(.*) http://doc.silverstripe.org/framework/en/trunk$1 [R=301,L]
+	# RewriteRule ^framework/en/master(.*) http://doc.silverstripe.org/framework/en/trunk$1 [R=301,L]
 
 	# Anything in sapphire/en/<version>/contributing is redirected to trunk, the info in there is usually not version specific,
 	# and only updated on master (e.g. contribution and coding guidelines)
-	#RewriteRule ^framework/en/contributing/?(.*) http://doc.silverstripe.org/framework/en/trunk/contributing/$1 [R=301,L]
-	#RewriteRule ^framework/en/[\d.]*/contributing/?(.*) http://doc.silverstripe.org/framework/en/trunk/contributing/$1 [R=301,L]
+	# # RewriteRule ^framework/en/contributing/?(.*) http://doc.silverstripe.org/framework/en/trunk/contributing/$1 [R=301,L]
+	# # RewriteRule ^framework/en/[\d.]*/contributing/?(.*) http://doc.silverstripe.org/framework/en/trunk/contributing/$1 [R=301,L]
+	
 
+	####   first round of Top 50 404 Errors (Issue 50) ####
+	RewriteRule ^(.*)changelog/?$ /$1/en/changelogs [R=301,L]
+	RewriteRule ^(.*)installation-into-subversion/?$ /$1/en/getting_started/composer [R=301,L]
+	# check target with Cam
+	RewriteRule ^(.*)modules:rssaggregator/?$ http://addons.silverstripe.org/add-ons/silverstripe/versionfeed [R=301,L]
+	RewriteRule ^(.*)memberauthenticator/?$ /$1/en/developer_guides/security/authentication [R=301,L]
+	# check target with Cam
+	RewriteRule ^(.*)modules:mssql/?$ http://addons.silverstripe.org/add-ons/silverstripe/mssql [R=301,L]
+	RewriteRule ^(.*)authenticator/?$ $1/developer_guides/security/authentication [R=301,L]
+	RewriteRule ^(.*)recipes:combining_files/?$ /$1/en/developer_guides/templates/requirements [R=301,L]
+	# to avoid redirect loop
+	RewriteCond %{REQUEST_URI} !^(.*)/field_types/datefield
+	RewriteRule ^(.*)datefield/?$ /$1/en/developer_guides/forms/field_types/datefield [R=301,L]
+	# to avoid redirect loop
+	RewriteCond %{REQUEST_URI} !^(.*)/security/member
+	RewriteRule ^(.*)member/?$ /$1/en/developer_guides/security/member [R=301,L]
+	RewriteRule ^(.*)topics/datamodel/?$ /$1/developer_guides/model/data_model_and_orm [R=301,L]
+	RewriteRule ^(.*)treedropdownfield/?$ /$1/developer_guides/forms/field_types/common_subclasses [R=301,L]
+	RewriteRule ^(.*)/tutorials/1-building-a-basic-site/?$ /$1/tutorials/building-a-basic-site [R=301,L]
+	# to avoid redirect loop
+	RewriteCond %{REQUEST_URI} !^(.*)/developer_guides/security
+	RewriteRule ^(.*)topics/security/?$ /$1/developer_guides/security [R=301,L]
+	RewriteRule ^(.*)topics/environment-management/?$ /$1/getting_started/environment_management [R=301,L]
+	# to avoid redirect loop
+	RewriteCond %{REQUEST_URI} !^(.*)/developer_guides/testing
+	RewriteRule ^(.*)topics/testing/?$ /$1/developer_guides/testing [R=301,L]
+	RewriteRule ^(.*)/tutorials/2-extending-a-basic-site/?$ /$1/tutorials/extending-a-basic-site [R=301,L]
+	# to avoid redirect loop
+	RewriteCond %{REQUEST_URI} !^(.*)/developer_guides/configuration
+	RewriteRule ^(.*)topics/configuration/?$ /$1/developer_guides/configuration [R=301,L]
+	# to avoid redirect loop
+	RewriteCond %{REQUEST_URI} !^(.*)/software/download
+	RewriteRule ^(.*)download/?$ http://www.silverstripe.org/software/download [R=301,L]
+	RewriteRule ^(.*)reference/permission/?$ /$1/developer_guides/security/permissions [R=301,L]
+	RewriteRule ^(.*)topics/controller/?$ /$1/developer_guides/controllers [R=301,L]
+	# to avoid redirect loop
+	RewriteCond %{REQUEST_URI} !^(.*)/customising_the_admin_interface/typography
+	RewriteRule ^(.*)typography/?$ /$1/en/developer_guides/customising_the_admin_interface/typography [R=301,L]
+	RewriteRule ^(.*)howto/?$ /$1/tutorials [R=301,L]
+	RewriteRule ^(.*)topics/rich-text-editing/?$ /$1/developer_guides/forms/field_types/htmleditorfield [R=301,L]
+	RewriteRule ^(.*)reference/modeladmin/?$ /$1/developer_guides/customising_the_admin_interface/modeladmin [R=301,L]
+	RewriteRule ^(.*)/tutorials/5-dataobject-relationship-management/?$ /$1/tutorials/dataobject-relationship-management [R=301,L]
+	RewriteRule ^(.*)/tutorials/3-forms/?$ /$1/tutorials/forms [R=301,L]
+	RewriteRule ^(.*)/topics/reference/requirements/?$ /$1/reference/requirements [R=301,L]
+	# check target with Cam
+	RewriteRule ^(.*)modules:auth_ext_drivers/?$ https://github.com/mattclegg/silverstripe-doc-restructuring/blob/master/output/modules/auth_ext_drivers.md [R=301,L]
+	RewriteRule ^(.*)reference/built-in-page-controls/?$ /$1/developer_guides/templates/syntax [R=301,L]
+	RewriteRule ^(.*)misc/release-process/?$ /$1/contributing/release_process [R=301,L]
+	RewriteRule ^(.*)trunk/developer_guides/model/?$ /$1/developer_guides/model [R=301,L]
+	RewriteRule ^(.*)reference/dataextension/?$ /$1/developer_guides/model/extending_dataobjects [R=301,L]
+	RewriteRule ^(.*)developer_guides/data_types_and_casting/?$ /$1/developer_guides/model/data_types_and_casting [R=301,L]
+	RewriteRule ^(.*)getting_started/installation/composer/?$ /$1/getting_started/composer [R=301,L]
+	RewriteRule ^(.*)upgrading/release.process/?$ /$1/upgrading [R=301,L]
+	RewriteRule ^(.*)/tutorials/4-site-search/?$ /$1/tutorials/site-search [R=301,L]
+	RewriteRule ^(.*)/reference/grid-field/?$ /$1/developer_guides/forms/field_types/gridfield [R=301,L]
+	RewriteRule ^(.*)reference/cms-architecture/?$ /$1/cms_architecture [R=301,L]
+	RewriteRule ^tabset/?$ /en/developer_guides/forms/tabbed_forms [R=301,L]
+	RewriteRule ^(.*)trunk/developer_guides/extending/extensions/?$ /$1/developer_guides/extending/extensions [R=301,L]
+	RewriteRule ^(.*)topics/css/?$ /$1/developer_guides/templates/requirements [R=301,L]
+	RewriteRule ^(.*)developer_guides/customising_the_cms/modeladmin/?$ /$1/developer_guides/customising_the_admin_interface/modeladmin [R=301,L]
+	RewriteRule ^(.*)developer_guides/model/sqlquery/?$ /$1/developer_guides/model/sql_query [R=301,L]
+	RewriteRule ^(.*)installation/upgrading/?$ /$1/upgrading [R=301,L]
+	RewriteRule ^(.*)developer_guides/data_model_and_orm/?$ /$1/developer_guides/model/data_model_and_orm [R=301,L]
 
 	RewriteCond %{REQUEST_URI} ^(.*)$
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt)$
 	RewriteRule .* framework/main.php?url=%1&%{QUERY_STRING} [L]
+
 </IfModule>
 
 ErrorDocument 404 /assets/error-404.html
