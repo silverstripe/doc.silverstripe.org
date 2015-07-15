@@ -55,6 +55,7 @@
 	RewriteRule ^(.*)/howto/simple-contact-form/?$ /$1/developer_guides/forms/how_tos/simple_contact_form [R=301,L]
 	RewriteRule ^(.*)/installation/?$ /$1/getting_started/installation [R=301,L]
 	RewriteRule ^(.*)/installation/common-problems/?$ /$1/getting_started/installation/common_problems [R=301,L]
+
 	#
 	RewriteCond %{REQUEST_URI} !en/getting_started/installation/composer
 	RewriteRule ^(.*)/installation/composer/?$ /$1/getting_started/composer [R=301,L]
