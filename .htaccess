@@ -53,10 +53,13 @@
 	RewriteRule ^(.*)/howto/navigation-menu/?$ /$1/developer_guides/templates/how_tos/navigation_menus [R=301,L]
 	RewriteRule ^(.*)/howto/pagination/?$ /$1/developer_guides/templates/how_tos/pagination [R=301,L]
 	RewriteRule ^(.*)/howto/simple-contact-form/?$ /$1/developer_guides/forms/how_tos/simple_contact_form [R=301,L]
-	
-	RewriteRule ^([a-z]{2})/installation/?$ /$1/getting_started/installation [R=301,L]
+	RewriteRule ^(.*)/installation/?$ /$1/getting_started/installation [R=301,L]
 	RewriteRule ^(.*)/installation/common-problems/?$ /$1/getting_started/installation/common_problems [R=301,L]
+	#
+	RewriteCond %{REQUEST_URI} !en/getting_started/installation/composer
 	RewriteRule ^(.*)/installation/composer/?$ /$1/getting_started/composer [R=301,L]
+	RewriteRule ^en/getting_started/installation/composer/?$ /en/getting_started/composer [R=301,L]
+	#
 	RewriteRule ^(.*)/installation/from-source/?$ /$1/getting_started/installation [R=301,L]
 	RewriteRule ^(.*)/installation/lighttpd/?$ /$1/getting_started/installation/how_to/configure_lighttpd [R=301,L]
 	RewriteRule ^(.*)/installation/mac-osx/?$ /$1/getting_started/installation/mac_osx [R=301,L]
@@ -79,17 +82,18 @@
 	RewriteRule ^(.*)/misc/contributing/translation/?$ /$1/contributing/translations [R=301,L]
 	RewriteRule ^(.*)/misc/contributing/translation-process/?$ /$1/contributing/translation-process [R=301,L]
 	RewriteRule ^(.*)/misc/release-process/?$ /$1/contributing/release_process [R=301,L]
-
+	#
+	RewriteCond %{REQUEST_URI} !en/2.4/topics/reference/requirements
 	RewriteRule ^(.*)/reference/?$ /$1/developer_guides [R=301,L]
+	RewriteRule ^en/2.4/topics/reference/requirements/?$ /en/2.4/reference/requirements [R=301,L]
+	#	
 	RewriteRule ^(.*)/reference/aspects/?$ /$1/developer_guides/extending/aspects [R=301,L]
 	RewriteRule ^(.*)/reference/cms-architecture/?$ /$1/developer_guides/customising_the_admin_interface/cms_architecture [R=301,L]
 	RewriteRule ^(.*)/reference/grid-field/?$ /$1/developer_guides/forms/field_types/gridfield [R=301,L]
 	RewriteRule ^(.*)/reference/database-structure/?$ /$1/developer_guides/model [R=301,L]
 	RewriteRule ^(.*)/reference/dataextension/?$ /$1/developer_guides/model/extending_dataobjects [R=301,L]
 	RewriteRule ^(.*)/reference/dataobject/?$ /$1/developer_guides/model [R=301,L]
-
 	RewriteRule ^(.*)/reference/datefield/?$ /$1/developer_guides/forms/field_types/datefield [R=301,L]
-
 	RewriteRule ^(.*)/reference/director/?$ /$1/developer_guides/execution_pipeline/director [R=301,L]
 	RewriteRule ^(.*)/reference/execution-pipeline/?$ /$1/developer_guides/execution_pipeline [R=301,L]
 	RewriteRule ^(.*)/reference/flushable/?$ /$1/developer_guides/execution_pipeline/flushable [R=301,L]
@@ -102,19 +106,19 @@
 	RewriteRule ^(.*)/reference/partial-caching/?$ /$1/developer_guides/performance/partial_caching [R=301,L]
 	RewriteRule ^(.*)/reference/permission/?$ /$1/developer_guides/security/permissions [R=301,L]
 	RewriteRule ^(.*)/reference/preview/?$ /$1/developer_guides/customising_the_admin_interface/preview [R=301,L]
-	RewriteRule ^(.*)/reference/requirements/?$ /$1/developer_guides/templates/requirements [R=301,L]
 	RewriteRule ^(.*)/reference/restfulservice/?$ /$1/developer_guides/integration/restfulservice [R=301,L]
 	RewriteRule ^(.*)/reference/rssfeed/?$ /$1/developer_guides/integration/rssfeed [R=301,L]
 	RewriteRule ^(.*)/reference/searchcontext/?$ /$1/developer_guides/search/searchcontext [R=301,L]
 	RewriteRule ^(.*)/reference/shortcodes/?$ /$1/developer_guides/extending/shortcodes [R=301,L]
 	RewriteRule ^(.*)/reference/siteconfig/?$ /$1/developer_guides/configuration/siteconfig [R=301,L]
 	RewriteRule ^(.*)/reference/sitetree/?$ /$1/developer_guides/model/data_model_and_orm [R=301,L]
-	RewriteRule ^(.*)sqlquery/?$ /$1/sql_query [R=301,L]
 	RewriteRule ^(.*)/reference/templates/?$ /$1/developer_guides/templates [R=301,L]
 	RewriteRule ^(.*)/reference/templates-format-syntax/?$ /$1/developer_guides/templates/syntax [R=301,L]
 	RewriteRule ^(.*)/reference/typography/?$ /$1/developer_guides/customising_the_admin_interface/typography [R=301,L]
 	RewriteRule ^(.*)/reference/uploadfield/?$ /$1/developer_guides/forms/fields [R=301,L]
 	RewriteRule ^(.*)/reference/urlvariabletools/?$ /$1/developer_guides/debugging/url_variable_tools [R=301,L]
+
+	RewriteRule ^(.*)sqlquery/?$ /$1/sql_query [R=301,L]
 
 	RewriteRule ^(.*)/topics/?$ /$1/developer_guides [R=301,L]
 	RewriteRule ^(.*)/topics/access-control/?$ /$1/developer_guides/security/access_control [R=301,L]
@@ -146,23 +150,25 @@
 	RewriteRule ^(.*)/topics/theme-development/?$ /$1/developer_guides/templates/themes [R=301,L]
 	RewriteRule ^(.*)/topics/versioning/?$ /$1/developer_guides/model/versioning [R=301,L]
 	RewriteRule ^(.*)/topics/widgets/?$ https://github.com/silverstripe/silverstripe-widgets [R=301,L]
-     
-	RewriteCond %{REQUEST_URI} (3.0|2.4)
-	RewriteRule ^(.*)/tutorials/1-building-a-basic-site/?$ /$1/tutorials/building-a-basic-site [R=301,L]
-	RewriteCond %{REQUEST_URI} (3.0|2.4)
-	RewriteRule ^(.*)/tutorials/2-extending-a-basic-site/?$ /$1/tutorials/extending-a-basic-site [R=301,L]
-	RewriteCond %{REQUEST_URI} (3.0|2.4)
-	RewriteRule ^(.*)/tutorials/3-forms/?$ /$1/tutorials/forms [R=301,L]
-	RewriteCond %{REQUEST_URI} (3.0|2.4)
-	RewriteRule ^(.*)/tutorials/4-site-search/?$ /$1/tutorials/site-search [R=301,L]
-	RewriteCond %{REQUEST_URI} (3.0|2.4)
-	RewriteRule ^(.*)/tutorials/5-dataobject-relationship-management/?$ /$1/tutorials/dataobject-relationship-management [R=301,L]
-
+	#
+	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/tutorials/1-building-a-basic-site/?$ /$1/tutorials/building_a_basic_site [R=301,L]
+	RewriteRule ^(.*)/tutorials/1-building-a-basic-site/?$ /$1/tutorials/building-a-basic-site [R=301,L]
+	#
+	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/tutorials/2-extending-a-basic-site/?$ /$1/tutorials/extending_a_basic_site [R=301,L]
+	RewriteRule ^(.*)/tutorials/2-extending-a-basic-site/?$ /$1/tutorials/extending-a-basic-site [R=301,L]
+	#
 	RewriteRule ^(.*)/tutorials/3-forms/?$ /$1/tutorials/forms [R=301,L]
+	#
+	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/tutorials/4-site-search/?$ /$1/tutorials/site_search [R=301,L]
+	RewriteRule ^(.*)/tutorials/4-site-search/?$ /$1/tutorials/site-search [R=301,L]
+	#
+	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/tutorials/5-dataobject-relationship-management/?$ /$1/tutorials/dataobject_relationship_management [R=301,L]
+	RewriteRule ^(.*)/tutorials/5-dataobject-relationship-management/?$ /$1/tutorials/dataobject-relationship-management [R=301,L]
+	#
 
 	# Legacy rewrite: Can't use 'master' as it confuses api.ss.org linking
 	RewriteRule ^framework/en/master(.*) http://doc.silverstripe.org/framework/en/trunk$1 [R=301,L]
@@ -182,11 +188,9 @@
 	RewriteRule ^treedropdownfield/?$ /en/developer_guides/forms/field_types/common_subclasses [R=301,L]
 	RewriteRule ^datefield/?$ /en/developer_guides/forms/field_types/datefield [R=301,L]
 	RewriteRule ^download/?$ http://www.silverstripe.org/software/download [R=301,L]
-	RewriteRule ^en/2.4/topics/reference/requirements/?$ http://docs.silverstripe.org/en/2.4/reference/requirements [R=301,L]
 	RewriteRule ^en/reference/built-in-page-controls/?$ /en/developer_guides/templates/syntax [R=301,L]
 	RewriteRule ^en/trunk/developer_guides/model/?$ /en/developer_guides/model [R=301,L]
 	RewriteRule ^en/developer_guides/data_types_and_casting/?$ /en/developer_guides/model/data_types_and_casting [R=301,L]
-	RewriteRule ^en/getting_started/installation/composer/?$ /en/getting_started/composer [R=301,L]
 	RewriteRule ^en/upgrading/release.process/?$ /en/upgrading [R=301,L]
 	RewriteRule ^member/?$ /en/developer_guides/security/member [R=301,L]
 	RewriteRule ^typography/?$ /en/developer_guides/customising_the_admin_interface/typography [R=301,L]
