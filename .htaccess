@@ -28,9 +28,9 @@
 
 	# Redirect legacy URLs (assumes we're not redirecting other assets, for performance reasons)
 	# Note: Just works on top-level domains, not if the webroot is in a subfolder
-	RewriteCond %{REQUEST_URI} ^(.*)$
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt)$
+	# RewriteCond %{REQUEST_URI} ^(.*)$
+	# RewriteCond %{REQUEST_FILENAME} !-f
+	# RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt)$
 	#RewriteRule ^execution-pipeline$ http://doc.silverstripe.org/framework/en/reference/ [R=301,L]
 
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
@@ -53,7 +53,8 @@
 	RewriteRule ^(.*)/howto/navigation-menu/?$ /$1/developer_guides/templates/how_tos/navigation_menus [R=301,L]
 	RewriteRule ^(.*)/howto/pagination/?$ /$1/developer_guides/templates/how_tos/pagination [R=301,L]
 	RewriteRule ^(.*)/howto/simple-contact-form/?$ /$1/developer_guides/forms/how_tos/simple_contact_form [R=301,L]
-	RewriteRule ^(.*)/installation/?$ /$1/getting_started/installation [R=301,L]
+
+	RewriteRule ^en/installation/?$ /en/getting_started/installation [R=301,L]
 	RewriteRule ^(.*)/installation/common-problems/?$ /$1/getting_started/installation/common_problems [R=301,L]
 	#
 	RewriteCond %{REQUEST_URI} !en/getting_started/installation/composer
@@ -73,7 +74,7 @@
 	RewriteRule ^(.*)/installation/windows-manual-iis-7/?$ /$1/getting_started/installation/other_installation_options/windows_iis7 [R=301,L]
 	RewriteRule ^(.*)/installation/windows-pi/?$ /$1/getting_started/installation/other_installation_options/windows_platform_installer [R=301,L]
 	RewriteRule ^(.*)/installation/windows-wamp/?$ /$1/getting_started/installation/windows [R=301,L]
-	
+
 	RewriteRule ^(.*)/misc/coding-conventions/?$ /$1/getting_started/coding_conventions [R=301,L]
 	RewriteRule ^(.*)/misc/contributing/?$ /$1/contributing [R=301,L]
 	RewriteRule ^(.*)/misc/contributing/code/?$ /$1/contributing/code [R=301,L]
