@@ -1,7 +1,9 @@
 # doc.silverstripe.org
 
-This is the source code powering http://doc.silverstripe.org.  It primarily
-consists of the SilverStripe framework and [docsviewer](https://github.com/silverstripe/silverstripe-docsviewer)
+This is the source code powering http://docs.silverstripe.org. It
+primarily consists of the SilverStripe
+[framework](https://github.com/silverstripe/silverstripe-framework)
+and [docsviewer](https://github.com/silverstripe/silverstripe-docsviewer)
 module with minimal configuration.
 
 For adding functionality or editing the style of the documentation see the 
@@ -12,9 +14,9 @@ For adding functionality or editing the style of the documentation see the
 To set up a test instance:
 
  * Clone this repository to a LAMP server.
- * Install [Composer](http://doc.silverstripe.org/framework/en/installation/composer)
+ * Install [Composer](http://docs.silverstripe.org/en/getting_started/composer)
  * After installing composer run `composer install --prefer-source` to grab the modules.
- * Run "make update" to check out the repositories from which is builds the
+ * Run `make update` to check out the repositories from which it builds the
  docs (this will take a while the first time)
 
 ## Source Documentation Files
@@ -34,18 +36,19 @@ make command in your terminal:
 in the bin/update.sh file.
 
 Once the `make fetch` command has executed and downloaded the latest files,
-those files are registered along with the module version the folder relates to.
-through the `app/docsviewer.yml` file.
+those files are registered along with the module version the folder relates to
+through the [docsviewer.yml](https://github.com/silverstripe/doc.silverstripe.org/blob/master/app/_config/docsviewer.yml) file.
 
 ## Contribution
 
-To contribute an improvement to the doc.silverstripe.org functionality or
+To contribute an improvement to the docs.silverstripe.org functionality or
 theme, submit a pull request on GitHub. Any approved pull requests will make
-their way onto the doc.silverstripe.org site in the next release.
+their way onto the docs.silverstripe.org site in the next release.
 
-The content for doc.silverstripe.org is stored in the modules repository inside
-a "docs" folder (for example, the framework documentation is stored at
-[github.com/silverstripe/sapphire](https://github.com/silverstripe/sapphire/tree/master/docs)).
+The content for docs.silverstripe.org is stored in the modules
+repository inside a "docs" folder (for example, the framework
+documentation is stored at
+[https://github.com/silverstripe/silverstripe-framework/tree/master/docs](https://github.com/silverstripe/silverstripe-framework/tree/master/docs).
 
 If you wish to edit the documentation content, submit a pull request on that
 Github project. Updates to the content are synced regularly with
@@ -53,16 +56,9 @@ docs.silverstripe.org via a cron job.
 
 ## Cron job
 
-The cron job keeps doc.silverstripe.org up to date with the latest code. This
+The cron job keeps docs.silverstripe.org up to date with the latest code. This
 cron task calls `make update`, a script that fetches the latest documentation
 for each module from git and rebuilds the search indexes.
 
 	05 * * * * sites make -f /sites/ss2doc-v2/www/Makefile -C /sites/ss2doc-v2/www update
 
-## Legacy Dokuwiki
-
-We assume that DokuWiki (which ran the original doc.silverstripe.org) is
-served on the same webserver from a different webroot, that's symlinked in
-under the URL http://doc.silverstripe.org/old.
-
-	ln -s /sites/ss2doc/www /sites/ss2doc-v2/www/old
