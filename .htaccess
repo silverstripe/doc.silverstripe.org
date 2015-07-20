@@ -28,9 +28,9 @@
 
 	# Redirect legacy URLs (assumes we're not redirecting other assets, for performance reasons)
 	# Note: Just works on top-level domains, not if the webroot is in a subfolder
-	RewriteCond %{REQUEST_URI} ^(.*)$
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt)$
+	# RewriteCond %{REQUEST_URI} ^(.*)$
+	# RewriteCond %{REQUEST_FILENAME} !-f
+	# RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt)$
 	#RewriteRule ^execution-pipeline$ http://doc.silverstripe.org/framework/en/reference/ [R=301,L]
 
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
@@ -54,7 +54,7 @@
 	RewriteRule ^(.*)/howto/pagination/?$ /$1/developer_guides/templates/how_tos/pagination [R=301,L]
 	RewriteRule ^(.*)/howto/simple-contact-form/?$ /$1/developer_guides/forms/how_tos/simple_contact_form [R=301,L]
 
-	RewriteRule ^([a-z]{2})/installation/?$ /$1/getting_started/installation [R=301,L]
+	RewriteRule ^en/installation/?$ /en/getting_started/installation [R=301,L]
 	RewriteRule ^(.*)/installation/common-problems/?$ /$1/getting_started/installation/common_problems [R=301,L]
 	#
 	RewriteCond %{REQUEST_URI} !en/getting_started/installation/composer
