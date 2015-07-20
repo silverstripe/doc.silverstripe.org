@@ -41,6 +41,7 @@ DocumentationViewer::set_edit_link(
 );
 
 if(Director::isLive()) {
+	Director::forceSSL();
 	ControllerExtension::$google_analytics_code = 'UA-84547-8';
 }
 
