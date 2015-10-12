@@ -32,6 +32,6 @@ Only:
 ---
 GlobalNav:
   hostname: '//www.silverstripe.org/'
-  css_path: '/themes/ssv3/css/toolbar.min.css'
   snippet_path: '/assets'
+  css_path: '/themes/ssv3/css/toolbar.min.css'
   use_localhost: false
