@@ -2,11 +2,6 @@
 	float: left;
 }
 
-.has_versions .versions .stable {
-	background: rgb(3, 91, 136);
-	color: #FFF;
-}
-
 #VersionsArchive {
 	float: right;
 }
