@@ -5,7 +5,7 @@
 		"ext-gd": "*",
 		"ext-mbstring": "*",
 		"silverstripe/docsviewer": "dev-develop",
-		"silverstripe/framework": "3.2.*@stable",
+		"silverstripe/framework": "^3.2",
 		"silverstripe/toolbar": "^4.0"
 	},
 	"require-dev": {
@@ -21,6 +21,7 @@
 		"process-timeout": 600
 	},
 	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"scripts": {
 
 	}
