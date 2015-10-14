@@ -277,16 +277,16 @@
         },
         {
             "name": "silverstripe/toolbar",
-            "version": "4.0.7",
+            "version": "4.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-globaltoolbar.git",
-                "reference": "e3e0c35ca30fcae8e9bfd9ea74c977c228b9b43c"
+                "reference": "ff9003d784f48edb526754d741c2ac9a282c5269"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-globaltoolbar/zipball/e3e0c35ca30fcae8e9bfd9ea74c977c228b9b43c",
-                "reference": "e3e0c35ca30fcae8e9bfd9ea74c977c228b9b43c",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-globaltoolbar/zipball/ff9003d784f48edb526754d741c2ac9a282c5269",
+                "reference": "ff9003d784f48edb526754d741c2ac9a282c5269",
                 "shasum": ""
             },
             "require": {
@@ -314,10 +314,10 @@
                 "silverstripe"
             ],
             "support": {
-                "source": "https://github.com/silverstripe/silverstripe-globaltoolbar/tree/4.0.7",
+                "source": "https://github.com/silverstripe/silverstripe-globaltoolbar/tree/4.0.8",
                 "issues": "https://github.com/silverstripe/silverstripe-globaltoolbar/issues"
             },
-            "time": "2015-10-13 01:37:18"
+            "time": "2015-10-14 00:00:39"
         },
         {
             "name": "unclecheese/display-logic",
