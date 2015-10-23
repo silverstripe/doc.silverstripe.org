@@ -1,3 +1,10 @@
+.versions-heading {
+    padding-top:7px;
+    color:#1389ce;
+    font-size:18px;
+    float: left;
+}
+
 .has_versions .versions {
 	float: left;
 }
