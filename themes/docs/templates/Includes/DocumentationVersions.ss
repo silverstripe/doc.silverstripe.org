@@ -1,4 +1,5 @@
 <% if Versions %>
+    <div class="versions-heading">Versions:</div>
 	<div class="versions">
 		<ul>
 			<% loop Versions.sort("Title DESC").limit(4) %>
@@ -7,11 +8,11 @@
 		</ul>
 	</div>
 	<form id="VersionsArchive">
-			<select id="VersionSelect" onchange="location.href=VersionsArchive.VersionSelect.options[selectedIndex].value">
-				<option>Archive</option>
-				<% loop Versions.sort("Title DESC").limit(20, 4) %>
+		<select id="VersionSelect" onchange="location.href=VersionsArchive.VersionSelect.options[selectedIndex].value">
+			<option>Archive</option>
+			<% loop Versions.sort("Title DESC").limit(20, 4) %>
      			<option value="$Link">$Title</option>
-     			<% end_loop %>
-			</select>
-		</form>
+     		<% end_loop %>
+		</select>
+	</form>
 <% end_if %>
