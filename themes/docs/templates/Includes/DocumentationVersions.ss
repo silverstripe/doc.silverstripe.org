@@ -9,7 +9,7 @@
 	</div>
 	<form id="VersionsArchive">
 		<select id="VersionSelect" onchange="location.href=VersionsArchive.VersionSelect.options[selectedIndex].value">
-			<option>Archive</option>
+			<option>Archived versions</option>
 			<% loop Versions.sort("Title DESC").limit(20, 4) %>
      			<option value="$Link">$Title</option>
      		<% end_loop %>
