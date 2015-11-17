@@ -4,7 +4,7 @@
 	"require": {
 		"ext-gd": "*",
 		"ext-mbstring": "*",
-		"silverstripe/docsviewer": "dev-develop",
+		"silverstripe/docsviewer": "dev-master",
 		"silverstripe/framework": "^3.2",
 		"silverstripe/toolbar": "^4.0"
 	},
