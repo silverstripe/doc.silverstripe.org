@@ -7,8 +7,8 @@
 		ga('create', 'UA-84547-17', 'auto', {'allowLinker': true});
 		ga('require', 'linker');
 		ga('linker:autoLink', [
-			'silverstripe.com',
-			'silverstripe.org',
+			'www.silverstripe.com',
+			'www.silverstripe.org',
 			'addons.silverstripe.org',
 			'api.silverstripe.org',
 			'docs.silverstripe.org',
