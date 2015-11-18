@@ -11,7 +11,7 @@
 			'silverstripe.org',
 			'addons.silverstripe.org',
 			'api.silverstripe.org',
-			'doc.silverstripe.org',
+			'docs.silverstripe.org',
 			'userhelp.silverstripe.org',
 			'demo.silverstripe.org'
 		]);
