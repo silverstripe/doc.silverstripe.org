@@ -12,12 +12,17 @@
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 
+	# Redirect requests for $AbsoluteBaseURL/favicon.ico to $AbsoluteBaseURL/$ThemeDir/favicons/favicon.ico
+	RewriteCond %{REQUEST_URI} !^/favicon\.ico [NC]
+	RewriteCond %{REQUEST_URI} favicon\.ico [NC]
+	RewriteRule (.*) http://docs.silverstripe.org/themes/docs/favicons/favicon.ico [R=301,L]
+
 	# Legacy rewrite from sapphire/ to framework/ namespace
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_URI} !^framework/main\.php
 	RewriteRule ^sapphire/?(.*) http://doc.silverstripe.org/framework/$1 [R=301,L]
 	
-	#Rewrite framework to the new base url
+	# Rewrite framework to the new base url
 	RewriteCond %{REQUEST_URI} ^/?framework/en/
 	RewriteRule ^framework/en/(.*)$ /en/$1 [R=301,NC,QSA,L]
 
