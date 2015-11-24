@@ -13,7 +13,7 @@ Only:
   environment: dev
 ---
 GlobalNav:
-  hostname: '//ssorg.dev/'
+  hostname: '//www.silverstripe.org/'
   css_path: '/themes/ssv3/css/toolbar.min.css'
   snippet_path: '/assets'
   use_localhost: false
@@ -22,7 +22,7 @@ Only:
   environment: test
 ---
 GlobalNav:
-  hostname: '//sssites-ssorg-uat.sites.silverstripe.com/'
+  hostname: '//www.silverstripe.org/'
   css_path: '/themes/ssv3/css/toolbar.min.css'
   snippet_path: '/assets'
   use_localhost: false
