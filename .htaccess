@@ -12,11 +12,6 @@
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 
-	# Redirect requests for $AbsoluteBaseURL/favicon.ico to $AbsoluteBaseURL/$ThemeDir/favicons/favicon.ico
-	RewriteCond %{REQUEST_URI} !^/favicon\.ico [NC]
-	RewriteCond %{REQUEST_URI} favicon\.ico [NC]
-	RewriteRule (.*) http://docs.silverstripe.org/themes/docs/favicons/favicon.ico [R=301,L]
-
 	# Legacy rewrite from sapphire/ to framework/ namespace
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_URI} !^framework/main\.php
@@ -226,14 +221,13 @@ ErrorDocument 500 /assets/error-500.html
 FileETag INode MTime
 
 <IfModule mod_expires.c>
-ExpiresActive on
-ExpiresByType image/* "access plus 7 days"
-ExpiresByType text/css "access plus 7 days"
-ExpiresByType application/x-javascript "access plus 7 days"
-ExpiresByType application/javascript "access plus 7 days"
+	ExpiresActive on
+	ExpiresByType image/* "access plus 7 days"
+	ExpiresByType text/css "access plus 7 days"
+	ExpiresByType application/x-javascript "access plus 7 days"
+	ExpiresByType application/javascript "access plus 7 days"
 </IfModule>
 
 <IfModule mod_deflate.c>
 	SetOutputFilter DEFLATE
 </IfModule>
-
