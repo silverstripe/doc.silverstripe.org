@@ -70,6 +70,7 @@
 	RewriteRule ^(.*)/howto/simple-contact-form/?$ /$1/developer_guides/forms/how_tos/simple_contact_form [R=301,L]
 
 	RewriteRule ^en/installation/?$ /en/getting_started/installation [R=301,L]
+
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/installation/common-problems/?$ /$1/getting_started/installation/common_problems [R=301,L]
 	#
@@ -121,17 +122,20 @@
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/misc/release-process/?$ /$1/contributing/release_process [R=301,L]
 	#
-	RewriteCond %{REQUEST_URI} !en/2.4/topics/reference/requirements
+
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/reference/?$ /$1/developer_guides [R=301,L]
+
+	RewriteCond %{REQUEST_URI} !en/2.4/topics/reference/requirements
 	RewriteRule ^en/2.4/topics/reference/requirements/?$ /en/2.4/reference/requirements [R=301,L]
 	#	
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/reference/aspects/?$ /$1/developer_guides/extending/aspects [R=301,L]
 	#	
-	RewriteCond %{REQUEST_URI} !en/developer_guides/customising_the_admin_interface/reference/cms-architecture
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/reference/cms-architecture/?$ /$1/developer_guides/customising_the_admin_interface/cms_architecture [R=301,L]
+
+	RewriteCond %{REQUEST_URI} !en/developer_guides/customising_the_admin_interface/reference/cms-architecture
 	RewriteRule ^en/developer_guides/customising_the_admin_interface/reference/cms-architecture/?$ /en/developer_guides/customising_the_admin_interface/cms_architecture [R=301,L]
 	#	
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
