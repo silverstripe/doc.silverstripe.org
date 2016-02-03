@@ -6,7 +6,8 @@
 		"ext-mbstring": "*",
 		"silverstripe/docsviewer": "dev-master",
 		"silverstripe/framework": "^3.2",
-		"silverstripe/toolbar": "^4.0"
+		"silverstripe/toolbar": "^4.0",
+		"silverstripe/dynamodb": "^1.1"
 	},
 	"require-dev": {
 		"phpunit/PHPUnit": "~3.7@stable"

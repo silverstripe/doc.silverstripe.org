@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dir=$1
+dir=$1/assets
 
 if [ ! "$dir" ]; then
   echo "Usage: $0 /base/folder/to/docs"
