@@ -10,19 +10,19 @@ DocumentationManifest:
   automatic_registration: false
   register_entities:
     -
-      Path: "src/framework_master/docs/"
+      Path: "assets/src/framework_master/docs/"
       Title: "Framework"
       Version: "4.0"
       Branch: "master"
       DefaultEntity: true
     -
-      Path: "src/framework_3/docs/"
+      Path: "assets/src/framework_3/docs/"
       Title: "Framework"
       Version: "3.4"
       Branch: "3"
       DefaultEntity: true
     -
-      Path: "src/framework_3.3/docs/"
+      Path: "assets/src/framework_3.3/docs/"
       Title: "Framework"
       Version: "3.3"
       Branch: "3.3"
@@ -34,17 +34,17 @@ DocumentationManifest:
       Stable: true
       DefaultEntity: true
     -
-      Path: "src/framework_3.1/docs/"
+      Path: "assets/src/framework_3.1/docs/"
       Title: "Framework"
       Version: "3.1"
       DefaultEntity: true
     -
-      Path: "src/framework_3.0/docs/"
+      Path: "assets/src/framework_3.0/docs/"
       Title: "Framework"
       Version: "3.0"
       DefaultEntity: true
     -
-      Path: "src/framework_2.4/docs/"
+      Path: "asserts/src/framework_2.4/docs/"
       Title: "Framework"
       Version: "2.4"
       DefaultEntity: true

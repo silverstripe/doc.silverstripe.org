@@ -4,10 +4,11 @@ global $project;
 $project = 'app';
 
 global $database;
-$database = 'SS_ssdoc';
 
-if (defined('SS_DATABASE_NAME')) {
+if(defined('SS_DATABASE_NAME') && SS_DATABASE_NAME) {
 	$database = SS_DATABASE_NAME;
+} else {
+	$database = 'SS_ssdoc';
 }
 
 if(isset($_ENV['CLEARDB_DATABASE_URL'])) {
