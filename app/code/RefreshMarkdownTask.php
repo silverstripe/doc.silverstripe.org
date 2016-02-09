@@ -1,9 +1,10 @@
 <?php
 
-class UpdateTask extends BuildTask
+class RefreshMarkdownTask extends BuildTask
 {
     /**
      * @var string
+     * @config documentation_repositories
      */
     protected $title = "Updates source markdown files";
 
@@ -24,7 +25,7 @@ class UpdateTask extends BuildTask
      */
     public function run($request)
     {
-        $this->printLine("updating...");
+        $this->printLine("refreshing markdown files...");
 
         $repositories = $this->getRepositories();
 
@@ -66,7 +67,7 @@ class UpdateTask extends BuildTask
         {
             return $repos;
         } else {
-            user_error("You need to set 'UpdateTask:documentation_repositories' array in your yaml configuration", E_USER_WARNING);
+            user_error("You need to set 'RefreshMarkdownTask:documentation_repositories' array in a yaml configuration file", E_USER_WARNING);
             return null;
         }
     }
@@ -82,13 +83,8 @@ class UpdateTask extends BuildTask
 
         $path = $this->getPath();
 
-        if (!file_exists("{$path}/src")) {
-            mkdir("{$path}/src");
-        }
-
-        if (file_exists("{$path}/src/{$folder}_{$branch}")) {
-            exec("rm -rf {$path}/src/{$folder}_{$branch}");
-        }
+        exec("mkdir -p {$path}/src");
+        exec("rm -rf {$path}/src/{$folder}_{$branch}");
 
         $this->printLine("cloning " . $remote . "/" . $branch);
 
@@ -107,11 +103,11 @@ class UpdateTask extends BuildTask
      */
     private function cleanRepository(array $repository)
     {
-        $files = array_merge(glob("*"), glob(".*"));
+        $paths = array_merge(glob("*"), glob(".*"));
 
-        foreach ($files as $file) {
-            if ($file !== "docs" && $file !== "." && $file !== "..") {
-                exec("rm -rf {$file}");
+        foreach ($paths as $path) {
+            if ($path !== "docs" && $path !== "." && $path !== "..") {
+                exec("rm -rf {$path}");
             }
         }
     }
