@@ -86,12 +86,14 @@ class UpdateTask extends BuildTask
             mkdir("{$path}/src");
         }
 
-        if (!file_exists("{$path}/src/{$folder}_{$branch}")) {
-            $this->printLine("cloning " . $remote . "/" . $branch);
-
-            chdir("{$path}/src");
-            exec("git clone -q git://github.com/{$remote}.git {$folder}_{$branch} --quiet");
+        if (file_exists("{$path}/src/{$folder}_{$branch}")) {
+            exec("rm -rf {$path}/src/{$folder}_{$branch}");
         }
+
+        $this->printLine("cloning " . $remote . "/" . $branch);
+
+        chdir("{$path}/src");
+        exec("git clone -q git://github.com/{$remote}.git {$folder}_{$branch} --quiet");
 
         chdir("{$path}/src/{$folder}_{$branch}");
         exec("git fetch origin");
