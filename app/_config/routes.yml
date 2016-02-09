@@ -1,5 +1,5 @@
 ---
-Name: docs
+Name: docs-routes
 After: framework/routes#coreroutes
 ---
 Director:
