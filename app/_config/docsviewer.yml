@@ -18,8 +18,14 @@ DocumentationManifest:
     -
       Path: "src/framework_3/docs/"
       Title: "Framework"
-      Version: "3.3"
+      Version: "3.4"
       Branch: "3"
+      DefaultEntity: true
+    -
+      Path: "src/framework_3.3/docs/"
+      Title: "Framework"
+      Version: "3.3"
+      Branch: "3.3"
       DefaultEntity: true
     -
       Path: "src/framework_3.2/docs/"
