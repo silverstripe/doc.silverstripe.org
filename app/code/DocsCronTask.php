@@ -1,6 +1,6 @@
 <?php
 
-class UpdateDocsCronTask implements CronTask {
+class DocsCronTask implements CronTask {
 	/**
 	 * 
 	 * @return string
