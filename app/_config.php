@@ -58,9 +58,7 @@ Config::inst()->update('DocumentationSearch', 'boost_by_path', array(
 ));
 
 // Set shared index (avoid issues with different temp paths between CLI and web users)
-if(file_exists(BASE_PATH . '/.lucene-index')) {
-	Config::inst()->update('DocumentationSearch', 'index_location', BASE_PATH . '/.lucene-index');
-}
+Config::inst()->update('DocumentationSearch', 'index_location', BASE_PATH . '/assets/.lucene-index');
 
 // Fix invalid character in iconv
 // see http://stackoverflow.com/questions/4723135/invalid-characters-for-lucene-text-search
