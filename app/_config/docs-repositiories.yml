@@ -29,8 +29,4 @@ UpdateTask:
     -
       - silverstripe/silverstripe-framework
       - framework
-      - "3"
-    -
-      - silverstripe/silverstripe-framework
-      - framework
       - "2.4"
