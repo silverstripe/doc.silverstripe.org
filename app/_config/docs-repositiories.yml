@@ -13,6 +13,10 @@ UpdateTask:
     -
       - silverstripe/silverstripe-framework
       - framework
+      - "3.3"
+    -
+      - silverstripe/silverstripe-framework
+      - framework
       - "3.2"
     -
       - silverstripe/silverstripe-framework
