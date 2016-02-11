@@ -22,7 +22,7 @@ DocumentationManifest:
       Branch: "3.3"
       DefaultEntity: true
     -
-      Path: "src/framework_3.2/docs/"
+      Path: "assets/src/framework_3.2/docs/"
       Title: "Framework"
       Version: "3.2"
       Stable: true
