@@ -38,7 +38,7 @@ DocumentationManifest:
       Version: "3.0"
       DefaultEntity: true
     -
-      Path: "asserts/src/framework_2.4/docs/"
+      Path: "assets/src/framework_2.4/docs/"
       Title: "Framework"
       Version: "2.4"
       DefaultEntity: true
