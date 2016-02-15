@@ -4,10 +4,11 @@
 	"require": {
 		"ext-gd": "*",
 		"ext-mbstring": "*",
-		"silverstripe/docsviewer": "dev-master",
+		"silverstripe/docsviewer": "^1.2",
 		"silverstripe/framework": "^3.2",
 		"silverstripe/toolbar": "^4.0",
-		"silverstripe/dynamodb": "^1.1"
+		"silverstripe/dynamodb": "^1.1",
+		"mandrew/silverstripe-quickfeedback": "^0.2"
 	},
 	"require-dev": {
 		"phpunit/PHPUnit": "~3.7@stable"
