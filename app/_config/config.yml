@@ -10,3 +10,6 @@ StaticExporter:
 Controller:
   extensions:
     - ControllerExtension
+QuickFeedbackExtension:
+  redirect_field: true
+  rate_limit: 1
