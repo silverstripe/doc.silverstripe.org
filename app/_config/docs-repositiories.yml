@@ -1,0 +1,32 @@
+---
+Name: docs-repos
+After:
+  - framework/*
+  - cms/*
+---
+RefreshMarkdownTask:
+  documentation_repositories:
+    -
+      - silverstripe/silverstripe-framework
+      - framework
+      - master
+    -
+      - silverstripe/silverstripe-framework
+      - framework
+      - "3.3"
+    -
+      - silverstripe/silverstripe-framework
+      - framework
+      - "3.2"
+    -
+      - silverstripe/silverstripe-framework
+      - framework
+      - "3.1"
+    -
+      - silverstripe/silverstripe-framework
+      - framework
+      - "3.0"
+    -
+      - silverstripe/silverstripe-framework
+      - framework
+      - "2.4"

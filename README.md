@@ -3,7 +3,7 @@
 This is the source code powering http://docs.silverstripe.org. It
 primarily consists of the SilverStripe
 [framework](https://github.com/silverstripe/silverstripe-framework)
-and [docsviewer](https://github.com/silverstripe/silverstripe-docsviewer)
+and the [docsviewer](https://github.com/silverstripe/silverstripe-docsviewer)
 module with minimal configuration.
 
 For adding functionality or editing the style of the documentation see the 
@@ -15,9 +15,15 @@ To set up a test instance:
 
  * Clone this repository to a LAMP server.
  * Install [Composer](http://docs.silverstripe.org/en/getting_started/composer)
+ * Install [sake](https://docs.silverstripe.org/en/developer_guides/cli/).
  * After installing composer run `composer install --prefer-source` to grab the modules.
- * Run `make update` to check out the repositories from which it builds the
- docs (this will take a while the first time)
+ * Run the docs crontask in the browser `dev/tasks/UpdateDocsCronTask`
+   to download all fresh markdown documentation files and reindex them. Note: this
+   will take some time to run. Alternatively, you can use sake
+   to perform these tasks by firstly running the command `sake
+   dev/tasks/RefreshMarkdownTask flush=1` and secondly `sake
+   dev/tasks/RebuildLuceneDocsIndex flush=1`.
+ * Make sure to flush the cache for markdown content to show up.
 
 ## Source Documentation Files
 
@@ -27,17 +33,33 @@ ignored from this repository to allow for easier updating and to keep this
 project small.
 
 To update or download the source documentation at any time run the following
-make command in your terminal:
+BuildTask command with sake:
 
 	cd /Sites/doc.silverstripe.org/
-	make fetch
+	sake dev/tasks/RefreshMarkdownTask flush=1
 
-`make fetch` will call bin/update.sh to download / update each module as listed
-in the bin/update.sh file.
+This build task will download / update each module as listed in the
+`app/_config/docs-repositories.yml` file. Running `sake
+dev/tasks/RebuildLuceneDocsIndex flush=1` will then create a search
+index and reindex the documentation to facilitate searching.
 
-Once the `make fetch` command has executed and downloaded the latest files,
+Once the build task has executed and downloaded the latest files,
 those files are registered along with the module version the folder relates to
-through the [docsviewer.yml](https://github.com/silverstripe/doc.silverstripe.org/blob/master/app/_config/docsviewer.yml) file.
+through the `app/_config/docsviewer.yml` file.
+
+```yaml
+DocumentationManifest:
+  register_entities:
+    -
+      Path: "src/framework_3.2/docs/"
+      Title: "Developer Documentation"
+      Version: "3.2"
+      Stable: true
+      DefaultEntity: true
+```
+
+Set `Stable: true` on the set of documentation relating the current stable version of SilverStripe.
+
 
 ## Contribution
 
@@ -56,9 +78,12 @@ docs.silverstripe.org via a cron job.
 
 ## Cron job
 
-The cron job keeps docs.silverstripe.org up to date with the latest code. This
-cron task calls `make update`, a script that fetches the latest documentation
-for each module from git and rebuilds the search indexes.
+The cron job `UpdateDocsCronTask` includes tasks that fetch the latest documentation for each module from git and rebuilds the search indexes.
 
-	05 * * * * sites make -f /sites/ss2doc-v2/www/Makefile -C /sites/ss2doc-v2/www update
+	public function getSchedule() {
+        return "0 20 * * *"; // runs process() function every day at 8PM
+	}
 
+## Deployment
+
+Deployment is via the SilverStripe Platform deployment tool and uses StackShare.

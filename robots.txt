@@ -1,4 +1,5 @@
 User-agent: *
-Disallow: /src/
-Disallow: /en/4.0/
-Disallow: /en/3.3/
+Disallow: /admin
+Disallow: /assets/src
+Disallow: /assets/.lucene-index
+Crawl-Delay: 4
