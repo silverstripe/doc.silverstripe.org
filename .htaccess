@@ -29,10 +29,13 @@ ErrorDocument 500 /assets/error-500.html
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 
+	RewriteCond %{HTTP_HOST} ^(.*).silverstripe.com$ [NC]
+    RewriteRule ^(.*)$ https://docs.silverstripe.org/$1 [L,R=301]
+
 	# Legacy rewrite from sapphire/ to framework/ namespace
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_URI} !^framework/main\.php
-	RewriteRule ^sapphire/?(.*) http://doc.silverstripe.org/framework/$1 [R=301,L]
+	RewriteRule ^sapphire/?(.*) https://docs.silverstripe.org/framework/$1 [R=301,L]
 	
 	# Rewrite framework to the new base url
 	RewriteCond %{REQUEST_URI} ^/?framework/en/
@@ -41,7 +44,7 @@ ErrorDocument 500 /assets/error-500.html
 	# DokuWiki rewrite rules: Need to happen before other rules in order to redirect /doku.php?id=<pagename>
 	# to /pagename, which can then be matched by the legacy rewrite rules further down
 	RewriteCond %{QUERY_STRING}          ^(\bid\b=([^&]*)&?(.*)?)
-	RewriteRule ^doku.php$                http://doc.silverstripe.org/%2?%3 [R=301,L]
+	RewriteRule ^doku.php$                https://docs.silverstripe.org/%2?%3 [R=301,L]
 
 	# Redirect legacy URLs (assumes we're not redirecting other assets, for performance reasons)
 	# Note: Just works on top-level domains, not if the webroot is in a subfolder
