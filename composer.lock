@@ -418,16 +418,16 @@
         },
         {
             "name": "mandrew/silverstripe-quickfeedback",
-            "version": "0.2.0",
+            "version": "0.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mandrew/silverstripe-quickfeedback.git",
-                "reference": "b2f28c28ed089a4f5ea5d2d870f47de77e854b3c"
+                "reference": "5a2315a3f2ba18aafcff6872a5dbb498aa8f2ab5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mandrew/silverstripe-quickfeedback/zipball/b2f28c28ed089a4f5ea5d2d870f47de77e854b3c",
-                "reference": "b2f28c28ed089a4f5ea5d2d870f47de77e854b3c",
+                "url": "https://api.github.com/repos/mandrew/silverstripe-quickfeedback/zipball/5a2315a3f2ba18aafcff6872a5dbb498aa8f2ab5",
+                "reference": "5a2315a3f2ba18aafcff6872a5dbb498aa8f2ab5",
                 "shasum": ""
             },
             "require": {
@@ -453,7 +453,7 @@
                 "member",
                 "silverstripe"
             ],
-            "time": "2016-02-15 21:06:37"
+            "time": "2016-02-15 23:36:59"
         },
         {
             "name": "mtdowling/cron-expression",
