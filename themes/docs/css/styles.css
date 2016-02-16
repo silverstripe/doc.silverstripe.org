@@ -12,3 +12,79 @@
 #VersionsArchive {
 	float: right;
 }
+
+/* quick feedback button styles */
+.quickfeedback {
+	background-color: #f6f7f8;
+	padding: 30px 0;
+}
+.quickfeedback fieldset,
+.quickfeedback .Actions {
+	padding: 0 30px;
+}
+.quickfeedback h4,
+.quickfeedback .textarea label,
+.quickfeedback textarea {
+ 	margin: 0 0 10px;
+ }
+.quickfeedback h4 {
+ 	font-weight: bold;
+}
+.quickfeedback h4,
+.quickfeedback .textarea label,
+.quickfeedback .btn,
+.quickfeedback input {
+	font-size: 14px;
+}
+.quickfeedback .textarea label {
+	display: block;
+	line-height: 21px;
+}
+.quickfeedback .btn,
+.quickfeedback input {
+	text-transform: uppercase;
+	padding: 10px 30px; 
+	margin-right: 7px;
+	border-width: 1px;
+}
+.quickfeedback .field.textarea {
+	padding-top: 20px;
+}
+.quickfeedback textarea {
+	width: 100%;
+    outline: none;
+    border-radius: 2px;
+    border: 1px solid #ddd;
+    padding: 9px;
+}
+.quickfeedback .action {
+    border-radius: 4px;
+    font-weight: 400;
+    line-height: 21px;
+}
+.quickfeedback .btn,
+.quickfeedback .action {
+	background-color: #fafafa;
+	color: #212121;
+}
+.quickfeedback .btn:hover,
+.quickfeedback .action:hover {
+	background-color: #fff;
+}
+
+form .message {
+	display: block;
+	margin-bottom: 0;
+	font-weight:400;
+	border-radius:4px;
+	padding: 10px 15px;
+	clear: both;
+	margin: 0 15px 20px;
+}
+form .message.good {
+	background: #CAF7FF;
+}
+form .message.error {
+	background: #FF8480;
+	color:#fff;
+}
