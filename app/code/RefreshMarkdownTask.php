@@ -94,7 +94,7 @@ class RefreshMarkdownTask extends BuildTask
         $this->printLine("cloning " . $remote . "/" . $branch);
 
         chdir("{$path}/src");
-        exec("git clone -q https://github.com/{$remote}.git {$folder}_{$branch} --depth 1 --branch {$branch} --single-branch");
+        exec("git clone -q https://github.com/{$remote}.git {$folder}_{$branch} --branch {$branch} --single-branch");
 
         chdir("{$path}/src/{$folder}_{$branch}");
     }
@@ -106,6 +106,10 @@ class RefreshMarkdownTask extends BuildTask
      */
     private function cleanRepository(array $repository)
     {
+	
+	// if the dev=1 flag is used when invoking RefreshMarkdownTask the git repos are kept.
+	if( isset($_REQUEST['dev']) && $_REQUEST['dev'] ) return;
+
         $paths = array_merge(glob("*"), glob(".*"));
 
         foreach ($paths as $path) {

@@ -1,7 +1,6 @@
 # doc.silverstripe.org
 
-This is the source code powering http://docs.silverstripe.org. It
-primarily consists of the SilverStripe
+This is the source code powering http://docs.silverstripe.org and primarily consists of the SilverStripe
 [framework](https://github.com/silverstripe/silverstripe-framework)
 and the [docsviewer](https://github.com/silverstripe/silverstripe-docsviewer)
 module with minimal configuration.
@@ -9,43 +8,71 @@ module with minimal configuration.
 For adding functionality or editing the style of the documentation see the 
 [docsviewer](http://github.com/silverstripe/silverstripe-docsviewer) module.
 
-## Development
-
-To set up a test instance:
-
- * Clone this repository to a LAMP server.
- * Install [Composer](http://docs.silverstripe.org/en/getting_started/composer)
- * Install [sake](https://docs.silverstripe.org/en/developer_guides/cli/).
- * After installing composer run `composer install --prefer-source` to grab the modules.
- * Run the docs crontask in the browser `dev/tasks/UpdateDocsCronTask`
-   to download all fresh markdown documentation files and reindex them. Note: this
-   will take some time to run. Alternatively, you can use sake
-   to perform these tasks by firstly running the command `sake
-   dev/tasks/RefreshMarkdownTask flush=1` and secondly `sake
-   dev/tasks/RebuildLuceneDocsIndex flush=1`.
- * Make sure to flush the cache for markdown content to show up.
-
 ## Source Documentation Files
 
-Documentation for each module is stored on the filesystem via a full git clone
-of the module to the `src/` subdirectory in this project. These checkouts are
-ignored from this repository to allow for easier updating and to keep this
-project small.
+The source documentation markdown files are stored and maintained in the
+[framework repository](https://github.com/silverstripe/silverstripe-framework/),
+ within the `docs` directory. In order for `doc.silverstripe.org` to
+render the most current versions of these source markdown files for
+viewing, the files must first be downloaded and reindexed (see the Installation section below).
 
-To update or download the source documentation at any time run the following
-BuildTask command with sake:
+## Installing and Contributing
 
-	cd /Sites/doc.silverstripe.org/
+Follow these instruction to set up a local test instance of
+`doc.silverstripe.org` for offline viewing and/or contributing. 
+
+1. Clone this repository to a LAMP server. For example, the command
+
+```	
+	git clone https://github.com/silverstripe/doc.silverstripe.org path/to/webroot/ssdocs
+```
+
+will create a repository named `ssdocs` within `path/to/webroot/.
+
+1. Install [Composer](http://docs.silverstripe.org/en/getting_started/composer).
+1. Install required modules with the commands:
+```	
+	cd path/to/webroot/ssdocs
+    composer install --prefer-source
+```	
+1. Install [sake](https://docs.silverstripe.org/en/developer_guides/cli/).
+1. Refresh the markdown documentation files with the commands:
+
+```	
+	cd path/to/webroot/ssdocs
 	sake dev/tasks/RefreshMarkdownTask flush=1
+```	
+Note: if you are contributing you need to also add a 'dev' flag to
+keep the git repositories. So, use the following command instead:
 
-This build task will download / update each module as listed in the
-`app/_config/docs-repositories.yml` file. Running `sake
-dev/tasks/RebuildLuceneDocsIndex flush=1` will then create a search
-index and reindex the documentation to facilitate searching.
+```	
+	sake dev/tasks/RefreshMarkdownTask flush=1 dev=1
+```	
+1. Reindex the markdown documentation files with the commands:
+```	
+	cd path/to/webroot/ssdocs
+	sake dev/tasks/RebuildLuceneDocsIndex flush=1
+```	
+Note: rebuilding the indexes will take some time to complete.
+1. After completing the above Installation instructions, you can edit
+   the documentation markdown files, which are stored in
+   `path/to/webroot/doc.silverstripe.org/assets/src/framework_*`, one
+   for each version branch of the framework. After editing these
+   files, your changes must be pushed to the appropriate branch of the
+   [framework repository](https://github.com/silverstripe/silverstripe-framework/).
+   A cron job `UpdateDocsCronTask` runs `RefreshMarkdownTask` and
+   `RebuildLuceneDocsIndex` on the SilverStripe docs server at 8PM
+   each day so after your changes have been reviewed and merged into
+   the codebase, they will appear live on
+   https://docs.silverstripe.org after the cron job has completed.
 
-Once the build task has executed and downloaded the latest files,
-those files are registered along with the module version the folder relates to
-through the `app/_config/docsviewer.yml` file.
+## Maintenance and Deployment
+
+Deployment on the SilverStripe docs server is via the SilverStripe
+Platform deployment tool and uses StackShare.
+
+In order to add a new version or update which version is stable, update 
+the `app/_config/docsviewer.yml` file:
 
 ```yaml
 DocumentationManifest:
@@ -58,32 +85,16 @@ DocumentationManifest:
       DefaultEntity: true
 ```
 
-Set `Stable: true` on the set of documentation relating the current stable version of SilverStripe.
+Set `Stable: true` on the set of documentation relating the current
+stable version of SilverStripe.
 
+Also, update the `app/_config/docs-repositories.yml` file if needed:
 
-## Contribution
-
-To contribute an improvement to the docs.silverstripe.org functionality or
-theme, submit a pull request on GitHub. Any approved pull requests will make
-their way onto the docs.silverstripe.org site in the next release.
-
-The content for docs.silverstripe.org is stored in the modules
-repository inside a "docs" folder (for example, the framework
-documentation is stored at
-[https://github.com/silverstripe/silverstripe-framework/tree/master/docs](https://github.com/silverstripe/silverstripe-framework/tree/master/docs).
-
-If you wish to edit the documentation content, submit a pull request on that
-Github project. Updates to the content are synced regularly with
-docs.silverstripe.org via a cron job.
-
-## Cron job
-
-The cron job `UpdateDocsCronTask` includes tasks that fetch the latest documentation for each module from git and rebuilds the search indexes.
-
-	public function getSchedule() {
-        return "0 20 * * *"; // runs process() function every day at 8PM
-	}
-
-## Deployment
-
-Deployment is via the SilverStripe Platform deployment tool and uses StackShare.
+```yaml
+RefreshMarkdownTask:
+  documentation_repositories:
+    -
+      - silverstripe/silverstripe-framework
+      - framework
+      - "3.2"
+```
