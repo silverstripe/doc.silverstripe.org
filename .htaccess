@@ -30,7 +30,7 @@ ErrorDocument 500 /assets/error-500.html
 	RewriteEngine On
 
 	RewriteCond %{HTTP_HOST} ^docs?.silverstripe.com$ [NC]
-    RewriteRule ^(.*)$ https://docs.silverstripe.org/$1 [L,R=301]
+	RewriteRule ^(.*)$ https://docs.silverstripe.org/$1 [L,R=301]
 
 	# Legacy rewrite from sapphire/ to framework/ namespace
 	RewriteCond %{REQUEST_FILENAME} !-f
