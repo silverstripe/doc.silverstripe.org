@@ -29,8 +29,8 @@ ErrorDocument 500 /assets/error-500.html
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 
-	RewriteCond %{HTTP_HOST} ^docs?.silverstripe.com$ [NC]
-    RewriteRule ^(.*)$ https://docs.silverstripe.org/$1 [L,R=301]
+	RewriteCond %{HTTP_HOST} ^(docs?.silverstripe.com|doc.silverstripe.org|beta.docs.silverstripe.org)$ [NC]
+	RewriteRule ^(.*)$ https://docs.silverstripe.org/$1 [L,R=301]
 
 	# Legacy rewrite from sapphire/ to framework/ namespace
 	RewriteCond %{REQUEST_FILENAME} !-f
