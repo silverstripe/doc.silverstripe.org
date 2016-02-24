@@ -26,7 +26,6 @@ DocumentationManifest:
       Path: "assets/src/framework_3.2/docs/"
       Title: "Framework"
       Version: "3.2"
-      Stable: true
       DefaultEntity: true
     -
       Path: "assets/src/framework_3.1/docs/"
