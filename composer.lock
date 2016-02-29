@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9f1ebf69ac08e2236c2eb2d037edba18",
-    "content-hash": "f88a0b9a12e2d68c269af2e927349145",
+    "hash": "9742d16b8852a7de2416f98188896f0a",
+    "content-hash": "46719e6018290fda5408ffefd5c0952f",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -418,16 +418,16 @@
         },
         {
             "name": "mandrew/silverstripe-quickfeedback",
-            "version": "0.2.2",
+            "version": "0.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mandrew/silverstripe-quickfeedback.git",
-                "reference": "5a2315a3f2ba18aafcff6872a5dbb498aa8f2ab5"
+                "reference": "3cf1b0356074579c2fc837a68660009de88300a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mandrew/silverstripe-quickfeedback/zipball/5a2315a3f2ba18aafcff6872a5dbb498aa8f2ab5",
-                "reference": "5a2315a3f2ba18aafcff6872a5dbb498aa8f2ab5",
+                "url": "https://api.github.com/repos/mandrew/silverstripe-quickfeedback/zipball/3cf1b0356074579c2fc837a68660009de88300a4",
+                "reference": "3cf1b0356074579c2fc837a68660009de88300a4",
                 "shasum": ""
             },
             "require": {
@@ -453,7 +453,7 @@
                 "member",
                 "silverstripe"
             ],
-            "time": "2016-02-15 23:36:59"
+            "time": "2016-02-18 04:32:50"
         },
         {
             "name": "mtdowling/cron-expression",
@@ -724,16 +724,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.2",
+            "version": "v2.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "ee278f7c851533e58ca307f66305ccb9188aceda"
+                "reference": "78c468665c9568c3faaa9c416a7134308f2d85c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/ee278f7c851533e58ca307f66305ccb9188aceda",
-                "reference": "ee278f7c851533e58ca307f66305ccb9188aceda",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/78c468665c9568c3faaa9c416a7134308f2d85c3",
+                "reference": "78c468665c9568c3faaa9c416a7134308f2d85c3",
                 "shasum": ""
             },
             "require": {
@@ -780,7 +780,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-01-13 10:28:07"
+            "time": "2016-01-27 05:14:19"
         },
         {
             "name": "unclecheese/display-logic",
@@ -1192,16 +1192,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.2",
+            "version": "v2.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "34c8a4b51e751e7ea869b8262f883d008a2b81b8"
+                "reference": "2a4ee40acb880c56f29fb1b8886e7ffe94f3b995"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/34c8a4b51e751e7ea869b8262f883d008a2b81b8",
-                "reference": "34c8a4b51e751e7ea869b8262f883d008a2b81b8",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/2a4ee40acb880c56f29fb1b8886e7ffe94f3b995",
+                "reference": "2a4ee40acb880c56f29fb1b8886e7ffe94f3b995",
                 "shasum": ""
             },
             "require": {
@@ -1237,7 +1237,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-01-13 10:28:07"
+            "time": "2016-02-23 07:41:20"
         }
     ],
     "aliases": [],
