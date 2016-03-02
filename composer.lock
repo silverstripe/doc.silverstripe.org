@@ -549,16 +549,16 @@
         },
         {
             "name": "silverstripe/docsviewer",
-            "version": "1.3.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "cf7505b340966252d9fef504dd880c63e6152a9d"
+                "reference": "405af6b3778399a7d8334067c3dc6e5ad1b75e11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/cf7505b340966252d9fef504dd880c63e6152a9d",
-                "reference": "cf7505b340966252d9fef504dd880c63e6152a9d",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/405af6b3778399a7d8334067c3dc6e5ad1b75e11",
+                "reference": "405af6b3778399a7d8334067c3dc6e5ad1b75e11",
                 "shasum": ""
             },
             "require": {
@@ -586,7 +586,7 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2016-02-06 00:54:31"
+            "time": "2016-02-29 21:35:56"
         },
         {
             "name": "silverstripe/dynamodb",
@@ -631,16 +631,16 @@
         },
         {
             "name": "silverstripe/framework",
-            "version": "3.2.1",
+            "version": "3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-framework.git",
-                "reference": "0178fa5a1873a0f1d6100268c86dab81a18c23a5"
+                "reference": "fb582332010873c1ec03f5644263667f615b1f98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/0178fa5a1873a0f1d6100268c86dab81a18c23a5",
-                "reference": "0178fa5a1873a0f1d6100268c86dab81a18c23a5",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/fb582332010873c1ec03f5644263667f615b1f98",
+                "reference": "fb582332010873c1ec03f5644263667f615b1f98",
                 "shasum": ""
             },
             "require": {
@@ -651,6 +651,11 @@
                 "phpunit/phpunit": "~3.7"
             },
             "type": "silverstripe-module",
+            "extra": {
+                "branch-alias": {
+                    "3.x-dev": "3.3.x-dev"
+                }
+            },
             "autoload": {
                 "classmap": [
                     "tests/behat/features/bootstrap"
@@ -676,7 +681,7 @@
                 "framework",
                 "silverstripe"
             ],
-            "time": "2015-11-16 03:17:10"
+            "time": "2016-02-29 02:23:25"
         },
         {
             "name": "silverstripe/toolbar",
