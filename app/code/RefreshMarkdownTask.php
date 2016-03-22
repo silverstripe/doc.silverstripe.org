@@ -106,6 +106,9 @@ class RefreshMarkdownTask extends BuildTask
      */
     private function cleanRepository(array $repository)
     {
+        // if the dev=1 flag is used when invoking RefreshMarkdownTask the git repos are kept, enabling local development of framework.
+        if( isset($_REQUEST['dev']) && $_REQUEST['dev'] ) return;
+
         $paths = array_merge(glob("*"), glob(".*"));
 
         foreach ($paths as $path) {
