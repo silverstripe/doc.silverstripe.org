@@ -94,7 +94,7 @@ class RefreshMarkdownTask extends BuildTask
         $this->printLine("cloning " . $remote . "/" . $branch);
 
         chdir("{$path}/src");
-        exec("git clone -q https://github.com/{$remote}.git {$folder}_{$branch} --depth 1 --branch {$branch} --single-branch");
+        exec("git clone -q https://github.com/{$remote}.git {$folder}_{$branch} --branch {$branch}");
 
         chdir("{$path}/src/{$folder}_{$branch}");
     }
