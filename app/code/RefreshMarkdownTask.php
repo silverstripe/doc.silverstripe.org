@@ -9,9 +9,14 @@ class RefreshMarkdownTask extends BuildTask
     private static $documentation_repositories;
 
     /**
+     * @var SS_HTTPRequest $request The request object the controller was called with.
+    */
+    protected $request = null;
+
+    /**
      * @var string
      */
-    protected $title = "Refresh markdown files";
+    protected $title = "RefreshMarkdownTask";
 
     /**
      * @var string
@@ -30,13 +35,11 @@ class RefreshMarkdownTask extends BuildTask
      */
     public function run($request)
     {
-        $this->printLine("refreshing markdown files...");
-
+        $this->request = $request;
+        $this->printLine("Refreshing markdown files...");
         $repositories = $this->getRepositories();
-
         foreach ($repositories as $repository) {
             $this->cloneRepository($repository);
-            $this->cleanRepository($repository);
         }
     }
 
@@ -64,7 +67,6 @@ class RefreshMarkdownTask extends BuildTask
      * Returns the array of repos to source markdown docs from
      *
      * @return array
-     *
      */
     private function getRepositories()
     {
@@ -78,40 +80,42 @@ class RefreshMarkdownTask extends BuildTask
     }
 
     /**
-     * @param array $repository
+     * Clone $repository which contains the most current documentation source markdown files
      *
-     * @todo test this works with all modules
+     * @param array $repository
      */
     private function cloneRepository(array $repository)
     {
+
         list($remote, $folder, $branch) = $repository;
 
         $path = $this->getPath();
 
         exec("mkdir -p {$path}/src");
         exec("rm -rf {$path}/src/{$folder}_{$branch}");
-
-        $this->printLine("cloning " . $remote . "/" . $branch);
-
         chdir("{$path}/src");
-        exec("git clone -q https://github.com/{$remote}.git {$folder}_{$branch} --depth 1 --branch {$branch} --single-branch");
 
-        chdir("{$path}/src/{$folder}_{$branch}");
-    }
+        // If the dev=1 flag is used when RefreshMarkdownTask is run, a full git clone of the framework repository is kept
+        // to enable local development of framework and doc.silverstripe.org from within doc.silverstripe.org. Otherwise,
+        // only a shallow clone of the framework repository is made and all non-markdown files deleted, only allowing viewing
+        // of documentation files. Note: The --depth 1 option in the git clone command implies the option --single-branch
 
-    /**
-     * Clears out any non markdown files stored in assets
-     *
-     * @param array $repository
-     */
-    private function cleanRepository(array $repository)
-    {
-        $paths = array_merge(glob("*"), glob(".*"));
-
-        foreach ($paths as $path) {
-            if ($path !== "docs" && $path !== "." && $path !== "..") {
-                exec("rm -rf {$path}");
+        if( $this->request->getVar('dev') ) {
+            $this->printLine("Performing full clone of " . $remote . "/" . $branch);
+            exec("git clone -q https://github.com/{$remote}.git {$folder}_{$branch} --branch {$branch}");
+        } else {
+            $this->printLine("Performing shallow clone of " . $remote . "/" . $branch);
+            exec("git clone -q https://github.com/{$remote}.git {$folder}_{$branch} --branch {$branch} --depth 1");
+            $this->printLine("Deleting non-documentation framework files from shallow clone of " . $remote . "/" . $branch);
+            chdir("{$path}/src/{$folder}_{$branch}");
+            $framework_paths = array_merge(glob("*"), glob(".*"));
+            foreach ($framework_paths as $framework_path) {
+                if ( $framework_path !== "docs" && $framework_path !=="." && $framework_path !==".." ) {
+                    exec("rm -rf {$framework_path}");
+                }
             }
         }
+
     }
+
 }
