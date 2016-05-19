@@ -16,6 +16,13 @@ DocumentationManifest:
       Branch: "master"
       DefaultEntity: true
     -
+      Path: "assets/src/framework_3.4/docs/"
+      Title: "Framework"
+      Version: "3.4"
+      Branch: "3.4"
+      Stable: false
+      DefaultEntity: true
+    -
       Path: "assets/src/framework_3.3/docs/"
       Title: "Framework"
       Version: "3.3"
