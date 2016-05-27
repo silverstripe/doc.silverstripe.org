@@ -103,7 +103,7 @@ class RefreshMarkdownTask extends BuildTask
         // to enable local development of framework and doc.silverstripe.org from within doc.silverstripe.org. Otherwise,
         // only the documentation source files are downloaded, only allowing the viewing of documentation files. 
 
-        if( $this->request->getVar('dev') ) {
+        if ($this->request instanceof SS_HTTPRequest && $this->request->getVar('dev')) {
             $this->printLine("Cloning repository {$remote}/{$branch} into assets/src/{$folder}_{$branch}");
             exec("git clone --quiet https://github.com/{$remote}.git {$folder}_{$branch} --branch {$branch}");
         } else {
