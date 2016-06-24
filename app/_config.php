@@ -15,7 +15,7 @@ if(isset($_ENV['CLEARDB_DATABASE_URL'])) {
 	global $databaseConfig;
 
 	$parts = parse_url($_ENV['CLEARDB_DATABASE_URL']);
-	
+
 	$databaseConfig['type'] = 'MySQLDatabase';
 	$databaseConfig['server'] = $parts['host'];
 	$databaseConfig['username'] = $parts['user'];
@@ -51,6 +51,12 @@ DocumentationSearch::set_meta_data(array(
 	'Description' => 'Documentation for SilverStripe CMS / Framework',
 	'Tags' => 'silverstripe sapphire php framework cms content management system'
 ));
+
+// SS Platform logging
+if(defined('AWS_SYSLOG_LEVEL')) {
+    $sysLogWriter = new SS_SysLogWriter('silverstripe', LOG_PID | LOG_CONS);
+    SS_Log::add_writer($sysLogWriter, (int)AWS_SYSLOG_LEVEL, '<=');
+}
 
 // Changelogs have heaps of phrases, but are rarely relevant for content searches
 Config::inst()->update('DocumentationSearch', 'boost_by_path', array(
