@@ -28,20 +28,20 @@ class GitMarkdownUpdater implements MarkdownUpdater
 	 */
 	protected function doFetch($path, $branch) {
 		$errors = array();
-		$checkoutCommand = sprintf(
-			'cd %s && git checkout %s',
+		$fetchCommand = sprintf(
+			'cd %s && git fetch origin %s',
 			escapeshellarg($path),
 			escapeshellarg($branch)
 		);
-		$pullCommand = sprintf(
-			'cd %s && git pull origin %s',
+		$resetCommand = sprintf(
+			'cd %s && git reset --hard origin/%s',
 			escapeshellarg($path),
 			escapeshellarg($branch)
 		);
 
 		// Run
-		if($this->runCommand($checkoutCommand, $errors)) {
-			$this->runCommand($pullCommand, $errors);
+		if($this->runCommand($fetchCommand, $errors)) {
+			$this->runCommand($resetCommand, $errors);
 		}
 		return $errors;
     }
@@ -73,9 +73,12 @@ class GitMarkdownUpdater implements MarkdownUpdater
 	 * @return bool Flag if the command was successful
 	 */
 	protected function runCommand($cmd, &$errors = array()) {
-		exec($cmd, $output, $result);
+		exec("{$cmd} 2>&1 >/dev/null", $output, $result);
 		if($result) {
-			$errors[] = "Error running command {$cmd}";
+			$errors[] = "Error running command {$cmd}:";
+			foreach($output as $error) {
+				$errors[] = ' * ' . $error;
+			}
 			return false;
 		}
 		return true;
