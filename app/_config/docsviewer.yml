@@ -20,7 +20,7 @@ DocumentationManifest:
       Title: "Framework"
       Version: "3.4"
       Branch: "3.4"
-      Stable: false
+      Stable: true
       DefaultEntity: true
     -
       Path: "assets/src/framework_3.3/docs/"
