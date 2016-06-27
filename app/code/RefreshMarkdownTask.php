@@ -49,12 +49,6 @@ class RefreshMarkdownTask extends BuildTask
         foreach ($repositories as list($repo, $folder, $branch)) {
 			$path =  "{$baseDir}/{$folder}_{$branch}";
 
-			// Pass in ?force=1 to force delete existing repos, rather than trying to update them
-			if($this->request && $this->request->getVar('force') && file_exists($path)) {
-				$this->printLine("Removing {$path}");
-				Filesystem::removeFolder($path);
-			}
-
 			// Pass in ?addonly=1 to only update new branches
 			if($this->request && $this->request->getVar('addonly') && file_exists($path)) {
 				$this->printLine("Skipping update of {$branch}: Already exists at {$path};");
@@ -65,6 +59,12 @@ class RefreshMarkdownTask extends BuildTask
 			if($this->request && ($onlyBranch = $this->request->getVar('branch')) && $onlyBranch != $branch) {
 				$this->printLine("Skipping update of {$branch}: doesn't match provided filter");
 				continue;
+			}
+
+			// Pass in ?force=1 to force delete existing repos, rather than trying to update them
+			if($this->request && $this->request->getVar('force') && file_exists($path)) {
+				$this->printLine("Removing {$path}");
+				Filesystem::removeFolder($path);
 			}
 
 			// Update this repo
