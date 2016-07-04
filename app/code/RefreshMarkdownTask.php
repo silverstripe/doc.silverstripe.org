@@ -111,8 +111,12 @@ class RefreshMarkdownTask extends BuildTask
     {
         $eol = Director::is_cli() ? PHP_EOL : "<br>";
         echo $message . $eol;
-		ob_flush();
+		if(ob_get_level() > 0) {
+			ob_flush();
+		}
 		flush();
+
+
     }
 
 	/**
