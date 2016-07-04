@@ -13,3 +13,7 @@ Controller:
 QuickFeedbackExtension:
   redirect_field: true
   rate_limit: 1
+Injector:
+  MarkdownUpdater:
+    class: GitMarkdownUpdater
+

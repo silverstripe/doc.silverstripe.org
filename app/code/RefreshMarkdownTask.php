@@ -21,7 +21,7 @@ class RefreshMarkdownTask extends BuildTask
     /**
      * @var string
      */
-    protected $description = "Downloads a fresh version of markdown documentation files from source";
+    protected $description = "Downloads a fresh version of markdown documentation files from source. Options are force=1, addonly=1, and branch=<branch>";
 
     /**
      * @var bool
@@ -35,10 +35,50 @@ class RefreshMarkdownTask extends BuildTask
      */
     public function run($request)
     {
-        $this->request = $request;
-        $repositories = $this->getRepositories();
-        foreach ($repositories as $repository) {
-            $this->cloneRepository($repository);
+		$this->request = $request;
+		$repositories = $this->getRepositories();
+		$baseDir = $this->getSourceRoot();
+		$updater = $this->getUpdater();
+
+		// Ensure root directory exists
+		if(!$this->ensureRootDirectory($baseDir)) {
+			return;
+		}
+
+		// Update each repo
+        foreach ($repositories as list($repo, $folder, $branch)) {
+			$path =  "{$baseDir}/{$folder}_{$branch}";
+
+			// Pass in ?addonly=1 to only update new branches
+			if($this->request && $this->request->getVar('addonly') && file_exists($path)) {
+				$this->printLine("Skipping update of {$branch}: Already exists at {$path};");
+				continue;
+			}
+
+			// Check if we want to update only a specific branch
+			if($this->request && ($onlyBranch = $this->request->getVar('branch')) && $onlyBranch != $branch) {
+				$this->printLine("Skipping update of {$branch}: doesn't match provided filter");
+				continue;
+			}
+
+			// Pass in ?force=1 to force delete existing repos, rather than trying to update them
+			if($this->request && $this->request->getVar('force') && file_exists($path)) {
+				$this->printLine("Removing {$path}");
+				Filesystem::removeFolder($path);
+			}
+
+			// Update this repo
+			$this->printLine("Beginning update of {$branch}");
+            $errors = $updater->update($repo, $path, $branch);
+
+			// Handle result
+			if(empty($errors)) {
+				$this->printLine("Successful update of {$branch}");
+			} else {
+				foreach($errors as $error) {
+					$this->error($error);
+				}
+			}
         }
         $this->printLine(" ");
         $this->printLine("To re-index the freshly downloaded documentation files either:");
@@ -46,14 +86,22 @@ class RefreshMarkdownTask extends BuildTask
         $this->printLine("(2) point your browser at the url 'http://localhost/path/to/ssdocs/dev/tasks/RebuildLuceneDocsIndex?flush=1'");
     }
 
+	/**
+	 * Gets the service that will pull down remote markdown files
+	 * @return MarkdownUpdater
+	 */
+	protected function getUpdater() {
+		return Injector::inst()->get('MarkdownUpdater');
+	}
+
     /**
+	 * Get sources root directory
+	 *
      * @return string
-     *
-     * @todo document this new configuration parameter
      */
-    private function getPath()
+    private function getSourceRoot()
     {
-        return ASSETS_PATH;
+        return ASSETS_PATH . '/src';
     }
 
     /**
@@ -61,56 +109,56 @@ class RefreshMarkdownTask extends BuildTask
      */
     private function printLine($message)
     {
-        $this->eol = Director::is_cli() ? PHP_EOL : "<br>";
-        print $message . $this->eol;
-        flush();
+        $eol = Director::is_cli() ? PHP_EOL : "<br>";
+        echo $message . $eol;
+		if(ob_get_level() > 0) {
+			ob_flush();
+		}
+		flush();
+
+
     }
+
+	/**
+	 * Log an error
+	 *
+	 * @param string $message
+	 */
+	protected function error($message)
+	{
+		$this->printLine($message);
+		SS_Log::log($message, SS_Log::ERR);
+	}
 
     /**
      * Returns the array of repos to source markdown docs from
      *
      * @return array
      */
-    private function getRepositories()
+    protected function getRepositories()
     {
-        if($repos = $this->config()->documentation_repositories)
-        {
-            return $repos;
-        } else {
-            user_error("You need to set 'RefreshMarkdownTask:documentation_repositories' array in a yaml configuration file", E_USER_WARNING);
-            return null;
-        }
+        $repositories = $this->config()->documentation_repositories;
+		if(empty($repositories)) {
+			$this->error(
+				"You need to set 'RefreshMarkdownTask:documentation_repositories' array in a yaml configuration file"
+			);
+		}
+		return $repositories;
     }
 
-    /**
-     * Clone $repository which contains the most current documentation source markdown files
-     *
-     * @param array $repository
-     */
-    private function cloneRepository(array $repository)
-    {
-
-        list($remote, $folder, $branch) = $repository;
-
-        $path = $this->getPath();
-
-        exec("mkdir -p {$path}/src");
-        exec("chmod -R 775 {$path}/src" );
-        exec("rm -rf {$path}/src/{$folder}_{$branch}");
-        chdir("{$path}/src");
-
-        // If the dev=1 flag is used when RefreshMarkdownTask is run, a full git clone of the framework repository is kept
-        // to enable local development of framework and doc.silverstripe.org from within doc.silverstripe.org. Otherwise,
-        // only the documentation source files are downloaded, only allowing the viewing of documentation files. 
-
-        if ($this->request instanceof SS_HTTPRequest && $this->request->getVar('dev')) {
-            $this->printLine("Cloning repository {$remote}/{$branch} into assets/src/{$folder}_{$branch}");
-            exec("git clone --quiet https://github.com/{$remote}.git {$folder}_{$branch} --branch {$branch}");
-        } else {
-            $this->printLine("Downloading the latest documentation files from repository {$remote}/{$branch} to assets/src/{$folder}_{$branch}");
-            exec("svn export --quiet https://github.com/{$remote}.git/branches/{$branch}/docs {$folder}_{$branch}/docs");
-        }
-
-    }
+	/**
+	 * Ensure root directory exists
+	 *
+	 * @param string $path
+	 * @return bool True if the directory exists and is writable
+	 */
+	protected function ensureRootDirectory($path) {
+		Filesystem::makeFolder($path);
+		if(is_dir($path) && is_writable($path)) {
+			return true;
+		}
+		$this->error("Could not create {$path}");
+		return false;
+	}
 
 }
