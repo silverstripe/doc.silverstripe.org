@@ -304,7 +304,9 @@ ErrorDocument 500 /assets/error-500.html
 	RewriteRule ^(.*)/tutorials/5-dataobject-relationship-management/?$ /$1/tutorials/dataobject_relationship_management [R=301,L]
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/tutorials/5-dataobject-relationship-management/?$ /$1/tutorials/dataobject-relationship-management [R=301,L]
-	#
+	
+	RewriteCond %{REQUEST_URI} !(3.|2.)
+	RewriteRule ^(.*)/getting_started/coding_conventions/?$ /$1/contributing/coding_conventions [R=301,L]
 
 	# Legacy rewrite: Can't use 'master' as it confuses api.ss.org linking
 	RewriteRule ^framework/en/master(.*) http://doc.silverstripe.org/framework/en/trunk$1 [R=301,L]
