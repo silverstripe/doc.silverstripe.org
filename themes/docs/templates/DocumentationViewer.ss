@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 
 <html>
-	<% include DocumentationHead %>	
+
+	<% include DocumentationHead %>
 	
 	<div id="masthead" <% if Versions %>class="has_versions"<% end_if %>>
 		<div class="wrapper">
