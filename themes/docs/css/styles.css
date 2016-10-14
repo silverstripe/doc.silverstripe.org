@@ -43,7 +43,7 @@
 .quickfeedback .btn,
 .quickfeedback input {
 	text-transform: uppercase;
-	padding: 10px 30px; 
+	padding: 10px 30px;
 	margin-right: 7px;
 	border-width: 1px;
 }
@@ -87,4 +87,14 @@ form .message.good {
 form .message.error {
 	background: #FF8480;
 	color:#fff;
+}
+/* Remove global navigation in mobile view */
+.nav-mobile {
+    display: block;
+}
+
+@media (max-width: 992px) {
+    .nav-mobile{
+        display: none;
+    }
 }

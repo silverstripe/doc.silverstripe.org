@@ -17,8 +17,10 @@
 <header class="site-header" data-0="background-position: 50% 50%;" data-544="background-position: 50% -30%;">
 	<div class="global-nav header-mask">
 		<div id="navWrapper">
-			$GlobalNav('doc')
-			<% include SearchBox %>
+			<div class="nav-mobile">
+				$GlobalNav('doc')
+				<% include SearchBox %>
+			</div>
 		</div>
 	</div>
 </header>
