@@ -96,13 +96,10 @@ form .message.error {
 }
 
 @media (max-width: 992px) {
-    /*.nav-mobile{
-        display: none;
-    }*/
     .site-header {
         display: none;
     }
-    #sidebar a.logo {
+    #sidebar .logo {
         display: block;
         height: 40px;
         margin: 16px;
