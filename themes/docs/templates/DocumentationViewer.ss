@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 
 <html>
-	<% include DocumentationHead %>	
-	
+	<% include DocumentationHead %>
+
 	<div id="masthead" <% if Versions %>class="has_versions"<% end_if %>>
 		<div class="wrapper">
-			<% if Breadcrumbs.count > 1 %>			
+			<a class="menu-toggle">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</a>
+			<% if Breadcrumbs.count > 1 %>
 				<% include DocumentationBreadcrumbs %>
 			<% else_if Page.Title %>
 				<h1>$Page.Title</h1>
@@ -18,8 +24,8 @@
 
 			<% include DocumentationVersions %>
 		</div>
-	</div>	
-	
+	</div>
+
 	<div class="wrapper">
 		<div id="layout" class="clearfix">
 
@@ -27,11 +33,11 @@
 
 			<div id="content">
 				$Layout
-				
+
 				<% include DocumentationFooter %>
 			</div>
 		</div>
 	</div>
-	<% include DocumentationGA %>	
+	<% include DocumentationGA %>
 	<% include DocumentationEnd %>
 </html>
