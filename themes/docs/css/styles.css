@@ -99,11 +99,14 @@ form .message.error {
     .site-header {
         display: none;
     }
-    #sidebar .logo {
-        display: block;
+
+    #masthead .logo {
+        display: inline-block;
+        float: left;
         height: 40px;
-        margin: 16px;
-        background-color: red;
+        width: 100%;
+        margin-bottom: 24px;
+        margin-left: 4px;
         background: url(https://www.silverstripe.org/themes/ssv3/img/global-logo-open-source.svg) no-repeat;
     }
 }

@@ -5,6 +5,7 @@
 
 	<div id="masthead" <% if Versions %>class="has_versions"<% end_if %>>
 		<div class="wrapper">
+			<a class="logo" href="https://docs.silverstripe.org/"></a>
 			<a class="menu-toggle">
 				<span></span>
 				<span></span>
