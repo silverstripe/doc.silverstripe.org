@@ -1,6 +1,7 @@
 <head>
 	<% base_tag %>
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title><% if Title %>$Title &#8211; <% end_if %>SilverStripe Documentation</title>
 
 	<% include DocumentationFavicons %>
@@ -17,8 +18,10 @@
 <header class="site-header" data-0="background-position: 50% 50%;" data-544="background-position: 50% -30%;">
 	<div class="global-nav header-mask">
 		<div id="navWrapper">
-			$GlobalNav('doc')
-			<% include SearchBox %>
+			<div class="nav-mobile">
+				$GlobalNav('doc')
+				<% include SearchBox %>
+			</div>
 		</div>
 	</div>
 </header>
