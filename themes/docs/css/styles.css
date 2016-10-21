@@ -99,12 +99,12 @@ form .message.error {
     .site-header {
         display: none;
     }
-
+    /* SilverStripe logo on top of page */
     #masthead .logo {
         display: inline-block;
         float: left;
         height: 40px;
-        width: 100%;
+        width: 75%; 
         margin-bottom: 24px;
         margin-left: 4px;
         background: url(https://www.silverstripe.org/themes/ssv3/img/global-logo-open-source.svg) no-repeat;
