@@ -8,15 +8,6 @@
 
 			<div class="doc-breadcrumbs">
 				<p>
-					<div class="menu-bar">
-						<a class="logo" href="https://docs.silverstripe.org/"></a>
-						<a class="menu-toggle">
-							<span></span>
-							<span></span>
-							<span></span>
-							<span></span>
-						</a>
-					</div>
 					<a class="breadcrumb" href="$BaseHref">Documentation</a>
 					<span>/</span>
 					<a class="breadcrumb current">Index</a>
