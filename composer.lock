@@ -558,12 +558,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "b8dea84832d46723b0f94e52211227f4ed7d419a"
+                "reference": "9d7a1f621049980167a5a3ba4e7b418a62ee55ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/b8dea84832d46723b0f94e52211227f4ed7d419a",
-                "reference": "b8dea84832d46723b0f94e52211227f4ed7d419a",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/9d7a1f621049980167a5a3ba4e7b418a62ee55ee",
+                "reference": "9d7a1f621049980167a5a3ba4e7b418a62ee55ee",
                 "shasum": ""
             },
             "require": {
@@ -591,7 +591,7 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2016-10-27 21:07:02"
+            "time": "2016-11-07 13:31:41"
         },
         {
             "name": "silverstripe/dynamodb",
