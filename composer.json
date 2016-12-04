@@ -4,7 +4,7 @@
 	"require": {
 		"ext-gd": "*",
 		"ext-mbstring": "*",
-		"silverstripe/docsviewer": "dev-master",
+		"silverstripe/docsviewer": "^2.0@beta",
 		"silverstripe/framework": "^3.2",
 		"silverstripe/toolbar": "^4.2",
 		"silverstripe/dynamodb": "^1.1",
@@ -23,8 +23,5 @@
 		"process-timeout": 600
 	},
 	"minimum-stability": "dev",
-	"prefer-stable": true,
-	"scripts": {
-
-	}
+	"prefer-stable": true
 }
