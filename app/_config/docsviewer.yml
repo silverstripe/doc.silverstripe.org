@@ -12,39 +12,59 @@ DocumentationManifest:
     -
       Path: "assets/src/framework_master/docs/"
       Title: "Framework"
-      Version: "4.0"
+      VersionTitle: "4.x"
+      Version: "4"
       Branch: "master"
+      DefaultEntity: true
+    -
+      Path: "assets/src/framework_3/docs/"
+      Title: "Framework"
+      VersionTitle: "3.x"
+      Version: "3"
+      Branch: "3"
+      Stable: true
       DefaultEntity: true
     -
       Path: "assets/src/framework_3.4/docs/"
       Title: "Framework"
+      VersionTitle: "3.4"
       Version: "3.4"
       Branch: "3.4"
-      Stable: true
+      Archived: true
       DefaultEntity: true
     -
       Path: "assets/src/framework_3.3/docs/"
       Title: "Framework"
+      VersionTitle: "3.3"
       Version: "3.3"
       Branch: "3.3"
+      Archived: true
       DefaultEntity: true
     -
       Path: "assets/src/framework_3.2/docs/"
       Title: "Framework"
+      VersionTitle: "3.3"
       Version: "3.2"
+      Archived: true
       DefaultEntity: true
     -
       Path: "assets/src/framework_3.1/docs/"
       Title: "Framework"
+      VersionTitle: "3.1"
       Version: "3.1"
+      Archived: true
       DefaultEntity: true
     -
       Path: "assets/src/framework_3.0/docs/"
       Title: "Framework"
+      VersionTitle: "3.0"
       Version: "3.0"
+      Archived: true
       DefaultEntity: true
     -
       Path: "assets/src/framework_2.4/docs/"
       Title: "Framework"
+      VersionTitle: "2.4"
       Version: "2.4"
+      Archived: true
       DefaultEntity: true

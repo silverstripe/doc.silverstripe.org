@@ -36,14 +36,20 @@ ErrorDocument 500 /assets/error-500.html
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_URI} !^framework/main\.php
 	RewriteRule ^sapphire/?(.*) https://docs.silverstripe.org/framework/$1 [R=301,L]
-	
+
 	# Rewrite framework to the new base url
 	RewriteCond %{REQUEST_URI} ^/?framework/en/
 	RewriteRule ^framework/en/(.*)$ /en/$1 [R=301,NC,QSA,L]
 
 	# Docs in /contributing are version agnostic, and should always point to latest
-	RewriteCond %{REQUEST_URI} !(4.0)
-	RewriteRule ^(.*)/(.*)/contributing/?(.*)?$ /$1/4.0/contributing/$3 [R=301,L]
+	RewriteCond %{REQUEST_URI} !(4)
+	RewriteRule ^(.*)/(.*)/contributing/?(.*)?$ /$1/4/contributing/$3 [R=301,L]
+
+	# Redirect 4.0 docs to 4 (new major version)
+	RewriteRule ^en/4\.0/(.*)?$ /en/4/$1 [R=301,L]
+
+	# Redirect any version > 3.4 to 3 branch
+	RewriteRule ^en/3\.[5-9]/(.*)?$ /en/3/$1 [R=301,L]
 
 	# DokuWiki rewrite rules: Need to happen before other rules in order to redirect /doku.php?id=<pagename>
 	# to /pagename, which can then be matched by the legacy rewrite rules further down
@@ -128,7 +134,7 @@ ErrorDocument 500 /assets/error-500.html
 	RewriteRule ^(.*)/installation/windows-pi/?$ /$1/getting_started/installation/other_installation_options/windows_platform_installer [R=301,L]
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/installation/windows-wamp/?$ /$1/getting_started/installation/windows [R=301,L]
-	
+
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/misc/coding-conventions/?$ /$1/getting_started/coding_conventions [R=301,L]
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
@@ -152,16 +158,16 @@ ErrorDocument 500 /assets/error-500.html
 
 	RewriteCond %{REQUEST_URI} !en/2.4/topics/reference/requirements
 	RewriteRule ^en/2.4/topics/reference/requirements/?$ /en/2.4/reference/requirements [R=301,L]
-	#	
+	#
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/reference/aspects/?$ /$1/developer_guides/extending/aspects [R=301,L]
-	#	
+	#
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/reference/cms-architecture/?$ /$1/developer_guides/customising_the_admin_interface/cms_architecture [R=301,L]
 
 	RewriteCond %{REQUEST_URI} !en/developer_guides/customising_the_admin_interface/reference/cms-architecture
 	RewriteRule ^en/developer_guides/customising_the_admin_interface/reference/cms-architecture/?$ /en/developer_guides/customising_the_admin_interface/cms_architecture [R=301,L]
-	#	
+	#
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/reference/grid-field/?$ /$1/developer_guides/forms/field_types/gridfield [R=301,L]
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
@@ -294,7 +300,7 @@ ErrorDocument 500 /assets/error-500.html
 	RewriteRule ^(.*)/tutorials/2-extending-a-basic-site/?$ /$1/tutorials/extending-a-basic-site [R=301,L]
 	#
 	RewriteRule ^(.*)/tutorials/3-forms/?$ /$1/tutorials/forms [R=301,L]
-	# 
+	#
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/tutorials/4-site-search/?$ /$1/tutorials/site_search [R=301,L]
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
@@ -304,7 +310,7 @@ ErrorDocument 500 /assets/error-500.html
 	RewriteRule ^(.*)/tutorials/5-dataobject-relationship-management/?$ /$1/tutorials/dataobject_relationship_management [R=301,L]
 	RewriteCond %{REQUEST_URI} !(3.0|2.4)
 	RewriteRule ^(.*)/tutorials/5-dataobject-relationship-management/?$ /$1/tutorials/dataobject-relationship-management [R=301,L]
-	
+
 	RewriteCond %{REQUEST_URI} !(3.|2.)
 	RewriteRule ^(.*)/getting_started/coding_conventions/?$ /$1/contributing/coding_conventions [R=301,L]
 
@@ -348,7 +354,7 @@ ErrorDocument 500 /assets/error-500.html
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|js|png|swf|txt)$
 	RewriteRule .* framework/main.php?url=%1&%{QUERY_STRING} [L]
- 
+
 </IfModule>
 
 ErrorDocument 404 /assets/error-404.html
