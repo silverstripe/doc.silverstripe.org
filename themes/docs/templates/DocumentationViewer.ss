@@ -6,7 +6,7 @@
 	<div id="masthead" <% if Versions %>class="has_versions"<% end_if %>>
 		<div class="wrapper">
 			<div class="menu-bar">
-				<a class="logo" href="https://userhelp.silverstripe.org/"></a>
+				<a class="logo" href="https://docs.silverstripe.org/"></a>
 				<a class="menu-open">
 					<%t DocumentationViewer.MENU "Menu" %>
 				</a>
