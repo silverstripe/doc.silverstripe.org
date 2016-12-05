@@ -43,7 +43,7 @@ DocumentationManifest:
     -
       Path: "assets/src/framework_3.2/docs/"
       Title: "Framework"
-      VersionTitle: "3.3"
+      VersionTitle: "3.2"
       Version: "3.2"
       Archived: true
       DefaultEntity: true
