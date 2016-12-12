@@ -10,4 +10,4 @@ Director:
     'dev/buildcache/$Action': 'RebuildStaticCacheTask'
     'dev': 'DevelopmentAdmin'
     '': '->en/'
-    '$Lang/$Action': 'DocumentationViewer'
+    '$Lang/$Version/$Action': 'DocumentationViewer'
