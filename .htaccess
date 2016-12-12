@@ -51,6 +51,9 @@ ErrorDocument 500 /assets/error-500.html
 	# Redirect any version > 3.4 to 3 branch
 	RewriteRule ^en/3\.[5-9]/(.*)?$ /en/3/$1 [R=301,L]
 
+	# Redirect old index links to the current version (via another redirect rule)
+	RewriteRule ^en/all\/?$ / [R=301,L]
+
 	# DokuWiki rewrite rules: Need to happen before other rules in order to redirect /doku.php?id=<pagename>
 	# to /pagename, which can then be matched by the legacy rewrite rules further down
 	RewriteCond %{QUERY_STRING}          ^(\bid\b=([^&]*)&?(.*)?)
