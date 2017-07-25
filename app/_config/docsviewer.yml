@@ -10,11 +10,11 @@ DocumentationManifest:
   automatic_registration: false
   register_entities:
     -
-      Path: "assets/src/framework_master/docs/"
+      Path: "assets/src/framework_4/docs/"
       Title: "Framework"
       VersionTitle: "4.x"
       Version: "4"
-      Branch: "master"
+      Branch: "4"
       DefaultEntity: true
     -
       Path: "assets/src/framework_3/docs/"
