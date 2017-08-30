@@ -4,6 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+    "hash": "fe77eae7f153ec8d70ba905ae736c1f3",
     "content-hash": "db0fd420bda434d99cd25d69e6acf238",
     "packages": [
         {
@@ -67,7 +68,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2016-07-25T18:03:20+00:00"
+            "time": "2016-07-25 18:03:20"
         },
         {
             "name": "composer/installers",
@@ -174,7 +175,7 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2016-08-13T20:53:52+00:00"
+            "time": "2016-08-13 20:53:52"
         },
         {
             "name": "doctrine/cache",
@@ -244,7 +245,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2016-10-29T11:16:17+00:00"
+            "time": "2016-10-29 11:16:17"
         },
         {
             "name": "erusev/parsedown",
@@ -283,7 +284,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2014-11-29T02:29:14+00:00"
+            "time": "2014-11-29 02:29:14"
         },
         {
             "name": "erusev/parsedown-extra",
@@ -327,7 +328,7 @@
                 "parsedown",
                 "parser"
             ],
-            "time": "2014-09-16T11:54:01+00:00"
+            "time": "2014-09-16 11:54:01"
         },
         {
             "name": "guzzle/guzzle",
@@ -423,7 +424,7 @@
                 "web service"
             ],
             "abandoned": "guzzlehttp/guzzle",
-            "time": "2015-03-18T18:23:50+00:00"
+            "time": "2015-03-18 18:23:50"
         },
         {
             "name": "mandrew/silverstripe-quickfeedback",
@@ -462,7 +463,7 @@
                 "member",
                 "silverstripe"
             ],
-            "time": "2016-02-18T04:32:50+00:00"
+            "time": "2016-02-18 04:32:50"
         },
         {
             "name": "mnapoli/front-yaml",
@@ -496,7 +497,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2016-10-01T11:06:51+00:00"
+            "time": "2016-10-01 11:06:51"
         },
         {
             "name": "mtdowling/cron-expression",
@@ -540,7 +541,7 @@
                 "cron",
                 "schedule"
             ],
-            "time": "2016-01-26T21:23:30+00:00"
+            "time": "2016-01-26 21:23:30"
         },
         {
             "name": "silverstripe/crontask",
@@ -583,20 +584,20 @@
                 "cron",
                 "silverstripe"
             ],
-            "time": "2016-09-13T10:39:18+00:00"
+            "time": "2016-09-13 10:39:18"
         },
         {
             "name": "silverstripe/docsviewer",
-            "version": "2.0.0-beta7",
+            "version": "2.0.0-beta8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "a10cdd35f75d9c2cf5b43189de3a6fe2acead425"
+                "reference": "83594bdf7785d4fc1bb87b5357a832a7bf1fb16d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/a10cdd35f75d9c2cf5b43189de3a6fe2acead425",
-                "reference": "a10cdd35f75d9c2cf5b43189de3a6fe2acead425",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/83594bdf7785d4fc1bb87b5357a832a7bf1fb16d",
+                "reference": "83594bdf7785d4fc1bb87b5357a832a7bf1fb16d",
                 "shasum": ""
             },
             "require": {
@@ -625,7 +626,7 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2017-08-14T04:33:49+00:00"
+            "time": "2017-08-30 01:57:52"
         },
         {
             "name": "silverstripe/dynamodb",
@@ -666,7 +667,7 @@
                 "dynamodb",
                 "silverstripe"
             ],
-            "time": "2016-03-03T21:34:17+00:00"
+            "time": "2016-03-03 21:34:17"
         },
         {
             "name": "silverstripe/framework",
@@ -720,7 +721,7 @@
                 "framework",
                 "silverstripe"
             ],
-            "time": "2016-11-28T12:35:19+00:00"
+            "time": "2016-11-28 12:35:19"
         },
         {
             "name": "silverstripe/toolbar",
@@ -764,7 +765,7 @@
                 "source": "https://github.com/silverstripe/silverstripe-globaltoolbar/tree/4.2.0",
                 "issues": "https://github.com/silverstripe/silverstripe-globaltoolbar/issues"
             },
-            "time": "2016-10-14T02:05:33+00:00"
+            "time": "2016-10-14 02:05:33"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -824,7 +825,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-10-13T01:43:15+00:00"
+            "time": "2016-10-13 01:43:15"
         },
         {
             "name": "symfony/yaml",
@@ -873,7 +874,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-14T16:15:57+00:00"
+            "time": "2016-11-14 16:15:57"
         },
         {
             "name": "unclecheese/display-logic",
@@ -917,7 +918,7 @@
                 "logic",
                 "silverstripe"
             ],
-            "time": "2016-06-21T00:24:32+00:00"
+            "time": "2016-06-21 00:24:32"
         }
     ],
     "packages-dev": [
@@ -980,7 +981,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-09-02T10:13:14+00:00"
+            "time": "2014-09-02 10:13:14"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -1027,7 +1028,7 @@
                 "filesystem",
                 "iterator"
             ],
-            "time": "2016-10-03T07:40:28+00:00"
+            "time": "2016-10-03 07:40:28"
         },
         {
             "name": "phpunit/php-text-template",
@@ -1068,7 +1069,7 @@
             "keywords": [
                 "template"
             ],
-            "time": "2015-06-21T13:50:34+00:00"
+            "time": "2015-06-21 13:50:34"
         },
         {
             "name": "phpunit/php-timer",
@@ -1112,7 +1113,7 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2016-05-12T18:03:57+00:00"
+            "time": "2016-05-12 18:03:57"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -1162,7 +1163,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2014-03-03T05:10:30+00:00"
+            "time": "2014-03-03 05:10:30"
         },
         {
             "name": "phpunit/phpunit",
@@ -1235,7 +1236,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-10-17T09:04:17+00:00"
+            "time": "2014-10-17 09:04:17"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1284,7 +1285,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2013-01-13T10:24:48+00:00"
+            "time": "2013-01-13 10:24:48"
         }
     ],
     "aliases": [],
