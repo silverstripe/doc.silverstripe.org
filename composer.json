@@ -8,7 +8,8 @@
 		"silverstripe/framework": "^3.2",
 		"silverstripe/toolbar": "^4.2",
 		"silverstripe/dynamodb": "^1.1",
-		"mandrew/silverstripe-quickfeedback": "^0.2"
+		"mandrew/silverstripe-quickfeedback": "^0.2",
+		"silverstripe/raygun": "^1.1"
 	},
 	"require-dev": {
 		"phpunit/PHPUnit": "~3.7@stable"
