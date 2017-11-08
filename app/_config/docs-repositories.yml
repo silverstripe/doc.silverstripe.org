@@ -9,6 +9,10 @@ RefreshMarkdownTask:
     -
       - silverstripe/silverstripe-framework
       - framework
+      - "master"
+    -
+      - silverstripe/silverstripe-framework
+      - framework
       - "4"
     -
       - silverstripe/silverstripe-framework
