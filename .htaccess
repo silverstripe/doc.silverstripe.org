@@ -32,6 +32,9 @@ ErrorDocument 500 /assets/error-500.html
 	RewriteCond %{HTTP_HOST} ^(docs?.silverstripe.com|doc.silverstripe.org|beta.docs.silverstripe.org)$ [NC]
 	RewriteRule ^(.*)$ https://docs.silverstripe.org/$1 [L,R=301]
 
+	# Home page redirect
+	RewriteRule ^(/)?$ /en/4/ [R=302,NC,QSA,L]
+
 	# Legacy rewrite from sapphire/ to framework/ namespace
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_URI} !^framework/main\.php
@@ -52,7 +55,7 @@ ErrorDocument 500 /assets/error-500.html
 	RewriteRule ^en/3\.[5-9]/(.*)?$ /en/3/$1 [R=301,L]
 
 	# Redirect old index links to the current version
-	RewriteRule ^en/(all|results)\/?$ /en/3/$1 [R=301,L]
+	RewriteRule ^en/(all|results)\/?$ /en/4/$1 [R=301,L]
 
 	# DokuWiki rewrite rules: Need to happen before other rules in order to redirect /doku.php?id=<pagename>
 	# to /pagename, which can then be matched by the legacy rewrite rules further down
