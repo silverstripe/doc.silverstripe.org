@@ -32,9 +32,6 @@ ErrorDocument 500 /assets/error-500.html
 	RewriteCond %{HTTP_HOST} ^(docs?.silverstripe.com|doc.silverstripe.org|beta.docs.silverstripe.org)$ [NC]
 	RewriteRule ^(.*)$ https://docs.silverstripe.org/$1 [L,R=301]
 
-	# Home page redirect
-	RewriteRule ^(/)?$ /en/4/ [R=302,NC,QSA,L]
-
 	# Legacy rewrite from sapphire/ to framework/ namespace
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_URI} !^framework/main\.php

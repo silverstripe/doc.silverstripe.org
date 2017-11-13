@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e6c7b612751c05e732df53cfa1d4aae0",
+    "content-hash": "3e089a4d1755a301b0b42f28b0825fba",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -637,16 +637,16 @@
         },
         {
             "name": "silverstripe/docsviewer",
-            "version": "2.0.0-beta8",
+            "version": "2.0.0-rc1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "83594bdf7785d4fc1bb87b5357a832a7bf1fb16d"
+                "reference": "fccde14751b81d19d4723cf92826d483a7555864"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/83594bdf7785d4fc1bb87b5357a832a7bf1fb16d",
-                "reference": "83594bdf7785d4fc1bb87b5357a832a7bf1fb16d",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/fccde14751b81d19d4723cf92826d483a7555864",
+                "reference": "fccde14751b81d19d4723cf92826d483a7555864",
                 "shasum": ""
             },
             "require": {
@@ -675,7 +675,7 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2017-08-30T01:57:52+00:00"
+            "time": "2017-11-13T01:08:23+00:00"
         },
         {
             "name": "silverstripe/dynamodb",
@@ -1378,7 +1378,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "silverstripe/docsviewer": 10,
+        "silverstripe/docsviewer": 5,
         "phpunit/phpunit": 0
     },
     "prefer-stable": true,
