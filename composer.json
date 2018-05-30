@@ -5,7 +5,7 @@
 		"ext-gd": "*",
 		"ext-mbstring": "*",
 		"silverstripe/docsviewer": "^2.0@rc",
-		"silverstripe/framework": "^3.2",
+		"silverstripe/framework": "~3.6",
 		"silverstripe/toolbar": "^4.2",
 		"silverstripe/dynamodb": "^1.1",
 		"mandrew/silverstripe-quickfeedback": "^0.2",
