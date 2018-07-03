@@ -6,9 +6,11 @@
 
 	<% include DocumentationFavicons %>
 
+	<%-- disabled for Swiftype indexing
 	<% if $CanonicalUrl %>
 		<link rel="canonical" href="$CanonicalUrl" />
 	<% end_if %>
+	--%>
 	<link rel="stylesheet" href="$ThemeDir/css/ionicons.min.css" />
 	<link rel="stylesheet" href="$ThemeDir/css/styles.css" />
 	<script type="text/javascript" src="//use.typekit.net/emt4dhq.js"></script>
