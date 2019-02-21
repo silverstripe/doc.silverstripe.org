@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1d2f6da0ba93e21841fdd1d85a5d60cd",
+    "content-hash": "4f381c5fae8e2f6af144bbbcd81fa6c3",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -712,16 +712,16 @@
         },
         {
             "name": "silverstripe/docsviewer",
-            "version": "2.0.0-rc3",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "03ec3d287e909e8b33811c1e7121a9f2f7554190"
+                "reference": "171652b33821d342ac1603c3bb0e0bdddc111a26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/03ec3d287e909e8b33811c1e7121a9f2f7554190",
-                "reference": "03ec3d287e909e8b33811c1e7121a9f2f7554190",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/171652b33821d342ac1603c3bb0e0bdddc111a26",
+                "reference": "171652b33821d342ac1603c3bb0e0bdddc111a26",
                 "shasum": ""
             },
             "require": {
@@ -755,7 +755,7 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2018-06-08T04:14:53+00:00"
+            "time": "2019-02-14T07:56:02+00:00"
         },
         {
             "name": "silverstripe/dynamodb",
@@ -800,16 +800,16 @@
         },
         {
             "name": "silverstripe/framework",
-            "version": "3.7.0",
+            "version": "3.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-framework.git",
-                "reference": "d9261af1f3201fcea0d67a72b6fa1408ec69effc"
+                "reference": "bb5701b73d40909caf99d71bac02e0329d301335"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/d9261af1f3201fcea0d67a72b6fa1408ec69effc",
-                "reference": "d9261af1f3201fcea0d67a72b6fa1408ec69effc",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/bb5701b73d40909caf99d71bac02e0329d301335",
+                "reference": "bb5701b73d40909caf99d71bac02e0329d301335",
                 "shasum": ""
             },
             "require": {
@@ -877,7 +877,7 @@
                 "framework",
                 "silverstripe"
             ],
-            "time": "2018-06-08T00:19:40+00:00"
+            "time": "2019-02-12T08:44:41+00:00"
         },
         {
             "name": "silverstripe/raygun",
@@ -1546,7 +1546,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "silverstripe/docsviewer": 5,
         "phpunit/phpunit": 0
     },
     "prefer-stable": true,
