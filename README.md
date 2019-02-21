@@ -30,7 +30,8 @@ For adding functionality or editing the style of the documentation, see the
 
 To set up a local instance of [doc.silverstripe.org](https://github.com/SpiritLevel/doc.silverstripe.org):
 
-* Install [Composer](https://docs.silverstripe.org/en/getting_started/composer).
+* Ensure you are running the required PHP version (see .platform.yml)
+* Install [Composer](https://docs.silverstripe.org/en/getting_started/composer)
 * Install [sake](https://docs.silverstripe.org/en/developer_guides/cli).
 * Clone this repository to a LAMP server. For example, the shell command
 ```
@@ -118,3 +119,5 @@ versions that are not stable.
 ## Deployment
 
 Deployment is via the [SilverStripe Platform](https://www.silverstripe.com/platform/) deployment tool and uses [StackShare](http://www.silverstripe.com/platform/technical/).
+
+For platform configuration, see .platform.yml.
