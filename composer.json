@@ -7,7 +7,7 @@
 		"silverstripe/docsviewer": "^2.0",
 		"silverstripe/framework": "~3.6",
 		"silverstripe/toolbar": "^4.2",
-		"silverstripe/dynamodb": "^1.1",
+		"silverstripe/dynamodb": "^3",
 		"mandrew/silverstripe-quickfeedback": "^0.2",
 		"silverstripe/raygun": "^1.1"
 	},
