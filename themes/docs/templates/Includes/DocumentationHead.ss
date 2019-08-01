@@ -9,6 +9,11 @@
 	<% if $CanonicalUrl %>
 		<link rel="canonical" href="$CanonicalUrl" />
 	<% end_if %>
+
+	<%--Set default priority search results--%>
+	<meta class="swiftype" name="site-priority" data-type="integer" content="1" />
+	<meta class="swiftype" name="title" data-type="string" content="$Title">
+
 	<link rel="stylesheet" href="$ThemeDir/css/ionicons.min.css" />
 	<link rel="stylesheet" href="$ThemeDir/css/styles.css" />
 	<script type="text/javascript" src="//use.typekit.net/emt4dhq.js"></script>
