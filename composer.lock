@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "66e3760a1d7af03c0407bd5abb301dd3",
+    "content-hash": "584b20c5ae4aa35473bb51416f1500a2",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1184,16 +1184,16 @@
         },
         {
             "name": "silverstripe/toolbar",
-            "version": "dev-feature/55276-swiftype-search",
+            "version": "4.2.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/lexakami/silverstripe-globaltoolbar.git",
-                "reference": "f669e9148d40d3dd32f52bd3ce74148074bec6c7"
+                "url": "https://github.com/silverstripe/silverstripe-globaltoolbar.git",
+                "reference": "999a1c2587f13b5953498f6453d74c8469c24b64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexakami/silverstripe-globaltoolbar/zipball/f669e9148d40d3dd32f52bd3ce74148074bec6c7",
-                "reference": "f669e9148d40d3dd32f52bd3ce74148074bec6c7",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-globaltoolbar/zipball/999a1c2587f13b5953498f6453d74c8469c24b64",
+                "reference": "999a1c2587f13b5953498f6453d74c8469c24b64",
                 "shasum": ""
             },
             "require": {
@@ -1221,9 +1221,10 @@
                 "silverstripe"
             ],
             "support": {
-                "source": "https://github.com/lexakami/silverstripe-globaltoolbar/tree/feature/55276-swiftype-search"
+                "source": "https://github.com/silverstripe/silverstripe-globaltoolbar/tree/4.2.3",
+                "issues": "https://github.com/silverstripe/silverstripe-globaltoolbar/issues"
             },
-            "time": "2019-08-08T04:59:31+00:00"
+            "time": "2019-08-12T23:19:56+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -1754,7 +1755,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "silverstripe/toolbar": 20,
         "phpunit/phpunit": 0
     },
     "prefer-stable": true,
