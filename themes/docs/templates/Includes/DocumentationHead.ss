@@ -28,8 +28,8 @@
 		<div id="navWrapper">
 			<div class="nav-mobile">
 				$GlobalNav('doc')
-				<% include SearchBox %>
 			</div>
 		</div>
 	</div>
 </header>
+<% include SearchModal %>
