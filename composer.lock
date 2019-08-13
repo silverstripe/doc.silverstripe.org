@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bebddbda993b76e7ce5d76d5963b1764",
+    "content-hash": "584b20c5ae4aa35473bb51416f1500a2",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1184,16 +1184,16 @@
         },
         {
             "name": "silverstripe/toolbar",
-            "version": "4.2.2",
+            "version": "4.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-globaltoolbar.git",
-                "reference": "1b0ea930e122e21f44fbb3b0e7c62ea7d47a06c3"
+                "reference": "999a1c2587f13b5953498f6453d74c8469c24b64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-globaltoolbar/zipball/1b0ea930e122e21f44fbb3b0e7c62ea7d47a06c3",
-                "reference": "1b0ea930e122e21f44fbb3b0e7c62ea7d47a06c3",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-globaltoolbar/zipball/999a1c2587f13b5953498f6453d74c8469c24b64",
+                "reference": "999a1c2587f13b5953498f6453d74c8469c24b64",
                 "shasum": ""
             },
             "require": {
@@ -1221,10 +1221,10 @@
                 "silverstripe"
             ],
             "support": {
-                "source": "https://github.com/silverstripe/silverstripe-globaltoolbar/tree/4.2",
+                "source": "https://github.com/silverstripe/silverstripe-globaltoolbar/tree/4.2.3",
                 "issues": "https://github.com/silverstripe/silverstripe-globaltoolbar/issues"
             },
-            "time": "2019-07-08T23:12:15+00:00"
+            "time": "2019-08-12T23:19:56+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",

@@ -6,7 +6,7 @@
 		"ext-mbstring": "*",
 		"silverstripe/docsviewer": "^2.0",
 		"silverstripe/framework": "~3.6",
-		"silverstripe/toolbar": "^4.2",
+		"silverstripe/toolbar": "~4.2.3",
 		"silverstripe/dynamodb": "^3",
 		"mandrew/silverstripe-quickfeedback": "^0.2",
 		"silverstripe/raygun": "^1.1"
@@ -15,10 +15,10 @@
 		"phpunit/phpunit": "~3.7@stable"
 	},
 	"repositories": [
-        {
-            "type": "vcs",
-            "url": "git://github.com/silverstripe/silverstripe-globaltoolbar.git"
-        }
+		{
+			"type": "vcs",
+			"url": "https://github.com/silverstripe/silverstripe-globaltoolbar.git"
+		}
 	],
 	"config": {
 		"process-timeout": 600
