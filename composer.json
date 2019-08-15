@@ -4,7 +4,7 @@
 	"require": {
 		"ext-gd": "*",
 		"ext-mbstring": "*",
-		"silverstripe/docsviewer": "^2.0",
+		"silverstripe/docsviewer": "2.x-dev",
 		"silverstripe/framework": "~3.6",
 		"silverstripe/toolbar": "~4.2.3",
 		"silverstripe/dynamodb": "^3",
