@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "584b20c5ae4aa35473bb51416f1500a2",
+    "content-hash": "8544bc821d77107865374653cdd93d8c",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -969,16 +969,16 @@
         },
         {
             "name": "silverstripe/docsviewer",
-            "version": "2.0.0",
+            "version": "2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-docsviewer.git",
-                "reference": "171652b33821d342ac1603c3bb0e0bdddc111a26"
+                "reference": "6681ced3277d692fe916604cad5ea88f40481b18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/171652b33821d342ac1603c3bb0e0bdddc111a26",
-                "reference": "171652b33821d342ac1603c3bb0e0bdddc111a26",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-docsviewer/zipball/6681ced3277d692fe916604cad5ea88f40481b18",
+                "reference": "6681ced3277d692fe916604cad5ea88f40481b18",
                 "shasum": ""
             },
             "require": {
@@ -991,11 +991,6 @@
                 "silverstripe/staticpublisher": "Allows publishing documentation as HTML"
             },
             "type": "silverstripe-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
@@ -1012,7 +1007,7 @@
                 "documentation",
                 "silverstripe"
             ],
-            "time": "2019-02-14T07:56:02+00:00"
+            "time": "2019-08-15T00:06:38+00:00"
         },
         {
             "name": "silverstripe/dynamodb",
@@ -1755,6 +1750,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "silverstripe/docsviewer": 20,
         "phpunit/phpunit": 0
     },
     "prefer-stable": true,
