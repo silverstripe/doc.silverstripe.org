@@ -352,6 +352,12 @@ ErrorDocument 500 /assets/error-500.html
 	RewriteRule ^en/trunk/developer_guides/extending/extensions/?$ /en/developer_guides/extending/extensions [R=301,L]
 	RewriteRule ^en/developer_guides/customising_the_cms/modeladmin/?$ /en/developer_guides/customising_the_admin_interface/modeladmin [R=301,L]
 	RewriteRule ^en/developer_guides/data_model_and_orm/?$ /en/developer_guides/model/data_model_and_orm [R=301,L]
+	
+	# See https://github.com/silverstripe/silverstripe-framework/pull/9212
+	RewriteRule ^(.*)/getting_started/installation/common_problems$ /$1/getting_started/common_problems [R=301,L]
+	RewriteRule ^(.*)/getting_started/installation /$1/getting_started/server_requirements [R=301,L]
+
+	
 
 	RewriteCond %{REQUEST_URI} ^(.*)$
 	RewriteCond %{REQUEST_FILENAME} !-f
