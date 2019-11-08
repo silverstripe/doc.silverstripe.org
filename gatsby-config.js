@@ -52,7 +52,7 @@ module.exports = {
       options: {
         printRejected: false,
         whitelist: ['.algolia-autocomplete'],
-        ignore: ['prismjs/','docsearch.js/'],
+        ignore: ['prismjs/','docsearch.js/', 'src/theme/assets/search/algolia.css'],
         //purgeOnly : ['components/', '/main.css', 'bootstrap/'],
       }
     }        

@@ -13,8 +13,6 @@ export default function HTML(props) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         {props.headComponents}
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
-
       </head>
       <body {...props.bodyAttributes} className="docs-page">
         {props.preBodyComponents}
