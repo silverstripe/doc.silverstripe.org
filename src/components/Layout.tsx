@@ -1,12 +1,8 @@
 import React, { StatelessComponent, useState } from "react";
 import Header from './Header';
 import Sidebar from './Sidebar';
-import smoothScroll from 'smooth-scroll';
 
 const Layout: StatelessComponent<{}> = ({ children}) => {
-  if (typeof window !== "undefined") {
-    smoothScroll('a[href*="#"]')
-  }  
   const [isToggled, setSidebarOpen] = useState(false);
   return (
     <>

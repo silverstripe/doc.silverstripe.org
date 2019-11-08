@@ -1,6 +1,12 @@
-import React from 'react'
-import { Redirect } from '@reach/router'
+import React, { useEffect } from 'react'
+import { Redirect, navigate } from '@reach/router'
 
-const IndexPage = () => <Redirect to={`/en/4/`} />
+const IndexPage = () => {
+    useEffect(() => {
+        navigate('/en/4/');
+    }, []);
+
+    return <div />;
+}
 
 export default IndexPage;

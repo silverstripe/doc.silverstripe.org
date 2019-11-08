@@ -46,7 +46,16 @@ module.exports = {
       options: {
         // Add any options here
       },
-    },    
+    },
+    { 
+      resolve: `gatsby-plugin-purgecss`,
+      options: {
+        printRejected: false,
+        whitelist: ['.algolia-autocomplete'],
+        ignore: ['prismjs/','docsearch.js/'],
+        //purgeOnly : ['components/', '/main.css', 'bootstrap/'],
+      }
+    }        
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
