@@ -9,16 +9,21 @@ interface HeaderProps {
 }
 
 const handleNavigate = (e: any): void => {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
   const currentNode = getCurrentNode();
   const ver = e.target.value;
 
   if (currentNode) {
     const newPath = currentNode.slug.replace(/^\/en\/[0-9]+\//, `/en/${ver}/`);
     const otherNode = getNodes().find(n => n.slug === newPath);
+    // This has to be a hard refresh, because the sidebar needs to unmount
     if (otherNode) {
-      navigate(otherNode.slug);
+      window.location.href = otherNode.slug;
     } else {
-      navigate(`/en/${ver}`);
+      window.location.href = `/en/${ver}`;
     }
   }
 }

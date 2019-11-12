@@ -4,14 +4,15 @@ import { Link } from 'gatsby';
 import { getChildren, getSiblings } from '../utils/nodes';
 
 const createCards = (children: SilverstripeDocument[]): ReactElement[] => {
-    return children.map(({ summary, slug, title, icon }) => {
+    return children.map(({ summary, slug, title, icon, iconBrand }) => {
+        const iconClass = iconBrand ? `fab fa-${iconBrand}` : `fas fa-${icon || 'file-alt'}`
         return (
             <div className="col-12 col-lg-6 py-3" key={slug}>
                 <div className="card shadow-sm">
                     <div className="card-body">
                         <h5 className="card-title mb-3">
                             <span className="theme-icon-holder card-icon-holder mr-2">                                
-                                <i className={`fas fa-${icon || 'file-alt'}`}></i>                                
+                                <i className={iconClass}></i>
                             </span>
                             <span className="card-title-text">{title}</span>
                         </h5>

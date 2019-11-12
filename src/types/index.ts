@@ -25,10 +25,11 @@ export interface SilverstripeDocument {
     slug: string;
     isIndex: boolean;
     filePath: string;
-    introduction: string;
-    icon: string;
-    hideChildren: boolean;
-    hideSelf: boolean;
+    introduction?: string;
+    icon?: string;
+    iconBrand?: string;
+    hideChildren?: boolean;
+    hideSelf?: boolean;
     parentSlug: string;
     summary: string;
     fileTitle: string;

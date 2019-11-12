@@ -4,7 +4,6 @@ import { HierarchyQuery, SilverstripeDocument } from '../types';
 import sortFiles from './sortFiles';
 
 let __nodes: SilverstripeDocument[] | undefined;
-let __path: string | null = null;
 let __currentNode: SilverstripeDocument | null = null;
 let __currentVersion: string | null = null;
 let __home: SilverstripeDocument | null = null;
@@ -27,6 +26,7 @@ const getNodes = (): SilverstripeDocument[] => {
             isIndex
             introduction
             icon
+            iconBrand
             hideChildren
             slug
             parentSlug
