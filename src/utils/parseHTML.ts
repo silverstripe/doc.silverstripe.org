@@ -3,7 +3,7 @@ import cleanChildrenTags from './cleanChildrenTags';
 import cleanWhitespace from './cleanWhitespace';
 import rewriteLink from './rewriteLink';
 import parseChildrenOf from './parseChildrenOf';
-import rewriteCallout from './rewriteCallout';
+import cleanCalloutTags from './cleanCalloutTags';
 import { ReactElement } from 'react';
 import rewriteTable from './rewriteTable';
 import rewriteHeader from './rewriteHeader';
@@ -14,7 +14,9 @@ import rewriteHeader from './rewriteHeader';
  */
 const parseHTML = (html: string): ReactElement | ReactElement[] | string => {
     let cleanHTML = cleanChildrenTags(html);
+    cleanHTML = cleanCalloutTags(cleanHTML);
     cleanHTML = cleanWhitespace(cleanHTML);
+
     const parseOptions = {
         replace(domNode: DomElement): ReactElement | object | undefined | false {
             const { name, attribs, children } = domNode;
@@ -22,11 +24,6 @@ const parseHTML = (html: string): ReactElement | ReactElement[] | string => {
             if (name && attribs) {
                 if (name === 'a') {
                     return rewriteLink(attribs, domChildren, parseOptions);
-                }
-                if (name === 'div') {
-                    if (attribs && attribs.markdown) {
-                        return rewriteCallout(attribs.class, domChildren, parseOptions);                    
-                    }
                 }
                 if (name === 'table') {
                     return rewriteTable(domChildren, parseOptions);

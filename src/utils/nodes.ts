@@ -6,6 +6,7 @@ import sortFiles from './sortFiles';
 let __nodes: SilverstripeDocument[] | undefined;
 let __path: string | null = null;
 let __currentNode: SilverstripeDocument | null = null;
+let __currentVersion: string | null = null;
 let __home: SilverstripeDocument | null = null;
 
 const childrenMap = new Map();
@@ -102,27 +103,36 @@ const getParent = (node: SilverstripeDocument): SilverstripeDocument | null => {
   return parentMap.get(node.slug);
 };
 
-const getCurrentNode = (): SilverstripeDocument | null => {
-    const browserPath = typeof window !== 'undefined' ? window.location.pathname : '/';
-    if (!__path || __path !== browserPath) {
-        __path = browserPath;
-        const nodes = getNodes();
-        __currentNode = nodes.find(n => n.slug === __path) || null;
-    }
-    return __currentNode || null;
-};
+const getCurrentNode = (): SilverstripeDocument | null => __currentNode;
 
 const getHomePage = (): SilverstripeDocument | null => {
   if (__home) {
     return __home;
   }
   const nodes = getNodes();
-  const homePage = nodes.find(n => n.slug === '/en/4/') || null;
+  const version = getCurrentVersion();
+  const homePage = nodes.find(n => n.slug === `/en/${version}/`) || null;
 
   __home = homePage;
 
   return __home;
 };
+
+const getCurrentVersion = (): string | null => __currentVersion;
+
+const setCurrentNode = (slug: string): void => {
+  const currentNode = getNodes().find(n => n.slug === slug) || null;
+  __currentNode = currentNode;
+
+  if (currentNode) {
+    const matches = currentNode.slug.match(/^\/en\/([0-9]+)\//);
+    if (matches) {
+      __currentVersion = matches[1];
+    }
+  }
+};
+
+
 
 export {
   getNodes,
@@ -132,4 +142,6 @@ export {
   getCurrentNode,
   getHomePage,
   getNavChildren,
+  getCurrentVersion,
+  setCurrentNode
 };

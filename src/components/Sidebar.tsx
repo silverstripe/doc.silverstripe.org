@@ -1,30 +1,22 @@
-import React, { StatelessComponent, ReactElement, useRef, useLayoutEffect, useEffect, useState } from 'react';
+import React, { StatelessComponent, ReactElement } from 'react';
 import SearchBox from './SearchBox';
 import Nav from './Nav';
 
 interface SidebarProps {
     isOpen: boolean;
+    onNavigate?(e: React.MouseEvent): void;
 }
 
-// Global state to persist across renders
-let scroll = 0;
 
-const Sidebar:StatelessComponent<SidebarProps> = ({ isOpen }): ReactElement => {
-  const scrollingDiv = useRef(null);
-  useLayoutEffect(() => {
-    //scrollingDiv.current.scrollTop = scroll;
-  }, [])
-  const handleScroll = () => {
-    scroll = scrollingDiv.current.scrollTop;
-  };
+const Sidebar:StatelessComponent<SidebarProps> = ({ isOpen, onNavigate }): ReactElement => {
     return (
-        <div ref={scrollingDiv} onScroll={handleScroll} id="docs-sidebar" className={`docs-sidebar ${isOpen ? 'sidebar-visible' : ''}`}>
+        <div id="docs-sidebar" className={`docs-sidebar ${isOpen ? 'sidebar-visible' : ''}`}>
         <div className="top-search-box d-lg-none p-3">
           <form className="search-form">
             <SearchBox identifier="sidebar-search"/>
           </form>
         </div>
-        <Nav />
+        <Nav onNavigate={onNavigate} />
       </div>
     );
 };

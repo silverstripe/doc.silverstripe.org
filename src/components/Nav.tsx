@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { StatelessComponent, ReactElement } from 'react';
 import { getNavChildren, getHomePage, getCurrentNode } from '../utils/nodes';
 import { SilverstripeDocument } from '../types';
 import { Link } from 'gatsby';
+import classnames from 'classnames';
+import { LinkGetProps } from '@reach/router';
 
-const Nav = () => {
+interface NavProps {
+    onNavigate?(e: React.MouseEvent): void;
+};
+
+const getLinkProps = (props: LinkGetProps): {} => {
+    const { isPartiallyCurrent, isCurrent } = props;
+    return {
+        className: classnames({
+            'active': isCurrent,
+            'section': isPartiallyCurrent,
+            'nav-link': true,
+        }),
+    };
+};
+
+const Nav:StatelessComponent<NavProps> = ({ onNavigate }): ReactElement => {
     const currentNode = getCurrentNode();
     const top = getHomePage();
     if (!top) {
-        return <nav>boo</nav>;
+        return <nav />;
     }
 
     return (
@@ -19,7 +36,7 @@ const Nav = () => {
                 return (
                     <React.Fragment key={slug}>
                     <li className="nav-item section-title">
-                        <Link activeClassName='active' className="nav-link" to={slug}>{title}</Link>
+                        <Link getProps={getLinkProps} onClick={onNavigate} to={slug}>{title}</Link>
                     </li>
                     {childItems.map((node: SilverstripeDocument) => {
                         const { slug: childSlug, title: childTitle } = node;
@@ -27,13 +44,13 @@ const Nav = () => {
                         return (
                             <React.Fragment key={childSlug}>
                             <li key={childSlug} className="nav-item">
-                                <Link activeClassName='active' className="nav-link" to={childSlug}>{childTitle}</Link>
+                            <Link getProps={getLinkProps} onClick={onNavigate} to={childSlug}>{childTitle}</Link>
                             </li>
                             {shouldShowChildren && getNavChildren(node).map((child: SilverstripeDocument) => {
                                 const { title: grandchildTitle, slug: grandchildSlug } = child;
                                 return (
                                     <li key={grandchildSlug} className="nav-item third-level">
-                                        <Link activeClassName='active' className="nav-link" to={grandchildSlug}>{grandchildTitle}</Link>
+                                        <Link getProps={getLinkProps} onClick={onNavigate} to={grandchildSlug}>{grandchildTitle}</Link>
                                     </li>
                                 );
                             })}

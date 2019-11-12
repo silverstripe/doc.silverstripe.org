@@ -2,7 +2,7 @@ import React, { StatelessComponent, ReactElement } from 'react';
 import { SilverstripeDocument, ChildrenOfProps } from '../types';
 import { Link } from 'gatsby';
 import { getChildren, getSiblings } from '../utils/nodes';
-import path from 'path';
+
 const createCards = (children: SilverstripeDocument[]): ReactElement[] => {
     return children.map(({ summary, slug, title, icon }) => {
         return (
@@ -26,7 +26,7 @@ const createCards = (children: SilverstripeDocument[]): ReactElement[] => {
     })
 };
 
-const createList= (children: SilverstripeDocument[]): ReactElement[] => {
+const createList = (children: SilverstripeDocument[]): ReactElement[] => {
     return children.map(({ summary, slug, title }) => {        
         return (
             <React.Fragment key={slug}>

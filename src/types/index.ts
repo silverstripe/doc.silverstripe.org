@@ -6,6 +6,7 @@ export interface SingleFileQuery {
 
 export interface SinglePage {
     title: string;
+    slug: string;
     parent: {
         html: string;
         parent: {

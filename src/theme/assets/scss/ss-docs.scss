@@ -47,6 +47,21 @@ body {
         &::before {
             background: none;
         }
+        &.section {
+            &::before {
+                background: $gray-700;
+                height: 4px;
+                top: 50%;
+                margin-top: -2pxp;
+            }
+            &.active {
+                &::before {
+                    background: $theme-color-primary;
+                    height: 100%;
+                    top: 0;
+                }
+            }
+        }        
     }
     .nav-item {
         margin-left: 0;
@@ -59,6 +74,9 @@ body {
     }
 }
 
+code {
+    padding: 0;
+}
 
 .docs-logo-wrapper {
     width: 300px;

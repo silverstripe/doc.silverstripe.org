@@ -1,11 +1,26 @@
-import React, { StatelessComponent, SyntheticEvent, ReactElement } from 'react';
+import React, { StatelessComponent, ReactElement } from 'react';
 import SearchBox from './SearchBox';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import logo from '../images/silverstripe-logo.svg';
-import { getHomePage } from '../utils/nodes';
+import { getNodes, getHomePage, getCurrentNode, getCurrentVersion } from '../utils/nodes';
 
 interface HeaderProps {
-  handleSidebarToggle(e: SyntheticEvent): void
+  handleSidebarToggle(e: EventTarget): void
+}
+
+const handleNavigate = (e: any): void => {
+  const currentNode = getCurrentNode();
+  const ver = e.target.value;
+
+  if (currentNode) {
+    const newPath = currentNode.slug.replace(/^\/en\/[0-9]+\//, `/en/${ver}/`);
+    const otherNode = getNodes().find(n => n.slug === newPath);
+    if (otherNode) {
+      navigate(otherNode.slug);
+    } else {
+      navigate(`/en/${ver}`);
+    }
+  }
 }
 
 const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): ReactElement => {
@@ -16,7 +31,7 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
           <div className="container position-relative py-2 d-flex">
             <div className="docs-logo-wrapper">
               <div className="site-logo">
-                <Link className="navbar-brand" to={home.slug} title="Go to the home page">
+                <Link className="navbar-brand" to={ home ? home.slug : '/'} title="Go to the home page">
                   <img src={logo} alt="Silverstripe CMS documentation" />
                   <span>Documentation</span>
                 </Link>
@@ -32,8 +47,8 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
               </div>
               <ul className="social-list list-inline d-flex flex-grow-1 flex-lg-grow-0 justify-content-between justify-content-lg-around align-items-center">
                 <li className="list-inline-item version-select">
-                  <label htmlFor="version-select">Version:</label>
-                  <select id="version-select" onChange={() => alert('this doesnt work yet')}>
+                  <label htmlFor="version-select">Version: </label>
+                  <select id="version-select" value={getCurrentVersion() || '4'} onChange={handleNavigate}>
                       <option value='4'>4.x</option>
                       <option value='3'>3.x</option>
                   </select>

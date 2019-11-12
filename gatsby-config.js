@@ -23,15 +23,15 @@ module.exports = {
         patterns: `docs/en/**`
       }
     },    
-    // {
-    //   resolve: `gatsby-source-git`,
-    //   options: {
-    //     name: `3`,
-    //     remote: `https://github.com/unclecheese/silverstripe-framework.git`,
-    //     branch: `3`,
-    //     patterns: `docs/en/**`
-    //   }
-    // },    
+    {
+      resolve: `gatsby-source-git`,
+      options: {
+        name: `3`,
+        remote: `https://github.com/unclecheese/silverstripe-framework.git`,
+        branch: `pulls/3/gatsby-docs`,
+        patterns: `docs/en/**`
+      }
+    },    
     {
       resolve: 'gatsby-transformer-remark',
       options: {

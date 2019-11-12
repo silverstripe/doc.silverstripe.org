@@ -1,15 +1,19 @@
-import React, { StatelessComponent, ReactElement } from 'react';
+import React, { StatelessComponent, ReactElement, useEffect } from 'react';
 import { graphql } from 'gatsby';
 import SEO from '../components/SEO';
 import { SingleFileQuery } from '../types';
 import parseHTML from '../utils/parseHTML';
+import { setCurrentNode } from '../utils/nodes';
 
 const Template: StatelessComponent<SingleFileQuery> = (result): ReactElement => {
-    const currentNode = result.data.silverstripeDocument;
+    const currentNode = result.data.silverstripeDocument;    
     const { html } = currentNode.parent;
-    const { title } = currentNode;
-    const { relativePath, gitRemote: { ref, webLink } } = currentNode.parent.parent;
+    const { title, slug } = currentNode;
+    const { relativePath, gitRemote: { ref, webLink, sourceInstanceName } } = currentNode.parent.parent;
     const editLink = `${webLink}/edit/${ref}/${relativePath}`;
+    useEffect(() => {
+      setCurrentNode(slug);
+    }, []);
     return (
     <>
       <SEO title={title} />
@@ -40,6 +44,7 @@ export const pageQuery = graphql`
               gitRemote {
                 ref
                 webLink
+                sourceInstanceName
               }
             }
           }
@@ -47,6 +52,7 @@ export const pageQuery = graphql`
       }
 
       title
+      slug
 
     }
   }
