@@ -7,6 +7,7 @@
 import React, { StatelessComponent } from "react";
 import Helmet from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
+import { getCurrentVersion } from '../utils/nodes';
 
 interface MetaProp {
   name: string,
@@ -71,6 +72,11 @@ const SEO: StatelessComponent<SEOProps> = ({ description, lang, meta, title }) =
         {
           name: `twitter:description`,
           content: metaDescription
+        },
+        {
+          name: `docsearch:version`,
+          content: getCurrentVersion(),
+
         }
       ].concat(meta)}
     />

@@ -1,6 +1,7 @@
 import React from 'react'
 import { StatelessComponent, ReactElement, useEffect } from 'react';
 import { navigateTo } from "gatsby-link"
+import { getCurrentVersion } from '../utils/nodes';
 
 interface SearchBoxProps {
   identifier: string;
@@ -26,13 +27,14 @@ const SearchBox: StatelessComponent<SearchBoxProps> = ({ identifier }): ReactEle
         );
         if(window.docsearch){
             window.docsearch({ 
+              algoliaOptions: {
+                facetFilters: [`version:${getCurrentVersion()}`],
+                hitsPerPage: 5,
+              },
               apiKey: process.env.GATSBY_DOCSEARCH_API_KEY, 
+              debug: true,
               indexName: process.env.GATSBY_DOCSEARCH_INDEX, 
               inputSelector: `#${identifier}`,
-              algoliaOptions: {
-                hitsPerPage: 5
-              },
-              debug: true
             });
           }
       
