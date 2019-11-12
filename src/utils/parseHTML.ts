@@ -1,6 +1,7 @@
 import parse, { DomElement } from 'html-react-parser';
 import cleanChildrenTags from './cleanChildrenTags';
 import cleanWhitespace from './cleanWhitespace';
+import cleanApiTags from './cleanApiTags';
 import rewriteLink from './rewriteLink';
 import parseChildrenOf from './parseChildrenOf';
 import cleanCalloutTags from './cleanCalloutTags';
@@ -13,9 +14,11 @@ import rewriteHeader from './rewriteHeader';
  * @return ReactElement | ReactElement[] | string
  */
 const parseHTML = (html: string): ReactElement | ReactElement[] | string => {
-    let cleanHTML = cleanChildrenTags(html);
+    let cleanHTML = html;
+    cleanHTML = cleanChildrenTags(cleanHTML);
     cleanHTML = cleanCalloutTags(cleanHTML);
     cleanHTML = cleanWhitespace(cleanHTML);
+    cleanHTML = cleanApiTags(cleanHTML);
 
     const parseOptions = {
         replace(domNode: DomElement): ReactElement | object | undefined | false {
