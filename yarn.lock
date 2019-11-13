@@ -766,6 +766,13 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
+"@babel/runtime@^7.7.2":
+  version "7.7.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.2.tgz#111a78002a5c25fc8e3361bedc9529c696b85a6a"
+  integrity sha512-JONRbXbTXc9WQE2mAZd1p0Z3DZ/6vaQIkgYMSTP3KjRCyd7rCZCcfhCyX+YjwcKxcZ82UrxbRD358bpExNgrjw==
+  dependencies:
+    regenerator-runtime "^0.13.2"
+
 "@babel/template@^7.7.0":
   version "7.7.0"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.7.0.tgz#4fadc1b8e734d97f56de39c77de76f2562e597d0"
@@ -5642,6 +5649,16 @@ gatsby-plugin-sharp@^2.2.36:
     sharp "^0.23.2"
     svgo "1.3.0"
     uuid "^3.3.3"
+
+gatsby-plugin-sitemap@^2.2.20:
+  version "2.2.20"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-sitemap/-/gatsby-plugin-sitemap-2.2.20.tgz#11e8f352d4d79597c93536356f7faac8dbeb6add"
+  integrity sha512-YjV5zaawra3loKp9CPfxDPoNPDneFc7/Fy5FBHYZUnb5ZJxz0wf8iwwOJ8JK3B5Q7YNAtDZbIOsZW9h4KKSwwA==
+  dependencies:
+    "@babel/runtime" "^7.7.2"
+    minimatch "^3.0.4"
+    pify "^3.0.0"
+    sitemap "^1.13.0"
 
 gatsby-plugin-styled-components@^3.1.11:
   version "3.1.11"
@@ -11649,6 +11666,14 @@ sisteransi@^1.0.3:
   resolved "https://registry.yarnpkg.com/sisteransi/-/sisteransi-1.0.3.tgz#98168d62b79e3a5e758e27ae63c4a053d748f4eb"
   integrity sha512-SbEG75TzH8G7eVXFSN5f9EExILKfly7SUvVY5DhhYLvfhKqhDFY0OzevWa/zwak0RLRfWS5AvfMWpd9gJvr5Yg==
 
+sitemap@^1.13.0:
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/sitemap/-/sitemap-1.13.0.tgz#569cbe2180202926a62a266cd3de09c9ceb43f83"
+  integrity sha1-Vpy+IYAgKSamKiZs094Jyc60P4M=
+  dependencies:
+    underscore "^1.7.0"
+    url-join "^1.1.0"
+
 slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
@@ -12892,6 +12917,11 @@ underscore.string@^3.3.5:
     sprintf-js "^1.0.3"
     util-deprecate "^1.0.2"
 
+underscore@^1.7.0:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.9.1.tgz#06dce34a0e68a7babc29b365b8e74b8925203961"
+  integrity sha512-5/4etnCkd9c8gwgowi5/om/mYO5ajCaOgdzj/oW+0eQV9WxKBDZw5+ycmKmeaTXjInS/W0BzpGLo2xR2aBwZdg==
+
 unherit@^1.0.4:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/unherit/-/unherit-1.1.2.tgz#14f1f397253ee4ec95cec167762e77df83678449"
@@ -13147,6 +13177,11 @@ urix@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
   integrity sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
+
+url-join@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/url-join/-/url-join-1.1.0.tgz#741c6c2f4596c4830d6718460920d0c92202dc78"
+  integrity sha1-dBxsL0WWxIMNZxhGCSDQySIC3Hg=
 
 url-loader@^1.1.2:
   version "1.1.2"

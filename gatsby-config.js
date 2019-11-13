@@ -2,12 +2,14 @@ module.exports = {
   siteMetadata: {
     title: `SilverStripe Documentation`,
     description: `Developer documentation for the SilverStripe CMS and framework.`,
-    author: `The Silverstripe Community`
+    author: `The Silverstripe Community`,
+    siteUrl: `https://doc.silverstripe.org`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
