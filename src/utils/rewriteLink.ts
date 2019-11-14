@@ -47,7 +47,7 @@ const rewriteLink = (
         return createElement(
             Link,
             {
-                to: path.join('en', version, href),
+                to: path.join('/', 'en', version, href),
                 className: 'gatsby-link'
             },
             domToReact(children, parseOptions)
