@@ -118,7 +118,7 @@ const getHomePage = (): SilverstripeDocument | null => {
   return __home;
 };
 
-const getCurrentVersion = (): string | null => __currentVersion;
+const getCurrentVersion = (): string => __currentVersion || '4';
 
 const setCurrentNode = (slug: string): void => {
   const currentNode = getNodes().find(n => n.slug === slug) || null;

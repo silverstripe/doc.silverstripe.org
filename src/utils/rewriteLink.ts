@@ -2,7 +2,7 @@ import { createElement, ReactElement } from 'react';
 import { domToReact, DomElement, HTMLReactParserOptions } from 'html-react-parser';
 import { Link } from 'gatsby';
 import rewriteAPILink from './rewriteAPILink';
-import { getCurrentNode } from '../utils/nodes';
+import { getCurrentNode, getCurrentVersion } from '../utils/nodes';
 import path from 'path';
 
 interface LinkAttributes {
@@ -21,7 +21,8 @@ const rewriteLink = (
     }
 
     const currentNode = getCurrentNode();
-    
+    const version = getCurrentVersion();
+
     // api links
     if (href.match(/^api\:/)) {
         const newHref = rewriteAPILink(href);
@@ -42,10 +43,13 @@ const rewriteLink = (
     }
 
     // Relative to root
-    if (href.substring(0, 1) === '/') {
+    if (href.startsWith('/')) {
         return createElement(
             Link,
-            { to: href, className: 'gatsby-link' },
+            {
+                to: path.join('en', version, href),
+                className: 'gatsby-link'
+            },
             domToReact(children, parseOptions)
         )
     }

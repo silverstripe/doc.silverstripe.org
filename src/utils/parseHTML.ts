@@ -8,6 +8,8 @@ import cleanCalloutTags from './cleanCalloutTags';
 import { ReactElement } from 'react';
 import rewriteTable from './rewriteTable';
 import rewriteHeader from './rewriteHeader';
+import cleanHeaders from './cleanHeaders';
+
 /**
  * Replace all the [CHILDREN] with proper React components.
  * @param html 
@@ -19,7 +21,8 @@ const parseHTML = (html: string): ReactElement | ReactElement[] | string => {
     cleanHTML = cleanCalloutTags(cleanHTML);
     cleanHTML = cleanWhitespace(cleanHTML);
     cleanHTML = cleanApiTags(cleanHTML);
-
+    cleanHTML = cleanHeaders(cleanHTML);
+    
     const parseOptions = {
         replace(domNode: DomElement): ReactElement | object | undefined | false {
             const { name, attribs, children } = domNode;
