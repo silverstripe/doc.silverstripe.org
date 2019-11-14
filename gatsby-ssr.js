@@ -8,7 +8,7 @@ exports.wrapPageElement = ({ element, props }) => {
 exports.onRenderBody = ({ setPostBodyComponents }) => {
     setPostBodyComponents([
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js" />,
-    <script dangerouslySetInnerHTML={{
+    process.env.NODE_ENV === 'production' && <script dangerouslySetInnerHTML={{
         __html: `
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
