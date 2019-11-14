@@ -1,9 +1,14 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "doc-silverstripe-org",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "description": "The Silverstripe CMS documentation website (docs.silverstripe.org)",
+  "version": "1.0.0",
+  "author": "Aaron Carlino <unclecheese@leftandmain.com>",
+  "contributors": [
+    {
+      "name": "The Silverstripe Community"
+    }
+  ],
   "dependencies": {
     "@types/react-helmet": "^5.0.14",
     "@types/styled-components": "^4.1.21",
@@ -55,24 +60,23 @@
     "typescript": "^3.7.2"
   },
   "keywords": [
-    "gatsby"
+    "silverstripe", "documentation"
   ],
-  "license": "MIT",
+  "license": "BSD-3",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
     "type-check": "tsc --noEmit",
     "lint": "tslint --project ."
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/silverstripe/doc.silverstripe.org"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/silverstripe/doc.silverstripe.org/issues"
   }
 }

@@ -1,3 +1,23 @@
 [[redirects]]
   from = "/"
   to = "/en/4/"
+
+[[redirects]]
+  from = "/contributing"
+  to = "/en/4/contributing/"
+
+[[redirects]]
+  from = "/en/4/getting_started/installation/common_problems"
+  to = "/en/4/getting_started/common_problems/"
+
+[[redirects]]
+  from = "/en/4/getting_started/installation/server_requirements"
+  to = "/en/4/getting_started/server_requirements/"
+
+[[redirects]]
+  from = "/en/3/getting_started/installation/common_problems"
+  to = "/en/3/getting_started/common_problems/"
+
+[[redirects]]
+  from = "/en/3/getting_started/installation/server_requirements"
+  to = "/en/3/getting_started/server_requirements/"
