@@ -34,6 +34,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-fontawesome": "^1.7.1",
     "react-helmet": "^5.2.1",
     "react-spring": "^8.0.27",
     "resize-observer-polyfill": "^1.5.1",

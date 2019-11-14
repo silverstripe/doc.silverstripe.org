@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   siteMetadata: {
     title: `SilverStripe Documentation`,
@@ -39,7 +41,14 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
-          'gatsby-remark-prismjs',
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              aliases: {
+                ss: 'html',
+              }
+            }
+          },
           `gatsby-remark-copy-linked-files`,
           {
             resolve: `gatsby-remark-images`,
@@ -63,13 +72,40 @@ module.exports = {
         printRejected: false,
         whitelist: ['algolia-autocomplete'],
         ignore: ['prismjs/','docsearch.js/', 'src/theme/assets/search/algolia.css'],
-        //purgeOnly : ['components/', '/main.css', 'bootstrap/'],
-      }
+        content: [
+          path.join(process.cwd(), '.cache/gatsby-source-git/**/*.md'),
+        ],
+        extractors: [,
+          {
+            extractor: class {
+              static extract(content) {
+                return content.match(/[A-Za-z0-9-_:\/]+/g) || [];
+              }
+            },
+            extensions: ['js', 'ts', 'jsx', 'tsx', 'md', 'mdx']            
+          },          
+          {
+            extractor: class  {
+              static extract(content) {
+                const selectors = [`file-alt`]
+                const matches = content.match(/icon(Brand)?: ([a-zA-Z0-9_-]+)/);    
+                if (matches) {
+                  const isBrand = typeof matches[1] !== 'undefined';
+                  selectors.push(isBrand ? `fab` : `fas`);
+                  selectors.push(`fa-${matches[2]}`);
+                }
+                return selectors;
+              }
+            },
+            extensions: ['md']
+          },
+        ]
+      },
     },
     {
       resolve: `gatsby-plugin-offline`,
       options: {
-        precachePages: [`/en/4/developer_guides/*`],
+        precachePages: [`/en/4/developer_guides/**`],
       },      
     }   
   ],

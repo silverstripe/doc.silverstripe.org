@@ -1,6 +1,6 @@
 require("prismjs/themes/prism-okaidia.css");
 require("./src/theme/assets/scss/theme.scss");
-require('./src/theme/assets/fontawesome/js/all.js');
+require('./src/theme/assets/fontawesome/css/all.css');
 require('./src/theme/assets/search/algolia.css');
 const smoothScroll = require('smooth-scroll');
 const Layout = require('./src/components/Layout').default;
