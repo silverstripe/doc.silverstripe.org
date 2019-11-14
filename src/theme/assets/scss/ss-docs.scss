@@ -50,15 +50,15 @@ body {
         &.section {
             &::before {
                 background: $gray-700;
-                height: 4px;
-                top: 50%;
-                margin-top: -2pxp;
+                // height: 4px;
+                // top: 50%;
+                // margin-top: -2pxp;
             }
             &.active {
                 &::before {
                     background: $theme-color-primary;
-                    height: 100%;
-                    top: 0;
+                    // height: 100%;
+                    // top: 0;
                 }
             }
         }        
