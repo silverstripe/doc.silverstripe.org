@@ -69,7 +69,7 @@ module.exports = {
     { 
       resolve: `gatsby-plugin-purgecss`,
       options: {
-        printRejected: false,
+        printRejected: true,
         whitelist: ['algolia-autocomplete'],
         ignore: ['prismjs/','docsearch.js/', 'src/theme/assets/search/algolia.css'],
         content: [
