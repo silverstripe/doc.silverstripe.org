@@ -121,18 +121,19 @@ code {
             color: $gray-800;
             label {
                 font-size: 0.7rem;
-                margin: 0;
+                margin: 0 0.5rem;
             }
             select {
                appearance: none;
                 border: 0;
                 color: $gray-800;
                 background: none;
-                padding-right: 2rem;            
+                padding-right: 2rem;
+                flex-shrink: 0;         
             }
-            [data-icon] {
+            i {
                 pointer-events: none;
-                margin-left: -2rem;
+                margin-left: -1rem;
             }
         }
     }
