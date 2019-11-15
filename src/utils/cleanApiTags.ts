@@ -1,6 +1,6 @@
-const cleanApiTags = (html: string): string => {  
+const cleanApiTags = (html: string): string => {
     return html.replace(
-        /\[api:(.*?)\][^(]/,
+        /\[api:(.*?)\][^(]/g,
         (_, query) => `<a href="${query}">${query}</a> `
     )
 };
