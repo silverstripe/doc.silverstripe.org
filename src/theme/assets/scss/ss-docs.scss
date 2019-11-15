@@ -50,15 +50,10 @@ body {
         &.section {
             &::before {
                 background: $gray-700;
-                // height: 4px;
-                // top: 50%;
-                // margin-top: -2pxp;
             }
             &.active {
                 &::before {
                     background: $theme-color-primary;
-                    // height: 100%;
-                    // top: 0;
                 }
             }
         }        
@@ -146,19 +141,8 @@ code {
     flex-grow: 1;
 }
 
-.algolia-autocomplete {
-    width: 100%;
-}
-
 .navbar {
     justify-content: flex-start;
-}
-
-
-:not(pre) > code[class*="language-"] {
-    background: $gray-200;
-    color: $theme-text-color-secondary;
-    text-shadow: none;
 }
 
 h1, h2, h3 {
@@ -187,9 +171,7 @@ h1, h2, h3 {
         color: $gray-800;
     }
 }
-.gatsby-highlight {
-    margin: 2rem 0;
-}
+
 @media (max-width: 1200px) {
     .docs-logo-wrapper {
         width: auto;
@@ -213,6 +195,7 @@ h1, h2, h3 {
         left: 0;
         right: 0;
     }
+    /* purgecss ignore */
     .algolia-autocomplete .ds-dropdown-menu {
         min-width: 400px;
     }

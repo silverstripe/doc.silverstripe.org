@@ -2,8 +2,8 @@ const path = require('path');
 
 module.exports = {
   siteMetadata: {
-    title: `SilverStripe Documentation`,
-    description: `Developer documentation for the SilverStripe CMS and framework.`,
+    title: `Silverstripe CMS Documentation`,
+    description: `Developer documentation for the Silverstripe CMS and framework.`,
     author: `The Silverstripe Community`,
     siteUrl: `https://doc.silverstripe.org`,
   },
@@ -69,20 +69,23 @@ module.exports = {
     { 
       resolve: `gatsby-plugin-purgecss`,
       options: {
-        printRejected: true,
-        whitelist: ['algolia-autocomplete'],
+        printRejected: false,        
+        whitelist: ['algolia-autocomplete', 'pre', 'code'],
         ignore: ['prismjs/','docsearch.js/', 'src/theme/assets/search/algolia.css'],
         content: [
           path.join(process.cwd(), '.cache/gatsby-source-git/**/*.md'),
+          path.join(process.cwd(), 'src/components/!(*.d).{ts,js,jsx,tsx}'),
+          path.join(process.cwd(), 'src/pages/!(*.d).{ts,js,jsx,tsx}'),
+          path.join(process.cwd(), 'src/templates/!(*.d).{ts,js,jsx,tsx}'),
         ],
-        extractors: [,
+        extractors: [
           {
             extractor: class {
               static extract(content) {
                 return content.match(/[A-Za-z0-9-_:\/]+/g) || [];
               }
             },
-            extensions: ['js', 'ts', 'jsx', 'tsx', 'md', 'mdx']            
+            extensions: ['js', 'ts', 'jsx', 'tsx']            
           },          
           {
             extractor: class  {

@@ -12,6 +12,7 @@ export default function HTML(props) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
+        <link rel="icon" type="image/png" href="ss-favicon.png"/>
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes} className="docs-page">

@@ -5,7 +5,25 @@ exports.wrapPageElement = ({ element, props }) => {
     return <Layout {...props}>{element}</Layout>
 };
 
-exports.onRenderBody = ({ setPostBodyComponents }) => {
+exports.onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
+    // Rules that cannot be touched by purgecss because they come in from client side rendering
+    setHeadComponents([
+        <style type="text/css" dangerouslySetInnerHTML={{
+            __html: `
+                :not(pre) > code[class*="language-"] {
+                    background: #f5f6f8;
+                    color: #5d6778;
+                    text-shadow: none;
+                }                
+                .algolia-autocomplete {
+                    width: 100%;
+                }
+                .gatsby-highlight {
+                    margin: 2rem 0;
+                }                
+                `
+          }} />
+    ]);
     setPostBodyComponents([
     <script key='docsearch' type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js" />,
     process.env.NODE_ENV === 'production' && 
