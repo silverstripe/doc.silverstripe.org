@@ -8,7 +8,7 @@ exports.wrapPageElement = ({ element, props }) => {
 exports.onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
     // Rules that cannot be touched by purgecss because they come in from client side rendering
     setHeadComponents([
-        <style type="text/css" dangerouslySetInnerHTML={{
+        <style key='prism-css' type="text/css" dangerouslySetInnerHTML={{
             __html: `
                 :not(pre) > code[class*="language-"] {
                     background: #f5f6f8;
