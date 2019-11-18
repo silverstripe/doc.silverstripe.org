@@ -205,3 +205,14 @@ h1, h2, h3 {
     }
 }
 
+:not(pre) > code[class*="language-"] {
+    background: #f5f6f8;
+    color: #5d6778;
+    text-shadow: none;
+}                
+.algolia-autocomplete {
+    width: 100%;
+}
+.gatsby-highlight {
+    margin: 2rem 0;
+}                

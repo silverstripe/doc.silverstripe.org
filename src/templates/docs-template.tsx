@@ -9,7 +9,7 @@ const Template: StatelessComponent<SingleFileQuery> = (result): ReactElement => 
     const currentNode = result.data.silverstripeDocument;    
     const { html } = currentNode.parent;
     const { title, slug } = currentNode;
-    const { relativePath, gitRemote: { ref, webLink, sourceInstanceName } } = currentNode.parent.parent;
+    const { relativePath, gitRemote: { ref, webLink } } = currentNode.parent.parent;
     const editLink = `${webLink}/edit/${ref}/${relativePath}`;
     useEffect(() => {
       setCurrentNode(slug);

@@ -13,13 +13,6 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sitemap`,
     {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `files`,
-        path: `${__dirname}/static`
-      }
-    },    
-    {
       resolve: `gatsby-source-git`,
       options: {
         name: `4`,
@@ -38,6 +31,20 @@ module.exports = {
       }
     },    
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `ss3-files`,
+        path: `${__dirname}/.cache/gatsby-source-git/3`
+      }
+    },    
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `ss4-files`,
+        path: `${__dirname}/.cache/gatsby-source-git/4`
+      }
+    },
+    {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
@@ -45,7 +52,8 @@ module.exports = {
             resolve: `gatsby-remark-prismjs`,
             options: {
               aliases: {
-                ss: 'html',
+                ss: `html`,
+                sh: `bash`,
               }
             }
           },

@@ -1,7 +1,6 @@
 const path = require('path');
 const { createFilePath } = require(`gatsby-source-filesystem`);
 const fileToTitle = require('./src/utils/fileToTitle');
-const crypto = require('crypto');
 
 const createSlug = (filePath, version) => {
   const parts = filePath.split('/');
@@ -13,11 +12,10 @@ const createSlug = (filePath, version) => {
   .toLowerCase()
 };
 
-exports.onCreateNode = async ({ node, getNode, actions }) => {  
+exports.onCreateNode = async ({ node, getNode, actions, createContentDigest }) => {  
   if (node.internal.type !== 'MarkdownRemark') {
     return;
   }
-
   const { createNode } = actions;
   const fileNode = getNode(node.parent);
   const version = fileNode.sourceInstanceName;
@@ -50,10 +48,10 @@ exports.onCreateNode = async ({ node, getNode, actions }) => {
 
   const docInternal = {
       type: `SilverstripeDocument`,
-      contentDigest: crypto
-        .createHash(`md5`)
-        .update(JSON.stringify(docData))
-        .digest(`hex`),
+      contentDigest: createContentDigest({
+        ...docData,
+        rawMarkdownBody: node.rawMarkdownBody,
+      }),
   };
   const nodeData = {    
     ...node,
@@ -62,7 +60,6 @@ exports.onCreateNode = async ({ node, getNode, actions }) => {
     parent: node.id,
     internal: docInternal,
   }  
-  
   createNode(nodeData);
 };
 
@@ -75,20 +72,8 @@ exports.createPages = async ({ actions, graphql }) => {
   {
     allSilverstripeDocument {
       nodes {
+        id
         slug
-        parent {
-          ... on MarkdownRemark {
-            parent {
-              ... on File {
-                gitRemote {
-                  sourceInstanceName
-                  ref
-                  webLink
-                }
-              }
-            }
-          }
-        }
       }
     }
   }`); 
@@ -103,6 +88,7 @@ exports.createPages = async ({ actions, graphql }) => {
                 path: node.slug,
                 component: docTemplate,
                 context: {
+                    id: node.id,
                     slug: node.slug,
                 }
             });
