@@ -16,8 +16,8 @@ module.exports = {
       resolve: `gatsby-source-git`,
       options: {
         name: `4`,
-        remote: `https://github.com/unclecheese/silverstripe-framework.git`,
-        branch: `pulls/4/gatsby-docs`,
+        remote: `https://github.com/silverstripe/silverstripe-framework.git`,
+        branch: `4`,
         patterns: `docs/en/**`
       }
     },    
@@ -25,8 +25,8 @@ module.exports = {
       resolve: `gatsby-source-git`,
       options: {
         name: `3`,
-        remote: `https://github.com/unclecheese/silverstripe-framework.git`,
-        branch: `pulls/3/gatsby-docs`,
+        remote: `https://github.com/silverstripe/silverstripe-framework.git`,
+        branch: `3`,
         patterns: `docs/en/**`
       }
     },    
