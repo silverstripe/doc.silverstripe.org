@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: /admin
-Disallow: /assets/src
-Disallow: /assets/.lucene-index
-Crawl-Delay: 4
