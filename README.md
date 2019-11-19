@@ -23,11 +23,23 @@ stored in
 
 To set up a local instance of [doc.silverstripe.org](https://github.com/silverstripe/doc.silverstripe.org):
 
-* Install [Gatsby CLI](https://gatsbyjs.com)
 * Clone this repository to an empty directory
 ```
    git clone https://github.com/silverstripe/doc.silverstripe.org path/to/ssdocs
 ```
+
+### Docker install
+
+No local NodeJS nor gatsby-cli is required for this option.
+
+ * Make sure docker and docker-compose are installed and docker daemon is running
+ * Simply use `./docker/run` to run gatsby commands
+     - `./docker/run build` would be equal to run `gatsby build` within a container
+     - `./docker/run develop -p 8000` would run `gatsby develop -p 8000` within a container.
+
+### Native install
+
+* Install [Gatsby CLI](https://gatsbyjs.com)
 
 ## Building
 
@@ -55,7 +67,7 @@ From within `path/to/ssdocs`, run the command
 gatsby develop
 ```
 to instantiate a development server. This will consume all of the markdown files in both major release
-branches and allow you to browse the documentation site on `http://localhost:8000` by default 
+branches and allow you to browse the documentation site on `http://localhost:8000` by default
 (see the [Gatsby docs](https://www.gatsbyjs.org/docs/) for instructions on customising the port).
 
 ## Authoring
