@@ -17,6 +17,9 @@ body {
     .search-input {
         border-radius: 5px;
         background: $gray-200;
+        &:focus {
+            color: $gray-900;
+        }
     }
 }
 .docs-sidebar {
@@ -92,7 +95,7 @@ code {
             span {
                 text-transform: uppercase;
                 font-size: 0.8rem;
-                color: $gray-700;
+                color: $gray-850;
             }
         }
         img {
@@ -122,6 +125,7 @@ code {
             label {
                 font-size: 0.7rem;
                 margin: 0 0.5rem;
+                color: $gray-900;
             }
             select {
                appearance: none;
@@ -177,7 +181,7 @@ h1, h2, h3 {
     width: 100%;
     margin: 2rem 0;
     a {
-        color: $gray-800;
+        color: $gray-850;
     }
 }
 

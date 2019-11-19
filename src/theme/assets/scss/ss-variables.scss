@@ -6,4 +6,4 @@ $container-max-widths: (
 ) !default;
 $theme-bg-light: lighten($theme-text-color-secondary, 65%);
 $font-family-sans-serif: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
-
+$gray-850: lighten($theme-text-color-secondary, 5%);

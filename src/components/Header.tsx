@@ -31,7 +31,7 @@ const handleNavigate = (e: any): void => {
 const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): ReactElement => {
     const home = getHomePage();
     return (
-    <header className="header fixed-top">	    
+    <header role="banner" className="header fixed-top">	    
         <div className="branding docs-branding">
           <div className="container position-relative py-2 d-flex">
             <div className="docs-logo-wrapper">

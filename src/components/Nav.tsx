@@ -28,7 +28,7 @@ const Nav:StatelessComponent<NavProps> = ({ onNavigate }): ReactElement => {
     }
 
     return (
-        <nav id="docs-nav" className="docs-nav navbar">
+        <nav role="navigation" id="docs-nav" className="docs-nav navbar">
         <ul className="section-items list-unstyled nav flex-column pb-3">
             {getNavChildren(top).map((node: SilverstripeDocument) => {
                 const { slug, title } = node;

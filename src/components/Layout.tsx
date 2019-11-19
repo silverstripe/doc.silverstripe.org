@@ -25,7 +25,7 @@ const Layout: StatelessComponent<LayoutProps> = ({ children, pathContext: { slug
     <Sidebar onNavigate={handleNavigate} isOpen={isToggled} />
       <div className="docs-content">
         <div className="container">
-          <article className="docs-article">
+          <article role="main" className="docs-article">
             {children}
           </article>
         </div> 

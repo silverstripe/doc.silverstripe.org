@@ -19,7 +19,7 @@ const createCards = (children: SilverstripeDocument[]): ReactElement[] => {
                         <div className="card-text">
                             {summary || ''}
                         </div>
-                        <Link className="card-link-mask" to={slug}></Link>
+                        <Link className="card-link-mask" to={slug} aria-label={title}></Link>
                     </div>
                 </div>
             </div>

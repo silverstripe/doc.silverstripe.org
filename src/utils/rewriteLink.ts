@@ -52,7 +52,8 @@ const rewriteLink = (
                 className: 'api-link',
                 href,
                 target: '_blank',
-            }
+            },
+            domToReact(children, parseOptions)
         )
     }
 
