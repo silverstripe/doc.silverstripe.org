@@ -152,13 +152,21 @@ h1, h2, h3 {
 }
 
 .card-body {
+    padding: 1.25rem;
     h5 {
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        margin-bottom: 0.75rem;
         .card-icon-holder { 
-            flex-shrink: 0;
+            flex-shrink: 0;    
+            padding: 0;
+            height: 32px;
+            width: 32px;
         }
+    }
+    .card-title-text {
+        top: 0;
     }
 }
 
