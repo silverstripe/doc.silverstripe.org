@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Redirect, navigate } from '@reach/router'
+import { navigate } from '@reach/router'
 
 const IndexPage = () => {
     useEffect(() => {

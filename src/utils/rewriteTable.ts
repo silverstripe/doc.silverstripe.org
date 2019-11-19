@@ -1,6 +1,12 @@
 import { DomElement, HTMLReactParserOptions, domToReact } from "html-react-parser";
 import { ReactElement, createElement } from "react";
 
+/**
+ * Ensure tables are responsive-ish
+ * 
+ * @param domChildren
+ * @param parseOptions 
+ */
 const rewriteTable = (domChildren: DomElement[], parseOptions: HTMLReactParserOptions): ReactElement => {
     return createElement(
         'div',

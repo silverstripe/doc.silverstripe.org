@@ -2,6 +2,10 @@ import { ReactElement, createElement } from 'react';
 import ChildrenOf from '../components/ChildrenOf';
 import { getCurrentNode } from '../utils/nodes';
 
+/**
+ * Turn [CHILDREN ... ] into a proper React component.
+ * @param data
+ */
 const parseChildrenOf = (data: any): ReactElement|false => {
     const currentNode = getCurrentNode();
     let matches;

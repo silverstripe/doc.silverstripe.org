@@ -215,4 +215,8 @@ h1, h2, h3 {
 }
 .gatsby-highlight {
     margin: 2rem 0;
-}                
+}
+
+.api-link {
+    border-bottom: 1px dashed $gray-700;
+}

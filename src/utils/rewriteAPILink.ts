@@ -1,4 +1,7 @@
-
+/**
+ * If an href is preceded with api:, rewrite it to the api.silverstripe.org site
+ * @param link 
+ */
 const rewriteAPILink = (link: string): string => {
     const version = 4;
     const match = link.match(/api\:(.*)/);

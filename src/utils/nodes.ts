@@ -13,6 +13,9 @@ const navChildrenMap = new Map();
 const siblingMap = new Map();
 const parentMap = new Map();
 
+/**
+ * Get all documents in the source
+ */
 const getNodes = (): SilverstripeDocument[] => {
   if (__nodes) {
     return __nodes;
@@ -44,6 +47,12 @@ const getNodes = (): SilverstripeDocument[] => {
   return __nodes;
 };
 
+/**
+ * Get the children of a given node
+ * 
+ * @param node
+ * @param includeFolders 
+ */
 const getChildren = (
   node: SilverstripeDocument,
   includeFolders: boolean = true
@@ -64,6 +73,11 @@ const getChildren = (
   return childrenMap.get(sku);
 }
 
+/**
+ * Get children of a given node that should be shown in navigation
+ * 
+ * @param node 
+ */
 const getNavChildren = (node: SilverstripeDocument): SilverstripeDocument[] => {
   if (navChildrenMap.has(node.slug)) {
     return navChildrenMap.get(node.slug);
@@ -78,6 +92,11 @@ const getNavChildren = (node: SilverstripeDocument): SilverstripeDocument[] => {
   return navChildrenMap.get(node.slug);
 };
 
+/**
+ * Get the siblings of a given node
+ * 
+ * @param node 
+ */
 const getSiblings = (node: SilverstripeDocument): SilverstripeDocument[] => {  
   if (siblingMap.has(node.slug)) {
     return siblingMap.get(node.slug);
@@ -90,6 +109,10 @@ const getSiblings = (node: SilverstripeDocument): SilverstripeDocument[] => {
   return siblingMap.get(node.slug);
 };
 
+/**
+ * Get the parent of a given node
+ * @param node 
+ */
 const getParent = (node: SilverstripeDocument): SilverstripeDocument | null => {
   if (parentMap.has(node.slug)) {
     return parentMap.get(node.slug);
@@ -103,8 +126,14 @@ const getParent = (node: SilverstripeDocument): SilverstripeDocument | null => {
   return parentMap.get(node.slug);
 };
 
+/**
+ * Get the current node. Must be set by setCurrentNode(string: slug)
+ */
 const getCurrentNode = (): SilverstripeDocument | null => __currentNode;
 
+/**
+ * Get the home page
+ */
 const getHomePage = (): SilverstripeDocument | null => {
   if (__home) {
     return __home;
@@ -118,8 +147,15 @@ const getHomePage = (): SilverstripeDocument | null => {
   return __home;
 };
 
+/**
+ * Get the selected version
+ */
 const getCurrentVersion = (): string => __currentVersion || '4';
 
+/**
+ * Set the current node by its slug.
+ * @param slug 
+ */
 const setCurrentNode = (slug: string): void => {
   const currentNode = getNodes().find(n => n.slug === slug) || null;
   __currentNode = currentNode;
@@ -131,8 +167,6 @@ const setCurrentNode = (slug: string): void => {
     }
   }
 };
-
-
 
 export {
   getNodes,

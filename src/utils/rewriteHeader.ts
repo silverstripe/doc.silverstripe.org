@@ -1,6 +1,10 @@
 import { createElement, ReactElement } from "react";
 import { DomElement } from 'html-react-parser';
 
+/**
+ * If a header has a {#explicit-id}, add it as an attribute
+ * @param domNode 
+ */
 const rewriteHeaders = (domNode: DomElement): ReactElement | false => {
     if (!domNode.name) {
         return false;

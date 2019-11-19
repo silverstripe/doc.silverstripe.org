@@ -10,6 +10,13 @@ interface LinkAttributes {
 };
 
 
+/**
+ * Ensure links use the Gatsby <Link /> component. Client-side routing FTW
+ * 
+ * @param attribs
+ * @param children 
+ * @param parseOptions 
+ */
 const rewriteLink = (
     attribs: LinkAttributes,
     children: DomElement[],
@@ -28,7 +35,11 @@ const rewriteLink = (
         const newHref = rewriteAPILink(href);
         return createElement(
             'a',
-            { href: newHref, target: '_blank' },
+            { 
+                className: 'api-link',
+                href: newHref,
+                target: '_blank' 
+            },
             domToReact(children, parseOptions)
         );
     }
