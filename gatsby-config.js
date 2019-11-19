@@ -26,7 +26,7 @@ module.exports = {
       options: {
         name: `3`,
         remote: `https://github.com/silverstripe/silverstripe-framework.git`,
-        branch: `3`,
+        branch: `3.7`,
         patterns: `docs/en/**`
       }
     },    
