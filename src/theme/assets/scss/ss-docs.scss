@@ -190,6 +190,7 @@ h1, h2, h3 {
         padding: 0 1rem;
     }
     .docs-sidebar {
+        top: 95px;
         transform: translateX(-150%);
         &.sidebar-visible {
             transform: translateX(0);
