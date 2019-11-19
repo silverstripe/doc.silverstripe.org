@@ -205,6 +205,10 @@ h1, h2, h3 {
     }
 }
 
+code[class*="language-"], pre[class*="language-"] {
+    font-size: 0.8rem;
+}
+
 :not(pre) > code[class*="language-"] {
     background: #f5f6f8;
     color: #5d6778;

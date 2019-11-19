@@ -13,3 +13,25 @@ if (typeof window !== "undefined") {
 exports.wrapPageElement = ({ element, props }) => {
     return <Layout {...props}>{element}</Layout>
 };
+
+exports.onRouteUpdate = ({location}) => {
+  anchorScroll(location);
+  return true;
+};
+exports.shouldUpdateScroll = ({
+  routerProps: { location },
+}) => {
+  anchorScroll(location);
+  return true;
+}
+
+const anchorScroll = location => {
+  // Check for location so build does not fail
+  if (location && location.hash) {
+    setTimeout(() => {
+      const item = document.querySelector(`${location.hash}`).offsetTop;
+      const mainNavHeight = document.querySelector(`header`).offsetHeight;
+      window.scrollTo({top: item - mainNavHeight, left: 0, behavior: 'smooth'});
+    }, 0);
+  }
+}
