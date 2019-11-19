@@ -7,8 +7,10 @@ export interface SingleFileQuery {
 export interface SinglePage {
     title: string;
     slug: string;
-    parent: {
+    watchFile: {
         html: string;
+    }
+    parent: {
         parent: {
             relativePath: string;
             gitRemote: {

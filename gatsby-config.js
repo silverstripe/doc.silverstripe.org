@@ -33,15 +33,15 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `ss3-files`,
-        path: `${__dirname}/.cache/gatsby-source-git/3`
+        name: `watcher--ss3`,
+        path: `${__dirname}/.cache/gatsby-source-git/3/docs/en`
       }
     },    
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `ss4-files`,
-        path: `${__dirname}/.cache/gatsby-source-git/4`
+        name: `watcher--ss4`,
+        path: `${__dirname}/.cache/gatsby-source-git/4/docs/en`
       }
     },
     {

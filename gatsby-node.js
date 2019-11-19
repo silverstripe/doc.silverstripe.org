@@ -12,18 +12,37 @@ const createSlug = (filePath, version) => {
   .toLowerCase()
 };
 
-exports.onCreateNode = async ({ node, getNode, actions, createContentDigest }) => {  
+exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNodeId, createContentDigest }) => {  
   if (node.internal.type !== 'MarkdownRemark') {
     return;
   }
   const { createNode } = actions;
   const fileNode = getNode(node.parent);
   const version = fileNode.sourceInstanceName;
+
+  // The gatsby-source-filesystem plugins are registered to collect from the same path
+  // that the git source writes to, so we get the watch task (hot reload on content changes)
+  // But we don't want duplicate document pages for each source plugin, so
+  // we bail out if we already have the file. However, we need to ensure
+  // the file is injected into the template as a dependency, so when the content changes,
+  // the pages get refreshed on the fly.
+  if (version.match(/^watcher--/)) {
+    const existing = getNodesByType('SilverstripeDocument')
+      .find(n => n.fileAbsolutePath === node.fileAbsolutePath);
+    
+    if (existing) {
+      // Pair the document with its watched file so we can inject it into the template
+      // as a dependency.
+      existing.watchFile___NODE = node.id;
+      return;
+    } 
+  }   
+
   const filePath = createFilePath({
     node,
     getNode,
     basePath: `docs`
-  });  
+  });
   let fileTitle = path.basename(node.fileAbsolutePath, '.md');
   const isIndex = fileTitle === 'index';
   if (isIndex) {
@@ -32,7 +51,7 @@ exports.onCreateNode = async ({ node, getNode, actions, createContentDigest }) =
   const docTitle = fileToTitle(fileTitle);
   const slug = createSlug(filePath, version);
   const parentSlug = `${path.resolve(slug, '../')}/`;
-  
+
   const docData = {
     isIndex,
     filePath,
@@ -55,11 +74,11 @@ exports.onCreateNode = async ({ node, getNode, actions, createContentDigest }) =
   };
   const nodeData = {    
     ...node,
-    id: `ss-doc-${node.id}`,
+    id: createNodeId(`SilverstripeDocument${node.id}`),
     ...docData,
     parent: node.id,
     internal: docInternal,
-  }  
+  }
   createNode(nodeData);
 };
 

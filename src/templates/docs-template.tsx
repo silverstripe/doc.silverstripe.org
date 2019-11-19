@@ -7,7 +7,7 @@ import { setCurrentNode } from '../utils/nodes';
 
 const Template: StatelessComponent<SingleFileQuery> = (result): ReactElement => {
     const currentNode = result.data.silverstripeDocument;    
-    const { html } = currentNode.parent;
+    const { html } = currentNode.watchFile;
     const { title, slug } = currentNode;
     const { relativePath, gitRemote: { ref, webLink } } = currentNode.parent.parent;
     const editLink = `${webLink}/edit/${ref}/${relativePath}`;
@@ -35,9 +35,14 @@ export default Template;
 export const pageQuery = graphql`
   query DocsBySlug($slug: String!) {
     silverstripeDocument(slug: { eq: $slug }) {
+      title
+      slug
+      id
+      watchFile {
+        html
+      }
       parent {
         ... on MarkdownRemark {
-          html
           parent {
             ... on File {
               relativePath
@@ -50,9 +55,6 @@ export const pageQuery = graphql`
           }
         }
       }
-
-      title
-      slug
 
     }
   }
