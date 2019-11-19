@@ -21,7 +21,7 @@ body {
 }
 .docs-sidebar {
     display: block;
-    top: 95px;  
+    top: 65px;  
     @include box-shadow(none);
 }
 
@@ -195,6 +195,9 @@ h1, h2, h3 {
             transform: translateX(0);
         }
     }
+    .docs-article {
+        padding: 2rem 0;
+    }
 }
 
 @media (max-width: 640px) {
@@ -230,5 +233,5 @@ code[class*="language-"], pre[class*="language-"] {
 }
 
 .api-link {
-    border-bottom: 1px dashed $gray-700;
+    text-decoration: underline;
 }

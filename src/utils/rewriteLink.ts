@@ -30,7 +30,7 @@ const rewriteLink = (
     const currentNode = getCurrentNode();
     const version = getCurrentVersion();
 
-    // api links
+    // shorthand api links
     if (href.match(/^api\:/)) {
         const newHref = rewriteAPILink(href);
         return createElement(
@@ -42,6 +42,18 @@ const rewriteLink = (
             },
             domToReact(children, parseOptions)
         );
+    }
+
+    // explicit API links
+    if (href.match(/api\.silverstripe\.org/)) {
+        return createElement(
+            'a',
+            {
+                className: 'api-link',
+                href,
+                target: '_blank',
+            }
+        )
     }
 
     // absolute links
