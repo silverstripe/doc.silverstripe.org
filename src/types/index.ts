@@ -11,6 +11,7 @@ export interface SinglePage {
         html: string;
     }
     parent: {
+        html: string;
         parent: {
             relativePath: string;
             gitRemote: {

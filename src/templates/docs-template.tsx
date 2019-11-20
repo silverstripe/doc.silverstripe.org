@@ -7,7 +7,12 @@ import { setCurrentNode } from '../utils/nodes';
 
 const Template: StatelessComponent<SingleFileQuery> = (result): ReactElement => {
     const currentNode = result.data.silverstripeDocument;    
-    const { html } = currentNode.watchFile;
+    let html;
+    if (currentNode.watchFile) {
+      html = currentNode.watchFile.html;
+    } else {
+      html = currentNode.parent.html;
+    }
     const { title, slug } = currentNode;
     const { relativePath, gitRemote: { ref, webLink } } = currentNode.parent.parent;
     const editLink = `${webLink}/edit/${ref}/${relativePath}`;
@@ -43,6 +48,7 @@ export const pageQuery = graphql`
       }
       parent {
         ... on MarkdownRemark {
+          html
           parent {
             ... on File {
               relativePath
