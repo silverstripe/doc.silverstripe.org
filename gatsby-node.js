@@ -12,7 +12,7 @@ const createSlug = (filePath, version) => {
   .toLowerCase()
 };
 
-exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNodeId, createContentDigest }) => {  
+exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNodeId, createContentDigest }) => {
   if (node.internal.type !== 'MarkdownRemark') {
     return;
   }
@@ -29,14 +29,14 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
   if (version.match(/^watcher--/)) {
     const existing = getNodesByType('SilverstripeDocument')
       .find(n => n.fileAbsolutePath === node.fileAbsolutePath);
-    
+
     if (existing) {
       // Pair the document with its watched file so we can inject it into the template
       // as a dependency.
       existing.watchFile___NODE = node.id;
       return;
-    } 
-  }   
+    }
+  }
 
   const filePath = createFilePath({
     node,
@@ -51,6 +51,7 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
   const docTitle = fileToTitle(fileTitle);
   const slug = createSlug(filePath, version);
   const parentSlug = `${path.resolve(slug, '../')}/`;
+  const unhideSelf = false;
 
   const docData = {
     isIndex,
@@ -58,7 +59,8 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
     fileTitle,
     slug,
     parentSlug,
-    ...node.frontmatter,    
+    unhideSelf,
+    ...node.frontmatter,
   };
 
   if (!docData.title || docData.title === '') {
@@ -72,7 +74,7 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
         rawMarkdownBody: node.rawMarkdownBody,
       }),
   };
-  const nodeData = {    
+  const nodeData = {
     ...node,
     id: createNodeId(`SilverstripeDocument${node.id}`),
     ...docData,
@@ -95,7 +97,7 @@ exports.createPages = async ({ actions, graphql }) => {
         slug
       }
     }
-  }`); 
+  }`);
 
 
     if (result.errors) {
@@ -111,6 +113,6 @@ exports.createPages = async ({ actions, graphql }) => {
                     slug: node.slug,
                 }
             });
-        })  
+        })
 
-};  
+};

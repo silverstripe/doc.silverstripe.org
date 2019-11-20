@@ -11,7 +11,7 @@ const createCards = (children: SilverstripeDocument[]): ReactElement[] => {
                 <div className="card shadow-sm">
                     <div className="card-body">
                         <h5 className="card-title">
-                            <span className="theme-icon-holder card-icon-holder mr-2">                                
+                            <span className="theme-icon-holder card-icon-holder mr-2">
                                 <i className={iconClass}></i>
                             </span>
                             <span className="card-title-text">{title}</span>
@@ -28,7 +28,7 @@ const createCards = (children: SilverstripeDocument[]): ReactElement[] => {
 };
 
 const createList = (children: SilverstripeDocument[]): ReactElement[] => {
-    return children.map(({ summary, slug, title }) => {        
+    return children.map(({ summary, slug, title }) => {
         return (
             <React.Fragment key={slug}>
                 <dt><Link to={slug}>{title}</Link></dt>
@@ -38,32 +38,39 @@ const createList = (children: SilverstripeDocument[]): ReactElement[] => {
     });
 };
 
-const ChildrenOf: StatelessComponent<ChildrenOfProps> = ({ folderName, exclude, currentNode, asList }) => {
+const ChildrenOf: StatelessComponent<ChildrenOfProps> = ({ folderName, exclude, only, currentNode, asList, includeFolders, reverse }) => {
     if (!currentNode) {
         return null;
     }
-    let children: ReactElement[] = [];
-    if (!folderName && !exclude) {
-        const sourceNodes = currentNode.isIndex ? getChildren(currentNode, false) : getSiblings(currentNode)
-        children = asList ? createList(sourceNodes) : createCards(sourceNodes);
+
+    var nodes: SilverstripeDocument[] = [];
+
+    if (!folderName && !exclude && !only) {
+        nodes = currentNode.isIndex ? getChildren(currentNode, false) : getSiblings(currentNode)
+
     } else if (folderName) {
         const targetFolder = getChildren(currentNode, true).find(
             child => child.isIndex && child.fileTitle.toLowerCase() === folderName.toLowerCase()
         );
         if (targetFolder) {
-            children = asList
-                ? createList(getChildren(targetFolder, false))
-                : createCards(getChildren(targetFolder, false));
-        } else {
-            children = [];
+            nodes = getChildren(targetFolder, false);
         }
     } else if (exclude) {
         const exclusions = exclude.split(',').map(e => e.toLowerCase());
-        const nodes = getChildren(currentNode, false).filter(
+        nodes = getChildren(currentNode, includeFolders).filter(
             child => !exclusions.includes(child.fileTitle.toLowerCase())
         );
-        children = asList ? createList(nodes) : createCards(nodes);
+    } else if (only) {
+        const inclusions = only.split(',').map(e => e.toLowerCase());
+        nodes = getChildren(currentNode, includeFolders).filter(
+            child => inclusions.includes(child.fileTitle.toLowerCase())
+        );
     }
+
+    if (reverse) {
+        nodes.reverse();
+    }
+    let children: ReactElement[] = asList ? createList(nodes) : createCards(nodes);
 
     return (
         <div className="docs-overview py-5">

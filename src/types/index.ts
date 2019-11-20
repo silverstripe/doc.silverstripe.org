@@ -19,7 +19,7 @@ export interface SinglePage {
                 webLink: string;
             }
         }
-    }    
+    }
 };
 
 
@@ -33,6 +33,7 @@ export interface SilverstripeDocument {
     iconBrand?: string;
     hideChildren?: boolean;
     hideSelf?: boolean;
+    unhideSelf?: boolean;
     parentSlug: string;
     summary: string;
     fileTitle: string;
@@ -48,6 +49,9 @@ export interface HierarchyQuery {
 export interface ChildrenOfProps {
     folderName?: string;
     exclude?: string;
+    only?: string;
     currentNode: SilverstripeDocument | null;
     asList?: boolean;
+    includeFolders?: boolean;
+    reverse?: boolean;
 };
