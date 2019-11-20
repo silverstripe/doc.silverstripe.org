@@ -16,11 +16,11 @@ module.exports = {
       resolve: `gatsby-source-git`,
       options: {
         name: `4`,
-        remote: `/Users/acarlino/Sites/gatsby-docs-4`,
+        remote: `https://github.com/silverstripe/silverstripe-framework.git`,
         branch: `4`,
         patterns: `docs/en/**`
       }
-    },    
+    },
     {
       resolve: `gatsby-source-git`,
       options: {
@@ -29,14 +29,14 @@ module.exports = {
         branch: `3.7`,
         patterns: `docs/en/**`
       }
-    },    
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `watcher--ss3`,
         path: `${__dirname}/.cache/gatsby-source-git/3/docs/en`
       }
-    },    
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -64,10 +64,10 @@ module.exports = {
             options: {
               maxWidth: 850,
             },
-          },          
+          },
         ]
       }
-    },    
+    },
     `gatsby-plugin-typescript`,
     {
       resolve: `gatsby-plugin-styled-components`,
@@ -75,10 +75,10 @@ module.exports = {
         // Add any options here
       },
     },
-    { 
+    {
       resolve: `gatsby-plugin-purgecss`,
       options: {
-        printRejected: false,        
+        printRejected: false,
         whitelist: ['algolia-autocomplete', 'pre', 'code'],
         ignore: ['prismjs/','docsearch.js/', 'src/theme/assets/search/algolia.css'],
         content: [
@@ -99,15 +99,15 @@ module.exports = {
                 return content.match(/[A-Za-z0-9-_:\/]+/g) || [];
               }
             },
-            extensions: ['js', 'ts', 'jsx', 'tsx']            
-          },          
+            extensions: ['js', 'ts', 'jsx', 'tsx']
+          },
           {
             // Match markdown files for icon classes (icon, iconBrand). Add each one to the
             // allowed selectors defined in FontAwesome. Everything else in FA should be removed.
             extractor: class  {
               static extract(content) {
                 const selectors = [`file-alt`]
-                const matches = content.match(/icon(Brand)?: ([a-zA-Z0-9_-]+)/);    
+                const matches = content.match(/icon(Brand)?: ([a-zA-Z0-9_-]+)/);
                 if (matches) {
                   const isBrand = typeof matches[1] !== 'undefined';
                   selectors.push(isBrand ? `fab` : `fas`);
@@ -125,7 +125,7 @@ module.exports = {
       resolve: `gatsby-plugin-offline`,
       options: {
         precachePages: [`/en/4/developer_guides/**`],
-      },      
-    }   
+      },
+    }
   ],
 }
