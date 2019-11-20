@@ -1,0 +1,15 @@
+version: '3.7'
+
+x-entrypoint: &entry
+  - /bin/bash
+  - /app/docker/entrypoint.sh
+
+services:
+  gatsby:
+    build:
+      context: .
+    working_dir: /app
+    network_mode: "host"
+    volumes:
+      - '..:/app'
+    entrypoint: *entry
