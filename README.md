@@ -70,16 +70,12 @@ your content changes, since the remote repositories are the source of truth.
 
 ## Deploying content changes
 
-Once your contribution has been merged into the master branch, you can run a build hook to trigger
-a new build in Netlify.
-
-```
-curl -X POST -d {} https://api.netlify.com/build_hooks/5dd225fffdc558cbf6a23490
-```
+Once your contribution has been merged into the master branch, it will be deployed to production via a
+Github action in the `silverstripe-framework` repository.
 
 ## Deploying app changes
 
-Once your change is merged in to the `master` branch of this repository, it will be deployed live within minutes.
+Once your change is merged in to the `master` branch of this repository, it will be deployed to production.
 
 ## Contribution
 

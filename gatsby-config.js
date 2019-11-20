@@ -16,7 +16,7 @@ module.exports = {
       resolve: `gatsby-source-git`,
       options: {
         name: `4`,
-        remote: `https://github.com/silverstripe/silverstripe-framework.git`,
+        remote: `/Users/acarlino/Sites/gatsby-docs-4`,
         branch: `4`,
         patterns: `docs/en/**`
       }
