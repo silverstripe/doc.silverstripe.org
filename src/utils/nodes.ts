@@ -31,6 +31,7 @@ const getNodes = (): SilverstripeDocument[] => {
             icon
             iconBrand
             hideChildren
+            unhideSelf
             slug
             parentSlug
             fileTitle
@@ -49,9 +50,9 @@ const getNodes = (): SilverstripeDocument[] => {
 
 /**
  * Get the children of a given node
- * 
+ *
  * @param node
- * @param includeFolders 
+ * @param includeFolders
  */
 const getChildren = (
   node: SilverstripeDocument,
@@ -75,8 +76,8 @@ const getChildren = (
 
 /**
  * Get children of a given node that should be shown in navigation
- * 
- * @param node 
+ *
+ * @param node
  */
 const getNavChildren = (node: SilverstripeDocument): SilverstripeDocument[] => {
   if (navChildrenMap.has(node.slug)) {
@@ -87,6 +88,8 @@ const getNavChildren = (node: SilverstripeDocument): SilverstripeDocument[] => {
     children = getChildren(node, true).filter(n => !n.hideSelf);
   }
 
+  getChildren(node, true).filter(n => n.unhideSelf).forEach(c => children.push(c));
+
   navChildrenMap.set(node.slug, children);
 
   return navChildrenMap.get(node.slug);
@@ -94,10 +97,10 @@ const getNavChildren = (node: SilverstripeDocument): SilverstripeDocument[] => {
 
 /**
  * Get the siblings of a given node
- * 
- * @param node 
+ *
+ * @param node
  */
-const getSiblings = (node: SilverstripeDocument): SilverstripeDocument[] => {  
+const getSiblings = (node: SilverstripeDocument): SilverstripeDocument[] => {
   if (siblingMap.has(node.slug)) {
     return siblingMap.get(node.slug);
   }
@@ -111,7 +114,7 @@ const getSiblings = (node: SilverstripeDocument): SilverstripeDocument[] => {
 
 /**
  * Get the parent of a given node
- * @param node 
+ * @param node
  */
 const getParent = (node: SilverstripeDocument): SilverstripeDocument | null => {
   if (parentMap.has(node.slug)) {
@@ -154,7 +157,7 @@ const getCurrentVersion = (): string => __currentVersion || '4';
 
 /**
  * Set the current node by its slug.
- * @param slug 
+ * @param slug
  */
 const setCurrentNode = (slug: string): void => {
   const currentNode = getNodes().find(n => n.slug === slug) || null;
