@@ -1,5 +1,5 @@
 import React from 'react'
-import { StatelessComponent, ReactElement, useEffect } from 'react';
+import { StatelessComponent, ReactElement, useEffect, useState } from 'react';
 import { navigateTo } from "gatsby-link"
 import { getCurrentVersion } from '../utils/nodes';
 
@@ -17,6 +17,7 @@ const autocompleteSelected = (e) => {
 };
 
 const SearchBox: StatelessComponent<SearchBoxProps> = ({ identifier }): ReactElement|null => {
+    const [ isFocused, setFocus ] = useState(false);
     useEffect(() => {
         if (typeof window === 'undefined') return;
 
@@ -40,13 +41,21 @@ const SearchBox: StatelessComponent<SearchBoxProps> = ({ identifier }): ReactEle
       
     }, []);
 
+    const handleFocus = () => setFocus(true);
+    const handleBlur = () => setFocus(false);
+    
+
     return (
+      <>
+            <label className={ isFocused ? `hide` : `show` } htmlFor={identifier}>Search...</label>
             <input
                 id={identifier}
                 type="search"
-                placeholder="Search the docs..."
                 className="form-control search-input"
+                onFocus={handleFocus}
+                onBlur={handleBlur}
             />
+      </>
       )  
 };
 
