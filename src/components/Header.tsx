@@ -38,10 +38,11 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
           <div className="container position-relative py-2 d-flex">
             <div className="docs-logo-wrapper">
               <div className="site-logo">
-                <Link className="navbar-brand" to={ home ? home.slug : '/'} title="Go to the home page">
-                  <img src={logo} alt="Silverstripe CMS documentation" />
-                  <span>Documentation</span>
+                <Link style={{ backgroundImage: `url(${logo})`}} className="navbar-brand" to={ home ? home.slug : '/'} title="Go to the home page">                  
+                  Silverstripe CMS Documentation
                 </Link>
+                <span />
+                <span>Documentation</span>
               </div>    
 
             </div>
@@ -52,7 +53,7 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
                   <SearchBox identifier="header-search" />
                 </form>
               </div>
-              <ul className="social-list list-inline d-flex flex-grow-1 flex-lg-grow-0 justify-content-between justify-content-lg-around align-items-center">
+              <ul className="social-list list-inline d-flex flex-grow-1 flex-lg-grow-0 align-items-center">
                 <li className="list-inline-item version-select">
                   <label htmlFor="version-select">Version: </label>
                   <select id="version-select" value={getCurrentVersion() || '4'} onChange={handleNavigate}>

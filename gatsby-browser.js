@@ -2,10 +2,12 @@ require("prismjs/themes/prism-okaidia.css");
 require("./src/theme/assets/scss/theme.scss");
 require('./src/theme/assets/fontawesome/css/all.css');
 require('./src/theme/assets/search/algolia.css');
+
 const React = require('react');
 const Layout = require('./src/components/Layout').default;
 const NodeProvider = require('./src/components/NodeProvider').default;
 const smoothScroll = require('smooth-scroll');
+
 
 if (typeof window !== "undefined") {
     smoothScroll('a[href*="#"]')

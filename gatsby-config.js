@@ -24,10 +24,13 @@ module.exports = {
 <<<<<<< HEAD
         name: `4`,
         remote: `https://github.com/silverstripe/silverstripe-framework.git`,
+<<<<<<< HEAD
 =======
         name: `docs--4`,
         remote: `/Users/acarlino/Sites/gatsby-docs-4`,
 >>>>>>> Docs/userguide switching
+=======
+>>>>>>> UX improvements per Paul design
         branch: `4`,
         patterns: `docs/en/**`
       }
