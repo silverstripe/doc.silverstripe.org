@@ -42,7 +42,7 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
                   Silverstripe CMS Documentation
                 </Link>
                 <span />
-                <span>Documentation</span>
+                <span>Docs</span>
               </div>    
 
             </div>
@@ -53,12 +53,12 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
                   <SearchBox identifier="header-search" />
                 </form>
               </div>
-              <ul className="social-list list-inline d-flex flex-grow-1 flex-lg-grow-0 align-items-center">
+              <ul className="social-list list-inline d-flex flex-grow-1 flex-lg-grow-0 align-items-center justify-content-center justify-content-lg-end">
                 <li className="list-inline-item version-select">
-                  <label htmlFor="version-select">Version: </label>
+                  
                   <select id="version-select" value={getCurrentVersion() || '4'} onChange={handleNavigate}>
-                      <option value='4'>4.x</option>
-                      <option value='3'>3.x</option>
+                      <option value='4'>v4.x</option>
+                      <option value='3'>v3.x</option>
                   </select>
                   <i className="fas fa-chevron-down"></i>
                 </li>
