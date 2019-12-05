@@ -1,9 +1,9 @@
 import React, { StatelessComponent, ReactElement } from 'react';
-import { getNavChildren, getHomePage, getCurrentNode } from '../utils/nodes';
 import { SilverstripeDocument } from '../types';
 import { Link } from 'gatsby';
 import classnames from 'classnames';
 import { LinkGetProps } from '@reach/router';
+import useHierarchy from '../hooks/useHierarchy';
 
 interface NavProps {
     onNavigate?(e: React.MouseEvent): void;
@@ -21,16 +21,40 @@ const getLinkProps = (props: LinkGetProps): {} => {
 };
 
 const Nav:StatelessComponent<NavProps> = ({ onNavigate }): ReactElement => {
+    const {
+        getNavChildren,
+        getHomePage,
+        getCurrentNode,
+        getCurrentCategory,
+        getCurrentVersion
+    } = useHierarchy();
+
     const currentNode = getCurrentNode();
     const top = getHomePage();
+    const category = getCurrentCategory();
+
+    const handleCategory = (e) => {
+        const v = getCurrentVersion();
+        if (e.target.value === 'user') {
+            window.location.href = `/en/${v}/userhelp/`;
+        } else {
+            window.location.href = `/en/${v}/`;
+        }
+    }
+    
     if (!top) {
         return <nav />;
     }
-
+    const topLevel = getNavChildren(top).filter(node => node.category === category);
     return (
         <nav role="navigation" id="docs-nav" className="docs-nav navbar">
+            <input type="radio" checked={category === 'docs'} value="docs" onChange={handleCategory} id="docs-switch" /> 
+            <label htmlFor="docs-switch">Docs</label> |
+            <input type="radio" checked={category === 'user'} value="user" onChange={handleCategory} id="user-switch" /> 
+            <label htmlFor="user-switch">Userguide</label>
+
         <ul className="section-items list-unstyled nav flex-column pb-3">
-            {getNavChildren(top).map((node: SilverstripeDocument) => {
+            {topLevel.map((node: SilverstripeDocument) => {
                 const { slug, title } = node;
                 const childItems = getNavChildren(node);
                 return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import { StatelessComponent, ReactElement, useEffect } from 'react';
 import { navigateTo } from "gatsby-link"
-import { getCurrentVersion } from '../utils/nodes';
+import useHierarchy from '../hooks/useHierarchy';
 
 interface SearchBoxProps {
   identifier: string;
@@ -17,6 +17,7 @@ const autocompleteSelected = (e) => {
 };
 
 const SearchBox: StatelessComponent<SearchBoxProps> = ({ identifier }): ReactElement|null => {
+    const { getCurrentVersion } = useHierarchy();
     useEffect(() => {
         if (typeof window === 'undefined') return;
         if (!process.env.GATSBY_DOCSEARCH_API_KEY) {

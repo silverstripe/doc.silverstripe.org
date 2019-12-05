@@ -1,4 +1,5 @@
 const path = require('path');
+const userhelpImports = require('./userhelp-imports');
 
 module.exports = {
   siteMetadata: {
@@ -17,8 +18,13 @@ module.exports = {
     {
       resolve: `gatsby-source-git`,
       options: {
+<<<<<<< HEAD
         name: `4`,
         remote: `https://github.com/silverstripe/silverstripe-framework.git`,
+=======
+        name: `docs--4`,
+        remote: `/Users/acarlino/Sites/gatsby-docs-4`,
+>>>>>>> Docs/userguide switching
         branch: `4`,
         patterns: `docs/en/**`
       }
@@ -26,24 +32,40 @@ module.exports = {
     {
       resolve: `gatsby-source-git`,
       options: {
-        name: `3`,
+        name: `docs--3`,
         remote: `https://github.com/silverstripe/silverstripe-framework.git`,
         branch: `3.7`,
         patterns: `docs/en/**`
       }
     },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: `gatsby-source-git`,
       options: {
-        name: `watcher--ss3`,
-        path: `${__dirname}/.cache/gatsby-source-git/3/docs/en`
+        name: `user--4`,
+        remote: `https://github.com/silverstripe/silverstripe-userhelp-content.git`,
+        branch: `4`,
+        patterns: `docs/en/**`
       }
+    },    
+    {
+      resolve: `gatsby-source-git`,
+      options: {
+        name: `user--3`,
+        remote: `https://github.com/silverstripe/silverstripe-userhelp-content.git`,
+        branch: `3`,
+        patterns: `docs/en/**`
+      }
+<<<<<<< HEAD
     },
+=======
+    },    
+    // ...userhelpImports    
+>>>>>>> Docs/userguide switching
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `watcher--ss4`,
-        path: `${__dirname}/.cache/gatsby-source-git/4/docs/en`
+        name: `watcher`,
+        path: `${__dirname}/.cache/gatsby-source-git/`
       }
     },
     {

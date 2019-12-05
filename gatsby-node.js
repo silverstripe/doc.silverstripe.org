@@ -3,23 +3,35 @@ const fs = require('fs');
 const { createFilePath } = require(`gatsby-source-filesystem`);
 const fileToTitle = require('./src/utils/fileToTitle');
 
-const createSlug = (filePath, version) => {
-  const parts = filePath.split('/');
-  const langIndex = parts.indexOf('en');
-  parts.splice(langIndex + 1, 0, version);
-  return parts
-  .map(part => part.replace(/^\d+_/, ''))
-  .join('/')
-  .toLowerCase()
+const createSlug = ({path, version, category, thirdparty}) => {
+  const [_, lang, ...rest] = path.split('/');
+  const parts = [
+    lang,
+    version,
+    // use suburl "userhelp" for all user docs
+    category === 'user' && 'userhelp',
+    // thirdparty modules are under /optional_features/ (coupling)
+    thirdparty && `optional_features/${thirdparty}`,
+    ...rest,
+  ].filter(p => p);
+
+   const slug = parts
+    .map(part => part.replace(/^\d+_/, ''))
+    .join('/')
+    .toLowerCase();
+
+    return `/${slug}/`;
 };
 
-exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNodeId, createContentDigest }) => {
+const parseName = name => name.split('--');
+
+exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNodeId, createContentDigest }) => {  
   if (node.internal.type !== 'MarkdownRemark') {
     return;
   }
   const { createNode } = actions;
   const fileNode = getNode(node.parent);
-  const version = fileNode.sourceInstanceName;
+  const [category, version, thirdparty] = parseName(fileNode.sourceInstanceName);
 
   // The gatsby-source-filesystem plugins are registered to collect from the same path
   // that the git source writes to, so we get the watch task (hot reload on content changes)
@@ -27,7 +39,7 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
   // we bail out if we already have the file. However, we need to ensure
   // the file is injected into the template as a dependency, so when the content changes,
   // the pages get refreshed on the fly.
-  if (version.match(/^watcher--/)) {
+  if (category === 'watcher') {
     const existing = getNodesByType('SilverstripeDocument')
       .find(n => n.fileAbsolutePath === node.fileAbsolutePath);
 
@@ -37,7 +49,7 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
       existing.watchFile___NODE = node.id;
       return;
     }
-  }
+  }   
 
   const filePath = createFilePath({
     node,
@@ -50,7 +62,12 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
     fileTitle = path.basename(path.dirname(node.fileAbsolutePath));
   }
   const docTitle = fileToTitle(fileTitle);
-  const slug = createSlug(filePath, version);
+  const slug = createSlug({
+    path: filePath,
+    version,
+    category,
+    thirdparty,
+  });
   const parentSlug = `${path.resolve(slug, '../')}/`;
   const unhideSelf = false;
 
@@ -61,6 +78,7 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
     slug,
     parentSlug,
     unhideSelf,
+    category,
     ...node.frontmatter,
   };
 

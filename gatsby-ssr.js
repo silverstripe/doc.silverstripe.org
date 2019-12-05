@@ -1,13 +1,27 @@
-const Layout = require('./src/components/Layout').default;
 const React = require('react');
+const Layout = require('./src/components/Layout').default;
+const NodeProvider = require('./src/components/NodeProvider').default;
+const { setCurrentPath } = require('./src/utils/nodes');
 
+/**
+ * Applies the node provider (static query of all documents)
+ * Ensures the chrome doesn't rerender every page load, which makes the sidebar reset its scroll.
+ */
 exports.wrapPageElement = ({ element, props }) => {
-    return <Layout {...props}>{element}</Layout>
+    return (
+        <NodeProvider>
+            <Layout {...props}>
+                {element}
+            </Layout>
+        </NodeProvider>
+    );
 };
 
-exports.onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
+
+exports.onRenderBody = ({ pathname, setPostBodyComponents, setHeadComponents }) => {
+    setCurrentPath(pathname);
     // Rules that cannot be touched by purgecss because they come in from client side rendering
-    setHeadComponents([
+    setHeadComponents([ 
         <style key='prism-css' type="text/css" dangerouslySetInnerHTML={{
             __html: `
                 :not(pre) > code[class*="language-"] {

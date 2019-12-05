@@ -2,22 +2,38 @@ require("prismjs/themes/prism-okaidia.css");
 require("./src/theme/assets/scss/theme.scss");
 require('./src/theme/assets/fontawesome/css/all.css');
 require('./src/theme/assets/search/algolia.css');
-const smoothScroll = require('smooth-scroll');
-const Layout = require('./src/components/Layout').default;
 const React = require('react');
+const Layout = require('./src/components/Layout').default;
+const NodeProvider = require('./src/components/NodeProvider').default;
+const { setCurrentPath } = require('./src/utils/nodes');
+const smoothScroll = require('smooth-scroll');
 
 if (typeof window !== "undefined") {
     smoothScroll('a[href*="#"]')
   }  
 
+/**
+ * Ensures the chrome doesn't rerender every page load, which makes the sidebar reset its scroll.
+ */
 exports.wrapPageElement = ({ element, props }) => {
-    return <Layout {...props}>{element}</Layout>
+    return (
+      <NodeProvider {...props}>
+          <Layout {...props}>
+            {element}
+          </Layout>
+      </NodeProvider>
+    );
 };
 
+
 exports.onRouteUpdate = ({location}) => {
+  if (window.ga && process.env.NODE_ENV === 'production') {
+    window.ga('send', 'pageview');
+  }
   anchorScroll(location);
   return true;
 };
+
 exports.shouldUpdateScroll = ({
   routerProps: { location },
 }) => {

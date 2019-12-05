@@ -1,7 +1,6 @@
 import React, { StatelessComponent, useState, ReactNode } from "react";
 import Header from './Header';
 import Sidebar from './Sidebar';
-import { setCurrentNode } from '../utils/nodes';
 
 interface LayoutProps {
   children?: ReactNode
@@ -9,15 +8,10 @@ interface LayoutProps {
     slug: string;
   }
 }
-const Layout: StatelessComponent<LayoutProps> = ({ children, pathContext: { slug } }) => {
+const Layout: StatelessComponent<LayoutProps> = ({ children }) => {
   const [isToggled, setSidebarOpen] = useState(false);
   const handleNavigate = () => setSidebarOpen(false);
 
-  // This is a wrapper component that only gets mounted once. 
-  // These two method calls set the initial state for SSR. From here on,
-  // the state is updated each time the docs template renders
-  setCurrentNode(slug);
-  
   return (
     <>
     <Header handleSidebarToggle={() => setSidebarOpen(!isToggled)} />

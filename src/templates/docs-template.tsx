@@ -1,9 +1,8 @@
-import React, { StatelessComponent, ReactElement, useEffect } from 'react';
+import React, { StatelessComponent, ReactElement } from 'react';
 import { graphql } from 'gatsby';
 import SEO from '../components/SEO';
 import { SingleFileQuery } from '../types';
 import parseHTML from '../utils/parseHTML';
-import { setCurrentNode } from '../utils/nodes';
 
 const Template: StatelessComponent<SingleFileQuery> = (result): ReactElement => {
     const currentNode = result.data.silverstripeDocument;    
@@ -13,12 +12,9 @@ const Template: StatelessComponent<SingleFileQuery> = (result): ReactElement => 
     } else {
       html = currentNode.parent.html;
     }
-    const { title, slug } = currentNode;
+    const { title } = currentNode;
     const { relativePath, gitRemote: { ref, webLink } } = currentNode.parent.parent;
     const editLink = `${webLink}/edit/${ref}/${relativePath}`;
-    useEffect(() => {
-      setCurrentNode(slug);
-    }, []);
     return (
     <>
       <SEO title={title} />

@@ -1,35 +1,37 @@
 import React, { StatelessComponent, ReactElement } from 'react';
 import SearchBox from './SearchBox';
-import { Link, navigate } from 'gatsby';
+import { Link } from 'gatsby';
 import logo from '../images/silverstripe-logo.svg';
-import { getNodes, getHomePage, getCurrentNode, getCurrentVersion } from '../utils/nodes';
+import useHierarchy from '../hooks/useHierarchy';
 
 interface HeaderProps {
   handleSidebarToggle(e: EventTarget): void
 }
 
-const handleNavigate = (e: any): void => {
-  if (typeof window === 'undefined') {
-    return;
-  }
-
-  const currentNode = getCurrentNode();
-  const ver = e.target.value;
-
-  if (currentNode) {
-    const newPath = currentNode.slug.replace(/^\/en\/[0-9]+\//, `/en/${ver}/`);
-    const otherNode = getNodes().find(n => n.slug === newPath);
-    // This has to be a hard refresh, because the sidebar needs to unmount
-    if (otherNode) {
-      window.location.href = otherNode.slug;
-    } else {
-      window.location.href = `/en/${ver}`;
-    }
-  }
-}
-
 const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): ReactElement => {
+    const { getNodes, getHomePage, getCurrentNode, getCurrentVersion } = useHierarchy();
     const home = getHomePage();
+
+    const handleNavigate = (e: any): void => {
+      if (typeof window === 'undefined') {
+        return;
+      }
+    
+      const currentNode = getCurrentNode();
+      const ver = e.target.value;
+    
+      if (currentNode) {
+        const newPath = currentNode.slug.replace(/^\/en\/[0-9]+\//, `/en/${ver}/`);
+        const otherNode = getNodes().find(n => n.slug === newPath);
+        // This has to be a hard refresh, because the sidebar needs to unmount
+        if (otherNode) {
+          window.location.href = otherNode.slug;
+        } else {
+          window.location.href = `/en/${ver}`;
+        }
+      }
+    };
+    
     return (
     <header role="banner" className="header fixed-top">	    
         <div className="branding docs-branding">

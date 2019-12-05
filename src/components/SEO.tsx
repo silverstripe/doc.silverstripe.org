@@ -7,7 +7,7 @@
 import React, { StatelessComponent } from "react";
 import Helmet from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
-import { getCurrentVersion } from '../utils/nodes';
+import { getCurrentVersion, getCurrentCategory } from '../utils/nodes';
 
 interface MetaProp {
   name: string,
@@ -77,11 +77,20 @@ const SEO: StatelessComponent<SEOProps> = ({ description, lang, meta, title }) =
         {
           name: `docsearch:version`,
           content: getCurrentVersion(),
+<<<<<<< HEAD
         },
         {
           name: `docsearch:context`,
           content: site.siteMetadata.context,
         },
+=======
+
+        },
+        {
+          name: `docsearch:category`,
+          content: getCurrentCategory(),
+        }
+>>>>>>> Docs/userguide switching
       ].concat(meta)}
     />
   );

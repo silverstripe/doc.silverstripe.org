@@ -1,21 +1,28 @@
-import { useStaticQuery } from 'gatsby';
-import { graphql } from 'gatsby';
-import { HierarchyQuery, SilverstripeDocument } from '../types';
+import { SilverstripeDocument } from '../types';
 import sortFiles from './sortFiles';
 
-let __nodes: SilverstripeDocument[] | undefined;
-let __currentNode: SilverstripeDocument | null = null;
+let __nodes: SilverstripeDocument[];
 let __currentVersion: string | null = null;
+let __currentCategory: string | null = null;
 let __home: SilverstripeDocument | null = null;
+let __path: string | null = null;
 
 const childrenMap = new Map();
 const navChildrenMap = new Map();
 const siblingMap = new Map();
 const parentMap = new Map();
+const nodeMap = new Map();
+
+/**
+ * Hydrate these functions with the list of all nodes
+ * @param nodes 
+ */
+const initialise = (nodes: SilverstripeDocument[]) => __nodes = nodes;
 
 /**
  * Get all documents in the source
  */
+<<<<<<< HEAD
 const getNodes = (): SilverstripeDocument[] => {
   if (__nodes) {
     return __nodes;
@@ -47,6 +54,9 @@ const getNodes = (): SilverstripeDocument[] => {
 
   return __nodes;
 };
+=======
+const getNodes = (): SilverstripeDocument[] => __nodes;
+>>>>>>> Docs/userguide switching
 
 /**
  * Get the children of a given node
@@ -132,7 +142,20 @@ const getParent = (node: SilverstripeDocument): SilverstripeDocument | null => {
 /**
  * Get the current node. Must be set by setCurrentNode(string: slug)
  */
-const getCurrentNode = (): SilverstripeDocument | null => __currentNode;
+const getCurrentNode = (): SilverstripeDocument | null => {
+  if (!__path) {
+    return null;
+  }
+  if (nodeMap.has(__path)) {
+    return nodeMap.get(__path) || null;
+  }
+
+  const node = getNodes().find(n => n.slug === __path) || null;
+
+  nodeMap.set(__path, node);
+
+  return nodeMap.get(__path);
+}
 
 /**
  * Get the home page
@@ -143,7 +166,8 @@ const getHomePage = (): SilverstripeDocument | null => {
   }
   const nodes = getNodes();
   const version = getCurrentVersion();
-  const homePage = nodes.find(n => n.slug === `/en/${version}/`) || null;
+  let slug = `/en/${version}/`;
+  const homePage = nodes.find(n => n.slug === slug) || null;
 
   __home = homePage;
 
@@ -159,19 +183,15 @@ const getCurrentVersion = (): string => __currentVersion || '4';
  * Set the current node by its slug.
  * @param slug
  */
-const setCurrentNode = (slug: string): void => {
-  const currentNode = getNodes().find(n => n.slug === slug) || null;
-  __currentNode = currentNode;
-
-  if (currentNode) {
-    const matches = currentNode.slug.match(/^\/en\/([0-9]+)\//);
-    if (matches) {
-      __currentVersion = matches[1];
-    }
-  }
+const setCurrentPath = (path: string) => {
+  __path = path;
+  const [_, lang, version, category] = path.split('/');
+  __currentVersion = version;
+  __currentCategory = category === 'userhelp' ? 'user' : 'docs';
 };
 
 export {
+  initialise,
   getNodes,
   getChildren,
   getSiblings,
@@ -180,5 +200,5 @@ export {
   getHomePage,
   getNavChildren,
   getCurrentVersion,
-  setCurrentNode
+  setCurrentPath
 };
