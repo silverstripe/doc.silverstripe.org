@@ -56,6 +56,7 @@ const NodeProvider: StatelessComponent<{}> = ({ children, pageContext: { slug } 
             getNodes,
             getParent,
             getSiblings,
+            setCurrentPath,
         }}>
           {children}
       </NodeContext.Provider>

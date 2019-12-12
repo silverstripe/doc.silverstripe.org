@@ -12,7 +12,7 @@ interface NodeFunctions {
     getHomePage(): SilverstripeDocument|null;
     getNavChildren(node: SilverstripeDocument): SilverstripeDocument[];
     getCurrentVersion(): string;
-    setCurrentNode(slug: string): undefined;
+    setCurrentPath(slug: string): undefined;
 };
 
 const useHierarchy = (): NodeFunctions => {

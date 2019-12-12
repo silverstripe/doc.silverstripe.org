@@ -72,7 +72,6 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `watcher`,
-        // In dev mode, watch all the source files. Otherwise, point it at a meaningless directory
         path: `${__dirname}/.cache/gatsby-source-git/`,
       }
     },    
@@ -164,5 +163,14 @@ module.exports = {
       },
     },
     `gatsby-plugin-remove-serviceworker`,
+<<<<<<< HEAD
+=======
+    // {
+    //   resolve: `gatsby-plugin-offline`,
+    //   options: {
+    //     precachePages: [`/en/4/developer_guides/**`],
+    //   },      
+    // }   
+>>>>>>> Remove service worker, fix rendering
   ],
 }

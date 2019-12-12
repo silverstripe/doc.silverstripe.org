@@ -5,11 +5,11 @@ import { SingleFileQuery } from '../types';
 
 const Template: StatelessComponent<SingleFileQuery> = (result): ReactElement => {
     const currentNode = result.data.silverstripeDocument;
-    const { title, slug } = currentNode;
+    const { title } = currentNode;
     const  { html } = currentNode.watchFile;
     const { relativePath, gitRemote } = currentNode.parent.parent;
     const { ref, href } = gitRemote;
-    console.log('rendering the template for ', slug, html.substring(0, 25));
+    
     return (
         <DocsPage
             title={title}
