@@ -66,8 +66,12 @@ module.exports = {
 >>>>>>> Docs/userguide switching
 =======
     
+<<<<<<< HEAD
     ...sources.slice(0, 4),
 >>>>>>> Initial commit of userdocs merge
+=======
+    ...sources,
+>>>>>>> Remove limited sources
     {
       resolve: `gatsby-source-filesystem`,
       options: {
