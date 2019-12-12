@@ -15,6 +15,7 @@ export interface SinglePage {
         parent: {
             relativePath: string;
             gitRemote: {
+                href: string;
                 ref: string;
                 webLink: string;
             }

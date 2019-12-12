@@ -2,8 +2,9 @@
 
 # doc.silverstripe.org
 
-This repository contains the source code powering [SilverStripe's
-developer documentation website](https://docs.silverstripe.org).
+This repository contains the source code powering [the Silverstripe CMS
+developer documentation website](https://docs.silverstripe.org) and
+[userhelp website](https://userhelp.silverstripe.org).
 
 This application is build on [Gatsby](https://gatsbyjs.com), a static
 site generator based on [React](https://reactjs.org). It sources content
@@ -61,6 +62,20 @@ gatsby serve
 These commands will give you an exact representation of how the site will run on a production server, with
 statically generated html files and server-side rendering.
 
+## Toggling between docs and userhelp
+
+Whether the application uses the `docs.silverstripe.org` content or `userhelp.silverstripe.org` is determined
+by the environment variable, `DOCS_CONTEXT`. You can set this in the `.env.development` file, or use one of
+the script shortcuts:
+
+```
+yarn dev-docs
+yarn dev-user
+yarn build-docs
+yarn build-user
+```
+
+
 ## Developing
 
 From within `path/to/ssdocs`, run the command
@@ -85,7 +100,7 @@ your content changes, since the remote repositories are the source of truth.
 ## Deploying content changes
 
 Once your contribution has been merged into the master branch, it will be deployed to production via a
-Github action in the `silverstripe-framework` repository.
+Github action in the repository that holds the markdown files (e.g. `silverstripe/silverstripe-framework` for docs).
 
 ## Deploying app changes
 
@@ -93,11 +108,12 @@ Once your change is merged in to the `master` branch of this repository, it will
 
 ## Contribution
 
-To contribute an improvement to the https://docs.silverstripe.org functionality or
+To contribute an improvement to the https://docs.silverstripe.org or https://userhelp.silverstripe.org functionality or
 theme, submit a pull request on the [GitHub project](https://github.com/silverstripe/doc.silverstripe.org). Any approved pull requests will make
-their way onto the https://docs.silverstripe.org site in the next release.
+their way onto the https://docs.silverstripe.org or https://userhelp.silverstripe.org sites in the next release.
 
 If you wish to edit the documentation content, submit a pull request
 on the
-[framework Github project](https://github.com/silverstripe/silverstripe-framework). Updated
-documentation content is uploaded daily to [doc.silverstripe.org](https://docs.silverstripe.org) via a build hook.
+[framework Github project](https://github.com/silverstripe/silverstripe-framework) or the
+[userhelp documentation](https://github.com/silverstripe/silverstripe-userhelp-content) repository
+or corresponding module.

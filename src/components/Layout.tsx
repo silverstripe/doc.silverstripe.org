@@ -1,6 +1,7 @@
-import React, { StatelessComponent, useState, ReactNode } from "react";
+import React, { StatelessComponent, useState, useEffect, ReactNode } from "react";
 import Header from './Header';
 import Sidebar from './Sidebar';
+import useHierarchy from '../hooks/useHierarchy';
 
 interface LayoutProps {
   children?: ReactNode
@@ -9,9 +10,10 @@ interface LayoutProps {
   }
 }
 const Layout: StatelessComponent<LayoutProps> = ({ children }) => {
+  const { setCurrentPath } = useHierarchy();
   const [isToggled, setSidebarOpen] = useState(false);
   const handleNavigate = () => setSidebarOpen(false);
-
+  
   return (
     <>
     <Header handleSidebarToggle={() => setSidebarOpen(!isToggled)} />

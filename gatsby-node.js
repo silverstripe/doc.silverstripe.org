@@ -3,15 +3,13 @@ const fs = require('fs');
 const { createFilePath } = require(`gatsby-source-filesystem`);
 const fileToTitle = require('./src/utils/fileToTitle');
 
-const createSlug = ({path, version, category, thirdparty}) => {
-  const [_, lang, ...rest] = path.split('/');
+const createSlug = ({path, version, thirdparty}) => {
+  const rest = path.split('/');
   const parts = [
-    lang,
+    'en',
     version,
-    // use suburl "userhelp" for all user docs
-    category === 'user' && 'userhelp',
-    // thirdparty modules are under /optional_features/ (coupling)
-    thirdparty && `optional_features/${thirdparty}`,
+    // thirdparty modules are explicitly pathed
+    thirdparty,
     ...rest,
   ].filter(p => p);
 
@@ -33,7 +31,7 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
   const fileNode = getNode(node.parent);
   const [category, version, thirdparty] = parseName(fileNode.sourceInstanceName);
 
-  // The gatsby-source-filesystem plugins are registered to collect from the same path
+  // The gatsby-sgatsbource-filesystem plugins are registered to collect from the same path
   // that the git source writes to, so we get the watch task (hot reload on content changes)
   // But we don't want duplicate document pages for each source plugin, so
   // we bail out if we already have the file. However, we need to ensure
@@ -47,14 +45,14 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
       // Pair the document with its watched file so we can inject it into the template
       // as a dependency.
       existing.watchFile___NODE = node.id;
-      return;
     }
+    return;
   }   
-
+  const basePath = category === 'user' ? `docs/en/userguide` : `docs/en`;
   const filePath = createFilePath({
     node,
     getNode,
-    basePath: `docs`
+    basePath,
   });
   let fileTitle = path.basename(node.fileAbsolutePath, '.md');
   const isIndex = fileTitle === 'index';
@@ -65,11 +63,20 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
   const slug = createSlug({
     path: filePath,
     version,
-    category,
     thirdparty,
   });
+  
   const parentSlug = `${path.resolve(slug, '../')}/`;
   const unhideSelf = false;
+
+  // Most of these don't exist in userhelp, so force them into the schema by un-nulling them.
+  const frontmatter = {
+    introduction: ``,
+    icon: `file-alt`,
+    iconBrand: ``,
+    hideChildren: false,
+    ...node.frontmatter,
+  };
 
   const docData = {
     isIndex,
@@ -79,7 +86,11 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
     parentSlug,
     unhideSelf,
     category,
+<<<<<<< HEAD
     ...node.frontmatter,
+=======
+    ...frontmatter,    
+>>>>>>> Initial commit of userdocs merge
   };
 
   if (!docData.title || docData.title === '') {
@@ -104,10 +115,16 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
 };
 
 
+<<<<<<< HEAD
 exports.createPages = async ({ actions, graphql, getNodesByType }) => {
   const { createPage, createRedirect } = actions;
 
   const docTemplate = path.resolve(`src/templates/docs-template.tsx`);
+=======
+exports.createPages = async ({ actions, graphql }) => {
+  const { createPage } = actions;
+  const docsTemplate = path.resolve(`src/templates/docs-template.tsx`)
+>>>>>>> Initial commit of userdocs merge
   const result = await graphql(`
   {
     allSilverstripeDocument {
@@ -126,7 +143,7 @@ exports.createPages = async ({ actions, graphql, getNodesByType }) => {
         .forEach(node => {
             createPage({
                 path: node.slug,
-                component: docTemplate,
+                component: docsTemplate,
                 context: {
                     id: node.id,
                     slug: node.slug,

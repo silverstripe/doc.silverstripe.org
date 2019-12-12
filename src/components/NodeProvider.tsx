@@ -11,12 +11,11 @@ import {
     getNodes,
     getParent,
     getSiblings,
-    getCurrentCategory,
     initialise,
     setCurrentPath,
 } from '../utils/nodes';
 
-const NodeProvider: StatelessComponent<{}> = ({ children, location: { pathname } }): ReactElement => {
+const NodeProvider: StatelessComponent<{}> = ({ children, pageContext: { slug } }): ReactElement => {
     const result:HierarchyQuery = useStaticQuery(graphql`
     {
       allSilverstripeDocument {
@@ -42,12 +41,11 @@ const NodeProvider: StatelessComponent<{}> = ({ children, location: { pathname }
     const nodes = result.allSilverstripeDocument.nodes.map(node => ({
       ...node,
     }));
-
     initialise(nodes);
   }
-  
-  setCurrentPath(pathname);
 
+  setCurrentPath(slug);
+  
   return (
       <NodeContext.Provider value={{
             getChildren,
@@ -58,7 +56,6 @@ const NodeProvider: StatelessComponent<{}> = ({ children, location: { pathname }
             getNodes,
             getParent,
             getSiblings,
-            getCurrentCategory,
         }}>
           {children}
       </NodeContext.Provider>

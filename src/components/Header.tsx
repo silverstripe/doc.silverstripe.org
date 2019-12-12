@@ -1,6 +1,6 @@
 import React, { StatelessComponent, ReactElement } from 'react';
 import SearchBox from './SearchBox';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import logo from '../images/silverstripe-logo.svg';
 import useHierarchy from '../hooks/useHierarchy';
 
@@ -25,9 +25,9 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
         const otherNode = getNodes().find(n => n.slug === newPath);
         // This has to be a hard refresh, because the sidebar needs to unmount
         if (otherNode) {
-          window.location.href = otherNode.slug;
+          navigate(otherNode.slug);
         } else {
-          window.location.href = `/en/${ver}`;
+          navigate(`/en/${ver}`);
         }
       }
     };

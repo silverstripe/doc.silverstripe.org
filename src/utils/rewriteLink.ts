@@ -4,11 +4,21 @@ import { Link } from 'gatsby';
 import rewriteAPILink from './rewriteAPILink';
 import { getCurrentNode, getCurrentVersion } from '../utils/nodes';
 import path from 'path';
+import { SilverstripeDocument } from '../types';
 
 interface LinkAttributes {
     href?: string;
 };
 
+
+const relativeLink = (currentNode: SilverstripeDocument, href: string): string => {
+    const slug = path.join(currentNode.isIndex ? currentNode.slug : currentNode.parentSlug, href);
+    if (!slug.endsWith('/')) {
+        return `${slug}/`
+    }
+
+    return slug;
+};
 
 /**
  * Ensure links use the Gatsby <Link /> component. Client-side routing FTW
@@ -80,10 +90,23 @@ const rewriteLink = (
 
     // Relative to page
     if (currentNode && currentNode.parentSlug) {
+
+        // Relative links to markdown files should be resolved to their pretty urls.
+        if (href.endsWith('.md')) {
+            return createElement(
+                Link,
+                {
+                    to: relativeLink(currentNode, href.replace(/\.md$/, '')),
+                    className: 'gatsby-link',
+                },
+                domToReact(children, parseOptions)
+            )
+        }
+    
         return createElement(
             Link,
             { 
-                to: path.join(currentNode.parentSlug, href),
+                to: relativeLink(currentNode, href),
                 className: 'gatsby-link'
             },
             domToReact(children, parseOptions)

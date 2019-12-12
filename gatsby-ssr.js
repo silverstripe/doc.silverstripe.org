@@ -1,7 +1,6 @@
 const React = require('react');
 const Layout = require('./src/components/Layout').default;
 const NodeProvider = require('./src/components/NodeProvider').default;
-const { setCurrentPath } = require('./src/utils/nodes');
 
 /**
  * Applies the node provider (static query of all documents)
@@ -9,7 +8,7 @@ const { setCurrentPath } = require('./src/utils/nodes');
  */
 exports.wrapPageElement = ({ element, props }) => {
     return (
-        <NodeProvider>
+        <NodeProvider {...props}>
             <Layout {...props}>
                 {element}
             </Layout>
@@ -17,9 +16,7 @@ exports.wrapPageElement = ({ element, props }) => {
     );
 };
 
-
-exports.onRenderBody = ({ pathname, setPostBodyComponents, setHeadComponents }) => {
-    setCurrentPath(pathname);
+exports.onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {    
     // Rules that cannot be touched by purgecss because they come in from client side rendering
     setHeadComponents([ 
         <style key='prism-css' type="text/css" dangerouslySetInnerHTML={{

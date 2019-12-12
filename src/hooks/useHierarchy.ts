@@ -12,7 +12,6 @@ interface NodeFunctions {
     getHomePage(): SilverstripeDocument|null;
     getNavChildren(node: SilverstripeDocument): SilverstripeDocument[];
     getCurrentVersion(): string;
-    getCurrentCategory(): string;
     setCurrentNode(slug: string): undefined;
 };
 

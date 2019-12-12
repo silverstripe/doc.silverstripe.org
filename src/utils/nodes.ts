@@ -3,10 +3,9 @@ import sortFiles from './sortFiles';
 
 let __nodes: SilverstripeDocument[];
 let __currentVersion: string | null = null;
-let __currentCategory: string | null = null;
-let __home: SilverstripeDocument | null = null;
 let __path: string | null = null;
 
+const homeMap = new Map();
 const childrenMap = new Map();
 const navChildrenMap = new Map();
 const siblingMap = new Map();
@@ -161,17 +160,19 @@ const getCurrentNode = (): SilverstripeDocument | null => {
  * Get the home page
  */
 const getHomePage = (): SilverstripeDocument | null => {
-  if (__home) {
-    return __home;
-  }
   const nodes = getNodes();
   const version = getCurrentVersion();
   let slug = `/en/${version}/`;
+<<<<<<< HEAD
+=======
+  if (homeMap.has(slug)) {
+    return homeMap.get(slug) || null;
+  }
+>>>>>>> Initial commit of userdocs merge
   const homePage = nodes.find(n => n.slug === slug) || null;
+  homeMap.set(slug, homePage);
 
-  __home = homePage;
-
-  return __home;
+  return homeMap.get(slug);
 };
 
 /**
@@ -180,14 +181,18 @@ const getHomePage = (): SilverstripeDocument | null => {
 const getCurrentVersion = (): string => __currentVersion || '4';
 
 /**
+<<<<<<< HEAD
  * Set the current node by its slug.
  * @param slug
+=======
+ * Set the current path, with some side effects for version
+ * @param slug 
+>>>>>>> Initial commit of userdocs merge
  */
 const setCurrentPath = (path: string) => {
-  __path = path;
-  const [_, lang, version, category] = path.split('/');
+  __path = path || `/`;
+  const [_, lang, version] = __path.split('/');
   __currentVersion = version;
-  __currentCategory = category === 'userhelp' ? 'user' : 'docs';
 };
 
 export {

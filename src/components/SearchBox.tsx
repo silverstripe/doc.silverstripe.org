@@ -31,7 +31,10 @@ const SearchBox: StatelessComponent<SearchBoxProps> = ({ identifier }): ReactEle
         if(window.docsearch){
             window.docsearch({ 
               algoliaOptions: {
-                facetFilters: [`version:${getCurrentVersion()}`],
+                facetFilters: [
+                  `version:${getCurrentVersion()}`,
+                  `context:${process.env.DOCS_CONTEXT}`,
+                ],
                 hitsPerPage: 5,
               },
               apiKey: process.env.GATSBY_DOCSEARCH_API_KEY, 

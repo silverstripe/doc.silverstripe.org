@@ -1,5 +1,7 @@
 const path = require('path');
-const userhelpImports = require('./userhelp-imports');
+const sources = process.env.DOCS_CONTEXT === 'user'
+  ? require('./sources-user')
+  : require('./sources-docs');
 
 module.exports = {
   siteMetadata: {
@@ -14,6 +16,7 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sitemap`,
+<<<<<<< HEAD
     `gatsby-plugin-netlify`,
     {
       resolve: `gatsby-source-git`,
@@ -61,13 +64,18 @@ module.exports = {
     },    
     // ...userhelpImports    
 >>>>>>> Docs/userguide switching
+=======
+    
+    ...sources.slice(0, 4),
+>>>>>>> Initial commit of userdocs merge
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `watcher`,
-        path: `${__dirname}/.cache/gatsby-source-git/`
+        // In dev mode, watch all the source files. Otherwise, point it at a meaningless directory
+        path: `${__dirname}/.cache/gatsby-source-git/`,
       }
-    },
+    },    
     {
       resolve: 'gatsby-transformer-remark',
       options: {
@@ -82,12 +90,22 @@ module.exports = {
               }
             }
           },
-          `gatsby-remark-copy-linked-files`,
           {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 850,
+              linkImagesToOriginal: false,
             },
+<<<<<<< HEAD
+=======
+          },          
+          {
+            resolve: `gatsby-remark-copy-linked-files`,
+            options: {
+              // Links to markdown files should be considered links to pages, not downloads.
+              ignoreFileExtensions: [`md`],
+            }
+>>>>>>> Initial commit of userdocs merge
           },
         ]
       }
