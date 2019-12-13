@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const { createFilePath } = require(`gatsby-source-filesystem`);
 const fileToTitle = require('./src/utils/fileToTitle');
 
@@ -116,3 +117,30 @@ exports.createPages = async ({ actions, graphql }) => {
         })
 
 };
+
+exports.onPostBuild = async ({ getNodesByType }) => {
+  console.log(`Writing legacy redirects...`);
+  const redirects = new Map();
+  const v4docs = getNodesByType('SilverstripeDocument').filter(n => n.slug.match(/^\/en\/4\//));
+  const v3docs = getNodesByType('SilverstripeDocument').filter(n => n.slug.match(/^\/en\/3\//));
+  
+  [...v4docs, ...v3docs].forEach(n => {
+    const legacy = n.slug.replace(/^\/en\/[0-9]\//, '/en/');
+    if (!redirects.has(legacy)) {
+      redirects.set(legacy, n.slug);
+    }
+  });
+  const lines = [];
+  redirects.forEach((slug, legacy) => {
+    lines.push(`${legacy}  ${slug}`);
+  });
+
+  fs.writeFileSync(path.join(__dirname, '_redirects'),
+  `### This file is auto-generated. Do not modify ###
+
+  ${lines.join("\n")}`
+  );
+
+  
+  return Promise.resolve();
+}

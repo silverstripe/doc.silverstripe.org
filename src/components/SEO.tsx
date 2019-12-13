@@ -76,8 +76,11 @@ const SEO: StatelessComponent<SEOProps> = ({ description, lang, meta, title }) =
         {
           name: `docsearch:version`,
           content: getCurrentVersion(),
-
-        }
+        },
+        {
+          name: `docsearch:context`,
+          content: process.env.DOCS_CONTEXT,
+        },
       ].concat(meta)}
     />
   );
