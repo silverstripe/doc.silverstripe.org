@@ -39,6 +39,7 @@ export const pageQuery = graphql`
             ... on File {
               relativePath
               gitRemote {
+                href
                 ref
                 sourceInstanceName
               }

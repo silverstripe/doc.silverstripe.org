@@ -11,13 +11,13 @@ interface HeaderProps {
 const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): ReactElement => {
     const { getNodes, getHomePage, getCurrentNode, getCurrentVersion } = useHierarchy();
     const home = getHomePage();
+    const currentNode = getCurrentNode() || home;
 
     const handleNavigate = (e: any): void => {
       if (typeof window === 'undefined') {
         return;
       }
-    
-      const currentNode = getCurrentNode();
+      
       const ver = e.target.value;
     
       if (currentNode) {
@@ -31,7 +31,9 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
         }
       }
     };
-    
+
+    const title = (currentNode && currentNode.category) === 'user' ? 'CMS Help' : 'CMS Docs';
+
     return (
     <header role="banner" className="header fixed-top">	    
         <div className="branding docs-branding">
@@ -42,7 +44,7 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
                   Silverstripe CMS Documentation
                 </Link>
                 <span />
-                <span>Docs</span>
+                <span>{title}</span>
               </div>    
 
             </div>
@@ -53,12 +55,11 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
                   <SearchBox identifier="header-search" />
                 </form>
               </div>
-              <ul className="social-list list-inline d-flex flex-grow-1 flex-lg-grow-0 align-items-center justify-content-center justify-content-lg-end">
+              <ul className="social-list list-inline d-flex flex-grow-1 flex-lg-grow-0 align-items-center justify-content-lg-center justify-content-end justify-content-lg-end">
                 <li className="list-inline-item version-select">
-                  
                   <select id="version-select" value={getCurrentVersion() || '4'} onChange={handleNavigate}>
-                      <option value='4'>v4.x</option>
-                      <option value='3'>v3.x</option>
+                      <option value='4'>V4</option>
+                      <option value='3'>V3</option>
                   </select>
                   <i className="fas fa-chevron-down"></i>
                 </li>

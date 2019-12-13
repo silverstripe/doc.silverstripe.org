@@ -1,5 +1,4 @@
 import React, { StatelessComponent } from 'react';
-import { SilverstripeDocument } from '../types';
 import SEO from './SEO';
 import parseHTML from '../utils/parseHTML';
 
@@ -12,7 +11,7 @@ interface DocsPageProps {
 };
 
 const DocsPage: StatelessComponent<DocsPageProps> = ({ title, html, branch, relPath, gitURL }): ReactElement => {
-    const editLink = `${gitURL}/edit/${branch}/${relPath}`;
+    const editLink = `${gitURL.replace(/\.git$/, '')}/edit/${branch}/${relPath}`;
 
     return (
         <>
