@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/98ac537e-14f6-4864-bf56-d5a60c76ccc9/deploy-status)](https://app.netlify.com/sites/ss-docs/deploys)
+
 # doc.silverstripe.org
 
 This repository contains the source code powering [SilverStripe's

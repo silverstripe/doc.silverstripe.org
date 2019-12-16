@@ -12,6 +12,7 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sitemap`,
+    `gatsby-plugin-netlify`,
     {
       resolve: `gatsby-source-git`,
       options: {
@@ -121,11 +122,6 @@ module.exports = {
         ]
       },
     },
-    {
-      resolve: `gatsby-plugin-offline`,
-      options: {
-        precachePages: [`/en/4/developer_guides/**`],
-      },
-    }
+    `gatsby-plugin-remove-serviceworker`,
   ],
 }

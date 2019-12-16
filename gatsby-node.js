@@ -86,8 +86,8 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
 };
 
 
-exports.createPages = async ({ actions, graphql }) => {
-  const { createPage } = actions;
+exports.createPages = async ({ actions, graphql, getNodesByType }) => {
+  const { createPage, createRedirect } = actions;
 
   const docTemplate = path.resolve(`src/templates/docs-template.tsx`);
   const result = await graphql(`
@@ -116,31 +116,22 @@ exports.createPages = async ({ actions, graphql }) => {
             });
         })
 
+
+    console.log(`Creating legacy redirects...`);
+    const redirects = new Map();
+    const v4docs = getNodesByType('SilverstripeDocument').filter(n => n.slug.match(/^\/en\/4\//));
+    const v3docs = getNodesByType('SilverstripeDocument').filter(n => n.slug.match(/^\/en\/3\//));
+    
+    [...v4docs, ...v3docs].forEach(n => {
+      const legacy = n.slug.replace(/^\/en\/[0-9]\//, '/en/');
+      if (!redirects.has(legacy)) {
+        redirects.set(legacy, n.slug);
+      }
+    });
+    redirects.forEach((toPath, fromPath) => {
+      createRedirect({ fromPath, toPath, isPermanent: true });
+    });
+  
+    
+      
 };
-
-exports.onPostBuild = async ({ getNodesByType }) => {
-  console.log(`Writing legacy redirects...`);
-  const redirects = new Map();
-  const v4docs = getNodesByType('SilverstripeDocument').filter(n => n.slug.match(/^\/en\/4\//));
-  const v3docs = getNodesByType('SilverstripeDocument').filter(n => n.slug.match(/^\/en\/3\//));
-  
-  [...v4docs, ...v3docs].forEach(n => {
-    const legacy = n.slug.replace(/^\/en\/[0-9]\//, '/en/');
-    if (!redirects.has(legacy)) {
-      redirects.set(legacy, n.slug);
-    }
-  });
-  const lines = [];
-  redirects.forEach((slug, legacy) => {
-    lines.push(`${legacy}  ${slug}`);
-  });
-
-  fs.writeFileSync(path.join(__dirname, 'static', '_redirects'),
-  `### This file is auto-generated. Do not modify ###
-
-  ${lines.join("\n")}`
-  );
-
-  
-  return Promise.resolve();
-}
