@@ -135,7 +135,7 @@ exports.onPostBuild = async ({ getNodesByType }) => {
     lines.push(`${legacy}  ${slug}`);
   });
 
-  fs.writeFileSync(path.join(__dirname, '_redirects'),
+  fs.writeFileSync(path.join(__dirname, 'static', '_redirects'),
   `### This file is auto-generated. Do not modify ###
 
   ${lines.join("\n")}`
