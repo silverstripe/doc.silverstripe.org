@@ -28,6 +28,7 @@ const SEO: StatelessComponent<SEOProps> = ({ description, lang, meta, title }) =
           title
           description
           author
+          context
         }
       }
     }
@@ -79,7 +80,7 @@ const SEO: StatelessComponent<SEOProps> = ({ description, lang, meta, title }) =
         },
         {
           name: `docsearch:context`,
-          content: process.env.DOCS_CONTEXT,
+          content: site.siteMetadata.context,
         },
       ].concat(meta)}
     />

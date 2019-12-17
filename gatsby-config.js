@@ -3,9 +3,10 @@ const path = require('path');
 module.exports = {
   siteMetadata: {
     title: `Silverstripe CMS Documentation`,
-    description: `Developer documentation for the Silverstripe CMS and framework.`,
+    description: `Developer and user documentation for the Silverstripe CMS and framework.`,
     author: `The Silverstripe Community`,
     siteUrl: `https://doc.silverstripe.org`,
+    context: process.env.DOCS_CONTEXT,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

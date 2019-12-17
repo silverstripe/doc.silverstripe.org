@@ -19,7 +19,9 @@ const autocompleteSelected = (e) => {
 const SearchBox: StatelessComponent<SearchBoxProps> = ({ identifier }): ReactElement|null => {
     useEffect(() => {
         if (typeof window === 'undefined') return;
-
+        if (!process.env.GATSBY_DOCSEARCH_API_KEY) {
+          return;
+        }
         window.addEventListener(
             `autocomplete:selected`,
             autocompleteSelected,
