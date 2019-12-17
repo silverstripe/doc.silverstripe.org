@@ -2,6 +2,7 @@ import React, { StatelessComponent, ReactElement } from 'react';
 import SearchBox from './SearchBox';
 import { Link, navigate } from 'gatsby';
 import logo from '../images/silverstripe-logo.svg';
+import useDocContext from '../hooks/useDocContext';
 import useHierarchy from '../hooks/useHierarchy';
 
 interface HeaderProps {
@@ -12,6 +13,7 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
     const { getNodes, getHomePage, getCurrentNode, getCurrentVersion } = useHierarchy();
     const home = getHomePage();
     const currentNode = getCurrentNode() || home;
+    const context = useDocContext();
 
     const handleNavigate = (e: any): void => {
       if (typeof window === 'undefined') {
@@ -32,7 +34,7 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
       }
     };
 
-    const title = (currentNode && currentNode.category) === 'user' ? 'CMS Help' : 'CMS Docs';
+    const title = context === 'user' ? 'CMS Help' : 'CMS Docs';
 
     return (
     <header role="banner" className="header fixed-top">	    

@@ -89,7 +89,7 @@ module.exports = {
             // allowed selectors defined in FontAwesome. Everything else in FA should be removed.
             extractor: class  {
               static extract(content) {
-                const selectors = [`file-alt`]
+                const selectors = [`fa-file-alt`]
                 const matches = content.match(/icon(Brand)?: ([a-zA-Z0-9_-]+)/);
                 if (matches) {
                   const isBrand = typeof matches[1] !== 'undefined';
