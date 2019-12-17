@@ -2,6 +2,7 @@ import React from 'react'
 import { StatelessComponent, ReactElement, useEffect, useState } from 'react';
 import { navigateTo } from "gatsby-link"
 import useHierarchy from '../hooks/useHierarchy';
+import { useStaticQuery, graphql } from 'gatsby';
 
 interface SearchBoxProps {
   identifier: string;
@@ -19,6 +20,16 @@ const autocompleteSelected = (e) => {
 const SearchBox: StatelessComponent<SearchBoxProps> = ({ identifier }): ReactElement|null => {
     const { getCurrentVersion } = useHierarchy();
     const [ isFocused, setFocus ] = useState(false);
+    const { site } = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          context
+        }
+      }
+    }
+  `);
+
     useEffect(() => {
         if (typeof window === 'undefined') return;
         if (!process.env.GATSBY_DOCSEARCH_API_KEY) {
@@ -34,7 +45,7 @@ const SearchBox: StatelessComponent<SearchBoxProps> = ({ identifier }): ReactEle
               algoliaOptions: {
                 facetFilters: [
                   `version:${getCurrentVersion()}`,
-                  `context:${process.env.DOCS_CONTEXT}`,
+                  //`context:${site.siteMetadata.context}`,
                 ],
                 hitsPerPage: 5,
               },
@@ -48,7 +59,11 @@ const SearchBox: StatelessComponent<SearchBoxProps> = ({ identifier }): ReactEle
     }, []);
 
     const handleFocus = () => setFocus(true);
-    const handleBlur = () => setFocus(false);
+    const handleBlur = (e) => {
+      if (!e.target.value.trim()) {
+        setFocus(false);
+      }
+    };
 
     return (
       <>

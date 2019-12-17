@@ -21,41 +21,7 @@ const initialise = (nodes: SilverstripeDocument[]) => __nodes = nodes;
 /**
  * Get all documents in the source
  */
-<<<<<<< HEAD
-const getNodes = (): SilverstripeDocument[] => {
-  if (__nodes) {
-    return __nodes;
-  }
-  const result:HierarchyQuery = useStaticQuery(graphql`
-    {
-      allSilverstripeDocument {
-        nodes {
-            title
-            summary
-            isIndex
-            introduction
-            icon
-            iconBrand
-            hideChildren
-            unhideSelf
-            slug
-            parentSlug
-            fileTitle
-            fileAbsolutePath
-        }
-      }
-    }
-  `
-  );
-  __nodes = result.allSilverstripeDocument.nodes.map(node => ({
-    ...node,
-  }));
-
-  return __nodes;
-};
-=======
 const getNodes = (): SilverstripeDocument[] => __nodes;
->>>>>>> Docs/userguide switching
 
 /**
  * Get the children of a given node
@@ -163,12 +129,9 @@ const getHomePage = (): SilverstripeDocument | null => {
   const nodes = getNodes();
   const version = getCurrentVersion();
   let slug = `/en/${version}/`;
-<<<<<<< HEAD
-=======
   if (homeMap.has(slug)) {
     return homeMap.get(slug) || null;
   }
->>>>>>> Initial commit of userdocs merge
   const homePage = nodes.find(n => n.slug === slug) || null;
   homeMap.set(slug, homePage);
 
@@ -181,13 +144,8 @@ const getHomePage = (): SilverstripeDocument | null => {
 const getCurrentVersion = (): string => __currentVersion || '4';
 
 /**
-<<<<<<< HEAD
- * Set the current node by its slug.
- * @param slug
-=======
  * Set the current path, with some side effects for version
  * @param slug 
->>>>>>> Initial commit of userdocs merge
  */
 const setCurrentPath = (path: string) => {
   __path = path || `/`;

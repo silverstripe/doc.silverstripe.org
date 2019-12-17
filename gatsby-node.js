@@ -86,11 +86,7 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
     parentSlug,
     unhideSelf,
     category,
-<<<<<<< HEAD
-    ...node.frontmatter,
-=======
     ...frontmatter,    
->>>>>>> Initial commit of userdocs merge
   };
 
   if (!docData.title || docData.title === '') {
@@ -115,16 +111,10 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
 };
 
 
-<<<<<<< HEAD
 exports.createPages = async ({ actions, graphql, getNodesByType }) => {
   const { createPage, createRedirect } = actions;
 
   const docTemplate = path.resolve(`src/templates/docs-template.tsx`);
-=======
-exports.createPages = async ({ actions, graphql }) => {
-  const { createPage } = actions;
-  const docsTemplate = path.resolve(`src/templates/docs-template.tsx`)
->>>>>>> Initial commit of userdocs merge
   const result = await graphql(`
   {
     allSilverstripeDocument {
@@ -143,7 +133,7 @@ exports.createPages = async ({ actions, graphql }) => {
         .forEach(node => {
             createPage({
                 path: node.slug,
-                component: docsTemplate,
+                component: docTemplate,
                 context: {
                     id: node.id,
                     slug: node.slug,

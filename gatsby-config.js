@@ -16,72 +16,17 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sitemap`,
-<<<<<<< HEAD
     `gatsby-plugin-netlify`,
-    {
-      resolve: `gatsby-source-git`,
-      options: {
-<<<<<<< HEAD
-        name: `4`,
-        remote: `https://github.com/silverstripe/silverstripe-framework.git`,
-<<<<<<< HEAD
-=======
-        name: `docs--4`,
-        remote: `/Users/acarlino/Sites/gatsby-docs-4`,
->>>>>>> Docs/userguide switching
-=======
->>>>>>> UX improvements per Paul design
-        branch: `4`,
-        patterns: `docs/en/**`
-      }
-    },
-    {
-      resolve: `gatsby-source-git`,
-      options: {
-        name: `docs--3`,
-        remote: `https://github.com/silverstripe/silverstripe-framework.git`,
-        branch: `3.7`,
-        patterns: `docs/en/**`
-      }
-    },
-    {
-      resolve: `gatsby-source-git`,
-      options: {
-        name: `user--4`,
-        remote: `https://github.com/silverstripe/silverstripe-userhelp-content.git`,
-        branch: `4`,
-        patterns: `docs/en/**`
-      }
-    },    
-    {
-      resolve: `gatsby-source-git`,
-      options: {
-        name: `user--3`,
-        remote: `https://github.com/silverstripe/silverstripe-userhelp-content.git`,
-        branch: `3`,
-        patterns: `docs/en/**`
-      }
-<<<<<<< HEAD
-    },
-=======
-    },    
-    // ...userhelpImports    
->>>>>>> Docs/userguide switching
-=======
-    
-<<<<<<< HEAD
-    ...sources.slice(0, 4),
->>>>>>> Initial commit of userdocs merge
-=======
+
     ...sources,
->>>>>>> Remove limited sources
+
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `watcher`,
-        path: `${__dirname}/.cache/gatsby-source-git/`,
+        path: `${__dirname}/.cache/gatsby-source-git/`
       }
-    },    
+    },
     {
       resolve: 'gatsby-transformer-remark',
       options: {
@@ -96,22 +41,12 @@ module.exports = {
               }
             }
           },
+          `gatsby-remark-copy-linked-files`,
           {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 850,
-              linkImagesToOriginal: false,
             },
-<<<<<<< HEAD
-=======
-          },          
-          {
-            resolve: `gatsby-remark-copy-linked-files`,
-            options: {
-              // Links to markdown files should be considered links to pages, not downloads.
-              ignoreFileExtensions: [`md`],
-            }
->>>>>>> Initial commit of userdocs merge
           },
         ]
       }
@@ -170,14 +105,5 @@ module.exports = {
       },
     },
     `gatsby-plugin-remove-serviceworker`,
-<<<<<<< HEAD
-=======
-    // {
-    //   resolve: `gatsby-plugin-offline`,
-    //   options: {
-    //     precachePages: [`/en/4/developer_guides/**`],
-    //   },      
-    // }   
->>>>>>> Remove service worker, fix rendering
   ],
 }
