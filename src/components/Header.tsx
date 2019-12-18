@@ -53,9 +53,11 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
 
             <div className="docs-top-utilities d-flex justify-content-between justify-content-lg-end align-items-center">
               <div className="top-search-box d-none d-lg-flex">
+                {process.env.GATSBY_DOCSEARCH_API_KEY && (
                 <form className="search-form">
                   <SearchBox identifier="header-search" />
                 </form>
+                )}
               </div>
               <ul className="social-list list-inline d-flex flex-grow-1 flex-lg-grow-0 align-items-center justify-content-lg-center justify-content-end justify-content-lg-end">
                 <li className="list-inline-item version-select">
