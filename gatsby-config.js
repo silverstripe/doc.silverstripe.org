@@ -1,4 +1,7 @@
 const path = require('path');
+const sources = process.env.DOCS_CONTEXT === 'user'
+  ? require('./sources-user')
+  : require('./sources-docs');
 
 module.exports = {
   siteMetadata: {
@@ -14,36 +17,14 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-netlify`,
-    {
-      resolve: `gatsby-source-git`,
-      options: {
-        name: `4`,
-        remote: `https://github.com/silverstripe/silverstripe-framework.git`,
-        branch: `4`,
-        patterns: `docs/en/**`
-      }
-    },
-    {
-      resolve: `gatsby-source-git`,
-      options: {
-        name: `3`,
-        remote: `https://github.com/silverstripe/silverstripe-framework.git`,
-        branch: `3.7`,
-        patterns: `docs/en/**`
-      }
-    },
+
+    ...sources,
+
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `watcher--ss3`,
-        path: `${__dirname}/.cache/gatsby-source-git/3/docs/en`
-      }
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `watcher--ss4`,
-        path: `${__dirname}/.cache/gatsby-source-git/4/docs/en`
+        name: `watcher`,
+        path: `${__dirname}/.cache/gatsby-source-git/`
       }
     },
     {
@@ -108,7 +89,7 @@ module.exports = {
             // allowed selectors defined in FontAwesome. Everything else in FA should be removed.
             extractor: class  {
               static extract(content) {
-                const selectors = [`file-alt`]
+                const selectors = [`fa-file-alt`]
                 const matches = content.match(/icon(Brand)?: ([a-zA-Z0-9_-]+)/);
                 if (matches) {
                   const isBrand = typeof matches[1] !== 'undefined';

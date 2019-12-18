@@ -1,37 +1,23 @@
-import React, { StatelessComponent, ReactElement, useEffect } from 'react';
+import React, { StatelessComponent, ReactElement } from 'react';
 import { graphql } from 'gatsby';
-import SEO from '../components/SEO';
+import DocsPage from '../components/DocsPage';
 import { SingleFileQuery } from '../types';
-import parseHTML from '../utils/parseHTML';
-import { setCurrentNode } from '../utils/nodes';
 
 const Template: StatelessComponent<SingleFileQuery> = (result): ReactElement => {
-    const currentNode = result.data.silverstripeDocument;    
-    let html;
-    if (currentNode.watchFile) {
-      html = currentNode.watchFile.html;
-    } else {
-      html = currentNode.parent.html;
-    }
-    const { title, slug } = currentNode;
-    const { relativePath, gitRemote: { ref, webLink } } = currentNode.parent.parent;
-    const editLink = `${webLink}/edit/${ref}/${relativePath}`;
-    useEffect(() => {
-      setCurrentNode(slug);
-    }, []);
+    const currentNode = result.data.silverstripeDocument;
+    const { title } = currentNode;
+    const  { html } = currentNode.watchFile;
+    const { relativePath, gitRemote } = currentNode.parent.parent;
+    const { ref, href } = gitRemote;
+    
     return (
-    <>
-      <SEO title={title} />
-      {parseHTML(html)}
-      <div className="github-edit">
-        <a target="_blank" href={editLink} title="Edit on Github">
-          <i className="fas fa-pen fa-fw" />{` `}
-          Edit on Github
-        </a>
-      </div>
-
-
-    </>
+        <DocsPage
+            title={title}
+            html={html}
+            relPath={relativePath}
+            branch={ref}
+            gitURL={href}
+        />
     );
 };
 
@@ -53,8 +39,8 @@ export const pageQuery = graphql`
             ... on File {
               relativePath
               gitRemote {
+                href
                 ref
-                webLink
                 sourceInstanceName
               }
             }

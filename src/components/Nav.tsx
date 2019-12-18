@@ -1,9 +1,9 @@
 import React, { StatelessComponent, ReactElement } from 'react';
-import { getNavChildren, getHomePage, getCurrentNode } from '../utils/nodes';
 import { SilverstripeDocument } from '../types';
 import { Link } from 'gatsby';
 import classnames from 'classnames';
 import { LinkGetProps } from '@reach/router';
+import useHierarchy from '../hooks/useHierarchy';
 
 interface NavProps {
     onNavigate?(e: React.MouseEvent): void;
@@ -21,16 +21,23 @@ const getLinkProps = (props: LinkGetProps): {} => {
 };
 
 const Nav:StatelessComponent<NavProps> = ({ onNavigate }): ReactElement => {
+    const {
+        getNavChildren,
+        getHomePage,
+        getCurrentNode,
+    } = useHierarchy();
+
     const currentNode = getCurrentNode();
     const top = getHomePage();
+
     if (!top) {
         return <nav />;
     }
-
+    const topLevel = getNavChildren(top);
     return (
         <nav role="navigation" id="docs-nav" className="docs-nav navbar">
         <ul className="section-items list-unstyled nav flex-column pb-3">
-            {getNavChildren(top).map((node: SilverstripeDocument) => {
+            {topLevel.map((node: SilverstripeDocument) => {
                 const { slug, title } = node;
                 const childItems = getNavChildren(node);
                 return (

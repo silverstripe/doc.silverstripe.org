@@ -15,6 +15,7 @@ export interface SinglePage {
         parent: {
             relativePath: string;
             gitRemote: {
+                href: string;
                 ref: string;
                 webLink: string;
             }
@@ -22,6 +23,10 @@ export interface SinglePage {
     }
 };
 
+enum DocCategory {
+    'docs' = 'docs',
+    'user' = 'user',
+}
 
 export interface SilverstripeDocument {
     title: string;
@@ -38,6 +43,7 @@ export interface SilverstripeDocument {
     summary: string;
     fileTitle: string;
     fileAbsolutePath: string;
+    category: DocCategory;
 }
 
 export interface HierarchyQuery {

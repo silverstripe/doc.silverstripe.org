@@ -1,6 +1,6 @@
 import { ReactElement, createElement } from 'react';
 import ChildrenOf from '../components/ChildrenOf';
-import { getCurrentNode } from '../utils/nodes';
+import { getCurrentNode } from './nodes';
 
 /**
  * Turn [CHILDREN ... ] into a proper React component.

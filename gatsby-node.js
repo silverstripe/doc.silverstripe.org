@@ -3,31 +3,41 @@ const fs = require('fs');
 const { createFilePath } = require(`gatsby-source-filesystem`);
 const fileToTitle = require('./src/utils/fileToTitle');
 
-const createSlug = (filePath, version) => {
-  const parts = filePath.split('/');
-  const langIndex = parts.indexOf('en');
-  parts.splice(langIndex + 1, 0, version);
-  return parts
-  .map(part => part.replace(/^\d+_/, ''))
-  .join('/')
-  .toLowerCase()
+const createSlug = ({path, version, thirdparty}) => {
+  const rest = path.split('/');
+  const parts = [
+    'en',
+    version,
+    // thirdparty modules are explicitly pathed
+    thirdparty,
+    ...rest,
+  ].filter(p => p);
+
+   const slug = parts
+    .map(part => part.replace(/^\d+_/, ''))
+    .join('/')
+    .toLowerCase();
+
+    return `/${slug}/`;
 };
 
-exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNodeId, createContentDigest }) => {
+const parseName = name => name.split('--');
+
+exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNodeId, createContentDigest }) => {  
   if (node.internal.type !== 'MarkdownRemark') {
     return;
   }
   const { createNode } = actions;
   const fileNode = getNode(node.parent);
-  const version = fileNode.sourceInstanceName;
+  const [category, version, thirdparty] = parseName(fileNode.sourceInstanceName);
 
-  // The gatsby-source-filesystem plugins are registered to collect from the same path
+  // The gatsby-sgatsbource-filesystem plugins are registered to collect from the same path
   // that the git source writes to, so we get the watch task (hot reload on content changes)
   // But we don't want duplicate document pages for each source plugin, so
   // we bail out if we already have the file. However, we need to ensure
   // the file is injected into the template as a dependency, so when the content changes,
   // the pages get refreshed on the fly.
-  if (version.match(/^watcher--/)) {
+  if (category === 'watcher') {
     const existing = getNodesByType('SilverstripeDocument')
       .find(n => n.fileAbsolutePath === node.fileAbsolutePath);
 
@@ -35,14 +45,14 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
       // Pair the document with its watched file so we can inject it into the template
       // as a dependency.
       existing.watchFile___NODE = node.id;
-      return;
     }
-  }
-
+    return;
+  }   
+  const basePath = category === 'user' ? `docs/en/userguide` : `docs/en`;
   const filePath = createFilePath({
     node,
     getNode,
-    basePath: `docs`
+    basePath,
   });
   let fileTitle = path.basename(node.fileAbsolutePath, '.md');
   const isIndex = fileTitle === 'index';
@@ -50,9 +60,23 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
     fileTitle = path.basename(path.dirname(node.fileAbsolutePath));
   }
   const docTitle = fileToTitle(fileTitle);
-  const slug = createSlug(filePath, version);
+  const slug = createSlug({
+    path: filePath,
+    version,
+    thirdparty,
+  });
+  
   const parentSlug = `${path.resolve(slug, '../')}/`;
   const unhideSelf = false;
+
+  // Most of these don't exist in userhelp, so force them into the schema by un-nulling them.
+  const frontmatter = {
+    introduction: ``,
+    icon: `file-alt`,
+    iconBrand: ``,
+    hideChildren: false,
+    ...node.frontmatter,
+  };
 
   const docData = {
     isIndex,
@@ -61,7 +85,8 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
     slug,
     parentSlug,
     unhideSelf,
-    ...node.frontmatter,
+    category,
+    ...frontmatter,    
   };
 
   if (!docData.title || docData.title === '') {

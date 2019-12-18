@@ -74,7 +74,11 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "type-check": "tsc --noEmit",
-    "lint": "tslint --project ."
+    "lint": "tslint --project .",
+    "dev-docs": "DOCS_CONTEXT=docs gatsby develop",
+    "dev-user": "DOCS_CONTEXT=user gatsby develop",
+    "build-docs": "DOCS_CONTEXT=docs gatsby build",
+    "build-user": "DOCS_CONTEXT=user gatsby build"
   },
   "repository": {
     "type": "git",
