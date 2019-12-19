@@ -46,7 +46,7 @@ const ChildrenOf: StatelessComponent<ChildrenOfProps> = ({ folderName, exclude, 
     var nodes: SilverstripeDocument[] = [];
 
     if (!folderName && !exclude && !only) {
-        nodes = currentNode.isIndex ? getChildren(currentNode, false) : getSiblings(currentNode)
+        nodes = currentNode.isIndex ? getChildren(currentNode, includeFolders) : getSiblings(currentNode)
 
     } else if (folderName) {
         const targetFolder = getChildren(currentNode, true).find(
