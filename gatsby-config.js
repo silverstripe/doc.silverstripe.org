@@ -1,4 +1,4 @@
-const path = require('path');
+const purgeCSSConfig = require('./purgecss.config');
 const sources = process.env.DOCS_CONTEXT === 'user'
   ? require('./sources-user')
   : require('./sources-docs');
@@ -66,47 +66,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-purgecss`,
       options: {
-        printRejected: false,
-        whitelist: ['algolia-autocomplete', 'pre', 'code'],
-        ignore: ['prismjs/','docsearch.js/', 'src/theme/assets/search/algolia.css'],
-        content: [
-          // All the markdown in the git repos
-          path.join(process.cwd(), '.cache/gatsby-source-git/**/*.md'),
-          // Components
-          path.join(process.cwd(), 'src/components/!(*.d).{ts,js,jsx,tsx}'),
-          // Static pages (e.g. 404)
-          path.join(process.cwd(), 'src/pages/!(*.d).{ts,js,jsx,tsx}'),
-          // Page templates
-          path.join(process.cwd(), 'src/templates/!(*.d).{ts,js,jsx,tsx}'),
-        ],
-        extractors: [
-          {
-            // Simple extractor just matches against components and templates (e.g. JSX)
-            extractor: class {
-              static extract(content) {
-                return content.match(/[A-Za-z0-9-_:\/]+/g) || [];
-              }
-            },
-            extensions: ['js', 'ts', 'jsx', 'tsx']
-          },
-          {
-            // Match markdown files for icon classes (icon, iconBrand). Add each one to the
-            // allowed selectors defined in FontAwesome. Everything else in FA should be removed.
-            extractor: class  {
-              static extract(content) {
-                const selectors = [`fa-file-alt`]
-                const matches = content.match(/icon(Brand)?: ([a-zA-Z0-9_-]+)/);
-                if (matches) {
-                  const isBrand = typeof matches[1] !== 'undefined';
-                  selectors.push(isBrand ? `fab` : `fas`);
-                  selectors.push(`fa-${matches[2]}`);
-                }
-                return selectors;
-              }
-            },
-            extensions: ['md']
-          },
-        ]
+        ...purgeCSSConfig,
       },
     },
     `gatsby-plugin-remove-serviceworker`,
