@@ -267,14 +267,28 @@ h1, h2, h3 {
         padding-left: 0;
         width: auto;
     }
-    .docs-top-utilities {
-        .social-list {
-            li {
-                
+}
+
+@media(max-width: 370px) {
+    .docs-logo-wrapper {
+        .site-logo {
+            width: 140px;
+            .navbar-brand {
+                width: 20px;
+                height: 20px;
+            }
+            span:nth-child(2) {
+                display: none;
+            }
+            span:nth-child(3) {
+                font-size: 0.75 rem;
             }
         }
     }
-    
+    .docs-top-utilities {
+        flex-grow: 0;
+        padding: 0 0.5rem;
+    }
 }
 
 code[class*="language-"], pre[class*="language-"] {
