@@ -269,6 +269,28 @@
 		}
 		
 	}
+
+	.anchor {
+		color: $theme-text-color-light;
+		margin-left: 1rem;
+		opacity: 0;
+		transition: opacity .2s;
+
+		/* Force anchor link to offset header */
+		margin-top: -90px;
+		padding-top: 90px;
+
+		&:focus {
+			opacity: 1;
+
+			/* Outline behaves incorrectly due to offset, use underline instead */
+			outline: none;
+			text-decoration: underline;
+		}
+	}
+	:hover > .anchor {
+		opacity: 1;
+	}
 	
 	.section-heading {
 		font-size: 1.875rem;

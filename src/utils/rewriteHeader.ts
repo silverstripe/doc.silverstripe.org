@@ -33,10 +33,22 @@ const rewriteHeaders = (domNode: DomElement): ReactElement | false => {
             id = generateID(data);
         }
 
+        const anchor = createElement(
+          'a',
+          {
+              "aria-hidden": true,
+              className: 'anchor',
+              href: `#${id}`,
+              id,
+              key: id,
+          },
+          '#'
+        );
+
         return createElement(
             domNode.name,
-            { id },
-            header
+            {},
+            [ header, anchor ]
         );
 
     }
