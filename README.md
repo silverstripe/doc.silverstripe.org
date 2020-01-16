@@ -11,16 +11,14 @@ site generator based on [React](https://reactjs.org). It sources content
 from the [framework](https://github.com/silverstripe/silverstripe-framework)
 repository for each major release.
 
-**This repository does NOT contain the most current documentation.**
+**This repository does NOT contain any documentation.**
 
-The documentation files are written in the
-[markdown](https://docs.silverstripe.org/en/2.4/misc/ss-markdown/)
-format and the most current versions of these files and are not stored
-here. Instead, they are stored in a `docs` folder alongside the
-framework source code in each framework repository. For example, the
-documentation markdown files for the master branch of the SilverStripe framework are
-stored in
+The developer documentation is stored in the framework module
+repository, in the `docs` folder. For example, the documentation for the
+master branch of Silverstripe CMS is stored in
 [https://github.com/silverstripe/silverstripe-framework/tree/master/docs](https://github.com/silverstripe/silverstripe-framework/tree/master/docs).
+
+The userhelp documentation is stored in the [userhelp-content repo](https://github.com/silverstripe/silverstripe-userhelp-content/).
 
 ## Installation
 
@@ -44,6 +42,13 @@ No local NodeJS nor gatsby-cli is required for this option.
 
 * Install [Gatsby CLI](https://gatsbyjs.com)
 
+## Developing
+
+Once cloned, from the root of the repository, run the command `yarn dev-docs`
+to instantiate a development server. This will consume all of the markdown files in both major release
+branches and allow you to browse the developer documentation site on `http://localhost:8000` by default
+(see the [Gatsby docs](https://www.gatsbyjs.org/docs/) for instructions on customising the port).
+
 ## Building
 
 To test a static build of the site, first create a production environment file.
@@ -55,8 +60,8 @@ cp .env.development .env.production
 Then, run the build.
 
 ```
-gatsby build
-gatsby serve
+yarn build-docs
+yarn serve
 ```
 
 These commands will give you an exact representation of how the site will run on a production server, with
@@ -74,18 +79,6 @@ yarn dev-user
 yarn build-docs
 yarn build-user
 ```
-
-
-## Developing
-
-From within `path/to/ssdocs`, run the command
-
-```
-gatsby develop
-```
-to instantiate a development server. This will consume all of the markdown files in both major release
-branches and allow you to browse the documentation site on `http://localhost:8000` by default
-(see the [Gatsby docs](https://www.gatsbyjs.org/docs/) for instructions on customising the port).
 
 ## Authoring
 
