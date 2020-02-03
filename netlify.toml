@@ -9,6 +9,11 @@
   to = "/en/4/"
 
 [[redirects]]
+  from = "/framework/en/*"
+  to = "/en/4/:splat"
+  status = 301
+  
+[[redirects]]
   from = "/contributing"
   to = "/en/4/contributing/"
 
