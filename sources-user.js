@@ -88,7 +88,7 @@ module.exports = [
       }
     },
 
-    /******* [FORK] forum ********/
+    /******* forum ********/
 
     // v3
     {
@@ -96,9 +96,8 @@ module.exports = [
       resolve: `gatsby-source-git`,
       options: {
         name: `user--3--optional_features/forums`,
-        remote: `https://github.com/unclecheese/silverstripe-forum`,
-        //branch: `0.8`,
-        branch: `pulls/0.8/new-docs`,
+        remote: `https://github.com/silverstripe-archive/silverstripe-forum`,
+        branch: `0.8`,        
         patterns: `docs/en/userguide/**`        
       }
     },
