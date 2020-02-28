@@ -67,10 +67,10 @@ const ChildrenOf: StatelessComponent<ChildrenOfProps> = ({ folderName, exclude, 
         );
     }
 
-    if (reverse) {
-        nodes.reverse();
-    }
-    let children: ReactElement[] = asList ? createList(nodes) : createCards(nodes);
+    const clonedNodes = [...nodes];
+    reverse && clonedNodes.reverse();
+
+    let children: ReactElement[] = asList ? createList(clonedNodes) : createCards(clonedNodes);
 
     return (
         <div className="docs-overview py-5">
