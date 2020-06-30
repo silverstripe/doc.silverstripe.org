@@ -1,5 +1,6 @@
 import { SilverstripeDocument } from '../types';
 import sortFiles from './sortFiles';
+import { node } from 'prop-types';
 
 let __nodes: SilverstripeDocument[];
 let __currentVersion: string | null = null;
@@ -143,6 +144,19 @@ const getHomePage = (): SilverstripeDocument | null => {
  */
 const getCurrentVersion = (): string => __currentVersion || '4';
 
+
+/**
+ * Gets the path in another version
+ * @param currentNode 
+ * @param version 
+ */
+const getVersionPath = (currentNode: SilverstripeDocument, version: number): string => {
+  const newPath = currentNode.slug.replace(/^\/en\/[0-9]+\//, `/en/${version}/`);
+  const otherNode = getNodes().find(n => n.slug === newPath);
+
+  return otherNode ? otherNode.slug : `/en/${version}`;
+};
+
 /**
  * Set the current path, with some side effects for version
  * @param slug 
@@ -163,5 +177,6 @@ export {
   getHomePage,
   getNavChildren,
   getCurrentVersion,
+  getVersionPath,
   setCurrentPath
 };
