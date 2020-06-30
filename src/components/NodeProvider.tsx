@@ -12,6 +12,7 @@ import {
     getParent,
     getSiblings,
     initialise,
+    getVersionPath,
     setCurrentPath,
 } from '../utils/nodes';
 
@@ -56,6 +57,7 @@ const NodeProvider: StatelessComponent<{}> = ({ children, pageContext: { slug } 
             getNodes,
             getParent,
             getSiblings,
+            getVersionPath,
             setCurrentPath,
         }}>
           {children}
