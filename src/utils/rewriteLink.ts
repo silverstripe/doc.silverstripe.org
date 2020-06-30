@@ -40,6 +40,19 @@ const rewriteLink = (
 
     const currentNode = getCurrentNode();
     const version = getCurrentVersion();
+
+    // hash links
+    if (href.startsWith('#')) {
+        return createElement(
+            Link,
+            { 
+                to: path.join(currentNode?.slug, href),
+                className: 'gatsby-link'
+            },
+            domToReact(children, parseOptions)
+        );   
+    }
+
     // shorthand api links
     if (href.match(/^api\:/)) {
         const newHref = rewriteAPILink(href);
