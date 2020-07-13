@@ -21,21 +21,18 @@ module.exports = [
       }
   },      
 
-  /******* [FORK] versionedfiles ********/  
+  
   // v3
   {
       resolve: `gatsby-source-git`,
       options: {
         name: `user--3--optional_features/versionedfiles`,
-        //remote: `https://github.com/silverstripe-australia/silverstripe-versionedfiles`,
-        remote: `https://github.com/silverstripe/silverstripe-versionedfiles`,
-        // branch: `master`,
-        branch: `pulls/master/new-docs`,
+        remote: `https://github.com/symbiote/silverstripe-versionedfiles`,
+        branch: `master`,        
         patterns: `docs/en/userguide/**`        
       }
     },
 
-  /******* [FORK] advancedworkflow ********/
   
   // v3
   {
@@ -43,10 +40,8 @@ module.exports = [
       resolve: `gatsby-source-git`,
       options: {
         name: `user--3--optional_features/setting_up_advancedworkflow`,
-        //remote: `https://github.com/symbiote/silverstripe-advancedworkflow`,
-        //branch: `4`,
-        remote: `https://github.com/silverstripe/silverstripe-advancedworkflow`,
-        branch: `pulls/4/new-docs`,
+        remote: `https://github.com/symbiote/silverstripe-advancedworkflow`,
+        branch: `4`,
         patterns: `docs/en/userguide/**`        
       }
     },
@@ -56,10 +51,8 @@ module.exports = [
       resolve: `gatsby-source-git`,
       options: {
         name: `user--4--optional_features/setting_up_advancedworkflow`,
-        // remote: `https://github.com/symbiote/silverstripe-advancedworkflow`,
-        // branch: `master`,
-        remote: `https://github.com/silverstripe/silverstripe-advancedworkflow`,
-        branch: `pulls/master/new-docs`,
+        remote: `https://github.com/symbiote/silverstripe-advancedworkflow`,
+        branch: `master`,
         patterns: `docs/en/userguide/**`        
       }
     },
@@ -92,7 +85,6 @@ module.exports = [
 
     // v3
     {
-      // Fork. Remove once PR is merged.
       resolve: `gatsby-source-git`,
       options: {
         name: `user--3--optional_features/forums`,
@@ -301,17 +293,14 @@ module.exports = [
       }
     },
 
-    /******* [FORK] maintenance ********/
 
     // v4
     {
       resolve: `gatsby-source-git`,
       options: {
         name: `user--4--optional_features/modules_report`,
-        //remote: `https://github.com/bringyourownideas/silverstripe-maintenance`,
-        remote: `https://github.com/silverstripe/silverstripe-maintenance`,
-        branch: `pulls/1/new-docs`,
-        // branch: `1`,
+        remote: `https://github.com/bringyourownideas/silverstripe-maintenance`,        
+        branch: `1`,
         patterns: `docs/en/userguide/**`        
       }
     },
