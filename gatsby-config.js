@@ -1,12 +1,15 @@
 const purgeCSSConfig = require('./purgecss.config');
-const sources = process.env.DOCS_CONTEXT === 'user'
+const isUser = process.env.DOCS_CONTEXT === 'user';
+const sources = isUser
   ? require('./sources-user')
   : require('./sources-docs');
 
 module.exports = {
   siteMetadata: {
     title: `Silverstripe CMS Documentation`,
-    description: `Developer and user documentation for the Silverstripe CMS and framework.`,
+    description: isUser
+    	? `Silverstripe CMS user help guide`
+    	: `Developer documentation for Silverstripe CMS and framework`,
     author: `The Silverstripe Community`,
     siteUrl: `https://doc.silverstripe.org`,
     context: process.env.DOCS_CONTEXT,
