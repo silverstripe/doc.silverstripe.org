@@ -217,6 +217,12 @@ h1, h2, h3 {
     }
 }
 
+.cards-list {
+	a.active {
+		border-left: 5px solid #999;
+		padding-left: 5px;
+	}
+}
 .github-edit {
     display: flex;
     align-items: center;

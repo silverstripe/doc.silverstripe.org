@@ -31,7 +31,7 @@ const createList = (children: SilverstripeDocument[]): ReactElement[] => {
     return children.map(({ summary, slug, title }) => {
         return (
             <React.Fragment key={slug}>
-                <dt><Link to={slug}>{title}</Link></dt>
+                <dt><Link activeClassName="active" to={slug}>{title}</Link></dt>
                 <dd>{summary || ''}</dd>
             </React.Fragment>
         );
@@ -75,7 +75,7 @@ const ChildrenOf: StatelessComponent<ChildrenOfProps> = ({ folderName, exclude, 
     return (
         <div className="docs-overview py-5">
             {asList &&
-                <dl>{children}</dl>
+                <dl className="cards-list">{children}</dl>
             }
             {!asList &&
             <div className="row">
