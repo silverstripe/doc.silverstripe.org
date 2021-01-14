@@ -34,9 +34,9 @@ To set up a local instance of [doc.silverstripe.org](https://github.com/silverst
 No local NodeJS nor gatsby-cli is required for this option.
 
  * Make sure docker and docker-compose are installed and docker daemon is running
- * Simply use `./docker/run` to run gatsby commands
-     - `./docker/run build` would be equal to run `gatsby build` within a container
-     - `./docker/run develop -p 8000` would run `gatsby develop -p 8000` within a container.
+ * Simply use `./docker/run` to run yarn commands within container
+     - `./docker/run dev-docs` would be equal to run `yarn dev-docs` within a container
+     - `./docker/run build-docs` would run `yarn build-docs` within a container
 
 ### Native install
 

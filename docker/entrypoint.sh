@@ -6,4 +6,4 @@ if [[ ! -d "/app/node_modules" ]] ; then
     yarn;
 fi;
 
-gatsby $@
+yarn $@
