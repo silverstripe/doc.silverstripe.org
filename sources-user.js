@@ -401,8 +401,6 @@ module.exports = [
       }        
     },
 
-    },
-
     /******* session-manager ********/
 
     // v4
