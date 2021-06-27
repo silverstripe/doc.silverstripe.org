@@ -401,4 +401,16 @@ module.exports = [
       }        
     },
 
+    /******* session-manager ********/
+
+    // v4
+    {
+      resolve: `gatsby-source-git`,
+      options: {
+        name: `user--4--optional_features/managing_devices`,
+        remote: `https://github.com/silverstripe/silverstripe-session-manager`,
+        branch: `master`,
+        patterns: `docs/en/userguide/**`        
+      }
+    },
 ];
