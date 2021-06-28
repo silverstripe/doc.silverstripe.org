@@ -409,7 +409,7 @@ module.exports = [
       options: {
         name: `user--4--optional_features/managing_devices`,
         remote: `https://github.com/silverstripe/silverstripe-session-manager`,
-        branch: `master`,
+        branch: `1`,
         patterns: `docs/en/userguide/**`        
       }
     },
