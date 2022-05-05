@@ -8,6 +8,7 @@ import { SilverstripeDocument } from '../types';
 
 interface LinkAttributes {
     href?: string;
+    class?: string;
 };
 
 
@@ -31,7 +32,8 @@ const relativeLink = (currentNode: SilverstripeDocument, href: string): string =
 const rewriteLink = (
     attribs: LinkAttributes,
     children: DomElement[],
-    parseOptions: HTMLReactParserOptions
+    parseOptions: HTMLReactParserOptions,
+    domNode: DomElement
 ): ReactElement|false => {
     const { href } = attribs;
     if (!href) {
@@ -43,6 +45,11 @@ const rewriteLink = (
 
     // hash links
     if (href.startsWith('#')) {
+        // Just let normal parsing occur for heading links
+        if (attribs.class === 'anchor') {
+            return domToReact(domNode);
+        }
+        // rewrite all other hashlinks
         return createElement(
             Link,
             { 
