@@ -41,6 +41,15 @@ const rewriteLink = (
     const currentNode = getCurrentNode();
     const version = getCurrentVersion();
 
+    // mailto links
+    if (href.startsWith('mailto:')) {
+        return createElement(
+            'a',
+            { href },
+            domToReact(children, parseOptions)
+        );
+    }
+
     // hash links
     if (href.startsWith('#')) {
         return createElement(
