@@ -1,6 +1,9 @@
 import { createElement, ReactElement } from "react";
-import { DomElement } from 'html-react-parser';
+import { DomElement, domToReact, htmlToDOM } from 'html-react-parser';
 
+/**
+ * Generate the ID for a heading
+ */
 const generateID = (title: string): string => {
     return title
         .replace('&amp;', '-and-')
@@ -11,45 +14,58 @@ const generateID = (title: string): string => {
         .replace(/-$/g, '')
         .toLowerCase();
 }
+
+/**
+ * Get the full plain text of the heading for checking and generating the ID
+ */
+const getFullHeading = (element: DomElement): string => {
+    let text = '';
+    if (element.type === 'text') {
+        text += element.data;
+    }
+
+    if (element.children) {
+        for (const child of element.children) {
+            text += getFullHeading(child);
+        }
+    }
+
+    return text;
+}
+
 /**
  * If a header has a {#explicit-id}, add it as an attribute
- * @param domNode 
  */
 const rewriteHeaders = (domNode: DomElement): ReactElement | false => {
     if (!domNode.name) {
         return false;
     }
-    const firstChild = domNode.children ? domNode.children[0] : null;
-    if (firstChild && firstChild.type === 'text') {
-        const { data } = firstChild;
-        const matches = data.match(/^(.*?){#([A-Za-z0-9_-]+)\}$/);
+
+    const plainText = getFullHeading(domNode);
+
+    if (plainText) {
+        // const plainText = getFullHeading(firstChild);
+        const matches = plainText.match(/^(.*?)\{#([A-Za-z0-9_-]+)\}$/);
         let header;
         let id;
         if (matches) {
             header = matches[1];
             id = matches[2];
         } else {
-            header = data;
-            id = generateID(data);
+            header = plainText;
+            id = generateID(plainText);
         }
 
-        const anchor = createElement(
-          'a',
-          {
-              "aria-hidden": true,
-              className: 'anchor',
-              href: `#${id}`,
-              id,
-              key: id,
-          },
-          '#'
-        );
+        const anchor = htmlToDOM(`<a id="${id}" class="anchor" aria-hidden="true" href="#${id}">#</a>`)[0];
 
-        return createElement(
-            domNode.name,
-            {},
-            [ header, anchor ]
-        );
+        const lastChild = domNode.children ? domNode.children[domNode.children.length - 1] : null;
+        if (lastChild && lastChild.type === 'text') {
+            lastChild.data = lastChild.data.replace(/\s*{#([A-Za-z0-9_-]+)\}$/, '');
+        }
+
+        domNode.children?.push(anchor);
+
+        return domToReact([domNode]);
 
     }
 

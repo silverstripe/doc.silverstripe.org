@@ -29,7 +29,7 @@ const parseHTML = (html: string): ReactElement | ReactElement[] | string => {
             const domChildren = children || [];
             if (name && attribs) {
                 if (name === 'a') {
-                    return rewriteLink(attribs, domChildren, parseOptions);
+                    return rewriteLink(attribs, domChildren, parseOptions, domNode);
                 }
                 if (name === 'table') {
                     return rewriteTable(domChildren, parseOptions);
