@@ -8,17 +8,17 @@ developer documentation website](https://docs.silverstripe.org) and
 
 This application is build on [Gatsby](https://gatsbyjs.com), a static
 site generator based on [React](https://reactjs.org). It sources content
-from the [framework](https://github.com/silverstripe/silverstripe-framework)
+from the [silverstripe/developer-docs](https://github.com/silverstripe/developer-docs)
 repository for each major release.
 
 **This repository does NOT contain any documentation.**
 
-The developer documentation is stored in the framework module
-repository, in the `docs` folder. For example, the documentation for the
-master branch of Silverstripe CMS is stored in
-[https://github.com/silverstripe/silverstripe-framework/tree/master/docs](https://github.com/silverstripe/silverstripe-framework/tree/master/docs).
+The developer documentation is stored in the [silverstripe/developer-docs repository](https://github.com/silverstripe/developer-docs)),
+in the `en` folder. For example, the documentation for the
+Silverstripe CMS 4.x is stored in
+[https://github.com/silverstripe/developer-docs/tree/4/en](https://github.com/silverstripe/developer-docs/tree/4/en).
 
-The userhelp documentation is stored in the [userhelp-content repo](https://github.com/silverstripe/silverstripe-userhelp-content/).
+The userhelp documentation is stored in the [silverstripe/silverstripe-userhelp-content repo](https://github.com/silverstripe/silverstripe-userhelp-content/).
 
 ## Installation
 
@@ -33,10 +33,10 @@ To set up a local instance of [doc.silverstripe.org](https://github.com/silverst
 
 No local NodeJS nor gatsby-cli is required for this option.
 
- * Make sure docker and docker-compose are installed and docker daemon is running
- * Simply use `./docker/run` to run gatsby commands
-     - `./docker/run build` would be equal to run `gatsby build` within a container
-     - `./docker/run develop -p 8000` would run `gatsby develop -p 8000` within a container.
+* Make sure docker and docker-compose are installed and docker daemon is running
+* Simply use `./docker/run` to run gatsby commands
+  * `./docker/run build` would be equal to run `gatsby build` within a container
+  * `./docker/run develop -p 8000` would run `gatsby develop -p 8000` within a container.
 
 ### Native install
 
@@ -83,9 +83,9 @@ yarn build-user
 ## Authoring
 
 You can make changes directly to the source markdown files and get live updates in the development
-server without having to rebuild the app or even refresh the browser. The clones of the `silverstripe/framework`
+server without having to rebuild the app or even refresh the browser. The clones of the `silverstripe/developer-docs`
 repositories are in the `.cache/gatsby-source-git` folder in the root of this project. There are subfolders
-for `3/` and `4/`, respective to their branch names. You can edit the files in `docs/en` from there.
+for `3/` and `4/`, respective to their branch names. You can edit the files in `en` from there.
 
 Just don't forget to merge your changes upstream once you're done. Building the gatsby app will not preserve
 your content changes, since the remote repositories are the source of truth.
@@ -93,7 +93,7 @@ your content changes, since the remote repositories are the source of truth.
 ## Deploying content changes
 
 Once your contribution has been merged into the master branch, it will be deployed to production via a
-Github action in the repository that holds the markdown files (e.g. `silverstripe/silverstripe-framework` for docs).
+Github action in the repository that holds the markdown files (e.g. `silverstripe/developer-docs` for developer docs).
 
 ## Deploying app changes
 
@@ -107,6 +107,5 @@ their way onto the https://docs.silverstripe.org or https://userhelp.silverstrip
 
 If you wish to edit the documentation content, submit a pull request
 on the
-[framework Github project](https://github.com/silverstripe/silverstripe-framework) or the
-[userhelp documentation](https://github.com/silverstripe/silverstripe-userhelp-content) repository
-or corresponding module.
+[developer documentation](https://github.com/silverstripe/developer-docs) repository or the
+[userhelp documentation](https://github.com/silverstripe/silverstripe-userhelp-content) repository.

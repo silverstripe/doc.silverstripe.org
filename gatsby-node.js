@@ -48,7 +48,7 @@ exports.onCreateNode = async ({ node, getNode, getNodesByType, actions, createNo
     }
     return;
   }   
-  const basePath = category === 'user' ? `docs/en/userguide` : `docs/en`;
+  const basePath = category === 'user' ? `docs/en/userguide` : `en`;
   const filePath = createFilePath({
     node,
     getNode,
