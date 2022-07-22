@@ -1,6 +1,7 @@
+import parse from 'html-react-parser';
+import { ReactElement } from 'react';
 import { SilverstripeDocument } from '../types';
 import sortFiles from './sortFiles';
-import { node } from 'prop-types';
 
 let __nodes: SilverstripeDocument[];
 let __currentVersion: string | null = null;
@@ -149,17 +150,65 @@ const getDefaultVersion = (): string => '4';
  */
 const getCurrentVersion = (): string => __currentVersion || getDefaultVersion();
 
+/**
+ * Get a message to display for all pages on this version's docs
+ */
+const getVersionMessage = (): ReactElement | ReactElement[] | string | null => {
+  const EOL = [
+    '3',
+  ];
+  const PRE_RELEASE = [
+    '5',
+  ];
+  const version = getCurrentVersion();
+  const stablePath = getVersionPath(getCurrentNode(), getDefaultVersion());
+
+  // Output the appropriate message and styling
+  function makeMessage(style: string, icon: string, stability: string, message: string|null): string {
+    let template = `<div id="version-callout" class="callout-block callout-block--version callout-block-${style}">
+      <div class="callout-version-title">Version ${version}<span class="callout-version-stability">
+        <i class="far fa-${icon}"></i><span class="callout-version-stability-text">${stability}</span></span>
+      </div>`;
+    if (message) {
+      template += `<div class="callout-version-content">
+          This version of Silverstripe CMS ${message}.
+          <a href="${stablePath}">Go to documentation for the most recent stable version.</a>
+        </div>`;
+    }
+    template += '</div>';
+    return template;
+  }
+
+  // Return the correct message for the current version
+  if (EOL.includes(version)) {
+    return parse(makeMessage('danger', 'times-circle', 'end of life', 'will not recieve any additional bug fixes or documentation updates'));
+  }
+  if (PRE_RELEASE.includes(version)) {
+    return parse(makeMessage(
+      'warning',
+      'calendar',
+      'pre-stable',
+      'has not yet been given a stable release. See <a target="_blank" href="https://www.silverstripe.org/software/roadmap/">the release roadmap</a> for more information'
+    ));
+  }
+  return parse(makeMessage('success', 'check-circle', 'supported', null));
+};
+
 
 /**
  * Gets the path in another version
  * @param currentNode 
  * @param version 
  */
-const getVersionPath = (currentNode: SilverstripeDocument, version: number): string => {
-  const newPath = currentNode.slug.replace(/^\/en\/[0-9]+\//, `/en/${version}/`);
+const getVersionPath = (currentNode: SilverstripeDocument|null, version: number|string): string => {
+  const basePath = `/en/${version}`;
+  if (!currentNode) {
+    return basePath;
+  }
+  const newPath = currentNode.slug.replace(/^\/en\/[0-9]+\//, `${basePath}/`);
   const otherNode = getNodes().find(n => n.slug === newPath);
 
-  return otherNode ? otherNode.slug : `/en/${version}`;
+  return otherNode ? otherNode.slug : basePath;
 };
 
 /**
@@ -185,4 +234,5 @@ export {
   getVersionPath,
   setCurrentPath,
   getDefaultVersion,
+  getVersionMessage,
 };

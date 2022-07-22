@@ -384,6 +384,60 @@
 	}
 }
 
+.callout-block--version {
+	border-left-width: 6px;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	
+	.callout-version-title {
+		display: flex;
+		font-size: 1rem;
+		font-weight: $font-weight-bold;
+		color: lighten($theme-text-color-primary, 15%);
+
+		.callout-version-stability {
+			display: flex;
+			align-items: center;
+			margin-left: auto;
+			font-size: 1.125rem;
+		}
+
+		.callout-version-stability-text {
+			text-transform: uppercase;
+			font-size: 0.875rem;
+			margin-left: 10px;
+		}
+	}
+
+	.callout-version-content {
+		padding-top: 10px;
+	}
+
+	&.callout-block-success {
+		.callout-version-stability {
+			color: darken($theme-success-color, 15%);
+		}
+	}
+
+	&.callout-block-info {
+		.callout-version-stability {
+			color: darken($theme-info-color, 15%);
+		}
+	}
+
+	&.callout-block-warning {
+		.callout-version-stability {
+			color: darken($theme-warning-color, 15%);
+		}
+	}
+
+	&.callout-block-danger {
+		.callout-version-stability {
+			color: darken($theme-danger-color, 15%);
+		}
+	}
+}
+
 
 .cta-section {
 	.container {

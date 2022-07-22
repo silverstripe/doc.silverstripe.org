@@ -15,6 +15,7 @@ import {
     getVersionPath,
     setCurrentPath,
     getDefaultVersion,
+    getVersionMessage,
 } from '../utils/nodes';
 
 const NodeProvider: StatelessComponent<{}> = ({ children, pageContext: { slug } }): ReactElement => {
@@ -61,6 +62,7 @@ const NodeProvider: StatelessComponent<{}> = ({ children, pageContext: { slug } 
             getVersionPath,
             setCurrentPath,
             getDefaultVersion,
+            getVersionMessage,
         }}>
           {children}
       </NodeContext.Provider>

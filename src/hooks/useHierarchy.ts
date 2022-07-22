@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, ReactElement } from 'react';
 import NodeContext from '../contexts/NodeContext';
 import { SilverstripeDocument } from '../types';
 
@@ -15,6 +15,7 @@ interface NodeFunctions {
     getVersionPath(currentNode: SilverstripeDocument, version: number|string): string;
     setCurrentPath(slug: string): undefined;
     getDefaultVersion(): string;
+    getVersionMessage():  ReactElement | ReactElement[] | string | null;
 };
 
 const useHierarchy = (): NodeFunctions => {

@@ -14,7 +14,7 @@ class IconExtractor {
         const matches = content.match(/icon(Brand)?: ([a-zA-Z0-9_-]+)/);
         if (matches) {
           const isBrand = typeof matches[1] !== 'undefined';
-          selectors.push(isBrand ? `fab` : `fas`);
+          selectors.push(isBrand ? 'fab' : 'fas');
           selectors.push(`fa-${matches[2]}`);
         }
         return selectors;
@@ -29,6 +29,12 @@ const whitelist = [
     // Syntax highlighting
     'pre',
     'code',
+
+    // Icon classes used in nodes.ts
+    'far',
+    'fa-calendar',
+    'fa-check-circle',
+    'fa-times-circle',
 ];
 
 const whitelistPatterns = [
