@@ -20,6 +20,24 @@ Silverstripe CMS 4.x is stored in
 
 The userhelp documentation is stored in the [silverstripe/silverstripe-userhelp-content repo](https://github.com/silverstripe/silverstripe-userhelp-content/).
 
+## What to update when creating a new pre-release major branch, making a stable major release, or making a major EOL
+
+When **creating a new major branch for a pre-release major version**
+
+- Make sure you've added a new major branch to both `silverstripe/developer-docs` and `silverstripe/silverstripe-userhelp-content`
+  - You probably need to add new major branches for various modules as defined in `sources-user.js` as well
+- Add the new major to `sources-docs.js` and `sources-user.js`
+- Add the new major to the version select in `src/components/Header.tsx`
+- Add the major to the `PRE_RELEASE` array in the `getVersionMessage` function in `src/utils/nodes.ts`
+
+For **new stable releases**, you will need to do the following
+
+- Remove the major from the `PRE_RELEASE` array in the `getVersionMessage` function in `src/utils/nodes.ts`
+- Update the `getDefaultVersion` function's return value to the new stable major in `src/utils/nodes.ts`
+- Update redirects in `netlify.toml`
+
+When a **major goes EOL**, add the major to the `EOL` array in the `getVersionMessage` function in `src/utils/nodes.ts`
+
 ## Installation
 
 To set up a local instance of [doc.silverstripe.org](https://github.com/silverstripe/doc.silverstripe.org):
