@@ -140,9 +140,14 @@ const getHomePage = (): SilverstripeDocument | null => {
 };
 
 /**
+ * Get the default version
+ */
+const getDefaultVersion = (): string => '4';
+
+/**
  * Get the selected version
  */
-const getCurrentVersion = (): string => __currentVersion || '4';
+const getCurrentVersion = (): string => __currentVersion || getDefaultVersion();
 
 
 /**
@@ -178,5 +183,6 @@ export {
   getNavChildren,
   getCurrentVersion,
   getVersionPath,
-  setCurrentPath
+  setCurrentPath,
+  getDefaultVersion,
 };

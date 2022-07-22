@@ -12,8 +12,9 @@ interface NodeFunctions {
     getHomePage(): SilverstripeDocument|null;
     getNavChildren(node: SilverstripeDocument): SilverstripeDocument[];
     getCurrentVersion(): string;
-    getVersionPath(currentNode: SilverstripeDocument, version: number): string;
+    getVersionPath(currentNode: SilverstripeDocument, version: number|string): string;
     setCurrentPath(slug: string): undefined;
+    getDefaultVersion(): string;
 };
 
 const useHierarchy = (): NodeFunctions => {
