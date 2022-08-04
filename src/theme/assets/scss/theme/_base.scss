@@ -13,6 +13,10 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: 'Poppins', sans-serif;
 	color: $theme-text-color-primary;
 	font-weight: 600;
+
+	code[class*="language-"] {
+		font-size: 0.8em;
+	}
 }
 
 code {
@@ -59,16 +63,27 @@ code {
 	border-bottom-color: darken($theme-bg-light, 5%);
 }
 
-a.theme-link {
-	color: $theme-text-color-primary;
+a {
 	text-decoration: underline;
-    -webkit-text-decoration-color: rgba($theme-text-color-primary,0.3);
-    text-decoration-color: rgba($theme-text-color-primary,0.3);
-    &:hover {
-	    color: $theme-color-primary;
-	    -webkit-text-decoration-color: rgba($theme-color-primary,0.8);
-	        text-decoration-color: rgba($theme-color-primary,0.8);
-    }
+
+	&:hover {
+		text-decoration: none;
+	}
+
+	&.theme-link {
+		color: $theme-text-color-primary;
+		-webkit-text-decoration-color: rgba($theme-text-color-primary,0.3);
+		text-decoration-color: rgba($theme-text-color-primary,0.3);
+		&:hover {
+			color: $theme-color-primary;
+			-webkit-text-decoration-color: rgba($theme-color-primary,0.8);
+				text-decoration-color: rgba($theme-color-primary,0.8);
+		}
+	}
+
+	&.btn {
+		text-decoration: none;
+	}
 }
 
 .btn {

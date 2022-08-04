@@ -172,11 +172,6 @@
 	.section-title {
 		font-size: 1rem;
 		margin-bottom: 1rem;
-		a {
-			&:hover {
-				text-decoration: none;
-			}
-		}
 	}
 	.section-items {
 		font-size: 0.875rem;
@@ -207,7 +202,6 @@
 			color: $theme-color-primary;
 			&:before {
 				background-color: $theme-color-primary;
-				
 			}
 			.theme-icon-holder {
 				color: #fff;
@@ -267,7 +261,6 @@
 				margin-bottom: 0;
 			}
 		}
-		
 	}
 
 	.anchor {
@@ -275,18 +268,6 @@
 		margin-left: 1rem;
 		opacity: 0;
 		transition: opacity .2s;
-
-		/* Force anchor link to offset header */
-		margin-top: -90px;
-		padding-top: 90px;
-
-		&:focus {
-			opacity: 1;
-
-			/* Outline behaves incorrectly due to offset, use underline instead */
-			outline: none;
-			text-decoration: underline;
-		}
 	}
 	:hover > .anchor {
 		opacity: 1;

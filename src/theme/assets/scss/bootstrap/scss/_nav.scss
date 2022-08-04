@@ -14,9 +14,10 @@
 .nav-link {
   display: block;
   padding: $nav-link-padding-y $nav-link-padding-x;
+  text-decoration: none;
 
   @include hover-focus {
-    text-decoration: none;
+    text-decoration: underline;
   }
 
   // Disabled state lightens text
