@@ -65,6 +65,13 @@ const rewriteHeaders = (domNode: DomElement): ReactElement | false => {
 
         domNode.children?.push(anchor);
 
+        if (domNode.name === 'h1') {
+            if (!domNode.attribs) {
+                domNode.attribs = {};
+            }
+            domNode.attribs['aria-details'] = 'version-callout';
+        }
+
         return domToReact([domNode]);
 
     }

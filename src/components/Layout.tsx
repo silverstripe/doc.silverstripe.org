@@ -11,22 +11,23 @@ interface LayoutProps {
   }
 }
 const Layout: StatelessComponent<LayoutProps> = ({ children, pageContext: { slug } }) => {
-  const { setCurrentPath, getVersionPath, getCurrentVersion, getCurrentNode } = useHierarchy();
+  const { setCurrentPath, getVersionPath, getCurrentVersion, getCurrentNode, getDefaultVersion, getVersionMessage } = useHierarchy();
   const [isToggled, setSidebarOpen] = useState(false);
   const handleNavigate = () => setSidebarOpen(false);
   
   setCurrentPath(slug);
   const ver = getCurrentVersion();
   const currentNode = getCurrentNode();
+  const versionMessage = getVersionMessage();
 
   return (
     <>
-    {currentNode && ver !== '4' && (
+    {currentNode && ver !== getDefaultVersion() && (
       <Helmet
         link={[
           {
             rel: 'canonical',
-            href: getVersionPath(currentNode, '4'),
+            href: getVersionPath(currentNode, getDefaultVersion()),
           }
         ]}
        />
@@ -37,7 +38,10 @@ const Layout: StatelessComponent<LayoutProps> = ({ children, pageContext: { slug
       <div className="docs-content">
         <div className="container">
           <article role="main" className="docs-article">
+            <>
+            {versionMessage}
             {children}
+            </>
           </article>
         </div> 
       </div>
