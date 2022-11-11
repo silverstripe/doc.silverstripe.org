@@ -13,7 +13,7 @@ module.exports = [
     options: {
       name: `docs--4`,
       remote: `https://github.com/silverstripe/developer-docs.git`,
-      branch: `4.11`,
+      branch: `4.12`,
       patterns: `en/**`
     }
   },
