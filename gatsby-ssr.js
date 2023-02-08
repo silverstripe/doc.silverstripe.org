@@ -34,6 +34,19 @@ exports.onRenderBody = ({ setPostBodyComponents, setHeadComponents, pathname }) 
                     margin: 2rem 0;
                 }                
                 `
+          }} />,
+          // this is being done as a quick work around as there's issues when building css
+          <style type="text/css" dangerouslySetInnerHTML={{
+            __html: `
+                .api-link code {
+                    text-decoration: underline;
+                    color: #5d6778;
+                }
+                .api-link code:hover,
+                .api-link code:active {
+                    text-decoration: none;
+                }
+            `
           }} />
     ]);
     setPostBodyComponents([
