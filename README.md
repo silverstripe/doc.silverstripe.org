@@ -14,7 +14,7 @@ repository for each major release.
 **This repository does NOT contain any documentation.**
 
 The developer documentation is stored in the [silverstripe/developer-docs repository](https://github.com/silverstripe/developer-docs)),
-in the `en` folder. For example, the documentation for the 
+in the `en` folder. For example, the documentation for the
 Silverstripe CMS 4.x is stored in
 [https://github.com/silverstripe/developer-docs/tree/4/en](https://github.com/silverstripe/developer-docs/tree/4/en).
 
