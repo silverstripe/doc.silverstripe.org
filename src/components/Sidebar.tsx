@@ -1,5 +1,4 @@
 import React, { StatelessComponent, ReactElement } from 'react';
-import SearchBox from './SearchBox';
 import Nav from './Nav';
 
 interface SidebarProps {
@@ -10,12 +9,7 @@ interface SidebarProps {
 
 const Sidebar:StatelessComponent<SidebarProps> = ({ isOpen, onNavigate }): ReactElement => {
     return (
-        <div id="docs-sidebar" className={`docs-sidebar ${isOpen ? 'sidebar-visible' : ''}`}>
-        <div className="top-search-box d-lg-none p-3">
-          <form className="search-form">
-            <SearchBox identifier="sidebar-search"/>
-          </form>
-        </div>
+      <div id="docs-sidebar" className={`docs-sidebar ${isOpen ? 'sidebar-visible' : ''}`}>
         <Nav onNavigate={onNavigate} />
       </div>
     );

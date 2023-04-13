@@ -1,75 +1,51 @@
 import React from 'react'
-import { StatelessComponent, ReactElement, useEffect, useState } from 'react';
-import { navigateTo } from "gatsby-link"
+import { StatelessComponent, ReactElement } from 'react';
+import { navigate } from "gatsby"
 import useHierarchy from '../hooks/useHierarchy';
-import useDocContext from '../hooks/useDocContext';
-import { useStaticQuery, graphql } from 'gatsby';
+import { DocSearch } from '@docsearch/react';
 
-interface SearchBoxProps {
-  identifier: string;
-}
+import '@docsearch/css';
 
-const autocompleteSelected = (e) => {
-    e.stopPropagation()
-    // Use an anchor tag to parse the absolute url (from autocomplete.js) into a relative url
-    // eslint-disable-next-line no-undef
-    const a = document.createElement(`a`)
-    a.href = e._args[0].url
-    navigateTo(`${a.pathname}${a.hash}`)
+const makeUrlRelative = (url: string) => {
+  // Use an anchor tag to parse the absolute url into a relative url
+  // eslint-disable-next-line no-undef
+  const a = document.createElement(`a`);
+  a.href = url;
+  return `${a.pathname}${a.hash}`;
 };
 
-const SearchBox: StatelessComponent<SearchBoxProps> = ({ identifier }): ReactElement|null => {
+const handleClick = (event: Event, url: string) => {
+  event.preventDefault();
+  navigate(url);
+}
+
+const SearchBox: StatelessComponent = (): ReactElement|null => {
     const { getCurrentVersion } = useHierarchy();
-    const [ isFocused, setFocus ] = useState(false);
-    const context = useDocContext();
-
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-        if (!process.env.GATSBY_DOCSEARCH_API_KEY) {
-          return;
-        }
-        window.addEventListener(
-            `autocomplete:selected`,
-            autocompleteSelected,
-            true
-        );
-        if(window.docsearch){
-            window.docsearch({ 
-              algoliaOptions: {
-                facetFilters: [
-                  `version:${getCurrentVersion()}`,
-                  //`context:${context}`,
-                ],
-                hitsPerPage: 5,
-              },
-              apiKey: process.env.GATSBY_DOCSEARCH_API_KEY, 
-              debug: true,
-              indexName: process.env.GATSBY_DOCSEARCH_INDEX, 
-              inputSelector: `#${identifier}`,
-            });
-          }
-      
-    }, []);
-
-    const handleFocus = () => setFocus(true);
-    const handleBlur = (e) => {
-      if (!e.target.value.trim()) {
-        setFocus(false);
-      }
-    };
 
     return (
-      <>
-            <label className={ isFocused ? `hide` : `show` } htmlFor={identifier}>Search...</label>
-            <input
-                id={identifier}
-                type="search"
-                className="form-control search-input"
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-            />
-      </>
-      )  
+      <DocSearch
+        appId={process.env.GATSBY_DOCSEARCH_APP_ID}
+        indexName={process.env.GATSBY_DOCSEARCH_INDEX}
+        apiKey={process.env.GATSBY_DOCSEARCH_API_KEY}
+        disableUserPersonalization
+        searchParameters={{
+          facetFilters: [
+            `version:${getCurrentVersion()}`,
+          ],
+          hitsPerPage: 5,
+        }}
+        // Overrides the behaviour of pressing "enter" on a search result
+        navigator={{
+          navigate: ({ itemUrl }) => navigate(makeUrlRelative(itemUrl)),
+        }}
+        // Overrides the link container for search results so we can use gatsby navigation instead of full page loads
+        hitComponent={({ hit, children }) => {
+          const relativeUrl = makeUrlRelative(hit.url);
+          // We can't use a gatsby <Link> component here - for some reason it makes the links disappear on hover
+          return <a onClick={(e) => handleClick(e, relativeUrl)} href={relativeUrl}>{children}</a>
+        }}
+      />
+    );
 };
 
 export default SearchBox;

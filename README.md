@@ -29,6 +29,7 @@ When **creating a new major branch for a pre-release major version**
 - Add the new major to `sources-docs.js` and `sources-user.js`
 - Add the new major to the version select in `src/components/Header.tsx`
 - Add the major to the `PRE_RELEASE` array in the `getVersionMessage` function in `src/utils/nodes.ts`
+- Add the new major version to the [algolia crawler script](https://crawler.algolia.com/admin/crawlers/3d14ccdd-f9ae-4957-bc0a-5b21b4c29af3/configuration/edit)
 
 For **new stable releases**, you will need to do the following
 
@@ -80,10 +81,13 @@ Then, run the build.
 ```
 yarn build-docs
 yarn serve
+
+# or with docker
+./docker/run build && ./docker/run serve -p 8000
 ```
 
 These commands will give you an exact representation of how the site will run on a production server, with
-statically generated html files and server-side rendering.
+statically generated html files, css purging, and server-side rendering.
 
 ## Toggling between docs and userhelp
 
