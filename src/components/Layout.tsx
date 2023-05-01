@@ -20,18 +20,21 @@ const Layout: StatelessComponent<LayoutProps> = ({ children, pageContext: { slug
   const currentNode = getCurrentNode();
   const versionMessage = getVersionMessage();
 
+  const helmetLinks = [{
+    rel: 'preconnect',
+    href: `https://${process.env.GATSBY_DOCSEARCH_APP_ID}-dsn.algolia.net`,
+    crossOrigin: ''
+  }];
+  if (currentNode && ver !== getDefaultVersion()) {
+    helmetLinks.push({
+      rel: 'canonical',
+      href: getVersionPath(currentNode, getDefaultVersion()),
+    });
+  }
+
   return (
     <>
-    {currentNode && ver !== getDefaultVersion() && (
-      <Helmet
-        link={[
-          {
-            rel: 'canonical',
-            href: getVersionPath(currentNode, getDefaultVersion()),
-          }
-        ]}
-       />
-    )}
+    <Helmet link={helmetLinks} />
     <Header handleSidebarToggle={() => setSidebarOpen(!isToggled)} />
     <div className={`docs-wrapper container ${isToggled ? 'sidebar-visible' : ''}`}>
     <Sidebar onNavigate={handleNavigate} isOpen={isToggled} />

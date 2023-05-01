@@ -10,7 +10,7 @@ interface HeaderProps {
 }
 
 const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): ReactElement => {
-    const { getNodes, getHomePage, getCurrentNode, getCurrentVersion } = useHierarchy();
+    const { getHomePage, getCurrentNode, getCurrentVersion, getVersionPath } = useHierarchy();
     const home = getHomePage();
     const currentNode = getCurrentNode() || home;
     const context = useDocContext();
@@ -23,14 +23,9 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
       const ver = e.target.value;
     
       if (currentNode) {
-        const newPath = currentNode.slug.replace(/^\/en\/[0-9]+\//, `/en/${ver}/`);
-        const otherNode = getNodes().find(n => n.slug === newPath);
-        // This has to be a hard refresh, because the sidebar needs to unmount
-        if (otherNode) {
-          navigate(otherNode.slug);
-        } else {
-          navigate(`/en/${ver}`);
-        }
+        const newPath = getVersionPath(currentNode, ver);
+        // This has to be a hard refresh, because the sidebar and searchbar need to unmount
+        navigate(newPath);
       }
     };
 
@@ -52,12 +47,8 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
             </div>
 
             <div className="docs-top-utilities d-flex justify-content-between justify-content-lg-end align-items-center">
-              <div className="top-search-box d-none d-lg-flex">
-                {process.env.GATSBY_DOCSEARCH_API_KEY && (
-                <form className="search-form">
-                  <SearchBox identifier="header-search" />
-                </form>
-                )}
+              <div className="top-search-box d-lg-flex">
+                {process.env.GATSBY_DOCSEARCH_API_KEY && <SearchBox />}
               </div>
               <ul className="social-list list-inline d-flex flex-grow-1 flex-lg-grow-0 align-items-center justify-content-lg-center justify-content-end justify-content-lg-end">
                 <li className="list-inline-item version-select">

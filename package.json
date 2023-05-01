@@ -10,6 +10,7 @@
     }
   ],
   "dependencies": {
+    "@docsearch/react": "3",
     "@types/react-helmet": "^5.0.14",
     "@types/styled-components": "^4.1.21",
     "autoprefixer": "^9.7.1",

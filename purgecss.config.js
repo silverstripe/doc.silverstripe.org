@@ -39,6 +39,7 @@ const whitelist = [
 
 const whitelistPatterns = [
     /^callout-/,
+    /^DocSearch-/,
 ];
 
 const whitelistPatternsChildren = [
@@ -54,8 +55,7 @@ module.exports = {
     // (syntax highlight, Algolia)
     ignore: [
         'prismjs/',
-        'docsearch.js/',
-        'src/theme/assets/search/algolia.css',
+        '@docsearch/',
     ],
     content: [
       // All the markdown in the git repos

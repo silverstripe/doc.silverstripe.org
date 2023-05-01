@@ -34,49 +34,10 @@
 		top: 0;
 		left: 0;
 	}
-	
 }
-
-
-/* Docs page */
-.search-form {
-    position: relative;
-    width: 100%;
-	.search-input {
-		font-size: 0.875rem;
-		@include border-radius(1.5rem);
-		padding-right: 3rem;
-		padding-left: 1.5rem;
-		&:focus {
-			border-color: $theme-divider;
-		}
-	}
-	.search-btn {
-		color: lighten($theme-text-color-secondary, 15%);
-		background: none;
-		border: none;
-		position: absolute;
-		right: 0;
-		top: 0.15rem;
-		margin-right: 0;
-		
-		
-		&:active, &:focus, &:hover {
-			outline: none !important;
-			color: $theme-color-primary;
-			@include box-shadow(none);
-			
-		}
-		
-	}
-}
-
 
 .docs-branding {
-	min-height: 69px;
-	.top-search-box {
-		width: 300px;
-	}
+	height: $header-height;
 }
 
 .docs-logo-wrapper {

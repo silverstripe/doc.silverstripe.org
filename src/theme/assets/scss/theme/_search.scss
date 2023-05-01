@@ -1,0 +1,17 @@
+// We have to use !important here to ensure we are able to override algolia's styling
+.DocSearch-Modal {
+    margin-top: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    top: $header-height !important;
+}
+
+.DocSearch-Button-Keys {
+    display: none !important;
+}
+
+.DocSearch-Button-Placeholder {
+    @media (min-width: 475px) {
+        display: flex !important;
+    }
+}
