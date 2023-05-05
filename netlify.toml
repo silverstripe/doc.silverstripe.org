@@ -2,20 +2,26 @@
   from = "https://doc.silverstripe.org/*"
   to = "https://docs.silverstripe.org/:splat"
   force = true
-  status = 301
+  status = 302
 
 [[redirects]]
   from = "/"
-  to = "/en/4/"
+  to = "/en/5/"
+  status = 302
+
+[[redirects]]
+  from = "/en"
+  to = "/en/5/"
+  status = 302
 
 [[redirects]]
   from = "/framework/en/*"
-  to = "/en/4/:splat"
-  status = 301
-  
+  to = "/en/5/:splat"
+  status = 302
+
 [[redirects]]
   from = "/contributing"
-  to = "/en/4/contributing/"
+  to = "/en/5/contributing/"
 
 [[redirects]]
   from = "/en/4/getting_started/installation/common_problems"

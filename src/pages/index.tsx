@@ -3,7 +3,7 @@ import { navigate } from '@reach/router'
 
 const IndexPage = () => {
     useEffect(() => {
-        navigate('/en/4/');
+        navigate('/en/5/');
     }, []);
 
     return <div />;
