@@ -143,7 +143,7 @@ const getHomePage = (): SilverstripeDocument | null => {
 /**
  * Get the default version
  */
-const getDefaultVersion = (): string => '4';
+const getDefaultVersion = (): string => '5';
 
 /**
  * Get the selected version
@@ -158,7 +158,7 @@ const getVersionMessage = (): ReactElement | ReactElement[] | string | null => {
     '3',
   ];
   const PRE_RELEASE = [
-    '5',
+    '6',
   ];
   const version = getCurrentVersion();
   const stablePath = getVersionPath(getCurrentNode(), getDefaultVersion());

@@ -36,6 +36,7 @@ For **new stable releases**, you will need to do the following
 - Remove the major from the `PRE_RELEASE` array in the `getVersionMessage` function in `src/utils/nodes.ts`
 - Update the `getDefaultVersion` function's return value to the new stable major in `src/utils/nodes.ts`
 - Update redirects in `netlify.toml`
+- Update `index.tsx` to navigate to the new stable major
 
 When a **major goes EOL**, add the major to the `EOL` array in the `getVersionMessage` function in `src/utils/nodes.ts`
 
