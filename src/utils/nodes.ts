@@ -157,6 +157,9 @@ const getVersionMessage = (): ReactElement | ReactElement[] | string | null => {
   const EOL = [
     '3',
   ];
+  const PREVIOUS_RELEASE = [
+    '4',
+  ];
   const PRE_RELEASE = [
     '6',
   ];
@@ -191,6 +194,10 @@ const getVersionMessage = (): ReactElement | ReactElement[] | string | null => {
       'has not yet been given a stable release. See <a target="_blank" href="https://www.silverstripe.org/software/roadmap/">the release roadmap</a> for more information'
     ));
   }
+  if (PREVIOUS_RELEASE.includes(version)) {
+    return parse(makeMessage('info', 'check-circle', 'supported', 'is still supported though will not receive any additional features'));
+  }
+  // CURRENT_RELEASE
   return parse(makeMessage('success', 'check-circle', 'supported', null));
 };
 
