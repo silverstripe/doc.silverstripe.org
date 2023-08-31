@@ -4,7 +4,7 @@ module.exports = [
     options: {
       name: 'docs--5',
       remote: 'https://github.com/silverstripe/developer-docs.git',
-      branch: '5.0',
+      branch: '5.1',
       patterns: 'en/**'
     }
   },
