@@ -1,7 +1,7 @@
 import React, { StatelessComponent, ReactElement } from 'react';
 import SearchBox from './SearchBox';
 import { Link, navigate } from 'gatsby';
-import logo from '../images/silverstripe-logo.svg';
+import logo from '../images/silverstripe-cms-logo.svg';
 import useDocContext from '../hooks/useDocContext';
 import useHierarchy from '../hooks/useHierarchy';
 
