@@ -9,6 +9,7 @@ import { ReactElement } from 'react';
 import rewriteTable from './rewriteTable';
 import rewriteHeader from './rewriteHeader';
 import cleanHeaders from './cleanHeaders';
+import parseCalloutTags from './parseCalloutTags';
 
 /**
  * Replace all the [CHILDREN] with proper React components.
@@ -38,9 +39,12 @@ const parseHTML = (html: string): ReactElement | ReactElement[] | string => {
                     return rewriteHeader(domNode);
                 }
             }
-            if (domNode.data) {
+            if (domNode.data && domNode.parent?.name !== 'code') {
                 const { data } = domNode;
-                return parseChildrenOf(data);
+                if (data.match(/\[CHILDREN.*?\]/)) {
+                    return parseChildrenOf(data);
+                }
+                return parseCalloutTags(data);
             }
 
             return false;

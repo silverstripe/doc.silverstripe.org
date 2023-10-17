@@ -52,6 +52,11 @@ export interface HierarchyQuery {
     }
 };
 
+export interface CalloutBlockProps {
+    type: string;
+    content: any;
+}
+
 export interface ChildrenOfProps {
     folderName?: string;
     exclude?: string;
