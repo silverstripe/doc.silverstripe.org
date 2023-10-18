@@ -1,4 +1,4 @@
-import parse, { DomElement } from 'html-react-parser';
+import parse, { DomElement, domToReact } from 'html-react-parser';
 import cleanChildrenTags from './cleanChildrenTags';
 import cleanWhitespace from './cleanWhitespace';
 import cleanApiTags from './cleanApiTags';
@@ -12,7 +12,7 @@ import cleanHeaders from './cleanHeaders';
 import parseCalloutTags from './parseCalloutTags';
 
 /**
- * Replace all the [CHILDREN] with proper React components.
+ * Replace all the [CHILDREN] and callout tags with proper React components.
  * @param html 
  * @return ReactElement | ReactElement[] | string
  */
@@ -38,13 +38,15 @@ const parseHTML = (html: string): ReactElement | ReactElement[] | string => {
                 if (name.match(/^h[0-9]$/)) {
                     return rewriteHeader(domNode);
                 }
+                if (name === 'callout') {
+                    return parseCalloutTags(domNode.attribs.type, domToReact(domNode.children));
+                }
             }
             if (domNode.data && domNode.parent?.name !== 'code') {
                 const { data } = domNode;
                 if (data.match(/\[CHILDREN.*?\]/)) {
                     return parseChildrenOf(data);
                 }
-                return parseCalloutTags(data);
             }
 
             return false;
