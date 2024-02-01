@@ -284,7 +284,8 @@
 		font-size: 1rem;
 	}
 
-	.content p:last-of-type {
+	// Don't add unnecessary space at the end of a callout block
+	.content > :last-child {
 		margin-bottom: 0;
 	}
 	
