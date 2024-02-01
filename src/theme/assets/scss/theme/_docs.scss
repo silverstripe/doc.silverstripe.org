@@ -283,6 +283,10 @@
 	.callout-title {
 		font-size: 1rem;
 	}
+
+	.content p:last-of-type {
+		margin-bottom: 0;
+	}
 	
 	&.callout-block-info {
 		border-color: $theme-info-color;

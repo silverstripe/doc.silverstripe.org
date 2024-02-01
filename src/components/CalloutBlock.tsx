@@ -4,16 +4,17 @@ import { CalloutBlockProps } from '../types';
 
 const getCalloutClass = (type: string): string => {
     switch (type) {
-        case 'hint':
+        case 'TIP':
             return 'success';
-        case 'notice':
+        case 'IMPORTANT':
+        case 'WARNING':
             return 'warning';
-        case 'alert':
+        case 'CAUTION':
             return 'danger';
-        case 'note':
+        case 'NOTE':
             return 'info'
         default:
-            return type;
+            return 'info';
     }
 };
 
@@ -23,7 +24,6 @@ const CalloutBlock: StatelessComponent<CalloutBlockProps> = ({ type, content }) 
             <div className="content">{content}</div>
         </div>
     );
-
 };
 
 export default CalloutBlock;

@@ -4,7 +4,6 @@ import cleanWhitespace from './cleanWhitespace';
 import cleanApiTags from './cleanApiTags';
 import rewriteLink from './rewriteLink';
 import parseChildrenOf from './parseChildrenOf';
-import cleanCalloutTags from './cleanCalloutTags';
 import { ReactElement } from 'react';
 import rewriteTable from './rewriteTable';
 import rewriteHeader from './rewriteHeader';
@@ -19,7 +18,6 @@ import parseCalloutTags from './parseCalloutTags';
 const parseHTML = (html: string): ReactElement | ReactElement[] | string => {
     let cleanHTML = html;
     cleanHTML = cleanChildrenTags(cleanHTML);
-    cleanHTML = cleanCalloutTags(cleanHTML);
     cleanHTML = cleanWhitespace(cleanHTML);
     cleanHTML = cleanApiTags(cleanHTML);
     cleanHTML = cleanHeaders(cleanHTML);
@@ -38,8 +36,27 @@ const parseHTML = (html: string): ReactElement | ReactElement[] | string => {
                 if (name.match(/^h[0-9]$/)) {
                     return rewriteHeader(domNode);
                 }
-                if (name === 'callout') {
-                    return parseCalloutTags(domNode.attribs.type, domToReact(domNode.children));
+                if (name === 'blockquote') {
+                    for (const child of children) {
+                        // For some reason blockquotes start with an empty new line with this parser.
+                        if (child.type === 'text' && child.data === "\n") {
+                            continue;
+                        }
+                        // If the first relevant child isn't a paragraph or is empty, it's not a callout block.
+                        if (child.type !== 'tag' || child.name !== 'p' || !child.children?.length || child.children[0].type !== 'text') {
+                            break;
+                        }
+                        // Check if the first text node marks this as a callout block
+                        const firstTextNode = child.children[0];
+                        const calloutTypeRegex = /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\n/;
+                        const matches = firstTextNode.data.match(calloutTypeRegex);
+                        if (!matches) {
+                            break;
+                        }
+                        // Remove the type marker and render the component
+                        firstTextNode.data = firstTextNode.data.replace(calloutTypeRegex, '');
+                        return parseCalloutTags(matches[1], domToReact(children));
+                    }
                 }
             }
             if (domNode.data && domNode.parent?.name !== 'code') {
