@@ -55,7 +55,7 @@ const parseHTML = (html: string): ReactElement | ReactElement[] | string => {
                         }
                         // Remove the type marker and render the component
                         firstTextNode.data = firstTextNode.data.replace(calloutTypeRegex, '');
-                        return parseCalloutTags(matches[1], domToReact(children));
+                        return parseCalloutTags(matches[1], children, parseOptions);
                     }
                 }
             }
