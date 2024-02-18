@@ -96,7 +96,33 @@ const rewriteLink = (
         )
     }
 
-    // absolute links
+    // absolute links to docs (unversioned)
+    if (href.match(/^https?:\/\/docs.silverstripe.org\/en\/[a-zA-Z]/)) {
+        return createElement(
+            Link,
+            {
+                to: path.join('/', 'en', version, href.replace(/^https?:\/\/docs.silverstripe.org\/en/, '')),
+                className: 'gatsby-link'
+            },
+            domToReact(children, parseOptions)
+        );
+    }
+
+    // absolute links to docs (versioned)
+    const hrefMatch = href.match(/^https?:\/\/docs.silverstripe.org\/en\/([0-9]+)/);
+    if (hrefMatch) {
+        const hrefVersion = hrefMatch[1];
+        return createElement(
+            Link,
+            {
+                to: path.join('/', 'en', hrefVersion, href.replace(/^https?:\/\/docs.silverstripe.org\/en\/([0-9]+)/, '')),
+                className: 'gatsby-link'
+            },
+            domToReact(children, parseOptions)
+        );
+    }
+
+    // absolute links to anywhere else
     if (href.match(/^https?/)) {
         return createElement(
             'a',
