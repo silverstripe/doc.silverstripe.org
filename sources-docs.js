@@ -14,7 +14,7 @@ module.exports = [
       name: 'docs--5--optional_features/linkfield',
       remote: 'https://github.com/silverstripe/silverstripe-linkfield.git',
       branch: '4.0',
-      patterns: 'docs/en/**'
+      patterns: 'docs/en/!(userguide)/**'
     }
   },
   {
