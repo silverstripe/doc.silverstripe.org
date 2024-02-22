@@ -12,6 +12,15 @@ module.exports = [
   {
     resolve: `gatsby-source-git`,
     options: {
+      name: `user--5--optional_features/linkfield`,
+      remote: `https://github.com/silverstripe/silverstripe-linkfield`,
+      branch: `4`,
+      patterns: `docs/en/userguide/**`,
+    }
+  },
+  {
+    resolve: `gatsby-source-git`,
+    options: {
       name: `user--5--optional_features/setting_up_advancedworkflow`,
       remote: `https://github.com/symbiote/silverstripe-advancedworkflow`,
       branch: `6`,
