@@ -23,6 +23,14 @@ module.exports = [
       name: 'docs--5--optional_features/userforms',
       remote: 'https://github.com/silverstripe/silverstripe-userforms.git',
       branch: '6.2',
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--5--optional_features/elemental',
+      remote: 'https://github.com/silverstripe/silverstripe-elemental.git',
+      branch: '5.2',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
