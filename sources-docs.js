@@ -37,6 +37,33 @@ module.exports = [
   {
     resolve: 'gatsby-source-git',
     options: {
+      name: 'docs--5--optional_features/mfa',
+      remote: 'https://github.com/silverstripe/silverstripe-mfa.git',
+      branch: '5.2',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--5--optional_features/mfa/authenticators/totp-authenticator',
+      remote: 'https://github.com/silverstripe/silverstripe-totp-authenticator.git',
+      branch: '5.2',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--5--optional_features/mfa/authenticators/webauthn-authenticator',
+      remote: 'https://github.com/silverstripe/silverstripe-webauthn-authenticator.git',
+      branch: '5.2',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
       name: 'docs--4',
       remote: 'https://github.com/silverstripe/developer-docs.git',
       branch: '4.13',
