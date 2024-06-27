@@ -1,9 +1,10 @@
-import React, { StatelessComponent, ReactElement } from 'react';
+import React, { StatelessComponent, ReactElement, useContext } from 'react';
 import SearchBox from './SearchBox';
 import { Link, navigate } from 'gatsby';
 import logo from '../images/silverstripe-cms-logo.svg';
 import useDocContext from '../hooks/useDocContext';
 import useHierarchy from '../hooks/useHierarchy';
+import LayoutContext from '../contexts/LayoutContext';
 
 interface HeaderProps {
   handleSidebarToggle(e: EventTarget): void
@@ -14,6 +15,7 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
     const home = getHomePage();
     const currentNode = getCurrentNode() || home;
     const context = useDocContext();
+    const { currentGitRemote } = useContext(LayoutContext);
 
     const handleNavigate = (e: any): void => {
       if (typeof window === 'undefined') {
@@ -30,6 +32,8 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
     };
 
     const title = context === 'user' ? 'CMS Help' : 'CMS Docs';
+    const gitHref = currentGitRemote && currentGitRemote.hasOwnProperty('href'
+       ? currentGitRemote.href.replace(/\.git$/, '') : '';
 
     return (
     <header role="banner" className="header fixed-top">	    
@@ -59,7 +63,7 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
                   </select>
                   <i className="fas fa-chevron-down"></i>
                 </li>
-                <li className="d-none d-sm-inline list-inline-item"><a title="Go to the Github repository" href="https://github.com/silverstripe/silverstripe-framework"><i className="fab fa-github fa-fw" /></a></li>
+                { gitHref && <li className="d-none d-sm-inline list-inline-item"><a title="Go to the Github repository" href={gitHref}><i className="fab fa-github fa-fw" /></a></li> }
               </ul>
             </div>
             <button onClick={handleSidebarToggle} id="docs-sidebar-toggler" className="docs-sidebar-toggler docs-sidebar-visible mr-2 d-xl-none" type="button">
