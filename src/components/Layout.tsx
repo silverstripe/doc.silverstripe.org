@@ -3,6 +3,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import useHierarchy from '../hooks/useHierarchy';
 import Helmet from 'react-helmet';
+import LayoutContext from '../contexts/LayoutContext';
 
 interface LayoutProps {
   children?: ReactNode
@@ -13,6 +14,7 @@ interface LayoutProps {
 const Layout: StatelessComponent<LayoutProps> = ({ children, pageContext: { slug } }) => {
   const { setCurrentPath, getVersionPath, getCurrentVersion, getCurrentNode, getDefaultVersion, getVersionMessage } = useHierarchy();
   const [isToggled, setSidebarOpen] = useState(false);
+  const [currentGitRemote, setCurrentGitRemote] = useState(null);
   const handleNavigate = () => setSidebarOpen(false);
   
   setCurrentPath(slug);
@@ -32,24 +34,29 @@ const Layout: StatelessComponent<LayoutProps> = ({ children, pageContext: { slug
     });
   }
 
+  const value = {
+    currentGitRemote,
+    setCurrentGitRemote,
+  };
+
   return (
-    <>
-    <Helmet link={helmetLinks} />
-    <Header handleSidebarToggle={() => setSidebarOpen(!isToggled)} />
-    <div className={`docs-wrapper container ${isToggled ? 'sidebar-visible' : ''}`}>
-    <Sidebar onNavigate={handleNavigate} isOpen={isToggled} />
-      <div className="docs-content">
-        <div className="container">
-          <article role="main" className="docs-article">
-            <>
-            {versionMessage}
-            {children}
-            </>
-          </article>
-        </div> 
+    <LayoutContext.Provider value={value}>
+      <Helmet link={helmetLinks} />
+      <Header handleSidebarToggle={() => setSidebarOpen(!isToggled)} />
+      <div className={`docs-wrapper container ${isToggled ? 'sidebar-visible' : ''}`}>
+      <Sidebar onNavigate={handleNavigate} isOpen={isToggled} />
+        <div className="docs-content">
+          <div className="container">
+            <article role="main" className="docs-article">
+              <>
+              {versionMessage}
+              {children}
+              </>
+            </article>
+          </div>
+        </div>
       </div>
-    </div>
-    </>
+    </LayoutContext.Provider>
   );
 };
 export default Layout;
