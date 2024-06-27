@@ -59,7 +59,6 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
                   </select>
                   <i className="fas fa-chevron-down"></i>
                 </li>
-                <li className="d-none d-sm-inline list-inline-item"><a title="Go to the Github repository" href="https://github.com/silverstripe/silverstripe-framework"><i className="fab fa-github fa-fw" /></a></li>
               </ul>
             </div>
             <button onClick={handleSidebarToggle} id="docs-sidebar-toggler" className="docs-sidebar-toggler docs-sidebar-visible mr-2 d-xl-none" type="button">
