@@ -1,7 +1,8 @@
-import React, { StatelessComponent, ReactElement } from 'react';
+import React, { StatelessComponent, ReactElement, useContext } from 'react';
 import { graphql } from 'gatsby';
 import DocsPage from '../components/DocsPage';
 import { SingleFileQuery } from '../types';
+import LayoutContext from '../contexts/LayoutContext';
 
 const Template: StatelessComponent<SingleFileQuery> = (result): ReactElement => {
     const currentNode = result.data.silverstripeDocument;
@@ -9,6 +10,9 @@ const Template: StatelessComponent<SingleFileQuery> = (result): ReactElement => 
     const  { html } = currentNode.watchFile;
     const { relativePath, gitRemote } = currentNode.parent.parent;
     const { ref, href } = gitRemote;
+    const { setCurrentGitRemote } = useContext(LayoutContext);
+
+    setCurrentGitRemote(gitRemote);
     
     return (
         <DocsPage
