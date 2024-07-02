@@ -46,7 +46,7 @@
     "react-helmet": "^5.2.1",
     "react-spring": "^8.0.27",
     "resize-observer-polyfill": "^1.5.1",
-    "sharp": "^0.30.5",
+    "sharp": "^0.32.6",
     "smooth-scroll": "^16.1.0",
     "styled-components": "^4.4.1",
     "unist-util-select": "^3.0.0"
