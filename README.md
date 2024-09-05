@@ -25,8 +25,8 @@ The userhelp documentation is stored in the [silverstripe/silverstripe-userhelp-
 When **creating a new major branch for a pre-release major version**
 
 - Make sure you've added a new major branch to both `silverstripe/developer-docs` and `silverstripe/silverstripe-userhelp-content`
-  - You probably need to add new major branches for various modules as defined in `sources-user.js` as well
 - Add the new major to `sources-docs.js` and `sources-user.js`
+- Add new major branches for various modules as defined in `sources-docs.js` and `sources-user.js` as well
 - Add the new major to the version select in `src/components/Header.tsx`
 - Add the major to the `PRE_RELEASE` array in the `getVersionMessage` function in `src/utils/nodes.ts`
 - Add the new major version to the [algolia crawler script](https://crawler.algolia.com/admin/crawlers/3d14ccdd-f9ae-4957-bc0a-5b21b4c29af3/configuration/edit)
