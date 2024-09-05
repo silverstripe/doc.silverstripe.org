@@ -57,6 +57,7 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
               <ul className="social-list list-inline d-flex flex-grow-1 flex-lg-grow-0 align-items-center justify-content-lg-center justify-content-end justify-content-lg-end">
                 <li className="list-inline-item version-select">
                   <select id="version-select" value={getCurrentVersion()} onChange={handleNavigate}>
+                      <option value='6'>V6</option>
                       <option value='5'>V5</option>
                       <option value='4'>V4</option>
                       <option value='3'>V3</option>
