@@ -46,6 +46,15 @@ module.exports = [
     }
   },
   {
+    resolve: `gatsby-source-git`,
+    options: {
+      name: `docs--6--optional_features/graphql`,
+      remote: `https://github.com/silverstripe/silverstripe-graphql.git`,
+      branch: `6`,
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
     resolve: 'gatsby-source-git',
     options: {
       name: 'docs--6--optional_features/mfa/authenticators/totp-authenticator',
