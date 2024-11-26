@@ -66,15 +66,6 @@ module.exports = [
   {
     resolve: 'gatsby-source-git',
     options: {
-      name: 'docs--6--optional_features/mfa/authenticators/webauthn-authenticator',
-      remote: 'https://github.com/silverstripe/silverstripe-webauthn-authenticator.git',
-      branch: '6',
-      patterns: 'docs/en/!(userguide)/**'
-    }
-  },
-  {
-    resolve: 'gatsby-source-git',
-    options: {
       name: 'docs--6--optional_features/taxonomies',
       remote: 'https://github.com/silverstripe/silverstripe-taxonomy.git',
       branch: '4',

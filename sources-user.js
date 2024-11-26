@@ -30,33 +30,6 @@ module.exports = [
   {
     resolve: `gatsby-source-git`,
     options: {
-      name: `user--6--optional_features/online_databases_and_registries`,
-      remote: `https://github.com/silverstripe/silverstripe-registry`,
-      branch: `4`,
-      patterns: `docs/en/userguide/**`
-    }
-  },
-  {
-    resolve: `gatsby-source-git`,
-    options: {
-      name: `user--6--optional_features/content_review`,
-      remote: `https://github.com/silverstripe/silverstripe-contentreview`,
-      branch: `6`,
-      patterns: `docs/en/userguide/**`
-    }
-  },
-  {
-    resolve: `gatsby-source-git`,
-    options: {
-      name: `user--6--optional_features/blogs`,
-      remote: `https://github.com/silverstripe/silverstripe-blog`,
-      branch: `5`,
-      patterns: `docs/en/userguide/**`
-    }
-  },
-  {
-    resolve: `gatsby-source-git`,
-    options: {
       name: `user--6--optional_features/forms`,
       remote: `https://github.com/silverstripe/silverstripe-userforms`,
       branch: `7`,
@@ -66,35 +39,8 @@ module.exports = [
   {
     resolve: `gatsby-source-git`,
     options: {
-      name: `user--6--optional_features/working_with_multiple_websites`,
-      remote: `https://github.com/silverstripe/silverstripe-subsites`,
-      branch: `4`,
-      patterns: `docs/en/userguide/**`
-    }
-  },
-  {
-    resolve: `gatsby-source-git`,
-    options: {
       name: `user--6--optional_features/taxonomies`,
       remote: `https://github.com/silverstripe/silverstripe-taxonomy`,
-      branch: `4`,
-      patterns: `docs/en/userguide/**`
-    }
-  },
-  {
-    resolve: `gatsby-source-git`,
-    options: {
-      name: `user--6--optional_features/iframe`,
-      remote: `https://github.com/silverstripe/silverstripe-iframe`,
-      branch: `4`,
-      patterns: `docs/en/userguide/**`
-    }
-  },
-  {
-    resolve: `gatsby-source-git`,
-    options: {
-      name: `user--6--optional_features/site_wide_rss_feeds`,
-      remote: `https://github.com/silverstripe/silverstripe-versionfeed`,
       branch: `4`,
       patterns: `docs/en/userguide/**`
     }
@@ -111,26 +57,8 @@ module.exports = [
   {
     resolve: `gatsby-source-git`,
     options: {
-      name: `user--6--optional_features/modules_report`,
-      remote: `https://github.com/bringyourownideas/silverstripe-maintenance`,
-      branch: `4`,
-      patterns: `docs/en/userguide/**`
-    }
-  },
-  {
-    resolve: `gatsby-source-git`,
-    options: {
       name: `user--6--optional_features/share_draft_content`,
       remote: `https://github.com/silverstripe/silverstripe-sharedraftcontent`,
-      branch: `4`,
-      patterns: `docs/en/userguide/**`
-    }
-  },
-  {
-    resolve: `gatsby-source-git`,
-    options: {
-      name: `user--6--optional_features/document_converter`,
-      remote: `https://github.com/silverstripe/silverstripe-documentconverter`,
       branch: `4`,
       patterns: `docs/en/userguide/**`
     }
@@ -147,31 +75,12 @@ module.exports = [
   {
     resolve: `gatsby-source-git`,
     options: {
-      name: `user--6--managing_your_website/reports/security_report`,
-      remote: `https://github.com/silverstripe/silverstripe-securityreport`,
-      branch: `4`,
-      patterns: `docs/en/userguide/**`,
-    }
-  },
-  {
-    resolve: `gatsby-source-git`,
-    options: {
-      name: `user--6--managing_your_website/reports/sitewide_content_report`,
-      remote: `https://github.com/silverstripe/silverstripe-sitewidecontent-report`,
-      branch: `5`,
-      patterns: `docs/en/userguide/**`,
-    }
-  },
-  {
-    resolve: `gatsby-source-git`,
-    options: {
       name: `user--6--optional_features/managing_devices`,
       remote: `https://github.com/silverstripe/silverstripe-session-manager`,
       branch: `3`,
       patterns: `docs/en/userguide/**`
     }
   },
-
   // v5
   {
     resolve: `gatsby-source-git`,
