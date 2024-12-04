@@ -12,7 +12,7 @@ const rewriteAPILink = (link: string): string => {
         return link;
     }
 
-    return `https://api.silverstripe.org/search/lookup?q=${match[1]}&version=${version}`;
+    return `https://api.silverstripe.org/search.html?q=${match[1]}&version=${version}`;
 };
 
 export default rewriteAPILink;
