@@ -5,7 +5,7 @@ module.exports = [
     options: {
       name: 'docs--6',
       remote: 'https://github.com/silverstripe/developer-docs.git',
-      branch: '6',
+      branch: '6.0',
       patterns: 'en/**'
     }
   },
@@ -14,7 +14,7 @@ module.exports = [
     options: {
       name: 'docs--6--optional_features/linkfield',
       remote: 'https://github.com/silverstripe/silverstripe-linkfield.git',
-      branch: '5',
+      branch: '5.0',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -23,7 +23,7 @@ module.exports = [
     options: {
       name: 'docs--6--optional_features/userforms',
       remote: 'https://github.com/silverstripe/silverstripe-userforms.git',
-      branch: '7',
+      branch: '7.0',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -32,7 +32,7 @@ module.exports = [
     options: {
       name: 'docs--6--optional_features/elemental',
       remote: 'https://github.com/silverstripe/silverstripe-elemental.git',
-      branch: '6',
+      branch: '6.0',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -41,7 +41,7 @@ module.exports = [
     options: {
       name: 'docs--6--optional_features/mfa',
       remote: 'https://github.com/silverstripe/silverstripe-mfa.git',
-      branch: '6',
+      branch: '6.0',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -50,7 +50,7 @@ module.exports = [
     options: {
       name: `docs--6--optional_features/graphql`,
       remote: `https://github.com/silverstripe/silverstripe-graphql.git`,
-      branch: `6`,
+      branch: `6.0`,
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -59,7 +59,7 @@ module.exports = [
     options: {
       name: 'docs--6--optional_features/mfa/authenticators/totp-authenticator',
       remote: 'https://github.com/silverstripe/silverstripe-totp-authenticator.git',
-      branch: '6',
+      branch: '6.0',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -68,7 +68,7 @@ module.exports = [
     options: {
       name: 'docs--6--optional_features/taxonomies',
       remote: 'https://github.com/silverstripe/silverstripe-taxonomy.git',
-      branch: '4',
+      branch: '4.0',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
