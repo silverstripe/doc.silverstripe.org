@@ -5,12 +5,7 @@ require('./src/theme/assets/fontawesome/css/all.css');
 const React = require('react');
 const Layout = require('./src/components/Layout').default;
 const NodeProvider = require('./src/components/NodeProvider').default;
-const smoothScroll = require('smooth-scroll');
 
-
-if (typeof window !== "undefined") {
-    smoothScroll('a[href*="#"]')
-  }  
 
 /**
  * Ensures the chrome doesn't rerender every page load, which makes the sidebar reset its scroll.
@@ -47,7 +42,7 @@ const anchorScroll = location => {
     setTimeout(() => {
       const item = document.querySelector(`${location.hash}`).offsetTop;
       const mainNavHeight = document.querySelector(`header`).offsetHeight;
-      window.scrollTo({top: item - mainNavHeight, left: 0, behavior: 'smooth'});
+      window.scrollTo({top: item - mainNavHeight, left: 0, behavior: 'instant'});
     }, 0);
   }
 }
