@@ -1,5 +1,8 @@
 body {
     font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    @media (prefers-reduced-motion: no-preference) {
+        scroll-behavior: smooth;
+    }
 }
 .docs-wrapper {
     &.sidebar-visible {
@@ -267,4 +270,15 @@ code[class*="language-"], pre[class*="language-"] {
 
 .api-link {
     text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    > a[id] {
+		scroll-margin-top: 80px;
+	}
 }
