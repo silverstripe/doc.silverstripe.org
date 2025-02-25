@@ -79,7 +79,7 @@ module.exports = [
     options: {
       name: 'docs--5',
       remote: 'https://github.com/silverstripe/developer-docs.git',
-      branch: '5.3',
+      branch: '5.4',
       patterns: 'en/**'
     }
   },
@@ -88,7 +88,7 @@ module.exports = [
     options: {
       name: 'docs--5--optional_features/linkfield',
       remote: 'https://github.com/silverstripe/silverstripe-linkfield.git',
-      branch: '4.1',
+      branch: '4.2',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -97,7 +97,7 @@ module.exports = [
     options: {
       name: 'docs--5--optional_features/userforms',
       remote: 'https://github.com/silverstripe/silverstripe-userforms.git',
-      branch: '6.3',
+      branch: '6.4',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -106,7 +106,7 @@ module.exports = [
     options: {
       name: 'docs--5--optional_features/elemental',
       remote: 'https://github.com/silverstripe/silverstripe-elemental.git',
-      branch: '5.3',
+      branch: '5.4',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -115,7 +115,7 @@ module.exports = [
     options: {
       name: 'docs--5--optional_features/mfa',
       remote: 'https://github.com/silverstripe/silverstripe-mfa.git',
-      branch: '5.3',
+      branch: '5.4',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -124,7 +124,7 @@ module.exports = [
     options: {
       name: 'docs--5--optional_features/mfa/authenticators/totp-authenticator',
       remote: 'https://github.com/silverstripe/silverstripe-totp-authenticator.git',
-      branch: '5.2',
+      branch: '5.3',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
