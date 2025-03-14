@@ -12,6 +12,15 @@ module.exports = [
   {
     resolve: 'gatsby-source-git',
     options: {
+      name: 'docs--6--optional_features/htmleditor-tinymce',
+      remote: 'https://github.com/silverstripe/silverstripe-htmleditor-tinymce.git',
+      branch: '1.0',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
       name: 'docs--6--optional_features/linkfield',
       remote: 'https://github.com/silverstripe/silverstripe-linkfield.git',
       branch: '5.0',
