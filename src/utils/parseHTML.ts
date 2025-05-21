@@ -5,6 +5,7 @@ import cleanApiTags from './cleanApiTags';
 import rewriteLink from './rewriteLink';
 import parseChildrenOf from './parseChildrenOf';
 import { ReactElement } from 'react';
+import rewritePre from './rewritePre';
 import rewriteTable from './rewriteTable';
 import rewriteHeader from './rewriteHeader';
 import cleanHeaders from './cleanHeaders';
@@ -32,6 +33,9 @@ const parseHTML = (html: string): ReactElement | ReactElement[] | string => {
                 }
                 if (name === 'table') {
                     return rewriteTable(domChildren, parseOptions);
+                }
+                if (name === 'pre') {
+                    return rewritePre(domNode);
                 }
                 if (name.match(/^h[0-9]$/)) {
                     return rewriteHeader(domNode);
