@@ -40,6 +40,8 @@ const whitelist = [
 const whitelistPatterns = [
     /^callout-/,
     /^DocSearch-/,
+    /^btn/,
+    /^copy-button/,
 ];
 
 const whitelistPatternsChildren = [
