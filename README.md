@@ -26,9 +26,9 @@ When **creating a new major branch for a pre-release major version**
 
 - Make sure you've added a new major branch to both `silverstripe/developer-docs` and `silverstripe/silverstripe-userhelp-content`
 - Add the new major to `sources-docs.js` and `sources-user.js`
-- Add new major branches for various modules as defined in `sources-docs.js` and `sources-user.js` as well
+- Add the new major branches for various modules as defined in `sources-docs.js` and `sources-user.js` as well
 - Add the new major to the version select in `src/components/Header.tsx`
-- Add the major to the `PRE_RELEASE` array in the `getVersionMessage` function in `src/utils/nodes.ts`
+- Add the new major to the `PRE_RELEASE` array in the `getVersionMessage` function in `src/utils/nodes.ts`
 - Add the new major version to the [algolia crawler script](https://crawler.algolia.com/admin/crawlers/3d14ccdd-f9ae-4957-bc0a-5b21b4c29af3/configuration/edit)
 
 For **new stable releases**, you will need to do the following
@@ -36,7 +36,8 @@ For **new stable releases**, you will need to do the following
 - Remove the major from the `PRE_RELEASE` array in the `getVersionMessage` function in `src/utils/nodes.ts`
 - Update the `getDefaultVersion` function's return value to the new stable major in `src/utils/nodes.ts`
 - Update redirects in `netlify.toml`
-- Update `index.tsx` to navigate to the new stable major
+- Update `src/pages/index.tsx` to navigate to the new stable major
+- Add the new major to `redirects` in `gatsby-node.js`
 
 When a **major goes EOL**, add the major to the `EOL` array in the `getVersionMessage` function in `src/utils/nodes.ts`
 

@@ -144,11 +144,12 @@ exports.createPages = async ({ actions, graphql, getNodesByType }) => {
 
     console.log(`Creating legacy redirects...`);
     const redirects = new Map();
+    const v6docs = getNodesByType('SilverstripeDocument').filter(n => n.slug.match(/^\/en\/6\//));
     const v5docs = getNodesByType('SilverstripeDocument').filter(n => n.slug.match(/^\/en\/5\//));
     const v4docs = getNodesByType('SilverstripeDocument').filter(n => n.slug.match(/^\/en\/4\//));
     const v3docs = getNodesByType('SilverstripeDocument').filter(n => n.slug.match(/^\/en\/3\//));
     
-    [...v5docs, ...v4docs, ...v3docs].forEach(n => {
+    [...v6docs, ...v5docs, ...v4docs, ...v3docs].forEach(n => {
       const legacy = n.slug.replace(/^\/en\/[0-9]\//, '/en/');
       if (legacy === '/en/') {
         return;
