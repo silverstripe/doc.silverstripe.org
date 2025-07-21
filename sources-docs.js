@@ -155,6 +155,15 @@ module.exports = [
       patterns: 'docs/en/!(userguide)/**'
     }
   },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--5--optional_features/non-blocking-sessions',
+      remote: 'https://github.com/silverstripe/silverstripe-non-blocking-sessions',
+      branch: '1.0',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
 
   // CMS 4
   {
