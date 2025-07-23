@@ -12,6 +12,105 @@ module.exports = [
   {
     resolve: 'gatsby-source-git',
     options: {
+      name: 'docs--6--optional_features/login-forms',
+      remote: 'https://github.com/silverstripe/silverstripe-login-forms.git',
+      branch: '6.0',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--6--optional_features/gridfieldextensions',
+      remote: 'https://github.com/silverstripe/silverstripe-gridfieldextensions.git',
+      branch: '5.0',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--6--optional_features/gridfield-bulk-editing-tools',
+      remote: 'https://github.com/silverstripe/silverstripe-gridfield-bulk-editing-tools.git',
+      branch: '5.0',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--6--optional_features/realme',
+      remote: 'https://github.com/silverstripe/silverstripe-realme.git',
+      branch: '6.0',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--6--optional_features/staticpublishqueue',
+      remote: 'https://github.com/silverstripe/silverstripe-staticpublishqueue.git',
+      branch: '7.0',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--6--optional_features/tagfield',
+      remote: 'https://github.com/silverstripe/silverstripe-tagfield.git',
+      branch: '4.0',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--6--optional_features/textextraction',
+      remote: 'https://github.com/silverstripe/silverstripe-textextraction.git',
+      branch: '5.0',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--6--optional_features/advancedworkflow',
+      remote: 'https://github.com/silverstripe/silverstripe-advancedworkflow.git',
+      branch: '7.0',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--6--optional_features/queuedjobs',
+      remote: 'https://github.com/silverstripe/silverstripe-queuedjobs.git',
+      branch: '6.0',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--6--optional_features/totp-authenticator',
+      remote: 'https://github.com/silverstripe/silverstripe-totp-authenticator.git',
+      branch: '6.0',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--6--optional_features/fluent',
+      remote: 'https://github.com/tractorcow/silverstripe-fluent.git',
+      branch: '8.0',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
       name: 'docs--6--optional_features/htmleditor-tinymce',
       remote: 'https://github.com/silverstripe/silverstripe-htmleditor-tinymce.git',
       branch: '1.0',
@@ -90,6 +189,105 @@ module.exports = [
       remote: 'https://github.com/silverstripe/developer-docs.git',
       branch: '5.4',
       patterns: 'en/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--5--optional_features/login-forms',
+      remote: 'https://github.com/silverstripe/silverstripe-login-forms.git',
+      branch: '5.3',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--5--optional_features/gridfieldextensions',
+      remote: 'https://github.com/silverstripe/silverstripe-gridfieldextensions.git',
+      branch: '4.1',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--5--optional_features/gridfield-bulk-editing-tools',
+      remote: 'https://github.com/silverstripe/silverstripe-gridfield-bulk-editing-tools.git',
+      branch: '4.1',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--5--optional_features/realme',
+      remote: 'https://github.com/silverstripe/silverstripe-realme.git',
+      branch: '5.5',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--5--optional_features/staticpublishqueue',
+      remote: 'https://github.com/silverstripe/silverstripe-staticpublishqueue.git',
+      branch: '6.3',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--5--optional_features/tagfield',
+      remote: 'https://github.com/silverstripe/silverstripe-tagfield.git',
+      branch: '3.4',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--5--optional_features/textextraction',
+      remote: 'https://github.com/silverstripe/silverstripe-textextraction.git',
+      branch: '4.1',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--5--optional_features/advancedworkflow',
+      remote: 'https://github.com/silverstripe/silverstripe-advancedworkflow.git',
+      branch: '6.4',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--5--optional_features/queuedjobs',
+      remote: 'https://github.com/silverstripe/silverstripe-queuedjobs.git',
+      branch: '5.3',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--5--optional_features/totp-authenticator',
+      remote: 'https://github.com/silverstripe/silverstripe-totp-authenticator.git',
+      branch: '5.3',
+      patterns: 'docs/en/!(userguide)/**'
+    }
+  },
+  {
+    resolve: 'gatsby-source-git',
+    options: {
+      name: 'docs--5--optional_features/fluent',
+      remote: 'https://github.com/tractorcow-farm/silverstripe-fluent.git',
+      branch: '7.3',
+      patterns: 'docs/en/!(userguide)/**'
     }
   },
   {
