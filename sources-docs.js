@@ -93,15 +93,6 @@ module.exports = [
   {
     resolve: 'gatsby-source-git',
     options: {
-      name: 'docs--6--optional_features/totp-authenticator',
-      remote: 'https://github.com/silverstripe/silverstripe-totp-authenticator.git',
-      branch: '6.0',
-      patterns: 'docs/en/!(userguide)/**'
-    }
-  },
-  {
-    resolve: 'gatsby-source-git',
-    options: {
       name: 'docs--6--optional_features/fluent',
       remote: 'https://github.com/tractorcow/silverstripe-fluent.git',
       branch: '8.0',
@@ -268,15 +259,6 @@ module.exports = [
     options: {
       name: 'docs--5--optional_features/queuedjobs',
       remote: 'https://github.com/silverstripe/silverstripe-queuedjobs.git',
-      branch: '5.3',
-      patterns: 'docs/en/!(userguide)/**'
-    }
-  },
-  {
-    resolve: 'gatsby-source-git',
-    options: {
-      name: 'docs--5--optional_features/totp-authenticator',
-      remote: 'https://github.com/silverstripe/silverstripe-totp-authenticator.git',
       branch: '5.3',
       patterns: 'docs/en/!(userguide)/**'
     }
