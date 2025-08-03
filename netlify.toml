@@ -39,3 +39,18 @@
   from = "/en/3/getting_started/installation/server_requirements"
   to = "/en/3/getting_started/server_requirements/"
 
+[[redirects]]
+  from = "/en/5/project_governance/major_release_policy/"
+  to = "/en/5/project_governance/release_policy/"
+
+[[redirects]]
+  from = "/en/5/project_governance/minor_release_policy/"
+  to = "/en/5/project_governance/release_policy/"
+  
+[[redirects]]
+  from = "/en/6/project_governance/major_release_policy/"
+  to = "/en/6/project_governance/release_policy/"
+
+[[redirects]]
+  from = "/en/6/project_governance/minor_release_policy/"
+  to = "/en/6/project_governance/release_policy/"
