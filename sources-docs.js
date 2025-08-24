@@ -5,7 +5,7 @@ module.exports = [
     options: {
       name: 'docs--6',
       remote: 'https://github.com/silverstripe/developer-docs.git',
-      branch: '6.0',
+      branch: '6.1',
       patterns: 'en/**'
     }
   },
@@ -14,7 +14,7 @@ module.exports = [
     options: {
       name: 'docs--6--optional_features/login-forms',
       remote: 'https://github.com/silverstripe/silverstripe-login-forms.git',
-      branch: '6.0',
+      branch: '6.1',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -23,7 +23,7 @@ module.exports = [
     options: {
       name: 'docs--6--optional_features/gridfieldextensions',
       remote: 'https://github.com/silverstripe/silverstripe-gridfieldextensions.git',
-      branch: '5.0',
+      branch: '5.1',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -32,7 +32,7 @@ module.exports = [
     options: {
       name: 'docs--6--optional_features/gridfield-bulk-editing-tools',
       remote: 'https://github.com/silverstripe/silverstripe-gridfield-bulk-editing-tools.git',
-      branch: '5.0',
+      branch: '5.1',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -59,7 +59,7 @@ module.exports = [
     options: {
       name: 'docs--6--optional_features/tagfield',
       remote: 'https://github.com/silverstripe/silverstripe-tagfield.git',
-      branch: '4.0',
+      branch: '4.1',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -77,7 +77,7 @@ module.exports = [
     options: {
       name: 'docs--6--optional_features/advancedworkflow',
       remote: 'https://github.com/silverstripe/silverstripe-advancedworkflow.git',
-      branch: '7.0',
+      branch: '7.1',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -86,7 +86,7 @@ module.exports = [
     options: {
       name: 'docs--6--optional_features/queuedjobs',
       remote: 'https://github.com/silverstripe/silverstripe-queuedjobs.git',
-      branch: '6.0',
+      branch: '6.1',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -95,7 +95,7 @@ module.exports = [
     options: {
       name: 'docs--6--optional_features/fluent',
       remote: 'https://github.com/tractorcow/silverstripe-fluent.git',
-      branch: '8.0',
+      branch: '8.1',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -113,7 +113,7 @@ module.exports = [
     options: {
       name: 'docs--6--optional_features/linkfield',
       remote: 'https://github.com/silverstripe/silverstripe-linkfield.git',
-      branch: '5.0',
+      branch: '5.1',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -131,7 +131,7 @@ module.exports = [
     options: {
       name: 'docs--6--optional_features/elemental',
       remote: 'https://github.com/silverstripe/silverstripe-elemental.git',
-      branch: '6.0',
+      branch: '6.1',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -140,7 +140,7 @@ module.exports = [
     options: {
       name: 'docs--6--optional_features/mfa',
       remote: 'https://github.com/silverstripe/silverstripe-mfa.git',
-      branch: '6.0',
+      branch: '6.1',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -149,7 +149,7 @@ module.exports = [
     options: {
       name: `docs--6--optional_features/graphql`,
       remote: `https://github.com/silverstripe/silverstripe-graphql.git`,
-      branch: `6.0`,
+      branch: `6.1`,
       patterns: 'docs/en/!(userguide)/**'
     }
   },
@@ -167,7 +167,7 @@ module.exports = [
     options: {
       name: 'docs--6--optional_features/taxonomies',
       remote: 'https://github.com/silverstripe/silverstripe-taxonomy.git',
-      branch: '4.0',
+      branch: '4.1',
       patterns: 'docs/en/!(userguide)/**'
     }
   },
