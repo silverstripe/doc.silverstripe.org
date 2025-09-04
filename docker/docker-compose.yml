@@ -1,5 +1,3 @@
-version: '3.7'
-
 x-entrypoint: &entry
   - /bin/bash
   - /app/docker/entrypoint.sh
