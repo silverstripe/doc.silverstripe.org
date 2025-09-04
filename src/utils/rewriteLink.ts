@@ -131,6 +131,15 @@ const rewriteLink = (
         );
     }
 
+    // Image links
+    if (href.match(/\.(jpg|jpeg|gif|png|webp|avif|tiff|bmp)$/i)) {
+        return createElement(
+            'a',
+            { href, target: '_blank' },
+            domToReact(children, parseOptions)
+        );
+    }
+
     // Relative to root
     if (href.startsWith('/')) {
         return createElement(
