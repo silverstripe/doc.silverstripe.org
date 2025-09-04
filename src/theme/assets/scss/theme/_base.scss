@@ -13,11 +13,15 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: 'Poppins', sans-serif;
 	color: $theme-text-color-primary;
 	font-weight: 600;
+}
 
+/*! purgecss start ignore */
+h1, h2, h3, h4, h5, h6 {
 	code[class*="language-"] {
-		font-size: 0.8em;
+		font-size: 0.9em;
 	}
 }
+/*! purgecss end ignore */
 
 code {
 	background: $theme-bg-light;
