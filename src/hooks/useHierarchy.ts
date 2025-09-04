@@ -16,6 +16,7 @@ interface NodeFunctions {
     setCurrentPath(slug: string): undefined;
     getDefaultVersion(): string;
     getVersionMessage():  ReactElement | ReactElement[] | string | null;
+    getVersionStatus(version: string): string;
 };
 
 const useHierarchy = (): NodeFunctions => {

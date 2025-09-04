@@ -42,6 +42,7 @@ const whitelistPatterns = [
     /^DocSearch-/,
     /^btn/,
     /^copy-button/,
+    /version-select--[a-z-]+$/,
 ];
 
 const whitelistPatternsChildren = [
