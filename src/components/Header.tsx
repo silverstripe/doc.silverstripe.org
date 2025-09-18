@@ -11,7 +11,7 @@ interface HeaderProps {
 }
 
 const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): ReactElement => {
-    const { getHomePage, getCurrentNode, getCurrentVersion, getVersionPath } = useHierarchy();
+    const { getHomePage, getCurrentNode, getCurrentVersion, getVersionPath, getVersionStatus } = useHierarchy();
     const home = getHomePage();
     const currentNode = getCurrentNode() || home;
     const context = useDocContext();
@@ -34,6 +34,7 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
     const title = context === 'user' ? 'CMS Help' : 'CMS Docs';
     const gitHref = currentGitRemote && currentGitRemote.hasOwnProperty('href')
        ? currentGitRemote.href.replace(/\.git$/, '') : '';
+    const currentVersion = getCurrentVersion();
 
     return (
     <header role="banner" className="header fixed-top">	    
@@ -55,8 +56,8 @@ const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): React
                 {process.env.GATSBY_DOCSEARCH_API_KEY && <SearchBox />}
               </div>
               <ul className="social-list list-inline d-flex flex-grow-1 flex-lg-grow-0 align-items-center justify-content-lg-center justify-content-end justify-content-lg-end">
-                <li className="list-inline-item version-select">
-                  <select id="version-select" value={getCurrentVersion()} onChange={handleNavigate}>
+                <li className={`list-inline-item version-select version-select--${getVersionStatus(currentVersion)}`}>
+                  <select id="version-select" value={currentVersion} onChange={handleNavigate}>
                       <option value='6'>V6</option>
                       <option value='5'>V5</option>
                       <option value='4'>V4</option>

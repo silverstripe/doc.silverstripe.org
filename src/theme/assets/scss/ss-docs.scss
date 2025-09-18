@@ -139,7 +139,6 @@ code {
                appearance: none;
                 border: 0;
                 color: $gray-800;
-                background: $theme-color-primary;
                 border-radius: 100px;
                 color: #fff;
                 padding: 0.45rem 1.25rem 0.45rem 0.75rem;
@@ -155,6 +154,18 @@ code {
                 font-size: 0.6rem;
                 opacity: 0.8;
             }
+        }
+        .version-select--current select {
+            background: $theme-success-color-dark;
+        }
+        .version-select--previous select {
+            background: $theme-info-color-dark;
+        }
+        .version-select--pre-release select {
+            background: $theme-warning-color-dark;
+        }
+        .version-select--eol select {
+            background: $theme-danger-color-dark;
         }
     }
 }

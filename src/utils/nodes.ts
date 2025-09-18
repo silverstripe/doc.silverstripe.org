@@ -14,6 +14,15 @@ const siblingMap = new Map();
 const parentMap = new Map();
 const nodeMap = new Map();
 
+const EOL = [
+  '3',
+  '4',
+];
+const PREVIOUS_RELEASE = [
+  '5',
+];
+const PRE_RELEASE = [];
+
 /**
  * Hydrate these functions with the list of all nodes
  * @param nodes 
@@ -150,18 +159,27 @@ const getDefaultVersion = (): string => '6';
  */
 const getCurrentVersion = (): string => __currentVersion || getDefaultVersion();
 
+const getVersionStatus = (version: string): string => {
+  if (EOL.includes(version)) {
+    return 'eol';
+  }
+
+  if (PRE_RELEASE.includes(version)) {
+    return 'pre-release';
+  }
+
+
+  if (PREVIOUS_RELEASE.includes(version)) {
+    return 'previous';
+  }
+
+  return 'current';
+}
+
 /**
  * Get a message to display for all pages on this version's docs
  */
 const getVersionMessage = (): ReactElement | ReactElement[] | string | null => {
-  const EOL = [
-    '3',
-    '4',
-  ];
-  const PREVIOUS_RELEASE = [
-    '5',
-  ];
-  const PRE_RELEASE = [];
   const version = getCurrentVersion();
   const stablePath = getVersionPath(getCurrentNode(), getDefaultVersion());
 
@@ -241,4 +259,5 @@ export {
   setCurrentPath,
   getDefaultVersion,
   getVersionMessage,
+  getVersionStatus,
 };
