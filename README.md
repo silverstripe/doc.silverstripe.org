@@ -81,7 +81,7 @@ cp .env.development .env.production
 Then, run the build.
 
 ```
-yarn build-docs
+yarn build
 yarn serve
 
 # or with docker
