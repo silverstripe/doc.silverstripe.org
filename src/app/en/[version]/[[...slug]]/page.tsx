@@ -1,0 +1,92 @@
+import { notFound } from 'next/navigation';
+import { getDocumentByParams, getAllDocuments } from '@/lib/content/get-document';
+import { buildSlugFromParams } from '@/lib/routing';
+import type { Metadata } from 'next';
+
+interface PageParams {
+  version: string;
+  slug?: string[];
+}
+
+interface PageProps {
+  params: Promise<PageParams>;
+}
+
+/**
+ * Generate static params for all document routes
+ * This pre-renders all possible paths at build time
+ */
+export async function generateStaticParams(): Promise<PageParams[]> {
+  const allDocs = await getAllDocuments();
+  const params: PageParams[] = [];
+
+  for (const doc of allDocs) {
+    // Extract version and slug from document slug
+    // Document slug format: /en/{version}/{path}/
+    const parts = doc.slug.split('/').filter(Boolean);
+    if (parts.length < 2) continue; // Skip invalid slugs
+
+    const [, version, ...slug] = parts;
+
+    params.push({
+      version,
+      slug: slug.length > 0 ? slug : undefined
+    });
+  }
+
+  return params;
+}
+
+/**
+ * Generate metadata for the page
+ */
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const params = await props.params;
+  const doc = await getDocumentByParams(params.version, params.slug);
+
+  if (!doc) {
+    return {
+      title: 'Not Found'
+    };
+  }
+
+  return {
+    title: doc.title,
+    description: doc.summary || undefined
+  };
+}
+
+/**
+ * Dynamic page renderer
+ */
+export default async function Page(props: PageProps) {
+  const params = await props.params;
+  const doc = await getDocumentByParams(params.version, params.slug);
+
+  if (!doc) {
+    notFound();
+  }
+
+  return (
+    <main className="container mx-auto px-4 py-12">
+      <article>
+        <h1 className="text-4xl font-bold mb-4">{doc.title}</h1>
+        
+        {doc.summary && (
+          <p className="text-xl text-gray-600 mb-6">{doc.summary}</p>
+        )}
+
+        <div className="prose max-w-none">
+          {/* Content would be rendered here - raw markdown or processed HTML */}
+          <div>{doc.content}</div>
+        </div>
+
+        <footer className="mt-12 pt-8 border-t border-gray-200">
+          <p className="text-sm text-gray-500">
+            Version {doc.version} • {doc.category}
+          </p>
+        </footer>
+      </article>
+    </main>
+  );
+}

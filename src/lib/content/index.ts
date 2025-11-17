@@ -16,3 +16,12 @@ export { buildContentTree } from './build-tree';
 
 // Document Sorting
 export { sortDocuments } from './sort-files';
+
+// Document Fetching
+export {
+  getAllDocuments,
+  getDocumentBySlug,
+  getDocumentByParams,
+  getChildDocuments,
+  clearDocumentCache
+} from './get-document';
