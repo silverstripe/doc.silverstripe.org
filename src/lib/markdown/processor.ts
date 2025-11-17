@@ -8,15 +8,18 @@ import rehypeStringify from 'rehype-stringify';
 import { visit } from 'unist-util-visit';
 import type { Root } from 'hast';
 import { highlightCodeBlocks } from './syntax-highlight';
+import { remarkImages } from './remark-images';
 
 /**
  * Convert markdown content to HTML using remark/rehype pipeline
  * Supports GitHub Flavored Markdown and raw HTML
+ * Optionally resolves relative image paths
  */
-export async function markdownToHtml(content: string): Promise<string> {
+export async function markdownToHtml(content: string, filePath?: string): Promise<string> {
   const processor = unified()
     .use(remarkParse)
     .use(remarkGfm)
+    .use(remarkImages, { currentFilePath: filePath })
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
     .use(highlightCodeBlocks)
@@ -30,8 +33,8 @@ export async function markdownToHtml(content: string): Promise<string> {
 /**
  * Process markdown for headings with IDs and cleanup
  */
-export async function markdownToHtmlWithCleanup(content: string): Promise<string> {
-  let html = await markdownToHtml(content);
+export async function markdownToHtmlWithCleanup(content: string, filePath?: string): Promise<string> {
+  let html = await markdownToHtml(content, filePath);
   html = cleanHeaders(html);
   html = cleanWhitespace(html);
   return html;

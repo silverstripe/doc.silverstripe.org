@@ -88,8 +88,8 @@ export default async function Page(props: PageProps) {
   const allDocs = await getAllDocuments();
   const navTree = buildNavTree(allDocs, params.version, doc.slug);
 
-  // Convert markdown to HTML
-  let htmlContent = await markdownToHtmlWithCleanup(doc.content);
+  // Convert markdown to HTML with image path resolution
+  let htmlContent = await markdownToHtmlWithCleanup(doc.content, doc.fileAbsolutePath);
 
   // Replace [CHILDREN] markers with rendered children
   htmlContent = replaceChildrenMarkers(htmlContent, doc, allDocs);

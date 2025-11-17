@@ -669,7 +669,7 @@
 
 ### Steps
 
-11.1. **Configure Next.js for Static Images**
+10.1. **Configure Next.js for Static Images**
    - Update `next.config.js`:
      ```javascript
      module.exports = {
@@ -680,7 +680,7 @@
      ```
    - Note: Static export requires unoptimized images
 
-11.2. **Create Image Path Resolver**
+10.2. **Create Image Path Resolver**
    - Create `src/lib/markdown/resolve-image-paths.ts`:
      - `resolveImagePath(imagePath: string, currentFilePath: string): string`
      - Resolves relative image paths in markdown
@@ -688,13 +688,13 @@
      - Returns absolute path or public URL
    - Write unit tests with various path scenarios
 
-11.3. **Update Markdown Processor for Images**
+10.3. **Update Markdown Processor for Images**
    - Modify remark/rehype pipeline to process images
    - Convert relative paths to absolute paths
    - Add `src/lib/markdown/remark-images.ts` plugin
    - Ensure images in `_images/` directories resolve correctly
 
-11.4. **Test with Mock Images**
+10.4. **Test with Mock Images**
    - Add sample images to `tests/fixtures/mock-content/v6/_images/`
    - Add markdown with image references to mock files
    - Test various image path formats:
@@ -702,7 +702,7 @@
      - `![Alt text](_images/diagram.jpg)`
      - `![Alt text](./images/photo.png)`
 
-11.5. **Validation**
+10.5. **Validation**
    - [ ] Images in mock content display correctly
    - [ ] Relative paths resolve properly
    - [ ] No broken image links in `npm run mock`
@@ -716,7 +716,7 @@
 
 ### Steps
 
-10.1. **Create Git Clone Script**
+11.1. **Create Git Clone Script**
    - Create `scripts/clone-docs.mjs`:
      - Reads `DOCS_CONTEXT` from environment (defaults to `docs`)
      - Reads `_gatsby/sources-docs.cjs` or `_gatsby/sources-user.cjs`
@@ -725,24 +725,24 @@
      - Handles optional features paths
      - Uses git command line or simple-git library
 
-10.2. **Verify Content Loader**
+11.2. **Verify Content Loader**
    - Ensure `buildContentTree()` checks `NEXT_USE_MOCK_DATA` env var
    - If false (default), loads from `.cache/content/`
    - If true, loads from `tests/fixtures/mock-content/`
 
-10.3. **Test Clone Script**
+11.3. **Test Clone Script**
    - Run `npm run clone` (defaults to docs context)
    - Verify `.cache/content/` directory created
    - Verify markdown files cloned correctly
    - Test `npm run clone:docs` and `npm run clone:user`
 
-10.4. **Test with Real Content**
+11.4. **Test with Real Content**
    - Run `npm run dev` (uses cloned content)
    - Verify pages load correctly
    - Check navigation structure
    - Verify URLs match expectations
 
-10.5. **Validation**
+11.5. **Validation**
    - [ ] `npm run clone` successfully downloads content
    - [ ] `npm run clone:docs` clones docs context
    - [ ] `npm run clone:user` clones user context

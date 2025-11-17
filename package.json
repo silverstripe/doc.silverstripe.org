@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
-    "mock": "NEXT_USE_MOCK_DATA=true next dev",
-    "build": "npm run clone && next build",
+    "mock": "NEXT_USE_MOCK_DATA=true npm run copy-images:mock && NEXT_USE_MOCK_DATA=true next dev",
+    "build": "npm run clone && next build && npm run copy-images",
     "clone": "node scripts/clone-docs.mjs",
     "clone:docs": "DOCS_CONTEXT=docs node scripts/clone-docs.mjs",
     "clone:user": "DOCS_CONTEXT=user node scripts/clone-docs.mjs",
+    "copy-images": "node scripts/copy-images.mjs",
+    "copy-images:mock": "NEXT_USE_MOCK_DATA=true node scripts/copy-images.mjs",
     "test": "jest",
     "test:watch": "jest --watch"
   },

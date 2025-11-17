@@ -7,6 +7,8 @@ summary: "Database data types in Silverstripe"
 
 Silverstripe supports various data types for database columns.
 
+![Data type model](./_datatype-model.svg)
+
 ## Available Types
 
 - Text, Varchar
