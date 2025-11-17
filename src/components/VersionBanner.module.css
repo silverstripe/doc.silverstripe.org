@@ -1,0 +1,113 @@
+.banner {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  border-left: 4px solid;
+}
+
+.content {
+  max-width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.icon {
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+}
+
+.titleSection {
+  flex: 1;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status {
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.messageSection {
+  margin-top: 0.75rem;
+}
+
+.message {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.link {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 150ms ease-in-out;
+}
+
+.link:hover {
+  opacity: 0.8;
+}
+
+.link:focus {
+  outline: 2px solid;
+  outline-offset: 2px;
+}
+
+.style-success {
+  background-color: #f0fdf4;
+  border-color: #22c55e;
+  color: #166534;
+}
+
+.style-success .link {
+  color: #16a34a;
+}
+
+.style-info {
+  background-color: #eff6ff;
+  border-color: #3b82f6;
+  color: #1e40af;
+}
+
+.style-info .link {
+  color: #1d4ed8;
+}
+
+.style-warning {
+  background-color: #fffbeb;
+  border-color: #f59e0b;
+  color: #92400e;
+}
+
+.style-warning .link {
+  color: #b45309;
+}
+
+.style-danger {
+  background-color: #fef2f2;
+  border-color: #ef4444;
+  color: #7f1d1d;
+}
+
+.style-danger .link {
+  color: #991b1b;
+}
+

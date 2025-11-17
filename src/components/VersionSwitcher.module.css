@@ -1,0 +1,51 @@
+.versionSwitcher {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: var(--color-gray-50, #f9fafb);
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+}
+
+.label {
+  font-weight: 500;
+  color: var(--color-gray-700, #374151);
+  white-space: nowrap;
+}
+
+.select {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid var(--color-gray-300, #d1d5db);
+  border-radius: 0.375rem;
+  background-color: white;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
+}
+
+.select:hover {
+  border-color: var(--color-gray-400, #9ca3af);
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--color-blue-500, #3b82f6);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.select.status-current {
+  border-color: var(--color-green-300, #86efac);
+  background-color: var(--color-green-50, #f0fdf4);
+}
+
+.select.status-supported {
+  border-color: var(--color-blue-300, #93c5fd);
+  background-color: var(--color-blue-50, #eff6ff);
+}
+
+.select.status-eol {
+  border-color: var(--color-red-300, #fca5a5);
+  background-color: var(--color-red-50, #fef2f2);
+}
+

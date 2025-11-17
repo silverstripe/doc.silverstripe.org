@@ -70,6 +70,8 @@ describe('Routing Utilities', () => {
   describe('getAvailableVersions', () => {
     it('should return available versions', () => {
       const versions = getAvailableVersions();
+      expect(versions).toContain('3');
+      expect(versions).toContain('4');
       expect(versions).toContain('5');
       expect(versions).toContain('6');
     });

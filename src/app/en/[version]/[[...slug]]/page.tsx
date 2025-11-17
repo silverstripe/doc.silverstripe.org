@@ -43,6 +43,7 @@ export async function generateStaticParams(): Promise<PageParams[]> {
  * Generate metadata for the page
  */
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { getDefaultVersion, getVersionPath } = await import('@/lib/versions');
   const params = await props.params;
   const doc = await getDocumentByParams(params.version, params.slug);
 
@@ -52,10 +53,21 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
     };
   }
 
-  return {
+  const metadata: Metadata = {
     title: doc.title,
     description: doc.summary || undefined
   };
+
+  // Add canonical URL for non-current versions
+  const defaultVersion = getDefaultVersion();
+  if (params.version !== defaultVersion) {
+    const latestPath = getVersionPath(doc.slug, defaultVersion);
+    metadata.alternates = {
+      canonical: latestPath
+    };
+  }
+
+  return metadata;
 }
 
 /**

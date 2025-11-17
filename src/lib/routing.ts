@@ -44,5 +44,5 @@ export function extractVersionAndSlug(fullSlug: string): { version: string; slug
  * This would be used by generateStaticParams
  */
 export function getAvailableVersions(): string[] {
-  return ['5', '6']; // Based on mock content structure
+  return ['3', '4', '5', '6'];
 }

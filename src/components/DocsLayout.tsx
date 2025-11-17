@@ -1,5 +1,8 @@
 import { Sidebar } from './Sidebar';
+import { VersionSwitcher } from './VersionSwitcher';
+import { VersionBanner } from './VersionBanner';
 import { NavNode } from '@/types';
+import { getDefaultVersion, getVersionPath } from '@/lib/versions';
 
 interface DocsLayoutProps {
   children: React.ReactNode;
@@ -18,9 +21,22 @@ export function DocsLayout({
   currentSlug,
   version,
 }: DocsLayoutProps) {
+  const isCurrentVersion = version === getDefaultVersion();
+  const latestVersionPath = getVersionPath(currentSlug, getDefaultVersion());
+
   return (
     <div style={{ minHeight: '100vh', padding: '2rem 0' }}>
       <div className="container-fluid">
+        {/* Version Banner */}
+        <div className="row mb-4">
+          <div className="col-12">
+            <VersionBanner
+              version={version}
+              latestVersionPath={latestVersionPath}
+            />
+          </div>
+        </div>
+
         <div className="row">
           {/* Sidebar - hidden on mobile by default */}
           <div 
@@ -35,6 +51,12 @@ export function DocsLayout({
               paddingRight: '2rem',
             }}
           >
+            <div className="mb-4">
+              <VersionSwitcher
+                currentVersion={version}
+                currentSlug={currentSlug}
+              />
+            </div>
             <Sidebar navTree={navTree} currentSlug={currentSlug} version={version} />
           </div>
 

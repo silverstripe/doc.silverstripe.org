@@ -663,51 +663,7 @@
 
 ---
 
-## PHASE 10: Git Content Cloning
-
-**Goal:** Replace mock data with real content cloned from git repositories.
-
-### Steps
-
-10.1. **Create Git Clone Script**
-   - Create `scripts/clone-docs.mjs`:
-     - Reads `DOCS_CONTEXT` from environment (defaults to `docs`)
-     - Reads `_gatsby/sources-docs.cjs` or `_gatsby/sources-user.cjs`
-     - Clones each repository to `.cache/content/`
-     - Checks out correct branch
-     - Handles optional features paths
-     - Uses git command line or simple-git library
-
-10.2. **Verify Content Loader**
-   - Ensure `buildContentTree()` checks `NEXT_USE_MOCK_DATA` env var
-   - If false (default), loads from `.cache/content/`
-   - If true, loads from `tests/fixtures/mock-content/`
-
-10.3. **Test Clone Script**
-   - Run `npm run clone` (defaults to docs context)
-   - Verify `.cache/content/` directory created
-   - Verify markdown files cloned correctly
-   - Test `npm run clone:docs` and `npm run clone:user`
-
-10.4. **Test with Real Content**
-   - Run `npm run dev` (uses cloned content)
-   - Verify pages load correctly
-   - Check navigation structure
-   - Verify URLs match expectations
-
-10.5. **Validation**
-   - [ ] `npm run clone` successfully downloads content
-   - [ ] `npm run clone:docs` clones docs context
-   - [ ] `npm run clone:user` clones user context
-   - [ ] `npm run dev` works with real content
-   - [ ] `npm run mock` still works with mock data
-   - [ ] All URLs correct with real content
-   - [ ] Navigation shows real structure
-   - [ ] Tests still pass (using mock data via `NEXT_USE_MOCK_DATA=true`)
-
----
-
-## PHASE 11: Image Handling
+## PHASE 10: Image Handling
 
 **Goal:** Configure Next.js Image component and ensure markdown images load correctly.
 
@@ -751,6 +707,50 @@
    - [ ] Relative paths resolve properly
    - [ ] No broken image links in `npm run mock`
    - [ ] Image path resolution tests pass
+
+---
+
+## PHASE 11: Git Content Cloning
+
+**Goal:** Replace mock data with real content cloned from git repositories.
+
+### Steps
+
+10.1. **Create Git Clone Script**
+   - Create `scripts/clone-docs.mjs`:
+     - Reads `DOCS_CONTEXT` from environment (defaults to `docs`)
+     - Reads `_gatsby/sources-docs.cjs` or `_gatsby/sources-user.cjs`
+     - Clones each repository to `.cache/content/`
+     - Checks out correct branch
+     - Handles optional features paths
+     - Uses git command line or simple-git library
+
+10.2. **Verify Content Loader**
+   - Ensure `buildContentTree()` checks `NEXT_USE_MOCK_DATA` env var
+   - If false (default), loads from `.cache/content/`
+   - If true, loads from `tests/fixtures/mock-content/`
+
+10.3. **Test Clone Script**
+   - Run `npm run clone` (defaults to docs context)
+   - Verify `.cache/content/` directory created
+   - Verify markdown files cloned correctly
+   - Test `npm run clone:docs` and `npm run clone:user`
+
+10.4. **Test with Real Content**
+   - Run `npm run dev` (uses cloned content)
+   - Verify pages load correctly
+   - Check navigation structure
+   - Verify URLs match expectations
+
+10.5. **Validation**
+   - [ ] `npm run clone` successfully downloads content
+   - [ ] `npm run clone:docs` clones docs context
+   - [ ] `npm run clone:user` clones user context
+   - [ ] `npm run dev` works with real content
+   - [ ] `npm run mock` still works with mock data
+   - [ ] All URLs correct with real content
+   - [ ] Navigation shows real structure
+   - [ ] Tests still pass (using mock data via `NEXT_USE_MOCK_DATA=true`)
 
 ---
 
