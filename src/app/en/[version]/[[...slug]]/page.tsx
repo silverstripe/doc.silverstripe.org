@@ -60,12 +60,17 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
  * Dynamic page renderer
  */
 export default async function Page(props: PageProps) {
+  const { markdownToHtmlWithCleanup } = await import('@/lib/markdown/processor');
+  
   const params = await props.params;
   const doc = await getDocumentByParams(params.version, params.slug);
 
   if (!doc) {
     notFound();
   }
+
+  // Convert markdown to HTML
+  const htmlContent = await markdownToHtmlWithCleanup(doc.content);
 
   return (
     <main className="container mx-auto px-4 py-12">
@@ -77,8 +82,7 @@ export default async function Page(props: PageProps) {
         )}
 
         <div className="prose max-w-none">
-          {/* Content would be rendered here - raw markdown or processed HTML */}
-          <div>{doc.content}</div>
+          <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
         </div>
 
         <footer className="mt-12 pt-8 border-t border-gray-200">
