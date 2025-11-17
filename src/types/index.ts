@@ -46,6 +46,18 @@ export interface ContentTree {
 }
 
 /**
+ * Hierarchical navigation node for rendering sidebars
+ */
+export interface NavNode {
+  slug: string;
+  title: string;
+  isIndex: boolean;
+  isActive: boolean;
+  children: NavNode[];
+  hasVisibleChildren: boolean;
+}
+
+/**
  * Props for ChildrenOf component
  */
 export interface ChildrenOfProps {

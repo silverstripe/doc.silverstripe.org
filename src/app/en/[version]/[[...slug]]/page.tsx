@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation';
 import { getDocumentByParams, getAllDocuments } from '@/lib/content/get-document';
 import { buildSlugFromParams } from '@/lib/routing';
+import { buildNavTree } from '@/lib/nav';
+import { DocsLayout } from '@/components/DocsLayout';
 import type { Metadata } from 'next';
 
 interface PageParams {
@@ -70,15 +72,22 @@ export default async function Page(props: PageProps) {
     notFound();
   }
 
+  // Build navigation tree
+  const allDocs = await getAllDocuments();
+  const navTree = buildNavTree(allDocs, params.version, doc.slug);
+
   // Convert markdown to HTML
   let htmlContent = await markdownToHtmlWithCleanup(doc.content);
 
   // Replace [CHILDREN] markers with rendered children
-  const allDocs = await getAllDocuments();
   htmlContent = replaceChildrenMarkers(htmlContent, doc, allDocs);
 
   return (
-    <main className="container mx-auto px-4 py-12">
+    <DocsLayout
+      navTree={navTree}
+      currentSlug={doc.slug}
+      version={params.version}
+    >
       <article>
         <h1 className="text-4xl font-bold mb-4">{doc.title}</h1>
         
@@ -96,6 +105,6 @@ export default async function Page(props: PageProps) {
           </p>
         </footer>
       </article>
-    </main>
+    </DocsLayout>
   );
 }
