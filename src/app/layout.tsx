@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
+import { generateRootMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'SilverStripe Documentation',
-  description: 'SilverStripe CMS Documentation'
-};
+export const metadata: Metadata = generateRootMetadata();
 
 export default function RootLayout({
   children

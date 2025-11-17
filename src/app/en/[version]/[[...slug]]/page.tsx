@@ -3,6 +3,7 @@ import { getDocumentByParams, getAllDocuments } from '@/lib/content/get-document
 import { buildSlugFromParams } from '@/lib/routing';
 import { buildNavTree } from '@/lib/nav';
 import { DocsLayout } from '@/components/DocsLayout';
+import { generatePageMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
 interface PageParams {
@@ -53,18 +54,15 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
     };
   }
 
-  const metadata: Metadata = {
-    title: doc.title,
-    description: doc.summary || undefined
-  };
+  const metadata = generatePageMetadata(doc);
 
   // Add canonical URL for non-current versions
   const defaultVersion = getDefaultVersion();
   if (params.version !== defaultVersion) {
     const latestPath = getVersionPath(doc.slug, defaultVersion);
-    metadata.alternates = {
-      canonical: latestPath
-    };
+    if (metadata.alternates) {
+      metadata.alternates.canonical = latestPath;
+    }
   }
 
   return metadata;

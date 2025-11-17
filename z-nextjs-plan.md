@@ -754,38 +754,37 @@
 
 ---
 
-## PHASE 12: Search Integration (Algolia)
+## PHASE 12: Metadata & SEO
 
-**Goal:** Integrate Algolia DocSearch for site search.
+**Goal:** Add proper metadata, OpenGraph tags, and sitemap.
 
 ### Steps
 
-11.1. **Install DocSearch**
-   ```bash
-   npm install @docsearch/react
-   ```
+12.1. **Create Metadata Generator**
+   - Create `src/lib/seo/metadata.ts`:
+     - `generatePageMetadata(doc: DocumentNode): Metadata`
+     - Returns Next.js metadata object
+     - Includes title, description, OpenGraph, etc.
 
-11.2. **Create Search Component**
-   - Create `src/components/SearchBox.tsx`:
-     - Client component
-     - Uses `@docsearch/react`
-     - Configured with environment variables
-   - Port from `_gatsby/src/components/SearchBox.tsx`
+12.2. **Add to Page Components**
+   - Export `generateMetadata()` function in page routes
+   - Use document title, summary, etc.
 
-11.3. **Add to Header**
-   - Create `src/components/Header.tsx`
-   - Include SearchBox component
-   - Style with Bootstrap/Tailwind
+12.3. **Add Sitemap**
+   - Create `src/app/sitemap.ts`
+   - Generate sitemap from all documents
+   - Include changefreq, priority
 
-11.4. **Configure DocSearch**
-   - Ensure index name correct for docs/user context
-   - Verify API keys loaded from environment
+12.4. **Add Robots.txt**
+   - Create `src/app/robots.ts`
+   - Configure indexing rules
 
-11.5. **Validation**
-   - [ ] Search box appears in header
-   - [ ] Search opens on click
-   - [ ] (Optional) Search results work if index exists
-   - [ ] Component renders without errors
+12.5. **Validation**
+   - [ ] All pages have proper titles
+   - [ ] Meta descriptions set
+   - [ ] OpenGraph tags present
+   - [ ] Sitemap generated correctly
+   - [ ] Robots.txt accessible
 
 ---
 
@@ -795,26 +794,26 @@
 
 ### Steps
 
-12.1. **Port SCSS Styles**
+13.1. **Port SCSS Styles**
    - Copy `_gatsby/src/theme/assets/scss/` files
    - Convert to CSS modules or Tailwind utilities
    - Keep Bootstrap if used, or replace with Tailwind
 
-12.2. **Style Components**
+13.2. **Style Components**
    - Header, Sidebar, VersionSwitcher, VersionBanner, ChildrenList
    - Ensure responsive design works
    - Match Gatsby site appearance
 
-12.3. **Add Icons**
+13.3. **Add Icons**
    - Install Font Awesome or similar
    - Apply icons to navigation, children cards, etc.
 
-12.4. **Handle Images**
+13.4. **Handle Images**
    - Configure Next.js Image component
    - Ensure markdown images load correctly
    - Add image optimization
 
-12.5. **Validation**
+13.5. **Validation**
    - [ ] Site visually matches Gatsby site
    - [ ] Responsive design works on mobile
    - [ ] Icons display correctly
@@ -822,36 +821,37 @@
 
 ---
 
-## PHASE 14: Metadata & SEO
+## PHASE 14: Search Integration (Algolia)
 
-**Goal:** Add proper metadata, OpenGraph tags, and sitemap.
+**Goal:** Integrate Algolia DocSearch for site search.
 
 ### Steps
 
-13.1. **Create Metadata Generator**
-   - Create `src/lib/seo/metadata.ts`:
-     - `generatePageMetadata(doc: DocumentNode): Metadata`
-     - Returns Next.js metadata object
-     - Includes title, description, OpenGraph, etc.
+14.1. **Install DocSearch**
+   ```bash
+   npm install @docsearch/react
+   ```
 
-13.2. **Add to Page Components**
-   - Export `generateMetadata()` function in page routes
-   - Use document title, summary, etc.
+14.2. **Create Search Component**
+   - Create `src/components/SearchBox.tsx`:
+     - Client component
+     - Uses `@docsearch/react`
+     - Configured with environment variables
+   - Port from `_gatsby/src/components/SearchBox.tsx`
 
-13.3. **Add Sitemap**
-   - Create `src/app/sitemap.ts`
-   - Generate sitemap from all documents
-   - Include changefreq, priority
+14.3. **Add to Header**
+   - Create `src/components/Header.tsx`
+   - Include SearchBox component
+   - Style with Bootstrap/Tailwind
 
-13.4. **Add Robots.txt**
-   - Create `src/app/robots.ts`
-   - Configure indexing rules
+14.4. **Configure DocSearch**
+   - Ensure index name correct for docs/user context
+   - Verify API keys loaded from environment
 
-13.5. **Validation**
-   - [ ] All pages have proper titles
-   - [ ] Meta descriptions set
-   - [ ] OpenGraph tags present
-   - [ ] Sitemap generated correctly
-   - [ ] Robots.txt accessible
+14.5. **Validation**
+   - [ ] Search box appears in header
+   - [ ] Search opens on click
+   - [ ] (Optional) Search results work if index exists
+   - [ ] Component renders without errors
 
 ---
