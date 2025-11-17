@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Content cache
+.cache/
+
+# Environment
+.env.local
+.env*.local
+
+# Testing
+coverage/
+
+# OS
+.DS_Store
+Thumbs.db
+
+*.tsbuildinfo
