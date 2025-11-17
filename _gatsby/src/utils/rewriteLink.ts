@@ -2,7 +2,7 @@ import { createElement, ReactElement } from 'react';
 import { domToReact, DomElement, HTMLReactParserOptions } from 'html-react-parser';
 import { Link } from 'gatsby';
 import rewriteAPILink from './rewriteAPILink';
-import { getCurrentNode, getCurrentVersion } from '../utils/nodes';
+import { getCurrentNode, getCurrentVersion } from './nodes';
 import path from 'path';
 import { SilverstripeDocument } from '../types';
 
