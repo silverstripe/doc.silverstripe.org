@@ -1,0 +1,40 @@
+.layout {
+  min-height: 100vh;
+  padding: 2rem 0;
+}
+
+.layoutContainer {
+  width: 100%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.sidebarContainer {
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  border-right: 1px solid #e9ecef;
+  padding-right: 2rem;
+}
+
+.mainContent {
+  padding-left: 2rem;
+}
+
+.bannerRow {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 991px) {
+  .sidebarContainer {
+    display: none;
+  }
+
+  .mainContent {
+    padding-left: 0;
+  }
+}

@@ -1,5 +1,6 @@
 import { DocumentNode } from '@/types';
 import { getChildren, FilterOptions, getChildrenFiltered } from '@/lib/children';
+import styles from './ChildrenList.module.css';
 
 interface ChildrenListProps {
   doc: DocumentNode;
@@ -24,7 +25,7 @@ export async function ChildrenList({
 
   if (children.length === 0) {
     return (
-      <div className="alert alert-info" role="status">
+      <div className={styles.emptyState} role="status">
         No child pages found.
       </div>
     );
@@ -34,26 +35,26 @@ export async function ChildrenList({
 
   if (asList) {
     return (
-      <div className="docs-list">
-        <dl className="row">
+      <div className={styles.docsList}>
+        <div>
           {children.map((child) => (
-            <div key={child.slug} className="col-12">
-              <dt>
-                <a href={child.slug} className="stretched-link">
-                  {child.title}
-                </a>
-              </dt>
-              <dd className="text-muted">{child.summary || ''}</dd>
+            <div key={child.slug} className={styles.docsListItem}>
+              <a href={child.slug} className={styles.docsListItemTitle}>
+                {child.title}
+              </a>
+              <p className={styles.docsListItemDescription}>
+                {child.summary || ''}
+              </p>
             </div>
           ))}
-        </dl>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="docs-overview py-5">
-      <div className="row">
+    <div className={styles.docsOverview}>
+      <div className={styles.cardGrid}>
         {children.map((child) => {
           const icon = child.icon || 'file-alt';
           const iconClass = child.iconBrand
@@ -61,24 +62,22 @@ export async function ChildrenList({
             : `fas fa-${icon}`;
 
           return (
-            <div key={child.slug} className="col-12 col-lg-6 py-3">
-              <div className="card shadow-sm">
-                <div className="card-body">
-                  <h5 className="card-title">
-                    <span className="theme-icon-holder card-icon-holder me-2">
-                      <i className={iconClass}></i>
-                    </span>
-                    <span className="card-title-text">{child.title}</span>
-                  </h5>
-                  <div className="card-text text-muted">
-                    {child.summary || ''}
-                  </div>
-                  <a
-                    className="card-link-mask stretched-link"
-                    href={child.slug}
-                    aria-label={child.title}
-                  />
+            <div key={child.slug} className={styles.card}>
+              <div className={styles.cardBody}>
+                <h5 className={styles.cardTitle}>
+                  <span className={`${styles.cardIconHolder}`}>
+                    <i className={iconClass}></i>
+                  </span>
+                  <span className={styles.cardTitleText}>{child.title}</span>
+                </h5>
+                <div className={styles.cardText}>
+                  {child.summary || ''}
                 </div>
+                <a
+                  className={styles.cardLinkMask}
+                  href={child.slug}
+                  aria-label={child.title}
+                />
               </div>
             </div>
           );

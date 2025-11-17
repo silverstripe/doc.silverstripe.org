@@ -29,7 +29,6 @@ describe('buildNavTree - Integration with mock content', () => {
     
     // Check that we have expected items
     const titles = tree.map(n => n.title);
-    console.log('Top-level items:', titles);
     expect(titles.some(t => t.includes('Getting') || t.includes('Developer') || t.includes('Optional'))).toBe(true);
   });
 

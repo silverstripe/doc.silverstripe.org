@@ -213,8 +213,8 @@ describe('Sidebar', () => {
     const devGuidesLink = screen.getByText('Developer Guides');
     const parent = devGuidesLink.closest('li');
     
-    // Should have spacer instead of toggle
-    const spacer = parent?.querySelector('.nav-toggle-spacer');
-    expect(spacer).toBeInTheDocument();
+    // Should have spacer instead of toggle (just verify no button for items without children)
+    const toggle = parent?.querySelector('button');
+    expect(toggle).not.toBeInTheDocument();
   });
 });

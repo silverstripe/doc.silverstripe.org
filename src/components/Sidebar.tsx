@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { NavNode, isNodeOrDescendantActive, getActiveAncestorsSlug } from '@/lib/nav';
+import styles from './Sidebar.module.css';
 
 interface SidebarProps {
   navTree: NavNode[];
@@ -63,37 +64,36 @@ export function Sidebar({ navTree, currentSlug, version }: SidebarProps) {
     const isActive = node.isActive || isNodeOrDescendantActive(node);
 
     const linkClasses = [
-      'nav-link',
-      isActive ? 'active' : '',
-      depth > 0 ? 'nav-link-nested' : '',
+      styles.navLink,
+      isActive ? styles.active : '',
+      depth > 0 ? styles.navNested : '',
     ]
       .filter(Boolean)
       .join(' ');
 
     return (
-      <li key={node.slug} className="nav-item">
-        <div className="d-flex align-items-center gap-2">
+      <li key={node.slug} className={styles.navItem}>
+        <div className={styles.navItemContainer}>
           {hasChildren && (
             <button
-              className="nav-toggle btn btn-sm p-0"
+              className={styles.navToggle}
               onClick={() => toggleExpanded(node.slug)}
               aria-expanded={isExpanded}
               aria-label={`Toggle ${node.title}`}
-              style={{ visibility: hasChildren ? 'visible' : 'hidden' }}
             >
-              <span className={`chevron ${isExpanded ? 'expanded' : ''}`}>
+              <span className={`${styles.chevron} ${isExpanded ? styles.expanded : ''}`}>
                 ▶
               </span>
             </button>
           )}
-          {!hasChildren && <span className="nav-toggle-spacer" style={{ width: '24px' }} />}
+          {!hasChildren && <span className={styles.navToggleSpacer} />}
           <Link href={node.slug} className={linkClasses}>
             {node.title}
           </Link>
         </div>
 
         {hasChildren && isExpanded && (
-          <ul className="nav-children list-unstyled ms-4">
+          <ul className={styles.navChildren}>
             {node.children.map(child => renderNode(child, depth + 1))}
           </ul>
         )}
@@ -102,8 +102,8 @@ export function Sidebar({ navTree, currentSlug, version }: SidebarProps) {
   };
 
   return (
-    <nav className="docs-sidebar" role="navigation">
-      <ul className="nav flex-column list-unstyled">
+    <nav className={styles.sidebar} role="navigation">
+      <ul className={styles.nav}>
         {navTree.map(node => renderNode(node, 0))}
       </ul>
     </nav>

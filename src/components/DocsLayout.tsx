@@ -3,6 +3,7 @@ import { VersionSwitcher } from './VersionSwitcher';
 import { VersionBanner } from './VersionBanner';
 import { NavNode } from '@/types';
 import { getDefaultVersion, getVersionPath } from '@/lib/versions';
+import styles from './DocsLayout.module.css';
 
 interface DocsLayoutProps {
   children: React.ReactNode;
@@ -25,33 +26,20 @@ export function DocsLayout({
   const latestVersionPath = getVersionPath(currentSlug, getDefaultVersion());
 
   return (
-    <div style={{ minHeight: '100vh', padding: '2rem 0' }}>
-      <div className="container-fluid">
+    <div className={styles.layout}>
+      <div className={styles.layoutContainer}>
         {/* Version Banner */}
-        <div className="row mb-4">
-          <div className="col-12">
-            <VersionBanner
-              version={version}
-              latestVersionPath={latestVersionPath}
-            />
-          </div>
+        <div className={styles.bannerRow}>
+          <VersionBanner
+            version={version}
+            latestVersionPath={latestVersionPath}
+          />
         </div>
 
-        <div className="row">
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '2rem' }}>
           {/* Sidebar - hidden on mobile by default */}
-          <div 
-            className="col-12 col-lg-3 d-none d-lg-block"
-            style={{
-              position: 'sticky',
-              top: '2rem',
-              height: 'fit-content',
-              maxHeight: 'calc(100vh - 4rem)',
-              overflowY: 'auto',
-              borderRight: '1px solid #e9ecef',
-              paddingRight: '2rem',
-            }}
-          >
-            <div className="mb-4">
+          <div className={styles.sidebarContainer}>
+            <div style={{ marginBottom: '1rem' }}>
               <VersionSwitcher
                 currentVersion={version}
                 currentSlug={currentSlug}
@@ -61,10 +49,7 @@ export function DocsLayout({
           </div>
 
           {/* Main content */}
-          <div 
-            className="col-12 col-lg-9"
-            style={{ paddingLeft: '2rem' }}
-          >
+          <div className={styles.mainContent}>
             <main role="main">
               {children}
             </main>
