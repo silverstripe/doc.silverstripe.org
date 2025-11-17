@@ -1,7 +1,6 @@
 ---
 title: "Installation"
 summary: "Basic installation guide"
-order: 1
 ---
 
 # Installation

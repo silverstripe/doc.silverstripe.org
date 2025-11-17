@@ -28,7 +28,6 @@ iconBrand: "silverstripe"
 hideChildren: true
 hideSelf: false
 unhideSelf: true
-order: 5
 ---
 
 Content here`;
@@ -43,7 +42,6 @@ Content here`;
       expect(result.data.hideChildren).toBe(true);
       expect(result.data.hideSelf).toBe(false);
       expect(result.data.unhideSelf).toBe(true);
-      expect(result.data.order).toBe(5);
     });
 
     it('handles missing frontmatter', () => {
@@ -104,17 +102,6 @@ ${markdown}`;
 
       expect(result.hideChildren).toBe(true);
       expect(result.hideSelf).toBe(false);
-    });
-
-    it('converts order to number', () => {
-      const data = {
-        order: '10',
-      };
-
-      const result = validateFrontmatter(data);
-
-      expect(typeof result.order).toBe('number');
-      expect(result.order).toBe(10);
     });
 
     it('removes undefined values', () => {

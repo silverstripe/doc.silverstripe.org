@@ -33,7 +33,6 @@ export function validateFrontmatter(data: any): DocumentMeta {
     hideChildren: Boolean(data.hideChildren) || false,
     hideSelf: Boolean(data.hideSelf) || false,
     unhideSelf: Boolean(data.unhideSelf) || false,
-    order: data.order ? Number(data.order) : undefined,
   };
 
   // Keep any additional unknown fields as-is

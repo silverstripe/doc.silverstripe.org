@@ -1,7 +1,6 @@
 ---
 title: "Composer Setup"
 summary: "Setting up Silverstripe with Composer"
-order: 2
 ---
 
 # Using Composer

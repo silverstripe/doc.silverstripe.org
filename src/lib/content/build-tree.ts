@@ -7,6 +7,15 @@ import { generateSlug } from './slug-generator';
 import { sortDocuments } from './sort-files';
 
 /**
+ * Extract numeric order from a filename or directory name
+ * e.g., "01_Installation" -> 1, "02_Advanced" -> 2, "Getting_Started" -> undefined
+ */
+function extractOrderFromName(name: string): number | undefined {
+  const match = name.match(/^(\d+)_/);
+  return match ? Number(match[1]) : undefined;
+}
+
+/**
  * Build a tree of document nodes from a directory
  * Recursively reads markdown files, parses frontmatter, generates slugs
  */
@@ -45,6 +54,17 @@ export async function buildContentTree(
       const parentDir = path.dirname(filePath);
       const fileTitle = fileToTitle(raw.pathInfo.filename, isIndex ? parentDir : undefined);
 
+      // Extract order from directory or filename
+      let order: number | undefined;
+      if (isIndex) {
+        // For index files, extract from directory name
+        const dirName = path.basename(path.dirname(filePath));
+        order = extractOrderFromName(dirName);
+      } else {
+        // For regular files, extract from filename
+        order = extractOrderFromName(raw.pathInfo.filename);
+      }
+
       // Build path for slug - include filename segment unless it's an index file in root
       let slugPath = relativeDir;
       if (!isIndex) {
@@ -59,7 +79,16 @@ export async function buildContentTree(
       const slug = generateSlug(slugPath === '.' ? '' : slugPath, version, optional);
 
       // Generate parent slug (directory of current slug path)
-      const parentPath = relativeDir === '.' ? '' : relativeDir;
+      // For index files, the parent is the parent directory of the current directory
+      // For regular files, the parent is the current directory
+      let parentPath = relativeDir === '.' ? '' : relativeDir;
+      if (isIndex && relativeDir !== '.') {
+        // For index files, get the parent directory
+        parentPath = path.dirname(relativeDir);
+        if (parentPath === '.') {
+          parentPath = '';
+        }
+      }
       const parentSlug = generateSlug(parentPath, version, optional);
 
       // Get frontmatter title or use file-derived title
@@ -76,6 +105,7 @@ export async function buildContentTree(
         title,
         content,
         category,
+        ...(order !== undefined && { order }),
         ...frontmatter,
       };
 

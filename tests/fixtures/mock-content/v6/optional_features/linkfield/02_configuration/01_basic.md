@@ -1,7 +1,6 @@
 ---
 title: "Basic Configuration"
 summary: "Basic Link Field configuration"
-order: 1
 ---
 
 # Basic Configuration

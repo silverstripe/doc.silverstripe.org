@@ -1,7 +1,6 @@
 ---
 title: "Getting Started"
 summary: "Get started with Silverstripe v5"
-order: 1
 ---
 
 # Getting Started with v5

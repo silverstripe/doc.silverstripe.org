@@ -19,6 +19,7 @@ export interface DocumentNode {
   hideSelf?: boolean;
   unhideSelf?: boolean;
   introduction?: string;
+  order?: number;
 }
 
 /**
@@ -33,7 +34,6 @@ export interface DocumentMeta {
   hideChildren?: boolean;
   hideSelf?: boolean;
   unhideSelf?: boolean;
-  order?: number;
   [key: string]: any;
 }
 

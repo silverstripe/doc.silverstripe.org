@@ -1,7 +1,6 @@
 ---
 title: "Configuration"
 summary: "Configuring the Link Field module"
-order: 2
 ---
 
 # Configuration

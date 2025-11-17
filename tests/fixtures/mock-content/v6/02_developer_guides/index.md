@@ -2,14 +2,13 @@
 title: "Developer Guides"
 summary: "Comprehensive guides for developers"
 icon: "code"
-order: 2
 ---
 
 # Developer Guides
 
 This section provides comprehensive guides for Silverstripe developers.
 
-[CHILDREN]
+[CHILDREN includeFolders]
 
 ## Overview
 

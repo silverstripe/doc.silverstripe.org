@@ -2,14 +2,13 @@
 title: "Link Field"
 summary: "The Link Field module for Silverstripe"
 icon: "link"
-order: 1
 ---
 
 # Link Field Module
 
 The Link Field module provides a flexible way to manage links in Silverstripe.
 
-[CHILDREN]
+[CHILDREN includeFolders]
 
 ## Features
 

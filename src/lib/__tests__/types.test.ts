@@ -74,11 +74,10 @@ describe('Type Definitions', () => {
         title: 'Page Title',
         summary: 'Short description',
         icon: 'download',
-        order: 1,
       };
 
       expect(meta.title).toBe('Page Title');
-      expect(meta.order).toBe(1);
+      expect(meta.summary).toBe('Short description');
     });
 
     it('should support all boolean flags', () => {

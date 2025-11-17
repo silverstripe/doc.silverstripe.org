@@ -1,7 +1,6 @@
 ---
 title: "Data Types"
 summary: "Database data types in Silverstripe"
-order: 1
 ---
 
 # Data Types

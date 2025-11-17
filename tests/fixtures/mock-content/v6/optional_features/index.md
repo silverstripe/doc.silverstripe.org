@@ -1,7 +1,6 @@
 ---
 title: "Optional Features"
 summary: "Optional modules and features"
-order: 3
 ---
 
 # Optional Features

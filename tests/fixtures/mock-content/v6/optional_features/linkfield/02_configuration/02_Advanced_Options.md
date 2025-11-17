@@ -1,7 +1,6 @@
 ---
 title: "Advanced Options"
 summary: "Advanced Link Field configuration"
-order: 2
 ---
 
 # Advanced Configuration

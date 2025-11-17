@@ -54,7 +54,12 @@ interface DocumentNode {
 }
 ```
 
----
+**Key notes:**
+- **Ordering:** `order` is extracted from numeric filename prefixes (e.g., `01_`, `02_`) and stored in the node, not frontmatter
+- For directories: `01_Getting_Started/index.md` → order: 1
+- For files: `02_Advanced.md` → order: 2
+- Files without numeric prefixes have no order value
+- Sorting respects directory structure first, then order within directory
 
 ## Testing
 

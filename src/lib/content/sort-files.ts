@@ -10,7 +10,7 @@ function isVersionNumber(value: string): boolean {
 
 /**
  * Sort documents respecting numeric prefixes and alphabetical order
- * Numeric prefixes affect sort order, alphabetical for non-numbered files
+ * Uses extracted order property from filenames, then falls back to alphabetical
  */
 export function sortDocuments(docs: DocumentNode[]): DocumentNode[] {
   return [...docs].sort((a, b) => {
@@ -22,7 +22,20 @@ export function sortDocuments(docs: DocumentNode[]): DocumentNode[] {
       return dirA.localeCompare(dirB, 'en', { numeric: false, sensitivity: 'case' });
     }
 
-    // Same directory: compare file titles with numeric awareness
+    // Same directory: use order if available
+    if (a.order !== undefined && b.order !== undefined) {
+      return a.order - b.order;
+    }
+
+    // If only one has order, it comes first
+    if (a.order !== undefined) {
+      return -1;
+    }
+    if (b.order !== undefined) {
+      return 1;
+    }
+
+    // No order: compare file titles with numeric awareness
     let compA = a.fileTitle;
     let compB = b.fileTitle;
     const compareOptions = { numeric: false, sensitivity: 'case' as const };

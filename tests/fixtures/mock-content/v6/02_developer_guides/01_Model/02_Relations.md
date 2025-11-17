@@ -1,7 +1,6 @@
 ---
 title: "Relations"
 summary: "Managing relationships between data objects"
-order: 2
 ---
 
 # Relations

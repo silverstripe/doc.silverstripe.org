@@ -1,7 +1,6 @@
 ---
 title: "Usage"
 summary: "Using the Link Field in your project"
-order: 1
 ---
 
 # Using Link Field

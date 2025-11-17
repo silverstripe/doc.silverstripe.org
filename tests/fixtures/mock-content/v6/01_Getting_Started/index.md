@@ -2,14 +2,13 @@
 title: "Getting Started"
 summary: "Get started with Silverstripe CMS"
 icon: "rocket"
-order: 1
 ---
 
 # Getting Started
 
 Welcome! This section covers everything you need to know to get started with Silverstripe CMS.
 
-[CHILDREN]
+[CHILDREN includeFolders]
 
 ## What You'll Learn
 

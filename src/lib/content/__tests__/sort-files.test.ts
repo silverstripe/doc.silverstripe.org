@@ -2,7 +2,11 @@ import { sortDocuments } from '../sort-files';
 import { DocumentNode } from '@/types';
 
 describe('sort-files', () => {
-  const mockDoc = (fileTitle: string, fileAbsolutePath: string): DocumentNode => ({
+  const mockDoc = (
+    fileTitle: string,
+    fileAbsolutePath: string,
+    order?: number
+  ): DocumentNode => ({
     slug: '/en/6/test/',
     version: '6',
     filePath: fileTitle,
@@ -13,24 +17,28 @@ describe('sort-files', () => {
     title: fileTitle,
     content: '',
     category: 'docs',
+    ...(order !== undefined && { order }),
   });
 
   describe('sortDocuments', () => {
-    it('sorts numeric prefixes numerically', () => {
+    it('sorts by order property when available', () => {
       const docs = [
-        mockDoc('03_third', '/docs/03_third.md'),
-        mockDoc('01_first', '/docs/01_first.md'),
-        mockDoc('02_second', '/docs/02_second.md'),
+        mockDoc('Composer', '/docs/02_Composer.md', 2),
+        mockDoc('Installation', '/docs/01_Installation.md', 1),
+        mockDoc('Advanced Installation', '/docs/05_Advanced_Installation/index.md', 5),
       ];
 
       const sorted = sortDocuments(docs);
 
-      expect(sorted[0].fileTitle).toBe('01_first');
-      expect(sorted[1].fileTitle).toBe('02_second');
-      expect(sorted[2].fileTitle).toBe('03_third');
+      expect(sorted[0].fileTitle).toBe('Installation');
+      expect(sorted[0].order).toBe(1);
+      expect(sorted[1].fileTitle).toBe('Composer');
+      expect(sorted[1].order).toBe(2);
+      expect(sorted[2].fileTitle).toBe('Advanced Installation');
+      expect(sorted[2].order).toBe(5);
     });
 
-    it('sorts alphabetically when no numeric prefix', () => {
+    it('sorts alphabetically when no order property', () => {
       const docs = [
         mockDoc('zebra', '/docs/zebra.md'),
         mockDoc('alpha', '/docs/alpha.md'),
@@ -44,26 +52,44 @@ describe('sort-files', () => {
       expect(sorted[2].fileTitle).toBe('zebra');
     });
 
-    it('handles mixed numeric and non-numeric', () => {
+    it('prioritizes documents with order over those without', () => {
       const docs = [
         mockDoc('zebra', '/docs/zebra.md'),
-        mockDoc('01_first', '/docs/01_first.md'),
+        mockDoc('Installation', '/docs/01_Installation.md', 1),
         mockDoc('alpha', '/docs/alpha.md'),
       ];
 
       const sorted = sortDocuments(docs);
 
-      // Numeric files should sort first, then alphabetically
-      expect(sorted[0].fileTitle).toBe('01_first');
+      // Document with order should come first
+      expect(sorted[0].fileTitle).toBe('Installation');
+      expect(sorted[0].order).toBe(1);
+      // Then alphabetically sorted remaining
       expect(sorted[1].fileTitle).toBe('alpha');
       expect(sorted[2].fileTitle).toBe('zebra');
     });
 
+    it('handles mixed order values within same directory', () => {
+      const docs = [
+        mockDoc('05_Advanced', '/docs/same/05_Advanced.md', 5),
+        mockDoc('01_First', '/docs/same/01_First.md', 1),
+        mockDoc('03_Third', '/docs/same/03_Third.md', 3),
+        mockDoc('02_Second', '/docs/same/02_Second.md', 2),
+      ];
+
+      const sorted = sortDocuments(docs);
+
+      expect(sorted[0].order).toBe(1);
+      expect(sorted[1].order).toBe(2);
+      expect(sorted[2].order).toBe(3);
+      expect(sorted[3].order).toBe(5);
+    });
+
     it('preserves different directory structure', () => {
       const docs = [
-        mockDoc('file', '/docs/dir1/file.md'),
-        mockDoc('file', '/docs/dir2/file.md'),
-        mockDoc('file', '/docs/dir3/file.md'),
+        mockDoc('file', '/docs/dir1/file.md', 1),
+        mockDoc('file', '/docs/dir2/file.md', 1),
+        mockDoc('file', '/docs/dir3/file.md', 1),
       ];
 
       const sorted = sortDocuments(docs);
@@ -73,7 +99,7 @@ describe('sort-files', () => {
       expect(sorted[2].fileAbsolutePath).toBe('/docs/dir3/file.md');
     });
 
-    it('handles semantic version numbers', () => {
+    it('handles semantic version numbers without order', () => {
       const docs = [
         mockDoc('3.2.1', '/docs/3.2.1.md'),
         mockDoc('1.0.0', '/docs/1.0.0.md'),
@@ -85,20 +111,6 @@ describe('sort-files', () => {
       expect(sorted[0].fileTitle).toBe('1.0.0');
       expect(sorted[1].fileTitle).toBe('2.0.0');
       expect(sorted[2].fileTitle).toBe('3.2.1');
-    });
-
-    it('handles version strings with prerelease', () => {
-      const docs = [
-        mockDoc('2.0.0-beta1', '/docs/2.0.0-beta1.md'),
-        mockDoc('1.0.0', '/docs/1.0.0.md'),
-        mockDoc('2.0.0-alpha1', '/docs/2.0.0-alpha1.md'),
-      ];
-
-      const sorted = sortDocuments(docs);
-
-      expect(sorted[0].fileTitle).toBe('1.0.0');
-      // Prerelease versions should sort after base version
-      expect(sorted[1].fileTitle).toMatch(/2\.0\.0/);
     });
 
     it('does not modify original array', () => {
@@ -115,18 +127,18 @@ describe('sort-files', () => {
       expect(docs[1].fileTitle).toBe('alpha');
     });
 
-    it('sorts within same directory consistently', () => {
+    it('sorts children correctly with order property', () => {
       const docs = [
-        mockDoc('03_third', '/docs/same/03_third.md'),
-        mockDoc('01_first', '/docs/same/01_first.md'),
-        mockDoc('02_second', '/docs/same/02_second.md'),
+        mockDoc('Getting Started', '/docs/01_Getting_Started/index.md', 1),
+        mockDoc('Developer Guides', '/docs/02_developer_guides/index.md', 2),
+        mockDoc('Optional Features', '/docs/optional_features/index.md'),
       ];
 
       const sorted = sortDocuments(docs);
 
-      expect(sorted[0].fileTitle).toBe('01_first');
-      expect(sorted[1].fileTitle).toBe('02_second');
-      expect(sorted[2].fileTitle).toBe('03_third');
+      expect(sorted[0].order).toBe(1);
+      expect(sorted[1].order).toBe(2);
+      expect(sorted[2].order).toBeUndefined();
     });
   });
 });

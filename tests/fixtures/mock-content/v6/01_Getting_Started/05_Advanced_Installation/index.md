@@ -1,7 +1,6 @@
 ---
 title: "Advanced Installation"
 summary: "Advanced installation options"
-order: 3
 hideChildren: false
 ---
 

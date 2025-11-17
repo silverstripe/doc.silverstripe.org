@@ -1,7 +1,6 @@
 ---
 title: "Installation"
 summary: "Install Silverstripe v5"
-order: 1
 ---
 
 # Installation v5
