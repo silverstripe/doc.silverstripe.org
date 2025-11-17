@@ -61,6 +61,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
  */
 export default async function Page(props: PageProps) {
   const { markdownToHtmlWithCleanup } = await import('@/lib/markdown/processor');
+  const { replaceChildrenMarkers } = await import('@/lib/children');
   
   const params = await props.params;
   const doc = await getDocumentByParams(params.version, params.slug);
@@ -70,7 +71,11 @@ export default async function Page(props: PageProps) {
   }
 
   // Convert markdown to HTML
-  const htmlContent = await markdownToHtmlWithCleanup(doc.content);
+  let htmlContent = await markdownToHtmlWithCleanup(doc.content);
+
+  // Replace [CHILDREN] markers with rendered children
+  const allDocs = await getAllDocuments();
+  htmlContent = replaceChildrenMarkers(htmlContent, doc, allDocs);
 
   return (
     <main className="container mx-auto px-4 py-12">
