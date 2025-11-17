@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SearchBox } from './SearchBox';
 import styles from './Header.module.css';
 
 /**
@@ -15,6 +16,10 @@ export function Header() {
             <span className={styles.logoSubtitle}>Docs</span>
           </div>
         </Link>
+
+        <div className={styles.searchContainer}>
+          <SearchBox />
+        </div>
 
         <nav className={styles.nav}>
           <div className={styles.navItem}>

@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/creative-commoners/doc.silverstripe.org#readme",
   "dependencies": {
+    "@docsearch/react": "^4.3.2",
     "@fortawesome/fontawesome-free": "^7.1.0",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",

@@ -30,6 +30,16 @@
   font-size: 1.25rem;
 }
 
+.searchContainer {
+  flex: 1;
+  max-width: 400px;
+  margin: 0 1rem;
+}
+
+.searchContainer :global(.DocSearch-Button) {
+  width: 100%;
+}
+
 .logoBrand {
   width: 32px;
   height: 32px;
