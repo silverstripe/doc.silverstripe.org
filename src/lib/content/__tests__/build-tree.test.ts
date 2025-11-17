@@ -63,7 +63,9 @@ describe('build-tree', () => {
     });
 
     it('handles deeply nested structure', async () => {
-      const docs = await buildContentTree(fixturesDir, 'v6', 'docs');
+      // Load optional_features separately with the optional parameter
+      const optionalPath = path.join(fixturesDir, 'optional_features');
+      const docs = await buildContentTree(optionalPath, 'v6', 'docs', 'optional_features');
 
       // Check for deeply nested optional_features/linkfield files
       const deepNested = docs.filter((d) =>

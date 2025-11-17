@@ -53,20 +53,39 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
   // Build versions map - v5 and v6 (and potentially others)
   const versionDirs = ['v5', 'v6'];
   
+  if (!cachedDocuments) {
+    cachedDocuments = new Map();
+  }
+  
   for (const versionDir of versionDirs) {
     const versionPath = path.join(contentBase, versionDir);
     try {
+      // Load main docs for this version
       const versionDocs = await buildContentTree(
         versionPath,
         versionDir.replace(/^v/, ''),
         config.docsContext
       );
       documents.push(...versionDocs);
-      
-      if (!cachedDocuments) {
-        cachedDocuments = new Map();
-      }
       cachedDocuments.set(versionDir, versionDocs);
+      
+      // Load optional_features and its subdirectories
+      const optionalFeaturesPath = path.join(versionPath, 'optional_features');
+      try {
+        // Load everything under optional_features with the optional_features parameter
+        // The root parent slug should be the version root so Optional Features appears in nav
+        const optionalFeaturesDocs = await buildContentTree(
+          optionalFeaturesPath,
+          versionDir.replace(/^v/, ''),
+          config.docsContext,
+          'optional_features',
+          `/en/${versionDir.replace(/^v/, '')}/` // rootParentSlug = version root
+        );
+        documents.push(...optionalFeaturesDocs);
+        cachedDocuments.set(`${versionDir}/optional_features`, optionalFeaturesDocs);
+      } catch (error) {
+        // optional_features directory may not exist, continue
+      }
     } catch (error) {
       // Version directory may not exist, continue
       console.warn(`Version ${versionDir} not found, skipping`);

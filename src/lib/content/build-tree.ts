@@ -23,11 +23,13 @@ export async function buildContentTree(
   basePath: string,
   version: string,
   category: 'docs' | 'user' = 'docs',
-  optional?: string
+  optional?: string,
+  rootParentSlug?: string
 ): Promise<DocumentNode[]> {
   try {
-    // Get all markdown files
-    const files = await listMarkdownFiles(basePath);
+    // Get all markdown files, excluding optional_features if not loading optional content
+    const excludeDirs = optional ? undefined : ['optional_features'];
+    const files = await listMarkdownFiles(basePath, excludeDirs);
 
     if (files.length === 0) {
       return [];
@@ -89,7 +91,14 @@ export async function buildContentTree(
           parentPath = '';
         }
       }
-      const parentSlug = generateSlug(parentPath, version, optional);
+      
+      // If rootParentSlug is provided and this is the root index, use it
+      let parentSlug: string;
+      if (rootParentSlug && isIndex && relativeDir === '.') {
+        parentSlug = rootParentSlug;
+      } else {
+        parentSlug = generateSlug(parentPath, version, optional);
+      }
 
       // Get frontmatter title or use file-derived title
       const title = frontmatter.title || fileTitle;
