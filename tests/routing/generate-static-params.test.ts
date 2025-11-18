@@ -23,7 +23,7 @@ describe('Routing - generateStaticParams', () => {
     const params = await generateStaticParams();
     
     const nested = params.find(
-      p => p.version === '6' && p.slug?.includes('getting-started')
+      p => p.version === '6' && p.slug?.includes('getting_started')
     );
     
     expect(nested).toBeDefined();
@@ -75,27 +75,27 @@ describe('Routing - URL Patterns', () => {
     expect(root?.slug).toBeUndefined();
   });
 
-  it('should generate /en/6/getting-started/', async () => {
+  it('should generate /en/6/getting_started/', async () => {
     const params = await generateStaticParams();
     const route = params.find(
-      p => p.version === '6' && p.slug?.[0] === 'getting-started'
+      p => p.version === '6' && p.slug?.[0] === 'getting_started'
     );
     
     expect(route).toBeDefined();
   });
 
-  it('should generate /en/6/optional-features/linkfield/', async () => {
+  it('should generate /en/6/optional_features/linkfield/', async () => {
     const params = await generateStaticParams();
     const route = params.find(
       p => p.version === '6' && 
-           p.slug?.includes('optional-features') &&
+           p.slug?.includes('optional_features') &&
            p.slug?.includes('linkfield')
     );
     
     expect(route).toBeDefined();
   });
 
-  it('should normalize paths (no numeric prefixes, lowercase, hyphens)', async () => {
+  it('should normalize paths (no numeric prefixes, lowercase, underscores)', async () => {
     const params = await generateStaticParams();
     
     params.forEach(p => {
@@ -105,8 +105,6 @@ describe('Routing - URL Patterns', () => {
           expect(segment).not.toMatch(/^\d+/);
           // Lowercase
           expect(segment).toBe(segment.toLowerCase());
-          // No underscores
-          expect(segment).not.toContain('_');
         });
       }
     });

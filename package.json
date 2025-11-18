@@ -4,8 +4,8 @@
   "description": "SilverStripe CMS Documentation - Next.js Rebuild",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
-    "mock": "NEXT_USE_MOCK_DATA=true npm run copy-images:mock && NEXT_USE_MOCK_DATA=true next dev",
+    "dev": "next dev --port 9876",
+    "mock": "NEXT_USE_MOCK_DATA=true npm run copy-images:mock && NEXT_USE_MOCK_DATA=true next dev --port 9876",
     "build": "npm run clone && next build && npm run copy-images",
     "clone": "node scripts/clone-docs.mjs",
     "clone:docs": "DOCS_CONTEXT=docs node scripts/clone-docs.mjs",

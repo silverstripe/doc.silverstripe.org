@@ -34,7 +34,7 @@ describe('Image Handling Integration', () => {
     const docs = await getAllDocuments();
     
     const gettingStarted = docs.find(doc => 
-      doc.slug?.includes('getting-started') && doc.version === '6' && doc.isIndex
+      doc.slug?.includes('getting_started') && doc.version === '6' && doc.isIndex
     );
     
     expect(gettingStarted).toBeDefined();
@@ -58,7 +58,7 @@ describe('Image Handling Integration', () => {
     const docs = await getAllDocuments();
     
     const dataTypes = docs.find(doc => 
-      doc.slug?.includes('data-types') && doc.version === '6'
+      doc.slug?.includes('data_types') && doc.version === '6'
     );
     
     expect(dataTypes).toBeDefined();

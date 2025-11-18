@@ -1,11 +1,22 @@
+'use client';
+
 import Link from 'next/link';
 import { SearchBox } from './SearchBox';
+import { VersionSwitcher } from './VersionSwitcher';
 import styles from './Header.module.css';
+import { usePathname } from 'next/navigation';
 
 /**
  * Header component with navigation and branding
  */
 export function Header() {
+  const pathname = usePathname();
+  
+  // Extract version and slug from pathname
+  const pathParts = pathname.split('/').filter(Boolean);
+  const version = pathParts[1] || '6';
+  const slug = pathname;
+
   return (
     <header className={styles.header}>
       <div className={styles.headerContent}>
@@ -32,13 +43,11 @@ export function Header() {
               <i className="fab fa-github"></i>
             </a>
           </div>
-          <div className={styles.socialList}>
-            <a href="https://twitter.com/silverstripe" className={styles.socialItem} title="Twitter">
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="https://www.facebook.com/silverstripe" className={styles.socialItem} title="Facebook">
-              <i className="fab fa-facebook"></i>
-            </a>
+          <div className={styles.versionSwitcherWrapper}>
+            <VersionSwitcher
+              currentVersion={version}
+              currentSlug={slug}
+            />
           </div>
         </nav>
       </div>

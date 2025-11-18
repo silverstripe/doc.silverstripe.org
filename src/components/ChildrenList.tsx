@@ -62,24 +62,21 @@ export async function ChildrenList({
             : `fas fa-${icon}`;
 
           return (
-            <div key={child.slug} className={styles.card}>
-              <div className={styles.cardBody}>
-                <h5 className={styles.cardTitle}>
-                  <span className={`${styles.cardIconHolder}`}>
-                    <i className={iconClass}></i>
-                  </span>
-                  <span className={styles.cardTitleText}>{child.title}</span>
-                </h5>
-                <div className={styles.cardText}>
-                  {child.summary || ''}
+            <a key={child.slug} href={child.slug} className={styles.cardLink}>
+              <div className={styles.card}>
+                <div className={styles.cardBody}>
+                  <h5 className={styles.cardTitle}>
+                    <span className={`${styles.cardIconHolder}`}>
+                      <i className={iconClass}></i>
+                    </span>
+                    <span className={styles.cardTitleText}>{child.title}</span>
+                  </h5>
+                  <div className={styles.cardText}>
+                    {child.summary || ''}
+                  </div>
                 </div>
-                <a
-                  className={styles.cardLinkMask}
-                  href={child.slug}
-                  aria-label={child.title}
-                />
               </div>
-            </div>
+            </a>
           );
         })}
       </div>

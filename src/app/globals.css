@@ -80,7 +80,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
-  padding-top: var(--header-height);
 }
 
 /* ============ Typography ============ */
@@ -277,6 +276,13 @@ button:hover,
 .card:hover {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   background-color: var(--theme-bg-light);
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
 }
 
 .card-body {

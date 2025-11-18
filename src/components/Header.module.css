@@ -99,35 +99,10 @@
   color: var(--theme-color-primary);
 }
 
-.socialList {
+.versionSwitcherWrapper {
   display: flex;
   align-items: center;
-  gap: 0.875rem;
-  margin-left: 1rem;
-  padding-left: 1rem;
-  border-left: 1px solid var(--theme-border);
-}
-
-.socialItem {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: var(--theme-bg-light);
-  border-radius: 50%;
-  text-decoration: none;
-  color: var(--theme-color-primary);
-  transition: all 0.2s ease-in-out;
-}
-
-.socialItem:hover {
-  background: var(--theme-color-primary);
-  color: white;
-}
-
-.socialItem i {
-  font-size: 1rem;
+  gap: 0.5rem;
 }
 
 .search {
@@ -164,10 +139,6 @@
     gap: 1rem;
   }
 
-  .socialList {
-    display: none;
-  }
-
   .search {
     display: none;
   }
@@ -184,10 +155,5 @@
 
   .nav {
     gap: 0.5rem;
-  }
-
-  .socialItem {
-    width: 28px;
-    height: 28px;
   }
 }

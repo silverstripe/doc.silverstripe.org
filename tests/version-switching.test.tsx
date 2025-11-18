@@ -15,14 +15,14 @@ describe('VersionSwitcher Component', () => {
     (useRouter as jest.Mock).mockReturnValue({
       push: mockPush,
     });
-    (usePathname as jest.Mock).mockReturnValue('/en/6/getting-started/');
+    (usePathname as jest.Mock).mockReturnValue('/en/6/getting_started/');
   });
 
   it('should render version selector', () => {
     render(
       <VersionSwitcher
         currentVersion="6"
-        currentSlug="/en/6/getting-started/"
+        currentSlug="/en/6/getting_started/"
       />
     );
 
@@ -34,7 +34,7 @@ describe('VersionSwitcher Component', () => {
     render(
       <VersionSwitcher
         currentVersion="6"
-        currentSlug="/en/6/getting-started/"
+        currentSlug="/en/6/getting_started/"
       />
     );
 
@@ -46,7 +46,7 @@ describe('VersionSwitcher Component', () => {
     render(
       <VersionSwitcher
         currentVersion="6"
-        currentSlug="/en/6/getting-started/"
+        currentSlug="/en/6/getting_started/"
       />
     );
 
@@ -59,14 +59,14 @@ describe('VersionSwitcher Component', () => {
     render(
       <VersionSwitcher
         currentVersion="6"
-        currentSlug="/en/6/getting-started/"
+        currentSlug="/en/6/getting_started/"
       />
     );
 
     const select = screen.getByRole('combobox') as HTMLSelectElement;
     fireEvent.change(select, { target: { value: '5' } });
 
-    expect(mockPush).toHaveBeenCalledWith('/en/5/getting-started/');
+    expect(mockPush).toHaveBeenCalledWith('/en/5/getting_started/');
   });
 
   it('should handle root version switch', () => {
@@ -87,21 +87,21 @@ describe('VersionSwitcher Component', () => {
     render(
       <VersionSwitcher
         currentVersion="6"
-        currentSlug="/en/6/developer-guides/model/data-types/"
+        currentSlug="/en/6/developer_guides/model/data_types/"
       />
     );
 
     const select = screen.getByRole('combobox') as HTMLSelectElement;
     fireEvent.change(select, { target: { value: '5' } });
 
-    expect(mockPush).toHaveBeenCalledWith('/en/5/developer-guides/model/data-types/');
+    expect(mockPush).toHaveBeenCalledWith('/en/5/developer_guides/model/data_types/');
   });
 
   it('should have proper aria-label', () => {
     render(
       <VersionSwitcher
         currentVersion="6"
-        currentSlug="/en/6/getting-started/"
+        currentSlug="/en/6/getting_started/"
       />
     );
 

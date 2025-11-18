@@ -54,23 +54,23 @@ describe('Document Fetcher', () => {
     });
 
     it('should find nested page by slug', async () => {
-      const doc = await getDocumentBySlug('/en/6/getting-started/installation/');
+      const doc = await getDocumentBySlug('/en/6/getting_started/installation/');
       
       expect(doc).toBeTruthy();
-      expect(doc?.slug).toBe('/en/6/getting-started/installation/');
+      expect(doc?.slug).toBe('/en/6/getting_started/installation/');
     });
 
     it('should find optional features nested pages', async () => {
-      const doc = await getDocumentBySlug('/en/6/optional-features/linkfield/');
+      const doc = await getDocumentBySlug('/en/6/optional_features/linkfield/');
       
       expect(doc).toBeTruthy();
-      expect(doc?.slug).toBe('/en/6/optional-features/linkfield/');
+      expect(doc?.slug).toBe('/en/6/optional_features/linkfield/');
     });
 
     it('should be case-insensitive', async () => {
-      const doc1 = await getDocumentBySlug('/en/6/getting-started/');
-      const doc2 = await getDocumentBySlug('/en/6/GETTING-STARTED/');
-      const doc3 = await getDocumentBySlug('/en/6/Getting-Started/');
+      const doc1 = await getDocumentBySlug('/en/6/getting_started/');
+      const doc2 = await getDocumentBySlug('/en/6/GETTING_STARTED/');
+      const doc3 = await getDocumentBySlug('/en/6/Getting_Started/');
       
       expect(doc1).toBeTruthy();
       expect(doc2).toBeTruthy();
@@ -80,27 +80,27 @@ describe('Document Fetcher', () => {
     });
 
     it('should return null for non-existent slug', async () => {
-      const doc = await getDocumentBySlug('/en/6/does-not-exist/');
+      const doc = await getDocumentBySlug('/en/6/does_not_exist/');
       
       expect(doc).toBeNull();
     });
 
     it('should handle slugs with or without leading slash', async () => {
-      const doc1 = await getDocumentBySlug('/en/6/getting-started/');
-      const doc2 = await getDocumentBySlug('en/6/getting-started/');
+      const doc1 = await getDocumentBySlug('/en/6/getting_started/');
+      const doc2 = await getDocumentBySlug('en/6/getting_started/');
       
       expect(doc1?.slug).toBe(doc2?.slug);
     });
 
     it('should handle slugs with or without trailing slash', async () => {
-      const doc1 = await getDocumentBySlug('/en/6/getting-started/');
-      const doc2 = await getDocumentBySlug('/en/6/getting-started');
+      const doc1 = await getDocumentBySlug('/en/6/getting_started/');
+      const doc2 = await getDocumentBySlug('/en/6/getting_started');
       
       expect(doc1?.slug).toBe(doc2?.slug);
     });
 
     it('should find v5 documents', async () => {
-      const doc = await getDocumentBySlug('/en/5/getting-started/');
+      const doc = await getDocumentBySlug('/en/5/getting_started/');
       
       expect(doc).toBeTruthy();
       expect(doc?.version).toBe('5');
@@ -109,10 +109,10 @@ describe('Document Fetcher', () => {
 
   describe('getDocumentByParams', () => {
     it('should reconstruct slug from version and slug array', async () => {
-      const doc = await getDocumentByParams('6', ['getting-started', 'installation']);
+      const doc = await getDocumentByParams('6', ['getting_started', 'installation']);
       
       expect(doc).toBeTruthy();
-      expect(doc?.slug).toBe('/en/6/getting-started/installation/');
+      expect(doc?.slug).toBe('/en/6/getting_started/installation/');
     });
 
     it('should handle root version page', async () => {
@@ -131,30 +131,30 @@ describe('Document Fetcher', () => {
 
     it('should handle deeply nested optional features', async () => {
       const doc = await getDocumentByParams('6', [
-        'optional-features',
+        'optional_features',
         'linkfield',
         'configuration',
         'basic'
       ]);
       
       expect(doc).toBeTruthy();
-      expect(doc?.slug).toContain('/optional-features/linkfield');
+      expect(doc?.slug).toContain('/optional_features/linkfield');
     });
   });
 
   describe('getChildDocuments', () => {
     it('should return children of a parent slug', async () => {
-      const children = await getChildDocuments('/en/6/getting-started/');
+      const children = await getChildDocuments('/en/6/getting_started/');
       
       expect(children.length).toBeGreaterThan(0);
-      expect(children[0].parentSlug).toBe('/en/6/getting-started/');
+      expect(children[0].parentSlug).toBe('/en/6/getting_started/');
     });
 
     it('should return empty array for parent with no children', async () => {
       const doc = await getDocumentBySlug('/en/6/');
       if (doc) {
         // Find a leaf page with no children
-        const leaf = await getDocumentBySlug('/en/6/getting-started/installation/');
+        const leaf = await getDocumentBySlug('/en/6/getting_started/installation/');
         if (leaf) {
           const children = await getChildDocuments(leaf.slug);
           expect(children).toEqual([]);
@@ -194,19 +194,18 @@ describe('Document Fetcher', () => {
     });
 
     it('should strip numeric prefixes from paths', async () => {
-      const doc = await getDocumentBySlug('/en/6/getting-started/');
+      const doc = await getDocumentBySlug('/en/6/getting_started/');
       
       // The slug should not contain numeric prefixes
       expect(doc?.slug).not.toMatch(/\/\d+[-_]/);
     });
 
-    it('should convert underscores to hyphens in slugs', async () => {
+    it('should preserve underscores in slugs', async () => {
       const docs = await getAllDocuments();
       
-      // Check that no underscores exist in slugs
-      docs.forEach(doc => {
-        expect(doc.slug).not.toContain('_');
-      });
+      // Check that underscores are preserved in slugs
+      const withUnderscores = docs.filter(doc => doc.slug.includes('_'));
+      expect(withUnderscores.length).toBeGreaterThan(0);
     });
 
     it('should have lowercase slugs', async () => {

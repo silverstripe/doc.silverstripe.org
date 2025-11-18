@@ -2,7 +2,7 @@ import path from 'path';
 
 /**
  * Generate a slug from a directory path and version
- * Strips numeric prefixes, converts to lowercase, converts underscores to hyphens
+ * Strips numeric prefixes, converts to lowercase
  * Returns format: /en/{version}/{path}/
  */
 export function generateSlug(
@@ -15,12 +15,11 @@ export function generateSlug(
     .split(/[\\/]/)
     .filter((s) => s && s.length > 0);
 
-  // Strip numeric prefixes, convert to lowercase, and convert underscores to hyphens
+  // Strip numeric prefixes and convert to lowercase
   const parts = segments.map((part) =>
     part
       .replace(/^\d+_/, '') // Strip numeric prefix
       .toLowerCase() // Convert to lowercase
-      .replace(/_/g, '-') // Convert underscores to hyphens
   );
 
   // Build the slug
@@ -32,7 +31,6 @@ export function generateSlug(
       optional
         .replace(/^\d+_/, '')
         .toLowerCase()
-        .replace(/_/g, '-')
     );
   }
 

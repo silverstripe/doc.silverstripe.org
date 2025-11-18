@@ -60,7 +60,7 @@ function renderCardGridHTML(children: DocumentNode[]): string {
         ? `fab fa-${child.iconBrand}`
         : `fas fa-${icon}`;
 
-      return `<div class="col-12 col-lg-6 py-3">
+      return `<a href="${child.slug}" class="col-12 col-lg-6 py-3 card-link">
     <div class="card shadow-sm">
       <div class="card-body">
         <h5 class="card-title">
@@ -72,10 +72,9 @@ function renderCardGridHTML(children: DocumentNode[]): string {
         <div class="card-text">
           ${escapeHtml(child.summary || '')}
         </div>
-        <a class="card-link-mask" href="${child.slug}" aria-label="${escapeHtml(child.title)}"></a>
       </div>
     </div>
-  </div>`;
+  </a>`;
     })
     .join('\n');
 

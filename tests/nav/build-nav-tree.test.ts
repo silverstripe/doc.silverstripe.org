@@ -16,11 +16,11 @@ describe('buildNavTree', () => {
       category: 'docs',
     },
     {
-      slug: '/en/6/getting-started/',
+      slug: '/en/6/getting_started/',
       version: '6',
-      filePath: 'getting-started/index.md',
+      filePath: 'getting_started/index.md',
       fileTitle: 'index',
-      fileAbsolutePath: '/root/v6/getting-started/index.md',
+      fileAbsolutePath: '/root/v6/getting_started/index.md',
       isIndex: true,
       parentSlug: '/en/6/',
       title: 'Getting Started',
@@ -28,23 +28,23 @@ describe('buildNavTree', () => {
       category: 'docs',
     },
     {
-      slug: '/en/6/getting-started/installation/',
+      slug: '/en/6/getting_started/installation/',
       version: '6',
-      filePath: 'getting-started/installation.md',
+      filePath: 'getting_started/installation.md',
       fileTitle: 'installation',
-      fileAbsolutePath: '/root/v6/getting-started/installation.md',
+      fileAbsolutePath: '/root/v6/getting_started/installation.md',
       isIndex: false,
-      parentSlug: '/en/6/getting-started/',
+      parentSlug: '/en/6/getting_started/',
       title: 'Installation',
       content: 'Installation',
       category: 'docs',
     },
     {
-      slug: '/en/6/developer-guides/',
+      slug: '/en/6/developer_guides/',
       version: '6',
-      filePath: 'developer-guides/index.md',
+      filePath: 'developer_guides/index.md',
       fileTitle: 'index',
-      fileAbsolutePath: '/root/v6/developer-guides/index.md',
+      fileAbsolutePath: '/root/v6/developer_guides/index.md',
       isIndex: true,
       parentSlug: '/en/6/',
       title: 'Developer Guides',
@@ -147,7 +147,7 @@ describe('buildNavTree', () => {
   });
 
   it('should mark current page as active', () => {
-    const tree = buildNavTree(mockDocs, '6', '/en/6/getting-started/installation/');
+    const tree = buildNavTree(mockDocs, '6', '/en/6/getting_started/installation/');
     
     const gettingStarted = tree.find(n => n.title === 'Getting Started');
     expect(gettingStarted?.children[0].isActive).toBe(true);

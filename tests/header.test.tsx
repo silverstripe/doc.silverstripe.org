@@ -5,8 +5,16 @@ jest.mock('next/link', () => {
   return ({ children, href }: any) => <a href={href}>{children}</a>;
 });
 
+jest.mock('next/navigation', () => ({
+  usePathname: () => '/en/6/getting_started/',
+}));
+
 jest.mock('@/components/SearchBox', () => ({
   SearchBox: () => <div data-testid="search-box">Mock SearchBox</div>,
+}));
+
+jest.mock('@/components/VersionSwitcher', () => ({
+  VersionSwitcher: () => <div data-testid="version-switcher">Mock VersionSwitcher</div>,
 }));
 
 describe('Header Component', () => {
@@ -21,5 +29,11 @@ describe('Header Component', () => {
     const { getByText } = render(<Header />);
     
     expect(getByText('Home')).toBeInTheDocument();
+  });
+
+  it('renders version switcher', () => {
+    const { getByTestId } = render(<Header />);
+    
+    expect(getByTestId('version-switcher')).toBeInTheDocument();
   });
 });

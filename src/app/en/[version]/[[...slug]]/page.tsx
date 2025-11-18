@@ -99,12 +99,6 @@ export default async function Page(props: PageProps) {
       version={params.version}
     >
       <article>
-        <h1 className="text-4xl font-bold mb-4">{doc.title}</h1>
-        
-        {doc.summary && (
-          <p className="text-xl text-gray-600 mb-6">{doc.summary}</p>
-        )}
-
         <div className="prose max-w-none">
           <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
         </div>

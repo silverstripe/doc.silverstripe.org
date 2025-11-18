@@ -54,7 +54,7 @@ describe('build-tree', () => {
     it('generates parent slugs', async () => {
       const docs = await buildContentTree(fixturesDir, 'v6', 'docs');
 
-      const nested = docs.find((d) => d.slug.includes('getting-started/installation'));
+      const nested = docs.find((d) => d.slug.includes('getting_started/installation'));
       expect(nested).toBeDefined();
       if (nested) {
         expect(nested.parentSlug).toBeDefined();
@@ -69,7 +69,7 @@ describe('build-tree', () => {
 
       // Check for deeply nested optional_features/linkfield files
       const deepNested = docs.filter((d) =>
-        d.slug.includes('optional-features')
+        d.slug.includes('optional_features')
       );
       expect(deepNested.length).toBeGreaterThan(0);
     });
@@ -77,7 +77,7 @@ describe('build-tree', () => {
     it('converts numeric prefixes in file titles', async () => {
       const docs = await buildContentTree(fixturesDir, 'v6', 'docs');
 
-      const doc = docs.find((d) => d.slug.includes('getting-started'));
+      const doc = docs.find((d) => d.slug.includes('getting_started'));
       expect(doc?.fileTitle).not.toMatch(/^\d+_/);
     });
 

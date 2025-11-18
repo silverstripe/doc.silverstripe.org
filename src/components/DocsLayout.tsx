@@ -1,5 +1,4 @@
 import { Sidebar } from './Sidebar';
-import { VersionSwitcher } from './VersionSwitcher';
 import { VersionBanner } from './VersionBanner';
 import { NavNode } from '@/types';
 import { getDefaultVersion, getVersionPath } from '@/lib/versions';
@@ -39,12 +38,6 @@ export function DocsLayout({
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '2rem' }}>
           {/* Sidebar - hidden on mobile by default */}
           <div className={styles.sidebarContainer}>
-            <div style={{ marginBottom: '1rem' }}>
-              <VersionSwitcher
-                currentVersion={version}
-                currentSlug={currentSlug}
-              />
-            </div>
             <Sidebar navTree={navTree} currentSlug={currentSlug} version={version} />
           </div>
 

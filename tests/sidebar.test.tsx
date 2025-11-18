@@ -15,14 +15,14 @@ jest.mock('next/link', () => {
 describe('Sidebar', () => {
   const mockNavTree: NavNode[] = [
     {
-      slug: '/en/6/getting-started/',
+      slug: '/en/6/getting_started/',
       title: 'Getting Started',
       isIndex: true,
       isActive: false,
       hasVisibleChildren: true,
       children: [
         {
-          slug: '/en/6/getting-started/installation/',
+          slug: '/en/6/getting_started/installation/',
           title: 'Installation',
           isIndex: false,
           isActive: false,
@@ -32,7 +32,7 @@ describe('Sidebar', () => {
       ],
     },
     {
-      slug: '/en/6/developer-guides/',
+      slug: '/en/6/developer_guides/',
       title: 'Developer Guides',
       isIndex: true,
       isActive: false,
@@ -81,14 +81,14 @@ describe('Sidebar', () => {
   it('should auto-expand parent of active page', async () => {
     const activeTree: NavNode[] = [
       {
-        slug: '/en/6/getting-started/',
+        slug: '/en/6/getting_started/',
         title: 'Getting Started',
         isIndex: true,
         isActive: false,
         hasVisibleChildren: true,
         children: [
           {
-            slug: '/en/6/getting-started/installation/',
+            slug: '/en/6/getting_started/installation/',
             title: 'Installation',
             isIndex: false,
             isActive: true,
@@ -99,7 +99,7 @@ describe('Sidebar', () => {
       },
     ];
 
-    render(<Sidebar navTree={activeTree} currentSlug="/en/6/getting-started/installation/" version="6" />);
+    render(<Sidebar navTree={activeTree} currentSlug="/en/6/getting_started/installation/" version="6" />);
 
     // Installation should be visible because parent is auto-expanded
     await waitFor(() => {
@@ -110,7 +110,7 @@ describe('Sidebar', () => {
   it('should mark active page with active class', async () => {
     const activeTree: NavNode[] = [
       {
-        slug: '/en/6/getting-started/',
+        slug: '/en/6/getting_started/',
         title: 'Getting Started',
         isIndex: true,
         isActive: true,
@@ -119,7 +119,7 @@ describe('Sidebar', () => {
       },
     ];
 
-    render(<Sidebar navTree={activeTree} currentSlug="/en/6/getting-started/" version="6" />);
+    render(<Sidebar navTree={activeTree} currentSlug="/en/6/getting_started/" version="6" />);
 
     const activeLink = screen.getByText('Getting Started');
     expect(activeLink).toHaveClass('active');
@@ -137,7 +137,7 @@ describe('Sidebar', () => {
       const stored = localStorage.getItem('sidebar_state_v6');
       expect(stored).toBeTruthy();
       const parsed = JSON.parse(stored || '[]');
-      expect(parsed).toContain('/en/6/getting-started/');
+      expect(parsed).toContain('/en/6/getting_started/');
     });
 
     // Rerender and verify it's still expanded
@@ -165,14 +165,14 @@ describe('Sidebar', () => {
     // Switch to v5 and verify separate storage
     const v5Tree: NavNode[] = [
       {
-        slug: '/en/5/getting-started/',
+        slug: '/en/5/getting_started/',
         title: 'Getting Started v5',
         isIndex: true,
         isActive: false,
         hasVisibleChildren: true,
         children: [
           {
-            slug: '/en/5/getting-started/setup/',
+            slug: '/en/5/getting_started/setup/',
             title: 'Setup',
             isIndex: false,
             isActive: false,
@@ -195,8 +195,8 @@ describe('Sidebar', () => {
     render(<Sidebar navTree={mockNavTree} currentSlug="/en/6/" version="6" />);
 
     const links = screen.getAllByRole('link');
-    expect(links[0]).toHaveAttribute('href', '/en/6/getting-started/');
-    expect(links[1]).toHaveAttribute('href', '/en/6/developer-guides/');
+    expect(links[0]).toHaveAttribute('href', '/en/6/getting_started/');
+    expect(links[1]).toHaveAttribute('href', '/en/6/developer_guides/');
   });
 
   it('should handle empty nav tree', () => {

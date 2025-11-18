@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import { SearchBox } from '@/components/SearchBox';
 
 jest.mock('next/navigation', () => ({
-  usePathname: () => '/en/6/getting-started',
+  usePathname: () => '/en/6/getting_started',
 }));
 
 jest.mock('@docsearch/react', () => ({
@@ -47,7 +47,7 @@ describe('SearchBox Component', () => {
   it('extracts version from pathname', () => {
     const { getByTestId } = render(<SearchBox />);
     // The version should be extracted from the pathname
-    // In this case, it should be '6' from '/en/6/getting-started'
+    // In this case, it should be '6' from '/en/6/getting_started'
     expect(getByTestId('docsearch')).toBeInTheDocument();
   });
 });

@@ -41,7 +41,7 @@ describe('buildNavTree - Integration with mock content', () => {
       return;
     }
 
-    const tree = buildNavTree(allDocs, '6', '/en/6/getting-started/');
+    const tree = buildNavTree(allDocs, '6', '/en/6/getting_started/');
     
     // Find Getting Started node
     const gettingStarted = tree.find(n => n.title.includes('Getting'));

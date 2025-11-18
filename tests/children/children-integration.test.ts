@@ -30,26 +30,26 @@ describe('Children rendering integration', () => {
   it('renders children in hierarchical card layout', () => {
     const v6 = createDoc('/en/6', 'Silverstripe CMS 6', true, '/', undefined, 'index');
     const started = createDoc(
-      '/en/6/getting-started',
+      '/en/6/getting_started',
       'Getting Started',
       true,
       '/en/6',
       'Learn the basics',
-      '01_getting-started'
+      '01_getting_started'
     );
     const page1 = createDoc(
-      '/en/6/getting-started/installation',
+      '/en/6/getting_started/installation',
       'Installation',
       false,
-      '/en/6/getting-started',
+      '/en/6/getting_started',
       'Install Silverstripe',
       '01_installation'
     );
     const page2 = createDoc(
-      '/en/6/getting-started/requirements',
+      '/en/6/getting_started/requirements',
       'Requirements',
       false,
-      '/en/6/getting-started',
+      '/en/6/getting_started',
       'System requirements',
       '02_requirements'
     );

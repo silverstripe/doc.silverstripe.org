@@ -4,32 +4,32 @@ describe('slug-generator', () => {
   describe('generateSlug', () => {
     it('generates basic slug with version', () => {
       const slug = generateSlug('01_Getting_Started', 'v6');
-      expect(slug).toBe('/en/6/getting-started/');
+      expect(slug).toBe('/en/6/getting_started/');
     });
 
     it('strips numeric prefixes from path segments', () => {
       const slug = generateSlug('01_getting_started/02_installation', 'v6');
-      expect(slug).toBe('/en/6/getting-started/installation/');
+      expect(slug).toBe('/en/6/getting_started/installation/');
     });
 
     it('converts to lowercase', () => {
       const slug = generateSlug('01_Getting_Started/02_Installation', 'v6');
-      expect(slug).toBe('/en/6/getting-started/installation/');
+      expect(slug).toBe('/en/6/getting_started/installation/');
     });
 
-    it('converts underscores to hyphens', () => {
+    it('preserves underscores', () => {
       const slug = generateSlug('advanced_options', 'v6');
-      expect(slug).toBe('/en/6/advanced-options/');
+      expect(slug).toBe('/en/6/advanced_options/');
     });
 
     it('handles version without v prefix', () => {
       const slug = generateSlug('getting_started', '6');
-      expect(slug).toBe('/en/6/getting-started/');
+      expect(slug).toBe('/en/6/getting_started/');
     });
 
     it('handles version with v prefix', () => {
       const slug = generateSlug('getting_started', 'v5');
-      expect(slug).toBe('/en/5/getting-started/');
+      expect(slug).toBe('/en/5/getting_started/');
     });
 
     it('supports optional features path', () => {
@@ -38,7 +38,7 @@ describe('slug-generator', () => {
         'v6',
         'optional_features'
       );
-      expect(slug).toContain('/en/6/optional-features');
+      expect(slug).toContain('/en/6/optional_features');
       expect(slug).toContain('linkfield');
     });
 
@@ -47,7 +47,7 @@ describe('slug-generator', () => {
         '01_Getting_Started/02_Advanced_Installation/03_Docker',
         'v6'
       );
-      expect(slug).toBe('/en/6/getting-started/advanced-installation/docker/');
+      expect(slug).toBe('/en/6/getting_started/advanced_installation/docker/');
     });
 
     it('handles empty path', () => {
@@ -69,7 +69,7 @@ describe('slug-generator', () => {
         '01_Getting_Started/index.md',
         'v6'
       );
-      expect(slug).toBe('/en/6/getting-started/');
+      expect(slug).toBe('/en/6/getting_started/');
     });
 
     it('generates slug from nested index path', () => {
@@ -77,7 +77,7 @@ describe('slug-generator', () => {
         '02_developer_guides/01_model/index.md',
         'v6'
       );
-      expect(slug).toBe('/en/6/developer-guides/model/');
+      expect(slug).toBe('/en/6/developer_guides/model/');
     });
 
     it('supports optional parameter', () => {
@@ -86,7 +86,7 @@ describe('slug-generator', () => {
         'v6',
         'optional_features'
       );
-      expect(slug).toContain('/en/6/optional-features');
+      expect(slug).toContain('/en/6/optional_features');
     });
 
     it('handles non-index files by using their directory', () => {
@@ -96,7 +96,7 @@ describe('slug-generator', () => {
         '01_getting_started/readme.md',
         'v6'
       );
-      expect(slug).toBe('/en/6/getting-started/');
+      expect(slug).toBe('/en/6/getting_started/');
     });
   });
 
@@ -108,7 +108,7 @@ describe('slug-generator', () => {
 
       expect(slug1).toBe(slug2);
       expect(slug2).toBe(slug3);
-      expect(slug1).toBe('/en/6/getting-started/installation/');
+      expect(slug1).toBe('/en/6/getting_started/installation/');
     });
   });
 });
