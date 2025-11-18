@@ -3,19 +3,40 @@ import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
 import rehypeRaw from 'rehype-raw';
-import rehypeSanitize from 'rehype-sanitize';
+import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
 import rehypeStringify from 'rehype-stringify';
 import { visit } from 'unist-util-visit';
 import type { Root } from 'hast';
 import { highlightCodeBlocks } from './syntax-highlight';
 import { remarkImages } from './remark-images';
+import { cleanApiTags, setCurrentVersion } from './api-links';
+import { rewriteApiLinksInHtml } from './rewrite-api-links-html';
+
+/**
+ * Custom sanitizer schema that allows api: protocol for links
+ */
+const sanitizerSchema = {
+  ...defaultSchema,
+  protocols: {
+    ...(defaultSchema.protocols || {}),
+    href: [...(defaultSchema.protocols?.href || []), 'api']
+  }
+};
 
 /**
  * Convert markdown content to HTML using remark/rehype pipeline
  * Supports GitHub Flavored Markdown and raw HTML
  * Optionally resolves relative image paths
  */
-export async function markdownToHtml(content: string, filePath?: string): Promise<string> {
+export async function markdownToHtml(content: string, filePath?: string, version?: string): Promise<string> {
+  // Pre-process markdown to convert shorthand API links to markdown link syntax
+  let processedContent = cleanApiTags(content);
+
+  // Set the current version for API link rewriting
+  if (version) {
+    setCurrentVersion(version);
+  }
+
   const processor = unified()
     .use(remarkParse)
     .use(remarkGfm)
@@ -23,18 +44,25 @@ export async function markdownToHtml(content: string, filePath?: string): Promis
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
     .use(highlightCodeBlocks)
-    .use(rehypeSanitize)
+    .use(rehypeSanitize, sanitizerSchema)
     .use(rehypeStringify);
 
-  const file = await processor.process(content);
-  return String(file);
+  const file = await processor.process(processedContent);
+  let html = String(file);
+
+  // Post-process to rewrite API links in HTML
+  if (version) {
+    html = rewriteApiLinksInHtml(html, version);
+  }
+
+  return html;
 }
 
 /**
  * Process markdown for headings with IDs and cleanup
  */
-export async function markdownToHtmlWithCleanup(content: string, filePath?: string): Promise<string> {
-  let html = await markdownToHtml(content, filePath);
+export async function markdownToHtmlWithCleanup(content: string, filePath?: string, version?: string): Promise<string> {
+  let html = await markdownToHtml(content, filePath, version);
   html = cleanHeaders(html);
   html = cleanWhitespace(html);
   return html;

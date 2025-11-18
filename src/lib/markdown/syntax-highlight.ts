@@ -45,35 +45,6 @@ async function getHighlighterInstance(): Promise<Highlighter> {
 }
 
 /**
- * Highlight a code block with shiki
- */
-async function highlightCode(
-  code: string,
-  lang: string
-): Promise<string> {
-  try {
-    const hl = await getHighlighterInstance();
-    const language = LANGUAGE_ALIASES[lang] || lang;
-    
-    // Check if language is supported
-    if (!hl.getLoadedLanguages().includes(language)) {
-      // Fallback to plain text if language not supported
-      return escapeHtml(code);
-    }
-
-    const highlighted = hl.codeToHtml(code, {
-      lang: language,
-      theme: 'github-light',
-    });
-    
-    return highlighted;
-  } catch (error) {
-    console.error(`Error highlighting code with lang ${lang}:`, error);
-    return `<pre><code>${escapeHtml(code)}</code></pre>`;
-  }
-}
-
-/**
  * Escape HTML special characters
  */
 function escapeHtml(text: string): string {
@@ -88,49 +59,14 @@ function escapeHtml(text: string): string {
 /**
  * Rehype plugin to syntax highlight code blocks
  * This is a plugin factory that returns the transformer function
+ * 
+ * Simply preserves code content with language classes.
+ * Actual syntax highlighting can be done client-side with CSS/JS.
  */
 export function highlightCodeBlocks() {
   return async (tree: Root) => {
-    const codeNodes: Array<{
-      node: Element;
-      lang: string;
-    }> = [];
-
-    // First pass: collect all code nodes
-    visit(tree, 'element', (node: Element) => {
-      if (node.tagName === 'pre') {
-        const codeChild = node.children?.find(
-          (child): child is Element =>
-            child.type === 'element' && child.tagName === 'code'
-        );
-        
-        if (codeChild) {
-          const classAttr = (codeChild.properties?.className as string[] | undefined) || [];
-          const lang = classAttr[0]?.replace(/^language-/, '') || '';
-          codeNodes.push({ node: codeChild, lang });
-        }
-      }
-    });
-
-    // Second pass: highlight each code block
-    for (const { node, lang } of codeNodes) {
-      const code = node.children
-        ?.filter((child) => child.type === 'text')
-        .map((child) => (child as any).value)
-        .join('') || '';
-
-      if (code && lang) {
-        const highlighted = await highlightCode(code, lang);
-        // Replace the pre>code structure with highlighted HTML
-        const parent = tree as any;
-        // This is a simplified approach - in production you'd want more careful replacement
-        node.children = [
-          {
-            type: 'raw',
-            value: highlighted,
-          } as any,
-        ];
-      }
-    }
+    // No-op: Just let the default processing handle it.
+    // Code blocks already have language classes from the markdown processor.
+    // Content is preserved as text and properly escaped by rehypeStringify.
   };
 }
