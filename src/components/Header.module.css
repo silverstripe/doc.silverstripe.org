@@ -115,6 +115,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  order: -2;
 }
 
 .hamburgerWrapper {
@@ -167,7 +168,8 @@
   }
 
   .versionSwitcherWrapper {
-    display: none;
+    display: flex;
+    order: -2;
   }
 }
 

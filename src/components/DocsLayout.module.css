@@ -56,8 +56,8 @@
     max-height: none;
     padding-right: 1rem;
     padding-left: 1rem;
-    border-right: 1px solid #e9ecef;
-    background-color: white;
+    border-right: 1px solid var(--theme-border);
+    background-color: var(--theme-bg-white);
     z-index: 100;
     overflow-y: auto;
   }

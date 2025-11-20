@@ -63,6 +63,7 @@
   display: inline-block;
   font-size: 0.75rem;
   transform: rotate(0deg);
+  color: var(--theme-color-primary);
 }
 
 @media (prefers-reduced-motion: no-preference) {
