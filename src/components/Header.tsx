@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { SearchBox } from './SearchBox';
 import { VersionSwitcher } from './VersionSwitcher';
 import { HamburgerButton } from './HamburgerButton';
+import { DarkModeToggle } from './DarkModeToggle';
 import styles from './Header.module.css';
 import { usePathname } from 'next/navigation';
 
@@ -40,9 +41,9 @@ export function Header({ onMobileMenuToggle }: HeaderProps) {
     <header className={styles.header}>
       <div className={styles.headerContent}>
         <Link href="/" className={styles.logo}>
-          <img src="/logo.svg" alt="SilverStripe" className={styles.logoImage} />
+          <img src="/logo.svg" alt="Silverstripe" className={styles.logoImage} />
           <div className={styles.logoText}>
-            <span className={styles.logoTitle}>SilverStripe</span>
+            <span className={styles.logoTitle}>Silverstripe</span>
             <span className={styles.logoSubtitle}>Docs</span>
           </div>
         </Link>
@@ -53,9 +54,12 @@ export function Header({ onMobileMenuToggle }: HeaderProps) {
 
         <nav className={styles.nav}>
           <div className={styles.navItem}>
-            <a href="https://github.com/silverstripe" className={styles.navLink}>
+            <a href="https://github.com/silverstripe/developer-docs" className={styles.navLink}>
               <i className={`fab fa-github ${styles.githubIcon}`}></i>
             </a>
+          </div>
+          <div className={styles.navItem}>
+            <DarkModeToggle />
           </div>
           <div className={styles.versionSwitcherWrapper}>
             <VersionSwitcher

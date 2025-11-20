@@ -61,6 +61,45 @@
     'Noto Color Emoji';
 }
 
+/* Dark mode theme */
+:root.dark {
+  /* Primary Colors */
+  --theme-color-primary: #4a9eff;
+  --theme-color-primary-light: #1a3a4d;
+  
+  /* Text Colors */
+  --theme-text-primary: #e8e8e8;
+  --theme-text-secondary: #b0b0b0;
+  --theme-text-light: #808080;
+  
+  /* Background Colors */
+  --theme-bg-light: #2d3436;
+  --theme-bg-dark: #1a1f2e;
+  --theme-bg-white: #1e1e1e;
+  --theme-bg-gray: #2a2a2a;
+  
+  /* Border/Divider Colors */
+  --theme-border: #3a3a3a;
+  --theme-divider: #333333;
+  
+  /* Status Colors */
+  --theme-success: #66bb6a;
+  --theme-success-dark: #43a047;
+  --theme-success-light: #1b5e20;
+  
+  --theme-info: #42a5f5;
+  --theme-info-dark: #1e88e5;
+  --theme-info-light: #0d47a1;
+  
+  --theme-warning: #ffa726;
+  --theme-warning-dark: #f57c00;
+  --theme-warning-light: #e65100;
+  
+  --theme-danger: #ef5350;
+  --theme-danger-dark: #c62828;
+  --theme-danger-light: #b71c1c;
+}
+
 /* ============ Global Base Styles ============ */
 * {
   margin: 0;
@@ -80,6 +119,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 /* ============ Typography ============ */

@@ -1,5 +1,5 @@
 .header {
-  background-color: white;
+  background-color: var(--theme-bg-white);
   border-bottom: 1px solid var(--theme-border);
   padding: 0.875rem 0;
   height: var(--header-height);
@@ -9,6 +9,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
 }
 
 .headerContent {

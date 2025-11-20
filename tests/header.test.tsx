@@ -22,7 +22,7 @@ describe('Header Component', () => {
     const { getByTestId, getByText } = render(<Header />);
     
     expect(getByTestId('search-box')).toBeInTheDocument();
-    expect(getByText('SilverStripe')).toBeInTheDocument();
+    expect(getByText('Silverstripe')).toBeInTheDocument();
   });
 
   it('does not render Home link', () => {
@@ -47,7 +47,7 @@ describe('Header Component', () => {
 
   it('renders logo image with correct src', () => {
     const { getByAltText } = render(<Header />);
-    const logoImg = getByAltText('SilverStripe');
+    const logoImg = getByAltText('Silverstripe');
     
     expect(logoImg).toHaveAttribute('src', '/logo.svg');
   });

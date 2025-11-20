@@ -50,14 +50,14 @@ describe('Header Component', () => {
 
   it('should render logo image with correct src and alt text', () => {
     render(<Header />);
-    const logoImg = screen.getByAltText('SilverStripe');
+    const logoImg = screen.getByAltText('Silverstripe');
     expect(logoImg).toBeInTheDocument();
     expect(logoImg).toHaveAttribute('src', '/logo.svg');
   });
 
-  it('should render logo text "SilverStripe" and "Docs"', () => {
+  it('should render logo text "Silverstripe" and "Docs"', () => {
     render(<Header />);
-    expect(screen.getByText('SilverStripe')).toBeInTheDocument();
+    expect(screen.getByText('Silverstripe')).toBeInTheDocument();
     expect(screen.getByText('Docs')).toBeInTheDocument();
   });
 
@@ -70,7 +70,7 @@ describe('Header Component', () => {
   it('should render GitHub icon with correct class', () => {
     render(<Header />);
     const githubLink = screen.getByRole('link', { name: '' }).closest('a');
-    expect(githubLink).toHaveAttribute('href', 'https://github.com/silverstripe');
+    expect(githubLink).toHaveAttribute('href', 'https://github.com/silverstripe/developer-docs');
     
     const githubIcon = githubLink?.querySelector('i');
     expect(githubIcon).toBeInTheDocument();
@@ -81,7 +81,7 @@ describe('Header Component', () => {
     render(<Header />);
     const githubLinks = screen.getAllByRole('link');
     const githubLink = githubLinks.find(link => 
-      link.getAttribute('href') === 'https://github.com/silverstripe'
+      link.getAttribute('href') === 'https://github.com/silverstripe/developer-docs'
     );
     
     const githubIcon = githubLink?.querySelector('i');
@@ -100,7 +100,7 @@ describe('Header Component', () => {
 
   it('should have logo as link to home page', () => {
     render(<Header />);
-    const logoLink = screen.getByAltText('SilverStripe').closest('a');
+    const logoLink = screen.getByAltText('Silverstripe').closest('a');
     expect(logoLink).toHaveAttribute('href', '/');
   });
 
@@ -108,7 +108,7 @@ describe('Header Component', () => {
     render(<Header />);
     const githubLinks = screen.getAllByRole('link');
     const githubLink = githubLinks.find(link =>
-      link.getAttribute('href') === 'https://github.com/silverstripe'
+      link.getAttribute('href') === 'https://github.com/silverstripe/developer-docs'
     );
     expect(githubLink).toBeInTheDocument();
   });
