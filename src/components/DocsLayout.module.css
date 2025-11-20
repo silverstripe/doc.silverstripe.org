@@ -40,6 +40,7 @@
   margin-bottom: 1rem;
 }
 
+/* Mobile: hide sidebar by default */
 @media (max-width: 1023px) {
   .grid {
     display: block;
@@ -47,5 +48,28 @@
 
   .sidebarContainer {
     display: none;
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    width: var(--sidebar-width);
+    height: calc(100vh - var(--header-height));
+    max-height: none;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    border-right: 1px solid #e9ecef;
+    background-color: white;
+    z-index: 100;
+    overflow-y: auto;
+  }
+
+  /* Show sidebar when hamburger is open */
+  .sidebarOpen {
+    display: block;
+  }
+
+  .mainContent {
+    width: 100%;
   }
 }
+
+

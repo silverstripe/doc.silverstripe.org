@@ -116,6 +116,11 @@
   gap: 0.5rem;
 }
 
+.hamburgerWrapper {
+  display: none;
+  align-items: center;
+}
+
 .search {
   display: flex;
   align-items: center;
@@ -145,12 +150,22 @@
   color: var(--theme-text-light);
 }
 
+@media (max-width: 1023px) {
+  .hamburgerWrapper {
+    display: flex;
+  }
+}
+
 @media (max-width: 991px) {
   .nav {
     gap: 1rem;
   }
 
   .search {
+    display: none;
+  }
+
+  .versionSwitcherWrapper {
     display: none;
   }
 }

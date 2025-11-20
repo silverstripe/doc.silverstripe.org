@@ -1,21 +1,40 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { SearchBox } from './SearchBox';
 import { VersionSwitcher } from './VersionSwitcher';
+import { HamburgerButton } from './HamburgerButton';
 import styles from './Header.module.css';
 import { usePathname } from 'next/navigation';
+
+interface HeaderProps {
+  onMobileMenuToggle?: (isOpen: boolean) => void;
+}
 
 /**
  * Header component with navigation and branding
  */
-export function Header() {
+export function Header({ onMobileMenuToggle }: HeaderProps) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   
   // Extract version and slug from pathname
   const pathParts = pathname.split('/').filter(Boolean);
   const version = pathParts[1] || '6';
   const slug = pathname;
+
+  // Close menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    onMobileMenuToggle?.(false);
+  }, [pathname, onMobileMenuToggle]);
+
+  const handleMobileMenuToggle = () => {
+    const newState = !isMobileMenuOpen;
+    setIsMobileMenuOpen(newState);
+    onMobileMenuToggle?.(newState);
+  };
 
   return (
     <header className={styles.header}>
@@ -42,6 +61,12 @@ export function Header() {
             <VersionSwitcher
               currentVersion={version}
               currentSlug={slug}
+            />
+          </div>
+          <div className={styles.hamburgerWrapper}>
+            <HamburgerButton
+              isOpen={isMobileMenuOpen}
+              onClick={handleMobileMenuToggle}
             />
           </div>
         </nav>

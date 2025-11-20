@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { generateRootMetadata } from '@/lib/seo';
-import { Header } from '@/components/Header';
+import { RootLayoutClient } from '@/components/RootLayoutClient';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './globals.css';
 
@@ -14,9 +14,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
+        <RootLayoutClient>{children}</RootLayoutClient>
       </body>
     </html>
   );
 }
+
+

@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { Header } from '@/components/Header';
 
@@ -24,6 +25,19 @@ jest.mock('@/components/SearchBox', () => ({
 jest.mock('@/components/VersionSwitcher', () => ({
   VersionSwitcher: ({ currentVersion }: any) => (
     <div data-testid="version-switcher">v{currentVersion}</div>
+  ),
+}));
+
+// Mock HamburgerButton component
+jest.mock('@/components/HamburgerButton', () => ({
+  HamburgerButton: ({ isOpen, onClick }: any) => (
+    <button
+      data-testid="hamburger-button"
+      aria-expanded={isOpen}
+      onClick={onClick}
+    >
+      Menu
+    </button>
   ),
 }));
 
@@ -98,4 +112,39 @@ describe('Header Component', () => {
     );
     expect(githubLink).toBeInTheDocument();
   });
+
+  it('should render HamburgerButton component', () => {
+    render(<Header />);
+    expect(screen.getByTestId('hamburger-button')).toBeInTheDocument();
+  });
+
+  it('should call onMobileMenuToggle when hamburger button is clicked', async () => {
+    const mockToggle = jest.fn();
+    const user = userEvent.setup();
+    
+    render(<Header onMobileMenuToggle={mockToggle} />);
+    
+    const hamburgerButton = screen.getByTestId('hamburger-button');
+    await user.click(hamburgerButton);
+    
+    expect(mockToggle).toHaveBeenCalled();
+  });
+
+  it('should toggle hamburger state when clicked', async () => {
+    const mockToggle = jest.fn();
+    const user = userEvent.setup();
+    
+    const { rerender } = render(<Header onMobileMenuToggle={mockToggle} />);
+    
+    const hamburgerButton = screen.getByTestId('hamburger-button');
+    
+    // Initial state should be closed
+    expect(hamburgerButton).toHaveAttribute('aria-expanded', 'false');
+    
+    await user.click(hamburgerButton);
+    
+    // After first click, toggle should be called with true
+    expect(mockToggle).toHaveBeenCalledWith(true);
+  });
 });
+
