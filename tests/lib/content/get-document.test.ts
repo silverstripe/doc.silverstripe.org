@@ -16,8 +16,8 @@ describe('Document Fetcher', () => {
     it('should return all documents from mock content', async () => {
       const docs = await getAllDocuments();
       
-      // v5: 3 + v6: 11 (with new API_Examples.md) + optional_features: 6 = 20 total
-      expect(docs).toHaveLength(20); // Based on mock-content structure including optional features
+      // v5: 3 + v6: 11 + how-tos: 3 + optional_features: 6 = 23 total
+      expect(docs).toHaveLength(23); // Based on mock-content structure including optional features
       expect(docs[0]).toHaveProperty('slug');
       expect(docs[0]).toHaveProperty('version');
       expect(docs[0]).toHaveProperty('title');

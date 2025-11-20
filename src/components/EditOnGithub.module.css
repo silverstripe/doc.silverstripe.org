@@ -1,0 +1,31 @@
+.editContainer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color, #e5e7eb);
+}
+
+.editLink {
+  font-size: 0.875rem;
+  color: var(--text-muted, #6b7280);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.editLink:hover {
+  color: var(--link-hover, #374151);
+  text-decoration: underline;
+}
+
+@media (prefers-color-scheme: dark) {
+  .editContainer {
+    border-top-color: var(--border-dark, #374151);
+  }
+
+  .editLink {
+    color: var(--text-muted-dark, #9ca3af);
+  }
+
+  .editLink:hover {
+    color: var(--link-hover-dark, #d1d5db);
+  }
+}

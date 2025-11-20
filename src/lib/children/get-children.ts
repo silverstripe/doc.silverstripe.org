@@ -67,26 +67,30 @@ export function getChildrenFiltered(
 
   let nodes: DocumentNode[] = [];
 
+  // Normalize function: convert underscores and hyphens to spaces for comparison
+  const normalize = (str: string): string => 
+    str.replace(/[-_]/g, ' ').toLowerCase();
+
   if (folderName) {
     // Get target folder by name and then get its children
     const targetFolder = getChildren(doc, true).find(
       (child) =>
-        child.isIndex && child.fileTitle.toLowerCase() === folderName.toLowerCase()
+        child.isIndex && normalize(child.fileTitle) === normalize(folderName)
     );
     if (targetFolder) {
       nodes = getChildren(targetFolder, false);
     }
   } else if (exclude.length > 0) {
     // Get all children except excluded ones
-    const exclusionSet = new Set(exclude.map((e) => e.toLowerCase()));
+    const exclusionSet = new Set(exclude.map((e) => normalize(e)));
     nodes = getChildren(doc, includeFolders).filter(
-      (child) => !exclusionSet.has(child.fileTitle.toLowerCase())
+      (child) => !exclusionSet.has(normalize(child.fileTitle))
     );
   } else if (only.length > 0) {
     // Get only specified children
-    const inclusionSet = new Set(only.map((e) => e.toLowerCase()));
+    const inclusionSet = new Set(only.map((e) => normalize(e)));
     nodes = getChildren(doc, includeFolders).filter(
-      (child) => inclusionSet.has(child.fileTitle.toLowerCase())
+      (child) => inclusionSet.has(normalize(child.fileTitle))
     );
   } else {
     // Get all children

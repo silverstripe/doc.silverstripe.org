@@ -3,6 +3,7 @@ import { getDocumentByParams, getAllDocuments } from '@/lib/content/get-document
 import { buildSlugFromParams } from '@/lib/routing';
 import { buildNavTree } from '@/lib/nav';
 import { DocsLayout } from '@/components/DocsLayout';
+import EditOnGithub from '@/components/EditOnGithub';
 import { generatePageMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
@@ -104,7 +105,8 @@ export default async function Page(props: PageProps) {
         </div>
 
         <footer className="mt-12 pt-8 border-t border-gray-200">
-          <p className="text-sm text-gray-500">
+          <EditOnGithub version={doc.version} filePath={doc.filePath} category={doc.category} />
+          <p className="text-sm text-gray-500 mt-8">
             Version {doc.version} • {doc.category}
           </p>
         </footer>

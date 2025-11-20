@@ -90,7 +90,24 @@ export function Sidebar({ navTree, currentSlug, version }: SidebarProps) {
               aria-label={`Toggle ${node.title}`}
             >
               <span className={`${styles.chevron} ${isExpanded ? styles.expanded : ''}`}>
-                ▶
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <polyline
+                  points="4 3 8 6 4 9"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  />
+                </svg>
               </span>
             </button>
           )}

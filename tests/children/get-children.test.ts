@@ -14,7 +14,10 @@ describe('Children utilities', () => {
     slug: string,
     title: string,
     isIndex: boolean,
-    parentSlug: string
+    parentSlug: string,
+    summary?: string,
+    icon?: string,
+    hideChildren?: boolean
   ): DocumentNode => ({
     slug,
     version: '6',
@@ -26,6 +29,9 @@ describe('Children utilities', () => {
     title,
     content: '',
     category: 'docs',
+    ...(summary && { summary }),
+    ...(icon && { icon }),
+    ...(hideChildren && { hideChildren }),
   });
 
   beforeEach(() => {
@@ -146,6 +152,68 @@ describe('Children utilities', () => {
 
       expect(children).toHaveLength(1);
       expect(children[0].fileTitle).toBe('subsection');
+    });
+
+    it('returns nested children when calling getChildren on a nested folder', () => {
+      const root = createDoc('/en/6/section', 'section', true, '/en/6');
+      const nested = createDoc('/en/6/section/subsection', 'subsection', true, '/en/6/section');
+      const child1 = createDoc(
+        '/en/6/section/subsection/page1',
+        'page1',
+        false,
+        '/en/6/section/subsection'
+      );
+      const child2 = createDoc(
+        '/en/6/section/subsection/page2',
+        'page2',
+        false,
+        '/en/6/section/subsection'
+      );
+
+      setAllDocuments([root, nested, child1, child2]);
+
+      const nestedChildren = getChildren(nested, false);
+
+      expect(nestedChildren).toHaveLength(2);
+      expect(nestedChildren.map((c) => c.fileTitle)).toEqual(['page1', 'page2']);
+    });
+
+    it('handles deeply nested children correctly', () => {
+      const level1 = createDoc('/en/6/docs', 'docs', true, '/en/6');
+      const level2 = createDoc('/en/6/docs/guides', 'guides', true, '/en/6/docs');
+      const level3 = createDoc('/en/6/docs/guides/advanced', 'advanced', true, '/en/6/docs/guides');
+      const page = createDoc(
+        '/en/6/docs/guides/advanced/caching',
+        'caching',
+        false,
+        '/en/6/docs/guides/advanced'
+      );
+
+      setAllDocuments([level1, level2, level3, page]);
+
+      // Get children at each level
+      const level1Children = getChildren(level1, true);
+      const level2Children = getChildren(level2, true);
+      const level3Children = getChildren(level3, false);
+
+      expect(level1Children).toHaveLength(1);
+      expect(level2Children).toHaveLength(1);
+      expect(level3Children).toHaveLength(1);
+      expect(level3Children[0].fileTitle).toBe('caching');
+    });
+
+    it('respects hideChildren flag in filtered results', () => {
+      const parent = createDoc('/en/6/section', 'section', true, '/en/6');
+      const child1 = createDoc('/en/6/section/page1', 'page1', false, '/en/6/section');
+      const child2 = createDoc('/en/6/section/page2', 'page2', false, '/en/6/section', undefined, undefined, true);
+      
+      setAllDocuments([parent, child1, child2]);
+
+      const children = getChildren(parent, false);
+
+      // hideChildren flag is a property but doesn't filter in getChildren
+      // It's used in rendering logic
+      expect(children).toHaveLength(2);
     });
   });
 
@@ -323,6 +391,79 @@ describe('Children utilities', () => {
       expect(filtered.map((c) => c.fileTitle)).not.toContain('composer');
       const titles = filtered.map((c) => c.fileTitle);
       expect(titles[0]).toBe('views');
+    });
+
+    it('handles folder name with underscores matching hyphenated fileTitle', () => {
+      const parent = createDoc('/en/6/docs', 'docs', true, '/en/6');
+      const howTos = createDoc(
+        '/en/6/docs/how-tos',
+        'how-tos',
+        true,
+        '/en/6/docs',
+        'How To Guides',
+        undefined,
+        undefined
+      );
+      const page = createDoc(
+        '/en/6/docs/how-tos/first',
+        'first',
+        false,
+        '/en/6/docs/how-tos'
+      );
+
+      setAllDocuments([parent, howTos, page]);
+
+      // Test with underscores (from markdown)
+      const optionsUnderscores: FilterOptions = { folderName: 'How_Tos' };
+      const filtered1 = getChildrenFiltered(parent, optionsUnderscores);
+      expect(filtered1).toHaveLength(1);
+      expect(filtered1[0].fileTitle).toBe('first');
+
+      // Test with hyphens
+      const optionsHyphens: FilterOptions = { folderName: 'How-Tos' };
+      const filtered2 = getChildrenFiltered(parent, optionsHyphens);
+      expect(filtered2).toHaveLength(1);
+      expect(filtered2[0].fileTitle).toBe('first');
+
+      // Test with spaces
+      const optionsSpaces: FilterOptions = { folderName: 'How Tos' };
+      const filtered3 = getChildrenFiltered(parent, optionsSpaces);
+      expect(filtered3).toHaveLength(1);
+      expect(filtered3[0].fileTitle).toBe('first');
+    });
+
+    it('handles exclusions with underscores/hyphens/spaces normalization', () => {
+      const parent = createDoc('/en/6', 'home', true, '/');
+      const page1 = createDoc('/en/6/api_docs', 'api_docs', false, '/en/6');
+      const page2 = createDoc('/en/6/quick-start', 'quick-start', false, '/en/6');
+      const page3 = createDoc('/en/6/advanced guide', 'advanced guide', false, '/en/6');
+
+      setAllDocuments([parent, page1, page2, page3]);
+
+      // Exclude with underscores
+      const options: FilterOptions = { exclude: ['API_Docs', 'Quick-Start'] };
+      const filtered = getChildrenFiltered(parent, options);
+
+      expect(filtered).toHaveLength(1);
+      expect(filtered[0].fileTitle).toContain('advanced');
+    });
+
+    it('handles inclusions with underscores/hyphens/spaces normalization', () => {
+      const parent = createDoc('/en/6', 'home', true, '/');
+      const page1 = createDoc('/en/6/api_docs', 'api_docs', false, '/en/6');
+      const page2 = createDoc('/en/6/quick-start', 'quick-start', false, '/en/6');
+      const page3 = createDoc('/en/6/advanced guide', 'advanced guide', false, '/en/6');
+
+      setAllDocuments([parent, page1, page2, page3]);
+
+      // Include only with mixed formats
+      const options: FilterOptions = { only: ['API_Docs', 'Advanced Guide'] };
+      const filtered = getChildrenFiltered(parent, options);
+
+      expect(filtered).toHaveLength(2);
+      const titles = new Set(filtered.map((c) => c.fileTitle));
+      expect(titles).toContain('api_docs');
+      expect(titles).toContain('advanced guide');
     });
   });
 });
