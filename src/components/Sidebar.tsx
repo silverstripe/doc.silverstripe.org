@@ -17,6 +17,7 @@ interface SidebarProps {
  */
 export function Sidebar({ navTree, currentSlug, version }: SidebarProps) {
   const [expandedSlugs, setExpandedSlugs] = useState<Set<string>>(new Set());
+  const [isHydrated, setIsHydrated] = useState(false);
 
   // Initialize expanded state on mount
   useEffect(() => {
@@ -40,7 +41,8 @@ export function Sidebar({ navTree, currentSlug, version }: SidebarProps) {
     }
 
     setExpandedSlugs(expanded);
-  }, [currentSlug, version]);
+    setIsHydrated(true);
+  }, [currentSlug, version, navTree]);
 
   // Save expanded state to localStorage
   useEffect(() => {
@@ -66,13 +68,19 @@ export function Sidebar({ navTree, currentSlug, version }: SidebarProps) {
     const linkClasses = [
       styles.navLink,
       isActive ? styles.active : '',
-      depth > 0 ? styles.navNested : '',
+    ]
+      .filter(Boolean)
+      .join(' ');
+
+    const itemClasses = [
+      styles.navItem,
+      depth > 0 ? styles.nested : '',
     ]
       .filter(Boolean)
       .join(' ');
 
     return (
-      <li key={node.slug} className={styles.navItem}>
+      <li key={node.slug} className={itemClasses}>
         <div className={styles.navItemContainer}>
           {hasChildren && (
             <button
@@ -102,7 +110,7 @@ export function Sidebar({ navTree, currentSlug, version }: SidebarProps) {
   };
 
   return (
-    <nav className={styles.sidebar} role="navigation">
+    <nav className={`${styles.sidebar} ${isHydrated ? styles.hydrated : ''}`} role="navigation">
       <ul className={styles.nav}>
         {navTree.map(node => renderNode(node, 0))}
       </ul>

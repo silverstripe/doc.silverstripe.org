@@ -2,6 +2,19 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sidebar {
+    transition: opacity 0.2s ease-in-out;
+  }
+}
+
+.sidebar.hydrated {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .nav {
@@ -35,6 +48,11 @@
   height: 24px;
   color: var(--theme-text-secondary);
   transition: transform 0.2s ease-in-out;
+  flex-shrink: 0;
+}
+
+.navItem.nested > .navItemContainer > .navToggle {
+  margin-left: 1rem;
 }
 
 .navToggle:hover {
@@ -44,8 +62,13 @@
 .chevron {
   display: inline-block;
   font-size: 0.75rem;
-  transition: transform 0.2s ease-in-out;
   transform: rotate(0deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .chevron {
+    transition: transform 0.2s ease-in-out;
+  }
 }
 
 .chevron.expanded {
@@ -54,7 +77,12 @@
 
 .navToggleSpacer {
   width: 24px;
+  height: 24px;
   flex-shrink: 0;
+}
+
+.navItem.nested > .navItemContainer > .navToggleSpacer {
+  margin-left: 1rem;
 }
 
 .navLink {
@@ -99,10 +127,6 @@
   list-style: none;
   padding: 0;
   margin: 0.5rem 0 0 0;
-}
-
-.navNested {
-  margin-left: 1rem;
 }
 
 /* Scrollbar styling */

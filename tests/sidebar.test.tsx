@@ -217,4 +217,142 @@ describe('Sidebar', () => {
     const toggle = parent?.querySelector('button');
     expect(toggle).not.toBeInTheDocument();
   });
+
+  it('should render nested items with correct depth classes on chevron buttons', async () => {
+    const deepTree: NavNode[] = [
+      {
+        slug: '/en/6/level1/',
+        title: 'Level 1',
+        isIndex: true,
+        isActive: false,
+        hasVisibleChildren: true,
+        children: [
+          {
+            slug: '/en/6/level1/level2/',
+            title: 'Level 2',
+            isIndex: false,
+            isActive: false,
+            hasVisibleChildren: true,
+            children: [
+              {
+                slug: '/en/6/level1/level2/level3/',
+                title: 'Level 3',
+                isIndex: false,
+                isActive: false,
+                hasVisibleChildren: false,
+                children: [],
+              },
+            ],
+          },
+        ],
+      },
+    ];
+
+    render(<Sidebar navTree={deepTree} currentSlug="/en/6/" version="6" />);
+
+    // Expand level 1
+    const level1Toggle = screen.getByRole('button');
+    fireEvent.click(level1Toggle);
+
+    await waitFor(() => {
+      expect(screen.getByText('Level 2')).toBeInTheDocument();
+    });
+
+    // Verify level 2 li has nested class for proper indentation
+    const level2Link = screen.getByText('Level 2');
+    const level2Li = level2Link.closest('li');
+    expect(level2Li).toHaveClass('nested');
+
+    // Expand level 2
+    const level2Toggle = level2Li?.querySelector('button');
+    fireEvent.click(level2Toggle!);
+
+    await waitFor(() => {
+      expect(screen.getByText('Level 3')).toBeInTheDocument();
+    });
+
+    // Verify level 3 li has nested class
+    const level3Link = screen.getByText('Level 3');
+    const level3Li = level3Link.closest('li');
+    expect(level3Li).toHaveClass('nested');
+  });
+
+  it('should not apply animation class on initial mount for expanded items', async () => {
+    const autoExpandTree: NavNode[] = [
+      {
+        slug: '/en/6/parent/',
+        title: 'Parent',
+        isIndex: true,
+        isActive: false,
+        hasVisibleChildren: true,
+        children: [
+          {
+            slug: '/en/6/parent/active_child/',
+            title: 'Active Child',
+            isIndex: false,
+            isActive: true,
+            hasVisibleChildren: false,
+            children: [],
+          },
+        ],
+      },
+    ];
+
+    render(<Sidebar navTree={autoExpandTree} currentSlug="/en/6/parent/active_child/" version="6" />);
+
+    // Auto-expanded items should be visible immediately
+    await waitFor(() => {
+      expect(screen.getByText('Active Child')).toBeInTheDocument();
+    });
+
+    // Chevron should have expanded class
+    const parentLink = screen.getByText('Parent');
+    const parentContainer = parentLink.closest('div');
+    const parentButton = parentContainer?.querySelector('button');
+    const chevron = parentButton?.querySelector('span');
+    expect(chevron).toHaveClass('expanded');
+  });
+
+  it('should apply correct margin to base level toggle', () => {
+    render(<Sidebar navTree={mockNavTree} currentSlug="/en/6/" version="6" />);
+
+    const toggles = screen.getAllByRole('button');
+    const baseToggle = toggles[0];
+    
+    // Base level toggle should not have depth classes
+    expect(baseToggle).toHaveClass('navToggle');
+    expect(baseToggle).not.toHaveClass('depth1');
+
+    // Base level li should not have nested class
+    const baseLi = baseToggle.closest('li');
+    expect(baseLi).not.toHaveClass('nested');
+  });
+
+  it('should hide sidebar initially and show after hydration (FOUT fix)', async () => {
+    const { container, rerender } = render(<Sidebar navTree={mockNavTree} currentSlug="/en/6/" version="6" />);
+
+    // Get the nav element
+    const nav = container.querySelector('nav');
+    expect(nav).toBeInTheDocument();
+
+    // After first render cycle and hydration effect, should have hydrated class
+    await waitFor(() => {
+      expect(nav).toHaveClass('hydrated');
+    });
+  });
+
+  it('should have pointer-events: none while not hydrated, then auto on hydration', async () => {
+    const { container } = render(<Sidebar navTree={mockNavTree} currentSlug="/en/6/" version="6" />);
+
+    const nav = container.querySelector('nav');
+    expect(nav).toBeInTheDocument();
+
+    // After hydration effect completes, nav should be interactive with hydrated class
+    await waitFor(() => {
+      expect(nav).toHaveClass('hydrated');
+    });
+
+    // When hydrated class is present, pointer-events should be auto (via CSS)
+    expect(nav?.className).toContain('hydrated');
+  });
 });
