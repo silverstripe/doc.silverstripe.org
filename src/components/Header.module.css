@@ -53,6 +53,13 @@
   font-size: 0.875rem;
 }
 
+.logoImage {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
 .logoText {
   display: flex;
   flex-direction: column;
@@ -97,6 +104,10 @@
 
 .navLink:hover {
   color: var(--theme-color-primary);
+}
+
+.githubIcon {
+  font-size: 1.5rem;
 }
 
 .versionSwitcherWrapper {

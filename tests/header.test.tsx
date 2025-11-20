@@ -25,15 +25,30 @@ describe('Header Component', () => {
     expect(getByText('SilverStripe')).toBeInTheDocument();
   });
 
-  it('renders navigation links', () => {
-    const { getByText } = render(<Header />);
+  it('does not render Home link', () => {
+    const { queryByText } = render(<Header />);
     
-    expect(getByText('Home')).toBeInTheDocument();
+    expect(queryByText('Home')).not.toBeInTheDocument();
+  });
+
+  it('renders GitHub icon with larger size', () => {
+    const { container } = render(<Header />);
+    const githubIcon = container.querySelector('.fab.fa-github');
+    
+    expect(githubIcon).toBeInTheDocument();
+    expect(githubIcon).toHaveClass('githubIcon');
   });
 
   it('renders version switcher', () => {
     const { getByTestId } = render(<Header />);
     
     expect(getByTestId('version-switcher')).toBeInTheDocument();
+  });
+
+  it('renders logo image with correct src', () => {
+    const { getByAltText } = render(<Header />);
+    const logoImg = getByAltText('SilverStripe');
+    
+    expect(logoImg).toHaveAttribute('src', '/logo.svg');
   });
 });

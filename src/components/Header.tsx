@@ -21,7 +21,7 @@ export function Header() {
     <header className={styles.header}>
       <div className={styles.headerContent}>
         <Link href="/" className={styles.logo}>
-          <span className={styles.logoBrand}>SS</span>
+          <img src="/logo.svg" alt="SilverStripe" className={styles.logoImage} />
           <div className={styles.logoText}>
             <span className={styles.logoTitle}>SilverStripe</span>
             <span className={styles.logoSubtitle}>Docs</span>
@@ -34,13 +34,8 @@ export function Header() {
 
         <nav className={styles.nav}>
           <div className={styles.navItem}>
-            <a href="https://www.silverstripe.org" className={styles.navLink}>
-              Home
-            </a>
-          </div>
-          <div className={styles.navItem}>
             <a href="https://github.com/silverstripe" className={styles.navLink}>
-              <i className="fab fa-github"></i>
+              <i className={`fab fa-github ${styles.githubIcon}`}></i>
             </a>
           </div>
           <div className={styles.versionSwitcherWrapper}>
