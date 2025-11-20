@@ -50,9 +50,10 @@ describe('VersionSwitcher Component', () => {
       />
     );
 
-    expect(screen.getByText(/6\.0 \(Current\)/)).toBeInTheDocument();
-    expect(screen.getByText(/5\.0 \(Supported\)/)).toBeInTheDocument();
-    expect(screen.getByText(/3\.0 \(End of Life\)/)).toBeInTheDocument();
+    expect(screen.getByText('v6')).toBeInTheDocument();
+    expect(screen.getByText('v5')).toBeInTheDocument();
+    expect(screen.getByText('v4')).toBeInTheDocument();
+    expect(screen.getByText('v3')).toBeInTheDocument();
   });
 
   it('should navigate when version is changed', () => {

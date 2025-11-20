@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, usePathname } from 'next/navigation';
-import { getAllVersions, getVersionLabel, getVersionStatus } from '@/lib/versions';
+import { getAllVersions, getVersionSwitcherLabel, getVersionStatus } from '@/lib/versions';
 import styles from './VersionSwitcher.module.css';
 
 interface VersionSwitcherProps {
@@ -36,7 +36,7 @@ export function VersionSwitcher({ currentVersion, currentSlug }: VersionSwitcher
       >
         {versions.map((version) => (
           <option key={version} value={version}>
-            {getVersionLabel(version)}
+            {getVersionSwitcherLabel(version)}
           </option>
         ))}
       </select>

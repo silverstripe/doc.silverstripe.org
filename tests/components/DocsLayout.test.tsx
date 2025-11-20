@@ -62,7 +62,6 @@ describe('DocsLayout', () => {
     // Check main elements exist
     expect(screen.getByText('Test content')).toBeInTheDocument();
     expect(screen.getByTestId('sidebar')).toBeInTheDocument();
-    expect(screen.getByTestId('version-banner')).toBeInTheDocument();
   });
 
   it('should render with correct class names', () => {
@@ -138,21 +137,6 @@ describe('DocsLayout', () => {
     expect(screen.getByText('Test content')).toBeInTheDocument();
   });
 
-  it('should render version banner before grid', () => {
-    const { container } = renderWithContext(
-      <DocsLayout
-        navTree={mockNavTree}
-        currentSlug="/en/6/"
-        version="6"
-      >
-        <p>Test content</p>
-      </DocsLayout>
-    );
-
-    const bannerRow = container.querySelector('[class*="bannerRow"]');
-    expect(bannerRow).toBeInTheDocument();
-  });
-
   it('should render with main role on main element', () => {
     const { container } = renderWithContext(
       <DocsLayout
@@ -181,22 +165,6 @@ describe('DocsLayout', () => {
 
     // Sidebar mock should render (verifying props were passed)
     expect(screen.getByTestId('sidebar')).toBeInTheDocument();
-  });
-
-  it('should pass correct props to VersionBanner component', () => {
-    renderWithContext(
-      <DocsLayout
-        navTree={mockNavTree}
-        currentSlug="/en/6/"
-        version="6"
-      >
-        <p>Test content</p>
-      </DocsLayout>
-    );
-
-    // VersionBanner mock should render with correct version
-    const banner = screen.getByTestId('version-banner');
-    expect(banner).toHaveTextContent('Version 6');
   });
 
   it('should not apply sidebarOpen class when mobile menu is closed', () => {

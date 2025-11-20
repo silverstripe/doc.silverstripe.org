@@ -14,7 +14,7 @@ const ALL_VERSIONS = ['3', '4', '5', '6'];
  * Get all available documentation versions
  */
 export function getAllVersions(): string[] {
-  return ALL_VERSIONS;
+  return ALL_VERSIONS.slice().reverse();
 }
 
 /**
@@ -110,7 +110,7 @@ export function getVersionMessage(version: string): {
       return {
         style: 'success',
         icon: 'check-circle',
-        stability: 'Current',
+        stability: 'Supported',
         message: null
       };
     default:
@@ -121,4 +121,11 @@ export function getVersionMessage(version: string): {
         message: null
       };
   }
+}
+
+/**
+ * Get version label for version switcher (without .0 suffix)
+ */
+export function getVersionSwitcherLabel(version: string): string {
+  return `v${version}`;
 }

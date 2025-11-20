@@ -5,5 +5,6 @@ export {
   getVersionPath,
   getVersionLabel,
   getVersionMessage,
+  getVersionSwitcherLabel,
   type VersionStatus
 } from './version-utils';

@@ -2,9 +2,7 @@
 
 import { useContext } from 'react';
 import { Sidebar } from './Sidebar';
-import { VersionBanner } from './VersionBanner';
 import { NavNode } from '@/types';
-import { getDefaultVersion, getVersionPath } from '@/lib/versions';
 import { MobileMenuContext } from '@/contexts/MobileMenuContext';
 import styles from './DocsLayout.module.css';
 
@@ -25,21 +23,11 @@ export function DocsLayout({
   currentSlug,
   version,
 }: DocsLayoutProps) {
-  const isCurrentVersion = version === getDefaultVersion();
-  const latestVersionPath = getVersionPath(currentSlug, getDefaultVersion());
   const { isMobileMenuOpen, onClose } = useContext(MobileMenuContext);
 
   return (
     <div className={styles.layout}>
       <div className={styles.layoutContainer}>
-        {/* Version Banner */}
-        <div className={styles.bannerRow}>
-          <VersionBanner
-            version={version}
-            latestVersionPath={latestVersionPath}
-          />
-        </div>
-
         <div className={styles.grid}>
           {/* Sidebar - always in DOM, shown/hidden by CSS */}
           <div

@@ -3,8 +3,10 @@ import { getDocumentByParams, getAllDocuments } from '@/lib/content/get-document
 import { buildSlugFromParams } from '@/lib/routing';
 import { buildNavTree } from '@/lib/nav';
 import { DocsLayout } from '@/components/DocsLayout';
+import { VersionBanner } from '@/components/VersionBanner';
 import EditOnGithub from '@/components/EditOnGithub';
 import { generatePageMetadata } from '@/lib/seo';
+import { getVersionPath } from '@/lib/versions';
 import type { Metadata } from 'next';
 
 interface PageParams {
@@ -75,6 +77,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 export default async function Page(props: PageProps) {
   const { markdownToHtmlWithCleanup } = await import('@/lib/markdown/processor');
   const { replaceChildrenMarkers } = await import('@/lib/children');
+  const { getDefaultVersion } = await import('@/lib/versions');
   
   const params = await props.params;
   const doc = await getDocumentByParams(params.version, params.slug);
@@ -93,6 +96,9 @@ export default async function Page(props: PageProps) {
   // Replace [CHILDREN] markers with rendered children
   htmlContent = replaceChildrenMarkers(htmlContent, doc, allDocs);
 
+  const defaultVersion = getDefaultVersion();
+  const latestVersionPath = getVersionPath(doc.slug, defaultVersion);
+
   return (
     <DocsLayout
       navTree={navTree}
@@ -100,6 +106,12 @@ export default async function Page(props: PageProps) {
       version={params.version}
     >
       <article>
+        {/* Version Banner inside article for same width */}
+        <VersionBanner
+          version={params.version}
+          latestVersionPath={latestVersionPath}
+        />
+
         <div className="prose max-w-none">
           <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
         </div>

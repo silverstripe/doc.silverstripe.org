@@ -10,11 +10,6 @@ export function VersionBanner({ version, latestVersionPath }: VersionBannerProps
   const message = getVersionMessage(version);
   const isCurrentVersion = version === getDefaultVersion();
 
-  if (isCurrentVersion && !message.message) {
-    // Don't show banner for current version without a message
-    return null;
-  }
-
   return (
     <div className={`${styles.banner} ${styles[`style-${message.style}`]}`} role="alert">
       <div className={styles.content}>

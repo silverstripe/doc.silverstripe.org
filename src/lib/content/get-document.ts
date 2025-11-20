@@ -50,8 +50,8 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
   // Determine content base path
   const contentBase = await resolveContentBasePath();
 
-  // Build versions map - v5 and v6 (and potentially others)
-  const versionDirs = ['v5', 'v6'];
+  // Build versions map - v3, v4, v5, and v6
+  const versionDirs = ['v3', 'v4', 'v5', 'v6'];
   
   if (!cachedDocuments) {
     cachedDocuments = new Map();

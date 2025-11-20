@@ -16,20 +16,24 @@ describe('Document Fetcher', () => {
     it('should return all documents from mock content', async () => {
       const docs = await getAllDocuments();
       
-      // v5: 3 + v6: 11 + how-tos: 3 + optional_features: 6 = 23 total
-      expect(docs).toHaveLength(23); // Based on mock-content structure including optional features
+      // v3: 1 + v4: 1 + v5: 3 + v6: 11 + how-tos: 3 + optional_features: 6 = 25 total
+      expect(docs).toHaveLength(25); // Based on mock-content structure including optional features
       expect(docs[0]).toHaveProperty('slug');
       expect(docs[0]).toHaveProperty('version');
       expect(docs[0]).toHaveProperty('title');
       expect(docs[0]).toHaveProperty('content');
     });
 
-    it('should include v5 and v6 documents', async () => {
+    it('should include v3, v4, v5 and v6 documents', async () => {
       const docs = await getAllDocuments();
       
+      const v3Docs = docs.filter(d => d.version === '3');
+      const v4Docs = docs.filter(d => d.version === '4');
       const v5Docs = docs.filter(d => d.version === '5');
       const v6Docs = docs.filter(d => d.version === '6');
       
+      expect(v3Docs.length).toBeGreaterThan(0);
+      expect(v4Docs.length).toBeGreaterThan(0);
       expect(v5Docs.length).toBeGreaterThan(0);
       expect(v6Docs.length).toBeGreaterThan(0);
     });

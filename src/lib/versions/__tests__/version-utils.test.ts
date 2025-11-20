@@ -5,15 +5,16 @@ import {
   getVersionPath,
   getVersionLabel,
   getVersionMessage,
+  getVersionSwitcherLabel,
   type VersionStatus
 } from '../version-utils';
 
 describe('Version Utilities', () => {
   describe('getAllVersions', () => {
-    it('should return array of all versions', () => {
+    it('should return array of all versions in reverse order', () => {
       const versions = getAllVersions();
       expect(Array.isArray(versions)).toBe(true);
-      expect(versions).toEqual(['3', '4', '5', '6']);
+      expect(versions).toEqual(['6', '5', '4', '3']);
     });
 
     it('should include current version', () => {
@@ -30,6 +31,12 @@ describe('Version Utilities', () => {
       const versions = getAllVersions();
       expect(versions).toContain('3');
       expect(versions).toContain('4');
+    });
+
+    it('should have v6 first and v3 last', () => {
+      const versions = getAllVersions();
+      expect(versions[0]).toBe('6');
+      expect(versions[versions.length - 1]).toBe('3');
     });
   });
 
@@ -144,11 +151,11 @@ describe('Version Utilities', () => {
       expect(msg.message).toContain('still supported');
     });
 
-    it('should return current message for version 6', () => {
+    it('should return supported message for version 6 with no message text', () => {
       const msg = getVersionMessage('6');
       expect(msg.style).toBe('success');
       expect(msg.icon).toBe('check-circle');
-      expect(msg.stability).toBe('Current');
+      expect(msg.stability).toBe('Supported');
       expect(msg.message).toBeNull();
     });
 
@@ -166,6 +173,33 @@ describe('Version Utilities', () => {
         const msg = getVersionMessage(v);
         expect(validStyles).toContain(msg.style);
       });
+    });
+  });
+
+  describe('getVersionSwitcherLabel', () => {
+    it('should return v6 for version 6', () => {
+      const label = getVersionSwitcherLabel('6');
+      expect(label).toBe('v6');
+    });
+
+    it('should return v5 for version 5', () => {
+      const label = getVersionSwitcherLabel('5');
+      expect(label).toBe('v5');
+    });
+
+    it('should return v4 for version 4', () => {
+      const label = getVersionSwitcherLabel('4');
+      expect(label).toBe('v4');
+    });
+
+    it('should return v3 for version 3', () => {
+      const label = getVersionSwitcherLabel('3');
+      expect(label).toBe('v3');
+    });
+
+    it('should not include .0 suffix', () => {
+      const label = getVersionSwitcherLabel('6');
+      expect(label).not.toContain('.0');
     });
   });
 });
