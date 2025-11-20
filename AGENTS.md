@@ -112,9 +112,18 @@ and if applicable (per phase):
 
 ---
 
+## UI Components
+
+**Sidebar:** Navigation with localStorage state (key: `sidebar_state_v{version}`), expandable folders, responsive with hamburger menu on mobile  
+**Dark Mode:** Toggle in header, uses localStorage (key: `theme_preference`), applies `dark` class to `document.documentElement`, CSS custom properties  
+**Header:** Logo (SVG), GitHub icon, VersionSwitcher, DarkModeToggle, SearchBox  
+**Mobile:** Hamburger menu toggles sidebar overlay at <1024px breakpoint, fixed width sidebar above breakpoint
+
+---
+
 ## For AI Agents
 
-**Your mission:** Follow NEXTJS_PLAN.md phases sequentially. Each phase is self-contained.
+**Your mission:** Follow plan files e.g. (PLAN*.md, z-plan*.md) phases sequentially. Each phase is self-contained.
 
 **Approach:**
 1. Implement phase from provided instructions
