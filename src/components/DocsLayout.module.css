@@ -1,3 +1,7 @@
+:root {
+  --sidebar-width: 300px;
+}
+
 .layout {
   min-height: 100vh;
   padding: 2rem 0;
@@ -11,9 +15,16 @@
   margin-left: auto;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  gap: 2rem;
+}
+
 .sidebarContainer {
   position: sticky;
   top: 2rem;
+  width: var(--sidebar-width);
   height: fit-content;
   max-height: calc(100vh - 4rem);
   overflow-y: auto;
@@ -22,19 +33,19 @@
 }
 
 .mainContent {
-  padding-left: 2rem;
+  padding-left: 0;
 }
 
 .bannerRow {
   margin-bottom: 1rem;
 }
 
-@media (max-width: 991px) {
-  .sidebarContainer {
-    display: none;
+@media (max-width: 1023px) {
+  .grid {
+    display: block;
   }
 
-  .mainContent {
-    padding-left: 0;
+  .sidebarContainer {
+    display: none;
   }
 }

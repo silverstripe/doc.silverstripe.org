@@ -35,7 +35,7 @@ export function DocsLayout({
           />
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '2rem' }}>
+        <div className={styles.grid}>
           {/* Sidebar - hidden on mobile by default */}
           <div className={styles.sidebarContainer}>
             <Sidebar navTree={navTree} currentSlug={currentSlug} version={version} />
