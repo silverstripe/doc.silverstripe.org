@@ -51,6 +51,7 @@ interface DocumentNode {
   fileAbsolutePath: string; isIndex: boolean; parentSlug: string;
   title: string; content: string; category: 'docs' | 'user';
   summary?: string; icon?: string; hideChildren?: boolean; hide?: boolean; order?: number;
+  optionalFeature?: string; // e.g., 'linkfield' for optional features
 }
 ```
 
@@ -117,7 +118,23 @@ and if applicable (per phase):
 **Sidebar:** Navigation with localStorage state (key: `sidebar_state_v{version}`), expandable folders, responsive with hamburger menu on mobile  
 **Dark Mode:** Toggle in header, uses localStorage (key: `theme_preference`), applies `dark` class to `document.documentElement`, CSS custom properties  
 **Header:** Logo (SVG), GitHub icon, VersionSwitcher, DarkModeToggle, SearchBox  
-**Mobile:** Hamburger menu toggles sidebar overlay at <1024px breakpoint, fixed width sidebar above breakpoint
+**Mobile:** Hamburger menu toggles sidebar overlay at <1024px breakpoint, fixed width sidebar above breakpoint  
+**Edit on GitHub:** Dynamic URLs based on `src/lib/sources-config.ts`, supports all versions and optional features, uses correct branches from git source configuration
+
+---
+
+## Recent Improvements (Phases 8-9)
+
+**Phase 8:** Removed version footer text ("Version X • docs") from page layout  
+**Phase 8.5:** Fixed Edit on GitHub links:
+- Branch versions corrected (5.4 for v5, 6.1 for v6, etc.)
+- URL structure changed to `/blob/` (read-only) instead of `/edit/`
+- Optional features now point to correct repositories
+- Added `optionalFeature` field to DocumentNode
+- Central configuration in `src/lib/sources-config.ts` with 30+ module mappings
+
+**Test Coverage:** 493 passing tests across 39 suites  
+**Build Status:** All versions (3-6) pre-render successfully (1360 pages)
 
 ---
 

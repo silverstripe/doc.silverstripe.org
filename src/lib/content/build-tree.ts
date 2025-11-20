@@ -115,6 +115,7 @@ export async function buildContentTree(
         content,
         category,
         ...(order !== undefined && { order }),
+        ...(optional && { optionalFeature: optional }),
         ...frontmatter,
       };
 

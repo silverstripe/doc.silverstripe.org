@@ -117,10 +117,12 @@ export default async function Page(props: PageProps) {
         </div>
 
         <footer className="mt-12 pt-8 border-t border-gray-200">
-          <EditOnGithub version={doc.version} filePath={doc.filePath} category={doc.category} />
-          <p className="text-sm text-gray-500 mt-8">
-            Version {doc.version} • {doc.category}
-          </p>
+          <EditOnGithub 
+            version={doc.version} 
+            filePath={doc.filePath} 
+            category={doc.category} 
+            optionalFeature={doc.optionalFeature}
+          />
         </footer>
       </article>
     </DocsLayout>

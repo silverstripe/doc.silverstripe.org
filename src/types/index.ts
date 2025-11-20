@@ -20,6 +20,7 @@ export interface DocumentNode {
   unhideSelf?: boolean;
   introduction?: string;
   order?: number;
+  optionalFeature?: string; // e.g., 'staticpublishqueue' for optional features
 }
 
 /**
