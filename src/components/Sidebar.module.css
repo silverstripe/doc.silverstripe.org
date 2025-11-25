@@ -55,6 +55,10 @@
   margin-left: 1rem;
 }
 
+.navItem.nested > .navItemContainer > .navLink {
+  padding-left: 2rem;
+}
+
 .navToggle:hover {
   opacity: 0.8;
 }

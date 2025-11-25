@@ -50,6 +50,11 @@ export function Header({ onMobileMenuToggle }: HeaderProps) {
     const newState = !isMobileMenuOpen;
     setIsMobileMenuOpen(newState);
     onMobileMenuToggle?.(newState);
+    
+    // Scroll to top when opening mobile menu
+    if (newState && typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+    }
   };
 
   return (

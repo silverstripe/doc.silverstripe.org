@@ -68,6 +68,7 @@ export function Sidebar({ navTree, currentSlug, version }: SidebarProps) {
     const linkClasses = [
       styles.navLink,
       isActive ? styles.active : '',
+      `depth-${depth}`,
     ]
       .filter(Boolean)
       .join(' ');
@@ -75,6 +76,7 @@ export function Sidebar({ navTree, currentSlug, version }: SidebarProps) {
     const itemClasses = [
       styles.navItem,
       depth > 0 ? styles.nested : '',
+      `depth-${depth}`,
     ]
       .filter(Boolean)
       .join(' ');
