@@ -3,8 +3,11 @@ import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
 import rehypeRaw from 'rehype-raw';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
 import rehypeStringify from 'rehype-stringify';
+import { h } from 'hastscript';
 import { visit } from 'unist-util-visit';
 import type { Root } from 'hast';
 import { highlightCodeBlocks } from './syntax-highlight';
@@ -13,14 +16,31 @@ import { cleanApiTags, setCurrentVersion } from './api-links';
 import { rewriteApiLinksInHtml } from './rewrite-api-links-html';
 
 /**
- * Custom sanitizer schema that allows api: protocol for links
+ * Custom sanitizer schema that allows api: protocol for links and className on elements
  */
 const sanitizerSchema = {
   ...defaultSchema,
+  attributes: {
+    ...(defaultSchema.attributes || {}),
+    '*': [...(defaultSchema.attributes?.['*'] || []), 'className']
+  },
   protocols: {
     ...(defaultSchema.protocols || {}),
     href: [...(defaultSchema.protocols?.href || []), 'api']
   }
+};
+
+/**
+ * Configure heading anchor links with icon positioning
+ */
+const autolinkConfig = {
+  behavior: 'append' as const,
+  properties: {
+    className: 'heading-anchor',
+    ariaLabel: 'Permalink to this section',
+    title: 'Permalink to this section'
+  },
+  content: [h('span', '#')]
 };
 
 /**
@@ -41,9 +61,11 @@ export async function markdownToHtml(content: string, filePath?: string, version
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkImages, { currentFilePath: filePath })
-    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(remarkRehype, { allowDangerousHtml: true, clobberPrefix: '' })
     .use(rehypeRaw)
     .use(highlightCodeBlocks)
+    .use(rehypeSlug)
+    .use(rehypeAutolinkHeadings, autolinkConfig)
     .use(rehypeSanitize, sanitizerSchema)
     .use(rehypeStringify);
 
@@ -64,8 +86,18 @@ export async function markdownToHtml(content: string, filePath?: string, version
 export async function markdownToHtmlWithCleanup(content: string, filePath?: string, version?: string): Promise<string> {
   let html = await markdownToHtml(content, filePath, version);
   html = cleanHeaders(html);
+  html = removeUserContentPrefix(html);
   html = cleanWhitespace(html);
   return html;
+}
+
+/**
+ * Removes the 'user-content-' prefix from heading IDs
+ * This prefix is added by remark-rehype for footnote collision prevention
+ * but we want clean IDs on headings
+ */
+function removeUserContentPrefix(html: string): string {
+  return html.replace(/id="user-content-([^"]+)"/g, 'id="$1"');
 }
 
 /**

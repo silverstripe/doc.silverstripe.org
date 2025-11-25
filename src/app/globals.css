@@ -687,6 +687,32 @@ dd {
   margin-left: 1rem;
   margin-bottom: 0.5rem;
 }
+
+/* ============ Heading Anchors ============ */
+.heading-anchor {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  margin-left: 1rem;
+  text-decoration: none;
+  color: var(--theme-text-light);
+  font-size: 0.85em;
+  display: inline-block;
+  padding: 0 0.2rem;
+}
+
+h1:hover .heading-anchor,
+h2:hover .heading-anchor,
+h3:hover .heading-anchor,
+h4:hover .heading-anchor,
+h5:hover .heading-anchor,
+h6:hover .heading-anchor {
+  opacity: 0.6;
+}
+
+.heading-anchor:hover {
+  opacity: 1 !important;
+  color: var(--theme-color-primary);
+}
 @media (max-width: 991px) {
   h1 {
     font-size: 2.25rem;

@@ -55,7 +55,7 @@
 
 ---
 
-# Phase 5: Heading Anchors
+# Phase 4: Heading Anchors
 
 **Objective:** Add self-links to headings for easy sharing.
 
@@ -73,7 +73,7 @@
 
 ---
 
-# Phase 6: Code Blocks Enhancements
+# Phase 5: Code Blocks Enhancements
 
 **Objective:** Improve code block experience with highlighting and copy button.
 
@@ -98,7 +98,7 @@
 
 ---
 
-# Phase 7: Breadcrumbs
+# Phase 6: Breadcrumbs
 
 **Objective:** Add breadcrumb navigation to the top of pages.
 
@@ -118,7 +118,7 @@
 
 ---
 
-# Phase 8: GitHub Callouts (Alerts)
+# Phase 7: GitHub Callouts (Alerts)
 
 **Objective:** Support GitHub-flavored markdown alerts (Note, Warning, etc.).
 
@@ -136,7 +136,7 @@
 
 ---
 
-# Phase 9: Update config
+# Phase 8: Update config
 
 **Objective:** Ensure configuration files are up to date.
 
@@ -150,7 +150,7 @@
 
 ---
 
-# Phase 10: Scan for gatsby references
+# Phase 9: Scan for gatsby references
 
 **Objective:** Ensure no code references Gatsby.
 
@@ -162,7 +162,7 @@
 
 ===== NOPE =====
 
-# Phase 9x: Search Integration
+# Phase na: Search Integration
 
 **Objective:** Restore Search functionality.
 
@@ -178,7 +178,7 @@
 
 ---
 
-# Phase 10: Final Polish & Verification
+# Phase nb: Final Polish & Verification
 
 **Objective:** Comprehensive testing and cleanup.
 
