@@ -8,6 +8,7 @@ import { HamburgerButton } from './HamburgerButton';
 import { DarkModeToggle } from './DarkModeToggle';
 import styles from './Header.module.css';
 import { usePathname } from 'next/navigation';
+import { extractVersionAndFeatureFromSlug, getDocumentGithubInfo } from '@/lib/navigation-logic';
 
 interface HeaderProps {
   onMobileMenuToggle?: (isOpen: boolean) => void;
@@ -18,18 +19,32 @@ interface HeaderProps {
  */
 export function Header({ onMobileMenuToggle }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [githubUrl, setGithubUrl] = useState('https://github.com/silverstripe/developer-docs');
   const pathname = usePathname();
   
-  // Extract version and slug from pathname
+  // Extract version and optional feature from pathname
   const pathParts = pathname.split('/').filter(Boolean);
   const version = pathParts[1] || '6';
   const slug = pathname;
+  const { optionalFeature } = extractVersionAndFeatureFromSlug(slug);
 
   // Close menu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
     onMobileMenuToggle?.(false);
   }, [pathname, onMobileMenuToggle]);
+
+  // Update GitHub URL based on optional feature
+  useEffect(() => {
+    const githubInfo = getDocumentGithubInfo(version, optionalFeature);
+    if (githubInfo) {
+      const newUrl = `https://github.com/${githubInfo.owner}/${githubInfo.repo}`;
+      setGithubUrl(newUrl);
+    } else {
+      // Fallback to main developer-docs
+      setGithubUrl('https://github.com/silverstripe/developer-docs');
+    }
+  }, [version, optionalFeature]);
 
   const handleMobileMenuToggle = () => {
     const newState = !isMobileMenuOpen;
@@ -54,7 +69,7 @@ export function Header({ onMobileMenuToggle }: HeaderProps) {
 
         <nav className={styles.nav}>
           <div className={styles.navItem}>
-            <a href="https://github.com/silverstripe/developer-docs" className={styles.navLink}>
+            <a href={githubUrl} className={styles.navLink}>
               <i className={`fab fa-github ${styles.githubIcon}`}></i>
             </a>
           </div>

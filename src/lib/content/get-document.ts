@@ -81,8 +81,34 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
           'optional_features',
           `/en/${versionDir.replace(/^v/, '')}/` // rootParentSlug = version root
         );
-        documents.push(...optionalFeaturesDocs);
-        cachedDocuments.set(`${versionDir}/optional_features`, optionalFeaturesDocs);
+        
+        // Process optional feature documents to set the correct optionalFeature field
+        // and adjust filePath to be relative to the specific feature (not optional_features)
+        const processedDocs = optionalFeaturesDocs.map(doc => {
+          // Extract feature name from slug: /en/6/optional_features/linkfield/... -> linkfield
+          const slugParts = doc.slug.split('/').filter(Boolean);
+          const featureIndex = slugParts.indexOf('optional_features');
+          if (featureIndex >= 0 && featureIndex + 1 < slugParts.length) {
+            const featureName = slugParts[featureIndex + 1];
+            
+            // Adjust filePath: remove the feature name prefix since buildGithubEditUrl 
+            // expects filePath relative to the feature module (e.g., "index.md" not "linkfield/index.md")
+            let adjustedFilePath = doc.filePath;
+            if (adjustedFilePath.startsWith(`${featureName}/`)) {
+              adjustedFilePath = adjustedFilePath.substring(featureName.length + 1);
+            }
+            
+            return { 
+              ...doc, 
+              optionalFeature: featureName,
+              filePath: adjustedFilePath
+            };
+          }
+          return doc;
+        });
+        
+        documents.push(...processedDocs);
+        cachedDocuments.set(`${versionDir}/optional_features`, processedDocs);
       } catch (error) {
         // optional_features directory may not exist, continue
       }
