@@ -5,6 +5,7 @@
 
 import { DocumentNode } from '@/types';
 import { getSourceConfig } from './sources-config';
+import { normalizeSlug } from './utils';
 
 /**
  * Detect if a document is part of an optional module
@@ -48,8 +49,7 @@ export function doesSlugExistInVersion(
   documents: DocumentNode[],
   version: string
 ): boolean {
-  const normalizedSlug = slug.startsWith('/') ? slug : `/${slug}`;
-  const normalizedSlugEnd = normalizedSlug.endsWith('/') ? normalizedSlug : `${normalizedSlug}/`;
+  const normalizedSlugEnd = normalizeSlug(slug);
   
   // Try exact match first
   const exactMatch = documents.find(

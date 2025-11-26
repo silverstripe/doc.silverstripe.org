@@ -2,6 +2,7 @@ import path from 'path';
 import { DocumentNode } from '@/types';
 import { buildContentTree } from './build-tree';
 import { getConfig } from '@/lib/config';
+import { normalizeSlug } from '@/lib/utils';
 import fs from 'fs/promises';
 
 // Cache for documents to avoid rebuilding on every request
@@ -161,9 +162,7 @@ export async function getAllDocuments(): Promise<DocumentNode[]> {
 export async function getDocumentBySlug(slug: string): Promise<DocumentNode | null> {
   const docs = await getAllDocuments();
   
-  // Normalize slug for comparison - remove leading/trailing slashes
-  const normalizedSlug = slug.startsWith('/') ? slug : `/${slug}`;
-  const normalizedSlugEnd = normalizedSlug.endsWith('/') ? normalizedSlug : `${normalizedSlug}/`;
+  const normalizedSlugEnd = normalizeSlug(slug);
 
   // Find exact match first
   const exactMatch = docs.find(doc => doc.slug === normalizedSlugEnd);

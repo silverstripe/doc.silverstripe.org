@@ -1,6 +1,7 @@
 import { createHighlighter, type Highlighter } from 'shiki';
 import { visit } from 'unist-util-visit';
 import type { Root, Element } from 'hast';
+import { escapeHtml } from '@/lib/utils';
 
 // Singleton highlighter instance
 let highlighter: Highlighter | null = null;
@@ -42,18 +43,6 @@ async function getHighlighterInstance(): Promise<Highlighter> {
     });
   }
   return highlighter;
-}
-
-/**
- * Escape HTML special characters
- */
-function escapeHtml(text: string): string {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
 }
 
 /**
