@@ -15,6 +15,7 @@ import { highlightCodeBlocks } from './syntax-highlight';
 import { remarkImages } from './remark-images';
 import { cleanApiTags, setCurrentVersion } from './api-links';
 import { rewriteApiLinksInHtml } from './rewrite-api-links-html';
+import { cleanHeaders, cleanWhitespace } from './clean-html';
 
 /**
  * Custom sanitizer schema that allows api: protocol for links and className on elements
@@ -142,27 +143,4 @@ function removeUserContentPrefix(html: string): string {
   return html.replace(/id="user-content-([^"]+)"/g, 'id="$1"');
 }
 
-/**
- * Removes the <em> tags caused by underscores in the {#id_with_underscores}
- * Ported from Gatsby utils
- */
-function cleanHeaders(html: string): string {
-  return html.replace(
-    /<h([0-9])>(.*?)(\{#.*?<\/?em>.*?})/g,
-    (_, level, title, tag) => `<h${level}>${title} ${tag.replace(/<\/?em>/g, '_')}`
-  );
-}
 
-/**
- * The react parser doesn't like whitespace nodes in tags that require
- * specific DOM node children.
- * Ported from Gatsby utils
- */
-function cleanWhitespace(html: string): string {
-  let cleanHtml = html;
-  const rxp = /(\<\/?(?:table|tbody|thead|tfoot|tr|th|td)\>)\s+(\<\/?(?:table|tbody|thead|tfoot|tr|th|td)\>)/;
-  while (rxp.test(cleanHtml)) {
-    cleanHtml = cleanHtml.replace(rxp, (_, tag1, tag2) => `${tag1}${tag2}`);
-  }
-  return cleanHtml;
-}
