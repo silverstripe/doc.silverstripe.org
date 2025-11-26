@@ -1,6 +1,7 @@
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
+import remarkGithubBlockquoteAlerts from 'remark-github-blockquote-alert';
 import remarkRehype from 'remark-rehype';
 import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
@@ -28,6 +29,11 @@ const sanitizerSchema = {
       'data-code',
       'data-language',
       'aria-label',
+      'viewBox',
+      'width',
+      'height',
+      'aria-hidden',
+      'fill',
     ],
     button: [
       ...(defaultSchema.attributes?.button || []),
@@ -36,10 +42,28 @@ const sanitizerSchema = {
       'data-code',
       'aria-label',
     ],
+    blockquote: [
+      ...(defaultSchema.attributes?.blockquote || []),
+      'className',
+    ],
+    svg: [
+      'className',
+      'viewBox',
+      'width',
+      'height',
+      'aria-hidden',
+      'fill',
+    ],
+    path: [
+      'd',
+      'fill',
+    ],
   },
   tagNames: [
     ...(defaultSchema.tagNames || []),
     'button',
+    'svg',
+    'path',
   ],
   protocols: {
     ...(defaultSchema.protocols || {}),
@@ -77,6 +101,7 @@ export async function markdownToHtml(content: string, filePath?: string, version
   const processor = unified()
     .use(remarkParse)
     .use(remarkGfm)
+    .use(remarkGithubBlockquoteAlerts)
     .use(remarkImages, { currentFilePath: filePath })
     .use(remarkRehype, { allowDangerousHtml: true, clobberPrefix: '' })
     .use(rehypeRaw)

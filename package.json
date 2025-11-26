@@ -13,7 +13,9 @@
     "copy-images": "node scripts/copy-images.mjs",
     "copy-images:mock": "NEXT_USE_MOCK_DATA=true node scripts/copy-images.mjs",
     "test": "jest --maxWorkers=2",
-    "test:watch": "jest --maxWorkers=2 --watch"
+    "test:watch": "jest --maxWorkers=2 --watch",
+    "test:alerts": "NODE_OPTIONS=--experimental-vm-modules RUN_ALERTS_TESTS=true jest --maxWorkers=2 alerts.test.ts",
+    "test:all": "npm run test && npm run test:alerts"
   },
   "repository": {
     "type": "git",
@@ -47,6 +49,7 @@
     "rehype-stringify": "^10.0.1",
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.1",
+    "remark-github-blockquote-alert": "^2.0.0",
     "remark-html": "^16.0.1",
     "remark-rehype": "^11.1.2",
     "shiki": "^3.15.0",

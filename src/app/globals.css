@@ -561,6 +561,136 @@ button:hover,
   margin-bottom: 0.5rem;
 }
 
+/* ============ GitHub-style Alerts ============ */
+.markdown-alert {
+  border-left: 3px solid var(--theme-text-secondary);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0.375rem;
+  background: #f5f5f5;
+}
+
+.markdown-alert > :last-child {
+  margin-bottom: 0;
+}
+
+.markdown-alert .markdown-alert-title {
+  align-items: center;
+  display: flex;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+.markdown-alert .markdown-alert-title svg {
+  margin-right: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.markdown-alert-note {
+  border-left-color: var(--theme-info);
+  background: var(--theme-info-light);
+}
+
+.markdown-alert-note .markdown-alert-title {
+  color: var(--theme-info-dark);
+}
+
+.markdown-alert-tip {
+  border-left-color: var(--theme-success);
+  background: var(--theme-success-light);
+}
+
+.markdown-alert-tip .markdown-alert-title {
+  color: var(--theme-success-dark);
+}
+
+.markdown-alert-important {
+  border-left-color: #7c0aed;
+  background: rgba(124, 10, 237, 0.1);
+}
+
+.markdown-alert-important .markdown-alert-title {
+  color: #7c0aed;
+}
+
+.markdown-alert-warning {
+  border-left-color: var(--theme-warning);
+  background: var(--theme-warning-light);
+}
+
+.markdown-alert-warning .markdown-alert-title {
+  color: var(--theme-warning-dark);
+}
+
+.markdown-alert-caution {
+  border-left-color: var(--theme-danger);
+  background: var(--theme-danger-light);
+}
+
+.markdown-alert-caution .markdown-alert-title {
+  color: var(--theme-danger-dark);
+}
+
+/* Dark mode - GitHub Alerts */
+:root.dark .markdown-alert {
+  background: #1a2428;
+  border-left-color: var(--theme-text-secondary);
+}
+
+:root.dark .markdown-alert-note {
+  border-left-color: #42a5f5;
+  background: rgba(66, 165, 245, 0.1);
+}
+
+:root.dark .markdown-alert-note .markdown-alert-title {
+  color: #42a5f5;
+}
+
+:root.dark .markdown-alert-tip {
+  border-left-color: #66bb6a;
+  background: rgba(102, 187, 106, 0.1);
+}
+
+:root.dark .markdown-alert-tip .markdown-alert-title {
+  color: #66bb6a;
+}
+
+:root.dark .markdown-alert-important {
+  border-left-color: #a371f7;
+  background: rgba(163, 113, 247, 0.1);
+}
+
+:root.dark .markdown-alert-important .markdown-alert-title {
+  color: #a371f7;
+}
+
+:root.dark .markdown-alert-warning {
+  border-left-color: #ffa726;
+  background: rgba(255, 167, 38, 0.1);
+}
+
+:root.dark .markdown-alert-warning .markdown-alert-title {
+  color: #ffa726;
+}
+
+:root.dark .markdown-alert-caution {
+  border-left-color: #ef5350;
+  background: rgba(239, 83, 80, 0.1);
+}
+
+:root.dark .markdown-alert-caution .markdown-alert-title {
+  color: #ef5350;
+}
+
+/* Dark mode SVG icons - make them white */
+:root.dark .markdown-alert-title svg {
+  fill: white;
+}
+
 /* ============ Icons ============ */
 .theme-icon-holder {
   display: inline-flex;
