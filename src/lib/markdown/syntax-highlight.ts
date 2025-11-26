@@ -57,16 +57,127 @@ function escapeHtml(text: string): string {
 }
 
 /**
- * Rehype plugin to syntax highlight code blocks
- * This is a plugin factory that returns the transformer function
- * 
- * Simply preserves code content with language classes.
- * Actual syntax highlighting can be done client-side with CSS/JS.
+ * Rehype plugin to add language classes to code blocks
+ * We'll use Prism.js for highlighting on the client side
  */
 export function highlightCodeBlocks() {
   return async (tree: Root) => {
-    // No-op: Just let the default processing handle it.
-    // Code blocks already have language classes from the markdown processor.
-    // Content is preserved as text and properly escaped by rehypeStringify.
+    // Find all pre/code blocks
+    visit(tree, 'element', (node: any, index: number | undefined, parent: any) => {
+      if (node.tagName === 'pre' && parent && index !== undefined) {
+        const codeNode = node.children?.[0];
+        if (codeNode && codeNode.tagName === 'code') {
+          processCodeBlock(node, codeNode, parent, index);
+        }
+      }
+    });
   };
+}
+
+/**
+ * Process a single code block
+ */
+function processCodeBlock(preNode: any, codeNode: any, parent: any, index: number): void {
+  const classAttr = codeNode.properties?.className;
+  const classes = Array.isArray(classAttr) ? classAttr : [classAttr].filter(Boolean);
+
+  // Extract language from class
+  let language = 'text';
+  for (const cls of classes) {
+    if (typeof cls === 'string' && cls.startsWith('language-')) {
+      language = cls.replace('language-', '');
+      break;
+    }
+  }
+
+  // Resolve language alias
+  const resolvedLanguage = LANGUAGE_ALIASES[language] || language;
+
+  // Get raw code text
+  const codeText = getTextContent(codeNode);
+
+  // Create a wrapper div with copy button and language badge
+  const wrapperNode: any = {
+    type: 'element',
+    tagName: 'div',
+    properties: {
+      className: 'code-block-wrapper',
+      'data-language': resolvedLanguage,
+    },
+    children: [
+      // Header with language and copy button
+      {
+        type: 'element',
+        tagName: 'div',
+        properties: {
+          className: 'code-block-header',
+        },
+        children: [
+          {
+            type: 'element',
+            tagName: 'span',
+            properties: { className: 'code-block-language' },
+            children: [{ type: 'text', value: resolvedLanguage }],
+          },
+          {
+            type: 'element',
+            tagName: 'button',
+            properties: {
+              className: 'code-block-copy-btn',
+              type: 'button',
+              'data-code': codeText,
+              'aria-label': 'Copy code to clipboard',
+            },
+            children: [
+              {
+                type: 'text',
+                value: '📋 Copy',
+              },
+            ],
+          },
+        ],
+      },
+      // Pre/code block with language class for Prism
+      {
+        type: 'element',
+        tagName: 'pre',
+        properties: {
+          className: `language-${resolvedLanguage}`,
+        },
+        children: [
+          {
+            type: 'element',
+            tagName: 'code',
+            properties: {
+              className: `language-${resolvedLanguage}`,
+            },
+            children: [{ type: 'text', value: codeText }],
+          },
+        ],
+      },
+    ],
+  };
+
+  parent.children[index] = wrapperNode;
+}
+
+/**
+ * Extract text content from a node
+ */
+function getTextContent(node: any): string {
+  if (!node.children || node.children.length === 0) {
+    return node.value || '';
+  }
+
+  return node.children
+    .map((child: any) => {
+      if (child.type === 'text') {
+        return child.value || '';
+      }
+      if (child.type === 'element') {
+        return getTextContent(child);
+      }
+      return '';
+    })
+    .join('');
 }

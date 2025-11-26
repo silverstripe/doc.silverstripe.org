@@ -12,8 +12,8 @@
     "clone:user": "DOCS_CONTEXT=user node scripts/clone-docs.mjs",
     "copy-images": "node scripts/copy-images.mjs",
     "copy-images:mock": "NEXT_USE_MOCK_DATA=true node scripts/copy-images.mjs",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "jest --maxWorkers=2",
+    "test:watch": "jest --maxWorkers=2 --watch"
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,8 @@
     "gray-matter": "^4.0.3",
     "hastscript": "^9.0.1",
     "next": "^16.0.3",
+    "prism-react-renderer": "^2.4.1",
+    "prismjs": "^1.30.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "rehype-autolink-headings": "^7.1.0",

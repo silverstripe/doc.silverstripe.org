@@ -22,8 +22,25 @@ const sanitizerSchema = {
   ...defaultSchema,
   attributes: {
     ...(defaultSchema.attributes || {}),
-    '*': [...(defaultSchema.attributes?.['*'] || []), 'className']
+    '*': [
+      ...(defaultSchema.attributes?.['*'] || []),
+      'className',
+      'data-code',
+      'data-language',
+      'aria-label',
+    ],
+    button: [
+      ...(defaultSchema.attributes?.button || []),
+      'type',
+      'className',
+      'data-code',
+      'aria-label',
+    ],
   },
+  tagNames: [
+    ...(defaultSchema.tagNames || []),
+    'button',
+  ],
   protocols: {
     ...(defaultSchema.protocols || {}),
     href: [...(defaultSchema.protocols?.href || []), 'api']

@@ -133,6 +133,67 @@ SilverStripe\GraphQL\Schema\Schema:
         create: false
 ```
 
+## Code Samples - JavaScript
+
+> **NOTE:** The following JavaScript examples are included for testing syntax highlighting display across different languages.
+
+### Basic JavaScript Example
+
+```javascript
+function createPage(title, content) {
+    const page = {
+        title: title,
+        content: content,
+        created: new Date(),
+        published: false
+    };
+    
+    return page;
+}
+
+const myPage = createPage('Welcome', 'This is a test page');
+console.log(myPage.title);
+```
+
+### Async/Await Example
+
+```javascript
+async function fetchAndDisplayPages() {
+    try {
+        const response = await fetch('/api/pages');
+        const pages = await response.json();
+        
+        pages.forEach(page => {
+            console.log(`Page: ${page.title}`);
+        });
+    } catch (error) {
+        console.error('Failed to fetch pages:', error);
+    }
+}
+```
+
+### Object Methods and Arrow Functions
+
+```javascript
+const PageManager = {
+    pages: [],
+    
+    addPage: (title) => {
+        const id = this.pages.length + 1;
+        this.pages.push({ id, title });
+        return id;
+    },
+    
+    getPage: (id) => {
+        return this.pages.find(p => p.id === id);
+    },
+    
+    deletePages: function() {
+        this.pages = [];
+    }
+};
+```
+
 ## Combined Examples
 
 To use [api:SilverStripe\ORM\DataObject::create()] with custom initialization:
