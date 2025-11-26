@@ -117,6 +117,7 @@
 4. Run tests: `npm test -- tests/cache-path-integration.test.ts`
 5. Run full test suite: `npm test`
 
+---
 
 # Phase 7: Fix syntax highlighting on client-side navigation
 

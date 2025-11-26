@@ -46,6 +46,27 @@ describe('resolveImagePath', () => {
     expect(result).toContain('_images/mock.png');
   });
 
+  it('handles .cache/docs paths', () => {
+    const imagePath = '_images/locale-filter.png';
+    const filePath = '/home/project/.cache/docs/v6/optional_features/fluent/03_configuration.md';
+    const result = resolveImagePath(imagePath, filePath);
+    expect(result).toBe('/v6/optional_features/fluent/_images/locale-filter.png');
+  });
+
+  it('handles .cache/user paths', () => {
+    const imagePath = '../_images/screenshot.png';
+    const filePath = '/home/project/.cache/user/v6/01_Managing_your_website/index.md';
+    const result = resolveImagePath(imagePath, filePath);
+    expect(result).toBe('/v6/_images/screenshot.png');
+  });
+
+  it('handles legacy .cache/content paths', () => {
+    const imagePath = '../_images/legacy.png';
+    const filePath = '/home/project/.cache/content/v6/01_getting_started/index.md';
+    const result = resolveImagePath(imagePath, filePath);
+    expect(result).toBe('/v6/_images/legacy.png');
+  });
+
   it('handles Windows-style paths', () => {
     const imagePath = '../_images/screenshot.png';
     const filePath = 'C:\\content\\v6\\01_getting_started\\index.md';
