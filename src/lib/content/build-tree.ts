@@ -27,8 +27,9 @@ export async function buildContentTree(
   rootParentSlug?: string
 ): Promise<DocumentNode[]> {
   try {
-    // Get all markdown files, excluding optional_features if not loading optional content
-    const excludeDirs = optional ? undefined : ['optional_features'];
+    // Get all markdown files, excluding optional_features directories
+    // Excludes: 03_Optional_features (old deprecated version), optional_features (loaded separately as modules)
+    const excludeDirs = optional ? undefined : ['03_Optional_features', 'optional_features'];
     const files = await listMarkdownFiles(basePath, excludeDirs);
 
     if (files.length === 0) {
@@ -115,7 +116,6 @@ export async function buildContentTree(
         content,
         category,
         ...(order !== undefined && { order }),
-        ...(optional && { optionalFeature: optional }),
         ...frontmatter,
       };
 

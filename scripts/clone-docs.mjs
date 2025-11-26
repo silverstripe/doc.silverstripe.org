@@ -2,7 +2,7 @@
 
 /**
  * Clone documentation content from git repositories to .cache/content/
- * Reads git clone sources from _gatsby/sources-{context}.cjs
+ * Reads git clone sources from src/config/sources-{context}.cjs
  * Handles multiple versions (v3-v6) and optional features
  */
 
@@ -170,7 +170,7 @@ async function cloneDocs() {
     console.log(`\n🚀 Cloning ${context} documentation...\n`);
     
     // Load Gatsby sources using require (CommonJS)
-    const sourcesFile = path.join(rootDir, '_gatsby', `sources-${context}.js`);
+    const sourcesFile = path.join(rootDir, 'src', 'config', `sources-${context}.cjs`);
     if (!fs.existsSync(sourcesFile)) {
       throw new Error(`Sources file not found: ${sourcesFile}`);
     }

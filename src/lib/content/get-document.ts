@@ -73,7 +73,7 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
       const optionalFeaturesPath = path.join(versionPath, 'optional_features');
       try {
         // Load everything under optional_features with the optional_features parameter
-        // The root parent slug should be the version root so Optional Features appears in nav
+        // The root parent slug should be the version root so Optional Features index becomes a root child
         const optionalFeaturesDocs = await buildContentTree(
           optionalFeaturesPath,
           versionDir.replace(/^v/, ''),
@@ -86,8 +86,10 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
         // and adjust filePath to be relative to the specific feature (not optional_features)
         const processedDocs = optionalFeaturesDocs.map(doc => {
           // Extract feature name from slug: /en/6/optional_features/linkfield/... -> linkfield
+          // The optional_features index itself (slug ending with /optional_features/) should NOT have optionalFeature set
           const slugParts = doc.slug.split('/').filter(Boolean);
           const featureIndex = slugParts.indexOf('optional_features');
+          
           if (featureIndex >= 0 && featureIndex + 1 < slugParts.length) {
             const featureName = slugParts[featureIndex + 1];
             

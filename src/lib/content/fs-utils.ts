@@ -35,7 +35,7 @@ export async function readMarkdownFile(filePath: string): Promise<RawDocument> {
  * List all markdown files in a directory recursively
  * Optionally exclude specific directory names
  */
-export async function listMarkdownFiles(dir: string, excludeDirs?: string[]): Promise<string[]> {
+export async function listMarkdownFiles(dir: string, excludeDirs?: string[], excludePatterns?: RegExp[]): Promise<string[]> {
   const files: string[] = [];
 
   async function traverse(currentPath: string): Promise<void> {
@@ -46,6 +46,10 @@ export async function listMarkdownFiles(dir: string, excludeDirs?: string[]): Pr
         if (entry.isDirectory()) {
           // Skip excluded directories
           if (excludeDirs && excludeDirs.includes(entry.name)) {
+            continue;
+          }
+          // Skip directories matching exclude patterns
+          if (excludePatterns && excludePatterns.some(pattern => pattern.test(entry.name))) {
             continue;
           }
           await traverse(fullPath);
