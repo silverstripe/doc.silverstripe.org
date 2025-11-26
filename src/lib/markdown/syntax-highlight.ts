@@ -1,11 +1,6 @@
-import { createHighlighter, type Highlighter } from 'shiki';
 import { visit } from 'unist-util-visit';
 import type { Root, Element } from 'hast';
 import type { Text as HastText } from 'hast';
-import { escapeHtml } from '@/lib/utils';
-
-// Singleton highlighter instance
-let highlighter: Highlighter | null = null;
 
 /**
  * Type for HAST element nodes used in code block processing
@@ -43,19 +38,6 @@ const LANGUAGE_ALIASES: Record<string, string> = {
   markdown: 'markdown',
   md: 'markdown',
 };
-
-/**
- * Initialize shiki highlighter (lazy load)
- */
-async function getHighlighterInstance(): Promise<Highlighter> {
-  if (!highlighter) {
-    highlighter = await createHighlighter({
-      themes: ['github-light'],
-      langs: Object.values(LANGUAGE_ALIASES),
-    });
-  }
-  return highlighter;
-}
 
 /**
  * Rehype plugin to add language classes to code blocks
