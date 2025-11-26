@@ -47,7 +47,9 @@ src/
     children/             # [CHILDREN] marker replacement
     versions/             # Version utilities and constants
     seo/                  # Metadata generation
+    utils/                # Shared utilities (escapeHtml, slug-utils)
     sources-config.ts     # GitHub repo/branch mapping for 30+ modules
+    routing.ts            # URL routing utilities
   types/                  # TypeScript interfaces
   contexts/               # React contexts (MobileMenuContext)
 tests/                    # Test files (mirrors src/ structure)
@@ -76,7 +78,8 @@ interface DocumentNode {
 **Version Management:** `src/lib/versions/version-utils.ts` - centralized version constants  
 **Source Config:** `src/lib/sources-config.ts` - GitHub repo/branch mappings for all modules  
 **Markdown Pipeline:** `src/lib/markdown/processor.ts` - remark→rehype with GFM, alerts, code blocks  
-**Navigation:** `src/lib/nav/build-nav-tree.ts` - hierarchical nav tree from documents
+**Navigation:** `src/lib/nav/build-nav-tree.ts` - hierarchical nav tree from documents  
+**Utilities:** `src/lib/utils/` - shared utilities (escapeHtml, slug normalization)
 
 ---
 
@@ -84,7 +87,7 @@ interface DocumentNode {
 
 **Auto mock:** Tests use `NEXT_USE_MOCK_DATA=true` → `tests/fixtures/mock-content/`  
 **Types:** Unit (utils), Component (React/RTL), Integration (pages)  
-**Coverage:** 589 tests across 45 suites  
+**Coverage:** 609 tests across 47 suites  
 **Gate:** Tests pass → human validates → next phase
 
 ---
