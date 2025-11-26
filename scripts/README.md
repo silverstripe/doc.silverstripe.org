@@ -24,7 +24,7 @@ npm run copy-images
 
 1. Determines source directory:
    - Mock mode: `tests/fixtures/mock-content/`
-   - Real mode: `.cache/content/`
+   - Real mode: `.cache/{docs|user}/`
 
 2. Finds all version directories (v5, v6, etc.)
 

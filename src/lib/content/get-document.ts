@@ -28,48 +28,72 @@ const DEPRECATED_OPTIONAL_FEATURES = [
 ];
 
 /**
- * Resolve content base path - handles both testing and production
+ * Resolve content base path and effective context
+ * Returns {path, context} where context may be different from config.docsContext
+ * if using a fallback content path
+ * 
+ * Behavior:
+ * - If using mock data: uses configured context (docs or user)
+ * - If using real content:
+ *   1. Tries context-specific path: .cache/{docsContext}/ (e.g., .cache/docs/ or .cache/user/)
+ *   2. If not found, falls back to: .cache/content/ (for backward compatibility)
+ *   3. When using fallback, context is forced to 'docs' since .cache/content/ only contains docs
+ * 
+ * This means:
+ * - First time users with only docs cloned: `npm run dev` and `npm run dev:docs` work
+ * - Users who want user content: must run `npm run clone:user` first, then `npm run dev:user`
+ * - Without clone, user context falls back to docs fallback, which returns no user content (500 error)
  */
-async function resolveContentBasePath(): Promise<string> {
+async function resolveContentBasePathWithContext(): Promise<{ path: string; context: 'docs' | 'user' }> {
   const config = getConfig();
   
-  // Try multiple paths in order
-  const pathsToTry = config.useMockData
-    ? [
-        path.join(process.cwd(), 'tests/fixtures/mock-content'),
-        path.join(__dirname, '../../../tests/fixtures/mock-content'),
-      ]
-    : [
-        path.join(process.cwd(), '.cache/content'),
-      ];
-
-  for (const p of pathsToTry) {
-    try {
-      await fs.access(p);
-      return p;
-    } catch {
-      // Continue to next path
+  if (config.useMockData) {
+    // Mock data path is context-agnostic, use configured context
+    const mockPaths = [
+      path.join(process.cwd(), 'tests/fixtures/mock-content'),
+      path.join(__dirname, '../../../tests/fixtures/mock-content'),
+    ];
+    
+    for (const p of mockPaths) {
+      try {
+        await fs.access(p);
+        return { path: p, context: config.docsContext };
+      } catch {
+        // Continue to next path
+      }
     }
+    
+    // Return default if none exist
+    return { path: mockPaths[0], context: config.docsContext };
   }
-
-  // Return default if none exist (will error when actually trying to read)
-  return pathsToTry[0];
+  
+  // Real content - try context-specific path first
+  const contextSpecificPath = path.join(process.cwd(), '.cache', config.docsContext);
+  try {
+    await fs.access(contextSpecificPath);
+    return { path: contextSpecificPath, context: config.docsContext };
+  } catch {
+    // Fallback to old location for backward compatibility
+    const fallbackPath = path.join(process.cwd(), '.cache', 'content');
+    // When using fallback, force context to 'docs' since that's what it contains
+    return { path: fallbackPath, context: 'docs' };
+  }
 }
 
 /**
  * Get all documents from content tree (real or mock), filtered by current DOCS_CONTEXT
  */
 async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
+  // Determine content base path and effective context first to check cache key
+  const { path: contentBase, context: effectiveContext } = await resolveContentBasePathWithContext();
+  
   if (cachedDocuments) {
     const allCached = Array.from(cachedDocuments.values()).flat();
-    return filterByContext(allCached);
+    return filterByContext(allCached, effectiveContext);
   }
 
   const config = getConfig();
   const documents: DocumentNode[] = [];
-  
-  // Determine content base path
-  const contentBase = await resolveContentBasePath();
 
   // Build versions map - v3, v4, v5, and v6
   const versionDirs = getAllVersions().map(v => `v${v}`);
@@ -85,7 +109,7 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
       const versionDocs = await buildContentTree(
         versionPath,
         versionDir.replace(/^v/, ''),
-        config.docsContext
+        effectiveContext
       );
       documents.push(...versionDocs);
       cachedDocuments.set(versionDir, versionDocs);
@@ -98,7 +122,7 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
         const optionalFeaturesDocs = await buildContentTree(
           optionalFeaturesPath,
           versionDir.replace(/^v/, ''),
-          config.docsContext,
+          effectiveContext,
           'optional_features',
           `/en/${versionDir.replace(/^v/, '')}/` // rootParentSlug = version root
         );
@@ -147,15 +171,16 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
     }
   }
 
-  return filterByContext(documents);
+  return filterByContext(documents, effectiveContext);
 }
 
 /**
- * Filter documents by the current DOCS_CONTEXT configuration
+ * Filter documents by context
  */
-function filterByContext(documents: DocumentNode[]): DocumentNode[] {
+function filterByContext(documents: DocumentNode[], context?: 'docs' | 'user'): DocumentNode[] {
   const config = getConfig();
-  return documents.filter(doc => doc.category === config.docsContext);
+  const filterContext = context ?? config.docsContext;
+  return documents.filter(doc => doc.category === filterContext);
 }
 
 /**

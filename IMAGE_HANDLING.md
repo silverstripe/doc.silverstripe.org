@@ -142,7 +142,7 @@ Example references in markdown:
 
 For production static exports:
 
-1. All images must be in the `.cache/content/` directory (real content)
+1. All images must be in the `.cache/{docs|user}/` directory (real content)
 2. Use relative paths in markdown files
 3. Build with: `npm run build` (images are automatically copied to `out/`)
 4. Images will be served as static files from their resolved paths

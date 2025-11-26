@@ -27,9 +27,9 @@ npm test            # All tests (auto uses mock data)
 ## Architecture
 
 **Static:** `output: 'export'`, all pages pre-rendered, no SSR/ISR  
-**Content:** Git clones to `.cache/content/`, versions 3-6  
+**Content:** Git clones to `.cache/{docs|user}/`, versions 3-6  
 **URLs:** `/en/{version}/{path}/` - case-insensitive, numeric prefixes stripped for URLs but kept for sorting  
-**Mock/Real:** `NEXT_USE_MOCK_DATA=true` uses `tests/fixtures/mock-content/`, false uses `.cache/content/`
+**Mock/Real:** `NEXT_USE_MOCK_DATA=true` uses `tests/fixtures/mock-content/`, false uses `.cache/{docs|user}/`
 
 ---
 

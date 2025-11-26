@@ -80,6 +80,7 @@ function copyToDestination(sourceDir, destDir, description) {
 async function copyImages() {
   try {
     const useMockData = process.env.NEXT_USE_MOCK_DATA === 'true';
+    const docsContext = process.env.DOCS_CONTEXT || 'docs';
     
     // Determine source directory
     let sourceDir;
@@ -87,7 +88,7 @@ async function copyImages() {
       sourceDir = path.join(rootDir, 'tests/fixtures/mock-content');
       console.log('📋 Using mock content images from:', sourceDir);
     } else {
-      sourceDir = path.join(rootDir, '.cache/content');
+      sourceDir = path.join(rootDir, '.cache', docsContext);
       console.log('📋 Using real content images from:', sourceDir);
     }
 

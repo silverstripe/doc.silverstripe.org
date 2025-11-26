@@ -109,11 +109,11 @@ function copyFiles(sourceDir, destDir, sourcePath, optionalFeatureName = null, e
  * Clone a single repository
  */
 async function cloneRepository(config) {
-  const { remote, branch, patterns, outputDir, version, name, excludeDirs } = config;
+  const { remote, branch, patterns, outputDir, version, name, excludeDirs, context } = config;
   
   // Use unique directory per repository+branch to avoid conflicts
   const repoName = path.basename(remote, '.git');
-  const tempDir = path.join(rootDir, '.cache', 'temp-clones', `${repoName}--${branch}`);
+  const tempDir = path.join(rootDir, '.cache', 'temp-clones', context, `${repoName}--${branch}`);
   ensureDir(tempDir);
   
   try {
@@ -158,7 +158,7 @@ function buildRepoConfig(sourceConfig, version, context) {
     relPath = '';
   }
   
-  const outputDir = path.join(rootDir, '.cache', 'content', `v${version}`, relPath);
+  const outputDir = path.join(rootDir, '.cache', context, `v${version}`, relPath);
   
   return {
     remote,

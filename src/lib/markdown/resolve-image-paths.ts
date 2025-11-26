@@ -24,7 +24,7 @@ export function resolveImagePath(imagePath: string, currentFilePath: string): st
   const urlPath = resolvedPath.replace(/\\/g, '/');
 
   // If path is relative to content root, make it absolute for public serving
-  // Content lives in .cache/content/ or tests/fixtures/mock-content/
+  // Content lives in .cache/{docs|user}/ or tests/fixtures/mock-content/
   // We want to return a path that works in the browser
   
   // Remove any leading path segments up to and including 'mock-content' or 'content'
