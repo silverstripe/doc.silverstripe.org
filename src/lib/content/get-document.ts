@@ -57,11 +57,12 @@ async function resolveContentBasePath(): Promise<string> {
 }
 
 /**
- * Get all documents from content tree (real or mock)
+ * Get all documents from content tree (real or mock), filtered by current DOCS_CONTEXT
  */
 async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
   if (cachedDocuments) {
-    return Array.from(cachedDocuments.values()).flat();
+    const allCached = Array.from(cachedDocuments.values()).flat();
+    return filterByContext(allCached);
   }
 
   const config = getConfig();
@@ -146,7 +147,15 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
     }
   }
 
-  return documents;
+  return filterByContext(documents);
+}
+
+/**
+ * Filter documents by the current DOCS_CONTEXT configuration
+ */
+function filterByContext(documents: DocumentNode[]): DocumentNode[] {
+  const config = getConfig();
+  return documents.filter(doc => doc.category === config.docsContext);
 }
 
 /**

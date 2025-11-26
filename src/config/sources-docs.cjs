@@ -6,7 +6,8 @@ module.exports = [
       name: 'docs--6',
       remote: 'https://github.com/silverstripe/developer-docs.git',
       branch: '6.1',
-      patterns: 'en/**'
+      patterns: 'en/**',
+      excludeDirs: ['01_Managing_your_website', '02_Creating_pages_and_content']
     }
   },
   {
@@ -179,7 +180,8 @@ module.exports = [
       name: 'docs--5',
       remote: 'https://github.com/silverstripe/developer-docs.git',
       branch: '5.4',
-      patterns: 'en/**'
+      patterns: 'en/**',
+      excludeDirs: ['01_Managing_your_website', '02_Creating_pages_and_content']
     }
   },
   {
@@ -352,7 +354,8 @@ module.exports = [
       name: 'docs--4',
       remote: 'https://github.com/silverstripe/developer-docs.git',
       branch: '4.13',
-      patterns: 'en/**'
+      patterns: 'en/**',
+      excludeDirs: ['01_Managing_your_website', '02_Creating_pages_and_content']
     }
   },
 
@@ -363,7 +366,8 @@ module.exports = [
       name: 'docs--3',
       remote: 'https://github.com/silverstripe/developer-docs.git',
       branch: '3',
-      patterns: 'en/**'
+      patterns: 'en/**',
+      excludeDirs: ['01_Managing_your_website', '02_Creating_pages_and_content']
     }
   },
 ];

@@ -43,8 +43,13 @@ function ensureDir(dir) {
  * For 'en/**': copy from en/ directly to destDir (e.g., en/01_Getting_Started/ -> v6/01_Getting_Started/)
  * For 'docs/en/**': copy from docs/en/ directly to destDir (skip docs/en prefix)
  * Also copies image files (.png, .jpg, .jpeg, .gif, .webp, .svg)
+ * @param {string} sourceDir - Source directory
+ * @param {string} destDir - Destination directory
+ * @param {string} sourcePath - Source path pattern
+ * @param {string|null} optionalFeatureName - Optional feature name for filtering
+ * @param {string[]|null} excludeDirs - Directories to exclude (for developer-docs user content filtering)
  */
-function copyFiles(sourceDir, destDir, sourcePath, optionalFeatureName = null) {
+function copyFiles(sourceDir, destDir, sourcePath, optionalFeatureName = null, excludeDirs = null) {
   const fullSourcePath = path.join(sourceDir, sourcePath);
   
   if (!fs.existsSync(fullSourcePath)) {
@@ -62,6 +67,11 @@ function copyFiles(sourceDir, destDir, sourcePath, optionalFeatureName = null) {
       const relPath = path.join(rel, entry.name);
       
       if (entry.isDirectory()) {
+        // Skip excluded directories
+        if (excludeDirs && excludeDirs.some(excluded => relPath === excluded || relPath.startsWith(excluded + path.sep))) {
+          continue;
+        }
+        
         // For optional features, skip anything not in the expected path
         // This filters out 'userguide' when we want docs, or docs when we want userguide
         if (optionalFeatureName && relPath === 'userguide') {
@@ -99,7 +109,7 @@ function copyFiles(sourceDir, destDir, sourcePath, optionalFeatureName = null) {
  * Clone a single repository
  */
 async function cloneRepository(config) {
-  const { remote, branch, patterns, outputDir, version, name } = config;
+  const { remote, branch, patterns, outputDir, version, name, excludeDirs } = config;
   
   // Use unique directory per repository+branch to avoid conflicts
   const repoName = path.basename(remote, '.git');
@@ -119,7 +129,7 @@ async function cloneRepository(config) {
     const sourcePath = parsePattern(patterns);
     if (sourcePath) {
       const isOptionalFeature = name.includes('optional_features');
-      copyFiles(tempDir, outputDir, sourcePath, isOptionalFeature ? name : null);
+      copyFiles(tempDir, outputDir, sourcePath, isOptionalFeature ? name : null, excludeDirs);
     }
     
   } catch (error) {
@@ -131,7 +141,7 @@ async function cloneRepository(config) {
  * Build repository config from source configuration
  */
 function buildRepoConfig(sourceConfig, version, context) {
-  const { remote, branch, patterns, name } = sourceConfig.options;
+  const { remote, branch, patterns, name, excludeDirs } = sourceConfig.options;
   
   // Determine output directory based on name
   // name format: "docs--6" or "docs--6--optional_features/linkfield"
@@ -157,7 +167,8 @@ function buildRepoConfig(sourceConfig, version, context) {
     outputDir,
     version,
     name,
-    context
+    context,
+    excludeDirs: excludeDirs || null
   };
 }
 

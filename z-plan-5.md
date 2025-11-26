@@ -32,7 +32,93 @@
 
 ---
 
-# Phase 2: Fix syntax highlighting on client-side navigation
+# Phase 2: Update clone-docs.mjs to Output to Context-Specific Subdirectory
+
+**Objective:** The clone script writes content to `.cache/docs/` or `.cache/user/` based on DOCS_CONTEXT env variable (defaulting to 'docs').
+
+**Tasks:**
+1. Update `scripts/clone-docs.mjs`
+   - Change output path from `.cache/content/v{version}` to `.cache/{context}/v{version}` where context is from `DOCS_CONTEXT` env var (default: 'docs')
+   - Update `buildRepoConfig()` function line 161 to use context in path
+   - Update temp clone dir to include context to avoid conflicts: `.cache/temp-clones/{context}/...`
+2. Create UNIT TEST `tests/scripts/clone-docs-path.test.ts`
+   - Mock file system operations
+   - Verify `buildRepoConfig()` returns correct output path for DOCS_CONTEXT=docs
+   - Verify `buildRepoConfig()` returns correct output path for DOCS_CONTEXT=user
+   - Verify default is 'docs' when DOCS_CONTEXT is not set
+3. Run tests: `npm test -- tests/scripts/clone-docs-path.test.ts`
+
+---
+
+# Phase 3: Update get-document.ts Content Path Resolution
+
+**Objective:** The document loading reads from `.cache/{context}/` instead of `.cache/content/` based on DOCS_CONTEXT.
+
+**Tasks:**
+1. Update `src/lib/content/get-document.ts`
+   - Modify `resolveContentBasePath()` (line 33-57) to use `.cache/{docsContext}/` instead of `.cache/content/`
+   - When `useMockData` is false, build path as: `path.join(process.cwd(), '.cache', config.docsContext)`
+2. Update existing tests `tests/lib/content/get-document.test.ts`
+   - Verify tests still pass (mock data path unchanged)
+3. Update `tests/lib/content/docs-context-filter.test.ts`
+   - Verify tests still pass with new path logic
+4. Run tests: `npm test -- tests/lib/content/`
+
+---
+
+# Phase 4: Update copy-images.mjs for Context-Specific Source
+
+**Objective:** The image copy script reads from `.cache/{context}/` based on DOCS_CONTEXT env variable.
+
+**Tasks:**
+1. Update `scripts/copy-images.mjs`
+   - Modify line 90 to read `DOCS_CONTEXT` env var (default: 'docs')
+   - Change real content source from `.cache/content` to `.cache/{context}`
+2. Create UNIT TEST `tests/scripts/copy-images-path.test.ts`
+   - Verify correct source path for DOCS_CONTEXT=docs
+   - Verify correct source path for DOCS_CONTEXT=user
+   - Verify mock data path is unchanged (tests/fixtures/mock-content)
+3. Run tests: `npm test -- tests/scripts/copy-images-path.test.ts`
+
+---
+
+# Phase 5: Update resolve-image-paths.ts Comments and Documentation
+
+**Objective:** Documentation and comments accurately reflect the new `.cache/{context}/` structure.
+
+**Tasks:**
+1. Update `src/lib/markdown/resolve-image-paths.ts`
+   - Update comment on line 27 from `.cache/content/` to `.cache/{docs|user}/`
+2. Update `IMAGE_HANDLING.md`
+   - Change line 145 reference from `.cache/content/` to `.cache/{docs|user}/`
+3. Update `scripts/README.md`
+   - Update line 27 reference from `.cache/content/` to `.cache/{docs|user}/`
+4. Update `AGENTS.md`
+   - Update line 30 reference from `.cache/content/` to `.cache/{docs|user}/`
+   - Update line 32 reference from `.cache/content/` to `.cache/{docs|user}/`
+5. Run all tests to verify no regressions: `npm test`
+
+---
+
+# Phase 6: Verify End-to-End Functionality
+
+**Objective:** Confirm the entire system works with the new cache structure.
+
+**Tasks:**
+1. Verify all existing tests pass
+   - Run `npm test`
+2. Verify mock development still works
+   - Confirm `tests/fixtures/mock-content/` structure unchanged
+   - Verify `npm run mock` command compatibility (uses NEXT_USE_MOCK_DATA=true, bypasses .cache)
+3. Create integration test `tests/cache-path-integration.test.ts`
+   - Test that resolveContentBasePath returns correct path for docs context
+   - Test that resolveContentBasePath returns correct path for user context
+   - Test that mock data path is used when NEXT_USE_MOCK_DATA=true
+4. Run tests: `npm test -- tests/cache-path-integration.test.ts`
+5. Run full test suite: `npm test`
+
+
+# Phase 7: Fix syntax highlighting on client-side navigation
 
 **Objective:** Prism.js syntax highlighting applies after client-side navigation via Next.js Link component, not just on full page loads.
 
@@ -62,7 +148,7 @@
 
 ---
 
-# Phase 3: Version switcher fallback to version homepage
+# Phase 8: Version switcher fallback to version homepage
 
 **Objective:** When switching versions and the current page doesn't exist in target version, redirect to that version's homepage instead of showing 404.
 
@@ -100,7 +186,7 @@
 
 ---
 
-# Phase 4: Integration testing and cleanup
+# Phase 9: Integration testing and cleanup
 
 **Objective:** All three features work together correctly. No regressions in existing functionality.
 
