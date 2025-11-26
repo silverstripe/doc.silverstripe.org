@@ -128,10 +128,10 @@ async function cloneRepository(config) {
 }
 
 /**
- * Build repository config from Gatsby sources
+ * Build repository config from source configuration
  */
-function buildRepoConfig(gatsbySource, version, context) {
-  const { remote, branch, patterns, name } = gatsbySource.options;
+function buildRepoConfig(sourceConfig, version, context) {
+  const { remote, branch, patterns, name } = sourceConfig.options;
   
   // Determine output directory based on name
   // name format: "docs--6" or "docs--6--optional_features/linkfield"

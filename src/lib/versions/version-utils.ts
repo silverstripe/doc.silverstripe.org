@@ -1,6 +1,5 @@
 /**
  * Version utilities for multi-version documentation support
- * Ported from _gatsby/src/utils/nodes.ts
  */
 
 export type VersionStatus = 'current' | 'supported' | 'eol';
