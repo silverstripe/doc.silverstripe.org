@@ -2,6 +2,7 @@
 
 import { useContext } from 'react';
 import { Sidebar } from './Sidebar';
+import { Breadcrumbs } from './Breadcrumbs';
 import { NavNode } from '@/types';
 import { MobileMenuContext } from '@/contexts/MobileMenuContext';
 import styles from './DocsLayout.module.css';
@@ -41,6 +42,7 @@ export function DocsLayout({
           {/* Main content */}
           <div className={styles.mainContent} onClick={onClose}>
             <main role="main">
+              <Breadcrumbs slug={currentSlug} version={version} navTree={navTree} />
               {children}
             </main>
           </div>
