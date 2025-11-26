@@ -94,7 +94,7 @@ module.exports = [
     resolve: 'gatsby-source-git',
     options: {
       name: 'docs--6--optional_features/fluent',
-      remote: 'https://github.com/tractorcow/silverstripe-fluent.git',
+      remote: 'https://github.com/tractorcow-farm/silverstripe-fluent.git',
       branch: '8.1',
       patterns: 'docs/en/!(userguide)/**'
     }
