@@ -326,6 +326,8 @@ Run tests: `npm test`
 
 ---
 
+(Use Opus)
+
 # Phase 7: Update AGENTS.md
 
 **Objective:** Update AGENTS.md with accurate project information after refactoring.

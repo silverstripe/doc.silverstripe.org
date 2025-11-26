@@ -1,5 +1,5 @@
 import { visit } from 'unist-util-visit';
-import type { Root } from 'mdast';
+import type { Root, Image } from 'mdast';
 import { resolveImagePath } from './resolve-image-paths';
 
 /**
@@ -12,7 +12,7 @@ export function remarkImages(options?: { currentFilePath?: string }) {
   return async (tree: Root) => {
     const currentFilePath = options?.currentFilePath || '';
 
-    visit(tree, 'image', (node: any) => {
+    visit(tree, 'image', (node: Image) => {
       if (node.url && currentFilePath) {
         node.url = resolveImagePath(node.url, currentFilePath);
       }

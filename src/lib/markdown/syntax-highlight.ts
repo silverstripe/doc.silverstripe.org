@@ -1,10 +1,22 @@
 import { createHighlighter, type Highlighter } from 'shiki';
 import { visit } from 'unist-util-visit';
 import type { Root, Element } from 'hast';
+import type { Text as HastText } from 'hast';
 import { escapeHtml } from '@/lib/utils';
 
 // Singleton highlighter instance
 let highlighter: Highlighter | null = null;
+
+/**
+ * Type for HAST element nodes used in code block processing
+ * Flexible type that accepts the range of properties we create in wrapper nodes
+ */
+interface CodeBlockElement {
+  type: 'element';
+  tagName: string;
+  properties?: Record<string, unknown>;
+  children?: (CodeBlockElement | HastText)[];
+}
 
 /**
  * Language aliases for Silverstripe documentation
@@ -52,11 +64,11 @@ async function getHighlighterInstance(): Promise<Highlighter> {
 export function highlightCodeBlocks() {
   return async (tree: Root) => {
     // Find all pre/code blocks
-    visit(tree, 'element', (node: any, index: number | undefined, parent: any) => {
+    visit(tree, 'element', (node: Element, index: number | undefined, parent: Element | Root | undefined) => {
       if (node.tagName === 'pre' && parent && index !== undefined) {
         const codeNode = node.children?.[0];
-        if (codeNode && codeNode.tagName === 'code') {
-          processCodeBlock(node, codeNode, parent, index);
+        if (codeNode && typeof codeNode === 'object' && 'tagName' in codeNode && codeNode.tagName === 'code') {
+          processCodeBlock(node as CodeBlockElement, codeNode as CodeBlockElement, parent as any, index);
         }
       }
     });
@@ -66,7 +78,7 @@ export function highlightCodeBlocks() {
 /**
  * Process a single code block
  */
-function processCodeBlock(preNode: any, codeNode: any, parent: any, index: number): void {
+function processCodeBlock(preNode: CodeBlockElement, codeNode: CodeBlockElement, parent: any, index: number): void {
   const classAttr = codeNode.properties?.className;
   const classes = Array.isArray(classAttr) ? classAttr : [classAttr].filter(Boolean);
 
@@ -86,7 +98,7 @@ function processCodeBlock(preNode: any, codeNode: any, parent: any, index: numbe
   const codeText = getTextContent(codeNode);
 
   // Create a wrapper div with copy button and language badge
-  const wrapperNode: any = {
+  const wrapperNode: CodeBlockElement = {
     type: 'element',
     tagName: 'div',
     properties: {
@@ -152,21 +164,22 @@ function processCodeBlock(preNode: any, codeNode: any, parent: any, index: numbe
 
 /**
  * Extract text content from a node
+ * Recursively traverses code block element children to collect text values
  */
-function getTextContent(node: any): string {
-  if (!node.children || node.children.length === 0) {
+function getTextContent(node: CodeBlockElement | HastText): string {
+  // Handle text nodes directly
+  if (node.type === 'text' && 'value' in node) {
     return node.value || '';
   }
 
-  return node.children
-    .map((child: any) => {
-      if (child.type === 'text') {
-        return child.value || '';
-      }
-      if (child.type === 'element') {
+  // Handle element nodes with children
+  if (node.type === 'element' && 'children' in node && node.children && node.children.length > 0) {
+    return node.children
+      .map((child: CodeBlockElement | HastText) => {
         return getTextContent(child);
-      }
-      return '';
-    })
-    .join('');
+      })
+      .join('');
+  }
+
+  return '';
 }

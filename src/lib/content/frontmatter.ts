@@ -23,7 +23,7 @@ export function parseFrontmatter(content: string): {
 /**
  * Validate and normalize frontmatter data
  */
-export function validateFrontmatter(data: any): DocumentMeta {
+export function validateFrontmatter(data: Record<string, unknown>): DocumentMeta {
   const validated: DocumentMeta = {
     title: data.title ? String(data.title) : undefined,
     summary: data.summary ? String(data.summary) : undefined,
