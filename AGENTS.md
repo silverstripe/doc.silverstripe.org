@@ -2,13 +2,13 @@
 
 ## Project Overview
 
-Rebuild of doc.silverstripe.org using **Next.js 16+ / Node.js 24+**. Starting from Gatsby v2 (`_gatsby/` dir). Two contexts: `docs` (developer) and `user` (end-user help).
+Rebuild of doc.silverstripe.org using **Next.js 16+ / Node.js 24+**. Two contexts: `docs` (developer) and `user` (end-user help). Static export with all pages pre-rendered at build time.
 
 ---
 
 ## Tech Stack
 
-Next.js 16+ • Node.js 24+ • TypeScript (strict) • Tailwind + Bootstrap • Markdown • Algolia DocSearch • Jest + RTL
+Next.js 16+ • Node.js 24+ • TypeScript (strict) • Tailwind + Bootstrap • Markdown (remark/rehype) • Algolia DocSearch • Jest + RTL • Prism.js
 
 ---
 
@@ -27,19 +27,31 @@ npm test            # All tests (auto uses mock data)
 ## Architecture
 
 **Static:** `output: 'export'`, all pages pre-rendered, no SSR/ISR  
-**Content:** Git clones to `.cache/content/` (sources in `_gatsby/sources-*.cjs`), versions 3-6  
-**URLs:** `/en/{version}/{path}/` - case-insensitive, numeric prefixes stripped, kept for sorting  
-**Mock/Real:** `NEXT_USE_MOCK_DATA=true` uses `tests/fixtures/`, false uses `.cache/content/`
+**Content:** Git clones to `.cache/content/`, versions 3-6  
+**URLs:** `/en/{version}/{path}/` - case-insensitive, numeric prefixes stripped for URLs but kept for sorting  
+**Mock/Real:** `NEXT_USE_MOCK_DATA=true` uses `tests/fixtures/mock-content/`, false uses `.cache/content/`
 
 ---
 
-## Critical Requirements
+## Project Structure
 
-**Testing:** All tests use mock data automatically. Tests must pass before next phase.
-
-**Capitalization:** Mock data includes varied capitalization (lowercase, Title Case, Mixed). Routing **must** be case-insensitive - all variations work.
-
-**File Structure:** Real content uses `index.md` (not `00_index.md`), directories like `01_Getting_Started/`
+```
+src/
+  app/                    # Next.js app router pages
+    en/[version]/[[...slug]]/page.tsx  # Main doc page
+  components/             # React components (PascalCase)
+  lib/
+    content/              # Document loading, parsing, tree building
+    markdown/             # MD→HTML processing (remark/rehype pipeline)
+    nav/                  # Navigation tree building
+    children/             # [CHILDREN] marker replacement
+    versions/             # Version utilities and constants
+    seo/                  # Metadata generation
+    sources-config.ts     # GitHub repo/branch mapping for 30+ modules
+  types/                  # TypeScript interfaces
+  contexts/               # React contexts (MobileMenuContext)
+tests/                    # Test files (mirrors src/ structure)
+```
 
 ---
 
@@ -50,105 +62,69 @@ interface DocumentNode {
   slug: string; version: string; filePath: string; fileTitle: string;
   fileAbsolutePath: string; isIndex: boolean; parentSlug: string;
   title: string; content: string; category: 'docs' | 'user';
-  summary?: string; icon?: string; hideChildren?: boolean; hide?: boolean; order?: number;
-  optionalFeature?: string; // e.g., 'linkfield' for optional features
+  summary?: string; icon?: string; hideChildren?: boolean; hideSelf?: boolean;
+  order?: number; optionalFeature?: string;
 }
 ```
 
-**Key notes:**
-- **Ordering:** `order` is extracted from numeric filename prefixes (e.g., `01_`, `02_`) and stored in the node, not frontmatter
-- For directories: `01_Getting_Started/index.md` → order: 1
-- For files: `02_Advanced.md` → order: 2
-- Files without numeric prefixes have no order value
-- Sorting respects directory structure first, then order within directory
+**Ordering:** `order` is extracted from numeric filename prefixes (e.g., `01_`, `02_`) and stored in the node. Sorting respects directory structure first, then order within directory.
+
+---
+
+## Key Modules
+
+**Version Management:** `src/lib/versions/version-utils.ts` - centralized version constants  
+**Source Config:** `src/lib/sources-config.ts` - GitHub repo/branch mappings for all modules  
+**Markdown Pipeline:** `src/lib/markdown/processor.ts` - remark→rehype with GFM, alerts, code blocks  
+**Navigation:** `src/lib/nav/build-nav-tree.ts` - hierarchical nav tree from documents
+
+---
 
 ## Testing
 
 **Auto mock:** Tests use `NEXT_USE_MOCK_DATA=true` → `tests/fixtures/mock-content/`  
 **Types:** Unit (utils), Component (React/RTL), Integration (pages)  
-**Manual:** `npm run mock` (dev), `npm run dev` (real after clone)  
+**Coverage:** 589 tests across 45 suites  
 **Gate:** Tests pass → human validates → next phase
-
----
-
-## Mock Data
-
-`tests/fixtures/mock-content/` - v5 & v6 dirs, nested structure, varied capitalization, optional_features/linkfield with nesting.
-
-Example structure:
-```
-v6/
-  index.md
-  01_Getting_Started/index.md
-  02_developer_guides/index.md
-  optional_features/linkfield/02_configuration/index.md
-```
-
----
-
-## Gatsby Reference
-
-`_gatsby/` - **old site file, reference only, don't copy, will be deleted after project complete**.
-
-**Files:** `gatsby-node.js` (slugs), `src/utils/nodes.ts` (nav), `src/utils/sortFiles.ts` (sort), `src/utils/fileToTitle.js` (title), `sources-docs.cjs` (git).
-
-Gatsby = GraphQL+SSR. We = static. Extract logic, not code.
-
----
-
-## Standards
-
-**TS:** Strict, no `any`, explicit returns, interfaces  
-**React:** Server default, `'use client'` when needed, small components  
-**Names:** Components=PascalCase, utils=kebab-case, tests=`*.test.*`
-
----
-
-## Success Criteria
-
-✅ Tests pass ✅ `npm run mock` works ✅ `npm run dev` works ✅ No TS errors ✅ Clean code
-
-and if applicable (per phase):
-✅ URLs match Gatsby ✅ Case-insensitive routing
 
 ---
 
 ## UI Components
 
-**Sidebar:** Navigation with localStorage state (key: `sidebar_state_v{version}`), expandable folders, responsive with hamburger menu on mobile  
-**Dark Mode:** Toggle in header, uses localStorage (key: `theme_preference`), applies `dark` class to `document.documentElement`, CSS custom properties  
-**Header:** Logo (SVG), GitHub icon, VersionSwitcher, DarkModeToggle, SearchBox  
-**Mobile:** Hamburger menu toggles sidebar overlay at <1024px breakpoint, fixed width sidebar above breakpoint  
-**Edit on GitHub:** Dynamic URLs based on `src/lib/sources-config.ts`, supports all versions and optional features, uses correct branches from git source configuration
+**Sidebar:** Expandable folders, localStorage state (`sidebar_state_v{version}`)  
+**Header:** Logo, GitHub icon, VersionSwitcher, DarkModeToggle, SearchBox  
+**Mobile:** Hamburger menu toggles sidebar at <1024px  
+**Edit on GitHub:** Dynamic URLs via `sources-config.ts`, supports optional features  
+**Breadcrumbs:** Auto-generated from slug path  
+**Code Blocks:** Prism.js highlighting, copy button
 
 ---
 
-## Recent Improvements (Phases 8-9)
+## Standards
 
-**Phase 8:** Removed version footer text ("Version X • docs") from page layout  
-**Phase 8.5:** Fixed Edit on GitHub links:
-- Branch versions corrected (5.4 for v5, 6.1 for v6, etc.)
-- URL structure changed to `/blob/` (read-only) instead of `/edit/`
-- Optional features now point to correct repositories
-- Added `optionalFeature` field to DocumentNode
-- Central configuration in `src/lib/sources-config.ts` with 30+ module mappings
-
-**Test Coverage:** 493 passing tests across 39 suites  
-**Build Status:** All versions (3-6) pre-render successfully (1360 pages)
+**TS:** Strict mode, minimize `any`, explicit returns  
+**React:** Server components default, `'use client'` when needed  
+**Names:** Components=PascalCase, utils=kebab-case, tests=`*.test.*`  
+**Imports:** Use `@/` path alias for src/ imports
 
 ---
 
 ## For AI Agents
 
-**Your mission:** Follow plan files e.g. (PLAN*.md, z-plan*.md) phases sequentially. Each phase is self-contained.
+**Your mission:** Follow plan files (z-plan-*.md) phases sequentially. Each phase is self-contained.
 
 **Approach:**
-1. Implement phase from provided instructions
+1. Read phase instructions completely before starting
 2. Write tests alongside code  
-3. Ensure tests pass
-4. Use mock data (don't test with real content)
+3. Ensure all tests pass before completing phase
+4. Use mock data for development (don't clone real content)
 5. Keep functions small, types strict
 6. Request validation when complete
 
-**Red flags:** Skipping tests • Using `any` • Large components • Testing with real content early • Moving ahead without validation
+**Red flags:** Skipping tests • Using `any` • Large components • Testing with real content • Moving ahead without validation
 
+**Key files to understand:**
+- `src/app/en/[version]/[[...slug]]/page.tsx` - main page component
+- `src/lib/content/get-document.ts` - document loading and caching
+- `src/lib/markdown/processor.ts` - markdown processing pipeline
+- `src/lib/sources-config.ts` - GitHub repository configuration
