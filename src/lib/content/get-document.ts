@@ -3,6 +3,7 @@ import { DocumentNode } from '@/types';
 import { buildContentTree } from './build-tree';
 import { getConfig } from '@/lib/config';
 import { normalizeSlug } from '@/lib/utils';
+import { getAllVersions } from '@/lib/versions';
 import fs from 'fs/promises';
 
 // Cache for documents to avoid rebuilding on every request
@@ -70,7 +71,7 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
   const contentBase = await resolveContentBasePath();
 
   // Build versions map - v3, v4, v5, and v6
-  const versionDirs = ['v3', 'v4', 'v5', 'v6'];
+  const versionDirs = getAllVersions().map(v => `v${v}`);
   
   if (!cachedDocuments) {
     cachedDocuments = new Map();

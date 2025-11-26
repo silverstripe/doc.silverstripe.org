@@ -6,6 +6,7 @@
 import { DocumentNode } from '@/types';
 import { getSourceConfig } from './sources-config';
 import { normalizeSlug } from './utils';
+import { getDefaultVersion } from '@/lib/versions';
 
 /**
  * Detect if a document is part of an optional module
@@ -103,7 +104,7 @@ export function extractVersionAndFeatureFromSlug(
   const parts = slug.split('/').filter(Boolean);
   
   if (parts.length < 2) {
-    return { version: '6', optionalFeature: null };
+    return { version: getDefaultVersion(), optionalFeature: null };
   }
   
   const version = parts[1];

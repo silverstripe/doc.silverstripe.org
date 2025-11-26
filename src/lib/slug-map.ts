@@ -4,6 +4,7 @@
  */
 
 import { getAllDocuments } from '@/lib/content/get-document';
+import { getAllVersions } from '@/lib/versions';
 
 let slugMapCache: Map<string, Set<string>> | null = null;
 
@@ -19,7 +20,7 @@ export async function getSlugsByVersion(): Promise<Map<string, Set<string>>> {
   const docs = await getAllDocuments();
   const slugMap = new Map<string, Set<string>>();
 
-  for (const version of ['3', '4', '5', '6']) {
+  for (const version of getAllVersions()) {
     slugMap.set(version, new Set());
   }
 

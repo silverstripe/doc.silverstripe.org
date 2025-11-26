@@ -2,6 +2,8 @@
  * Utility functions for routing and slug handling
  */
 
+import { getAllVersions } from '@/lib/versions';
+
 /**
  * Build a full slug from route parameters
  * Params come from Next.js dynamic route: [version]/[[...slug]]/page.tsx
@@ -44,5 +46,5 @@ export function extractVersionAndSlug(fullSlug: string): { version: string; slug
  * This would be used by generateStaticParams
  */
 export function getAvailableVersions(): string[] {
-  return ['3', '4', '5', '6'];
+  return getAllVersions();
 }

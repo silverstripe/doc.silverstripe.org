@@ -9,6 +9,7 @@ import { DarkModeToggle } from './DarkModeToggle';
 import styles from './Header.module.css';
 import { usePathname } from 'next/navigation';
 import { extractVersionAndFeatureFromSlug, getDocumentGithubInfo } from '@/lib/navigation-logic';
+import { getDefaultVersion } from '@/lib/versions';
 
 interface HeaderProps {
   onMobileMenuToggle?: (isOpen: boolean) => void;
@@ -24,7 +25,7 @@ export function Header({ onMobileMenuToggle }: HeaderProps) {
   
   // Extract version and optional feature from pathname
   const pathParts = pathname.split('/').filter(Boolean);
-  const version = pathParts[1] || '6';
+  const version = pathParts[1] || getDefaultVersion();
   const slug = pathname;
   const { optionalFeature } = extractVersionAndFeatureFromSlug(slug);
 

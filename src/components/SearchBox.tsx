@@ -3,6 +3,7 @@
 import { DocSearch } from '@docsearch/react';
 import { usePathname } from 'next/navigation';
 import { useCallback } from 'react';
+import { getDefaultVersion } from '@/lib/versions';
 import '@docsearch/css';
 
 /**
@@ -14,7 +15,7 @@ function getVersionFromPathname(pathname: string): string {
   if (parts.length >= 2 && parts[0] === 'en') {
     return parts[1];
   }
-  return '6'; // Default to latest version
+  return getDefaultVersion();
 }
 
 /**

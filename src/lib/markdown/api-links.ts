@@ -3,11 +3,13 @@
  * Supports formats: [api:Class], [api:Class::method()], [api:Class->property]
  */
 
+import { getDefaultVersion } from '@/lib/versions';
+
 /**
  * Get the current version from context (used during markdown processing)
  * This will be provided by the processor
  */
-let currentVersion = '6';
+let currentVersion = getDefaultVersion();
 
 export function setCurrentVersion(version: string): void {
   currentVersion = version;
