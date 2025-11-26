@@ -8,6 +8,24 @@ import fs from 'fs/promises';
 let cachedDocuments: Map<string, DocumentNode[]> | null = null;
 
 /**
+ * Deprecated optional feature folder names that should be filtered out.
+ * These exist as duplicates in the main developer-docs repo alongside
+ * the correctly-named folders cloned from individual module repos.
+ * 
+ * Mapping: deprecated folder -> canonical folder
+ * - content_blocks -> elemental
+ * - forms -> userforms  
+ * - multi-factor_authentication -> mfa
+ * - setting_up_advancedworkflow -> advancedworkflow
+ */
+const DEPRECATED_OPTIONAL_FEATURES = [
+  'content_blocks',
+  'forms',
+  'multi-factor_authentication',
+  'setting_up_advancedworkflow',
+];
+
+/**
  * Resolve content base path - handles both testing and production
  */
 async function resolveContentBasePath(): Promise<string> {
@@ -109,8 +127,14 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
           return doc;
         });
         
-        documents.push(...processedDocs);
-        cachedDocuments.set(`${versionDir}/optional_features`, processedDocs);
+        // Filter out documents from deprecated optional feature folders
+        const filteredDocs = processedDocs.filter(doc => {
+          if (!doc.optionalFeature) return true;
+          return !DEPRECATED_OPTIONAL_FEATURES.includes(doc.optionalFeature);
+        });
+        
+        documents.push(...filteredDocs);
+        cachedDocuments.set(`${versionDir}/optional_features`, filteredDocs);
       } catch (error) {
         // optional_features directory may not exist, continue
       }
