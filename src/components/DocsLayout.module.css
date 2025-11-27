@@ -22,7 +22,7 @@
 
 .sidebarContainer {
   position: fixed;
-  top: 2rem;
+  top: var(--header-height);;
   left: 0;
   width: var(--sidebar-width);
   height: calc(100vh - 4rem);
@@ -49,7 +49,6 @@
   .sidebarContainer {
     display: none;
     position: absolute;
-    top: var(--header-height);
     left: 0;
     width: var(--sidebar-width);
     height: calc(100vh - var(--header-height));

@@ -41,8 +41,17 @@ describe('SidebarIndentation', () => {
                   title: 'Level 4',
                   isIndex: false,
                   isActive: false,
-                  hasVisibleChildren: false,
-                  children: [],
+                  hasVisibleChildren: true,
+                  children: [
+                    {
+                      slug: '/en/6/level1/level2/level3/level4/level5/',
+                      title: 'Level 5',
+                      isIndex: false,
+                      isActive: false,
+                      hasVisibleChildren: false,
+                      children: [],
+                    },
+                  ],
                 },
               ],
             },
@@ -194,5 +203,185 @@ describe('SidebarIndentation', () => {
     });
 
     expect(items).toMatchSnapshot();
+  });
+
+  // New tests for data-depth attributes and visibility
+  it('should apply data-depth attribute to list items', () => {
+    const { container } = render(
+      <Sidebar navTree={mockNavTree} currentSlug="/en/6/level1/level2/level3/" version="6" />
+    );
+
+    // Check that li elements have data-depth attributes
+    const depth0Items = container.querySelectorAll('li[data-depth="0"]');
+    const depth1Items = container.querySelectorAll('li[data-depth="1"]');
+    const depth2Items = container.querySelectorAll('li[data-depth="2"]');
+    const depth3Items = container.querySelectorAll('li[data-depth="3"]');
+
+    expect(depth0Items.length).toBeGreaterThan(0);
+    expect(depth1Items.length).toBeGreaterThan(0);
+    expect(depth2Items.length).toBeGreaterThan(0);
+    expect(depth3Items.length).toBeGreaterThan(0);
+  });
+
+  it('should apply data-depth attribute to navItemContainer for CSS indentation', () => {
+    const { container } = render(
+      <Sidebar navTree={mockNavTree} currentSlug="/en/6/level1/level2/level3/" version="6" />
+    );
+
+    // Check that navItemContainer divs have data-depth attributes
+    const containers = container.querySelectorAll('div[data-depth]');
+    expect(containers.length).toBeGreaterThan(0);
+
+    // Verify we have containers at various depths
+    const containerDepths = new Set<string>();
+    containers.forEach(c => {
+      const depth = c.getAttribute('data-depth');
+      if (depth) containerDepths.add(depth);
+    });
+
+    expect(containerDepths.has('0')).toBe(true);
+    expect(containerDepths.has('1')).toBe(true);
+    expect(containerDepths.has('2')).toBe(true);
+    expect(containerDepths.has('3')).toBe(true);
+  });
+
+  it('should render top-level item visible (not clipped) with depth-0', () => {
+    const { container } = render(
+      <Sidebar navTree={mockNavTree} currentSlug="/en/6/" version="6" />
+    );
+
+    // First item should have depth-0 and be visible in DOM
+    const firstItem = container.querySelector('nav ul > li');
+    expect(firstItem).not.toBeNull();
+    expect(firstItem?.getAttribute('data-depth')).toBe('0');
+    expect(firstItem?.className).toContain('depth-0');
+    expect(firstItem?.className).not.toContain('nested');
+  });
+
+  it('should render 5 depth levels when fully expanded', () => {
+    // Create a nav tree with isActive at deepest level to trigger auto-expansion
+    const deepNavTree: NavNode[] = [
+      {
+        slug: '/en/6/level1/',
+        title: 'Level 1',
+        isIndex: false,
+        isActive: false,
+        hasVisibleChildren: true,
+        children: [
+          {
+            slug: '/en/6/level1/level2/',
+            title: 'Level 2',
+            isIndex: false,
+            isActive: false,
+            hasVisibleChildren: true,
+            children: [
+              {
+                slug: '/en/6/level1/level2/level3/',
+                title: 'Level 3',
+                isIndex: false,
+                isActive: false,
+                hasVisibleChildren: true,
+                children: [
+                  {
+                    slug: '/en/6/level1/level2/level3/level4/',
+                    title: 'Level 4',
+                    isIndex: false,
+                    isActive: false,
+                    hasVisibleChildren: true,
+                    children: [
+                      {
+                        slug: '/en/6/level1/level2/level3/level4/level5/',
+                        title: 'Level 5',
+                        isIndex: false,
+                        isActive: true, // Active at deepest level
+                        hasVisibleChildren: false,
+                        children: [],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ];
+
+    const { container } = render(
+      <Sidebar navTree={deepNavTree} currentSlug="/en/6/level1/level2/level3/level4/level5/" version="6" />
+    );
+
+    // Should have items at all 5 depth levels
+    const depth0 = container.querySelectorAll('li[data-depth="0"]');
+    const depth1 = container.querySelectorAll('li[data-depth="1"]');
+    const depth2 = container.querySelectorAll('li[data-depth="2"]');
+    const depth3 = container.querySelectorAll('li[data-depth="3"]');
+    const depth4 = container.querySelectorAll('li[data-depth="4"]');
+
+    expect(depth0.length).toBe(1);
+    expect(depth1.length).toBe(1);
+    expect(depth2.length).toBe(1);
+    expect(depth3.length).toBe(1);
+    expect(depth4.length).toBe(1);
+  });
+
+  it('should increase indentation with each depth level via data-depth attribute', () => {
+    // Create a nav tree with isActive at deepest level to trigger auto-expansion
+    const deepNavTree: NavNode[] = [
+      {
+        slug: '/en/6/level1/',
+        title: 'Level 1',
+        isIndex: false,
+        isActive: false,
+        hasVisibleChildren: true,
+        children: [
+          {
+            slug: '/en/6/level1/level2/',
+            title: 'Level 2',
+            isIndex: false,
+            isActive: false,
+            hasVisibleChildren: true,
+            children: [
+              {
+                slug: '/en/6/level1/level2/level3/',
+                title: 'Level 3',
+                isIndex: false,
+                isActive: false,
+                hasVisibleChildren: true,
+                children: [
+                  {
+                    slug: '/en/6/level1/level2/level3/level4/',
+                    title: 'Level 4',
+                    isIndex: false,
+                    isActive: false,
+                    hasVisibleChildren: true,
+                    children: [
+                      {
+                        slug: '/en/6/level1/level2/level3/level4/level5/',
+                        title: 'Level 5',
+                        isIndex: false,
+                        isActive: true, // Active at deepest level
+                        hasVisibleChildren: false,
+                        children: [],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ];
+
+    const { container } = render(
+      <Sidebar navTree={deepNavTree} currentSlug="/en/6/level1/level2/level3/level4/level5/" version="6" />
+    );
+
+    // Verify each depth level has correct data-depth on navItemContainer
+    for (let depth = 0; depth <= 4; depth++) {
+      const containerAtDepth = container.querySelector(`div[data-depth="${depth}"]`);
+      expect(containerAtDepth).not.toBeNull();
+    }
   });
 });

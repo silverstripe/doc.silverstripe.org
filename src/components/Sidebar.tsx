@@ -82,8 +82,8 @@ export function Sidebar({ navTree, currentSlug, version }: SidebarProps) {
       .join(' ');
 
     return (
-      <li key={node.slug} className={itemClasses}>
-        <div className={styles.navItemContainer}>
+      <li key={node.slug} className={itemClasses} data-depth={depth}>
+        <div className={styles.navItemContainer} data-depth={depth}>
           {hasChildren && (
             <button
               className={styles.navToggle}
