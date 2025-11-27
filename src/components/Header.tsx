@@ -9,7 +9,7 @@ import { DarkModeToggle } from './DarkModeToggle';
 import styles from './Header.module.css';
 import { usePathname } from 'next/navigation';
 import { extractVersionAndFeatureFromSlug, getDocumentGithubInfo } from '@/lib/navigation-logic';
-import { getDefaultVersion } from '@/lib/versions';
+import { getDefaultVersion, getVersionHomepage } from '@/lib/versions/version-utils';
 
 interface HeaderProps {
   onMobileMenuToggle?: (isOpen: boolean) => void;
@@ -25,7 +25,8 @@ export function Header({ onMobileMenuToggle }: HeaderProps) {
   
   // Extract version and optional feature from pathname
   const pathParts = pathname.split('/').filter(Boolean);
-  const version = pathParts[1] || getDefaultVersion();
+  // Only use pathParts[1] as version if pathParts[0] is 'en'
+  const version = (pathParts[0] === 'en' ? pathParts[1] : null) || getDefaultVersion();
   const slug = pathname;
   const { optionalFeature } = extractVersionAndFeatureFromSlug(slug);
 
@@ -61,7 +62,7 @@ export function Header({ onMobileMenuToggle }: HeaderProps) {
   return (
     <header className={styles.header}>
       <div className={styles.headerContent}>
-        <Link href="/" className={styles.logo}>
+        <Link href={getVersionHomepage(version)} className={styles.logo}>
           <img src="/logo.svg" alt="Silverstripe" className={styles.logoImage} />
           <div className={styles.logoText}>
             <span className={styles.logoTitle}>Silverstripe</span>
