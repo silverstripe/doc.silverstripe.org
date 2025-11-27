@@ -15,12 +15,23 @@ Next.js 16+ • Node.js 24+ • TypeScript (strict) • Tailwind + Bootstrap •
 ## Commands
 
 ```bash
-npm run mock        # Dev with mock data (tests/fixtures/mock-content/)
-npm run clone       # Clone docs (DOCS_CONTEXT defaults to 'docs')
-npm run dev         # Dev with cloned content  
-npm run build       # npm run clone && next build
-npm test            # All tests (auto uses mock data)
+npm run mock              # Dev with mock data (tests/fixtures/mock-content/)
+npm run dev               # Dev with cloned content (alias: dev:docs, DOCS_CONTEXT=docs)
+npm run dev:docs          # Dev with docs context (DOCS_CONTEXT=docs)
+npm run dev:user          # Dev with user-help context (DOCS_CONTEXT=user)
+npm run clone:docs        # Clone docs content (DOCS_CONTEXT=docs)
+npm run clone:user        # Clone user-help content (DOCS_CONTEXT=user)
+npm run build             # Build docs (alias: build:docs, DOCS_CONTEXT=docs)
+npm run build:docs        # Build with docs context (DOCS_CONTEXT=docs)
+npm run build:user        # Build with user-help context (DOCS_CONTEXT=user)
+npm run copy-images:docs  # Copy image assets for docs context
+npm run copy-images:user  # Copy image assets for user-help context
+npm test                  # All tests (auto uses mock data)
 ```
+
+**Environment variable:** `DOCS_CONTEXT` controls which documentation set loads:
+- `docs` (default): Developer documentation
+- `user`: End-user help documentation
 
 ---
 
@@ -87,7 +98,7 @@ interface DocumentNode {
 
 **Auto mock:** Tests use `NEXT_USE_MOCK_DATA=true` → `tests/fixtures/mock-content/`  
 **Types:** Unit (utils), Component (React/RTL), Integration (pages)  
-**Coverage:** 609 tests across 47 suites  
+**Coverage:** 704 tests across 55 suites  
 **Gate:** Tests pass → human validates → next phase
 
 ---
