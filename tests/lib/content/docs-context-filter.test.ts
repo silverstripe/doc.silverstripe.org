@@ -53,10 +53,15 @@ describe('DOCS_CONTEXT filtering', () => {
     const userDocs = await getAllDocuments();
     const userCount = userDocs.length;
 
-    // Should have different counts (one should be smaller or zero)
+    // Both contexts should have documents
     expect(docsCount).toBeGreaterThan(0);
-    // userCount might be 0 in mock data since we only have docs category in mock
-    expect(userCount).toBeLessThanOrEqual(docsCount);
+    expect(userCount).toBeGreaterThan(0);
+    
+    // User context might have different count due to 03_Optional_features inclusion
+    // (user context includes 03_Optional_features, docs context excludes it)
+    // The key is that filtering works - all docs have the correct category
+    expect(docsDocs.every(doc => doc.category === 'docs')).toBe(true);
+    expect(userDocs.every(doc => doc.category === 'user')).toBe(true);
   });
 
   it('should have category field in all documents', async () => {

@@ -118,13 +118,19 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
       const optionalFeaturesPath = path.join(versionPath, 'optional_features');
       try {
         // Load everything under optional_features with the optional_features parameter
-        // The root parent slug should be the version root so Optional Features index becomes a root child
+        // For docs context: the optional_features/index.md IS the Optional Features section, parent is version root
+        // For user context: the 03_Optional_features/index.md is the section, so optional_features modules
+        //   should be children of /en/{version}/optional_features/ (not siblings)
+        const versionNum = versionDir.replace(/^v/, '');
+        const rootParentSlug = effectiveContext === 'user'
+          ? `/en/${versionNum}/optional_features/`  // User: optional features are children of the section
+          : `/en/${versionNum}/`;  // Docs: optional features index is a root child
         const optionalFeaturesDocs = await buildContentTree(
           optionalFeaturesPath,
-          versionDir.replace(/^v/, ''),
+          versionNum,
           effectiveContext,
           'optional_features',
-          `/en/${versionDir.replace(/^v/, '')}/` // rootParentSlug = version root
+          rootParentSlug
         );
         
         // Process optional feature documents to set the correct optionalFeature field
@@ -155,8 +161,13 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
         });
         
         // Filter out documents from deprecated optional feature folders
+        // NOTE: This only applies to docs context. For user context, these folder names are correct.
+        // In docs context, the main developer-docs repo has deprecated folders (content_blocks, forms, etc.)
+        // that duplicate content from the properly-named module repos (elemental, userforms, etc.)
         const filteredDocs = processedDocs.filter(doc => {
           if (!doc.optionalFeature) return true;
+          // Only filter deprecated folders in docs context
+          if (effectiveContext === 'user') return true;
           return !DEPRECATED_OPTIONAL_FEATURES.includes(doc.optionalFeature);
         });
         

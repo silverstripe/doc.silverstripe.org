@@ -27,9 +27,16 @@ export async function buildContentTree(
   rootParentSlug?: string
 ): Promise<DocumentNode[]> {
   try {
-    // Get all markdown files, excluding optional_features directories
-    // Excludes: 03_Optional_features (old deprecated version), optional_features (loaded separately as modules)
-    const excludeDirs = optional ? undefined : ['03_Optional_features', 'optional_features'];
+    // Get all markdown files, excluding optional_features directories when loading main content
+    // For docs context: exclude 03_Optional_features (deprecated) and optional_features (loaded separately)
+    // For user context: only exclude optional_features (03_Optional_features contains the valid section index)
+    let excludeDirs: string[] | undefined;
+    if (!optional) {
+      // When loading main content (not optional features)
+      excludeDirs = category === 'user' 
+        ? ['optional_features']  // User: keep 03_Optional_features, exclude optional_features
+        : ['03_Optional_features', 'optional_features'];  // Docs: exclude both
+    }
     const files = await listMarkdownFiles(basePath, excludeDirs);
 
     if (files.length === 0) {

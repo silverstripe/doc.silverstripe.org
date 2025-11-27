@@ -48,8 +48,9 @@ function ensureDir(dir) {
  * @param {string} sourcePath - Source path pattern
  * @param {string|null} optionalFeatureName - Optional feature name for filtering
  * @param {string[]|null} excludeDirs - Directories to exclude (for developer-docs user content filtering)
+ * @param {string} context - Context ('docs' or 'user')
  */
-function copyFiles(sourceDir, destDir, sourcePath, optionalFeatureName = null, excludeDirs = null) {
+function copyFiles(sourceDir, destDir, sourcePath, optionalFeatureName = null, excludeDirs = null, context = 'docs') {
   const fullSourcePath = path.join(sourceDir, sourcePath);
   
   if (!fs.existsSync(fullSourcePath)) {
@@ -72,12 +73,18 @@ function copyFiles(sourceDir, destDir, sourcePath, optionalFeatureName = null, e
           continue;
         }
         
-        // For optional features, skip anything not in the expected path
-        // This filters out 'userguide' when we want docs, or docs when we want userguide
-        if (optionalFeatureName && relPath === 'userguide') {
-          // For docs context optional features, skip userguide
-          // For user context, keep userguide
-          continue;
+        // For optional features, filter based on context
+        // docs context: skip 'userguide' directory (we want dev docs, not user guides)
+        // user context: only process 'userguide' directory (skip everything else)
+        if (optionalFeatureName) {
+          if (context === 'docs' && relPath === 'userguide') {
+            // For docs context, skip userguide
+            continue;
+          }
+          if (context === 'user' && relPath !== 'userguide' && rel === '') {
+            // For user context at root level, only walk into userguide
+            continue;
+          }
         }
         walk(fullPath, relPath);
       } else {
@@ -86,6 +93,12 @@ function copyFiles(sourceDir, destDir, sourcePath, optionalFeatureName = null, e
         const isImage = imageExtensions.includes(path.extname(entry.name).toLowerCase());
         
         if (isMarkdown || isImage) {
+          // For user context optional features, only copy files from within userguide directory
+          // Skip files at root level (these are dev docs, not user guides)
+          if (optionalFeatureName && context === 'user' && !rel.startsWith('userguide')) {
+            continue;
+          }
+          
           // For optional features, strip the leading path and optionalFeatureName if present
           let finalPath = relPath;
           
@@ -129,7 +142,7 @@ async function cloneRepository(config) {
     const sourcePath = parsePattern(patterns);
     if (sourcePath) {
       const isOptionalFeature = name.includes('optional_features');
-      copyFiles(tempDir, outputDir, sourcePath, isOptionalFeature ? name : null, excludeDirs);
+      copyFiles(tempDir, outputDir, sourcePath, isOptionalFeature ? name : null, excludeDirs, context);
     }
     
   } catch (error) {
