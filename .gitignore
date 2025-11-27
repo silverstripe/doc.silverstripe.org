@@ -20,6 +20,8 @@ coverage/
 .DS_Store
 Thumbs.db
 
+next-env.d.ts
 *.tsbuildinfo
 *.log
 *.kate-swp
+

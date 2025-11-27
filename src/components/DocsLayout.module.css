@@ -5,6 +5,7 @@
 .layout {
   min-height: 100vh;
   padding: 2rem 0;
+  margin-left: calc(var(--sidebar-width) + 2rem);
 }
 
 .layoutContainer {
@@ -16,20 +17,19 @@
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: var(--sidebar-width) 1fr;
-  gap: 2rem;
+  display: block;
 }
 
 .sidebarContainer {
-  position: sticky;
+  position: fixed;
   top: 2rem;
+  left: 0;
   width: var(--sidebar-width);
-  height: fit-content;
-  max-height: calc(100vh - 4rem);
+  height: calc(100vh - 4rem);
   overflow-y: auto;
   border-right: 1px solid #e9ecef;
   padding-right: 2rem;
+  padding-left: 0;
 }
 
 .mainContent {
@@ -42,8 +42,8 @@
 
 /* Mobile: hide sidebar by default */
 @media (max-width: 1023px) {
-  .grid {
-    display: block;
+  .layout {
+    margin-left: 0;
   }
 
   .sidebarContainer {
@@ -53,22 +53,16 @@
     left: 0;
     width: var(--sidebar-width);
     height: calc(100vh - var(--header-height));
-    max-height: none;
     padding-right: 1rem;
     padding-left: 1rem;
     border-right: 1px solid var(--theme-border);
     background-color: var(--theme-bg-white);
     z-index: 100;
-    overflow-y: auto;
   }
 
   /* Show sidebar when hamburger is open */
   .sidebarOpen {
     display: block;
-  }
-
-  .mainContent {
-    width: 100%;
   }
 }
 
