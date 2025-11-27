@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { getDocumentByParams, getAllDocuments } from '@/lib/content/get-document';
 import { buildSlugFromParams } from '@/lib/routing';
 import { buildNavTree } from '@/lib/nav';
@@ -6,7 +6,7 @@ import { DocsLayout } from '@/components/DocsLayout';
 import { VersionBanner } from '@/components/VersionBanner';
 import EditOnGithub from '@/components/EditOnGithub';
 import { generatePageMetadata } from '@/lib/seo';
-import { getVersionPath } from '@/lib/versions';
+import { getVersionPath, getVersionHomepage } from '@/lib/versions';
 import type { Metadata } from 'next';
 
 interface PageParams {
@@ -83,7 +83,8 @@ export default async function Page(props: PageProps) {
   const doc = await getDocumentByParams(params.version, params.slug);
 
   if (!doc) {
-    notFound();
+    // Instead of 404, redirect to version homepage
+    redirect(getVersionHomepage(params.version));
   }
 
   // Build navigation tree

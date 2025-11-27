@@ -128,3 +128,12 @@ export function getVersionMessage(version: string): {
 export function getVersionSwitcherLabel(version: string): string {
   return `v${version}`;
 }
+
+/**
+ * Get the homepage slug for a version
+ * @param version - The version
+ * @returns The homepage slug (e.g., /en/6/)
+ */
+export function getVersionHomepage(version: string): string {
+  return `/en/${version}/`;
+}

@@ -13,13 +13,10 @@ interface VersionSwitcherProps {
  * Version switcher component for changing documentation versions
  * 
  * Fallback logic for version switching:
- * - Attempts to navigate to the same page in the target version
- * - If the page doesn't exist in target version, falls back to root (e.g., /en/6/)
- * - Uses getFallbackSlugForVersion utility to check if slug exists
- * 
- * Note: Full validation of slug existence would require server-side lookup.
- * For now, we use a safe fallback approach where users navigate to the target version
- * and Next.js handles non-existent routes with 404 pages.
+ * - Navigates to the same page in the target version
+ * - If the page doesn't exist in target version, the page component
+ *   automatically redirects to the target version's homepage
+ * - This is handled server-side via redirect() in the page component
  */
 export function VersionSwitcher({ currentVersion, currentSlug }: VersionSwitcherProps) {
   const router = useRouter();
