@@ -15,17 +15,3 @@
   color: var(--link-hover, #374151);
   text-decoration: underline;
 }
-
-@media (prefers-color-scheme: dark) {
-  .editContainer {
-    border-top-color: var(--border-dark, #374151);
-  }
-
-  .editLink {
-    color: var(--text-muted-dark, #9ca3af);
-  }
-
-  .editLink:hover {
-    color: var(--link-hover-dark, #d1d5db);
-  }
-}

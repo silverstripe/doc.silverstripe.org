@@ -27,7 +27,7 @@
   width: var(--sidebar-width);
   height: calc(100vh - 4rem);
   overflow-y: auto;
-  border-right: 1px solid #e9ecef;
+  border-right: 1px solid var(--theme-border);
   padding-right: 2rem;
   padding-left: 0;
 }

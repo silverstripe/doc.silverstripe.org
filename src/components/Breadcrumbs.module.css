@@ -20,7 +20,7 @@
 }
 
 .link {
-  color: #0066cc;
+  color: var(--theme-color-primary);
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -31,7 +31,7 @@
 }
 
 .link:focus-visible {
-  outline: 2px solid #0066cc;
+  outline: 2px solid var(--theme-color-primary);
   outline-offset: 2px;
   border-radius: 2px;
 }
@@ -42,28 +42,5 @@
 }
 
 .current {
-  color: #333;
   font-weight: 500;
-}
-
-@media (prefers-color-scheme: dark) {
-  .link {
-    color: #66b3ff;
-  }
-
-  .link:hover {
-    color: #99ccff;
-  }
-
-  .link:focus-visible {
-    outline-color: #66b3ff;
-  }
-
-  .separator {
-    color: #999;
-  }
-
-  .current {
-    color: #e6e6e6;
-  }
 }

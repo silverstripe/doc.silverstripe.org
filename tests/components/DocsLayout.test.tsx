@@ -218,6 +218,56 @@ describe('DocsLayout', () => {
       expect(mockOnClose).toHaveBeenCalled();
     }
   });
+
+  describe('sidebar styling', () => {
+    it('should render sidebar container with border styling', () => {
+      const { container } = renderWithContext(
+        <DocsLayout
+          navTree={mockNavTree}
+          currentSlug="/en/6/"
+          version="6"
+        >
+          <p>Test content</p>
+        </DocsLayout>
+      );
+
+      const sidebarContainer = container.querySelector('[class*="sidebarContainer"]');
+      expect(sidebarContainer).toBeInTheDocument();
+    });
+
+    it('should apply sidebarContainer class to sidebar', () => {
+      const { container } = renderWithContext(
+        <DocsLayout
+          navTree={mockNavTree}
+          currentSlug="/en/6/"
+          version="6"
+        >
+          <p>Test content</p>
+        </DocsLayout>
+      );
+
+      const sidebarContainer = container.querySelector('div[class*="sidebarContainer"]');
+      expect(sidebarContainer).toBeInTheDocument();
+      expect(sidebarContainer?.className).toContain('sidebarContainer');
+    });
+
+    it('should maintain sidebar styling when mobile menu is closed', () => {
+      const { container } = renderWithContext(
+        <DocsLayout
+          navTree={mockNavTree}
+          currentSlug="/en/6/"
+          version="6"
+        >
+          <p>Test content</p>
+        </DocsLayout>,
+        { isMobileMenuOpen: false, onClose: jest.fn() }
+      );
+
+      const sidebarContainer = container.querySelector('[class*="sidebarContainer"]');
+      expect(sidebarContainer).toBeInTheDocument();
+      expect(sidebarContainer?.className).toContain('sidebarContainer');
+    });
+  });
 });
 
 

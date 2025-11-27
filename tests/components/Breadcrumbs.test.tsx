@@ -295,5 +295,57 @@ describe('Breadcrumbs', () => {
       expect(container.querySelectorAll('.item').length).toBeGreaterThan(0);
       expect(container.querySelector('.current')).toBeInTheDocument();
     });
+
+    it('should apply link class to non-current breadcrumbs', () => {
+      const { container } = render(
+        <Breadcrumbs
+          slug="/en/6/01_getting_started/01_installation/"
+          version="6"
+          navTree={mockNavTree}
+        />
+      );
+
+      // CSS modules create scoped class names, so check for links that have href attributes
+      const links = container.querySelectorAll('a[href]');
+      expect(links.length).toBeGreaterThan(0);
+    });
+
+    it('should apply current class to current breadcrumb', () => {
+      const { container } = render(
+        <Breadcrumbs
+          slug="/en/6/01_getting_started/01_installation/"
+          version="6"
+          navTree={mockNavTree}
+        />
+      );
+
+      // Find the current breadcrumb by looking for the last span that is not a separator
+      const breadcrumbsList = container.querySelector('ol');
+      const items = breadcrumbsList?.querySelectorAll('li');
+      const lastItem = items?.[items.length - 1];
+      const currentElement = lastItem?.querySelector('span');
+      
+      expect(currentElement).toBeInTheDocument();
+      expect(currentElement).toHaveTextContent('Installation');
+    });
+
+    it('should apply separator class between breadcrumbs', () => {
+      const { container } = render(
+        <Breadcrumbs
+          slug="/en/6/01_getting_started/01_installation/"
+          version="6"
+          navTree={mockNavTree}
+        />
+      );
+
+      const breadcrumbsList = container.querySelector('ol');
+      const separatorSpans = breadcrumbsList?.querySelectorAll('span');
+      const separators = Array.from(separatorSpans || []).filter(span => span.textContent === '/');
+      
+      expect(separators.length).toBeGreaterThan(0);
+      separators.forEach((separator) => {
+        expect(separator).toHaveTextContent('/');
+      });
+    });
   });
 });

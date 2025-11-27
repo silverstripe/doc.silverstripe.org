@@ -507,6 +507,7 @@ button:hover,
 .card-title {
   font-weight: 600;
   color: var(--theme-text-primary);
+  margin-top: 0rem;
   margin-bottom: 0.75rem;
 }
 
