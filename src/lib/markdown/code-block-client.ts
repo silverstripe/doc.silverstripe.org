@@ -1,19 +1,37 @@
 /**
  * Client-side code block functionality
- * Adds copy button interactivity
+ * Adds copy button interactivity using event delegation for robustness
  */
 
-export function initializeCodeBlocks() {
-  // Find all copy buttons
-  const copyButtons = document.querySelectorAll('.code-block-copy-btn');
+let initialized = false;
 
-  copyButtons.forEach((button) => {
-    button.addEventListener('click', handleCopyClick);
-  });
+export function initializeCodeBlocks(): () => void {
+  // Use event delegation - only attach once to document
+  if (initialized) {
+    return () => {};
+  }
+
+  document.addEventListener('click', handleDelegatedClick);
+  initialized = true;
+
+  // Return cleanup function
+  return () => {
+    document.removeEventListener('click', handleDelegatedClick);
+    initialized = false;
+  };
 }
 
-async function handleCopyClick(event: Event) {
-  const button = event.target as HTMLButtonElement;
+function handleDelegatedClick(event: Event) {
+  const target = event.target as HTMLElement;
+  
+  // Check if clicked element is a copy button or inside one
+  const button = target.closest('.code-block-copy-btn') as HTMLButtonElement | null;
+  if (!button) return;
+
+  handleCopyClick(button);
+}
+
+async function handleCopyClick(button: HTMLButtonElement) {
   const codeText = button.getAttribute('data-code');
 
   if (!codeText) {

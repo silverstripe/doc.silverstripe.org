@@ -44,9 +44,10 @@ export function RootLayoutClient({ children }: RootLayoutClientProps) {
     return () => window.removeEventListener('hashchange', scrollToHeading);
   }, []);
 
-  // Initialize code block features (copy button, etc.)
+  // Initialize code block features (copy button via event delegation)
   useEffect(() => {
-    initializeCodeBlocks();
+    const cleanup = initializeCodeBlocks();
+    return cleanup;
   }, []);
 
   return (
