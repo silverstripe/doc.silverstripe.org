@@ -4,17 +4,6 @@
  */
 
 /**
- * Removes the <em> tags caused by underscores in the {#id_with_underscores}
- * Used when headers contain IDs with underscores
- */
-export function cleanHeaders(html: string): string {
-  return html.replace(
-    /<h([0-9])>(.*?)(\{#.*?<\/?em>.*?})/g,
-    (_, level, title, tag) => `<h${level}>${title} ${tag.replace(/<\/?em>/g, '_')}`
-  );
-}
-
-/**
  * The react parser doesn't like whitespace nodes in tags that require
  * specific DOM node children (like table cells, rows, etc.)
  */

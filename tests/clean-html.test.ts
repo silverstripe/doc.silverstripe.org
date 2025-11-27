@@ -1,34 +1,6 @@
-import { cleanHeaders, cleanWhitespace, normalizeHtml } from '@/lib/markdown/clean-html';
+import { cleanWhitespace, normalizeHtml } from '@/lib/markdown/clean-html';
 
 describe('Clean HTML Utilities', () => {
-  describe('cleanHeaders', () => {
-    it('removes em tags from header IDs with underscores', () => {
-      const html = '<h1>Title {#my_header_id}</h1>';
-      const cleaned = cleanHeaders(html);
-      expect(cleaned).toContain('my_header_id');
-    });
-
-    it('preserves headers without IDs', () => {
-      const html = '<h1>Simple Title</h1>';
-      const cleaned = cleanHeaders(html);
-      expect(cleaned).toBe(html);
-    });
-
-    it('handles multiple headers with IDs', () => {
-      const html = '<h1>Title {#id_1}</h1><h2>Subtitle {#id_2}</h2>';
-      const cleaned = cleanHeaders(html);
-      expect(cleaned).toContain('id_1');
-      expect(cleaned).toContain('id_2');
-    });
-
-    it('removes em tags that wrap underscores', () => {
-      const html = '<h2>Header with <em>_</em>underscores<em>_</em> {#my_id}</h2>';
-      const cleaned = cleanHeaders(html);
-      // Should convert <em>_</em> to _ within the ID
-      expect(cleaned).toBeTruthy();
-    });
-  });
-
   describe('cleanWhitespace', () => {
     it('removes whitespace between table elements', () => {
       const html = '<table>\n  <tbody>\n    <tr>\n      <td>Cell</td>\n    </tr>\n  </tbody>\n</table>';
@@ -85,8 +57,7 @@ describe('Clean HTML Utilities', () => {
 
   describe('combined usage', () => {
     it('can chain multiple cleaners', () => {
-      let html = '<h1>Header {#my_id} </h1>\n\n<table> <tr> <td>Cell</td> </tr> </table>';
-      html = cleanHeaders(html);
+      let html = '<h1>Header</h1>\n\n<table> <tr> <td>Cell</td> </tr> </table>';
       html = cleanWhitespace(html);
       html = normalizeHtml(html);
       expect(html).toBeTruthy();

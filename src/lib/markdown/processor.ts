@@ -15,7 +15,8 @@ import { highlightCodeBlocks } from './syntax-highlight';
 import { remarkImages } from './remark-images';
 import { cleanApiTags, setCurrentVersion } from './api-links';
 import { rewriteApiLinksInHtml } from './rewrite-api-links-html';
-import { cleanHeaders, cleanWhitespace } from './clean-html';
+import { cleanWhitespace } from './clean-html';
+import { remarkCustomHeadingIds } from './remark-custom-heading-ids';
 
 /**
  * Custom sanitizer schema that allows api: protocol for links and className on elements
@@ -103,6 +104,7 @@ export async function markdownToHtml(content: string, filePath?: string, version
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkGithubBlockquoteAlerts)
+    .use(remarkCustomHeadingIds)
     .use(remarkImages, { currentFilePath: filePath })
     .use(remarkRehype, { allowDangerousHtml: true, clobberPrefix: '' })
     .use(rehypeRaw)
@@ -128,7 +130,6 @@ export async function markdownToHtml(content: string, filePath?: string, version
  */
 export async function markdownToHtmlWithCleanup(content: string, filePath?: string, version?: string): Promise<string> {
   let html = await markdownToHtml(content, filePath, version);
-  html = cleanHeaders(html);
   html = removeUserContentPrefix(html);
   html = cleanWhitespace(html);
   return html;
