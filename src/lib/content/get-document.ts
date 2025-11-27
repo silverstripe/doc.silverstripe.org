@@ -94,13 +94,13 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
 
   const config = getConfig();
   const documents: DocumentNode[] = [];
+  
+  // Use local variable during loading to avoid race conditions
+  // across parallel workers - only set cachedDocuments after fully loaded
+  const localCache = new Map<string, DocumentNode[]>();
 
   // Build versions map - v3, v4, v5, and v6
   const versionDirs = getAllVersions().map(v => `v${v}`);
-  
-  if (!cachedDocuments) {
-    cachedDocuments = new Map();
-  }
   
   for (const versionDir of versionDirs) {
     const versionPath = path.join(contentBase, versionDir);
@@ -112,7 +112,7 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
         effectiveContext
       );
       documents.push(...versionDocs);
-      cachedDocuments.set(versionDir, versionDocs);
+      localCache.set(versionDir, versionDocs);
       
       // Load optional_features and its subdirectories
       const optionalFeaturesPath = path.join(versionPath, 'optional_features');
@@ -161,7 +161,7 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
         });
         
         documents.push(...filteredDocs);
-        cachedDocuments.set(`${versionDir}/optional_features`, filteredDocs);
+        localCache.set(`${versionDir}/optional_features`, filteredDocs);
       } catch (error) {
         // optional_features directory may not exist, continue
       }
@@ -170,6 +170,10 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
       console.warn(`Version ${versionDir} not found, skipping`);
     }
   }
+
+  // Set the module-level cache after all loading is complete
+  // This prevents race conditions in parallel workers
+  cachedDocuments = localCache;
 
   return filterByContext(documents, effectiveContext);
 }

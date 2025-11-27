@@ -83,7 +83,12 @@ export default async function Page(props: PageProps) {
   const doc = await getDocumentByParams(params.version, params.slug);
 
   if (!doc) {
-    // Instead of 404, redirect to version homepage
+    // If we're at version root and doc not found, show 404 to prevent redirect loop
+    // This can happen if version index is missing from content
+    if (!params.slug || params.slug.length === 0) {
+      notFound();
+    }
+    // For other pages, redirect to version homepage
     redirect(getVersionHomepage(params.version));
   }
 
