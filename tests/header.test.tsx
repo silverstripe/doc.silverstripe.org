@@ -22,7 +22,7 @@ describe('Header Component', () => {
     const { getByTestId, getByText } = render(<Header />);
     
     expect(getByTestId('search-box')).toBeInTheDocument();
-    expect(getByText('Silverstripe')).toBeInTheDocument();
+    expect(getByText('Silverstripe CMS')).toBeInTheDocument();
   });
 
   it('does not render Home link', () => {

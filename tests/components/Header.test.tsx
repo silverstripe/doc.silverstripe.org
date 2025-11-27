@@ -55,10 +55,27 @@ describe('Header Component', () => {
     expect(logoImg).toHaveAttribute('src', '/logo.svg');
   });
 
-  it('should render logo text "Silverstripe" and "Docs"', () => {
+  it('should render logo text "Silverstripe CMS" and "Docs"', () => {
     render(<Header />);
-    expect(screen.getByText('Silverstripe')).toBeInTheDocument();
+    expect(screen.getByText('Silverstripe CMS')).toBeInTheDocument();
     expect(screen.getByText('Docs')).toBeInTheDocument();
+  });
+
+  it('should render "Silverstripe CMS" as title', () => {
+    render(<Header />);
+    expect(screen.getByText('Silverstripe CMS')).toBeInTheDocument();
+  });
+
+  it('should render "Docs" subtitle for docs context', () => {
+    process.env.DOCS_CONTEXT = 'docs';
+    render(<Header />);
+    expect(screen.getByText('Docs')).toBeInTheDocument();
+  });
+
+  it('should render "User Help" subtitle for user context', () => {
+    process.env.DOCS_CONTEXT = 'user';
+    render(<Header />);
+    expect(screen.getByText('User Help')).toBeInTheDocument();
   });
 
   it('should NOT render "Home" text link', () => {
@@ -101,7 +118,7 @@ describe('Header Component', () => {
   it('should have logo as link to home page', () => {
     render(<Header />);
     const logoLink = screen.getByAltText('Silverstripe').closest('a');
-    expect(logoLink).toHaveAttribute('href', '/');
+    expect(logoLink).toHaveAttribute('href', '/en/6/');
   });
 
   it('should render GitHub link with href attribute', () => {

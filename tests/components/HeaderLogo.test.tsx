@@ -47,6 +47,10 @@ jest.mock('@/components/DarkModeToggle', () => ({
 }));
 
 describe('Phase 2: Logo Link Version Routing', () => {
+  afterEach(() => {
+    process.env.DOCS_CONTEXT = 'docs';
+  });
+
   it('logo href is /en/3/ when on a v3 page', () => {
     const { usePathname } = require('next/navigation');
     usePathname.mockReturnValue('/en/3/getting-started/');
@@ -100,5 +104,34 @@ describe('Phase 2: Logo Link Version Routing', () => {
     const logoImg = screen.getByAltText('Silverstripe');
     const logoLink = logoImg.closest('a');
     expect(logoLink).toHaveAttribute('href', '/en/4/');
+  });
+
+  it('displays "Silverstripe CMS" as logo title', () => {
+    const { usePathname } = require('next/navigation');
+    usePathname.mockReturnValue('/en/6/');
+
+    render(<Header />);
+
+    expect(screen.getByText('Silverstripe CMS')).toBeInTheDocument();
+  });
+
+  it('displays "Docs" subtitle for docs context', () => {
+    const { usePathname } = require('next/navigation');
+    usePathname.mockReturnValue('/en/6/');
+    process.env.DOCS_CONTEXT = 'docs';
+
+    render(<Header />);
+
+    expect(screen.getByText('Docs')).toBeInTheDocument();
+  });
+
+  it('displays "User Help" subtitle for user context', () => {
+    const { usePathname } = require('next/navigation');
+    usePathname.mockReturnValue('/en/6/');
+    process.env.DOCS_CONTEXT = 'user';
+
+    render(<Header />);
+
+    expect(screen.getByText('User Help')).toBeInTheDocument();
   });
 });

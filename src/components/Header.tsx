@@ -10,6 +10,7 @@ import styles from './Header.module.css';
 import { usePathname } from 'next/navigation';
 import { extractVersionAndFeatureFromSlug, getDocumentGithubInfo } from '@/lib/navigation-logic';
 import { getDefaultVersion, getVersionHomepage } from '@/lib/versions/version-utils';
+import { getConfig } from '@/lib/config';
 
 interface HeaderProps {
   onMobileMenuToggle?: (isOpen: boolean) => void;
@@ -22,6 +23,7 @@ export function Header({ onMobileMenuToggle }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [githubUrl, setGithubUrl] = useState('https://github.com/silverstripe/developer-docs');
   const pathname = usePathname();
+  const { docsContext } = getConfig();
   
   // Extract version and optional feature from pathname
   const pathParts = pathname.split('/').filter(Boolean);
@@ -29,6 +31,8 @@ export function Header({ onMobileMenuToggle }: HeaderProps) {
   const version = (pathParts[0] === 'en' ? pathParts[1] : null) || getDefaultVersion();
   const slug = pathname;
   const { optionalFeature } = extractVersionAndFeatureFromSlug(slug);
+  
+  const logoSubtitle = docsContext === 'user' ? 'User Help' : 'Docs';
 
   // Close menu when route changes
   useEffect(() => {
@@ -65,8 +69,8 @@ export function Header({ onMobileMenuToggle }: HeaderProps) {
         <Link href={getVersionHomepage(version)} className={styles.logo}>
           <img src="/logo.svg" alt="Silverstripe" className={styles.logoImage} />
           <div className={styles.logoText}>
-            <span className={styles.logoTitle}>Silverstripe</span>
-            <span className={styles.logoSubtitle}>Docs</span>
+            <span className={styles.logoTitle}>Silverstripe CMS</span>
+            <span className={styles.logoSubtitle}>{logoSubtitle}</span>
           </div>
         </Link>
 
