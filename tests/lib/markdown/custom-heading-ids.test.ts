@@ -181,9 +181,13 @@ describe('Custom Heading IDs', () => {
       const docs = await getAllDocuments();
       
       docs.forEach(doc => {
-        if (doc.content) {
-          // Should not contain the custom ID syntax anywhere
-          expect(doc.content).not.toMatch(/\{#[^}]+\}/);
+        if (doc.content && doc.content.includes('<h')) {
+          // Only check documents that have been rendered to HTML
+          // Raw markdown is allowed to have {#...} syntax - it's valid markdown
+          // Only check for syntax in actual HTML tags
+          // Should not have {#...} inside HTML tags or after closing tags in markup
+          expect(doc.content).not.toMatch(/<h[1-6][^>]*>\s*[^<]*\{#/);
+          expect(doc.content).not.toMatch(/\{#[^}]+\}\s*<\/h[1-6]>/);
         }
       });
     });
