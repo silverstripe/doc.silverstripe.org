@@ -24,10 +24,10 @@ npm run clone:user        # Clone user-help content (DOCS_CONTEXT=user)
 npm run build             # Build docs (alias: build:docs, DOCS_CONTEXT=docs)
 npm run build:docs        # Build with docs context (DOCS_CONTEXT=docs)
 npm run build:user        # Build with user-help context (DOCS_CONTEXT=user)
-npm run copy-images:docs  # Copy image assets for docs context
-npm run copy-images:user  # Copy image assets for user-help context
 npm test                  # All tests (auto uses mock data)
 ```
+
+**Note:** Image copying is now automatic during dev and build scripts. Manual image copying is available via `npm run copy-images:{docs|user|mock}` if needed.
 
 **Environment variable:** `DOCS_CONTEXT` controls which documentation set loads:
 - `docs` (default): Developer documentation
