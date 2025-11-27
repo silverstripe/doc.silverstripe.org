@@ -4,19 +4,27 @@ import { useState, useEffect } from 'react';
 import styles from './DarkModeToggle.module.css';
 
 /**
- * Dark mode toggle component with localStorage persistence
+ * Dark mode toggle component with localStorage persistence.
+ * Works with inline script in layout.tsx that sets dark class before first paint.
  */
 export function DarkModeToggle() {
   const [isDark, setIsDark] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
-  // Read from localStorage on mount
+  // Read from localStorage on mount, also check if inline script already set dark class
   useEffect(() => {
+    // Check if dark class was already set by inline script
+    const hasClassAlready = document.documentElement.classList.contains('dark');
     const saved = localStorage.getItem('theme_preference');
     let isDarkMode = saved === 'dark';
     
     if (!saved && typeof window !== 'undefined' && window.matchMedia) {
       isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    
+    // Use existing class state if no explicit preference saved
+    if (!saved && hasClassAlready) {
+      isDarkMode = true;
     }
     
     setIsDark(isDarkMode);
