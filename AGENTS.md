@@ -33,6 +33,12 @@ npm test                  # All tests (auto uses mock data)
 - `docs` (default): Developer documentation
 - `user`: End-user help documentation
 
+**Testing `npm run build`**
+- Use `npm run build && cd out && python3 -m http.server 8000` to serve static files locally for verification.
+- Site will be at `http://127.0.0.1:8000/en/6/` etc.
+- Ensure process is killed after testing.
+- If infinite redirect loops occurs, kill the server and fix the issue before proceeding.
+
 ---
 
 ## Architecture
