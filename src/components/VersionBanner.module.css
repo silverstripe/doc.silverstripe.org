@@ -5,6 +5,10 @@
   border-left: 4px solid;
 }
 
+.banner.noMessage {
+  padding-bottom: 0.75rem;
+}
+
 .content {
   max-width: 100%;
 }
@@ -13,6 +17,13 @@
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
+}
+
+.banner.noMessage .header {
+  margin-bottom: 0;
+}
+
+.banner:not(.noMessage) .header {
   margin-bottom: 0.5rem;
 }
 
@@ -31,10 +42,15 @@
   font-size: 1rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .status {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
   font-weight: 500;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -42,6 +58,11 @@
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
   background-color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+}
+
+.statusIcon {
+  font-size: 0.625rem;
 }
 
 .messageSection {

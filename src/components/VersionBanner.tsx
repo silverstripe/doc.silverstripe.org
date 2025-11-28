@@ -10,20 +10,33 @@ export function VersionBanner({ version, latestVersionPath }: VersionBannerProps
   const message = getVersionMessage(version);
   const isCurrentVersion = version === getDefaultVersion();
 
+  const getIconClass = () => {
+    switch (message.icon) {
+      case 'times-circle':
+        return 'fa-solid fa-circle-xmark';
+      case 'check-circle':
+        return 'fa-solid fa-circle-check';
+      case 'shield-alt':
+        return 'fa-solid fa-shield';
+      case 'info-circle':
+      default:
+        return 'fa-solid fa-circle-info';
+    }
+  };
+
   return (
-    <div className={`${styles.banner} ${styles[`style-${message.style}`]}`} role="alert">
+    <div className={`${styles.banner} ${styles[`style-${message.style}`]} ${!message.message ? styles.noMessage : ''}`} role="alert">
       <div className={styles.content}>
         <div className={styles.header}>
-          <span className={styles.icon} aria-hidden="true">
-            {message.icon === 'times-circle' && '✕'}
-            {message.icon === 'check-circle' && '✓'}
-            {message.icon === 'info-circle' && 'ℹ'}
-          </span>
+          <span className={`${styles.icon} ${getIconClass()}`} aria-hidden="true" />
           <div className={styles.titleSection}>
-            <span className={styles.title}>
-              Version {version}
-              <span className={styles.status}>{message.stability}</span>
-            </span>
+            <div className={styles.title}>
+              <span>Version {version}</span>
+              <span className={styles.status}>
+                <i className={`${styles.statusIcon} ${getIconClass()}`} aria-hidden="true" />
+                {message.stability}
+              </span>
+            </div>
           </div>
         </div>
 
