@@ -435,7 +435,7 @@ describe('Phase 1: Navigation & Links Logic', () => {
     });
 
     it('renders GitHub link to developer-docs for core docs', async () => {
-      render(<Header />);
+      render(<Header docsContext="docs" />);
       
       await waitFor(() => {
         const githubLink = screen.getAllByRole('link').find(link =>
@@ -447,11 +447,11 @@ describe('Phase 1: Navigation & Links Logic', () => {
 
     it('changes GitHub link when navigating to optional feature section', async () => {
       const { usePathname } = require('next/navigation');
-      const { rerender } = render(<Header />);
+      const { rerender } = render(<Header docsContext="docs" />);
 
       // Change pathname to optional feature
       usePathname.mockReturnValue('/en/6/optional_features/linkfield/');
-      rerender(<Header />);
+      rerender(<Header docsContext="docs" />);
 
       await waitFor(() => {
         const githubLink = screen.getAllByRole('link').find(link =>
@@ -465,13 +465,13 @@ describe('Phase 1: Navigation & Links Logic', () => {
       const { usePathname } = require('next/navigation');
       usePathname.mockReturnValue('/invalid/path/');
 
-      render(<Header />);
+      render(<Header docsContext="docs" />);
       const header = screen.getByRole('banner');
       expect(header).toBeInTheDocument();
     });
 
     it('renders all header components', () => {
-      render(<Header />);
+      render(<Header docsContext="docs" />);
 
       expect(screen.getByAltText('Silverstripe')).toBeInTheDocument();
       expect(screen.getByTestId('search-box')).toBeInTheDocument();

@@ -19,20 +19,20 @@ jest.mock('@/components/VersionSwitcher', () => ({
 
 describe('Header Component', () => {
   it('renders header with SearchBox', () => {
-    const { getByTestId, getByText } = render(<Header />);
+    const { getByTestId, getByText } = render(<Header docsContext="docs" />);
     
     expect(getByTestId('search-box')).toBeInTheDocument();
     expect(getByText('Silverstripe CMS')).toBeInTheDocument();
   });
 
   it('does not render Home link', () => {
-    const { queryByText } = render(<Header />);
+    const { queryByText } = render(<Header docsContext="docs" />);
     
     expect(queryByText('Home')).not.toBeInTheDocument();
   });
 
   it('renders GitHub icon with larger size', () => {
-    const { container } = render(<Header />);
+    const { container } = render(<Header docsContext="docs" />);
     const githubIcon = container.querySelector('.fab.fa-github');
     
     expect(githubIcon).toBeInTheDocument();
@@ -40,13 +40,13 @@ describe('Header Component', () => {
   });
 
   it('renders version switcher', () => {
-    const { getByTestId } = render(<Header />);
+    const { getByTestId } = render(<Header docsContext="docs" />);
     
     expect(getByTestId('version-switcher')).toBeInTheDocument();
   });
 
   it('renders logo image with correct src', () => {
-    const { getByAltText } = render(<Header />);
+    const { getByAltText } = render(<Header docsContext="docs" />);
     const logoImg = getByAltText('Silverstripe');
     
     expect(logoImg).toHaveAttribute('src', '/logo.svg');

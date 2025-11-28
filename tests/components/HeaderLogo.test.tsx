@@ -55,7 +55,7 @@ describe('Phase 2: Logo Link Version Routing', () => {
     const { usePathname } = require('next/navigation');
     usePathname.mockReturnValue('/en/3/getting-started/');
 
-    render(<Header />);
+    render(<Header docsContext="docs" />);
 
     const logoImg = screen.getByAltText('Silverstripe');
     const logoLink = logoImg.closest('a');
@@ -66,7 +66,7 @@ describe('Phase 2: Logo Link Version Routing', () => {
     const { usePathname } = require('next/navigation');
     usePathname.mockReturnValue('/en/6/getting-started/');
 
-    render(<Header />);
+    render(<Header docsContext="docs" />);
 
     const logoImg = screen.getByAltText('Silverstripe');
     const logoLink = logoImg.closest('a');
@@ -77,7 +77,7 @@ describe('Phase 2: Logo Link Version Routing', () => {
     const { usePathname } = require('next/navigation');
     usePathname.mockReturnValue('/invalid/path/');
 
-    render(<Header />);
+    render(<Header docsContext="docs" />);
 
     const logoImg = screen.getByAltText('Silverstripe');
     const logoLink = logoImg.closest('a');
@@ -88,7 +88,7 @@ describe('Phase 2: Logo Link Version Routing', () => {
     const { usePathname } = require('next/navigation');
     usePathname.mockReturnValue('/en/5/api/');
 
-    render(<Header />);
+    render(<Header docsContext="docs" />);
 
     const logoImg = screen.getByAltText('Silverstripe');
     const logoLink = logoImg.closest('a');
@@ -99,7 +99,7 @@ describe('Phase 2: Logo Link Version Routing', () => {
     const { usePathname } = require('next/navigation');
     usePathname.mockReturnValue('/en/4/api/');
 
-    render(<Header />);
+    render(<Header docsContext="docs" />);
 
     const logoImg = screen.getByAltText('Silverstripe');
     const logoLink = logoImg.closest('a');
@@ -110,7 +110,7 @@ describe('Phase 2: Logo Link Version Routing', () => {
     const { usePathname } = require('next/navigation');
     usePathname.mockReturnValue('/en/6/');
 
-    render(<Header />);
+    render(<Header docsContext="docs" />);
 
     expect(screen.getByText('Silverstripe CMS')).toBeInTheDocument();
   });
@@ -118,9 +118,8 @@ describe('Phase 2: Logo Link Version Routing', () => {
   it('displays "Docs" subtitle for docs context', () => {
     const { usePathname } = require('next/navigation');
     usePathname.mockReturnValue('/en/6/');
-    process.env.DOCS_CONTEXT = 'docs';
 
-    render(<Header />);
+    render(<Header docsContext="docs" />);
 
     expect(screen.getByText('Docs')).toBeInTheDocument();
   });
@@ -128,9 +127,8 @@ describe('Phase 2: Logo Link Version Routing', () => {
   it('displays "User Help" subtitle for user context', () => {
     const { usePathname } = require('next/navigation');
     usePathname.mockReturnValue('/en/6/');
-    process.env.DOCS_CONTEXT = 'user';
 
-    render(<Header />);
+    render(<Header docsContext="user" />);
 
     expect(screen.getByText('User Help')).toBeInTheDocument();
   });

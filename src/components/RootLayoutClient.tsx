@@ -8,9 +8,10 @@ import { initializeCodeBlocks } from '@/lib/markdown/code-block-client';
 
 interface RootLayoutClientProps {
   children: React.ReactNode;
+  docsContext: 'docs' | 'user';
 }
 
-export function RootLayoutClient({ children }: RootLayoutClientProps) {
+export function RootLayoutClient({ children, docsContext }: RootLayoutClientProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleMobileMenuClose = () => {
@@ -53,7 +54,7 @@ export function RootLayoutClient({ children }: RootLayoutClientProps) {
   return (
     <MobileMenuContext.Provider value={{ isMobileMenuOpen, onClose: handleMobileMenuClose }}>
       <SyntaxHighlighter />
-      <Header onMobileMenuToggle={setIsMobileMenuOpen} />
+      <Header onMobileMenuToggle={setIsMobileMenuOpen} docsContext={docsContext} />
       {children}
     </MobileMenuContext.Provider>
   );

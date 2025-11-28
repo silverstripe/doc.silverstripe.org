@@ -29,9 +29,11 @@ npm test                  # All tests (auto uses mock data)
 
 **Note:** Image copying is now automatic during dev and build scripts. Manual image copying is available via `npm run copy-images:{docs|user|mock}` if needed.
 
-**Environment variable:** `DOCS_CONTEXT` controls which documentation set loads:
-- `docs` (default): Developer documentation
-- `user`: End-user help documentation
+**Context Switching:** The site serves two independent documentation sets controlled by `DOCS_CONTEXT`:
+- `docs` (default): Developer documentation from `.cache/docs/`
+- `user`: End-user help from `.cache/user/`
+
+Scripts use `sh -c '...'` to ensure `DOCS_CONTEXT` is inherited by all commands in the chain. Never set `DOCS_CONTEXT` in `.env.local` as it interferes with script switching.
 
 **Testing `npm run build`**
 - Use `npm run build && cd out && python3 -m http.server 8000` to serve static files locally for verification.

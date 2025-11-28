@@ -1,5 +1,3 @@
-'use client';
-
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { SearchBox } from './SearchBox';
@@ -10,20 +8,19 @@ import styles from './Header.module.css';
 import { usePathname } from 'next/navigation';
 import { extractVersionAndFeatureFromSlug, getDocumentGithubInfo } from '@/lib/navigation-logic';
 import { getDefaultVersion, getVersionHomepage } from '@/lib/versions/version-utils';
-import { getConfig } from '@/lib/config';
 
 interface HeaderProps {
   onMobileMenuToggle?: (isOpen: boolean) => void;
+  docsContext: 'docs' | 'user';
 }
 
 /**
  * Header component with navigation and branding
  */
-export function Header({ onMobileMenuToggle }: HeaderProps) {
+export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [githubUrl, setGithubUrl] = useState('https://github.com/silverstripe/developer-docs');
   const pathname = usePathname();
-  const { docsContext } = getConfig();
   
   // Extract version and optional feature from pathname
   const pathParts = pathname.split('/').filter(Boolean);

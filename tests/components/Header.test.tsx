@@ -43,49 +43,47 @@ jest.mock('@/components/HamburgerButton', () => ({
 
 describe('Header Component', () => {
   it('should render the header', () => {
-    render(<Header />);
+    render(<Header docsContext="docs" />);
     const header = screen.getByRole('banner');
     expect(header).toBeInTheDocument();
   });
 
   it('should render logo image with correct src and alt text', () => {
-    render(<Header />);
+    render(<Header docsContext="docs" />);
     const logoImg = screen.getByAltText('Silverstripe');
     expect(logoImg).toBeInTheDocument();
     expect(logoImg).toHaveAttribute('src', '/logo.svg');
   });
 
   it('should render logo text "Silverstripe CMS" and "Docs"', () => {
-    render(<Header />);
+    render(<Header docsContext="docs" />);
     expect(screen.getByText('Silverstripe CMS')).toBeInTheDocument();
     expect(screen.getByText('Docs')).toBeInTheDocument();
   });
 
   it('should render "Silverstripe CMS" as title', () => {
-    render(<Header />);
+    render(<Header docsContext="docs" />);
     expect(screen.getByText('Silverstripe CMS')).toBeInTheDocument();
   });
 
   it('should render "Docs" subtitle for docs context', () => {
-    process.env.DOCS_CONTEXT = 'docs';
-    render(<Header />);
+    render(<Header docsContext="docs" />);
     expect(screen.getByText('Docs')).toBeInTheDocument();
   });
 
   it('should render "User Help" subtitle for user context', () => {
-    process.env.DOCS_CONTEXT = 'user';
-    render(<Header />);
+    render(<Header docsContext="user" />);
     expect(screen.getByText('User Help')).toBeInTheDocument();
   });
 
   it('should NOT render "Home" text link', () => {
-    render(<Header />);
+    render(<Header docsContext="docs" />);
     const homeLinks = screen.queryAllByText('Home');
     expect(homeLinks).toHaveLength(0);
   });
 
   it('should render GitHub icon with correct class', () => {
-    render(<Header />);
+    render(<Header docsContext="docs" />);
     const githubLink = screen.getByRole('link', { name: '' }).closest('a');
     expect(githubLink).toHaveAttribute('href', 'https://github.com/silverstripe/developer-docs');
     
@@ -95,7 +93,7 @@ describe('Header Component', () => {
   });
 
   it('should render GitHub icon with enlarged size class', () => {
-    render(<Header />);
+    render(<Header docsContext="docs" />);
     const githubLinks = screen.getAllByRole('link');
     const githubLink = githubLinks.find(link => 
       link.getAttribute('href') === 'https://github.com/silverstripe/developer-docs'
@@ -106,23 +104,23 @@ describe('Header Component', () => {
   });
 
   it('should render SearchBox component', () => {
-    render(<Header />);
+    render(<Header docsContext="docs" />);
     expect(screen.getByTestId('search-box')).toBeInTheDocument();
   });
 
   it('should render VersionSwitcher component', () => {
-    render(<Header />);
+    render(<Header docsContext="docs" />);
     expect(screen.getByTestId('version-switcher')).toBeInTheDocument();
   });
 
   it('should have logo as link to home page', () => {
-    render(<Header />);
+    render(<Header docsContext="docs" />);
     const logoLink = screen.getByAltText('Silverstripe').closest('a');
     expect(logoLink).toHaveAttribute('href', '/en/6/');
   });
 
   it('should render GitHub link with href attribute', () => {
-    render(<Header />);
+    render(<Header docsContext="docs" />);
     const githubLinks = screen.getAllByRole('link');
     const githubLink = githubLinks.find(link =>
       link.getAttribute('href') === 'https://github.com/silverstripe/developer-docs'
@@ -131,7 +129,7 @@ describe('Header Component', () => {
   });
 
   it('should render HamburgerButton component', () => {
-    render(<Header />);
+    render(<Header docsContext="docs" />);
     expect(screen.getByTestId('hamburger-button')).toBeInTheDocument();
   });
 
@@ -139,7 +137,7 @@ describe('Header Component', () => {
     const mockToggle = jest.fn();
     const user = userEvent.setup();
     
-    render(<Header onMobileMenuToggle={mockToggle} />);
+    render(<Header onMobileMenuToggle={mockToggle} docsContext="docs" />);
     
     const hamburgerButton = screen.getByTestId('hamburger-button');
     await user.click(hamburgerButton);
@@ -151,7 +149,7 @@ describe('Header Component', () => {
     const mockToggle = jest.fn();
     const user = userEvent.setup();
     
-    const { rerender } = render(<Header onMobileMenuToggle={mockToggle} />);
+    const { rerender } = render(<Header onMobileMenuToggle={mockToggle} docsContext="docs" />);
     
     const hamburgerButton = screen.getByTestId('hamburger-button');
     
