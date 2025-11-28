@@ -71,6 +71,19 @@ describe('API Links', () => {
     it('should encode backslashes as %5C', () => {
       const result = rewriteAPILink('api:SilverStripe\\ORM\\DataList');
       expect(result).toContain('%5C');
+      expect(result).not.toContain('%255C'); // no double encoding
+    });
+
+    it('should not double-encode pre-encoded backslashes', () => {
+      // When input already has %5C, should not become %255C
+      const result = rewriteAPILink('api:SilverStripe%5CORM%5CDataObject', '6');
+      expect(result).toBe('https://api.silverstripe.org/search/lookup?q=SilverStripe%5CORM%5CDataObject&version=6');
+      expect(result).not.toContain('%255C');
+    });
+
+    it('should handle multiple pre-encoded backslashes correctly', () => {
+      const result = rewriteAPILink('api:SilverStripe%5CStaticPublishQueue%5CJob%5CGenerateStaticCacheJob', '6');
+      expect(result).toBe('https://api.silverstripe.org/search/lookup?q=SilverStripe%5CStaticPublishQueue%5CJob%5CGenerateStaticCacheJob&version=6');
     });
 
     it('should not double-encode special characters in :: and ->', () => {

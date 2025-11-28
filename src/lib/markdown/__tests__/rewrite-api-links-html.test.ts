@@ -66,5 +66,20 @@ describe('rewriteApiLinksInHtml', () => {
     const html = '<a href="api:SilverStripe\\ORM\\DataList">link</a>';
     const result = rewriteApiLinksInHtml(html, '6');
     expect(result).toContain('%5C'); // backslash encoding
+    expect(result).not.toContain('%255C'); // no double encoding
+  });
+
+  it('should not double-encode pre-encoded backslashes in href', () => {
+    // If the HTML already has %5C encoded backslashes, should not become %255C
+    const html = '<a href="api:SilverStripe%5CORM%5CDataObject">link</a>';
+    const result = rewriteApiLinksInHtml(html, '6');
+    expect(result).toContain('SilverStripe%5CORM%5CDataObject');
+    expect(result).not.toContain('%255C');
+  });
+
+  it('should produce correct full URL with backslash encoding', () => {
+    const html = '<a href="api:SilverStripe\\ORM\\DataObject">DataObject</a>';
+    const result = rewriteApiLinksInHtml(html, '6');
+    expect(result).toBe('<a href="https://api.silverstripe.org/search/lookup?q=SilverStripe%5CORM%5CDataObject&version=6" target="_blank" rel="noopener noreferrer">DataObject</a>');
   });
 });

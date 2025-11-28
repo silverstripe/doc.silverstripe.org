@@ -32,8 +32,16 @@ export function rewriteAPILink(link: string, version?: string): string {
     return link;
   }
 
-  const query = match[1];
+  let query = match[1];
   const versionToUse = version || getCurrentVersion();
+
+  // First decode any pre-encoded characters to avoid double-encoding
+  // This handles cases where backslashes were already encoded as %5C
+  try {
+    query = decodeURIComponent(query);
+  } catch {
+    // If decoding fails (malformed encoding), use original query
+  }
 
   // Encode the query, but preserve :: -> () and backslashes
   // Use a custom encoder that only encodes what we need
