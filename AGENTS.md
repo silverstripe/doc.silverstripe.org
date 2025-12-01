@@ -150,3 +150,5 @@ interface DocumentNode {
 - `src/lib/content/get-document.ts` - document loading and caching
 - `src/lib/markdown/processor.ts` - markdown processing pipeline
 - `src/lib/sources-config.ts` - GitHub repository configuration
+
+**Banned actions:** Do not modify `z-plan-*.md` files or other plan files unless specifically asked to create or modify them. Never run `git` commands.

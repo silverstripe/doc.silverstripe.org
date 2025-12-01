@@ -17,6 +17,7 @@
 8. Run `npm install` to update lock file
 9. Verify no Tailwind imports remain: `grep -r "tailwind" src/`
 10. Run tests: `npm test`
+11. When reporting back, ensure that if there were any Tailwind usages, describe how they were refactored and where to manually test those areas.
 
 ---
 

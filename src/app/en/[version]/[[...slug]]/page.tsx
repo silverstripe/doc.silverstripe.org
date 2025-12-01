@@ -7,6 +7,7 @@ import { VersionBanner } from '@/components/VersionBanner';
 import EditOnGithub from '@/components/EditOnGithub';
 import { generatePageMetadata } from '@/lib/seo';
 import { getVersionPath, getVersionHomepage } from '@/lib/versions';
+import styles from './page.module.css';
 import type { Metadata } from 'next';
 
 interface PageParams {
@@ -118,11 +119,11 @@ export default async function Page(props: PageProps) {
           latestVersionPath={latestVersionPath}
         />
 
-        <div className="prose max-w-none">
+        <div className={`prose ${styles.contentWrapper}`}>
           <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
         </div>
 
-        <footer className="mt-12 pt-8 border-t border-gray-200">
+        <footer className={styles.footer}>
           <EditOnGithub 
             version={doc.version} 
             filePath={doc.filePath} 
