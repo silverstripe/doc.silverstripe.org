@@ -114,7 +114,7 @@ describe('EditOnGithub component', () => {
     const link = screen.getByRole('link', { name: /edit on github/i });
     expect(link).toHaveAttribute(
       'href',
-      'https://github.com/silverstripe/userhelp-docs/edit/master/user_help/index.md'
+      'https://github.com/silverstripe/silverstripe-userhelp-content/blob/6/docs/en/user_help/index.md'
     );
   });
 

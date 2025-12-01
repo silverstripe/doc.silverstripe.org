@@ -1,7 +1,8 @@
 /**
- * Source configuration mapping for GitHub repository information
+ * Source configuration mapping for developer docs GitHub repositories
  * Maps doc version and optional feature to repository and branch information
  * Branch versions match the actual git branches docs are cloned from
+ * Used for: npm run build:docs and EditOnGithub links
  */
 
 export interface SourceConfig {
@@ -295,7 +296,7 @@ export function getSourceConfig(
 }
 
 /**
- * Build GitHub edit URL for a document
+ * Build GitHub edit URL for a developer docs document
  */
 export function buildGithubEditUrl(
   version: string,

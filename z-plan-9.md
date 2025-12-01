@@ -69,6 +69,17 @@
 
 ---
 
+# Phase 4a: Resolve baseline-browser-mapping warning
+
+**Objective:** Resolve the baseline-browser-mapping when running npm run build:*
+
+**Tasks:**
+1. Investigate the cause of the warning related to baseline-browser-mapping when running npm run build:user (or build:docs, though user runs faster so test on that).
+2. Resolve the issue - note that `npm i baseline-browser-mapping@latest -D` was already run by the human earlier, and that did not seem to fix the warning.
+3. Test by running `npm run build:user` and ensure the warning is gone.
+
+---
+
 # Phase 5: Refactor Dark Mode Script to React Component
 
 **Objective:** Replace inline `dangerouslySetInnerHTML` script with proper Next.js Script component.

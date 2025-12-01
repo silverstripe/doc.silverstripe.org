@@ -1,4 +1,5 @@
-import { buildGithubEditUrl } from '@/lib/sources-config';
+import * as docsSources from '@/../sources-docs';
+import * as userSources from '@/../sources-user';
 import styles from './EditOnGithub.module.css';
 
 /**
@@ -23,8 +24,7 @@ interface EditOnGithubProps {
  * - Optional feature (if provided, uses feature-specific repository)
  * - Category (docs vs user help use different repositories)
  *
- * For user docs, always points to userhelp-docs/master
- * For developer docs, uses src/lib/sources-config.ts to get correct repo, owner, and branch
+ * Uses sources-docs.ts or sources-user.ts based on the category parameter.
  *
  * @example
  * // Main docs v6
@@ -35,6 +35,11 @@ interface EditOnGithubProps {
  * // Optional feature v6
  * <EditOnGithub version="6" filePath="index.md" category="docs" optionalFeature="linkfield" />
  * // → https://github.com/silverstripe/silverstripe-linkfield/blob/5.1/docs/en/index.md
+ *
+ * @example
+ * // User help v6
+ * <EditOnGithub version="6" filePath="index.md" category="user" />
+ * // → https://github.com/silverstripe/silverstripe-userhelp-content/blob/6/docs/en/index.md
  */
 export default function EditOnGithub({
   version,
@@ -42,20 +47,9 @@ export default function EditOnGithub({
   category,
   optionalFeature,
 }: EditOnGithubProps) {
-  // For user docs, use userhelp-docs repo (legacy support)
-  if (category === 'user') {
-    const githubUrl = `https://github.com/silverstripe/userhelp-docs/edit/master/${filePath}`;
-    return (
-      <div className={styles.editContainer}>
-        <a href={githubUrl} target="_blank" rel="noopener noreferrer" className={styles.editLink}>
-          Edit on GitHub
-        </a>
-      </div>
-    );
-  }
-
-  // For docs, use source config
-  const githubUrl = buildGithubEditUrl(version, filePath, optionalFeature);
+  // Select appropriate source config based on category
+  const sourceModule = category === 'user' ? userSources : docsSources;
+  const githubUrl = sourceModule.buildGithubEditUrl(version, filePath, optionalFeature);
 
   return (
     <div className={styles.editContainer}>

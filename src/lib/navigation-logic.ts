@@ -4,7 +4,7 @@
  */
 
 import { DocumentNode } from '@/types';
-import { getSourceConfig } from './sources-config';
+import { getSourceConfig } from '@/../sources-config';
 import { normalizeSlug } from './utils';
 import { getDefaultVersion } from '@/lib/versions';
 

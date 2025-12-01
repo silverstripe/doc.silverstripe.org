@@ -67,10 +67,12 @@ src/
     versions/             # Version utilities and constants
     seo/                  # Metadata generation
     utils/                # Shared utilities (escapeHtml, slug-utils)
-    sources-config.ts     # GitHub repo/branch mapping for 30+ modules
     routing.ts            # URL routing utilities
   types/                  # TypeScript interfaces
   contexts/               # React contexts (MobileMenuContext)
+sources-docs.ts           # Developer docs GitHub config (project root)
+sources-user.ts           # User help GitHub config (project root)
+sources-config.ts         # Unified config wrapper (project root)
 tests/                    # Test files (mirrors src/ structure)
 ```
 
@@ -95,7 +97,7 @@ interface DocumentNode {
 ## Key Modules
 
 **Version Management:** `src/lib/versions/version-utils.ts` - centralized version constants  
-**Source Config:** `src/lib/sources-config.ts` - GitHub repo/branch mappings for all modules  
+**Source Configs:** `sources-docs.ts` (developer docs), `sources-user.ts` (user help), `sources-config.ts` (wrapper) - all at project root  
 **Markdown Pipeline:** `src/lib/markdown/processor.ts` - remark→rehype with GFM, alerts, code blocks  
 **Navigation:** `src/lib/nav/build-nav-tree.ts` - hierarchical nav tree from documents  
 **Utilities:** `src/lib/utils/` - shared utilities (escapeHtml, slug normalization)
@@ -116,7 +118,7 @@ interface DocumentNode {
 **Sidebar:** Expandable folders, localStorage state (`sidebar_state_v{version}`)  
 **Header:** Logo, GitHub icon, VersionSwitcher, DarkModeToggle, SearchBox  
 **Mobile:** Hamburger menu toggles sidebar at <1024px  
-**Edit on GitHub:** Dynamic URLs via `sources-config.ts`, supports optional features  
+**Edit on GitHub:** Dynamic URLs via separate `sources-docs.ts` and `sources-user.ts` configs, supports optional features  
 **Breadcrumbs:** Auto-generated from slug path  
 **Code Blocks:** Prism.js highlighting, copy button
 
@@ -149,6 +151,8 @@ interface DocumentNode {
 - `src/app/en/[version]/[[...slug]]/page.tsx` - main page component
 - `src/lib/content/get-document.ts` - document loading and caching
 - `src/lib/markdown/processor.ts` - markdown processing pipeline
-- `src/lib/sources-config.ts` - GitHub repository configuration
+- `sources-docs.ts` - developer docs GitHub config (project root)
+- `sources-user.ts` - user help GitHub config (project root)
+- `src/components/EditOnGithub.tsx` - uses category param to select correct config
 
 **Banned actions:** Do not modify `z-plan-*.md` files or other plan files unless specifically asked to create or modify them. Never run `git` commands.

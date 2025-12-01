@@ -1,6 +1,6 @@
-import { getSourceConfig, buildGithubEditUrl } from '@/lib/sources-config';
+import { getSourceConfig, buildGithubEditUrl } from '@/../sources-docs';
 
-describe('Sources Config', () => {
+describe('Sources Docs Config', () => {
   describe('getSourceConfig', () => {
     it('should return main docs config for version 6', () => {
       const config = getSourceConfig('6');
