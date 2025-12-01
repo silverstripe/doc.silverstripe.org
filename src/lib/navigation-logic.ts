@@ -29,7 +29,6 @@ export function getDocumentGithubInfo(
   if (!config) {
     return null;
   }
-  
   return {
     owner: config.owner,
     repo: config.repo,
@@ -51,13 +50,11 @@ export function doesSlugExistInVersion(
   version: string
 ): boolean {
   const normalizedSlugEnd = normalizeSlug(slug);
-  
   // Try exact match first
-  const exactMatch = documents.find(
-    doc => doc.version === version && doc.slug === normalizedSlugEnd
-  );
-  if (exactMatch) return true;
-  
+  const exactMatch = documents.find((doc) => doc.version === version && doc.slug === normalizedSlugEnd);
+  if (exactMatch) {
+    return true;
+  }
   // Try case-insensitive match
   const caseInsensitiveMatch = documents.find(
     doc => 
@@ -82,12 +79,10 @@ export function getFallbackSlugForVersion(
 ): string {
   // Try to replace version in current slug
   const newSlug = currentSlug.replace(/^\/en\/[0-9]+\//, `/en/${targetVersion}/`);
-  
   // Check if it exists
   if (doesSlugExistInVersion(newSlug, documents, targetVersion)) {
     return newSlug;
   }
-  
   // Fallback to root of target version
   return `/en/${targetVersion}/`;
 }
@@ -102,18 +97,14 @@ export function extractVersionAndFeatureFromSlug(
 ): { version: string; optionalFeature: string | null } {
   // Format: /en/{version}[/optional_features/{feature}/...]
   const parts = slug.split('/').filter(Boolean);
-  
   if (parts.length < 2) {
     return { version: getDefaultVersion(), optionalFeature: null };
   }
-  
   const version = parts[1];
-  
   // Check if this is an optional feature path
   if (parts.length >= 4 && parts[2] === 'optional_features') {
     const optionalFeature = parts[3];
     return { version, optionalFeature };
   }
-  
   return { version, optionalFeature: null };
 }

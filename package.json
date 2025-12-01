@@ -41,6 +41,7 @@
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
+    "classnames": "^2.5.1",
     "gray-matter": "^4.0.3",
     "hastscript": "^9.0.1",
     "next": "^16.0.3",

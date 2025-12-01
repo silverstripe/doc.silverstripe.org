@@ -1,16 +1,18 @@
 import { getVersionMessage, getDefaultVersion } from '@/lib/versions';
 import styles from './VersionBanner.module.css';
+import { useMemo } from 'react';
+import cx from 'classnames';
 
 interface VersionBannerProps {
   version: string;
   latestVersionPath: string;
 }
 
-export function VersionBanner({ version, latestVersionPath }: VersionBannerProps) {
+export function VersionBanner({version, latestVersionPath }: VersionBannerProps) {
   const message = getVersionMessage(version);
   const isCurrentVersion = version === getDefaultVersion();
 
-  const getIconClass = () => {
+  const iconClass = useMemo(() => {
     switch (message.icon) {
       case 'times-circle':
         return 'fa-solid fa-circle-xmark';
@@ -22,18 +24,24 @@ export function VersionBanner({ version, latestVersionPath }: VersionBannerProps
       default:
         return 'fa-solid fa-circle-info';
     }
-  };
+  }, [message.icon]);
+
+  const bannerClassName = cx(
+    styles.banner,
+    styles[`style-${message.style}`],
+    { [styles.noMessage]: !message.message }
+  );
 
   return (
-    <div className={`${styles.banner} ${styles[`style-${message.style}`]} ${!message.message ? styles.noMessage : ''}`} role="alert">
+    <div className={bannerClassName} role="alert">
       <div className={styles.content}>
         <div className={styles.header}>
-          <span className={`${styles.icon} ${getIconClass()}`} aria-hidden="true" />
+          <span className={`${styles.icon} ${iconClass}`} aria-hidden="true" />
           <div className={styles.titleSection}>
             <div className={styles.title}>
               <span>Version {version}</span>
               <span className={styles.status}>
-                <i className={`${styles.statusIcon} ${getIconClass()}`} aria-hidden="true" />
+                <i className={`${styles.statusIcon} ${iconClass}`} aria-hidden="true" />
                 {message.stability}
               </span>
             </div>

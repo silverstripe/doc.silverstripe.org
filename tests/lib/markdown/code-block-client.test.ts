@@ -23,9 +23,13 @@ describe('initializeCodeBlocks', () => {
     button.setAttribute('data-code', 'console.log("test")');
     container.appendChild(button);
 
+    // Suppress clipboard API error since jsdom doesn't support it
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
     // Clicking the button should work even though it was added after initialization
     button.click();
 
+    spy.mockRestore();
     cleanup();
   });
 

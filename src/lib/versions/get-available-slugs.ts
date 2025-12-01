@@ -2,7 +2,6 @@
  * Utility to check if a slug exists in a specific version
  * Used for version switcher fallback logic
  */
-
 import { getAllDocuments } from '@/lib/content/get-document';
 import { normalizeSlug } from '@/lib/utils';
 
@@ -32,7 +31,6 @@ async function getSlugsByVersion(version: string): Promise<Set<string>> {
       slugsByVersion.get(docVersion)!.add(normalizeSlug(doc.slug));
     }
   }
-  
   return slugsByVersion.get(version) || new Set();
 }
 
