@@ -32,7 +32,7 @@ export default function RootLayout({
   const { docsContext } = getConfig();
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
         <script dangerouslySetInnerHTML={{ __html: darkModeScript }} />
       </head>
