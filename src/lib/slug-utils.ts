@@ -1,7 +1,8 @@
 /**
  * Consolidated utility functions for slug handling and routing
  */
-import { getAllVersions } from '@/lib/versions';
+import { DocumentNode } from '@/types';
+import { getAllVersions, getDefaultVersion } from '@/lib/versions';
 
 /**
  * Normalize a slug to ensure consistent format
@@ -63,4 +64,77 @@ export function extractVersionAndSlug(fullSlug: string): {
  */
 export function getAvailableVersions(): string[] {
   return getAllVersions();
+}
+
+/**
+ * Check if a slug exists in a specific version
+ * This is used for version switching fallback logic
+ * @param slug - The slug to check (e.g., /en/6/getting-started/)
+ * @param documents - All available documents
+ * @returns true if the slug exists in the version, false otherwise
+ */
+export function doesSlugExistInVersion(
+  slug: string,
+  documents: DocumentNode[],
+  version: string,
+): boolean {
+  const normalizedSlugEnd = normalizeSlug(slug);
+  // Try exact match first
+  const exactMatch = documents.find(
+    (doc) => doc.version === version && doc.slug === normalizedSlugEnd,
+  );
+  if (exactMatch) {
+    return true;
+  }
+  // Try case-insensitive match
+  const caseInsensitiveMatch = documents.find(
+    (doc) => doc.version === version
+      && doc.slug.toLowerCase() === normalizedSlugEnd.toLowerCase(),
+  );
+  return !!caseInsensitiveMatch;
+}
+
+/**
+ * Generate a fallback slug for version switching
+ * If the current slug doesn't exist in the target version, returns the root of that version
+ * @param currentSlug - The current page slug
+ * @param targetVersion - The target version to switch to
+ * @param documents - All available documents
+ * @returns The slug for the target version, or root if current doesn't exist
+ */
+export function getFallbackSlugForVersion(
+  currentSlug: string,
+  targetVersion: string,
+  documents: DocumentNode[],
+): string {
+  // Try to replace version in current slug
+  const newSlug = currentSlug.replace(/^\/en\/[0-9]+\//, `/en/${targetVersion}/`);
+  // Check if it exists
+  if (doesSlugExistInVersion(newSlug, documents, targetVersion)) {
+    return newSlug;
+  }
+  // Fallback to root of target version
+  return `/en/${targetVersion}/`;
+}
+
+/**
+ * Extract version and optional feature from a slug path
+ * @param slug - Full slug (e.g., /en/6/optional_features/linkfield/)
+ * @returns Object with version and optionalFeature
+ */
+export function extractVersionAndFeatureFromSlug(
+  slug: string,
+): { version: string; optionalFeature: string | null } {
+  // Format: /en/{version}[/optional_features/{feature}/...]
+  const parts = slug.split('/').filter(Boolean);
+  if (parts.length < 2) {
+    return { version: getDefaultVersion(), optionalFeature: null };
+  }
+  const version = parts[1];
+  // Check if this is an optional feature path
+  if (parts.length >= 4 && parts[2] === 'optional_features') {
+    const optionalFeature = parts[3];
+    return { version, optionalFeature };
+  }
+  return { version, optionalFeature: null };
 }

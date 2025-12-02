@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { extractVersionAndFeatureFromSlug, getDocumentGithubInfo } from '@/lib/navigation-logic';
+import { extractVersionAndFeatureFromSlug } from '@/lib/slug-utils';
+import { getDocumentGithubInfo } from '@/lib/github-utils';
 import { getDefaultVersion, getVersionHomepage } from '@/lib/versions/version-utils';
 import { SearchBox } from './SearchBox';
 import { VersionSwitcher } from './VersionSwitcher';

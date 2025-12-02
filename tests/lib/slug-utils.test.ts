@@ -3,8 +3,12 @@ import {
   normalizeSlugForComparison,
   buildSlugFromParams,
   extractVersionAndSlug,
-  getAvailableVersions
+  getAvailableVersions,
+  doesSlugExistInVersion,
+  getFallbackSlugForVersion,
+  extractVersionAndFeatureFromSlug,
 } from '@/lib/slug-utils';
+import { DocumentNode } from '@/types';
 
 describe('normalizeSlug', () => {
   it('adds leading slash if missing', () => {
@@ -136,5 +140,164 @@ describe('Routing Utilities', () => {
       const versions = getAvailableVersions();
       expect(Array.isArray(versions)).toBe(true);
     });
+  });
+});
+
+describe('doesSlugExistInVersion', () => {
+  const mockDocs: DocumentNode[] = [
+    {
+      slug: '/en/6/getting-started/',
+      version: '6',
+      filePath: 'index.md',
+      fileTitle: 'Getting Started',
+      fileAbsolutePath: '/path/to/index.md',
+      isIndex: true,
+      parentSlug: '/en/6/',
+      title: 'Getting Started',
+      content: 'content',
+      category: 'docs',
+    },
+    {
+      slug: '/en/6/api/index/',
+      version: '6',
+      filePath: 'api/index.md',
+      fileTitle: 'API',
+      fileAbsolutePath: '/path/to/api/index.md',
+      isIndex: true,
+      parentSlug: '/en/6/',
+      title: 'API',
+      content: 'content',
+      category: 'docs',
+    },
+    {
+      slug: '/en/5/getting-started/',
+      version: '5',
+      filePath: 'index.md',
+      fileTitle: 'Getting Started',
+      fileAbsolutePath: '/path/to/index.md',
+      isIndex: true,
+      parentSlug: '/en/5/',
+      title: 'Getting Started',
+      content: 'content',
+      category: 'docs',
+    },
+  ];
+
+  it('returns true for existing slug in version', () => {
+    const result = doesSlugExistInVersion('/en/6/getting-started/', mockDocs, '6');
+    expect(result).toBe(true);
+  });
+
+  it('returns false for non-existing slug in version', () => {
+    const result = doesSlugExistInVersion('/en/6/nonexistent/', mockDocs, '6');
+    expect(result).toBe(false);
+  });
+
+  it('returns false when slug exists in different version', () => {
+    const result = doesSlugExistInVersion('/en/5/api/index/', mockDocs, '6');
+    expect(result).toBe(false);
+  });
+
+  it('performs case-insensitive match', () => {
+    const result = doesSlugExistInVersion('/en/6/Getting-Started/', mockDocs, '6');
+    expect(result).toBe(true);
+  });
+
+  it('handles slugs without trailing slash', () => {
+    const result = doesSlugExistInVersion('/en/6/api/index', mockDocs, '6');
+    expect(result).toBe(true);
+  });
+});
+
+describe('getFallbackSlugForVersion', () => {
+  const mockDocs: DocumentNode[] = [
+    {
+      slug: '/en/6/getting-started/',
+      version: '6',
+      filePath: 'index.md',
+      fileTitle: 'Getting Started',
+      fileAbsolutePath: '/path/to/index.md',
+      isIndex: true,
+      parentSlug: '/en/6/',
+      title: 'Getting Started',
+      content: 'content',
+      category: 'docs',
+    },
+    {
+      slug: '/en/5/getting-started/',
+      version: '5',
+      filePath: 'index.md',
+      fileTitle: 'Getting Started',
+      fileAbsolutePath: '/path/to/index.md',
+      isIndex: true,
+      parentSlug: '/en/5/',
+      title: 'Getting Started',
+      content: 'content',
+      category: 'docs',
+    },
+    {
+      slug: '/en/5/admin-interface/',
+      version: '5',
+      filePath: 'index.md',
+      fileTitle: 'Admin Interface',
+      fileAbsolutePath: '/path/to/index.md',
+      isIndex: true,
+      parentSlug: '/en/5/',
+      title: 'Admin Interface',
+      content: 'content',
+      category: 'docs',
+    },
+  ];
+
+  it('returns equivalent path if it exists in target version', () => {
+    const result = getFallbackSlugForVersion('/en/6/getting-started/', '5', mockDocs);
+    expect(result).toBe('/en/5/getting-started/');
+  });
+
+  it('returns root version if path does not exist in target version', () => {
+    const result = getFallbackSlugForVersion('/en/6/api-docs/', '5', mockDocs);
+    expect(result).toBe('/en/5/');
+  });
+
+  it('handles pages unique to target version', () => {
+    const result = getFallbackSlugForVersion('/en/6/admin-interface/', '5', mockDocs);
+    expect(result).toBe('/en/5/admin-interface/');
+  });
+
+  it('handles versions with different content', () => {
+    const result = getFallbackSlugForVersion('/en/5/nonexistent-v5-page/', '6', mockDocs);
+    expect(result).toBe('/en/6/');
+  });
+});
+
+describe('extractVersionAndFeatureFromSlug', () => {
+  it('extracts version from core docs slug', () => {
+    const result = extractVersionAndFeatureFromSlug('/en/6/getting-started/');
+    expect(result.version).toBe('6');
+    expect(result.optionalFeature).toBeNull();
+  });
+
+  it('extracts version and optional feature from feature slug', () => {
+    const result = extractVersionAndFeatureFromSlug('/en/6/optional_features/linkfield/');
+    expect(result.version).toBe('6');
+    expect(result.optionalFeature).toBe('linkfield');
+  });
+
+  it('extracts version and nested optional feature path', () => {
+    const result = extractVersionAndFeatureFromSlug('/en/6/optional_features/linkfield/configuration/');
+    expect(result.version).toBe('6');
+    expect(result.optionalFeature).toBe('linkfield');
+  });
+
+  it('handles v5 paths', () => {
+    const result = extractVersionAndFeatureFromSlug('/en/5/getting-started/');
+    expect(result.version).toBe('5');
+    expect(result.optionalFeature).toBeNull();
+  });
+
+  it('defaults to v6 for invalid paths', () => {
+    const result = extractVersionAndFeatureFromSlug('/invalid/');
+    expect(result.version).toBe('6');
+    expect(result.optionalFeature).toBeNull();
   });
 });
