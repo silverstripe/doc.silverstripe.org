@@ -9,7 +9,7 @@ import './globals.css';
 export const metadata: Metadata = generateRootMetadata();
 
 export default function RootLayout({
-  children
+  children,
 }: {
   children: React.ReactNode;
 }) {

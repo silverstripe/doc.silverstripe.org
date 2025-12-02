@@ -8,7 +8,7 @@ Rebuild of doc.silverstripe.org using **Next.js 16+ / Node.js 24+**. Two context
 
 ## Tech Stack
 
-Next.js 16+ • Node.js 24+ • TypeScript (strict) • Tailwind + Bootstrap • Markdown (remark/rehype) • Algolia DocSearch • Jest + RTL • Prism.js
+Next.js 16+ • Node.js 24+ • TypeScript (strict) • Tailwind + Bootstrap • Markdown (remark/rehype) • Algolia DocSearch • Jest + RTL • Prism.js • ESLint (Airbnb)
 
 ---
 
@@ -21,9 +21,10 @@ npm run dev:docs          # Dev with docs context (DOCS_CONTEXT=docs)
 npm run dev:user          # Dev with user-help context (DOCS_CONTEXT=user)
 npm run clone:docs        # Clone docs content (DOCS_CONTEXT=docs)
 npm run clone:user        # Clone user-help content (DOCS_CONTEXT=user)
-npm run build             # Build docs (alias: build:docs, DOCS_CONTEXT=docs)
+npm run build             # Build docs (runs lint first, alias: build:docs, DOCS_CONTEXT=docs)
 npm run build:docs        # Build with docs context (DOCS_CONTEXT=docs)
 npm run build:user        # Build with user-help context (DOCS_CONTEXT=user)
+npm run lint              # Run ESLint - must have 0 errors and 0 warnings
 npm test                  # All tests (auto uses mock data)
 ```
 
@@ -129,7 +130,8 @@ interface DocumentNode {
 **TS:** Strict mode, minimize `any`, explicit returns  
 **React:** Server components default, `'use client'` when needed  
 **Names:** Components=PascalCase, utils=kebab-case, tests=`*.test.*`  
-**Imports:** Use `@/` path alias for src/ imports
+**Imports:** Use `@/` path alias for src/ imports  
+**Linting:** Run `npm run lint` - must have 0 errors and 0 warnings (Airbnb style guide)
 
 ---
 
@@ -139,11 +141,12 @@ interface DocumentNode {
 
 **Approach:**
 1. Read phase instructions completely before starting
-2. Write tests alongside code  
+2. Write tests alongside code
 3. Ensure all tests pass before completing phase
-4. Use mock data for development (don't clone real content)
-5. Keep functions small, types strict
-6. Request validation when complete
+4. Ensure linting passes with 0 errors and 0 warnings before completing phase
+5. Use mock data for development (don't clone real content)
+6. Keep functions small, types strict
+7. Request validation when complete
 
 **Red flags:** Skipping tests • Using `any` • Large components • Testing with real content • Moving ahead without validation
 

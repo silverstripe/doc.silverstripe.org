@@ -47,7 +47,7 @@ export function rewriteAPILink(link: string, version?: string): string {
   // Use a custom encoder that only encodes what we need
   const encodedQuery = query
     .split('')
-    .map(char => {
+    .map((char) => {
       if (char === '\\') return '%5C';
       if (char === ' ') return '%20';
       if (char === '$') return '%24';
@@ -63,14 +63,16 @@ export function rewriteAPILink(link: string, version?: string): string {
 /**
  * Convert shorthand [api:Something] syntax to proper markdown links
  * Handles variations with :: (methods) and -> (properties)
- * @example [api:SilverStripe\ORM\DataList] -> [SilverStripe\ORM\DataList](api:SilverStripe\ORM\DataList)
- * @example [api:SilverStripe\ORM\DataList::filter()] -> [SilverStripe\ORM\DataList::filter()](api:SilverStripe\ORM\DataList::filter())
+ * @example [api:SilverStripe\ORM\DataList] ->
+ *   [SilverStripe\ORM\DataList](api:SilverStripe\ORM\DataList)
+ * @example [api:SilverStripe\ORM\DataList::filter()] ->
+ *   [SilverStripe\ORM\DataList::filter()](api:SilverStripe\ORM\DataList::filter())
  */
 export function cleanApiTags(markdown: string): string {
   // Match [api:...] but only if not followed by (
   // This regex captures the api query and ensures we don't process [api:...](...)
   return markdown.replace(
     /\[api:(.*?)\](?!\()/g,
-    (_, query) => `[${query}](api:${query})`
+    (_, query) => `[${query}](api:${query})`,
   );
 }

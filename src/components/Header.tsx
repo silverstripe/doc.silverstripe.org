@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { extractVersionAndFeatureFromSlug, getDocumentGithubInfo } from '@/lib/navigation-logic';
+import { getDefaultVersion, getVersionHomepage } from '@/lib/versions/version-utils';
 import { SearchBox } from './SearchBox';
 import { VersionSwitcher } from './VersionSwitcher';
 import { HamburgerButton } from './HamburgerButton';
 import { DarkModeToggle } from './DarkModeToggle';
 import styles from './Header.module.css';
-import { usePathname } from 'next/navigation';
-import { extractVersionAndFeatureFromSlug, getDocumentGithubInfo } from '@/lib/navigation-logic';
-import { getDefaultVersion, getVersionHomepage } from '@/lib/versions/version-utils';
 
 interface HeaderProps {
   onMobileMenuToggle?: (isOpen: boolean) => void;
@@ -23,14 +23,14 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [githubUrl, setGithubUrl] = useState('https://github.com/silverstripe/developer-docs');
   const pathname = usePathname();
-  
+
   // Extract version and optional feature from pathname
   const pathParts = pathname.split('/').filter(Boolean);
   // Only use pathParts[1] as version if pathParts[0] is 'en'
   const version = (pathParts[0] === 'en' ? pathParts[1] : null) || getDefaultVersion();
   const slug = pathname;
   const { optionalFeature } = extractVersionAndFeatureFromSlug(slug);
-  
+
   const logoSubtitle = docsContext === 'user' ? 'User Help' : 'Docs';
 
   // Close menu when route changes
@@ -55,7 +55,7 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
     const newState = !isMobileMenuOpen;
     setIsMobileMenuOpen(newState);
     onMobileMenuToggle?.(newState);
-    
+
     // Scroll to top when opening mobile menu
     if (newState && typeof window !== 'undefined') {
       window.scrollTo(0, 0);
@@ -79,8 +79,8 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
 
         <nav className={styles.nav}>
           <div className={styles.navItem}>
-            <a href={githubUrl} className={styles.navLink}>
-              <i className={`fab fa-github ${styles.githubIcon}`}></i>
+            <a href={githubUrl} className={styles.navLink} aria-label="GitHub repository">
+              <i className={`fab fa-github ${styles.githubIcon}`} />
             </a>
           </div>
           <div className={styles.navItem}>

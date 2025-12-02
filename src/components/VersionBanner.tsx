@@ -1,14 +1,14 @@
 import { getVersionMessage, getDefaultVersion } from '@/lib/versions';
-import styles from './VersionBanner.module.css';
 import { useMemo } from 'react';
 import cx from 'classnames';
+import styles from './VersionBanner.module.css';
 
 interface VersionBannerProps {
   version: string;
   latestVersionPath: string;
 }
 
-export function VersionBanner({version, latestVersionPath }: VersionBannerProps) {
+export function VersionBanner({ version, latestVersionPath }: VersionBannerProps) {
   const message = getVersionMessage(version);
   const isCurrentVersion = version === getDefaultVersion();
 
@@ -29,7 +29,7 @@ export function VersionBanner({version, latestVersionPath }: VersionBannerProps)
   const bannerClassName = cx(
     styles.banner,
     styles[`style-${message.style}`],
-    { [styles.noMessage]: !message.message }
+    { [styles.noMessage]: !message.message },
   );
 
   return (
@@ -39,7 +39,10 @@ export function VersionBanner({version, latestVersionPath }: VersionBannerProps)
           <span className={`${styles.icon} ${iconClass}`} aria-hidden="true" />
           <div className={styles.titleSection}>
             <div className={styles.title}>
-              <span>Version {version}</span>
+              <span>
+                Version
+                {version}
+              </span>
               <span className={styles.status}>
                 <i className={`${styles.statusIcon} ${iconClass}`} aria-hidden="true" />
                 {message.stability}
@@ -51,7 +54,10 @@ export function VersionBanner({version, latestVersionPath }: VersionBannerProps)
         {message.message && (
           <div className={styles.messageSection}>
             <p className={styles.message}>
-              This version of Silverstripe CMS {message.message}.
+              This version of Silverstripe CMS
+              {' '}
+              {message.message}
+              .
             </p>
             {!isCurrentVersion && (
               <a href={latestVersionPath} className={styles.link}>

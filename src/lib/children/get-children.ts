@@ -2,14 +2,41 @@ import { DocumentNode } from '@/types';
 import { sortDocuments } from '../content/sort-files';
 
 /**
+ * Cache for all documents - populated by build context
+ */
+let documentCache: DocumentNode[] = [];
+
+/**
+ * Set all documents in cache
+ */
+export function setAllDocuments(docs: DocumentNode[]): void {
+  documentCache = docs;
+}
+
+/**
+ * Get the cached documents
+ */
+function getAllDocumentsCache(): DocumentNode[] {
+  return documentCache;
+}
+
+/**
+ * Clear cache (for testing)
+ */
+export function clearDocumentCache(): void {
+  documentCache = [];
+}
+
+/**
  * Get direct children of a document
  * @param doc Parent document
- * @param includeFolders If true, include index pages (folders); if false, only include non-index pages
+ * @param includeFolders If true, include index pages (folders); if false, only include
+ *   non-index pages
  * @returns Array of child documents, sorted
  */
 export function getChildren(
   doc: DocumentNode,
-  includeFolders: boolean = false
+  includeFolders: boolean = false,
 ): DocumentNode[] {
   if (!doc.isIndex) {
     return [];
@@ -17,9 +44,9 @@ export function getChildren(
 
   // This is a placeholder - will be populated by getAllDocuments from build context
   const allDocs = getAllDocumentsCache();
-  const children = allDocs.filter((n) => {
-    return n.parentSlug === doc.slug && (includeFolders || !n.isIndex);
-  });
+  const children = allDocs.filter(
+    (n) => n.parentSlug === doc.slug && (includeFolders || !n.isIndex),
+  );
 
   return sortDocuments(children);
 }
@@ -55,7 +82,7 @@ export interface FilterOptions {
  */
 export function getChildrenFiltered(
   doc: DocumentNode,
-  options: FilterOptions
+  options: FilterOptions,
 ): DocumentNode[] {
   const {
     folderName,
@@ -68,14 +95,12 @@ export function getChildrenFiltered(
   let nodes: DocumentNode[] = [];
 
   // Normalize function: convert underscores and hyphens to spaces for comparison
-  const normalize = (str: string): string => 
-    str.replace(/[-_]/g, ' ').toLowerCase();
+  const normalize = (str: string): string => str.replace(/[-_]/g, ' ').toLowerCase();
 
   if (folderName) {
     // Get target folder by name and then get its children
     const targetFolder = getChildren(doc, true).find(
-      (child) =>
-        child.isIndex && normalize(child.fileTitle) === normalize(folderName)
+      (child) => child.isIndex && normalize(child.fileTitle) === normalize(folderName),
     );
     if (targetFolder) {
       nodes = getChildren(targetFolder, false);
@@ -84,13 +109,13 @@ export function getChildrenFiltered(
     // Get all children except excluded ones
     const exclusionSet = new Set(exclude.map((e) => normalize(e)));
     nodes = getChildren(doc, includeFolders).filter(
-      (child) => !exclusionSet.has(normalize(child.fileTitle))
+      (child) => !exclusionSet.has(normalize(child.fileTitle)),
     );
   } else if (only.length > 0) {
     // Get only specified children
     const inclusionSet = new Set(only.map((e) => normalize(e)));
     nodes = getChildren(doc, includeFolders).filter(
-      (child) => inclusionSet.has(normalize(child.fileTitle))
+      (child) => inclusionSet.has(normalize(child.fileTitle)),
     );
   } else {
     // Get all children
@@ -103,30 +128,4 @@ export function getChildrenFiltered(
   }
 
   return nodes;
-}
-
-/**
- * Global cache for all documents - set by content builder
- */
-let documentCache: DocumentNode[] = [];
-
-/**
- * Set the global document cache (called during build)
- */
-export function setAllDocuments(docs: DocumentNode[]): void {
-  documentCache = docs;
-}
-
-/**
- * Get the cached documents
- */
-function getAllDocumentsCache(): DocumentNode[] {
-  return documentCache;
-}
-
-/**
- * Clear cache (for testing)
- */
-export function clearDocumentCache(): void {
-  documentCache = [];
 }

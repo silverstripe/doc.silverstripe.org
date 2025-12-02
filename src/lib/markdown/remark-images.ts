@@ -5,7 +5,7 @@ import { resolveImagePath } from './resolve-image-paths';
 /**
  * Remark plugin to resolve relative image paths in markdown
  * Converts relative paths to absolute paths based on file location
- * 
+ *
  * Usage: processor.use(remarkImages, { currentFilePath: '/path/to/file.md' })
  */
 export function remarkImages(options?: { currentFilePath?: string }) {

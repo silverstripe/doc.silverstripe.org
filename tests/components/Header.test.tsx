@@ -84,7 +84,7 @@ describe('Header Component', () => {
 
   it('should render GitHub icon with correct class', () => {
     render(<Header docsContext="docs" />);
-    const githubLink = screen.getByRole('link', { name: '' }).closest('a');
+    const githubLink = screen.getByRole('link', { name: /GitHub repository/ });
     expect(githubLink).toHaveAttribute('href', 'https://github.com/silverstripe/developer-docs');
     
     const githubIcon = githubLink?.querySelector('i');

@@ -1,4 +1,4 @@
 export {
   generatePageMetadata,
-  generateRootMetadata
+  generateRootMetadata,
 } from './metadata';

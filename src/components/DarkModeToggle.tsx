@@ -16,7 +16,7 @@ export function DarkModeToggle() {
 
     // Check if dark class already exists (set by inline script before hydration)
     const hasClassAlready = document.documentElement.classList.contains('dark');
-    
+
     // Determine initial dark mode state
     const saved = localStorage.getItem('theme_preference');
     let isDarkMode = saved === 'dark';
@@ -54,7 +54,7 @@ export function DarkModeToggle() {
   }, [isDark]);
 
   const handleToggle = () => {
-    setIsDark(prev => !prev);
+    setIsDark((prev) => !prev);
   };
 
   // Don't render button until initialized

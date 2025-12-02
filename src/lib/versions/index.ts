@@ -7,5 +7,5 @@ export {
   getVersionMessage,
   getVersionSwitcherLabel,
   getVersionHomepage,
-  type VersionStatus
+  type VersionStatus,
 } from './version-utils';

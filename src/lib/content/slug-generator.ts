@@ -8,7 +8,7 @@ import path from 'path';
 export function generateSlug(
   dirPath: string,
   version: string,
-  optional?: string
+  optional?: string,
 ): string {
   // Split path into segments and filter empty ones
   const segments = dirPath
@@ -16,10 +16,10 @@ export function generateSlug(
     .filter((s) => s && s.length > 0);
 
   // Strip numeric prefixes and convert to lowercase
-  const parts = segments.map((part) =>
-    part
+  const parts = segments.map(
+    (part) => part
       .replace(/^\d+_/, '') // Strip numeric prefix
-      .toLowerCase() // Convert to lowercase
+      .toLowerCase(), // Convert to lowercase
   );
 
   // Build the slug
@@ -30,7 +30,7 @@ export function generateSlug(
     baseParts.push(
       optional
         .replace(/^\d+_/, '')
-        .toLowerCase()
+        .toLowerCase(),
     );
   }
 
@@ -45,7 +45,7 @@ export function generateSlug(
 export function generateSlugFromFullPath(
   fullPath: string,
   version: string,
-  optional?: string
+  optional?: string,
 ): string {
   const dir = path.dirname(fullPath);
   return generateSlug(dir, version, optional);

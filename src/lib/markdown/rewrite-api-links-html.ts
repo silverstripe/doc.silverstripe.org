@@ -11,6 +11,6 @@ export function rewriteApiLinksInHtml(html: string, version: string): string {
     (match, query) => {
       const newUrl = rewriteAPILink(`api:${query}`, version);
       return `href="${newUrl}" target="_blank" rel="noopener noreferrer"`;
-    }
+    },
   );
 }

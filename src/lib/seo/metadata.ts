@@ -10,7 +10,7 @@ const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
  * Includes title, description, OpenGraph tags, and canonical URL
  */
 export function generatePageMetadata(doc: DocumentNode): Metadata {
-  const title = doc.title;
+  const { title } = doc;
   const description = doc.summary || DEFAULT_DESCRIPTION;
 
   // Construct canonical URL
@@ -20,7 +20,7 @@ export function generatePageMetadata(doc: DocumentNode): Metadata {
     title,
     description,
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
     },
     openGraph: {
       title,
@@ -32,16 +32,16 @@ export function generatePageMetadata(doc: DocumentNode): Metadata {
           url: DEFAULT_OG_IMAGE,
           width: 1200,
           height: 630,
-          alt: title
-        }
-      ]
+          alt: title,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [DEFAULT_OG_IMAGE]
-    }
+      images: [DEFAULT_OG_IMAGE],
+    },
   };
 
   return metadata;
@@ -57,7 +57,7 @@ export function generateRootMetadata(): Metadata {
     title: 'SilverStripe Documentation',
     description: DEFAULT_DESCRIPTION,
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
     },
     openGraph: {
       title: 'SilverStripe Documentation',
@@ -69,15 +69,15 @@ export function generateRootMetadata(): Metadata {
           url: DEFAULT_OG_IMAGE,
           width: 1200,
           height: 630,
-          alt: 'SilverStripe Documentation'
-        }
-      ]
+          alt: 'SilverStripe Documentation',
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: 'SilverStripe Documentation',
       description: DEFAULT_DESCRIPTION,
-      images: [DEFAULT_OG_IMAGE]
-    }
+      images: [DEFAULT_OG_IMAGE],
+    },
   };
 }

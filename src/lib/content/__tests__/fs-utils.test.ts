@@ -1,5 +1,5 @@
-import { readMarkdownFile, listMarkdownFiles, parseFilePath } from '../fs-utils';
 import path from 'path';
+import { readMarkdownFile, listMarkdownFiles, parseFilePath } from '../fs-utils';
 
 const fixturesDir = path.join(process.cwd(), 'tests/fixtures/mock-content/v6');
 

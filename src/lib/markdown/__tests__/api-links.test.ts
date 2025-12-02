@@ -1,4 +1,6 @@
-import { rewriteAPILink, cleanApiTags, setCurrentVersion, getCurrentVersion } from '../api-links';
+import {
+  rewriteAPILink, cleanApiTags, setCurrentVersion, getCurrentVersion,
+} from '../api-links';
 
 describe('API Links', () => {
   beforeEach(() => {

@@ -1,10 +1,10 @@
 'use client';
 
 import { useContext } from 'react';
-import { Sidebar } from './Sidebar';
-import { Breadcrumbs } from './Breadcrumbs';
 import { NavNode } from '@/types';
 import { MobileMenuContext } from '@/contexts/MobileMenuContext';
+import { Sidebar } from './Sidebar';
+import { Breadcrumbs } from './Breadcrumbs';
 import styles from './DocsLayout.module.css';
 
 interface DocsLayoutProps {
@@ -40,7 +40,17 @@ export function DocsLayout({
           </div>
 
           {/* Main content */}
-          <div className={styles.mainContent} onClick={onClose}>
+          <div
+            className={styles.mainContent}
+            onClick={onClose}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape' || e.key === 'Enter') {
+                onClose();
+              }
+            }}
+            role="button"
+            tabIndex={0}
+          >
             <main role="main">
               <Breadcrumbs slug={currentSlug} version={version} navTree={navTree} />
               {children}

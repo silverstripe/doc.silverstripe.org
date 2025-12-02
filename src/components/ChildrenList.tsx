@@ -1,5 +1,5 @@
 import { DocumentNode } from '@/types';
-import { getChildren, FilterOptions, getChildrenFiltered } from '@/lib/children';
+import { FilterOptions, getChildrenFiltered } from '@/lib/children';
 import styles from './ChildrenList.module.css';
 
 interface ChildrenListProps {
@@ -31,7 +31,7 @@ export async function ChildrenList({
     );
   }
 
-  const { asList, ...filterOptions } = options;
+  const { asList } = options;
 
   if (asList) {
     return (
@@ -67,7 +67,7 @@ export async function ChildrenList({
                 <div className={styles.cardBody}>
                   <h5 className={styles.cardTitle}>
                     <span className={`${styles.cardIconHolder}`}>
-                      <i className={iconClass}></i>
+                      <i className={iconClass} />
                     </span>
                     <span className={styles.cardTitleText}>{child.title}</span>
                   </h5>

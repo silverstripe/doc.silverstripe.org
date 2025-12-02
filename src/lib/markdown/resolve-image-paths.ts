@@ -3,7 +3,7 @@ import path from 'path';
 /**
  * Resolves relative image paths in markdown to absolute paths
  * Handles ../ and ./ relative paths, converting them to public URLs
- * 
+ *
  * @param imagePath - The image path from markdown (e.g., '../_images/screenshot.png')
  * @param currentFilePath - The full path of the current markdown file
  * @returns Absolute URL path for the image
@@ -26,7 +26,7 @@ export function resolveImagePath(imagePath: string, currentFilePath: string): st
   // If path is relative to content root, make it absolute for public serving
   // Content lives in .cache/{docs|user}/ or tests/fixtures/mock-content/
   // We want to return a path that works in the browser
-  
+
   // Remove any leading path segments up to and including content directory
   // Matches: mock-content, .cache/docs, .cache/user, or legacy .cache/content
   const contentMatch = urlPath.match(/(?:mock-content|\.cache\/(?:docs|user|content))(.*)$/);

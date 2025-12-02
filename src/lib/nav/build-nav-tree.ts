@@ -5,7 +5,7 @@ import { sortDocuments } from '../content/sort-files';
  * Filter documents to only those matching a specific version
  */
 function getDocsForVersion(docs: DocumentNode[], version: string): DocumentNode[] {
-  return docs.filter(doc => doc.version === version);
+  return docs.filter((doc) => doc.version === version);
 }
 
 /**
@@ -17,10 +17,10 @@ function getNavChildren(node: DocumentNode, allDocs: DocumentNode[]): DocumentNo
     return [];
   }
 
-  let children = allDocs.filter(n => n.parentSlug === node.slug && !n.hideSelf);
+  const children = allDocs.filter((n) => n.parentSlug === node.slug && !n.hideSelf);
 
   // Add any unhidden items
-  allDocs.forEach(c => {
+  allDocs.forEach((c) => {
     if (c.parentSlug === node.slug && c.unhideSelf && !children.includes(c)) {
       children.push(c);
     }
@@ -36,13 +36,13 @@ function getNavChildren(node: DocumentNode, allDocs: DocumentNode[]): DocumentNo
 export function buildNavTree(
   docs: DocumentNode[],
   version: string,
-  currentSlug?: string
+  currentSlug?: string,
 ): NavNode[] {
   const versionDocs = getDocsForVersion(docs, version);
 
   // Find the root document (version index: /en/{version}/)
   const rootSlug = `/en/${version}/`;
-  const rootDoc = versionDocs.find(doc => doc.slug === rootSlug);
+  const rootDoc = versionDocs.find((doc) => doc.slug === rootSlug);
 
   if (!rootDoc) {
     return [];
@@ -52,25 +52,23 @@ export function buildNavTree(
   const topLevelItems = getNavChildren(rootDoc, versionDocs);
 
   // Filter out any item that has the same slug as root (should never happen, but safety check)
-  const filteredTopLevelItems = topLevelItems.filter(item => item.slug !== rootSlug);
+  const filteredTopLevelItems = topLevelItems.filter((item) => item.slug !== rootSlug);
 
   // Build tree recursively
-  const buildTree = (nodes: DocumentNode[], depth: number = 0): NavNode[] => {
-    return nodes.map(node => {
-      // Allow 3 levels of depth (0, 1, 2) - meaning top, category, page
-      const children = depth < 2 ? getNavChildren(node, versionDocs) : [];
-      const childNodes = buildTree(children, depth + 1);
+  const buildTree = (nodes: DocumentNode[], depth: number = 0): NavNode[] => nodes.map((node) => {
+    // Allow 3 levels of depth (0, 1, 2) - meaning top, category, page
+    const children = depth < 2 ? getNavChildren(node, versionDocs) : [];
+    const childNodes = buildTree(children, depth + 1);
 
-      return {
-        slug: node.slug,
-        title: node.title,
-        isIndex: node.isIndex,
-        isActive: currentSlug ? node.slug === currentSlug : false,
-        children: childNodes,
-        hasVisibleChildren: childNodes.length > 0,
-      };
-    });
-  };
+    return {
+      slug: node.slug,
+      title: node.title,
+      isIndex: node.isIndex,
+      isActive: currentSlug ? node.slug === currentSlug : false,
+      children: childNodes,
+      hasVisibleChildren: childNodes.length > 0,
+    };
+  });
 
   return buildTree(filteredTopLevelItems);
 }
@@ -82,7 +80,7 @@ export function isNodeOrDescendantActive(node: NavNode): boolean {
   if (node.isActive) {
     return true;
   }
-  return node.children.some(child => isNodeOrDescendantActive(child));
+  return node.children.some((child) => isNodeOrDescendantActive(child));
 }
 
 /**

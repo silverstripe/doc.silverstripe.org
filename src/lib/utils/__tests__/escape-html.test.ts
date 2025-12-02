@@ -23,7 +23,7 @@ describe('escapeHtml', () => {
 
   it('escapes multiple special characters', () => {
     expect(escapeHtml('<div class="test" data-value=\'5 > 3 & 2\'>')).toBe(
-      '&lt;div class=&quot;test&quot; data-value=&#39;5 &gt; 3 &amp; 2&#39;&gt;'
+      '&lt;div class=&quot;test&quot; data-value=&#39;5 &gt; 3 &amp; 2&#39;&gt;',
     );
   });
 

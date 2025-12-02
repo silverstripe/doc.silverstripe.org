@@ -1,5 +1,5 @@
-import { buildContentTree } from '../build-tree';
 import path from 'path';
+import { buildContentTree } from '../build-tree';
 
 const fixturesDir = path.join(process.cwd(), 'tests/fixtures/mock-content/v6');
 
@@ -68,9 +68,7 @@ describe('build-tree', () => {
       const docs = await buildContentTree(optionalPath, 'v6', 'docs', 'optional_features');
 
       // Check for deeply nested optional_features/linkfield files
-      const deepNested = docs.filter((d) =>
-        d.slug.includes('optional_features')
-      );
+      const deepNested = docs.filter((d) => d.slug.includes('optional_features'));
       expect(deepNested.length).toBeGreaterThan(0);
     });
 
@@ -118,9 +116,7 @@ describe('build-tree', () => {
     it('case-insensitive slug generation', async () => {
       const docs = await buildContentTree(fixturesDir, 'v6', 'docs');
 
-      const allLowercase = docs.every((d) =>
-        d.slug === d.slug.toLowerCase()
-      );
+      const allLowercase = docs.every((d) => d.slug === d.slug.toLowerCase());
       expect(allLowercase).toBe(true);
     });
   });

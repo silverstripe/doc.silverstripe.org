@@ -11,6 +11,28 @@ export interface ChildrenConfig {
 }
 
 /**
+ * Clean a string by removing <em> tags and trimming
+ */
+function cleanString(str: string): string {
+  return str.replace(/<\/?em>/g, '').trim();
+}
+
+/**
+ * Parse flags from marker string
+ */
+function parseFlags(markerText: string, config: ChildrenConfig): void {
+  if (markerText.includes(' asList')) {
+    config.asList = true;
+  }
+  if (markerText.includes(' includeFolders')) {
+    config.includeFolders = true;
+  }
+  if (markerText.includes(' reverse')) {
+    config.reverse = true;
+  }
+}
+
+/**
  * Parse a [CHILDREN] marker from text
  * Supports:
  * - [CHILDREN] - basic, all children
@@ -97,40 +119,18 @@ export function parseChildrenMarker(text: string): ChildrenConfig | null {
 }
 
 /**
- * Parse flags from marker string
- */
-function parseFlags(markerText: string, config: ChildrenConfig): void {
-  if (markerText.includes(' asList')) {
-    config.asList = true;
-  }
-  if (markerText.includes(' includeFolders')) {
-    config.includeFolders = true;
-  }
-  if (markerText.includes(' reverse')) {
-    config.reverse = true;
-  }
-}
-
-/**
- * Clean a string by removing <em> tags and trimming
- */
-function cleanString(str: string): string {
-  return str.replace(/<\/?em>/g, '').trim();
-}
-
-/**
  * Find all [CHILDREN] markers in text
  * @param text Text to search
  * @returns Array of marker objects with text and config
  */
 export function findChildrenMarkers(
-  text: string
+  text: string,
 ): Array<{ marker: string; config: ChildrenConfig }> {
   const markers: Array<{ marker: string; config: ChildrenConfig }> = [];
   const markerRegex = /\[CHILDREN[^\]]*\]/g;
 
-  let match;
-  while ((match = markerRegex.exec(text)) !== null) {
+  let match = markerRegex.exec(text);
+  while (match !== null) {
     const config = parseChildrenMarker(match[0]);
     if (config) {
       markers.push({
@@ -138,6 +138,7 @@ export function findChildrenMarkers(
         config,
       });
     }
+    match = markerRegex.exec(text);
   }
 
   return markers;

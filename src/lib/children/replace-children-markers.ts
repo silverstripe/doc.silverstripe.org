@@ -1,7 +1,6 @@
 import { DocumentNode } from '@/types';
 import { escapeHtml } from '@/lib/utils';
 import {
-  parseChildrenMarker,
   findChildrenMarkers,
   ChildrenConfig,
 } from './parse-children-marker';
@@ -13,33 +12,13 @@ import {
 } from './get-children';
 
 /**
- * Render children list as HTML
- * This generates simple HTML that can be styled with Tailwind/Bootstrap
- */
-function renderChildrenHTML(
-  children: DocumentNode[],
-  config: ChildrenConfig
-): string {
-  if (children.length === 0) {
-    return '<div class="alert alert-info">No child pages found.</div>';
-  }
-
-  if (config.asList) {
-    return renderListHTML(children);
-  } else {
-    return renderCardGridHTML(children);
-  }
-}
-
-/**
  * Render children as a list with definitions
  */
 function renderListHTML(children: DocumentNode[]): string {
   const items = children
     .map(
-      (child) =>
-        `<dt><a href="${child.slug}">${escapeHtml(child.title)}</a></dt>
-    <dd>${escapeHtml(child.summary || '')}</dd>`
+      (child) => `<dt><a href="${child.slug}">${escapeHtml(child.title)}</a></dt>
+    <dd>${escapeHtml(child.summary || '')}</dd>`,
     )
     .join('\n');
 
@@ -86,7 +65,23 @@ function renderCardGridHTML(children: DocumentNode[]): string {
 </div>`;
 }
 
+/**
+ * Render children list as HTML
+ * This generates simple HTML that can be styled with Tailwind/Bootstrap
+ */
+function renderChildrenHTML(
+  children: DocumentNode[],
+  config: ChildrenConfig,
+): string {
+  if (children.length === 0) {
+    return '<div class="alert alert-info">No child pages found.</div>';
+  }
 
+  if (config.asList) {
+    return renderListHTML(children);
+  }
+  return renderCardGridHTML(children);
+}
 
 /**
  * Replace all [CHILDREN] markers in HTML with rendered children
@@ -98,7 +93,7 @@ function renderCardGridHTML(children: DocumentNode[]): string {
 export function replaceChildrenMarkers(
   html: string,
   doc: DocumentNode,
-  allDocs: DocumentNode[]
+  allDocs: DocumentNode[],
 ): string {
   setupDocumentCache(allDocs);
 

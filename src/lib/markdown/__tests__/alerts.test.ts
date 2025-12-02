@@ -12,7 +12,7 @@ describe('GitHub Alerts', () => {
       const markdown = `> [!NOTE]
 > This is a note`;
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert');
       expect(html).toContain('markdown-alert-note');
       expect(html).toContain('markdown-alert-title');
@@ -24,7 +24,7 @@ describe('GitHub Alerts', () => {
       const markdown = `> [!WARNING]
 > This is a warning`;
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert');
       expect(html).toContain('markdown-alert-warning');
       expect(html).toContain('WARNING');
@@ -35,7 +35,7 @@ describe('GitHub Alerts', () => {
       const markdown = `> [!CAUTION]
 > This is a caution`;
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert');
       expect(html).toContain('markdown-alert-caution');
       expect(html).toContain('CAUTION');
@@ -46,7 +46,7 @@ describe('GitHub Alerts', () => {
       const markdown = `> [!TIP]
 > This is a tip`;
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert');
       expect(html).toContain('markdown-alert-tip');
       expect(html).toContain('TIP');
@@ -57,7 +57,7 @@ describe('GitHub Alerts', () => {
       const markdown = `> [!IMPORTANT]
 > This is important`;
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert');
       expect(html).toContain('markdown-alert-important');
       expect(html).toContain('IMPORTANT');
@@ -72,7 +72,7 @@ describe('GitHub Alerts', () => {
 > 
 > Second paragraph`;
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert');
       expect(html).toContain('First paragraph');
       expect(html).toContain('Second paragraph');
@@ -84,7 +84,7 @@ describe('GitHub Alerts', () => {
       const markdown = `> [!NOTE]
 > This is **bold** text`;
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert');
       expect(html).toContain('<strong>bold</strong>');
     });
@@ -93,7 +93,7 @@ describe('GitHub Alerts', () => {
       const markdown = `> [!NOTE]
 > This is *italic* text`;
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert');
       expect(html).toContain('italic');
     });
@@ -102,7 +102,7 @@ describe('GitHub Alerts', () => {
       const markdown = `> [!NOTE]
 > Check out [this link](https://example.com)`;
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert');
       expect(html).toContain('<a');
       expect(html).toContain('this link');
@@ -112,7 +112,7 @@ describe('GitHub Alerts', () => {
       const markdown = `> [!NOTE]
 > Use \`$var\` to access variables`;
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert');
       expect(html).toContain('<code>');
       expect(html).toContain('$var');
@@ -126,7 +126,7 @@ describe('GitHub Alerts', () => {
 > - Item 2
 > - Item 3`;
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert');
       expect(html).toContain('<ul>');
       expect(html).toContain('Item 1');
@@ -140,7 +140,7 @@ describe('GitHub Alerts', () => {
 > 2. Second step
 > 3. Third step`;
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert');
       expect(html).toContain('<ol>');
       expect(html).toContain('First step');
@@ -153,7 +153,7 @@ describe('GitHub Alerts', () => {
       const markdown = `> [!NOTE]
 > Test content`;
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert-title');
       // SVG may be present (verify structure is correct)
       expect(html).toContain('NOTE');
@@ -166,16 +166,16 @@ describe('GitHub Alerts', () => {
       const markdown = `> [!NOTE]
 > Content`;
       const html = await markdownToHtml(markdown);
-      
+
       // Should have the alert div with both base and type classes
       expect(html).toMatch(/class="[^"]*markdown-alert[^"]*"/);
       expect(html).toMatch(/class="[^"]*markdown-alert-note[^"]*"/);
     });
 
     it('should distinguish between WARNING and CAUTION', async () => {
-      const warningHtml = await markdownToHtml(`> [!WARNING]\n> Warning text`);
-      const cautionHtml = await markdownToHtml(`> [!CAUTION]\n> Caution text`);
-      
+      const warningHtml = await markdownToHtml('> [!WARNING]\n> Warning text');
+      const cautionHtml = await markdownToHtml('> [!CAUTION]\n> Caution text');
+
       expect(warningHtml).toContain('markdown-alert-warning');
       expect(cautionHtml).toContain('markdown-alert-caution');
       expect(warningHtml).not.toContain('markdown-alert-caution');
@@ -191,7 +191,7 @@ describe('GitHub Alerts', () => {
 > [!WARNING]
 > Second alert`;
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert-note');
       expect(html).toContain('markdown-alert-warning');
       expect(html).toContain('First alert');
@@ -201,9 +201,9 @@ describe('GitHub Alerts', () => {
 
   describe('Alert without content', () => {
     it('should handle alert with only title', async () => {
-      const markdown = `> [!NOTE]`;
+      const markdown = '> [!NOTE]';
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert');
       expect(html).toContain('NOTE');
     });
@@ -214,7 +214,7 @@ describe('GitHub Alerts', () => {
       const markdown = `> [!NOTE]
 > Content`;
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert-note');
     });
   });
@@ -228,7 +228,7 @@ describe('GitHub Alerts', () => {
 console.log('test');
 \`\`\``;
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert');
       expect(html).toContain('console.log');
     });
@@ -239,7 +239,7 @@ console.log('test');
 
 ## Next Section`;
       const html = await markdownToHtml(markdown);
-      
+
       expect(html).toContain('markdown-alert');
       expect(html).toContain('<h2');
       expect(html).toContain('Next Section');
@@ -251,7 +251,7 @@ console.log('test');
       const markdown = `> [!NOTE]
 > See \`SilverStripe\\ORM\\DataList\` for more info`;
       const html = await markdownToHtml(markdown, undefined, '6');
-      
+
       expect(html).toContain('markdown-alert');
       expect(html).toContain('<code>');
     });
@@ -260,7 +260,7 @@ console.log('test');
       const markdown = `> [!NOTE]
 > See [DataList](api:SilverStripe\\ORM\\DataList) for more info`;
       const html = await markdownToHtml(markdown, undefined, '6');
-      
+
       expect(html).toContain('markdown-alert');
       expect(html).toContain('api.silverstripe.org');
     });

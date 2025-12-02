@@ -48,7 +48,7 @@ export function getVersionPath(currentSlug: string, targetVersion: string): stri
   // This is a placeholder - actual implementation requires document lookup
   // For now, return the base path for the target version
   const basePath = `/en/${targetVersion}/`;
-  
+
   if (!currentSlug || currentSlug === '/') {
     return basePath;
   }
@@ -64,7 +64,7 @@ export function getVersionPath(currentSlug: string, targetVersion: string): stri
 export function getVersionLabel(version: string): string {
   const status = getVersionStatus(version);
   const versionNum = `${version}.0`;
-  
+
   switch (status) {
     case 'current':
       return `${versionNum} (Current)`;
@@ -96,28 +96,28 @@ export function getVersionMessage(version: string): {
         style: 'danger',
         icon: 'times-circle',
         stability: 'End of Life',
-        message: 'will not receive any additional bug fixes or documentation updates'
+        message: 'will not receive any additional bug fixes or documentation updates',
       };
     case 'supported':
       return {
         style: 'info',
         icon: 'check-circle',
         stability: 'Supported',
-        message: 'is still supported though will not receive any additional features'
+        message: 'is still supported though will not receive any additional features',
       };
     case 'current':
       return {
         style: 'success',
         icon: 'check-circle',
         stability: 'Supported',
-        message: null
+        message: null,
       };
     default:
       return {
         style: 'info',
         icon: 'info-circle',
         stability: 'Unknown',
-        message: null
+        message: null,
       };
   }
 }

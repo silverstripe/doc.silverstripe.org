@@ -23,9 +23,9 @@ export function Sidebar({ navTree, currentSlug, version }: SidebarProps) {
   useEffect(() => {
     // Auto-expand ancestors of current page
     const expanded = new Set<string>();
-    navTree.forEach(node => {
+    navTree.forEach((node) => {
       const ancestors = getActiveAncestorsSlug(node);
-      ancestors.forEach(slug => expanded.add(slug));
+      ancestors.forEach((slug) => expanded.add(slug));
     });
 
     // Restore from localStorage
@@ -102,12 +102,12 @@ export function Sidebar({ navTree, currentSlug, version }: SidebarProps) {
                   focusable="false"
                 >
                   <polyline
-                  points="4 3 8 6 4 9"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                    points="4 3 8 6 4 9"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
               </span>
@@ -121,7 +121,7 @@ export function Sidebar({ navTree, currentSlug, version }: SidebarProps) {
 
         {hasChildren && isExpanded && (
           <ul className={styles.navChildren}>
-            {node.children.map(child => renderNode(child, depth + 1))}
+            {node.children.map((child) => renderNode(child, depth + 1))}
           </ul>
         )}
       </li>
@@ -131,7 +131,7 @@ export function Sidebar({ navTree, currentSlug, version }: SidebarProps) {
   return (
     <nav className={`${styles.sidebar} ${isHydrated ? styles.hydrated : ''}`} role="navigation">
       <ul className={styles.nav}>
-        {navTree.map(node => renderNode(node, 0))}
+        {navTree.map((node) => renderNode(node, 0))}
       </ul>
     </nav>
   );

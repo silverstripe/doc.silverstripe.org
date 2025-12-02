@@ -12,7 +12,8 @@ interface EditOnGithubProps {
   filePath: string;
   /** Documentation category: 'docs' for developer docs or 'user' for user help */
   category: 'docs' | 'user';
-  /** Optional feature name if document is from an optional feature (e.g., 'linkfield', 'staticpublishqueue') */
+  /** Optional feature name if document is from an optional feature
+ * (e.g., 'linkfield', 'staticpublishqueue') */
   optionalFeature?: string;
 }
 

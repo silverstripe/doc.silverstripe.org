@@ -1,6 +1,5 @@
 import { visit } from 'unist-util-visit';
-import type { Root, Element } from 'hast';
-import type { Text as HastText } from 'hast';
+import type { Root, Element, Text as HastText } from 'hast';
 
 /**
  * Type for HAST element nodes used in code block processing
@@ -18,7 +17,7 @@ interface CodeBlockElement {
  * Maps custom aliases to standard language identifiers
  */
 const LANGUAGE_ALIASES: Record<string, string> = {
-  ss: 'html',           // Silverstripe template syntax
+  ss: 'html', // Silverstripe template syntax
   silverstripe: 'php',
   php: 'php',
   javascript: 'javascript',
@@ -50,7 +49,12 @@ export function highlightCodeBlocks() {
       if (node.tagName === 'pre' && parent && index !== undefined) {
         const codeNode = node.children?.[0];
         if (codeNode && typeof codeNode === 'object' && 'tagName' in codeNode && codeNode.tagName === 'code') {
-          processCodeBlock(node as CodeBlockElement, codeNode as CodeBlockElement, parent as any, index);
+          processCodeBlock(
+            node as CodeBlockElement,
+            codeNode as CodeBlockElement,
+            parent as any,
+            index,
+          );
         }
       }
     });
@@ -60,7 +64,12 @@ export function highlightCodeBlocks() {
 /**
  * Process a single code block
  */
-function processCodeBlock(preNode: CodeBlockElement, codeNode: CodeBlockElement, parent: any, index: number): void {
+function processCodeBlock(
+  preNode: CodeBlockElement,
+  codeNode: CodeBlockElement,
+  parent: any,
+  index: number,
+): void {
   const classAttr = codeNode.properties?.className;
   const classes = Array.isArray(classAttr) ? classAttr : [classAttr].filter(Boolean);
 
@@ -157,9 +166,7 @@ function getTextContent(node: CodeBlockElement | HastText): string {
   // Handle element nodes with children
   if (node.type === 'element' && 'children' in node && node.children && node.children.length > 0) {
     return node.children
-      .map((child: CodeBlockElement | HastText) => {
-        return getTextContent(child);
-      })
+      .map((child: CodeBlockElement | HastText) => getTextContent(child))
       .join('');
   }
 

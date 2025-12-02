@@ -36,7 +36,7 @@ describe('slug-generator', () => {
       const slug = generateSlug(
         'optional_features/linkfield/02_configuration',
         'v6',
-        'optional_features'
+        'optional_features',
       );
       expect(slug).toContain('/en/6/optional_features');
       expect(slug).toContain('linkfield');
@@ -45,7 +45,7 @@ describe('slug-generator', () => {
     it('handles deeply nested paths', () => {
       const slug = generateSlug(
         '01_Getting_Started/02_Advanced_Installation/03_Docker',
-        'v6'
+        'v6',
       );
       expect(slug).toBe('/en/6/getting_started/advanced_installation/docker/');
     });
@@ -67,7 +67,7 @@ describe('slug-generator', () => {
       // It's primarily for index files where the slug is the directory
       const slug = generateSlugFromFullPath(
         '01_Getting_Started/index.md',
-        'v6'
+        'v6',
       );
       expect(slug).toBe('/en/6/getting_started/');
     });
@@ -75,7 +75,7 @@ describe('slug-generator', () => {
     it('generates slug from nested index path', () => {
       const slug = generateSlugFromFullPath(
         '02_developer_guides/01_model/index.md',
-        'v6'
+        'v6',
       );
       expect(slug).toBe('/en/6/developer_guides/model/');
     });
@@ -84,7 +84,7 @@ describe('slug-generator', () => {
       const slug = generateSlugFromFullPath(
         'optional_features/linkfield/02_configuration/index.md',
         'v6',
-        'optional_features'
+        'optional_features',
       );
       expect(slug).toContain('/en/6/optional_features');
     });
@@ -94,7 +94,7 @@ describe('slug-generator', () => {
       // which means the filename is lost
       const slug = generateSlugFromFullPath(
         '01_getting_started/readme.md',
-        'v6'
+        'v6',
       );
       expect(slug).toBe('/en/6/getting_started/');
     });

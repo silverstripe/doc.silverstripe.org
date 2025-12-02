@@ -24,18 +24,20 @@ export async function buildContentTree(
   version: string,
   category: 'docs' | 'user' = 'docs',
   optional?: string,
-  rootParentSlug?: string
+  rootParentSlug?: string,
 ): Promise<DocumentNode[]> {
   try {
     // Get all markdown files, excluding optional_features directories when loading main content
-    // For docs context: exclude 03_Optional_features (deprecated) and optional_features (loaded separately)
-    // For user context: only exclude optional_features (03_Optional_features contains the valid section index)
+    // For docs context: exclude 03_Optional_features (deprecated) and optional_features
+    // (loaded separately)
+    // For user context: only exclude optional_features (03_Optional_features contains the
+    // valid section index)
     let excludeDirs: string[] | undefined;
     if (!optional) {
       // When loading main content (not optional features)
-      excludeDirs = category === 'user' 
-        ? ['optional_features']  // User: keep 03_Optional_features, exclude optional_features
-        : ['03_Optional_features', 'optional_features'];  // Docs: exclude both
+      excludeDirs = category === 'user'
+        ? ['optional_features'] // User: keep 03_Optional_features, exclude optional_features
+        : ['03_Optional_features', 'optional_features']; // Docs: exclude both
     }
     const files = await listMarkdownFiles(basePath, excludeDirs);
 
@@ -58,7 +60,7 @@ export async function buildContentTree(
       const relativeDir = path.dirname(relativePath);
 
       // Determine if index file
-      const isIndex = raw.pathInfo.isIndex;
+      const { isIndex } = raw.pathInfo;
 
       // Generate file title
       const parentDir = path.dirname(filePath);
@@ -99,7 +101,7 @@ export async function buildContentTree(
           parentPath = '';
         }
       }
-      
+
       // If rootParentSlug is provided and this is the root index, use it
       let parentSlug: string;
       if (rootParentSlug && isIndex && relativeDir === '.') {

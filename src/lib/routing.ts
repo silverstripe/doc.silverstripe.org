@@ -20,9 +20,13 @@ export function buildSlugFromParams(params: {
 
 /**
  * Extract version and slug parts from a full slug
- * Takes a slug like /en/6/getting-started/installation/ and returns {version: '6', slug: ['getting-started', 'installation']}
+ * Takes a slug like /en/6/getting-started/installation/ and returns
+ * {version: '6', slug: ['getting-started', 'installation']}
  */
-export function extractVersionAndSlug(fullSlug: string): { version: string; slug: string[] } {
+export function extractVersionAndSlug(fullSlug: string): {
+  version: string;
+  slug: string[];
+} {
   const normalized = fullSlug.startsWith('/') ? fullSlug : `/${fullSlug}`;
   const cleaned = normalized.endsWith('/') ? normalized.slice(0, -1) : normalized;
   const parts = cleaned.split('/').filter(Boolean);

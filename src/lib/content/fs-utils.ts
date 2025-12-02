@@ -15,6 +15,22 @@ export interface RawDocument {
 }
 
 /**
+ * Parse a file path into components
+ */
+export function parseFilePath(filePath: string): PathInfo {
+  const filename = path.basename(filePath, '.md');
+  const directory = path.dirname(filePath);
+  const isIndex = filename === 'index';
+
+  return {
+    filename,
+    directory,
+    extension: '.md',
+    isIndex,
+  };
+}
+
+/**
  * Read a markdown file and return its raw content
  */
 export async function readMarkdownFile(filePath: string): Promise<RawDocument> {
@@ -35,7 +51,11 @@ export async function readMarkdownFile(filePath: string): Promise<RawDocument> {
  * List all markdown files in a directory recursively
  * Optionally exclude specific directory names
  */
-export async function listMarkdownFiles(dir: string, excludeDirs?: string[], excludePatterns?: RegExp[]): Promise<string[]> {
+export async function listMarkdownFiles(
+  dir: string,
+  excludeDirs?: string[],
+  excludePatterns?: RegExp[],
+): Promise<string[]> {
   const files: string[] = [];
 
   async function traverse(currentPath: string): Promise<void> {
@@ -49,7 +69,7 @@ export async function listMarkdownFiles(dir: string, excludeDirs?: string[], exc
             continue;
           }
           // Skip directories matching exclude patterns
-          if (excludePatterns && excludePatterns.some(pattern => pattern.test(entry.name))) {
+          if (excludePatterns && excludePatterns.some((pattern) => pattern.test(entry.name))) {
             continue;
           }
           await traverse(fullPath);
@@ -64,20 +84,4 @@ export async function listMarkdownFiles(dir: string, excludeDirs?: string[], exc
 
   await traverse(dir);
   return files;
-}
-
-/**
- * Parse a file path into components
- */
-export function parseFilePath(filePath: string): PathInfo {
-  const filename = path.basename(filePath, '.md');
-  const directory = path.dirname(filePath);
-  const isIndex = filename === 'index';
-
-  return {
-    filename,
-    directory,
-    extension: '.md',
-    isIndex,
-  };
 }

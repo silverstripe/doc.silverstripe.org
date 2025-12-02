@@ -10,8 +10,9 @@ describe('VersionBanner', () => {
       <VersionBanner version="6" latestVersionPath={mockLatestVersionPath} />
     );
 
-    // Check for version text
-    expect(screen.getByText(/Version 6/)).toBeInTheDocument();
+    // Check for version text by looking at the title section
+    const titleSection = container.querySelector('[class*="titleSection"]');
+    expect(titleSection?.textContent).toContain('Version6');
 
     // Check for Supported label
     expect(screen.getByText('Supported')).toBeInTheDocument();
@@ -29,8 +30,9 @@ describe('VersionBanner', () => {
       <VersionBanner version="5" latestVersionPath={mockLatestVersionPath} />
     );
 
-    // Check for version text
-    expect(screen.getByText(/Version 5/)).toBeInTheDocument();
+    // Check for version text by looking at the title section
+    const titleSection = container.querySelector('[class*="titleSection"]');
+    expect(titleSection?.textContent).toContain('Version5');
 
     // Check for Supported label
     expect(screen.getByText('Supported')).toBeInTheDocument();
@@ -51,8 +53,9 @@ describe('VersionBanner', () => {
       <VersionBanner version="4" latestVersionPath={mockLatestVersionPath} />
     );
 
-    // Check for version text
-    expect(screen.getByText(/Version 4/)).toBeInTheDocument();
+    // Check for version text by looking at the title section
+    const titleSection = container.querySelector('[class*="titleSection"]');
+    expect(titleSection?.textContent).toContain('Version4');
 
     // Check for End of Life label
     expect(screen.getByText('End of Life')).toBeInTheDocument();
@@ -104,7 +107,9 @@ describe('VersionBanner', () => {
       <VersionBanner version="5" latestVersionPath={mockLatestVersionPath} />
     );
 
-    expect(screen.getByText(/Version 5/)).toBeInTheDocument();
+    // Check for version text by looking at the title section
+    const titleSection = container.querySelector('[class*="titleSection"]');
+    expect(titleSection?.textContent).toContain('Version5');
     expect(screen.getByText('Supported')).toBeInTheDocument();
     
     // Verify status is displayed as a separate element with icon
@@ -136,7 +141,9 @@ describe('VersionBanner', () => {
 
     // Should have header with icon and title
     expect(container.querySelector('[aria-hidden="true"]')).toBeInTheDocument();
-    expect(screen.getByText(/Version 6/)).toBeInTheDocument();
+    // Check for version text by looking at the title section
+    const titleSection = container.querySelector('[class*="titleSection"]');
+    expect(titleSection?.textContent).toContain('Version6');
 
     // Should not have message section
     expect(container.querySelector('[class*="messageSection"]')).not.toBeInTheDocument();

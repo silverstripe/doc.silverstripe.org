@@ -4,6 +4,7 @@ import { DocSearch } from '@docsearch/react';
 import { usePathname } from 'next/navigation';
 import { useCallback } from 'react';
 import { getDefaultVersion } from '@/lib/versions';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import '@docsearch/css';
 
 /**
@@ -69,10 +70,13 @@ export function SearchBox() {
       hitComponent={({ hit, children }) => {
         const relativeUrl = makeUrlRelative(hit.url);
         return (
-          <a href={relativeUrl} onClick={(e) => {
-            e.preventDefault();
-            window.location.href = relativeUrl;
-          }}>
+          <a
+            href={relativeUrl}
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = relativeUrl;
+            }}
+          >
             {children}
           </a>
         );

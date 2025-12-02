@@ -23,5 +23,5 @@ export {
   getDocumentBySlug,
   getDocumentByParams,
   getChildDocuments,
-  clearDocumentCache
+  clearDocumentCache,
 } from './get-document';

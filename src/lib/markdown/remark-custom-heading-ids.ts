@@ -18,7 +18,8 @@ interface Heading {
   };
 }
 
-interface TextNode {
+// eslint-disable-next-line @typescript-eslint/naming-convention
+interface _TextNode {
   type: string;
   value: string;
 }

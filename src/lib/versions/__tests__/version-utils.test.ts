@@ -6,7 +6,6 @@ import {
   getVersionLabel,
   getVersionMessage,
   getVersionSwitcherLabel,
-  type VersionStatus
 } from '../version-utils';
 
 describe('Version Utilities', () => {
@@ -169,7 +168,7 @@ describe('Version Utilities', () => {
 
     it('should have valid style for all versions', () => {
       const validStyles = ['success', 'info', 'warning', 'danger'];
-      getAllVersions().forEach(v => {
+      getAllVersions().forEach((v) => {
         const msg = getVersionMessage(v);
         expect(validStyles).toContain(msg.style);
       });

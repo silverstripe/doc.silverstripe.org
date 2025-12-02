@@ -1,6 +1,5 @@
 import { generatePageMetadata, generateRootMetadata } from '@/lib/seo/metadata';
 import type { DocumentNode } from '@/types';
-import type { Metadata } from 'next';
 
 describe('generatePageMetadata', () => {
   it('generates metadata for a document with summary', () => {
@@ -15,7 +14,7 @@ describe('generatePageMetadata', () => {
       title: 'Getting Started',
       content: 'Content here',
       category: 'docs',
-      summary: 'Learn how to get started with SilverStripe'
+      summary: 'Learn how to get started with SilverStripe',
     };
 
     const metadata = generatePageMetadata(doc);
@@ -39,16 +38,16 @@ describe('generatePageMetadata', () => {
       parentSlug: '/en/6/',
       title: 'Advanced Topics',
       content: 'Content here',
-      category: 'docs'
+      category: 'docs',
     };
 
     const metadata = generatePageMetadata(doc);
 
     expect(metadata.description).toBe(
-      'SilverStripe CMS Documentation - Learn how to develop and configure SilverStripe applications.'
+      'SilverStripe CMS Documentation - Learn how to develop and configure SilverStripe applications.',
     );
     expect(metadata.openGraph?.description).toBe(
-      'SilverStripe CMS Documentation - Learn how to develop and configure SilverStripe applications.'
+      'SilverStripe CMS Documentation - Learn how to develop and configure SilverStripe applications.',
     );
   });
 
@@ -63,7 +62,7 @@ describe('generatePageMetadata', () => {
       parentSlug: '/en/6/',
       title: 'Test Page',
       content: 'Content here',
-      category: 'docs'
+      category: 'docs',
     };
 
     const metadata = generatePageMetadata(doc);
@@ -90,7 +89,7 @@ describe('generatePageMetadata', () => {
       parentSlug: '/en/6/',
       title: 'Test Page',
       content: 'Content here',
-      category: 'docs'
+      category: 'docs',
     };
 
     const metadata = generatePageMetadata(doc);
@@ -109,7 +108,7 @@ describe('generateRootMetadata', () => {
 
     expect(metadata.title).toBe('SilverStripe Documentation');
     expect(metadata.description).toBe(
-      'SilverStripe CMS Documentation - Learn how to develop and configure SilverStripe applications.'
+      'SilverStripe CMS Documentation - Learn how to develop and configure SilverStripe applications.',
     );
     expect(metadata.alternates?.canonical).toBe('https://doc.silverstripe.org/en/6/');
     expect(metadata.openGraph?.title).toBe('SilverStripe Documentation');

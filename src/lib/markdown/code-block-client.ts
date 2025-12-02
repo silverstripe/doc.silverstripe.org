@@ -23,7 +23,7 @@ export function initializeCodeBlocks(): () => void {
 
 function handleDelegatedClick(event: Event) {
   const target = event.target as HTMLElement;
-  
+
   // Check if clicked element is a copy button or inside one
   const button = target.closest('.code-block-copy-btn') as HTMLButtonElement | null;
   if (!button) return;

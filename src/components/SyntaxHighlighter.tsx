@@ -15,9 +15,9 @@ export function SyntaxHighlighter() {
         // Import language support (these extend Prism with language support)
         // Note: Order matters - load dependencies first
         // @ts-ignore - prismjs components don't have type definitions
-        await import('prismjs/components/prism-markup');  // HTML/XML - required by markup-templating
+        await import('prismjs/components/prism-markup'); // HTML/XML - required by markup-templating
         // @ts-ignore
-        await import('prismjs/components/prism-markup-templating');  // Required by PHP
+        await import('prismjs/components/prism-markup-templating'); // Required by PHP
         // @ts-ignore
         await import('prismjs/components/prism-php');
         // @ts-ignore

@@ -1,11 +1,11 @@
-import { sortDocuments } from '../sort-files';
 import { DocumentNode } from '@/types';
+import { sortDocuments } from '../sort-files';
 
 describe('sort-files', () => {
   const mockDoc = (
     fileTitle: string,
     fileAbsolutePath: string,
-    order?: number
+    order?: number,
   ): DocumentNode => ({
     slug: '/en/6/test/',
     version: '6',
@@ -119,8 +119,7 @@ describe('sort-files', () => {
         mockDoc('alpha', '/docs/alpha.md'),
       ];
 
-      const original = [...docs];
-      const sorted = sortDocuments(docs);
+      sortDocuments(docs);
 
       // Original should be unchanged
       expect(docs[0].fileTitle).toBe('zebra');

@@ -2,25 +2,6 @@ import matter from 'gray-matter';
 import { DocumentMeta } from '@/types';
 
 /**
- * Parse frontmatter from markdown content
- */
-export function parseFrontmatter(content: string): {
-  data: DocumentMeta;
-  content: string;
-} {
-  try {
-    const { data, content: markdownContent } = matter(content);
-    const validatedData = validateFrontmatter(data);
-    return {
-      data: validatedData,
-      content: markdownContent,
-    };
-  } catch (error) {
-    throw new Error(`Failed to parse frontmatter: ${error}`);
-  }
-}
-
-/**
  * Validate and normalize frontmatter data
  */
 export function validateFrontmatter(data: Record<string, unknown>): DocumentMeta {
@@ -50,4 +31,23 @@ export function validateFrontmatter(data: Record<string, unknown>): DocumentMeta
   });
 
   return validated;
+}
+
+/**
+ * Parse frontmatter from markdown content
+ */
+export function parseFrontmatter(content: string): {
+  data: DocumentMeta;
+  content: string;
+} {
+  try {
+    const { data, content: markdownContent } = matter(content);
+    const validatedData = validateFrontmatter(data);
+    return {
+      data: validatedData,
+      content: markdownContent,
+    };
+  } catch (error) {
+    throw new Error(`Failed to parse frontmatter: ${error}`);
+  }
 }

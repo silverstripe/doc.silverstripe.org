@@ -13,7 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${SITE_URL}${doc.slug}`,
       lastModified: new Date(),
       changeFrequency: doc.isIndex ? 'monthly' : 'weekly',
-      priority: doc.isIndex ? 0.8 : 0.6
+      priority: doc.isIndex ? 0.8 : 0.6,
     }));
 
     return entries;

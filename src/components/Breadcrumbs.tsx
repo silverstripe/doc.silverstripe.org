@@ -38,7 +38,7 @@ function findNavNodeBySlug(navTree: NavNode[], slug: string): NavNode | null {
 function buildBreadcrumbs(
   slug: string,
   version: string,
-  navTree: NavNode[]
+  navTree: NavNode[],
 ): Array<{ slug: string; title: string }> {
   const breadcrumbs: Array<{ slug: string; title: string }> = [];
 
@@ -53,12 +53,13 @@ function buildBreadcrumbs(
     return breadcrumbs;
   }
 
-  // Parse slug parts: /en/6/getting-started/installation/ → ['en', '6', 'getting-started', 'installation']
+  // Parse slug parts: /en/6/getting-started/installation/
+  // → ['en', '6', 'getting-started', 'installation']
   const parts = slug.split('/').filter(Boolean);
 
   // Build intermediate breadcrumbs for each path segment
   // Start from index 2 (skip 'en' and version)
-  for (let i = 2; i < parts.length; i++) {
+  for (let i = 2; i < parts.length; i += 1) {
     const currentSlug = `/${parts.slice(0, i + 1).join('/')}/`;
     const navNode = findNavNodeBySlug(navTree, currentSlug);
 

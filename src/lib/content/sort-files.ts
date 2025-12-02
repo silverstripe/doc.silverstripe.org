@@ -36,14 +36,14 @@ export function sortDocuments(docs: DocumentNode[]): DocumentNode[] {
     }
 
     // No order: compare file titles with numeric awareness
-    let compA = a.fileTitle;
-    let compB = b.fileTitle;
+    const compA = a.fileTitle;
+    const compB = b.fileTitle;
     const compareOptions = { numeric: false, sensitivity: 'case' as const };
 
     // If both are numeric or version numbers, compare numerically
     if (
-      (!isNaN(Number(compA)) && !isNaN(Number(compB))) ||
-      (isVersionNumber(compA) && isVersionNumber(compB))
+      (!Number.isNaN(Number(compA)) && !Number.isNaN(Number(compB)))
+      || (isVersionNumber(compA) && isVersionNumber(compB))
     ) {
       compareOptions.numeric = true;
     }

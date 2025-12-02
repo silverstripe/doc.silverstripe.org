@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Header } from './Header';
-import { SyntaxHighlighter } from './SyntaxHighlighter';
+import { useState, useEffect, useMemo } from 'react';
 import { MobileMenuContext } from '@/contexts/MobileMenuContext';
 import { initializeCodeBlocks } from '@/lib/markdown/code-block-client';
+import { Header } from './Header';
+import { SyntaxHighlighter } from './SyntaxHighlighter';
 
 interface RootLayoutClientProps {
   children: React.ReactNode;
@@ -21,7 +21,7 @@ export function RootLayoutClient({ children, docsContext }: RootLayoutClientProp
   // Scroll to heading when hash link is clicked or page loads with hash
   useEffect(() => {
     const scrollToHeading = () => {
-      const hash = window.location.hash;
+      const { hash } = window.location;
       if (hash) {
         const id = hash.slice(1);
         // Use setTimeout to ensure DOM is fully rendered
@@ -51,8 +51,13 @@ export function RootLayoutClient({ children, docsContext }: RootLayoutClientProp
     return cleanup;
   }, []);
 
+  const contextValue = useMemo(
+    () => ({ isMobileMenuOpen, onClose: handleMobileMenuClose }),
+    [isMobileMenuOpen],
+  );
+
   return (
-    <MobileMenuContext.Provider value={{ isMobileMenuOpen, onClose: handleMobileMenuClose }}>
+    <MobileMenuContext.Provider value={contextValue}>
       <SyntaxHighlighter />
       <Header onMobileMenuToggle={setIsMobileMenuOpen} docsContext={docsContext} />
       {children}

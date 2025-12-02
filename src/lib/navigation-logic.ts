@@ -5,8 +5,8 @@
 
 import { DocumentNode } from '@/types';
 import { getSourceConfig } from '@/../sources-config';
-import { normalizeSlug } from './utils';
 import { getDefaultVersion } from '@/lib/versions';
+import { normalizeSlug } from './utils';
 
 /**
  * Detect if a document is part of an optional module
@@ -23,7 +23,7 @@ export function getOptionalFeatureFromDocument(doc: DocumentNode | null): string
  */
 export function getDocumentGithubInfo(
   version: string,
-  optionalFeature?: string | null
+  optionalFeature?: string | null,
 ): { owner: string; repo: string; branch: string; docsPath?: string } | null {
   const config = getSourceConfig(version, optionalFeature || undefined);
   if (!config) {
@@ -47,19 +47,20 @@ export function getDocumentGithubInfo(
 export function doesSlugExistInVersion(
   slug: string,
   documents: DocumentNode[],
-  version: string
+  version: string,
 ): boolean {
   const normalizedSlugEnd = normalizeSlug(slug);
   // Try exact match first
-  const exactMatch = documents.find((doc) => doc.version === version && doc.slug === normalizedSlugEnd);
+  const exactMatch = documents.find(
+    (doc) => doc.version === version && doc.slug === normalizedSlugEnd,
+  );
   if (exactMatch) {
     return true;
   }
   // Try case-insensitive match
   const caseInsensitiveMatch = documents.find(
-    doc => 
-      doc.version === version && 
-      doc.slug.toLowerCase() === normalizedSlugEnd.toLowerCase()
+    (doc) => doc.version === version
+      && doc.slug.toLowerCase() === normalizedSlugEnd.toLowerCase(),
   );
   return !!caseInsensitiveMatch;
 }
@@ -75,7 +76,7 @@ export function doesSlugExistInVersion(
 export function getFallbackSlugForVersion(
   currentSlug: string,
   targetVersion: string,
-  documents: DocumentNode[]
+  documents: DocumentNode[],
 ): string {
   // Try to replace version in current slug
   const newSlug = currentSlug.replace(/^\/en\/[0-9]+\//, `/en/${targetVersion}/`);
@@ -93,7 +94,7 @@ export function getFallbackSlugForVersion(
  * @returns Object with version and optionalFeature
  */
 export function extractVersionAndFeatureFromSlug(
-  slug: string
+  slug: string,
 ): { version: string; optionalFeature: string | null } {
   // Format: /en/{version}[/optional_features/{feature}/...]
   const parts = slug.split('/').filter(Boolean);

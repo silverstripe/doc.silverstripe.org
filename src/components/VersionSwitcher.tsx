@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { getAllVersions, getVersionSwitcherLabel, getVersionStatus } from '@/lib/versions';
 import styles from './VersionSwitcher.module.css';
 
@@ -11,7 +11,7 @@ interface VersionSwitcherProps {
 
 /**
  * Version switcher component for changing documentation versions
- * 
+ *
  * Fallback logic for version switching:
  * - Navigates to the same page in the target version
  * - If the page doesn't exist in target version, the page component
@@ -20,7 +20,6 @@ interface VersionSwitcherProps {
  */
 export function VersionSwitcher({ currentVersion, currentSlug }: VersionSwitcherProps) {
   const router = useRouter();
-  const pathname = usePathname();
 
   const handleVersionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const targetVersion = e.target.value;
@@ -34,6 +33,7 @@ export function VersionSwitcher({ currentVersion, currentSlug }: VersionSwitcher
 
   return (
     <div className={styles.versionSwitcher}>
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="version-select" className={styles.label}>
         Version:
       </label>

@@ -9,7 +9,8 @@
  */
 export function cleanWhitespace(html: string): string {
   let cleanHtml = html;
-  const rxp = /(\<\/?(?:table|tbody|thead|tfoot|tr|th|td)\>)\s+(\<\/?(?:table|tbody|thead|tfoot|tr|th|td)\>)/;
+  const tagPattern = '(?:table|tbody|thead|tfoot|tr|th|td)';
+  const rxp = new RegExp(`(</?${tagPattern}>)\\s+(</?${tagPattern}>)`);
   while (rxp.test(cleanHtml)) {
     cleanHtml = cleanHtml.replace(rxp, (_, tag1, tag2) => `${tag1}${tag2}`);
   }
