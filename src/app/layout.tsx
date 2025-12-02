@@ -8,22 +8,6 @@ import './globals.css';
 
 export const metadata: Metadata = generateRootMetadata();
 
-// Inline script to set dark mode before first paint to prevent FOUT
-const darkModeScript = `
-(function() {
-  try {
-    var saved = localStorage.getItem('theme_preference');
-    var isDark = saved === 'dark';
-    if (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      isDark = true;
-    }
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    }
-  } catch (e) {}
-})();
-`;
-
 export default function RootLayout({
   children
 }: {
@@ -33,9 +17,6 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: darkModeScript }} />
-      </head>
       <body>
         <RootLayoutClient docsContext={docsContext}>{children}</RootLayoutClient>
       </body>
