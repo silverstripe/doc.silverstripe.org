@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { SyntaxHighlighter } from '@/components/SyntaxHighlighter';
 
@@ -125,5 +125,54 @@ describe('SyntaxHighlighter', () => {
 
     // Should still only be called once
     expect(mockHighlightAllUnder).toHaveBeenCalledTimes(1);
+  });
+
+  it('should re-highlight when code blocks are added to DOM via MutationObserver', async () => {
+    render(<SyntaxHighlighter />);
+
+    // Wait for initial mount
+    await new Promise(resolve => setTimeout(resolve, 100));
+    expect(mockHighlightAllUnder).toHaveBeenCalledTimes(1);
+
+    // Clear previous calls
+    mockHighlightAllUnder.mockClear();
+
+    // Simulate adding a code block to the DOM (like same-page navigation would)
+    await act(async () => {
+      const pre = document.createElement('pre');
+      const code = document.createElement('code');
+      code.textContent = 'const x = 1;';
+      pre.appendChild(code);
+      document.body.appendChild(pre);
+
+      // Wait for MutationObserver to trigger
+      await new Promise(resolve => setTimeout(resolve, 50));
+    });
+
+    expect(mockHighlightAllUnder).toHaveBeenCalledWith(document.body);
+  });
+
+  it('should not re-highlight when non-code elements are added to DOM', async () => {
+    render(<SyntaxHighlighter />);
+
+    // Wait for initial mount
+    await new Promise(resolve => setTimeout(resolve, 100));
+    expect(mockHighlightAllUnder).toHaveBeenCalledTimes(1);
+
+    // Clear previous calls
+    mockHighlightAllUnder.mockClear();
+
+    // Simulate adding a non-code element to the DOM
+    await act(async () => {
+      const div = document.createElement('div');
+      div.textContent = 'Just some text';
+      document.body.appendChild(div);
+
+      // Wait for MutationObserver callback
+      await new Promise(resolve => setTimeout(resolve, 50));
+    });
+
+    // Should not be called for non-code elements
+    expect(mockHighlightAllUnder).not.toHaveBeenCalled();
   });
 });

@@ -1,23 +1,23 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
 
 export function SyntaxHighlighter() {
   const pathname = usePathname();
+  const prismRef = useRef<typeof import('prismjs') | null>(null);
+  const isInitializedRef = useRef(false);
 
-  useEffect(() => {
-    const highlightCode = async () => {
-      try {
-        // Import Prism core
-        const Prism = await import('prismjs');
-
-        // Import language support (these extend Prism with language support)
-        // Note: Order matters - load dependencies first
+  const highlightCode = useCallback(async () => {
+    try {
+      // Load Prism and languages only once
+      if (!prismRef.current) {
+        prismRef.current = await import('prismjs');
+        // Import language support (order matters - load dependencies first)
         // @ts-ignore - prismjs components don't have type definitions
-        await import('prismjs/components/prism-markup'); // HTML/XML - required by markup-templating
+        await import('prismjs/components/prism-markup');
         // @ts-ignore
-        await import('prismjs/components/prism-markup-templating'); // Required by PHP
+        await import('prismjs/components/prism-markup-templating');
         // @ts-ignore
         await import('prismjs/components/prism-php');
         // @ts-ignore
@@ -38,16 +38,53 @@ export function SyntaxHighlighter() {
         await import('prismjs/components/prism-scss');
         // @ts-ignore
         await import('prismjs/components/prism-markdown');
-
-        // Highlight all code blocks
-        Prism.highlightAllUnder(document.body);
-      } catch (error) {
-        console.warn('Failed to initialize Prism highlighting:', error);
       }
-    };
 
+      prismRef.current.highlightAllUnder(document.body);
+    } catch (error) {
+      console.warn('Failed to initialize Prism highlighting:', error);
+    }
+  }, []);
+
+  // Initial highlighting and on pathname change
+  useEffect(() => {
     highlightCode();
-  }, [pathname]);
+  }, [pathname, highlightCode]);
+
+  // MutationObserver to detect DOM changes (handles same-page navigation)
+  useEffect(() => {
+    if (isInitializedRef.current) {
+      return undefined;
+    }
+    isInitializedRef.current = true;
+
+    const observer = new MutationObserver((mutations) => {
+      // Check if any mutation added code blocks
+      const hasCodeBlocks = mutations.some((mutation) => {
+        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+          return Array.from(mutation.addedNodes).some((node) => {
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              const element = node as Element;
+              return element.querySelector('pre code') || element.matches('pre code');
+            }
+            return false;
+          });
+        }
+        return false;
+      });
+
+      if (hasCodeBlocks) {
+        highlightCode();
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    return () => observer.disconnect();
+  }, [highlightCode]);
 
   return null;
 }
