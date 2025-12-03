@@ -129,6 +129,7 @@ interface DocumentNode {
 
 **TS:** Strict mode, minimize `any`, explicit returns  
 **React:** Server components default, `'use client'` when needed  
+**useEffect Positioning:** useEffect hooks must be positioned immediately before the return statement (return statement being equivalent of `render()` function in React class component). No function definitions, useMemo, or other logic between useEffect and return.  
 **Names:** Components=PascalCase, utils=kebab-case, tests=`*.test.*`  
 **Imports:** Use `@/` path alias for src/ imports  
 **Linting:** Run `npm run lint` - must have 0 errors and 0 warnings (Airbnb style guide)

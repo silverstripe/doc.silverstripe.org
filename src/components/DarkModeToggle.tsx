@@ -56,8 +56,6 @@ export function DarkModeToggle() {
   const handleToggle = () => {
     setIsDark((prev) => !prev);
   };
-
-  // Don't render button until initialized
   if (isDark === null) {
     return null;
   }

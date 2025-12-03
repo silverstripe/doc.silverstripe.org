@@ -18,6 +18,11 @@ export function RootLayoutClient({ children, docsContext }: RootLayoutClientProp
     setIsMobileMenuOpen(false);
   };
 
+  const contextValue = useMemo(
+    () => ({ isMobileMenuOpen, onClose: handleMobileMenuClose }),
+    [isMobileMenuOpen],
+  );
+
   // Scroll to heading when hash link is clicked or page loads with hash
   useEffect(() => {
     const scrollToHeading = () => {
@@ -50,11 +55,6 @@ export function RootLayoutClient({ children, docsContext }: RootLayoutClientProp
     const cleanup = initializeCodeBlocks();
     return cleanup;
   }, []);
-
-  const contextValue = useMemo(
-    () => ({ isMobileMenuOpen, onClose: handleMobileMenuClose }),
-    [isMobileMenuOpen],
-  );
 
   return (
     <MobileMenuContext.Provider value={contextValue}>

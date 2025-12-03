@@ -34,6 +34,17 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
 
   const logoSubtitle = docsContext === 'user' ? 'User Help' : 'Docs';
 
+  const handleMobileMenuToggle = () => {
+    const newState = !isMobileMenuOpen;
+    setIsMobileMenuOpen(newState);
+    onMobileMenuToggle?.(newState);
+
+    // Scroll to top when opening mobile menu
+    if (newState && typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+    }
+  };
+
   // Close menu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
@@ -51,17 +62,6 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
       setGithubUrl('https://github.com/silverstripe/developer-docs');
     }
   }, [version, optionalFeature]);
-
-  const handleMobileMenuToggle = () => {
-    const newState = !isMobileMenuOpen;
-    setIsMobileMenuOpen(newState);
-    onMobileMenuToggle?.(newState);
-
-    // Scroll to top when opening mobile menu
-    if (newState && typeof window !== 'undefined') {
-      window.scrollTo(0, 0);
-    }
-  };
 
   return (
     <header className={styles.header}>
