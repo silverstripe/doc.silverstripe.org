@@ -30,10 +30,10 @@ function findNavNodeBySlug(navTree: NavNode[], slug: string): NavNode | null {
  * Build breadcrumb items from a slug
  * E.g., /en/6/getting-started/installation/ becomes:
  * [
- *   { slug: '/en/6/', title: 'Home' },
  *   { slug: '/en/6/getting-started/', title: 'Getting Started' },
  *   { slug: '/en/6/getting-started/installation/', title: 'Installation' }
  * ]
+ * Home is only shown when on the home page itself.
  */
 function buildBreadcrumbs(
   slug: string,
@@ -41,23 +41,18 @@ function buildBreadcrumbs(
   navTree: NavNode[],
 ): Array<{ slug: string; title: string }> {
   const breadcrumbs: Array<{ slug: string; title: string }> = [];
+  const homeSlug = `/en/${version}/`;
 
-  // Always add Home (root version index)
-  breadcrumbs.push({
-    slug: `/en/${version}/`,
-    title: 'Home',
-  });
-
-  // If we're already at home, return early
-  if (slug === `/en/${version}/`) {
-    return breadcrumbs;
+  // If we're at home, return only Home
+  if (slug === homeSlug) {
+    return [{ slug: homeSlug, title: 'Home' }];
   }
 
   // Parse slug parts: /en/6/getting-started/installation/
   // → ['en', '6', 'getting-started', 'installation']
   const parts = slug.split('/').filter(Boolean);
 
-  // Build intermediate breadcrumbs for each path segment
+  // Build breadcrumbs for each path segment
   // Start from index 2 (skip 'en' and version)
   for (let i = 2; i < parts.length; i += 1) {
     const currentSlug = `/${parts.slice(0, i + 1).join('/')}/`;
@@ -76,11 +71,12 @@ function buildBreadcrumbs(
 
 /**
  * Breadcrumbs component displays navigation path from root to current page
+ * Hides "Home" link when not on home page; shows "Home" (non-link) when on home page
  */
 export function Breadcrumbs({ slug, version, navTree }: BreadcrumbsProps) {
   const breadcrumbs = buildBreadcrumbs(slug, version, navTree);
 
-  // Always show at least Home
+  // Don't render if no breadcrumbs
   if (breadcrumbs.length === 0) {
     return null;
   }

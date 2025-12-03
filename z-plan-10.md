@@ -94,7 +94,7 @@
 
 ---
 
-# Phase 4a: Do not show 'Home' in the breadcrumb
+# Phase 4b: Do not show 'Home' in the breadcrumb
 
 **Objective:** Remove the left most link 'Home' and only show 'Home' if currentky on the home page
 
