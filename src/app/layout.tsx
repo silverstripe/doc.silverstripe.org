@@ -17,8 +17,8 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
-      <body style={{ display: 'flex', justifyContent: 'center' }}>
-        <div style={{ width: '100%', maxWidth: 1280 }}>
+      <body className="body-container">
+        <div className="main-wrapper">
           <RootLayoutClient docsContext={docsContext}>{children}</RootLayoutClient>
         </div>
       </body>

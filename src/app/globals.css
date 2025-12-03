@@ -894,3 +894,14 @@ h6:hover .heading-anchor {
     font-size: 14px;
   }
 }
+
+/* ============ Layout Containers ============ */
+body.body-container {
+  display: flex;
+  justify-content: center;
+}
+
+.main-wrapper {
+  width: 100%;
+  max-width: 1280px;
+}
