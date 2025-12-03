@@ -11,6 +11,7 @@ import rehypeStringify from 'rehype-stringify';
 import { h } from 'hastscript';
 import { highlightCodeBlocks } from './syntax-highlight';
 import { remarkImages } from './remark-images';
+import { remarkLinks } from './remark-links';
 import { cleanApiTags, setCurrentVersion } from './api-links';
 import { rewriteApiLinksInHtml } from './rewrite-api-links-html';
 import { cleanWhitespace } from './clean-html';
@@ -108,6 +109,7 @@ export async function markdownToHtml(
     .use(remarkGithubBlockquoteAlerts)
     .use(remarkCustomHeadingIds)
     .use(remarkImages, { currentFilePath: filePath })
+    .use(remarkLinks, { currentFilePath: filePath, version })
     .use(remarkRehype, { allowDangerousHtml: true, clobberPrefix: '' })
     .use(rehypeRaw)
     .use(highlightCodeBlocks)

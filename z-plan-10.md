@@ -82,6 +82,29 @@
 
 ---
 
+# Phase 4a: Update inline links to other pages
+
+**Objective:** Ensure that links to other markdown files are properly resolved to URLS
+
+1. Notice that when running `npm run dev:docs`, that `/en/6/optional_features/advancedworkflow/adding-workflows/` contains a link to `/en/6/optional_features/advancedworkflow/adding-workflows/04_security.md`, which is wrong, it should be `/en/6/optional_features/advancedworkflow/security/`
+2. Work out how to ensure that links to other markdown files are instead properly linked to actual URLs instead, use existing functions if possible
+3. Create a unit test to test what is rendered will contain the correct URL
+4. Run tests: `npm run test`
+5. Run linting: `npm run lint`
+
+---
+
+# Phase 4a: Do not show 'Home' in the breadcrumb
+
+**Objective:** Remove the left most link 'Home' and only show 'Home' if currentky on the home page
+
+1. Update the breadcrumb so that the left most link 'Home' and only show 'Home' (as a non-link) if currently on the home page
+2. Ensure there is unit test coverage of the breadcrumb in various states
+3. Run tests: `npm run test`
+4. Run linting: `npm run lint`
+
+---
+
 # Phase 5: Evaluate and Remove PostCSS/Baseline Patch
 
 **Objective:** Remove postcss.config.mjs if not needed. Remove the hacky baseline-warning patch script.
@@ -90,10 +113,13 @@
 1. Check if autoprefixer is actually needed:
    - Modern browsers handle CSS fine; Tailwind not heavily used
    - If removable: delete `postcss.config.mjs`
-2. Remove `scripts/patch-baseline-warning.mjs`
+   - Give an explanation at the end of your work to explain what postcss used to do (may need to refer to _gatsby)
+2. Understand what `scripts/patch-baseline-warning.mjs` does and fixes, and resolve that problem in a more elegant way, if possible
+   - It's is just too hard to resolve, then retain the file and give an explanation at the end of your work as to why it needs to remain
+   - Remove `scripts/patch-baseline-warning.mjs` (if should be removed)
 3. Update `package.json`:
-   - Remove `"postinstall": "node scripts/patch-baseline-warning.mjs"`
-   - Remove autoprefixer and postcss from devDependencies if unused
+   - Remove `"postinstall": "node scripts/patch-baseline-warning.mjs"` (if applicable)
+   - Remove autoprefixer and postcss from devDependencies (if unused)
 4. Run build to verify no issues: `npm run build:docs`
 5. Run tests: `npm test`
 6. Run linting: `npm run lint`
@@ -107,12 +133,15 @@
 **Tasks:**
 1. Delete `src/lib/routing.ts` (it only re-exports from slug-utils)
 2. Search for any imports from `@/lib/routing` and update to `@/lib/slug-utils`
-3. Delete entire `src/config/` directory:
+3. Run build first `npm run build:docs` and `npm run build:user` - to record how many pages for each are parsed.
+3. Verify root-level configs are used: `sources-docs.ts`, `sources-user.ts` and verify if `src/config/sources-*.cjs` files are used
+4. If `src/config/sources-*.cjs` files are used, update the to use root-level configs instead.
+5. Delete entire `src/config/` directory:
    - `src/config/sources-docs.cjs`
    - `src/config/sources-user.cjs`
-4. Verify root-level configs are used: `sources-docs.ts`, `sources-user.ts`
-5. Run tests: `npm test`
-6. Run linting: `npm run lint`
+6. Run build to verify no issues: `npm run build:docs` and `npm run build:user` (ensure that docs cache is clear beforehand) and ensure the number of pages fetched and parsed match what was recorded earlier
+7. Run tests: `npm test`
+8. Run linting: `npm run lint`
 
 ---
 

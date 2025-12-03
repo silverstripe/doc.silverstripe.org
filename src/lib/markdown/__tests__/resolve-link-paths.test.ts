@@ -1,0 +1,190 @@
+import { resolveMarkdownLink, isRelativeMarkdownLink } from '../resolve-link-paths';
+
+describe('resolveMarkdownLink', () => {
+  describe('non-markdown links', () => {
+    it('returns non-.md links unchanged', () => {
+      const result = resolveMarkdownLink(
+        'https://example.com',
+        '/path/to/file.md',
+        '6',
+      );
+      expect(result).toBe('https://example.com');
+    });
+
+    it('returns anchor links unchanged', () => {
+      const result = resolveMarkdownLink(
+        '#section',
+        '/path/to/file.md',
+        '6',
+      );
+      expect(result).toBe('#section');
+    });
+
+    it('returns absolute paths unchanged even if they end in .md', () => {
+      const result = resolveMarkdownLink(
+        '/absolute/path/file.md',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/absolute/path/file.md');
+    });
+
+    it('returns http URLs unchanged even if they end in .md', () => {
+      const result = resolveMarkdownLink(
+        'http://example.com/file.md',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('http://example.com/file.md');
+    });
+  });
+
+  describe('relative .md links in .cache/docs', () => {
+    it('resolves ./ relative links with numeric prefix', () => {
+      const result = resolveMarkdownLink(
+        './04_security.md',
+        '/home/project/.cache/docs/v6/optional_features/advancedworkflow/01_adding-workflows.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/optional_features/advancedworkflow/security/');
+    });
+
+    it('resolves ../ relative links', () => {
+      const result = resolveMarkdownLink(
+        '../index.md',
+        '/home/project/.cache/docs/v6/optional_features/advancedworkflow/01_adding-workflows.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/optional_features/');
+    });
+
+    it('resolves links to index.md files', () => {
+      const result = resolveMarkdownLink(
+        './02_folder/index.md',
+        '/home/project/.cache/docs/v6/01_getting_started/index.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/getting_started/folder/');
+    });
+
+    it('resolves links without numeric prefix', () => {
+      const result = resolveMarkdownLink(
+        './configuration.md',
+        '/home/project/.cache/docs/v6/01_getting_started/index.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/getting_started/configuration/');
+    });
+
+    it('strips numeric prefix from directory and file', () => {
+      const result = resolveMarkdownLink(
+        '../02_developer_guides/01_model.md',
+        '/home/project/.cache/docs/v6/01_getting_started/index.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/model/');
+    });
+  });
+
+  describe('relative .md links in .cache/user', () => {
+    it('resolves ./ relative links in user docs', () => {
+      const result = resolveMarkdownLink(
+        './02_creating_pages.md',
+        '/home/project/.cache/user/v6/01_Managing_your_website/index.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/managing_your_website/creating_pages/');
+    });
+  });
+
+  describe('relative .md links in mock-content', () => {
+    it('resolves links in mock-content', () => {
+      const result = resolveMarkdownLink(
+        './02_installation.md',
+        '/home/project/tests/fixtures/mock-content/v6/01_getting_started/index.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/getting_started/installation/');
+    });
+  });
+
+  describe('version handling', () => {
+    it('uses the provided version in the output URL', () => {
+      const result = resolveMarkdownLink(
+        './other.md',
+        '/home/project/.cache/docs/v5/01_getting_started/index.md',
+        '5',
+      );
+      expect(result).toBe('/en/5/getting_started/other/');
+    });
+
+    it('handles version 4', () => {
+      const result = resolveMarkdownLink(
+        './other.md',
+        '/home/project/.cache/docs/v4/01_getting_started/index.md',
+        '4',
+      );
+      expect(result).toBe('/en/4/getting_started/other/');
+    });
+  });
+
+  describe('edge cases', () => {
+    it('handles deeply nested paths', () => {
+      const result = resolveMarkdownLink(
+        '../../03_other/04_section.md',
+        '/home/project/.cache/docs/v6/01_getting_started/02_installation/01_detail.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/other/section/');
+    });
+
+    it('handles filenames with underscores after prefix', () => {
+      const result = resolveMarkdownLink(
+        './01_getting_started.md',
+        '/home/project/.cache/docs/v6/index.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/getting_started/');
+    });
+
+    it('handles filenames with hyphens', () => {
+      const result = resolveMarkdownLink(
+        './04_my-feature.md',
+        '/home/project/.cache/docs/v6/01_section/index.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/section/my-feature/');
+    });
+
+    it('returns original link if no content match found', () => {
+      const result = resolveMarkdownLink(
+        './other.md',
+        '/some/random/path/file.md',
+        '6',
+      );
+      expect(result).toBe('./other.md');
+    });
+  });
+});
+
+describe('isRelativeMarkdownLink', () => {
+  it('returns true for relative .md links', () => {
+    expect(isRelativeMarkdownLink('./file.md')).toBe(true);
+    expect(isRelativeMarkdownLink('../file.md')).toBe(true);
+    expect(isRelativeMarkdownLink('path/to/file.md')).toBe(true);
+  });
+
+  it('returns false for non-.md links', () => {
+    expect(isRelativeMarkdownLink('./file.txt')).toBe(false);
+    expect(isRelativeMarkdownLink('https://example.com')).toBe(false);
+  });
+
+  it('returns false for absolute .md paths', () => {
+    expect(isRelativeMarkdownLink('/absolute/path/file.md')).toBe(false);
+  });
+
+  it('returns false for http/https .md links', () => {
+    expect(isRelativeMarkdownLink('http://example.com/file.md')).toBe(false);
+    expect(isRelativeMarkdownLink('https://example.com/file.md')).toBe(false);
+  });
+});
