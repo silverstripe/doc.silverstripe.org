@@ -113,7 +113,7 @@
 1. Check if autoprefixer is actually needed:
    - Modern browsers handle CSS fine; Tailwind not heavily used
    - If removable: delete `postcss.config.mjs`
-   - Give an explanation at the end of your work to explain what postcss used to do (may need to refer to _gatsby)
+   - Give an explanation at the end of your work to explain what postcss used to do (may need to refer to old code in _gatsby)
 2. Understand what `scripts/patch-baseline-warning.mjs` does and fixes, and resolve that problem in a more elegant way, if possible
    - It's is just too hard to resolve, then retain the file and give an explanation at the end of your work as to why it needs to remain
    - Remove `scripts/patch-baseline-warning.mjs` (if should be removed)
@@ -226,6 +226,4 @@
    - Verify tech stack is current
    - Ensure all commands are accurate
 3. Verify no broken references
-4. Run lint: `npm run lint`
-5. Run full test suite: `npm test`
-6. Test build: `npm run build`
+
