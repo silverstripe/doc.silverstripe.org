@@ -1,5 +1,5 @@
 import path from 'path';
-import { buildContentTree } from '../build-tree';
+import { buildContentTree } from '@/lib/content/build-tree';
 
 const fixturesDir = path.join(process.cwd(), 'tests/fixtures/mock-content/v6');
 

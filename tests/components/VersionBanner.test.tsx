@@ -12,7 +12,7 @@ describe('VersionBanner', () => {
 
     // Check for version text by looking at the title section
     const titleSection = container.querySelector('[class*="titleSection"]');
-    expect(titleSection?.textContent).toContain('Version6');
+    expect(titleSection?.textContent).toContain('Version 6');
 
     // Check for Supported label
     expect(screen.getByText('Supported')).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe('VersionBanner', () => {
 
     // Check for version text by looking at the title section
     const titleSection = container.querySelector('[class*="titleSection"]');
-    expect(titleSection?.textContent).toContain('Version5');
+    expect(titleSection?.textContent).toContain('Version 5');
 
     // Check for Supported label
     expect(screen.getByText('Supported')).toBeInTheDocument();
@@ -55,7 +55,7 @@ describe('VersionBanner', () => {
 
     // Check for version text by looking at the title section
     const titleSection = container.querySelector('[class*="titleSection"]');
-    expect(titleSection?.textContent).toContain('Version4');
+    expect(titleSection?.textContent).toContain('Version 4');
 
     // Check for End of Life label
     expect(screen.getByText('End of Life')).toBeInTheDocument();
@@ -109,7 +109,7 @@ describe('VersionBanner', () => {
 
     // Check for version text by looking at the title section
     const titleSection = container.querySelector('[class*="titleSection"]');
-    expect(titleSection?.textContent).toContain('Version5');
+    expect(titleSection?.textContent).toContain('Version 5');
     expect(screen.getByText('Supported')).toBeInTheDocument();
     
     // Verify status is displayed as a separate element with icon
@@ -143,7 +143,7 @@ describe('VersionBanner', () => {
     expect(container.querySelector('[aria-hidden="true"]')).toBeInTheDocument();
     // Check for version text by looking at the title section
     const titleSection = container.querySelector('[class*="titleSection"]');
-    expect(titleSection?.textContent).toContain('Version6');
+    expect(titleSection?.textContent).toContain('Version 6');
 
     // Should not have message section
     expect(container.querySelector('[class*="messageSection"]')).not.toBeInTheDocument();

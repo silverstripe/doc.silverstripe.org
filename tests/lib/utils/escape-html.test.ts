@@ -1,4 +1,4 @@
-import { escapeHtml } from '../escape-html';
+import { escapeHtml } from '@/lib/utils/escape-html';
 
 describe('escapeHtml', () => {
   it('escapes ampersand', () => {

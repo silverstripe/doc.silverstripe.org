@@ -1,4 +1,4 @@
-import { resolveMarkdownLink, isRelativeMarkdownLink } from '../resolve-link-paths';
+import { resolveMarkdownLink, isRelativeMarkdownLink } from '@/lib/markdown/resolve-link-paths';
 
 describe('resolveMarkdownLink', () => {
   describe('non-markdown links', () => {

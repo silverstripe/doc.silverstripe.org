@@ -1,4 +1,4 @@
-import { resolveImagePath, normalizeImagePath, isRelativePath } from '../resolve-image-paths';
+import { resolveImagePath, normalizeImagePath, isRelativePath } from '@/lib/markdown/resolve-image-paths';
 
 describe('resolveImagePath', () => {
   it('returns absolute paths unchanged', () => {

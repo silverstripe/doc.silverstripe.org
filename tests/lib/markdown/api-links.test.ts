@@ -1,6 +1,6 @@
 import {
   rewriteAPILink, cleanApiTags, setCurrentVersion, getCurrentVersion,
-} from '../api-links';
+} from '@/lib/markdown/api-links';
 
 describe('API Links', () => {
   beforeEach(() => {

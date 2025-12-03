@@ -1,4 +1,4 @@
-import { fileToTitle } from '../file-to-title';
+import { fileToTitle } from '@/lib/content/file-to-title';
 
 describe('file-to-title', () => {
   describe('fileToTitle', () => {

@@ -1,4 +1,4 @@
-import { parseFrontmatter, validateFrontmatter } from '../frontmatter';
+import { parseFrontmatter, validateFrontmatter } from '@/lib/content/frontmatter';
 
 describe('frontmatter', () => {
   describe('parseFrontmatter', () => {

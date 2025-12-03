@@ -1,4 +1,4 @@
-import { generateSlug, generateSlugFromFullPath } from '../slug-generator';
+import { generateSlug, generateSlugFromFullPath } from '@/lib/content/slug-generator';
 
 describe('slug-generator', () => {
   describe('generateSlug', () => {

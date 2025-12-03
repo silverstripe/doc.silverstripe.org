@@ -1,4 +1,4 @@
-import { rewriteApiLinksInHtml } from '../rewrite-api-links-html';
+import { rewriteApiLinksInHtml } from '@/lib/markdown/rewrite-api-links-html';
 
 describe('rewriteApiLinksInHtml', () => {
   it('should rewrite simple API links in HTML', () => {

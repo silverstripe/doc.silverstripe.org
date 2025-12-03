@@ -1,9 +1,9 @@
 describe('GitHub Alerts', () => {
-  let markdownToHtml: typeof import('../processor').markdownToHtml;
+  let markdownToHtml: typeof import('@/lib/markdown/processor').markdownToHtml;
 
   beforeAll(async () => {
     // Use dynamic import to load processor
-    const processor = await import('../processor');
+    const processor = await import('@/lib/markdown/processor');
     markdownToHtml = processor.markdownToHtml;
   });
 

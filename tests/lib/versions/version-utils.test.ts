@@ -6,7 +6,7 @@ import {
   getVersionLabel,
   getVersionMessage,
   getVersionSwitcherLabel,
-} from '../version-utils';
+} from '@/lib/versions/version-utils';
 
 describe('Version Utilities', () => {
   describe('getAllVersions', () => {

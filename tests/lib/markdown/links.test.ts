@@ -1,8 +1,8 @@
 describe('markdown link rewriting', () => {
-  let markdownToHtml: typeof import('../processor').markdownToHtml;
+  let markdownToHtml: typeof import('@/lib/markdown/processor').markdownToHtml;
 
   beforeAll(async () => {
-    const processor = await import('../processor');
+    const processor = await import('@/lib/markdown/processor');
     markdownToHtml = processor.markdownToHtml;
   });
 

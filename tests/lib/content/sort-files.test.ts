@@ -1,5 +1,5 @@
 import { DocumentNode } from '@/types';
-import { sortDocuments } from '../sort-files';
+import { sortDocuments } from '@/lib/content/sort-files';
 
 describe('sort-files', () => {
   const mockDoc = (
