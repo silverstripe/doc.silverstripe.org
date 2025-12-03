@@ -22,17 +22,11 @@ export async function ChildrenList({
   setAllDocuments(allDocs);
 
   const children = getChildrenFiltered(doc, options);
-
   if (children.length === 0) {
-    return (
-      <div className={styles.emptyState} role="status">
-        No child pages found.
-      </div>
-    );
+    return '';
   }
 
   const { asList } = options;
-
   if (asList) {
     return (
       <div className={styles.docsList}>

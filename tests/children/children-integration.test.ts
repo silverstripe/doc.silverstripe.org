@@ -254,25 +254,6 @@ describe('Children rendering integration', () => {
     expect(perfPos).toBeLessThan(cachePos);
   });
 
-  it('handles missing children gracefully', () => {
-    const v6 = createDoc('/en/6', 'Home', true, '/', undefined, 'index');
-    const empty = createDoc(
-      '/en/6/empty',
-      'Empty Section',
-      true,
-      '/en/6',
-      'No children',
-      'empty'
-    );
-
-
-    const html = '[CHILDREN]';
-
-    const result = replaceChildrenMarkers(html, empty, [v6, empty]);
-
-    expect(result).toContain('No child pages found');
-  });
-
   it('replaces multiple markers in single document', () => {
     const root = createDoc('/en/6', 'Home', true, '/', undefined, 'index');
     const section1 = createDoc(

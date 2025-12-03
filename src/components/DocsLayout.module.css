@@ -4,8 +4,7 @@
 
 .layout {
   min-height: 100vh;
-  padding: 2rem 0;
-  margin-left: calc(var(--sidebar-width) + 2rem);
+  padding-bottom: 3rem;
 }
 
 .layoutContainer {
@@ -17,19 +16,19 @@
 }
 
 .grid {
-  display: block;
+  display: flex;
 }
 
 .sidebarContainer {
-  position: fixed;
-  top: var(--header-height);;
-  left: 0;
   width: var(--sidebar-width);
+  /* min-width is required to stop it from collapsing in small screen widths */
+  min-width: var(--sidebar-width);
   height: calc(100vh - 4rem);
   overflow-y: auto;
   border-right: 1px solid var(--theme-border);
   padding-right: 2rem;
   padding-left: 0;
+  margin-right: 2rem;
 }
 
 .mainContent {
@@ -48,7 +47,7 @@
 
   .sidebarContainer {
     display: none;
-    position: absolute;
+    position: fixed;
     left: 0;
     width: var(--sidebar-width);
     height: calc(100vh - var(--header-height));

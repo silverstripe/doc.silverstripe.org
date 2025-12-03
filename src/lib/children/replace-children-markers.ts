@@ -67,14 +67,14 @@ function renderCardGridHTML(children: DocumentNode[]): string {
 
 /**
  * Render children list as HTML
- * This generates simple HTML that can be styled with Tailwind/Bootstrap
+ * This generates simple HTML that can be styled
  */
 function renderChildrenHTML(
   children: DocumentNode[],
   config: ChildrenConfig,
 ): string {
   if (children.length === 0) {
-    return '<div class="alert alert-info">No child pages found.</div>';
+    return '';
   }
 
   if (config.asList) {

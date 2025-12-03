@@ -40,8 +40,7 @@ export function VersionBanner({ version, latestVersionPath }: VersionBannerProps
           <div className={styles.titleSection}>
             <div className={styles.title}>
               <span>
-                Version
-                {version}
+                Version {version}
               </span>
               <span className={styles.status}>
                 <i className={`${styles.statusIcon} ${iconClass}`} aria-hidden="true" />

@@ -156,16 +156,6 @@ describe('replaceChildrenMarkers', () => {
     expect(result).toContain('Section 2');
   });
 
-  it('handles no matching children', () => {
-    const parent = createDoc('/en/6/guide', 'Guide', true, '/en/6');
-    const html = '[CHILDREN]';
-    const allDocs = [parent];
-
-    const result = replaceChildrenMarkers(html, parent, allDocs);
-
-    expect(result).toContain('No child pages found');
-  });
-
   it('escapes HTML special characters in titles', () => {
     const parent = createDoc('/en/6', 'Home', true, '/');
     const page1 = createDoc(
