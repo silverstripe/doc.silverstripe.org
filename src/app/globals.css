@@ -728,15 +728,7 @@ button:hover,
   color: var(--theme-color-primary);
 }
 
-/* ============ Utilities ============ */
-.container-fluid {
-  width: 100%;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  margin-right: auto;
-  margin-left: auto;
-}
-
+/* ============ Utilities (Required) ============ */
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -751,113 +743,11 @@ button:hover,
 }
 
 @media (min-width: 992px) {
-  .col-lg-3 {
-    flex: 0 0 25%;
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
-  }
-
   .col-lg-6 {
     flex: 0 0 50%;
     padding-right: 0.5rem;
     padding-left: 0.5rem;
   }
-
-  .col-lg-9 {
-    flex: 0 0 75%;
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
-  }
-}
-
-.d-none {
-  display: none;
-}
-
-@media (min-width: 992px) {
-  .d-lg-block {
-    display: block;
-  }
-}
-
-.d-flex {
-  display: flex;
-}
-
-.align-items-center {
-  align-items: center;
-}
-
-.align-items-start {
-  align-items: flex-start;
-}
-
-.justify-content-start {
-  justify-content: flex-start;
-}
-
-.justify-content-between {
-  justify-content: space-between;
-}
-
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
-.gap-2 {
-  gap: 0.5rem;
-}
-
-.gap-3 {
-  gap: 0.75rem;
-}
-
-.mb-1 {
-  margin-bottom: 0.25rem;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-
-.mb-3 {
-  margin-bottom: 0.75rem;
-}
-
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
-.mb-5 {
-  margin-bottom: 1.5rem;
-}
-
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
-.mt-3 {
-  margin-top: 0.75rem;
-}
-
-.mt-4 {
-  margin-top: 1rem;
-}
-
-.ms-2 {
-  margin-left: 0.5rem;
-}
-
-.ms-4 {
-  margin-left: 1rem;
-}
-
-.me-2 {
-  margin-right: 0.5rem;
-}
-
-.p-0 {
-  padding: 0;
 }
 
 .py-3 {
@@ -870,61 +760,12 @@ button:hover,
   padding-bottom: 1.5rem;
 }
 
-.px-2 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-muted {
-  color: var(--theme-text-light);
-}
-
-.text-danger {
-  color: var(--theme-danger);
-}
-
-.text-success {
-  color: var(--theme-success);
-}
-
-.text-info {
-  color: var(--theme-info);
-}
-
-.text-warning {
-  color: var(--theme-warning);
-}
-
-.stretched-link {
-  position: relative;
-}
-
-.stretched-link::after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-  content: '';
-}
-
-/* ============ Lists ============ */
-.list-unstyled {
-  list-style: none;
-  padding-left: 0;
+.me-2 {
+  margin-right: 0.5rem;
 }
 
 .shadow-sm {
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-}
-
-.shadow {
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
 /* ============ Content & Article Styles ============ */
