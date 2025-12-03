@@ -26,6 +26,7 @@ jest.mock('prismjs/components/prism-json', () => ({}));
 jest.mock('prismjs/components/prism-yaml', () => ({}));
 jest.mock('prismjs/components/prism-scss', () => ({}));
 jest.mock('prismjs/components/prism-markdown', () => ({}));
+jest.mock('prismjs/components/prism-diff', () => ({}));
 
 import { usePathname } from 'next/navigation';
 import Prism from 'prismjs';

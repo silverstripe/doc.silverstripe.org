@@ -38,6 +38,8 @@ export function SyntaxHighlighter() {
         await import('prismjs/components/prism-scss');
         // @ts-ignore
         await import('prismjs/components/prism-markdown');
+        // @ts-ignore
+        await import('prismjs/components/prism-diff');
       }
 
       prismRef.current.highlightAllUnder(document.body);

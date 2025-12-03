@@ -36,6 +36,7 @@ const LANGUAGE_ALIASES: Record<string, string> = {
   yml: 'yaml',
   markdown: 'markdown',
   md: 'markdown',
+  diff: 'diff',
 };
 
 /**

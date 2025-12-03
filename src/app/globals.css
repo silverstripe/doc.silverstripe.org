@@ -308,6 +308,21 @@ pre[class*='language-'] {
   color: #a6e22e;  /* Green for keys */
 }
 
+/* Diff highlighting */
+.language-diff .token.inserted {
+  color: #a6e22e;  /* Green for added lines */
+  background: rgba(166, 226, 46, 0.1);
+}
+
+.language-diff .token.deleted {
+  color: #f92672;  /* Red for removed lines */
+  background: rgba(249, 38, 114, 0.1);
+}
+
+.language-diff .token.coord {
+  color: #66d9ef;  /* Cyan for diff coordinates */
+}
+
 /* Code block wrapper styling */
 .code-block-wrapper {
   margin: 2rem 0;
