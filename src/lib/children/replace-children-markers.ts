@@ -12,21 +12,29 @@ import {
 } from './get-children';
 
 /**
+ * Note that due to when the code in this file runs, these functions intentionally return
+ * raw HTML rather than using JSX
+ */
+
+/**
  * Render children as a list with definitions
  */
 function renderListHTML(children: DocumentNode[]): string {
   const items = children
-    .map(
-      (child) => `<dt><a href="${child.slug}">${escapeHtml(child.title)}</a></dt>
-    <dd>${escapeHtml(child.summary || '')}</dd>`,
-    )
-    .join('\n');
+    .map((child) => (
+      `<dt>
+        <a href="${child.slug}">${escapeHtml(child.title)}</a>
+      </dt>
+      <dd>${escapeHtml(child.summary || '')}</dd>`
+    )).join('\n');
 
-  return `<div class="docs-list">
-  <dl>
-    ${items}
-  </dl>
-</div>`;
+  return (
+    `<div class="docs-list">
+      <dl>
+        ${items}
+      </dl>
+    </div>`
+  );
 }
 
 /**
@@ -40,29 +48,33 @@ function renderCardGridHTML(children: DocumentNode[]): string {
         ? `fab fa-${child.iconBrand}`
         : `fas fa-${icon}`;
 
-      return `<a href="${child.slug}" class="col-12 col-lg-6 py-3 card-link">
-    <div class="card shadow-sm">
-      <div class="card-body">
-        <h5 class="card-title">
-          <span class="theme-icon-holder card-icon-holder me-2">
-            <i class="${iconClass}"></i>
-          </span>
-          <span class="card-title-text">${escapeHtml(child.title)}</span>
-        </h5>
-        <div class="card-text">
-          ${escapeHtml(child.summary || '')}
-        </div>
-      </div>
-    </div>
-  </a>`;
+      return (
+        `<a href="${child.slug}" class="col-12 col-lg-6 py-3 card-link">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">
+                <span class="theme-icon-holder card-icon-holder me-2">
+                  <i class="${iconClass}"></i>
+                </span>
+                <span class="card-title-text">${escapeHtml(child.title)}</span>
+              </h5>
+              <div class="card-text">
+                ${escapeHtml(child.summary || '')}
+              </div>
+            </div>
+          </div>
+        </a>`
+      );
     })
     .join('\n');
 
-  return `<div class="docs-overview py-5">
-  <div class="row">
-    ${cards}
-  </div>
-</div>`;
+  return (
+    `<div class="docs-overview py-5">
+      <div class="row">
+        ${cards}
+      </div>
+    </div>`
+  );
 }
 
 /**

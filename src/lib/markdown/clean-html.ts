@@ -1,6 +1,5 @@
 /**
  * HTML cleanup utilities
- * Ported from Gatsby utils for consistent rendering
  */
 
 /**
