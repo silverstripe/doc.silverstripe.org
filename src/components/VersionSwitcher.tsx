@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import cx from 'classnames';
 import { getAllVersions, getVersionSwitcherLabel, getVersionStatus } from '@/lib/versions';
 import styles from './VersionSwitcher.module.css';
 
@@ -41,7 +42,7 @@ export function VersionSwitcher({ currentVersion, currentSlug }: VersionSwitcher
         id="version-select"
         value={currentVersion}
         onChange={handleVersionChange}
-        className={`${styles.select} ${styles[`status-${status}`]}`}
+        className={cx(styles.select, styles[`status-${status}`])}
         aria-label="Select documentation version"
       >
         {versions.map((version) => (

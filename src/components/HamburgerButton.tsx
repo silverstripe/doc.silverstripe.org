@@ -1,5 +1,6 @@
 'use client';
 
+import cx from 'classnames';
 import styles from './HamburgerButton.module.css';
 
 interface HamburgerButtonProps {
@@ -13,7 +14,7 @@ interface HamburgerButtonProps {
 export function HamburgerButton({ isOpen, onClick }: HamburgerButtonProps) {
   return (
     <button
-      className={`${styles.hamburger} ${isOpen ? styles.open : ''}`}
+      className={cx(styles.hamburger, { [styles.open]: isOpen })}
       onClick={onClick}
       aria-label="Toggle navigation menu"
       aria-expanded={isOpen}

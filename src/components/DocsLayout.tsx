@@ -1,6 +1,7 @@
 'use client';
 
 import { useContext } from 'react';
+import cx from 'classnames';
 import { NavNode } from '@/types';
 import { MobileMenuContext } from '@/contexts/MobileMenuContext';
 import { Sidebar } from './Sidebar';
@@ -32,9 +33,9 @@ export function DocsLayout({
         <div className={styles.grid}>
           {/* Sidebar - always in DOM, shown/hidden by CSS */}
           <div
-            className={`${styles.sidebarContainer} ${
-              isMobileMenuOpen ? styles.sidebarOpen : ''
-            }`}
+            className={cx(styles.sidebarContainer, {
+              [styles.sidebarOpen]: isMobileMenuOpen,
+            })}
           >
             <Sidebar navTree={navTree} currentSlug={currentSlug} version={version} />
           </div>

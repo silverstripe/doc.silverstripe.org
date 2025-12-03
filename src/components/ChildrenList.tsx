@@ -60,7 +60,7 @@ export async function ChildrenList({
               <div className={styles.card}>
                 <div className={styles.cardBody}>
                   <h5 className={styles.cardTitle}>
-                    <span className={`${styles.cardIconHolder}`}>
+                    <span className={styles.cardIconHolder}>
                       <i className={iconClass} />
                     </span>
                     <span className={styles.cardTitleText}>{child.title}</span>

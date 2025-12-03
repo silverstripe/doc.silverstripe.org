@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import cx from 'classnames';
 import Link from 'next/link';
 import { NavNode, isNodeOrDescendantActive, getActiveAncestorsSlug } from '@/lib/nav';
 import styles from './Sidebar.module.css';
@@ -65,21 +66,17 @@ export function Sidebar({ navTree, currentSlug, version }: SidebarProps) {
     const hasChildren = node.children.length > 0;
     const isActive = node.isActive || isNodeOrDescendantActive(node);
 
-    const linkClasses = [
+    const linkClasses = cx(
       styles.navLink,
-      isActive ? styles.active : '',
+      { [styles.active]: isActive },
       `depth-${depth}`,
-    ]
-      .filter(Boolean)
-      .join(' ');
+    );
 
-    const itemClasses = [
+    const itemClasses = cx(
       styles.navItem,
-      depth > 0 ? styles.nested : '',
+      { [styles.nested]: depth > 0 },
       `depth-${depth}`,
-    ]
-      .filter(Boolean)
-      .join(' ');
+    );
 
     return (
       <li key={node.slug} className={itemClasses} data-depth={depth}>
@@ -91,7 +88,7 @@ export function Sidebar({ navTree, currentSlug, version }: SidebarProps) {
               aria-expanded={isExpanded}
               aria-label={`Toggle ${node.title}`}
             >
-              <span className={`${styles.chevron} ${isExpanded ? styles.expanded : ''}`}>
+              <span className={cx(styles.chevron, { [styles.expanded]: isExpanded })}>
                 <svg
                   width="12"
                   height="12"
@@ -129,7 +126,7 @@ export function Sidebar({ navTree, currentSlug, version }: SidebarProps) {
   };
 
   return (
-    <nav className={`${styles.sidebar} ${isHydrated ? styles.hydrated : ''}`} role="navigation">
+    <nav className={cx(styles.sidebar, { [styles.hydrated]: isHydrated })} role="navigation">
       <ul className={styles.nav}>
         {navTree.map((node) => renderNode(node, 0))}
       </ul>
