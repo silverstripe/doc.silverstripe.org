@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { NavNode } from '@/types';
+import { NavNode } from '@/types/types';
 import styles from './Breadcrumbs.module.css';
 
 interface BreadcrumbsProps {

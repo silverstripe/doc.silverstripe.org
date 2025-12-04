@@ -3,7 +3,7 @@ import {
   DocumentMeta,
   ContentTree,
   ChildrenOfProps,
-} from '@/types/index';
+} from '@/types/types';
 
 describe('Type Definitions', () => {
   describe('DocumentNode', () => {

@@ -1,4 +1,4 @@
-import '@testing-library/jest-dom';
+require('@testing-library/jest-dom');
 
 // Ensure tests use mock data
 process.env.NEXT_USE_MOCK_DATA = 'true';
@@ -7,6 +7,6 @@ process.env.NEXT_USE_MOCK_DATA = 'true';
 if (typeof window !== 'undefined') {
   Object.defineProperty(window, 'scrollTo', {
     writable: true,
-    value: () => {},
+    value: function scrollTo() {},
   });
 }

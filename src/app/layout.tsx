@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { generateRootMetadata } from '@/lib/metadata/metadata';
 import { RootLayoutClient } from '@/components/RootLayoutClient';
-import { getConfig } from '@/lib/config';
+import { getConfig } from '@/lib/config/config';
 import { DarkModeScript } from './dark-mode-script';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'prismjs/themes/prism-okaidia.css';

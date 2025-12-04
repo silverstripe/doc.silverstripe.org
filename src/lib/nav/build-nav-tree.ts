@@ -1,4 +1,4 @@
-import { DocumentNode, NavNode } from '@/types';
+import { DocumentNode, NavNode } from '@/types/types';
 import { sortDocuments } from '../content/sort-files';
 
 /**

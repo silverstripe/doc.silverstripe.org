@@ -1,4 +1,4 @@
-import { getConfig } from '@/lib/config';
+import { getConfig } from '@/lib/config/config';
 
 describe('config', () => {
   const originalEnv = process.env;

@@ -1,5 +1,5 @@
 import path from 'path';
-import { DocumentNode } from '@/types';
+import { DocumentNode } from '@/types/types';
 
 /**
  * Check if a string looks like a semantic version number

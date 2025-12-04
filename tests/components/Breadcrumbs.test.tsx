@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
-import { NavNode } from '@/types';
+import { NavNode } from '@/types/types';
 
 // Mock next/link
 jest.mock('next/link', () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { DocsLayout } from '@/components/DocsLayout';
-import { NavNode } from '@/types';
+import { NavNode } from '@/types/types';
 import { MobileMenuContext } from '@/contexts/MobileMenuContext';
 
 // Mock next/link

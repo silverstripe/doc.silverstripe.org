@@ -1,5 +1,5 @@
-import { DocumentNode } from '@/types';
-import { escapeHtml } from '@/lib/utils/escape-html';
+import { DocumentNode } from '@/types/types';
+import { escapeHtml } from '@/lib/utils/html-utils';
 import {
   findChildrenMarkers,
   ChildrenConfig,
@@ -12,7 +12,7 @@ import {
 } from './get-children';
 
 /**
- * Note that due to when the code in this file runs, these functions intentionally return
+ * Note that due to when the code in this file runs (early), these functions intentionally return
  * raw HTML rather than using JSX
  */
 

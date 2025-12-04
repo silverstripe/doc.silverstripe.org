@@ -1,4 +1,4 @@
-import { DocumentNode } from '@/types';
+import { DocumentNode } from '@/types/types';
 import { getChildrenFiltered } from '@/lib/children/get-children';
 import type { FilterOptions } from '@/lib/children/get-children';
 import styles from './ChildrenList.module.css';

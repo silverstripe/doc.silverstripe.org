@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import type { DocumentNode } from '@/types';
+import type { DocumentNode } from '@/types/types';
 import { SITE_URL } from '../../../global-config';
 
 const DEFAULT_DESCRIPTION = 'SilverStripe CMS Documentation - Learn how to develop and configure SilverStripe applications.';

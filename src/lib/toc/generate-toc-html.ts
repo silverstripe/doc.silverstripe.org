@@ -1,4 +1,4 @@
-import { escapeHtml } from '@/lib/utils/escape-html';
+import { escapeHtml } from '@/lib/utils/html-utils';
 import type { TocHeading } from './extract-headings';
 
 /**

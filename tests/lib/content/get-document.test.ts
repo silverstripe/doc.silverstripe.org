@@ -5,7 +5,7 @@ import {
   getChildDocuments,
   clearDocumentCache
 } from '@/lib/content/get-document';
-import { DocumentNode } from '@/types';
+import { DocumentNode } from '@/types/types';
 
 describe('Document Fetcher', () => {
   beforeEach(() => {

@@ -3,7 +3,7 @@
  * Handles optional feature detection and GitHub link generation
  */
 
-import { DocumentNode } from '@/types';
+import { DocumentNode } from '@/types/types';
 import { getSourceConfig } from '@/../sources-config';
 
 /**

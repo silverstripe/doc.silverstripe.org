@@ -1,5 +1,5 @@
 import { buildNavTree, isNodeOrDescendantActive, getActiveAncestorsSlug } from '@/lib/nav/build-nav-tree';
-import { DocumentNode, NavNode } from '@/types';
+import { DocumentNode, NavNode } from '@/types/types';
 
 describe('buildNavTree', () => {
   const mockDocs: DocumentNode[] = [

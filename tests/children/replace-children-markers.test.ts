@@ -2,7 +2,7 @@ import {
   replaceChildrenMarkers,
   getChildrenData,
 } from '../../src/lib/children/replace-children-markers';
-import { DocumentNode } from '@/types';
+import { DocumentNode } from '@/types/types';
 import { clearDocumentCache } from '../../src/lib/children/get-children';
 
 describe('replaceChildrenMarkers', () => {

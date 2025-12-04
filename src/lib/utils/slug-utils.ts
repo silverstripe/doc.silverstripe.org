@@ -1,7 +1,7 @@
 /**
  * Consolidated utility functions for slug handling and routing
  */
-import { DocumentNode } from '@/types';
+import { DocumentNode } from '@/types/types';
 import { getAllVersions, getDefaultVersion } from '@/lib/versions/version-utils';
 
 /**

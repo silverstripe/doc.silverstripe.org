@@ -1,4 +1,4 @@
-import { DocumentNode } from '@/types';
+import { DocumentNode } from '@/types/types';
 import { sortDocuments } from '@/lib/content/sort-files';
 
 describe('sort-files', () => {

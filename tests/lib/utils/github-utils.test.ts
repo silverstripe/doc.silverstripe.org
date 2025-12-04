@@ -2,7 +2,7 @@ import {
   getOptionalFeatureFromDocument,
   getDocumentGithubInfo,
 } from '@/lib/utils/github-utils';
-import { DocumentNode } from '@/types';
+import { DocumentNode } from '@/types/types';
 
 describe('github-utils', () => {
   describe('getOptionalFeatureFromDocument', () => {

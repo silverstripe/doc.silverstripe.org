@@ -1,5 +1,5 @@
 import path from 'path';
-import { DocumentNode } from '@/types';
+import { DocumentNode } from '@/types/types';
 import { readMarkdownFile, listMarkdownFiles } from './fs-utils';
 import { parseFrontmatter } from './frontmatter';
 import { fileToTitle } from './file-to-title';

@@ -9,12 +9,12 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
 import rehypeStringify from 'rehype-stringify';
 import { h } from 'hastscript';
+import { cleanWhitespace } from '@/lib/utils/html-utils';
 import { highlightCodeBlocks } from './syntax-highlight';
 import { remarkImages } from './remark-images';
 import { remarkLinks } from './remark-links';
 import { cleanApiTags, setCurrentVersion } from './api-links';
 import { rewriteApiLinksInHtml } from './rewrite-api-links-html';
-import { cleanWhitespace } from './clean-html';
 import { remarkCustomHeadingIds } from './remark-custom-heading-ids';
 
 /**

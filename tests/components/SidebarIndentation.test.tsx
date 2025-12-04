@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Sidebar } from '@/components/Sidebar';
-import { NavNode } from '@/types';
+import { NavNode } from '@/types/types';
 
 // Mock next/link
 jest.mock('next/link', () => {

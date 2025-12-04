@@ -1,6 +1,6 @@
 # Silverstripe CMS Documentation
 
-Next.js rebuild of [doc.silverstripe.org](https://doc.silverstripe.org) and [userhelp.silverstripe.org](https://userhelp.silverstripe.org).
+Next.js code for [doc.silverstripe.org](https://doc.silverstripe.org) and [userhelp.silverstripe.org](https://userhelp.silverstripe.org).
 
 Built with **Next.js 16+ • Node.js 24+ • TypeScript • Markdown (remark/rehype) • Algolia DocSearch • Jest + RTL**.
 
@@ -39,7 +39,7 @@ Dev server runs on **http://localhost:9876**
 
 ## Environment Setup
 
-### Required Environment Variables
+### Environment Variables
 
 Create `.env.local` for local development:
 
@@ -137,12 +137,11 @@ src/
     en/[version]/[[...slug]]/page.tsx  # Main doc page
     en/layout.tsx     # Layout for /en/* routes
     layout.tsx        # Root layout
-    robots.ts         # SEO robots.txt
-    sitemap.ts        # SEO sitemap.xml
   components/         # React components (PascalCase)
     Sidebar.tsx, Header.tsx, CodeBlock.tsx, etc.
   lib/
-    config.ts         # Global config constants
+    config/           # Configuration
+      config.ts       # Global config constants
     content/          # Document loading, parsing, tree building
     markdown/         # MD→HTML processing (remark/rehype pipeline)
     nav/              # Navigation tree building
@@ -150,8 +149,9 @@ src/
     toc/              # Table of contents extraction & generation
     versions/         # Version utilities and constants
     metadata/         # Metadata generation (SEO)
-    utils/            # Shared utilities (escapeHtml, slug-utils, github-utils)
-  types/              # TypeScript interfaces
+    utils/            # Shared utilities (slug-utils, github-utils, html-utils)
+  types/
+    types.ts          # TypeScript interfaces
   contexts/           # React contexts (MobileMenuContext)
 
 scripts/

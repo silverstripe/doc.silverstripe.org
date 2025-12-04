@@ -8,7 +8,7 @@ import {
   getFallbackSlugForVersion,
   extractVersionAndFeatureFromSlug,
 } from '@/lib/utils/slug-utils';
-import { DocumentNode } from '@/types';
+import { DocumentNode } from '@/types/types';
 
 describe('normalizeSlug', () => {
   it('adds leading slash if missing', () => {

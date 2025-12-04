@@ -13,7 +13,7 @@ import {
   getFallbackSlugForVersion,
   extractVersionAndFeatureFromSlug,
 } from '@/lib/utils/slug-utils';
-import { DocumentNode } from '@/types';
+import { DocumentNode } from '@/types/types';
 
 // Mock next/navigation
 jest.mock('next/navigation', () => ({

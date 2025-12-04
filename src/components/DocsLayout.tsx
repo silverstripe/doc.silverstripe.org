@@ -2,7 +2,7 @@
 
 import { useContext } from 'react';
 import cx from 'classnames';
-import { NavNode } from '@/types';
+import { NavNode } from '@/types/types';
 import { MobileMenuContext } from '@/contexts/MobileMenuContext';
 import { Sidebar } from './Sidebar';
 import { Breadcrumbs } from './Breadcrumbs';

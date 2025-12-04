@@ -1,5 +1,5 @@
 import matter from 'gray-matter';
-import { DocumentMeta } from '@/types';
+import { DocumentMeta } from '@/types/types';
 
 /**
  * Validate and normalize frontmatter data

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Sidebar } from '@/components/Sidebar';
-import { NavNode } from '@/types';
+import { NavNode } from '@/types/types';
 
 // Mock next/link
 jest.mock('next/link', () => {

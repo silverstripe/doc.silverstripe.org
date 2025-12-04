@@ -1,6 +1,6 @@
 import path from 'path';
-import { DocumentNode } from '@/types';
-import { getConfig } from '@/lib/config';
+import { DocumentNode } from '@/types/types';
+import { getConfig } from '@/lib/config/config';
 import { normalizeSlug } from '@/lib/utils/slug-utils';
 import { getAllVersions } from '@/lib/versions/version-utils';
 import fs from 'fs/promises';

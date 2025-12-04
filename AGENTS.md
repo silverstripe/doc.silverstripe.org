@@ -78,12 +78,11 @@ src/
     en/[version]/[[...slug]]/page.tsx  # Main doc page
     en/layout.tsx     # Layout for /en/* routes
     layout.tsx        # Root layout
-    robots.ts         # SEO robots.txt
-    sitemap.ts        # SEO sitemap.xml
   components/         # React components (PascalCase)
     Sidebar.tsx, Header.tsx, CodeBlock.tsx, etc.
   lib/
-    config.ts         # Global config constants
+    config/           # Configuration
+      config.ts       # Global config constants
     content/          # Document loading, parsing, tree building
     markdown/         # MD→HTML processing (remark/rehype pipeline)
     nav/              # Navigation tree building
@@ -91,8 +90,9 @@ src/
     toc/              # Table of contents extraction & generation
     versions/         # Version utilities and constants
     metadata/         # Metadata generation (SEO)
-    utils/            # Shared utilities (escapeHtml, slug-utils, github-utils)
-  types/              # TypeScript interfaces
+    utils/            # Shared utilities (slug-utils, github-utils, html-utils)
+  types/
+    types.ts          # TypeScript interfaces
   contexts/           # React contexts (MobileMenuContext)
 
 scripts/
@@ -137,7 +137,7 @@ interface DocumentNode {
 **Source Configs:** `sources-docs.ts` (developer docs), `sources-user.ts` (user help), `sources-config.ts` (wrapper) - all at project root  
 **Markdown Pipeline:** `src/lib/markdown/processor.ts` - remark→rehype with GFM, alerts, code blocks  
 **Navigation:** `src/lib/nav/build-nav-tree.ts` - hierarchical nav tree from documents  
-**Utilities:** `src/lib/utils/` - shared utilities (escapeHtml, slug normalization)
+**Utilities:** `src/lib/utils/` - shared utilities (escapeHtml, slug normalization, etc)
 
 ---
 
@@ -145,7 +145,6 @@ interface DocumentNode {
 
 **Auto mock:** Tests use `NEXT_USE_MOCK_DATA=true` → `tests/fixtures/mock-content/`  
 **Types:** Unit (utils), Component (React/RTL), Integration (pages)  
-**Coverage:** 704 tests across 55 suites  
 **Gate:** Tests pass → human validates → next phase
 
 ---
@@ -172,11 +171,23 @@ interface DocumentNode {
 **HTML Injection:** Do NOT use `dangerouslySetInnerHTML` unless it is the correct or only way to solve an issue. Prefer the use of Next.js script handling, structured JSX, or other alternatives.
 **Linting:** Run `npm run lint` - must have 0 errors and 0 warnings (Airbnb style guide)
 
+### Security Considerations
+
+**Markdown Sanitization:** All markdown content is sanitized via `rehype-sanitize` in the markdown pipeline (`src/lib/markdown/processor.ts`). This prevents XSS from untrusted markdown content.
+
+**HTML Escaping:** When generating dynamic HTML (e.g., TOC, children lists), use `escapeHtml()` from `@/lib/utils/escape-html` for any user-derived or content-derived strings.
+
+**dangerouslySetInnerHTML Usage:** Only use with sanitized content:
+- `dark-mode-script.tsx`: Static script, no user input (acceptable)
+- `page.tsx`: Uses sanitized markdown output from rehype-sanitize (acceptable)
+
+**Slugs:** All slugs are generated from internal file paths during build time, not from user input. No runtime URL parsing exposes user input to the page rendering.
+
 ---
 
 ## For AI Agents
 
-**Your mission:** Follow plan files (z-plan-*.md) phases sequentially. Each phase is self-contained.
+**Your mission:** When give a phase plan follow it sequentially. Each phase is self-contained.
 
 **Approach:**
 1. Read phase instructions completely before starting
@@ -197,4 +208,18 @@ interface DocumentNode {
 - `sources-user.ts` - user help GitHub config (project root)
 - `src/components/EditOnGithub.tsx` - uses category param to select correct config
 
-**Banned actions:** Do not modify `z-plan-*.md` files or other plan files unless specifically asked to create or modify them. Never run `git` commands.
+**Documentation Maintenance:**
+When work alters project structure or adds new important files, update the "Source Code" section in both AGENTS.md and README.md. Include:
+- Core architecture files and entry points
+- Major feature modules and their purposes
+- Configuration files at project root
+
+Exclude from documentation:
+- Individual test files (just document the tests/ directory)
+- CSS modules (just mention CSS Modules are used)
+- Generated files (.next/, out/, node_modules/)
+- Minor utilities that don't represent unique functionality
+
+**Banned actions:**
+- Do not modify `z-plan-*.md` files or other plan files unless specifically asked to create or modify them.
+- Never run `git` commands. If we want to run `git checkout`, you must find another way to achieve the same result without using `git`.

@@ -6,7 +6,7 @@
 
 import * as docsSources from './sources-docs';
 import * as userSources from './sources-user';
-import { getConfig } from '@/lib/config';
+import { getConfig } from '@/lib/config/config';
 
 export type { SourceConfig } from './sources-docs';
 

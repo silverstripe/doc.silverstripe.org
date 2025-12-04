@@ -1,5 +1,5 @@
 import { generatePageMetadata, generateRootMetadata } from '@/lib/metadata/metadata';
-import type { DocumentNode } from '@/types';
+import type { DocumentNode } from '@/types/types';
 
 describe('generatePageMetadata', () => {
   it('generates metadata for a document with summary', () => {

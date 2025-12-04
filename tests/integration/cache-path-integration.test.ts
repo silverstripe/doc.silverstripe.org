@@ -1,4 +1,4 @@
-import { getConfig } from '@/lib/config';
+import { getConfig } from '@/lib/config/config';
 
 /**
  * Integration test for cache path resolution across the system

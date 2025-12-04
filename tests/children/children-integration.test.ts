@@ -1,5 +1,5 @@
 import { replaceChildrenMarkers } from '../../src/lib/children/replace-children-markers';
-import { DocumentNode } from '@/types';
+import { DocumentNode } from '@/types/types';
 
 describe('Children rendering integration', () => {
   const createDoc = (

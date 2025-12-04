@@ -10,6 +10,7 @@ import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
+import { loadSources } from './sources-loader.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
@@ -188,151 +189,16 @@ function buildRepoConfig(sourceConfig, version, context) {
  * Converts the structured TS config into Gatsby-like source array
  */
 function buildSourcesList(context) {
-  const SOURCES_DOCS = {
-    '6': {
-      main: { repo: 'developer-docs', owner: 'silverstripe', branch: '6.1' },
-      optionalFeatures: {
-        'login-forms': { repo: 'silverstripe-login-forms', owner: 'silverstripe', branch: '6.1' },
-        'gridfieldextensions': { repo: 'silverstripe-gridfieldextensions', owner: 'silverstripe', branch: '5.1' },
-        'gridfield-bulk-editing-tools': { repo: 'silverstripe-gridfield-bulk-editing-tools', owner: 'silverstripe', branch: '5.1' },
-        'realme': { repo: 'silverstripe-realme', owner: 'silverstripe', branch: '6.0' },
-        'staticpublishqueue': { repo: 'silverstripe-staticpublishqueue', owner: 'silverstripe', branch: '7.0' },
-        'tagfield': { repo: 'silverstripe-tagfield', owner: 'silverstripe', branch: '4.1' },
-        'textextraction': { repo: 'silverstripe-textextraction', owner: 'silverstripe', branch: '5.0' },
-        'advancedworkflow': { repo: 'silverstripe-advancedworkflow', owner: 'silverstripe', branch: '7.1' },
-        'queuedjobs': { repo: 'silverstripe-queuedjobs', owner: 'silverstripe', branch: '6.1' },
-        'fluent': { repo: 'silverstripe-fluent', owner: 'tractorcow', branch: '8.1' },
-        'htmleditor-tinymce': { repo: 'silverstripe-htmleditor-tinymce', owner: 'silverstripe', branch: '1.0' },
-        'linkfield': { repo: 'silverstripe-linkfield', owner: 'silverstripe', branch: '5.1' },
-        'userforms': { repo: 'silverstripe-userforms', owner: 'silverstripe', branch: '7.0' },
-        'elemental': { repo: 'silverstripe-elemental', owner: 'silverstripe', branch: '6.1' },
-        'mfa': { repo: 'silverstripe-mfa', owner: 'silverstripe', branch: '6.1' },
-        'graphql': { repo: 'silverstripe-graphql', owner: 'silverstripe', branch: '6.1' },
-        'totp-authenticator': { repo: 'silverstripe-totp-authenticator', owner: 'silverstripe', branch: '6.0' },
-        'taxonomies': { repo: 'silverstripe-taxonomy', owner: 'silverstripe', branch: '4.1' },
-      }
-    },
-    '5': {
-      main: { repo: 'developer-docs', owner: 'silverstripe', branch: '5.4' },
-      optionalFeatures: {
-        'login-forms': { repo: 'silverstripe-login-forms', owner: 'silverstripe', branch: '5.3' },
-        'gridfieldextensions': { repo: 'silverstripe-gridfieldextensions', owner: 'silverstripe', branch: '4.1' },
-        'gridfield-bulk-editing-tools': { repo: 'silverstripe-gridfield-bulk-editing-tools', owner: 'silverstripe', branch: '4.1' },
-        'realme': { repo: 'silverstripe-realme', owner: 'silverstripe', branch: '5.5' },
-        'staticpublishqueue': { repo: 'silverstripe-staticpublishqueue', owner: 'silverstripe', branch: '6.3' },
-        'tagfield': { repo: 'silverstripe-tagfield', owner: 'silverstripe', branch: '3.4' },
-        'textextraction': { repo: 'silverstripe-textextraction', owner: 'silverstripe', branch: '4.1' },
-        'advancedworkflow': { repo: 'silverstripe-advancedworkflow', owner: 'silverstripe', branch: '6.4' },
-        'queuedjobs': { repo: 'silverstripe-queuedjobs', owner: 'silverstripe', branch: '5.3' },
-        'fluent': { repo: 'silverstripe-fluent', owner: 'tractorcow-farm', branch: '7.3' },
-        'linkfield': { repo: 'silverstripe-linkfield', owner: 'silverstripe', branch: '4.2' },
-        'userforms': { repo: 'silverstripe-userforms', owner: 'silverstripe', branch: '6.4' },
-        'elemental': { repo: 'silverstripe-elemental', owner: 'silverstripe', branch: '5.4' },
-        'mfa': { repo: 'silverstripe-mfa', owner: 'silverstripe', branch: '5.4' },
-        'totp-authenticator': { repo: 'silverstripe-totp-authenticator', owner: 'silverstripe', branch: '5.3' },
-        'webauthn-authenticator': { repo: 'silverstripe-webauthn-authenticator', owner: 'silverstripe', branch: '5.3' },
-        'taxonomies': { repo: 'silverstripe-taxonomy', owner: 'silverstripe', branch: '3.2' },
-        'non-blocking-sessions': { repo: 'silverstripe-non-blocking-sessions', owner: 'silverstripe', branch: '1.0' },
-      }
-    },
-    '4': {
-      main: { repo: 'developer-docs', owner: 'silverstripe', branch: '4.13' }
-    },
-    '3': {
-      main: { repo: 'developer-docs', owner: 'silverstripe', branch: '3' }
-    }
-  };
-
-  const SOURCES_USER = {
-    '6': {
-      main: { repo: 'silverstripe-userhelp-content', owner: 'silverstripe', branch: '6' },
-      optionalFeatures: {
-        'linkfield': { repo: 'silverstripe-linkfield', owner: 'silverstripe', branch: '5' },
-        'advancedworkflow': { repo: 'silverstripe-advancedworkflow', owner: 'symbiote', branch: '5' },
-        'userforms': { repo: 'silverstripe-userforms', owner: 'silverstripe', branch: '7' },
-        'taxonomies': { repo: 'silverstripe-taxonomy', owner: 'silverstripe', branch: '4' },
-        'elemental': { repo: 'silverstripe-elemental', owner: 'dnadesign', branch: '6' },
-        'sharedraftcontent': { repo: 'silverstripe-sharedraftcontent', owner: 'silverstripe', branch: '4' },
-        'mfa': { repo: 'silverstripe-mfa', owner: 'silverstripe', branch: '6' },
-        'session-manager': { repo: 'silverstripe-session-manager', owner: 'silverstripe', branch: '3' },
-      }
-    },
-    '5': {
-      main: { repo: 'silverstripe-userhelp-content', owner: 'silverstripe', branch: '5' },
-      optionalFeatures: {
-        'linkfield': { repo: 'silverstripe-linkfield', owner: 'silverstripe', branch: '4' },
-        'advancedworkflow': { repo: 'silverstripe-advancedworkflow', owner: 'symbiote', branch: '6' },
-        'registry': { repo: 'silverstripe-registry', owner: 'silverstripe', branch: '3' },
-        'contentreview': { repo: 'silverstripe-contentreview', owner: 'silverstripe', branch: '5' },
-        'blog': { repo: 'silverstripe-blog', owner: 'silverstripe', branch: '4' },
-        'userforms': { repo: 'silverstripe-userforms', owner: 'silverstripe', branch: '6' },
-        'subsites': { repo: 'silverstripe-subsites', owner: 'silverstripe', branch: '3' },
-        'taxonomies': { repo: 'silverstripe-taxonomy', owner: 'silverstripe', branch: '3' },
-        'iframe': { repo: 'silverstripe-iframe', owner: 'silverstripe', branch: '3' },
-        'versionfeed': { repo: 'silverstripe-versionfeed', owner: 'silverstripe', branch: '3' },
-        'elemental': { repo: 'silverstripe-elemental', owner: 'dnadesign', branch: '5' },
-        'maintenance': { repo: 'silverstripe-maintenance', owner: 'bringyourownideas', branch: '3' },
-        'sharedraftcontent': { repo: 'silverstripe-sharedraftcontent', owner: 'silverstripe', branch: '3' },
-        'documentconverter': { repo: 'silverstripe-documentconverter', owner: 'silverstripe', branch: '3' },
-        'ckan-registry': { repo: 'silverstripe-ckan-registry', owner: 'silverstripe', branch: '2' },
-        'mfa': { repo: 'silverstripe-mfa', owner: 'silverstripe', branch: '5' },
-        'securityreport': { repo: 'silverstripe-securityreport', owner: 'silverstripe', branch: '3' },
-        'sitewidecontent-report': { repo: 'silverstripe-sitewidecontent-report', owner: 'silverstripe', branch: '4' },
-        'session-manager': { repo: 'silverstripe-session-manager', owner: 'silverstripe', branch: '2' },
-      }
-    },
-    '4': {
-      main: { repo: 'silverstripe-userhelp-content', owner: 'silverstripe', branch: '4' },
-      optionalFeatures: {
-        'advancedworkflow': { repo: 'silverstripe-advancedworkflow', owner: 'symbiote', branch: '5' },
-        'registry': { repo: 'silverstripe-registry', owner: 'silverstripe', branch: '2' },
-        'contentreview': { repo: 'silverstripe-contentreview', owner: 'silverstripe', branch: '4' },
-        'blog': { repo: 'silverstripe-blog', owner: 'silverstripe', branch: '3' },
-        'userforms': { repo: 'silverstripe-userforms', owner: 'silverstripe', branch: '5' },
-        'subsites': { repo: 'silverstripe-subsites', owner: 'silverstripe', branch: '2' },
-        'taxonomies': { repo: 'silverstripe-taxonomy', owner: 'silverstripe', branch: '2' },
-        'iframe': { repo: 'silverstripe-iframe', owner: 'silverstripe', branch: '2' },
-        'versionfeed': { repo: 'silverstripe-versionfeed', owner: 'silverstripe', branch: '2' },
-        'elemental': { repo: 'silverstripe-elemental', owner: 'dnadesign', branch: '4' },
-        'maintenance': { repo: 'silverstripe-maintenance', owner: 'bringyourownideas', branch: '2' },
-        'sharedraftcontent': { repo: 'silverstripe-sharedraftcontent', owner: 'silverstripe', branch: '2' },
-        'documentconverter': { repo: 'silverstripe-documentconverter', owner: 'silverstripe', branch: '2' },
-        'ckan-registry': { repo: 'silverstripe-ckan-registry', owner: 'silverstripe', branch: '1' },
-        'mfa': { repo: 'silverstripe-mfa', owner: 'silverstripe', branch: '4' },
-        'securityreport': { repo: 'silverstripe-securityreport', owner: 'silverstripe', branch: '2' },
-        'sitewidecontent-report': { repo: 'silverstripe-sitewidecontent-report', owner: 'silverstripe', branch: '3' },
-        'session-manager': { repo: 'silverstripe-session-manager', owner: 'silverstripe', branch: '1' },
-      }
-    },
-    '3': {
-      main: { repo: 'silverstripe-userhelp-content', owner: 'silverstripe', branch: '3' },
-      optionalFeatures: {
-        'versionedfiles': { repo: 'silverstripe-versionedfiles', owner: 'symbiote', branch: 'master' },
-        'advancedworkflow': { repo: 'silverstripe-advancedworkflow', owner: 'symbiote', branch: '4' },
-        'registry': { repo: 'silverstripe-registry', owner: 'silverstripe', branch: '1.0' },
-        'forum': { repo: 'silverstripe-forum', owner: 'silverstripe-archive', branch: '0.8' },
-        'blog': { repo: 'silverstripe-blog', owner: 'silverstripe', branch: '2' },
-        'translatable': { repo: 'silverstripe-translatable', owner: 'silverstripe', branch: '2.1' },
-        'subsites': { repo: 'silverstripe-subsites', owner: 'silverstripe', branch: '1.1' },
-        'secureassets': { repo: 'silverstripe-secureassets', owner: 'silverstripe', branch: 'master' },
-        'taxonomies': { repo: 'silverstripe-taxonomy', owner: 'silverstripe', branch: '1' },
-        'iframe': { repo: 'silverstripe-iframe', owner: 'silverstripe', branch: '1.0' },
-        'versionfeed': { repo: 'silverstripe-versionfeed', owner: 'silverstripe', branch: 'master' },
-        'dms': { repo: 'silverstripe-dms', owner: 'silverstripe', branch: 'master' },
-        'securityreport': { repo: 'silverstripe-securityreport', owner: 'silverstripe', branch: 'master' },
-        'sitewidecontent-report': { repo: 'silverstripe-sitewidecontent-report', owner: 'silverstripe', branch: '2.0' },
-      }
-    }
-  };
-
-  const sourceConfig = context === 'user' ? SOURCES_USER : SOURCES_DOCS;
+  const sourceConfig = loadSources(context);
   const contextPrefix = context === 'user' ? 'user' : 'docs';
   const excludeDirs = context === 'docs' ? ['01_Managing_your_website', '02_Creating_pages_and_content'] : null;
-  const docsPattern = context === 'docs' ? 'en/**' : 'docs/en/**';
 
   const sources = [];
 
   for (const [version, versionConfig] of Object.entries(sourceConfig)) {
+    const mainDocsPath = versionConfig.main.docsPath || 'en';
+    const docsPattern = `${mainDocsPath}/**`;
+
     // Main docs
     sources.push({
       resolve: 'gatsby-source-git',
@@ -348,10 +214,11 @@ function buildSourcesList(context) {
     // Optional features
     if (versionConfig.optionalFeatures) {
       for (const [featureName, config] of Object.entries(versionConfig.optionalFeatures)) {
-        const featurePattern = context === 'user' 
-          ? 'docs/en/userguide/**'
-          : 'docs/en/!(userguide)/**';
-        
+        const featureDocsPath = config.docsPath || 'docs/en';
+        const featurePattern = context === 'user'
+          ? `${featureDocsPath}/**`
+          : `${featureDocsPath}/!(userguide)/**`;
+
         sources.push({
           resolve: 'gatsby-source-git',
           options: {

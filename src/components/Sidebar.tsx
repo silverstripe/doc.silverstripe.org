@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import cx from 'classnames';
 import Link from 'next/link';
 import { isNodeOrDescendantActive, getActiveAncestorsSlug } from '@/lib/nav/build-nav-tree';
-import type { NavNode } from '@/types';
+import type { NavNode } from '@/types/types';
 import styles from './Sidebar.module.css';
 
 interface SidebarProps {

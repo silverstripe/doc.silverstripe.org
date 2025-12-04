@@ -1,6 +1,18 @@
 /**
- * HTML cleanup utilities
+ * HTML utility functions for escaping and cleaning HTML content
  */
+
+/**
+ * Escape HTML special characters to prevent XSS
+ */
+export function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 
 /**
  * The react parser doesn't like whitespace nodes in tags that require

@@ -26,21 +26,6 @@ interface EditOnGithubProps {
  * - Category (docs vs user help use different repositories)
  *
  * Uses sources-docs.ts or sources-user.ts based on the category parameter.
- *
- * @example
- * // Main docs v6
- * <EditOnGithub version="6" filePath="02_Developer_Guides/index.md" category="docs" />
- * // → https://github.com/silverstripe/developer-docs/blob/6.1/en/02_Developer_Guides/index.md
- *
- * @example
- * // Optional feature v6
- * <EditOnGithub version="6" filePath="index.md" category="docs" optionalFeature="linkfield" />
- * // → https://github.com/silverstripe/silverstripe-linkfield/blob/5.1/docs/en/index.md
- *
- * @example
- * // User help v6
- * <EditOnGithub version="6" filePath="index.md" category="user" />
- * // → https://github.com/silverstripe/silverstripe-userhelp-content/blob/6/docs/en/index.md
  */
 export default function EditOnGithub({
   version,
