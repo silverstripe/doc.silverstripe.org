@@ -251,4 +251,47 @@ No headings here.`;
       expect(headings.length).toBeGreaterThanOrEqual(2);
     });
   });
+
+  describe('backticks and underscores', () => {
+    it('should extract text from backticks, preserving underscores', () => {
+      const markdown = '## `many_many_extraFields`';
+
+      const headings = extractHeadings(markdown);
+
+      expect(headings).toHaveLength(1);
+      expect(headings[0].text).toBe('many_many_extraFields');
+      expect(headings[0].id).toBe('many_many_extrafields');
+    });
+
+    it('should preserve underscores in regular headings', () => {
+      const markdown = '## some_variable_name';
+
+      const headings = extractHeadings(markdown);
+
+      expect(headings).toHaveLength(1);
+      expect(headings[0].text).toBe('some_variable_name');
+      expect(headings[0].id).toBe('some_variable_name');
+    });
+
+    it('should handle mixed text with backticks containing underscores', () => {
+      const markdown = '## Defining `many_many_extraFields`';
+
+      const headings = extractHeadings(markdown);
+
+      expect(headings).toHaveLength(1);
+      expect(headings[0].text).toBe('Defining many_many_extraFields');
+      expect(headings[0].id).toBe('defining-many_many_extrafields');
+    });
+
+    it('should handle code with underscores in slug generation', () => {
+      const markdown = '## `_privateMethod`';
+
+      const headings = extractHeadings(markdown);
+
+      expect(headings).toHaveLength(1);
+      expect(headings[0].text).toBe('_privateMethod');
+      // Underscores are word characters and should be preserved in slugs
+      expect(headings[0].id).toBe('_privatemethod');
+    });
+  });
 });

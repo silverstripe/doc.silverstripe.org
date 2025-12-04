@@ -58,13 +58,20 @@ export function extractHeadings(markdown: string): TocHeading[] {
     const level = hashes.length;
 
     // Clean the text: remove inline code backticks, bold, italic markers
-    const text = rawText
-      .replace(/`([^`]+)`/g, '$1') // inline code
-      .replace(/\*\*([^*]+)\*\*/g, '$1') // bold
-      .replace(/\*([^*]+)\*/g, '$1') // italic
-      .replace(/__([^_]+)__/g, '$1') // bold with underscores
-      .replace(/_([^_]+)_/g, '$1') // italic with underscores
-      .trim();
+    // Process backticks first to extract code content
+    let text = rawText.replace(/`([^`]+)`/g, '$1');
+
+    // Remove bold markers (** and __)
+    text = text.replace(/\*\*([^*]+)\*\*/g, '$1');
+    text = text.replace(/__([^_]+)__/g, '$1');
+
+    // Remove italic markers (* and _), but only when not part of identifiers
+    // Match * surrounded by non-asterisk chars (works for markdown italic)
+    text = text.replace(/\*([^*]+)\*/g, '$1');
+    // For underscores: only match when surrounded by whitespace or punctuation
+    text = text.replace(/(^|[\s\p{P}])_([^_]+)_([\s\p{P}]|$)/gu, '$1$2$3');
+
+    text = text.trim();
 
     // Use custom ID if provided, otherwise generate from text
     const id = customId || slugify(text, usedSlugs);
