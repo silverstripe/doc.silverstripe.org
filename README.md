@@ -131,8 +131,6 @@ The npm scripts wrap commands in `sh -c '...'` to ensure environment variables a
   user/               # Cloned user help docs (v3-v6)
 
 assets/               # Static files (favicon, logo)
-  favicon.ico
-  logo.svg
 
 src/
   app/                # Next.js app router pages

@@ -72,8 +72,6 @@ Scripts use `sh -c '...'` to ensure `DOCS_CONTEXT` is inherited by all commands 
   user/               # Cloned user help docs (v3-v6)
 
 assets/               # Static files (favicon, logo)
-  favicon.ico
-  logo.svg
 
 src/
   app/                # Next.js app router pages
