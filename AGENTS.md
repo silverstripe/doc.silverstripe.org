@@ -8,7 +8,7 @@ Rebuild of doc.silverstripe.org using **Next.js 16+ / Node.js 24+**. Two context
 
 ## Tech Stack
 
-Next.js 16+ • Node.js 24+ • TypeScript (strict) • Tailwind + Bootstrap • Markdown (remark/rehype) • Algolia DocSearch • Jest + RTL • Prism.js • ESLint (Airbnb)
+Next.js 16+ • Node.js 24+ • TypeScript (strict) • CSS Modules + globals.css • Markdown (remark/rehype) • Algolia DocSearch • Jest + RTL • Prism.js • ESLint (Airbnb)
 
 ---
 

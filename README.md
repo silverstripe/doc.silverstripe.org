@@ -120,6 +120,6 @@ npm run build:user && cd out && python3 -m http.server 8000
 
 - **Framework:** Next.js 16+ with static export
 - **Content:** Markdown with remark/rehype processing  
-- **Styling:** Tailwind CSS + Bootstrap
+- **Styling:** CSS Modules + globals.css
 - **Search:** Algolia DocSearch
 - **Testing:** Jest + React Testing Library
