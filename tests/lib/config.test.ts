@@ -25,9 +25,9 @@ describe('config', () => {
   });
 
   it('should return empty strings for Docsearch config when not set', () => {
-    delete process.env.NEXT_PUBLIC_DOCSEARCH_APP_ID;
-    delete process.env.NEXT_PUBLIC_DOCSEARCH_API_KEY;
-    delete process.env.NEXT_PUBLIC_DOCSEARCH_INDEX_NAME;
+    delete process.env.NEXTJS_DOCSEARCH_APP_ID;
+    delete process.env.NEXTJS_DOCSEARCH_API_KEY;
+    delete process.env.NEXTJS_DOCSEARCH_INDEX_NAME;
     const config = getConfig();
     expect(config.docsearchAppId).toBe('');
     expect(config.docsearchApiKey).toBe('');

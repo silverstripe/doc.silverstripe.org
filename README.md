@@ -45,9 +45,9 @@ Create `.env.local` for local development:
 
 ```bash
 # Algolia DocSearch (optional, search disabled if not set)
-NEXT_PUBLIC_ALGOLIA_APP_ID=your_app_id
-NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY=your_search_key
-NEXT_PUBLIC_ALGOLIA_INDEX_NAME=your_index_name
+NEXTJS_ALGOLIA_APP_ID=your_app_id
+NEXTJS_ALGOLIA_SEARCH_API_KEY=your_search_key
+NEXTJS_ALGOLIA_INDEX_NAME=your_index_name
 ```
 
 **Note:** Never set `DOCS_CONTEXT` in `.env.local` - the npm scripts control this to avoid conflicts.

@@ -21,9 +21,9 @@ describe('SearchBox Component', () => {
   beforeEach(() => {
     process.env = {
       ...originalEnv,
-      NEXT_PUBLIC_DOCSEARCH_APP_ID: 'test-app-id',
-      NEXT_PUBLIC_DOCSEARCH_API_KEY: 'test-api-key',
-      NEXT_PUBLIC_DOCSEARCH_INDEX_NAME: 'test-index',
+      NEXTJS_DOCSEARCH_APP_ID: 'test-app-id',
+      NEXTJS_DOCSEARCH_API_KEY: 'test-api-key',
+      NEXTJS_DOCSEARCH_INDEX_NAME: 'test-index',
     };
   });
 
@@ -38,7 +38,7 @@ describe('SearchBox Component', () => {
 
   it('does not render when environment variables are missing', () => {
     process.env = { ...originalEnv };
-    delete process.env.NEXT_PUBLIC_DOCSEARCH_APP_ID;
+    delete process.env.NEXTJS_DOCSEARCH_APP_ID;
     
     const { container } = render(<SearchBox />);
     expect(container.firstChild).toBeNull();

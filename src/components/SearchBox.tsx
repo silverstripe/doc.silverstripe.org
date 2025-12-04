@@ -40,9 +40,9 @@ export function SearchBox() {
   const pathname = usePathname();
   const currentVersion = getVersionFromPathname(pathname);
 
-  const appId = process.env.NEXT_PUBLIC_DOCSEARCH_APP_ID;
-  const apiKey = process.env.NEXT_PUBLIC_DOCSEARCH_API_KEY;
-  const indexName = process.env.NEXT_PUBLIC_DOCSEARCH_INDEX_NAME;
+  const appId = process.env.NEXTJS_DOCSEARCH_APP_ID;
+  const apiKey = process.env.NEXTJS_DOCSEARCH_API_KEY;
+  const indexName = process.env.NEXTJS_DOCSEARCH_INDEX_NAME;
 
   // If not configured, don't render
   if (!appId || !apiKey || !indexName) {

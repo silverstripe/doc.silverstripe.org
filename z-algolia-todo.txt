@@ -20,11 +20,11 @@ IMPLEMENTATION ANALYSIS
   - Redirects to relative URLs for Next.js navigation
 
 ✓ REQUIRED ENVIRONMENT VARIABLES (3):
-  1. NEXT_PUBLIC_DOCSEARCH_APP_ID
+  1. NEXTJS_DOCSEARCH_APP_ID
      - Algolia application ID (public, safe to expose to browser)
-  2. NEXT_PUBLIC_DOCSEARCH_API_KEY
+  2. NEXTJS_DOCSEARCH_API_KEY
      - Algolia search-only API key (public, safe to expose to browser)
-  3. NEXT_PUBLIC_DOCSEARCH_INDEX_NAME
+  3. NEXTJS_DOCSEARCH_INDEX_NAME
      - Name of the Algolia index (e.g., "silverstripe-docs")
 
 ✓ DEPENDENCY: @docsearch/react is already in package.json
@@ -58,9 +58,9 @@ Once you receive credentials from Algolia:
 Option A: Local Development (.env.local)
   1. Create/edit .env.local in project root
   2. Add the three variables:
-     NEXT_PUBLIC_DOCSEARCH_APP_ID=your_app_id
-     NEXT_PUBLIC_DOCSEARCH_API_KEY=your_search_api_key
-     NEXT_PUBLIC_DOCSEARCH_INDEX_NAME=your_index_name
+     NEXTJS_DOCSEARCH_APP_ID=your_app_id
+     NEXTJS_DOCSEARCH_API_KEY=your_search_api_key
+     NEXTJS_DOCSEARCH_INDEX_NAME=your_index_name
   3. Restart dev server: npm run dev (or npm run mock)
   4. Search box should appear in header
 
@@ -142,11 +142,11 @@ TROUBLESHOOTING
 
 Q: Search box doesn't appear in header
 A: Check that all three env vars are set and the dev server was restarted
-   Run: echo $NEXT_PUBLIC_DOCSEARCH_APP_ID (etc) to verify
+   Run: echo $NEXTJS_DOCSEARCH_APP_ID (etc) to verify
 
 Q: Search appears but no results
 A: 1. Check that the Algolia index has been populated
-   2. Verify the index name matches NEXT_PUBLIC_DOCSEARCH_INDEX_NAME
+   2. Verify the index name matches NEXTJS_DOCSEARCH_INDEX_NAME
    3. Check Algolia dashboard for crawling status
 
 Q: Results show wrong version
