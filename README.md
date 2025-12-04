@@ -5,7 +5,7 @@ Next.js rebuild of [doc.silverstripe.org](https://doc.silverstripe.org) and [use
 ## Quick Start
 
 ```bash
-npm install
+npm ci                 # Install dependencies (use npm ci, not npm update)
 
 # Development with real content
 npm run clone:docs   # Clone developer documentation
@@ -21,6 +21,17 @@ npm run mock
 npm run build:docs   # Build developer documentation
 npm run build:user   # Build user help documentation
 ```
+
+### Updating Dependencies
+
+To update dependencies in this project:
+
+```bash
+npm install --save-dev <package-name>@latest     # Add/update a specific package
+npm install                                        # Update package.json and package-lock.json
+```
+
+Do **not** use `npm update` as it can cause peer dependency conflicts. Instead, update `package.json` manually or use `npm install` with specific package versions.
 
 ## How the Docs/User System Works
 
