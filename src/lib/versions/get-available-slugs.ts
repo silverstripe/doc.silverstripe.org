@@ -3,7 +3,7 @@
  * Used for version switcher fallback logic
  */
 import { getAllDocuments } from '@/lib/content/get-document';
-import { normalizeSlug } from '@/lib/slug-utils';
+import { normalizeSlug } from '@/lib/utils/slug-utils';
 
 // Cache for available slugs per version
 let slugsByVersion: Map<string, Set<string>> | null = null;

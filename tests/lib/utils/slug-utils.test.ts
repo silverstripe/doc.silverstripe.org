@@ -7,7 +7,7 @@ import {
   doesSlugExistInVersion,
   getFallbackSlugForVersion,
   extractVersionAndFeatureFromSlug,
-} from '@/lib/slug-utils';
+} from '@/lib/utils/slug-utils';
 import { DocumentNode } from '@/types';
 
 describe('normalizeSlug', () => {

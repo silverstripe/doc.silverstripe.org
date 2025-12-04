@@ -67,7 +67,7 @@ src/
     children/             # [CHILDREN] marker replacement
     versions/             # Version utilities and constants
     metadata/            # Metadata generation
-    utils/                # Shared utilities (escapeHtml, slug-utils)
+    utils/                # Shared utilities (escapeHtml, slug-utils, github-utils)
     routing.ts            # URL routing utilities
   types/                  # TypeScript interfaces
   contexts/               # React contexts (MobileMenuContext)

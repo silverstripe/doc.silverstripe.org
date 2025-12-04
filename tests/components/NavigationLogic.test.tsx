@@ -7,12 +7,12 @@ import { Header } from '@/components/Header';
 import {
   getOptionalFeatureFromDocument,
   getDocumentGithubInfo,
-} from '@/lib/github-utils';
+} from '@/lib/utils/github-utils';
 import {
   doesSlugExistInVersion,
   getFallbackSlugForVersion,
   extractVersionAndFeatureFromSlug,
-} from '@/lib/slug-utils';
+} from '@/lib/utils/slug-utils';
 import { DocumentNode } from '@/types';
 
 // Mock next/navigation
