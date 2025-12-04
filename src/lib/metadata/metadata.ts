@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import type { DocumentNode } from '@/types';
+import { SITE_URL } from '../../../global-config';
 
-const SITE_URL = process.env.SITE_URL || 'https://doc.silverstripe.org';
 const DEFAULT_DESCRIPTION = 'SilverStripe CMS Documentation - Learn how to develop and configure SilverStripe applications.';
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 

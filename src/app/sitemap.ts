@@ -1,9 +1,8 @@
 import { MetadataRoute } from 'next';
 import { getAllDocuments } from '@/lib/content/get-document';
+import { SITE_URL } from '../../global-config';
 
 export const dynamic = 'force-static';
-
-const SITE_URL = process.env.SITE_URL || 'https://doc.silverstripe.org';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {

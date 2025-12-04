@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { DEFAULT_VERSION } from '@/global-config';
+import { DEFAULT_VERSION } from '../../global-config';
 
 export default function Home() {
   // Redirect to latest version

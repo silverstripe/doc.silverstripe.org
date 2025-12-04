@@ -1,8 +1,7 @@
 import { MetadataRoute } from 'next';
+import { SITE_URL } from '../../global-config';
 
 export const dynamic = 'force-static';
-
-const SITE_URL = process.env.SITE_URL || 'https://doc.silverstripe.org';
 
 export default function robots(): MetadataRoute.Robots {
   return {
