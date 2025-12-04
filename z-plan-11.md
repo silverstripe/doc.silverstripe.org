@@ -197,6 +197,20 @@
 
 ---
 
+# Phase 9a: Create a table of contents on every content page
+
+**Objective:** Create a table of contents on every content page
+
+**Tasks:**
+1. Work out a way to create a hierarchical table of contents `<a>` links to heading anchors on the page so that there is no FOUT when navigating to the page
+3. Ensure table of contents shows directly below rendered `H1` on page content
+2. Write appropriate unit tests
+2. Update CSS so that each level is indented, with `H2` not indented
+3. Run tests: `npm test`
+4. Run linting: `npm run lint`
+
+---
+
 # Phase 10: Update README.md and AGENTS.md
 
 **Objective:** Rewrite README.md to be current. Verify AGENTS.md reflects all new standards.

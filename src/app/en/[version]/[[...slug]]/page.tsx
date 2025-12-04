@@ -4,7 +4,7 @@ import { buildNavTree } from '@/lib/nav/build-nav-tree';
 import { DocsLayout } from '@/components/DocsLayout';
 import { VersionBanner } from '@/components/VersionBanner';
 import EditOnGithub from '@/components/EditOnGithub';
-import { generatePageMetadata } from '@/lib/seo/metadata';
+import { generatePageMetadata } from '@/lib/metadata/metadata';
 import { getVersionPath, getVersionHomepage } from '@/lib/versions/version-utils';
 import type { Metadata } from 'next';
 import styles from './page.module.css';

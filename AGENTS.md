@@ -66,7 +66,7 @@ src/
     nav/                  # Navigation tree building
     children/             # [CHILDREN] marker replacement
     versions/             # Version utilities and constants
-    seo/                  # Metadata generation
+    metadata/            # Metadata generation
     utils/                # Shared utilities (escapeHtml, slug-utils)
     routing.ts            # URL routing utilities
   types/                  # TypeScript interfaces

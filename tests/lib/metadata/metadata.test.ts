@@ -1,4 +1,4 @@
-import { generatePageMetadata, generateRootMetadata } from '@/lib/seo/metadata';
+import { generatePageMetadata, generateRootMetadata } from '@/lib/metadata/metadata';
 import type { DocumentNode } from '@/types';
 
 describe('generatePageMetadata', () => {
