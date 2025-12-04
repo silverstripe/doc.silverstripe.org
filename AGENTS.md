@@ -8,7 +8,7 @@ Rebuild of doc.silverstripe.org using **Next.js 16+ / Node.js 24+**. Two context
 
 ## Tech Stack
 
-Next.js 16+ • Node.js 24+ • TypeScript (strict) • CSS Modules + globals.css • Markdown (remark/rehype) • Algolia DocSearch • Jest + RTL • Prism.js • ESLint (Airbnb)
+Next.js 16+ • Node.js 24+ • TypeScript (strict) • CSS Modules + globals.css • Markdown (remark/rehype) • Algolia DocSearch • Jest + RTL • Prism.js • classnames • ESLint (Airbnb)
 
 ---
 
@@ -66,7 +66,7 @@ src/
     nav/                  # Navigation tree building
     children/             # [CHILDREN] marker replacement
     versions/             # Version utilities and constants
-    metadata/            # Metadata generation
+    metadata/             # Metadata generation (SEO)
     utils/                # Shared utilities (escapeHtml, slug-utils, github-utils)
     routing.ts            # URL routing utilities
   types/                  # TypeScript interfaces
@@ -130,6 +130,7 @@ interface DocumentNode {
 **TS:** Strict mode, minimize `any`, explicit returns  
 **React:** Server components default, `'use client'` when needed  
 **useEffect Positioning:** useEffect hooks must be positioned immediately before the return statement (return statement being equivalent of `render()` function in React class component). No function definitions, useMemo, or other logic between useEffect and return.  
+**Classnames:** Use `cx()` utility (from `classnames` package) for combining class names  
 **Names:** Components=PascalCase, utils=kebab-case, tests=`*.test.*`  
 **Imports:** Use `@/` path alias for src/ imports. Do not create index.ts barrel files in lib/ subdirectories. Import directly from specific module files.  
 **HTML Injection:** Do NOT use `dangerouslySetInnerHTML` unless it is the correct or only way to solve an issue. Prefer the use of Next.js script handling, structured JSX, or other alternatives.
