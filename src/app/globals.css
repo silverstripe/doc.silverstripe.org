@@ -840,6 +840,7 @@ article > h1:first-child {
 .toc-item {
   margin: 0;
   padding: 0;
+  list-style: inside;
 }
 
 /* H2 - no indent (base level) */
@@ -852,23 +853,7 @@ article > h1:first-child {
   padding-left: 1rem;
 }
 
-/* H4 - 2 levels indent */
-.toc-item[data-level="4"] {
-  padding-left: 2rem;
-}
-
-/* H5 - 3 levels indent */
-.toc-item[data-level="5"] {
-  padding-left: 3rem;
-}
-
-/* H6 - 4 levels indent */
-.toc-item[data-level="6"] {
-  padding-left: 4rem;
-}
-
 .toc-link {
-  display: block;
   padding: 0.25rem 0;
   font-size: 0.9rem;
   color: var(--theme-text-secondary);

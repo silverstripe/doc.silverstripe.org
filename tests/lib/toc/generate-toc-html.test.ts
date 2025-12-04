@@ -31,18 +31,17 @@ describe('generateTocHtml', () => {
       expect(html).toBe('');
     });
 
-    it('should include data-level attributes for indentation', () => {
+    it('should include data-level attributes for H2 and H3 indentation', () => {
       const headings: TocHeading[] = [
         { id: 'h2', text: 'H2 Heading', level: 2 },
         { id: 'h3', text: 'H3 Heading', level: 3 },
-        { id: 'h4', text: 'H4 Heading', level: 4 },
       ];
 
       const html = generateTocHtml(headings);
 
       expect(html).toContain('data-level="2"');
       expect(html).toContain('data-level="3"');
-      expect(html).toContain('data-level="4"');
+      expect(html).not.toContain('data-level="4"');
     });
   });
 

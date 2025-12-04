@@ -9,10 +9,11 @@ export interface TocHeading {
 }
 
 /**
- * Regex to match markdown headings (## to ######)
+ * Regex to match markdown headings (## to ###)
  * We skip H1 as it's typically the page title
+ * We only include H2 and H3 in the table of contents
  */
-const HEADING_REGEX = /^(#{2,6})\s+(.+?)(?:\s*\{#([^}]+)\})?\s*$/gm;
+const HEADING_REGEX = /^(#{2,3})\s+(.+?)(?:\s*\{#([^}]+)\})?\s*$/gm;
 
 /**
  * Generate a URL-safe slug from text
@@ -45,6 +46,7 @@ function slugify(text: string, usedSlugs: Set<string>): string {
 /**
  * Extract headings from markdown content
  * Returns heading text, level, and generated/custom ID
+ * Only includes H2 and H3 headings in the table of contents
  */
 export function extractHeadings(markdown: string): TocHeading[] {
   const headings: TocHeading[] = [];
@@ -67,7 +69,10 @@ export function extractHeadings(markdown: string): TocHeading[] {
     // Use custom ID if provided, otherwise generate from text
     const id = customId || slugify(text, usedSlugs);
 
-    headings.push({ id, text, level });
+    // Only include H2 and H3 in TOC
+    if (level <= 3) {
+      headings.push({ id, text, level });
+    }
   }
 
   return headings;

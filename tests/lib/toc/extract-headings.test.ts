@@ -24,7 +24,7 @@ More content.`;
       expect(headings[1]).toEqual({ id: 'second-section', text: 'Second Section', level: 2 });
     });
 
-    it('should extract headings from H2 to H6', () => {
+    it('should extract headings from H2 to H3 only', () => {
       const markdown = `# Title
 
 ## Level 2
@@ -39,12 +39,9 @@ More content.`;
 
       const headings = extractHeadings(markdown);
 
-      expect(headings).toHaveLength(5);
+      expect(headings).toHaveLength(2);
       expect(headings[0].level).toBe(2);
       expect(headings[1].level).toBe(3);
-      expect(headings[2].level).toBe(4);
-      expect(headings[3].level).toBe(5);
-      expect(headings[4].level).toBe(6);
     });
 
     it('should not extract H1 headings', () => {
@@ -136,6 +133,49 @@ No headings here.`;
 
       expect(headings).toHaveLength(1);
       expect(headings[0].text).toBe('With bold and italic');
+    });
+  });
+
+  describe('filtering headings', () => {
+    it('should exclude H4 and deeper headings', () => {
+      const markdown = `## H2 Section
+
+### H3 Subsection
+
+#### H4 Not in TOC
+
+##### H5 Not in TOC
+
+###### H6 Not in TOC`;
+
+      const headings = extractHeadings(markdown);
+
+      expect(headings).toHaveLength(2);
+      expect(headings.map((h) => h.level)).toEqual([2, 3]);
+    });
+
+    it('should handle mixed H2 and H3 with deeper headings', () => {
+      const markdown = `## First
+
+### Nested
+
+#### Deep (not in TOC)
+
+## Second
+
+### Another Nested
+
+##### Even Deeper (not in TOC)`;
+
+      const headings = extractHeadings(markdown);
+
+      expect(headings).toHaveLength(4);
+      expect(headings.map((h) => h.text)).toEqual([
+        'First',
+        'Nested',
+        'Second',
+        'Another Nested',
+      ]);
     });
   });
 
