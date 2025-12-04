@@ -76,6 +76,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
  */
 export default async function Page({ params: paramsPromise }: PageProps) {
   const { markdownToHtmlWithCleanup } = await import('@/lib/markdown/processor');
+  const { stripChangelogToc } = await import('@/lib/markdown/strip-changelog-toc');
   const { replaceChildrenMarkers } = await import('@/lib/children/replace-children-markers');
   const { getDefaultVersion } = await import('@/lib/versions/version-utils');
   const { extractHeadings } = await import('@/lib/toc/extract-headings');
@@ -95,16 +96,19 @@ export default async function Page({ params: paramsPromise }: PageProps) {
     redirect(getVersionHomepage(version));
   }
 
+  // Strip hardcoded TOC from changelog pages
+  const cleanedContent = stripChangelogToc(doc.content, doc.slug);
+
   // Build navigation tree
   const allDocs = await getAllDocuments();
   const navTree = buildNavTree(allDocs, version, doc.slug);
 
   // Extract headings for table of contents (before HTML conversion)
-  const headings = extractHeadings(doc.content);
+  const headings = extractHeadings(cleanedContent);
   const tocHtml = generateTocHtml(headings);
 
   // Convert markdown to HTML with image path resolution and API link rewriting
-  let htmlContent = await markdownToHtmlWithCleanup(doc.content, doc.fileAbsolutePath, version);
+  let htmlContent = await markdownToHtmlWithCleanup(cleanedContent, doc.fileAbsolutePath, version);
 
   // Replace [CHILDREN] markers with rendered children
   htmlContent = replaceChildrenMarkers(htmlContent, doc, allDocs);
