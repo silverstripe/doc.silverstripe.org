@@ -247,6 +247,116 @@ describe('resolveMarkdownLink', () => {
     });
   });
 
+  describe('relative links without .md extension', () => {
+    it('resolves ./ relative link without extension', () => {
+      const result = resolveMarkdownLink(
+        './code',
+        '/home/project/.cache/docs/v6/10_Contributing/02_Documentation.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/contributing/code/');
+    });
+
+    it('resolves ../ relative link without extension', () => {
+      const result = resolveMarkdownLink(
+        '../getting_started',
+        '/home/project/.cache/docs/v6/10_Contributing/02_Documentation.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/getting_started/');
+    });
+
+    it('resolves deeply nested ../ relative link without extension', () => {
+      const result = resolveMarkdownLink(
+        '../fixtures',
+        '/home/project/.cache/docs/v6/02_Developer_Guides/06_Testing/How_Tos/02_FixtureFactories.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/testing/fixtures/');
+    });
+
+    it('preserves anchor fragments in relative links without extension', () => {
+      const result = resolveMarkdownLink(
+        './code#section',
+        '/home/project/.cache/docs/v6/10_Contributing/02_Documentation.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/contributing/code/#section');
+    });
+
+    it('does not modify external https links', () => {
+      const result = resolveMarkdownLink(
+        'https://example.com',
+        '/home/project/.cache/docs/v6/10_Contributing/02_Documentation.md',
+        '6',
+      );
+      expect(result).toBe('https://example.com');
+    });
+
+    it('does not modify image links like ../_images/screenshot.png', () => {
+      const result = resolveMarkdownLink(
+        '../_images/screenshot.png',
+        '/home/project/.cache/docs/v6/10_Contributing/02_Documentation.md',
+        '6',
+      );
+      expect(result).toBe('../_images/screenshot.png');
+    });
+
+    it('does not modify .jpg files', () => {
+      const result = resolveMarkdownLink(
+        './image.jpg',
+        '/home/project/.cache/docs/v6/10_Contributing/02_Documentation.md',
+        '6',
+      );
+      expect(result).toBe('./image.jpg');
+    });
+
+    it('does not modify .png files', () => {
+      const result = resolveMarkdownLink(
+        './image.png',
+        '/home/project/.cache/docs/v6/10_Contributing/02_Documentation.md',
+        '6',
+      );
+      expect(result).toBe('./image.png');
+    });
+
+    it('does not modify .gif files', () => {
+      const result = resolveMarkdownLink(
+        './image.gif',
+        '/home/project/.cache/docs/v6/10_Contributing/02_Documentation.md',
+        '6',
+      );
+      expect(result).toBe('./image.gif');
+    });
+
+    it('does not modify .svg files', () => {
+      const result = resolveMarkdownLink(
+        './image.svg',
+        '/home/project/.cache/docs/v6/10_Contributing/02_Documentation.md',
+        '6',
+      );
+      expect(result).toBe('./image.svg');
+    });
+
+    it('does not modify .webp files', () => {
+      const result = resolveMarkdownLink(
+        './image.webp',
+        '/home/project/.cache/docs/v6/10_Contributing/02_Documentation.md',
+        '6',
+      );
+      expect(result).toBe('./image.webp');
+    });
+
+    it('preserves anchor fragments with multiple # characters', () => {
+      const result = resolveMarkdownLink(
+        './code#section1#section2',
+        '/home/project/.cache/docs/v6/10_Contributing/02_Documentation.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/contributing/code/#section1#section2');
+    });
+  });
+
   describe('edge cases', () => {
     it('handles deeply nested paths', () => {
       const result = resolveMarkdownLink(

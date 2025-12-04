@@ -43,7 +43,7 @@
    - Test `./code#section` preserves anchor
    - Test that external links like `https://example.com` are not modified
    - Test that image links like `../_images/screenshot.png` are not modified
-3. Run tests: `npm test -- tests/lib/markdown/resolve-link-paths.test.ts`
+3. Run tests: `npm test`
 4. Run linting: `npm run lint`
 
 ---
@@ -62,7 +62,7 @@
    - Test `../developer_guides/testing/unit_testing` from `contributing/01_Code.md` → `/en/6/developer_guides/testing/unit_testing/`
    - Test `../getting_started/composer#contributing` from `contributing/01_Code.md` → `/en/6/getting_started/composer/#contributing`
    - Test `../../getting_started/environment_management` from deep nested path → `/en/6/getting_started/environment_management/`
-3. Run tests: `npm test -- tests/lib/markdown/resolve-link-paths.test.ts`
+3. Run tests: `npm test`
 4. Run linting: `npm run lint`
 
 ---
@@ -79,7 +79,7 @@
 2. Create UNIT TESTS in `tests/lib/markdown/resolve-link-paths.test.ts`
    - Test `../Project_Governance/Minor_release_policy#security-patch-windows` → `/en/6/project_governance/minor_release_policy/#security-patch-windows`
    - Test that path segments are lowercased but anchors keep original case
-3. Run tests: `npm test -- tests/lib/markdown/resolve-link-paths.test.ts`
+3. Run tests: `npm test`
 4. Run linting: `npm run lint`
 
 ---
@@ -95,7 +95,7 @@
    - Add integration test for parent directory links crossing sections: `../developer_guides/testing/unit_testing`
    - Add integration test for mixed case paths: `../Project_Governance/Minor_release_policy#section`
 2. Verify that existing tests still pass
-3. Run all markdown tests: `npm test -- tests/lib/markdown/`
+3. Run all markdown tests: `npm test`
 4. Run linting: `npm run lint`
 
 ---
