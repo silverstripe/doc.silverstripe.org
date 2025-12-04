@@ -55,26 +55,59 @@ Scripts use `sh -c '...'` to ensure `DOCS_CONTEXT` is inherited by all commands 
 
 ## Project Structure
 
+### Build Output
+
+- **`.next/`** - Next.js build cache (dev server)
+- **`out/`** - Static HTML export (production builds via `npm run build`)
+- **`public/`** - Static assets served at root URL (images, fonts, etc.)
+
+**Note:** Next.js reserves `public/` for static assets and cannot use it as `distDir`. The output directory is `out/` (Next.js default for static exports), matching deployment expectations.
+
+### Source Code
+
 ```
+.cache/
+  docs/               # Cloned developer docs (v3-v6)
+  user/               # Cloned user help docs (v3-v6)
+
 src/
-  app/                    # Next.js app router pages
+  app/                # Next.js app router pages
     en/[version]/[[...slug]]/page.tsx  # Main doc page
-  components/             # React components (PascalCase)
+    en/layout.tsx     # Layout for /en/* routes
+    layout.tsx        # Root layout
+    robots.ts         # SEO robots.txt
+    sitemap.ts        # SEO sitemap.xml
+  components/         # React components (PascalCase)
+    Sidebar.tsx, Header.tsx, CodeBlock.tsx, etc.
   lib/
-    content/              # Document loading, parsing, tree building
-    markdown/             # MD→HTML processing (remark/rehype pipeline)
-    nav/                  # Navigation tree building
-    children/             # [CHILDREN] marker replacement
-    versions/             # Version utilities and constants
-    metadata/             # Metadata generation (SEO)
-    utils/                # Shared utilities (escapeHtml, slug-utils, github-utils)
-    routing.ts            # URL routing utilities
-  types/                  # TypeScript interfaces
-  contexts/               # React contexts (MobileMenuContext)
-sources-docs.ts           # Developer docs GitHub config (project root)
-sources-user.ts           # User help GitHub config (project root)
-sources-config.ts         # Unified config wrapper (project root)
-tests/                    # Test files (mirrors src/ structure)
+    config.ts         # Global config constants
+    content/          # Document loading, parsing, tree building
+    markdown/         # MD→HTML processing (remark/rehype pipeline)
+    nav/              # Navigation tree building
+    children/         # [CHILDREN] marker replacement
+    toc/              # Table of contents extraction & generation
+    versions/         # Version utilities and constants
+    metadata/         # Metadata generation (SEO)
+    utils/            # Shared utilities (escapeHtml, slug-utils, github-utils)
+  types/              # TypeScript interfaces
+  contexts/           # React contexts (MobileMenuContext)
+
+scripts/
+  clone-docs.mjs      # Clone docs from GitHub (handles versions, optional features)
+  copy-images.mjs     # Copy images to static export folder
+
+tests/                # Jest tests (mirrors src/ structure)
+  fixtures/
+    mock-content/     # Mock data for testing (v3-v6 sample docs)
+
+Root-Level Configs
+  next.config.mjs     # Next.js configuration (static export, distDir='out', cpus: 2)
+  tsconfig.json       # TypeScript configuration (strict mode)
+  jest.config.cjs     # Jest test configuration
+  sources-docs.ts     # Developer docs GitHub repos config
+  sources-user.ts     # User help GitHub repos config
+  sources-config.ts   # Unified config wrapper
+  .eslintrc.json      # ESLint rules (Airbnb style guide)
 ```
 
 ---

@@ -116,6 +116,14 @@ The npm scripts wrap commands in `sh -c '...'` to ensure environment variables a
 
 ## Project Structure
 
+### Build Output
+
+- **`.next/`** - Next.js build cache (dev server)
+- **`out/`** - Static HTML export (production builds via `npm run build`)
+- **`public/`** - Static assets served at root URL (images, fonts, etc.)
+
+### Source Code
+
 ```
 .cache/
   docs/               # Cloned developer docs (v3-v6)
@@ -124,30 +132,41 @@ The npm scripts wrap commands in `sh -c '...'` to ensure environment variables a
 src/
   app/                # Next.js app router pages
     en/[version]/[[...slug]]/page.tsx  # Main doc page
+    en/layout.tsx     # Layout for /en/* routes
+    layout.tsx        # Root layout
+    robots.ts         # SEO robots.txt
+    sitemap.ts        # SEO sitemap.xml
   components/         # React components (PascalCase)
+    Sidebar.tsx, Header.tsx, CodeBlock.tsx, etc.
   lib/
+    config.ts         # Global config constants
     content/          # Document loading, parsing, tree building
     markdown/         # MD→HTML processing (remark/rehype pipeline)
     nav/              # Navigation tree building
     children/         # [CHILDREN] marker replacement
+    toc/              # Table of contents extraction & generation
     versions/         # Version utilities and constants
     metadata/         # Metadata generation (SEO)
-    utils/            # Shared utilities (escapeHtml, slug normalization)
-    routing.ts        # URL routing utilities
+    utils/            # Shared utilities (escapeHtml, slug-utils, github-utils)
   types/              # TypeScript interfaces
   contexts/           # React contexts (MobileMenuContext)
 
-sources-docs.ts       # Developer docs GitHub config (project root)
-sources-user.ts       # User help GitHub config (project root)
-sources-config.ts     # Unified config wrapper (project root)
-
 scripts/
-  clone-docs.mjs      # Clone docs from GitHub
+  clone-docs.mjs      # Clone docs from GitHub (handles versions, optional features)
   copy-images.mjs     # Copy images to static export folder
 
 tests/                # Jest tests (mirrors src/ structure)
   fixtures/
-    mock-content/     # Mock data for testing
+    mock-content/     # Mock data for testing (v3-v6 sample docs)
+
+Root-Level Configs
+  next.config.mjs     # Next.js configuration (static export, distDir='out', cpus: 2)
+  tsconfig.json       # TypeScript configuration (strict mode)
+  jest.config.cjs     # Jest test configuration
+  sources-docs.ts     # Developer docs GitHub repos config
+  sources-user.ts     # User help GitHub repos config
+  sources-config.ts   # Unified config wrapper
+  .eslintrc.json      # ESLint rules (Airbnb style guide)
 ```
 
 ### Key Modules
@@ -351,8 +370,6 @@ Run `npm run lint` - must have **0 errors and 0 warnings** (Airbnb style guide).
 # Kill the process on port 9876
 lsof -i :9876
 kill -9 <PID>
-
-# Or use a different port in next.config.mjs
 ```
 
 ### Content Not Updating
