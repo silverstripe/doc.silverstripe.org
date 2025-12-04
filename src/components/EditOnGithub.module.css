@@ -2,7 +2,7 @@
   font-size: 0.875rem;
   color: var(--text-muted, #6b7280);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color var(--transition-standard);
 }
 
 .editLink:hover {

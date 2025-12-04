@@ -22,7 +22,7 @@
   border-radius: 0.5rem;
   background: white;
   overflow: hidden;
-  transition: all 0.3s ease-in-out;
+  transition: all var(--transition-standard);
   position: relative;
   height: 100%;
 }
@@ -61,7 +61,7 @@
   color: var(--theme-color-primary);
   border-radius: 50%;
   font-size: 1rem;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color var(--transition-standard);
 }
 
 .cardTitleText {
@@ -98,7 +98,7 @@
   text-decoration: none;
   display: block;
   padding: 0.5rem 0;
-  transition: color 0.2s ease-in-out;
+  transition: color var(--transition-standard);
 }
 
 .docsListItemTitle:hover {

@@ -10,7 +10,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .sidebar {
-    transition: opacity 0.2s ease-in-out;
+    transition: opacity var(--transition-standard);
   }
 }
 
@@ -49,7 +49,7 @@
   width: 24px;
   height: 24px;
   color: var(--theme-text-secondary);
-  transition: transform 0.2s ease-in-out;
+  transition: transform var(--transition-standard);
   flex-shrink: 0;
 }
 
@@ -96,7 +96,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .chevron {
-    transition: transform 0.2s ease-in-out;
+    transition: transform var(--transition-standard);
   }
 }
 
@@ -121,7 +121,7 @@
   color: var(--theme-text-secondary);
   text-decoration: none;
   font-size: 0.875rem;
-  transition: all 0.2s ease-in-out;
+  transition: all var(--transition-standard);
   width: 100%;
 }
 
@@ -145,7 +145,7 @@
   height: 100%;
   background-color: transparent;
   border-radius: 1rem;
-  transition: background-color 0.2s ease-in-out;
+  transition: background-color var(--transition-standard);
 }
 
 .navLink.active::before {

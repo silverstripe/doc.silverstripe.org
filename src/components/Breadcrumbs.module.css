@@ -24,7 +24,7 @@
 .link {
   color: var(--theme-color-primary);
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color var(--transition-standard);
 }
 
 .link:hover {

@@ -9,7 +9,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  transition: background-color var(--transition-standard), border-color var(--transition-standard);
 }
 
 .headerContent {
@@ -98,7 +98,7 @@
 .navLink {
   text-decoration: none;
   color: var(--theme-text-secondary);
-  transition: color 0.2s ease-in-out;
+  transition: color var(--transition-standard);
   font-size: 0.875rem;
   font-weight: 500;
 }

@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: center;
   color: var(--theme-text-primary);
-  transition: all 0.2s ease-in-out;
+  transition: all var(--transition-standard);
 }
 
 .hamburger:hover {
@@ -28,7 +28,7 @@
   height: 2px;
   background-color: var(--theme-text-primary);
   border-radius: 1px;
-  transition: all 0.3s ease-in-out;
+  transition: all var(--transition-standard);
 }
 
 .hamburger.open .line:first-child {
