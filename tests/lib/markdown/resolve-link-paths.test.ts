@@ -20,13 +20,13 @@ describe('resolveMarkdownLink', () => {
       expect(result).toBe('#section');
     });
 
-    it('returns absolute paths unchanged even if they end in .md', () => {
+    it('resolves root-relative paths ending with .md as internal doc links', () => {
       const result = resolveMarkdownLink(
         '/absolute/path/file.md',
         '/current/file.md',
         '6',
       );
-      expect(result).toBe('/absolute/path/file.md');
+      expect(result).toBe('/en/6/absolute/path/file/');
     });
 
     it('returns http URLs unchanged even if they end in .md', () => {
@@ -36,6 +36,33 @@ describe('resolveMarkdownLink', () => {
         '6',
       );
       expect(result).toBe('http://example.com/file.md');
+    });
+
+    it('returns static asset paths unchanged', () => {
+      const result = resolveMarkdownLink(
+        '/_images/screenshot.png',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/_images/screenshot.png');
+    });
+
+    it('returns _resources paths unchanged', () => {
+      const result = resolveMarkdownLink(
+        '/_resources/file.zip',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/_resources/file.zip');
+    });
+
+    it('returns /assets paths unchanged', () => {
+      const result = resolveMarkdownLink(
+        '/assets/logo.svg',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/assets/logo.svg');
     });
   });
 
@@ -76,13 +103,40 @@ describe('resolveMarkdownLink', () => {
       expect(result).toBe('/en/6/developer_guides/security/secure_coding/');
     });
 
-    it('resolves root-relative paths without .md extension if they contain known segments', () => {
+    it('resolves root-relative paths without .md extension (dynamic detection)', () => {
       const result = resolveMarkdownLink(
         '/developer_guides/security/secure_coding',
         '/current/file.md',
         '6',
       );
       expect(result).toBe('/en/6/developer_guides/security/secure_coding/');
+    });
+
+    it('resolves any new section dynamically without hardcoding', () => {
+      const result = resolveMarkdownLink(
+        '/project_governance/request_for_comment',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/project_governance/request_for_comment/');
+    });
+
+    it('resolves upgrading/deprecations path dynamically', () => {
+      const result = resolveMarkdownLink(
+        '/upgrading/deprecations',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/upgrading/deprecations/');
+    });
+
+    it('resolves any_new_section/any_page path dynamically', () => {
+      const result = resolveMarkdownLink(
+        '/any_new_section/any_page',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/any_new_section/any_page/');
     });
 
     it('resolves root-relative paths without .md with anchor', () => {
@@ -101,33 +155,6 @@ describe('resolveMarkdownLink', () => {
         '6',
       );
       expect(result).toBe('/en/6/developer_guides/security/');
-    });
-
-    it('handles getting_started directory', () => {
-      const result = resolveMarkdownLink(
-        '/getting_started/installation.md',
-        '/current/file.md',
-        '6',
-      );
-      expect(result).toBe('/en/6/getting_started/installation/');
-    });
-
-    it('handles optional_features directory', () => {
-      const result = resolveMarkdownLink(
-        '/optional_features/linkfield/configuration.md',
-        '/current/file.md',
-        '6',
-      );
-      expect(result).toBe('/en/6/optional_features/linkfield/configuration/');
-    });
-
-    it('handles managing_your_website directory', () => {
-      const result = resolveMarkdownLink(
-        '/managing_your_website/creating_pages.md',
-        '/current/file.md',
-        '6',
-      );
-      expect(result).toBe('/en/6/managing_your_website/creating_pages/');
     });
   });
 

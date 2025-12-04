@@ -1,25 +1,27 @@
 import path from 'path';
 
 /**
- * List of known directory segments that can appear in root-relative markdown links
+ * Checks if a root-relative path should be treated as an internal documentation link
+ * Excludes paths that are already resolved, external URLs, or static assets
  */
-const KNOWN_DIR_SEGMENTS = [
-  'getting_started',
-  'developer_guides',
-  'optional_features',
-  'managing_your_website',
-  'changelogs',
-  'contributing',
-];
+function isInternalDocLink(pathStr: string): boolean {
+  // Already resolved with /en/ prefix
+  if (pathStr.startsWith('/en/')) {
+    return false;
+  }
 
-/**
- * Checks if a path contains at least one known directory segment
- * Handles paths with numeric prefixes like /01_developer_guides
- */
-function containsKnownSegment(pathStr: string): boolean {
-  // Remove numeric prefixes from each path segment and check
-  const segments = pathStr.split('/').map((part) => part.replace(/^\d+_/, '').toLowerCase());
-  return segments.some((segment) => KNOWN_DIR_SEGMENTS.includes(segment));
+  // External URLs with protocol
+  if (pathStr.startsWith('http') || pathStr.includes('://')) {
+    return false;
+  }
+
+  // Static asset paths (images, resources, etc)
+  if (pathStr.startsWith('/_images/') || pathStr.startsWith('/_resources/') || pathStr.startsWith('/assets/')) {
+    return false;
+  }
+
+  // If it passes all filters, it's an internal doc link
+  return true;
 }
 
 /**
@@ -54,8 +56,9 @@ function resolveRootRelativePath(linkPath: string, version: string): string {
 }
 
 /**
- * Resolves relative markdown file links to proper URL paths
+ * Resolves markdown file links to proper URL paths
  * Transforms links like './04_security.md' to '/en/6/optional_features/advancedworkflow/security/'
+ * Also handles root-relative links that don't have .md extension but are internal docs
  *
  * @param linkPath - The link path from markdown (e.g., './04_security.md')
  * @param currentFilePath - The full path of the current markdown file
@@ -70,14 +73,9 @@ export function resolveMarkdownLink(
   // Skip if not a markdown file link
   if (!linkPath.endsWith('.md')) {
     // Handle root-relative paths that don't have .md extension
-    // Check if it's a root-relative path starting with / and not already prefixed with /en/
-    if (linkPath.startsWith('/') && !linkPath.startsWith('/en/') && !linkPath.startsWith('http') && !linkPath.includes('://')) {
-      // Extract path without anchor
-      const [pathOnly] = linkPath.split('#');
-      // Check if it contains a known directory segment
-      if (containsKnownSegment(pathOnly)) {
-        return resolveRootRelativePath(linkPath, version);
-      }
+    // If it's a root-relative internal docs link, resolve it
+    if (linkPath.startsWith('/') && isInternalDocLink(linkPath)) {
+      return resolveRootRelativePath(linkPath, version);
     }
     return linkPath;
   }
@@ -98,8 +96,8 @@ export function resolveMarkdownLink(
       return linkPath;
     }
 
-    // Check if it contains a known directory segment
-    if (!containsKnownSegment(pathOnly)) {
+    // Check if it's an internal doc link
+    if (!isInternalDocLink(pathOnly)) {
       return linkPath;
     }
 
