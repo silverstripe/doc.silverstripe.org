@@ -77,6 +77,29 @@ function copyToDestination(sourceDir, destDir, description) {
   return totalCopied;
 }
 
+function copyStaticAssets(destDir) {
+  const assetsDir = path.join(rootDir, 'assets');
+  const assetFiles = ['favicon.ico', 'logo.svg'];
+  let copiedCount = 0;
+
+  if (!fs.existsSync(assetsDir)) {
+    console.log('  ⚠️  Assets directory not found at', assetsDir);
+    return 0;
+  }
+
+  for (const file of assetFiles) {
+    const srcFile = path.join(assetsDir, file);
+    const destFile = path.join(destDir, file);
+
+    if (fs.existsSync(srcFile)) {
+      fs.copyFileSync(srcFile, destFile);
+      copiedCount++;
+    }
+  }
+
+  return copiedCount;
+}
+
 async function copyImages() {
   try {
     const useMockData = process.env.NEXT_USE_MOCK_DATA === 'true';
@@ -108,6 +131,7 @@ async function copyImages() {
       path.join(rootDir, 'public'),
       'public'
     );
+    const publicAssets = copyStaticAssets(path.join(rootDir, 'public'));
 
     // Copy to out/ for static export
     console.log('  → out/ (static export)');
@@ -116,8 +140,9 @@ async function copyImages() {
       path.join(rootDir, 'out'),
       'out'
     );
+    const outAssets = copyStaticAssets(path.join(rootDir, 'out'));
 
-    const totalCopied = publicCopied + outCopied;
+    const totalCopied = publicCopied + outCopied + publicAssets + outAssets;
     console.log(`✅ Copied ${totalCopied} image file(s) to output directories`);
   } catch (error) {
     console.error('❌ Error copying images:', error.message);

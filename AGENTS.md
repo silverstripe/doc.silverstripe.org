@@ -58,8 +58,9 @@ Scripts use `sh -c '...'` to ensure `DOCS_CONTEXT` is inherited by all commands 
 ### Build Output
 
 - **`.next/`** - Next.js build cache (dev server)
-- **`out/`** - Static HTML export (production builds via `npm run build`)
-- **`public/`** - Static assets served at root URL (images, fonts, etc.)
+- **`out/`** - Static HTML export (production builds via `npm run build`), served at root URL
+- **`public/`** - Static assets for dev server (populated during `npm run dev`), served at root URL
+- **`assets/`** - Source files for favicon and logo (copied to `public/` and `out/`)
 
 **Note:** Next.js reserves `public/` for static assets and cannot use it as `distDir`. The output directory is `out/` (Next.js default for static exports), matching deployment expectations.
 
@@ -69,6 +70,10 @@ Scripts use `sh -c '...'` to ensure `DOCS_CONTEXT` is inherited by all commands 
 .cache/
   docs/               # Cloned developer docs (v3-v6)
   user/               # Cloned user help docs (v3-v6)
+
+assets/               # Static files (favicon, logo)
+  favicon.ico
+  logo.svg
 
 src/
   app/                # Next.js app router pages
@@ -94,7 +99,7 @@ src/
 
 scripts/
   clone-docs.mjs      # Clone docs from GitHub (handles versions, optional features)
-  copy-images.mjs     # Copy images to static export folder
+  copy-images.mjs     # Copy images and static assets to public/ (dev) and out/ (build)
 
 tests/                # Jest tests (mirrors src/ structure)
   fixtures/

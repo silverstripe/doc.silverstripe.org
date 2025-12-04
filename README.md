@@ -119,8 +119,9 @@ The npm scripts wrap commands in `sh -c '...'` to ensure environment variables a
 ### Build Output
 
 - **`.next/`** - Next.js build cache (dev server)
-- **`out/`** - Static HTML export (production builds via `npm run build`)
-- **`public/`** - Static assets served at root URL (images, fonts, etc.)
+- **`out/`** - Static HTML export (production builds via `npm run build`), served at root URL
+- **`public/`** - Static assets for dev server (populated during `npm run dev`), served at root URL
+- **`assets/`** - Source files for favicon and logo (copied to `public/` and `out/`)
 
 ### Source Code
 
@@ -128,6 +129,10 @@ The npm scripts wrap commands in `sh -c '...'` to ensure environment variables a
 .cache/
   docs/               # Cloned developer docs (v3-v6)
   user/               # Cloned user help docs (v3-v6)
+
+assets/               # Static files (favicon, logo)
+  favicon.ico
+  logo.svg
 
 src/
   app/                # Next.js app router pages
@@ -153,7 +158,7 @@ src/
 
 scripts/
   clone-docs.mjs      # Clone docs from GitHub (handles versions, optional features)
-  copy-images.mjs     # Copy images to static export folder
+  copy-images.mjs     # Copy images and static assets to public/ (dev) and out/ (build)
 
 tests/                # Jest tests (mirrors src/ structure)
   fixtures/
@@ -264,7 +269,7 @@ This is a **gate for production builds** - `npm run build` runs linting first.
 
 ### copy-images.mjs
 
-Copies image files from content directories to the `out/` folder for static export.
+Copies image files from content directories and static assets (favicon, logo) to both `public/` (development) and `out/` (production) directories.
 
 #### How It Determines the Source
 
@@ -273,20 +278,28 @@ Copies image files from content directories to the `out/` folder for static expo
 
 #### What It Does
 
-1. Finds all version directories (v3, v4, v5, v6)
-2. Recursively finds all image files (.png, .jpg, .jpeg, .gif, .webp, .svg)
-3. Preserves directory structure when copying to `out/`
+1. **Content Images:** Finds all version directories (v3, v4, v5, v6), recursively finds all image files (.png, .jpg, .jpeg, .gif, .webp, .svg), and preserves directory structure when copying
+2. **Static Assets:** Copies `favicon.ico` and `logo.svg` from `assets/` directory
+3. **Dual Destinations:** 
+   - Copies to `public/` for dev server (Next.js serves static files from `public/`)
+   - Copies to `out/` for production (static export build output)
 
 #### Integration with Build
 
-The build process automatically handles images:
+The build process automatically handles images and assets:
 
 ```bash
 npm run build:docs
 # Runs: lint → clone:docs → next build → copy-images:docs
+
+npm run dev:docs
+# Runs: copy-images:docs → next dev
 ```
 
-This ensures images are copied after the Next.js build completes.
+#### Note on Directories
+
+- **Development (`npm run dev`)**: Next.js serves static files from `public/` directory
+- **Production (`npm run build`)**: Static files are in `out/` directory (output from `next build --experimental-app`)
 
 ---
 
