@@ -1,0 +1,178 @@
+================================================================================
+ALGOLIA DOCSEARCH SETUP - TODO FOR HUMAN
+================================================================================
+
+PROJECT STATUS: SearchBox component implemented with graceful degradation.
+When Algolia credentials are not configured, the search input is not rendered.
+Once credentials are obtained, search will be fully functional.
+
+================================================================================
+IMPLEMENTATION ANALYSIS
+================================================================================
+
+✓ COMPONENT: src/components/SearchBox.tsx
+  - Uses @docsearch/react library (version 4.3.2, already in package.json)
+  - Gracefully handles missing configuration (returns null if env vars not set)
+  - Extracts current version from URL pathname
+  - Applies version facet filter for version-specific search results
+  - Supports up to 5 search results per page
+  - Disables user personalization
+  - Redirects to relative URLs for Next.js navigation
+
+✓ REQUIRED ENVIRONMENT VARIABLES (3):
+  1. NEXT_PUBLIC_DOCSEARCH_APP_ID
+     - Algolia application ID (public, safe to expose to browser)
+  2. NEXT_PUBLIC_DOCSEARCH_API_KEY
+     - Algolia search-only API key (public, safe to expose to browser)
+  3. NEXT_PUBLIC_DOCSEARCH_INDEX_NAME
+     - Name of the Algolia index (e.g., "silverstripe-docs")
+
+✓ DEPENDENCY: @docsearch/react is already in package.json
+  - Includes @docsearch/css for styling
+  - No additional installations needed
+
+================================================================================
+HUMAN ACTIONABLE STEPS
+================================================================================
+
+STEP 1: APPLY FOR ALGOLIA DOCSEARCH (FREE FOR OPEN SOURCE)
+────────────────────────────────────────────────────────────
+1. Visit: https://docsearch.algolia.com/apply
+2. Fill out the application form:
+   - Website URL: https://doc.silverstripe.org
+   - Sitemap URL: https://doc.silverstripe.org/sitemap.xml (to be deployed)
+   - Email: Use project contact or owner
+   - Other info as requested
+3. Wait for approval (typically 1-2 weeks for open source projects)
+4. Algolia will create a DocSearch index and send credentials
+
+IMPORTANT: The site must be deployed and publicly accessible before Algolia
+can crawl it. If the site is not yet deployed, you can request Algolia to 
+configure it for your development domain temporarily for testing.
+
+
+STEP 2: CONFIGURE ENVIRONMENT VARIABLES
+────────────────────────────────────────
+Once you receive credentials from Algolia:
+
+Option A: Local Development (.env.local)
+  1. Create/edit .env.local in project root
+  2. Add the three variables:
+     NEXT_PUBLIC_DOCSEARCH_APP_ID=your_app_id
+     NEXT_PUBLIC_DOCSEARCH_API_KEY=your_search_api_key
+     NEXT_PUBLIC_DOCSEARCH_INDEX_NAME=your_index_name
+  3. Restart dev server: npm run dev (or npm run mock)
+  4. Search box should appear in header
+
+Option B: Production Deployment
+  Set these environment variables in your deployment platform:
+  - GitHub Actions secrets
+  - Vercel environment variables
+  - Docker environment variables
+  - Your hosting provider's config
+  
+  Make sure they are visible at BUILD TIME (used to configure the client).
+
+
+STEP 3: TEST LOCALLY
+──────────────────────
+1. Add credentials to .env.local (see Step 2)
+2. Run: npm run dev
+3. Open browser to http://localhost:9876
+4. Look for search input in header (top right of page)
+5. Click search and try a query (e.g., "template")
+6. Results should show with version filter applied
+7. Click a result - should navigate to that document
+
+
+STEP 4: ALGOLIA INDEX CONFIGURATION
+────────────────────────────────────
+After Algolia crawls your deployed site, you may need to configure:
+
+1. Facets: Ensure "version" is set as a facet for version-specific search
+2. Ranking: Adjust ranking rules if needed
+3. Crawling Schedule: Set up regular re-indexing (weekly or as needed)
+
+Algolia DocSearch typically handles this automatically, but you can manage
+it in the Algolia dashboard: https://dashboard.algolia.com
+
+
+STEP 5: VERIFY CONFIGURATION
+─────────────────────────────
+After deployment with environment variables set:
+
+1. Build the site: npm run build
+2. Check that SearchBox renders in the header (not null)
+3. Perform test searches to verify:
+   - Results appear
+   - Results are filtered by current version
+   - Clicking results navigates correctly
+4. Test in different versions (URLs like /en/3/, /en/4/, etc.)
+
+================================================================================
+REFERENCE: CURRENT IMPLEMENTATION DETAILS
+================================================================================
+
+How SearchBox Works:
+  - Reads three env vars at build/render time
+  - Extracts version from URL pathname (/en/{version}/)
+  - Passes version as facetFilter to Algolia
+  - Only searches index for current version
+  - Handles navigation with window.location.href
+
+Graceful Degradation:
+  - If any env var is missing, SearchBox returns null
+  - Search input doesn't appear in header
+  - No errors in console, no broken functionality
+  - Site works normally without search
+
+Version Filtering:
+  - Current implementation searches: facetFilters: [`version:${currentVersion}`]
+  - This assumes Algolia index has "version" as a facet
+  - Algolia DocSearch crawler automatically adds version attribute
+
+URL Handling:
+  - SearchBox converts absolute URLs to relative URLs
+  - Uses window.location.href for navigation
+  - Works with Next.js app router
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Q: Search box doesn't appear in header
+A: Check that all three env vars are set and the dev server was restarted
+   Run: echo $NEXT_PUBLIC_DOCSEARCH_APP_ID (etc) to verify
+
+Q: Search appears but no results
+A: 1. Check that the Algolia index has been populated
+   2. Verify the index name matches NEXT_PUBLIC_DOCSEARCH_INDEX_NAME
+   3. Check Algolia dashboard for crawling status
+
+Q: Results show wrong version
+A: Ensure the URL matches /en/{version}/ format
+   SearchBox extracts version from pathname
+
+Q: Navigation doesn't work when clicking results
+A: This is expected behavior - uses window.location.href
+   Page will hard-reload to the result URL
+
+Q: Getting CORS or API errors
+A: Verify API key permissions in Algolia dashboard
+   Search-only keys should have limited permissions (more secure)
+
+================================================================================
+NEXT STEPS AFTER SETUP
+================================================================================
+
+1. Monitor search usage in Algolia dashboard
+2. Periodically review search analytics
+3. Adjust Algolia ranking rules if needed
+4. Keep index updated with new documentation
+5. Test search with new content after releases
+
+For questions about Algolia DocSearch, see:
+  - https://docsearch.algolia.com/docs
+  - https://www.algolia.com/doc/api-reference/
+
+================================================================================
