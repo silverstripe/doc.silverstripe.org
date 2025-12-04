@@ -39,6 +39,98 @@ describe('resolveMarkdownLink', () => {
     });
   });
 
+  describe('root-relative markdown paths', () => {
+    it('resolves root-relative paths with .md extension', () => {
+      const result = resolveMarkdownLink(
+        '/developer_guides/security/secure_coding.md',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/security/secure_coding/');
+    });
+
+    it('resolves root-relative paths with anchor fragments', () => {
+      const result = resolveMarkdownLink(
+        '/developer_guides/security/secure_coding.md#filesystem',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/security/secure_coding/#filesystem');
+    });
+
+    it('resolves root-relative index.md files', () => {
+      const result = resolveMarkdownLink(
+        '/developer_guides/index.md',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/');
+    });
+
+    it('resolves root-relative paths with numeric prefixes', () => {
+      const result = resolveMarkdownLink(
+        '/01_developer_guides/02_security/03_secure_coding.md',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/security/secure_coding/');
+    });
+
+    it('resolves root-relative paths without .md extension if they contain known segments', () => {
+      const result = resolveMarkdownLink(
+        '/developer_guides/security/secure_coding',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/security/secure_coding/');
+    });
+
+    it('resolves root-relative paths without .md with anchor', () => {
+      const result = resolveMarkdownLink(
+        '/developer_guides/security/secure_coding#filesystem',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/security/secure_coding/#filesystem');
+    });
+
+    it('leaves paths already prefixed with /en/ unchanged', () => {
+      const result = resolveMarkdownLink(
+        '/en/6/developer_guides/security/',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/security/');
+    });
+
+    it('handles getting_started directory', () => {
+      const result = resolveMarkdownLink(
+        '/getting_started/installation.md',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/getting_started/installation/');
+    });
+
+    it('handles optional_features directory', () => {
+      const result = resolveMarkdownLink(
+        '/optional_features/linkfield/configuration.md',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/optional_features/linkfield/configuration/');
+    });
+
+    it('handles managing_your_website directory', () => {
+      const result = resolveMarkdownLink(
+        '/managing_your_website/creating_pages.md',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/managing_your_website/creating_pages/');
+    });
+  });
+
   describe('relative .md links in .cache/docs', () => {
     it('resolves ./ relative links with numeric prefix', () => {
       const result = resolveMarkdownLink(
