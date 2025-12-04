@@ -78,6 +78,8 @@ export default async function Page({ params: paramsPromise }: PageProps) {
   const { markdownToHtmlWithCleanup } = await import('@/lib/markdown/processor');
   const { replaceChildrenMarkers } = await import('@/lib/children/replace-children-markers');
   const { getDefaultVersion } = await import('@/lib/versions/version-utils');
+  const { extractHeadings } = await import('@/lib/toc/extract-headings');
+  const { generateTocHtml, insertTocAfterH1 } = await import('@/lib/toc/generate-toc-html');
 
   const params = await paramsPromise;
   const { version, slug } = params;
@@ -97,11 +99,18 @@ export default async function Page({ params: paramsPromise }: PageProps) {
   const allDocs = await getAllDocuments();
   const navTree = buildNavTree(allDocs, version, doc.slug);
 
+  // Extract headings for table of contents (before HTML conversion)
+  const headings = extractHeadings(doc.content);
+  const tocHtml = generateTocHtml(headings);
+
   // Convert markdown to HTML with image path resolution and API link rewriting
   let htmlContent = await markdownToHtmlWithCleanup(doc.content, doc.fileAbsolutePath, version);
 
   // Replace [CHILDREN] markers with rendered children
   htmlContent = replaceChildrenMarkers(htmlContent, doc, allDocs);
+
+  // Insert TOC after the H1 heading
+  htmlContent = insertTocAfterH1(htmlContent, tocHtml);
 
   const defaultVersion = getDefaultVersion();
   const latestVersionPath = getVersionPath(doc.slug, defaultVersion);

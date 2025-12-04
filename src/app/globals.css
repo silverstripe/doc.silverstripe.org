@@ -809,6 +809,77 @@ article > h1:first-child {
   margin-bottom: 0.75rem;
 }
 
+/* ============ Table of Contents ============ */
+.toc {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.25rem;
+  background: var(--gray-100);
+  border-radius: 0.5rem;
+  border: 1px solid var(--theme-border);
+}
+
+:root.dark .toc {
+  background: var(--gray-800);
+}
+
+.toc-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--theme-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.75rem;
+}
+
+.toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc-item {
+  margin: 0;
+  padding: 0;
+}
+
+/* H2 - no indent (base level) */
+.toc-item[data-level="2"] {
+  padding-left: 0;
+}
+
+/* H3 - 1 level indent */
+.toc-item[data-level="3"] {
+  padding-left: 1rem;
+}
+
+/* H4 - 2 levels indent */
+.toc-item[data-level="4"] {
+  padding-left: 2rem;
+}
+
+/* H5 - 3 levels indent */
+.toc-item[data-level="5"] {
+  padding-left: 3rem;
+}
+
+/* H6 - 4 levels indent */
+.toc-item[data-level="6"] {
+  padding-left: 4rem;
+}
+
+.toc-link {
+  display: block;
+  padding: 0.25rem 0;
+  font-size: 0.9rem;
+  color: var(--theme-text-secondary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.toc-link:hover {
+  color: var(--theme-color-primary);
+}
+
 /* ============ Images ============ */
 img {
   max-width: 100%;

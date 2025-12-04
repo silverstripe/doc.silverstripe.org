@@ -25,7 +25,7 @@ module.exports = {
     process.env.RUN_ALERTS_TESTS ? '' : 'links.test'
   ].filter(Boolean),
   transformIgnorePatterns: [
-    'node_modules/(?!(unified|remark|rehype|mdast|hast|micromark|decode-named-character-reference|character-entities|unist-util-visit|unist-util-position|unist-util-position-from-estree|is-plain-obj|bail|ccount|escape-string-regexp|markdown-table|parse-entities|markdown-extensions|space-separated-tokens|comma-separated-tokens|character-reference-invalid|web-namespaces|zwitch|fault|type-fest|hastscript|unist-util-visit-parents|unist-util-is|rehype-slug|rehype-autolink-headings|remark-github-blockquote-alert|vfile|vfile-message|devlop|extend)/)'
+    'node_modules/(?!(unified|remark|rehype|mdast|hast|micromark|decode-named-character-reference|character-entities|unist-util-visit|unist-util-position|unist-util-position-from-estree|is-plain-obj|bail|ccount|escape-string-regexp|markdown-table|parse-entities|markdown-extensions|space-separated-tokens|comma-separated-tokens|character-reference-invalid|web-namespaces|zwitch|fault|type-fest|hastscript|unist-util-visit-parents|unist-util-is|rehype-slug|rehype-autolink-headings|remark-github-blockquote-alert|vfile|vfile-message|devlop|extend|github-slugger)/)'
   ],
   setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
   collectCoverageFrom: [
