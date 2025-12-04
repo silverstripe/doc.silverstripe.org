@@ -1,5 +1,6 @@
 import { DocumentNode } from '@/types';
-import { FilterOptions, getChildrenFiltered } from '@/lib/children';
+import { getChildrenFiltered } from '@/lib/children/get-children';
+import type { FilterOptions } from '@/lib/children/get-children';
 import styles from './ChildrenList.module.css';
 
 interface ChildrenListProps {

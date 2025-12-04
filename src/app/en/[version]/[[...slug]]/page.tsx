@@ -1,11 +1,11 @@
 import { notFound, redirect } from 'next/navigation';
 import { getDocumentByParams, getAllDocuments } from '@/lib/content/get-document';
-import { buildNavTree } from '@/lib/nav';
+import { buildNavTree } from '@/lib/nav/build-nav-tree';
 import { DocsLayout } from '@/components/DocsLayout';
 import { VersionBanner } from '@/components/VersionBanner';
 import EditOnGithub from '@/components/EditOnGithub';
-import { generatePageMetadata } from '@/lib/seo';
-import { getVersionPath, getVersionHomepage } from '@/lib/versions';
+import { generatePageMetadata } from '@/lib/seo/metadata';
+import { getVersionPath, getVersionHomepage } from '@/lib/versions/version-utils';
 import type { Metadata } from 'next';
 import styles from './page.module.css';
 
@@ -47,7 +47,7 @@ export async function generateStaticParams(): Promise<PageParams[]> {
  * Generate metadata for the page
  */
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
-  const { getDefaultVersion, getVersionPath: getVersionPathFn } = await import('@/lib/versions');
+  const { getDefaultVersion, getVersionPath: getVersionPathFn } = await import('@/lib/versions/version-utils');
   const params = await props.params;
   const doc = await getDocumentByParams(params.version, params.slug);
 
@@ -76,8 +76,8 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
  */
 export default async function Page({ params: paramsPromise }: PageProps) {
   const { markdownToHtmlWithCleanup } = await import('@/lib/markdown/processor');
-  const { replaceChildrenMarkers } = await import('@/lib/children');
-  const { getDefaultVersion } = await import('@/lib/versions');
+  const { replaceChildrenMarkers } = await import('@/lib/children/replace-children-markers');
+  const { getDefaultVersion } = await import('@/lib/versions/version-utils');
 
   const params = await paramsPromise;
   const { version, slug } = params;

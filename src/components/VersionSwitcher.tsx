@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import cx from 'classnames';
-import { getAllVersions, getVersionSwitcherLabel, getVersionStatus } from '@/lib/versions';
+import { getAllVersions, getVersionSwitcherLabel, getVersionStatus } from '@/lib/versions/version-utils';
 import styles from './VersionSwitcher.module.css';
 
 interface VersionSwitcherProps {

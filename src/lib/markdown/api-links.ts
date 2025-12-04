@@ -3,7 +3,7 @@
  * Supports formats: [api:Class], [api:Class::method()], [api:Class->property]
  */
 
-import { getDefaultVersion } from '@/lib/versions';
+import { getDefaultVersion } from '@/lib/versions/version-utils';
 
 /**
  * Get the current version from context (used during markdown processing)

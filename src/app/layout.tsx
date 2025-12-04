@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { generateRootMetadata } from '@/lib/seo';
+import { generateRootMetadata } from '@/lib/seo/metadata';
 import { RootLayoutClient } from '@/components/RootLayoutClient';
 import { getConfig } from '@/lib/config';
 import { DarkModeScript } from './dark-mode-script';

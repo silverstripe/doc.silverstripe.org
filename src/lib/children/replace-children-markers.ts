@@ -1,5 +1,5 @@
 import { DocumentNode } from '@/types';
-import { escapeHtml } from '@/lib/utils';
+import { escapeHtml } from '@/lib/utils/escape-html';
 import {
   findChildrenMarkers,
   ChildrenConfig,

@@ -2,7 +2,7 @@
  * Consolidated utility functions for slug handling and routing
  */
 import { DocumentNode } from '@/types';
-import { getAllVersions, getDefaultVersion } from '@/lib/versions';
+import { getAllVersions, getDefaultVersion } from '@/lib/versions/version-utils';
 
 /**
  * Normalize a slug to ensure consistent format

@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import cx from 'classnames';
 import Link from 'next/link';
-import { NavNode, isNodeOrDescendantActive, getActiveAncestorsSlug } from '@/lib/nav';
+import { isNodeOrDescendantActive, getActiveAncestorsSlug } from '@/lib/nav/build-nav-tree';
+import type { NavNode } from '@/types';
 import styles from './Sidebar.module.css';
 
 interface SidebarProps {

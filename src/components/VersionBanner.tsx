@@ -1,4 +1,4 @@
-import { getVersionMessage, getDefaultVersion } from '@/lib/versions';
+import { getVersionMessage, getDefaultVersion } from '@/lib/versions/version-utils';
 import { useMemo } from 'react';
 import cx from 'classnames';
 import styles from './VersionBanner.module.css';

@@ -4,7 +4,7 @@
  */
 import { getAllDocuments, clearDocumentCache, getDocumentBySlug, getDocumentByParams } from '@/lib/content/get-document';
 import { buildNavTree } from '@/lib/nav/build-nav-tree';
-import { replaceChildrenMarkers } from '@/lib/children';
+import { replaceChildrenMarkers } from '@/lib/children/replace-children-markers';
 
 describe('Phase 6: Navigation and Changelog Integration', () => {
   beforeEach(() => {

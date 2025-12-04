@@ -3,7 +3,7 @@
 import { DocSearch } from '@docsearch/react';
 import { usePathname } from 'next/navigation';
 import { useCallback } from 'react';
-import { getDefaultVersion } from '@/lib/versions';
+import { getDefaultVersion } from '@/lib/versions/version-utils';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import '@docsearch/css';
 

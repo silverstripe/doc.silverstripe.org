@@ -3,7 +3,7 @@
  * When a page doesn't exist in the target version, it should redirect to homepage
  */
 
-import { getVersionHomepage } from '@/lib/versions';
+import { getVersionHomepage } from '@/lib/versions/version-utils';
 import { slugExistsInVersion } from '@/lib/versions/get-available-slugs';
 
 describe('Version Fallback', () => {

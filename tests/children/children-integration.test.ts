@@ -1,4 +1,4 @@
-import { replaceChildrenMarkers } from '../../src/lib/children';
+import { replaceChildrenMarkers } from '../../src/lib/children/replace-children-markers';
 import { DocumentNode } from '@/types';
 
 describe('Children rendering integration', () => {

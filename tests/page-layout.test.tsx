@@ -12,7 +12,7 @@ jest.mock('@/lib/content/get-document', () => ({
   getAllDocuments: jest.fn()
 }));
 
-jest.mock('@/lib/nav', () => ({
+jest.mock('@/lib/nav/build-nav-tree', () => ({
   buildNavTree: jest.fn()
 }));
 
@@ -20,11 +20,11 @@ jest.mock('@/lib/markdown/processor', () => ({
   markdownToHtmlWithCleanup: jest.fn()
 }));
 
-jest.mock('@/lib/children', () => ({
+jest.mock('@/lib/children/replace-children-markers', () => ({
   replaceChildrenMarkers: jest.fn()
 }));
 
-jest.mock('@/lib/versions', () => ({
+jest.mock('@/lib/versions/version-utils', () => ({
   getDefaultVersion: jest.fn(),
   getVersionPath: jest.fn()
 }));
@@ -44,10 +44,10 @@ jest.mock('@/components/EditOnGithub', () => ({
 
 import Page from '@/app/en/[version]/[[...slug]]/page';
 import { getDocumentByParams, getAllDocuments } from '@/lib/content/get-document';
-import { buildNavTree } from '@/lib/nav';
+import { buildNavTree } from '@/lib/nav/build-nav-tree';
 import { markdownToHtmlWithCleanup } from '@/lib/markdown/processor';
-import { replaceChildrenMarkers } from '@/lib/children';
-import { getDefaultVersion, getVersionPath } from '@/lib/versions';
+import { replaceChildrenMarkers } from '@/lib/children/replace-children-markers';
+import { getDefaultVersion, getVersionPath } from '@/lib/versions/version-utils';
 
 describe('Page Layout - Version Footer', () => {
   beforeEach(() => {

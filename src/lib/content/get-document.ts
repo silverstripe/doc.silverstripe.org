@@ -1,8 +1,8 @@
 import path from 'path';
 import { DocumentNode } from '@/types';
 import { getConfig } from '@/lib/config';
-import { normalizeSlug } from '@/lib/utils';
-import { getAllVersions } from '@/lib/versions';
+import { normalizeSlug } from '@/lib/slug-utils';
+import { getAllVersions } from '@/lib/versions/version-utils';
 import fs from 'fs/promises';
 import { buildContentTree } from './build-tree';
 
