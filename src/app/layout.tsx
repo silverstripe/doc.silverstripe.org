@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { generateRootMetadata } from '@/lib/seo';
 import { RootLayoutClient } from '@/components/RootLayoutClient';
 import { getConfig } from '@/lib/config';
+import { DarkModeScript } from './dark-mode-script';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'prismjs/themes/prism-okaidia.css';
 import './globals.css';
@@ -17,6 +18,9 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
+      <head>
+        <DarkModeScript />
+      </head>
       <body className="body-container">
         <div className="main-wrapper">
           <RootLayoutClient docsContext={docsContext}>{children}</RootLayoutClient>

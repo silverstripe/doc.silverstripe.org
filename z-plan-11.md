@@ -23,7 +23,22 @@
 
 ---
 
-# Phase 2: Fix Sidebar Scrollbar Visibility
+# Phase 2: Fix Jest Duplicate Mock Warnings
+
+**Objective:** Eliminate the `jest-haste-map: duplicate manual mock found` warnings by excluding `.cache` directory from Jest's file scanning.
+
+**Tasks:**
+1. Update `jest.config.cjs`
+   - Add `modulePathIgnorePatterns: ['<rootDir>/.cache']` to exclude cloned content
+   - This prevents Jest from scanning mock files in downloaded Silverstripe modules
+2. Create UNIT TEST `tests/jest-config.test.ts`
+   - Verify jest config exports `modulePathIgnorePatterns` with `.cache` exclusion
+3. Run tests: `npm test` (should show no duplicate mock warnings)
+4. Run linting: `npm run lint`
+
+---
+
+# Phase 3: Fix Sidebar Scrollbar Visibility
 
 **Objective:** Sidebar scrollbar should only appear when sidebar content exceeds viewport height, independent of main content scroll.
 
@@ -40,21 +55,6 @@
    - Verify max-height uses viewport calculation
 4. Run tests: `npm test -- --testPathPattern="sidebar-scroll"`
 5. Run linting: `npm run lint`
-
----
-
-# Phase 3: Fix Jest Duplicate Mock Warnings
-
-**Objective:** Eliminate the `jest-haste-map: duplicate manual mock found` warnings by excluding `.cache` directory from Jest's file scanning.
-
-**Tasks:**
-1. Update `jest.config.cjs`
-   - Add `modulePathIgnorePatterns: ['<rootDir>/.cache']` to exclude cloned content
-   - This prevents Jest from scanning mock files in downloaded Silverstripe modules
-2. Create UNIT TEST `tests/jest-config.test.ts`
-   - Verify jest config exports `modulePathIgnorePatterns` with `.cache` exclusion
-3. Run tests: `npm test` (should show no duplicate mock warnings)
-4. Run linting: `npm run lint`
 
 ---
 

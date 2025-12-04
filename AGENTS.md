@@ -132,6 +132,7 @@ interface DocumentNode {
 **useEffect Positioning:** useEffect hooks must be positioned immediately before the return statement (return statement being equivalent of `render()` function in React class component). No function definitions, useMemo, or other logic between useEffect and return.  
 **Names:** Components=PascalCase, utils=kebab-case, tests=`*.test.*`  
 **Imports:** Use `@/` path alias for src/ imports  
+**HTML Injection:** Do NOT use `dangerouslySetInnerHTML` unless it is the correct or only way to solve an issue. Prefer the use of Next.js script handling, structured JSX, or other alternatives.
 **Linting:** Run `npm run lint` - must have 0 errors and 0 warnings (Airbnb style guide)
 
 ---

@@ -107,6 +107,12 @@ html {
   scroll-behavior: smooth;
 }
 
+html.prefers-no-transition,
+html.prefers-no-transition * {
+  transition: none !important;
+  animation: none !important;
+}
+
 body {
   font-family: var(--font-sans);
   color: var(--theme-text-secondary);
