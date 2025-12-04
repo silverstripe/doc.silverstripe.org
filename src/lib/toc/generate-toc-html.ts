@@ -18,10 +18,12 @@ export function generateTocHtml(headings: TocHeading[]): string {
     })
     .join('');
 
-  return `<nav class="toc" aria-label="Table of contents">
-<h2 class="toc-title">On this page</h2>
-<ul class="toc-list">${listItems}</ul>
-</nav>`;
+  return (
+    `<nav class="toc" aria-label="Table of contents">
+      <h2 class="toc-title">On this page</h2>
+      <ul class="toc-list">${listItems}</ul>
+    </nav>`
+  );
 }
 
 /**
