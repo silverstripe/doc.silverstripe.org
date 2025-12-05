@@ -459,6 +459,80 @@ describe('resolveMarkdownLink', () => {
       expect(result).toBe('./other.md');
     });
   });
+
+  describe('mixed case directory names (Phase 4)', () => {
+    it('resolves mixed case root-relative paths with .md extension', () => {
+      const result = resolveMarkdownLink(
+        '/Project_Governance/Minor_release_policy.md',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/project_governance/minor_release_policy/');
+    });
+
+    it('resolves mixed case paths with anchor fragments', () => {
+      const result = resolveMarkdownLink(
+        '/Project_Governance/Minor_release_policy.md#security-patch-windows',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/project_governance/minor_release_policy/#security-patch-windows');
+    });
+
+    it('resolves mixed case relative paths', () => {
+      const result = resolveMarkdownLink(
+        '../Project_Governance/Minor_release_policy',
+        '/home/project/.cache/docs/v6/Contributing/Code.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/project_governance/minor_release_policy/');
+    });
+
+    it('resolves mixed case paths without .md extension', () => {
+      const result = resolveMarkdownLink(
+        '/Project_Governance/Minor_release_policy',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/project_governance/minor_release_policy/');
+    });
+
+    it('preserves anchor case while lowercasing path segments', () => {
+      const result = resolveMarkdownLink(
+        '../Project_Governance/Minor_release_policy#Security-Patch-Windows',
+        '/home/project/.cache/docs/v6/Contributing/Code.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/project_governance/minor_release_policy/#Security-Patch-Windows');
+    });
+
+    it('handles mixed case with numeric prefixes', () => {
+      const result = resolveMarkdownLink(
+        '/01_Project_Governance/02_Minor_release_policy.md',
+        '/current/file.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/project_governance/minor_release_policy/');
+    });
+
+    it('handles deeply nested mixed case paths', () => {
+      const result = resolveMarkdownLink(
+        '../../../Contributing/Code_Standards/Style_Guide',
+        '/home/project/.cache/docs/v6/01_Developer_Guides/06_Testing/How_Tos/02_FixtureFactories.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/contributing/code_standards/style_guide/');
+    });
+
+    it('resolves mixed case index files', () => {
+      const result = resolveMarkdownLink(
+        './01_Project_Governance/index.md',
+        '/home/project/.cache/docs/v6/index.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/project_governance/');
+    });
+  });
 });
 
 describe('isRelativeMarkdownLink', () => {
