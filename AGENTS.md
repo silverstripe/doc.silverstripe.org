@@ -185,6 +185,14 @@ interface DocumentNode {
 
 ---
 
+## Dependency Management
+
+**Add or update a package** `npm install --save-dev <package-name>@latest`
+- Do NOT use npm update - it can cause peer dependency conflicts
+- Instead, manually update package.json or use npm install with versions
+
+---
+
 ## For AI Agents
 
 **Your mission:** When give a phase plan follow it sequentially. Each phase is self-contained.
