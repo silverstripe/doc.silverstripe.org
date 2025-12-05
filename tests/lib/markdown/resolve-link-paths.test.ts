@@ -533,6 +533,116 @@ describe('resolveMarkdownLink', () => {
       expect(result).toBe('/en/6/project_governance/');
     });
   });
+
+  describe('bare relative links (sibling references)', () => {
+    it('resolves bare sibling link without anchor', () => {
+      const result = resolveMarkdownLink(
+        'data_types_and_casting',
+        '/home/project/.cache/docs/v6/02_Developer_Guides/00_Model/01_Data_Model_and_ORM.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/model/data_types_and_casting/');
+    });
+
+    it('resolves bare sibling link with anchor', () => {
+      const result = resolveMarkdownLink(
+        'data_model_and_orm#subclasses',
+        '/home/project/.cache/docs/v6/02_Developer_Guides/00_Model/08_SQL_Select.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/model/data_model_and_orm/#subclasses');
+    });
+
+    it('resolves bare sibling link searchfilters', () => {
+      const result = resolveMarkdownLink(
+        'searchfilters',
+        '/home/project/.cache/docs/v6/02_Developer_Guides/00_Model/01_Data_Model_and_ORM.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/model/searchfilters/');
+    });
+
+    it('resolves bare sibling link permissions', () => {
+      const result = resolveMarkdownLink(
+        'permissions',
+        '/home/project/.cache/docs/v6/02_Developer_Guides/00_Model/10_Versioning.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/model/permissions/');
+    });
+
+    it('resolves bare sibling link in templates directory', () => {
+      const result = resolveMarkdownLink(
+        'template_inheritance#template-types-and-locations',
+        '/home/project/.cache/docs/v6/02_Developer_Guides/01_Templates/01_Syntax.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/templates/template_inheritance/#template-types-and-locations');
+    });
+
+    it('does not modify anchor-only links', () => {
+      const result = resolveMarkdownLink(
+        '#section',
+        '/home/project/.cache/docs/v6/02_Developer_Guides/00_Model/01_Data_Model_and_ORM.md',
+        '6',
+      );
+      expect(result).toBe('#section');
+    });
+
+    it('does not modify external URLs', () => {
+      const result = resolveMarkdownLink(
+        'https://example.com',
+        '/home/project/.cache/docs/v6/02_Developer_Guides/00_Model/01_Data_Model_and_ORM.md',
+        '6',
+      );
+      expect(result).toBe('https://example.com');
+    });
+
+    it('does not modify image file references', () => {
+      const result = resolveMarkdownLink(
+        'screenshot.png',
+        '/home/project/.cache/docs/v6/02_Developer_Guides/00_Model/01_Data_Model_and_ORM.md',
+        '6',
+      );
+      expect(result).toBe('screenshot.png');
+    });
+
+    it('resolves bare sibling link with .md extension', () => {
+      const result = resolveMarkdownLink(
+        'data_types_and_casting.md',
+        '/home/project/.cache/docs/v6/02_Developer_Guides/00_Model/01_Data_Model_and_ORM.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/model/data_types_and_casting/');
+    });
+
+    it('resolves bare sibling link with path segments', () => {
+      const result = resolveMarkdownLink(
+        'relations',
+        '/home/project/.cache/docs/v6/02_Developer_Guides/00_Model/01_Data_Model_and_ORM.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/model/relations/');
+    });
+
+    it('resolves bare sibling link in mock-content', () => {
+      const result = resolveMarkdownLink(
+        'installation',
+        '/home/project/tests/fixtures/mock-content/v6/01_getting_started/index.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/getting_started/installation/');
+    });
+
+    it('resolves bare sibling link in user docs', () => {
+      const result = resolveMarkdownLink(
+        'creating_pages',
+        '/home/project/.cache/user/v6/01_Managing_your_website/index.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/managing_your_website/creating_pages/');
+    });
+  });
 });
 
 describe('isRelativeMarkdownLink', () => {

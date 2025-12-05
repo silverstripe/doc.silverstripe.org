@@ -86,16 +86,25 @@ export function resolveMarkdownLink(
     return linkPath;
   }
 
+  // Normalize bare relative links (e.g., 'sibling_page' or 'sibling_page#anchor')
+  // to explicit relative format ('./sibling_page') before processing
+  // These are links that don't start with '/', './', '../', or contain '://'
+  // and are not just anchor-only links
+  let normalizedLinkPath = linkPath;
+  if (isBareRelativeLink(linkPath)) {
+    normalizedLinkPath = `./${linkPath}`;
+  }
+
   // Handle relative links without .md extension (e.g., './code', '../getting_started')
   // Also handles links with .md extension (e.g., '../getting_started/composer.md')
-  if (linkPath.startsWith('./') || linkPath.startsWith('../')) {
+  if (normalizedLinkPath.startsWith('./') || normalizedLinkPath.startsWith('../')) {
     // Check if it's an image or static asset (don't process)
-    if (isStaticAsset(linkPath)) {
+    if (isStaticAsset(normalizedLinkPath)) {
       return linkPath;
     }
 
     // Extract anchor if present
-    const [pathOnly, ...anchorParts] = linkPath.split('#');
+    const [pathOnly, ...anchorParts] = normalizedLinkPath.split('#');
     const anchor = anchorParts.length > 0 ? `#${anchorParts.join('#')}` : '';
 
     // Check if it ends with .md and remove if present
@@ -111,12 +120,12 @@ export function resolveMarkdownLink(
     const resolvedPath = path.resolve(currentDir, cleanPathOnly);
 
     // Normalize to forward slashes for URLs
-    const normalizedPath = resolvedPath.replace(/\\/g, '/');
+    const normalizedResolvedPath = resolvedPath.replace(/\\/g, '/');
 
     // Extract the path relative to content root
     // Matches: mock-content, .cache/docs, .cache/user, or legacy .cache/content
     const regex = /(?:mock-content|\.cache\/(?:docs|user|content))(.*)$/;
-    const contentMatch = normalizedPath.match(regex);
+    const contentMatch = normalizedResolvedPath.match(regex);
     if (!contentMatch) {
       // Fallback: return original
       return linkPath;
@@ -251,6 +260,38 @@ export function resolveMarkdownLink(
   }
 
   return linkPath;
+}
+
+/**
+ * Checks if a link is a "bare" relative link (e.g., 'sibling_page' or 'sibling_page#anchor')
+ * These are links without explicit relative prefix (./, ../) or absolute prefix (/)
+ * and should be treated as sibling file references
+ * @param linkPath - The link path to check
+ * @returns True if path is a bare relative link
+ */
+function isBareRelativeLink(linkPath: string): boolean {
+  // Skip anchor-only links
+  if (linkPath.startsWith('#')) {
+    return false;
+  }
+
+  // Skip external URLs
+  if (linkPath.startsWith('http') || linkPath.includes('://')) {
+    return false;
+  }
+
+  // Skip links with explicit relative or absolute prefixes
+  if (linkPath.startsWith('/') || linkPath.startsWith('./') || linkPath.startsWith('../')) {
+    return false;
+  }
+
+  // Skip static assets
+  if (isStaticAsset(linkPath)) {
+    return false;
+  }
+
+  // If it passes all filters, it's a bare relative link
+  return true;
 }
 
 /**
