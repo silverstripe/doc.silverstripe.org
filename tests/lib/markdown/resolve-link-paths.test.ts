@@ -357,6 +357,71 @@ describe('resolveMarkdownLink', () => {
     });
   });
 
+  describe('cross-section relative links (Phase 3)', () => {
+    it('resolves ../developer_guides/testing/unit_testing from contributing/', () => {
+      const result = resolveMarkdownLink(
+        '../developer_guides/testing/unit_testing',
+        '/home/project/.cache/docs/v6/10_contributing/01_Code.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/testing/unit_testing/');
+    });
+
+    it('resolves ../developer_guides/testing/unit_testing.md from contributing/', () => {
+      const result = resolveMarkdownLink(
+        '../developer_guides/testing/unit_testing.md',
+        '/home/project/.cache/docs/v6/10_contributing/01_Code.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/testing/unit_testing/');
+    });
+
+    it('resolves ../getting_started/composer#contributing from contributing/', () => {
+      const result = resolveMarkdownLink(
+        '../getting_started/composer#contributing',
+        '/home/project/.cache/docs/v6/10_contributing/01_Code.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/getting_started/composer/#contributing');
+    });
+
+    it('resolves ../getting_started/composer.md#contributing from contributing/', () => {
+      const result = resolveMarkdownLink(
+        '../getting_started/composer.md#contributing',
+        '/home/project/.cache/docs/v6/10_contributing/01_Code.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/getting_started/composer/#contributing');
+    });
+
+    it('resolves ../../getting_started/environment_management from deeply nested path', () => {
+      const result = resolveMarkdownLink(
+        '../../../getting_started/environment_management',
+        '/home/project/.cache/docs/v6/02_developer_guides/06_testing/How_Tos/02_FixtureFactories.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/getting_started/environment_management/');
+    });
+
+    it('resolves ../01_developer_guides/testing from contributing with numeric prefixes', () => {
+      const result = resolveMarkdownLink(
+        '../01_developer_guides/testing',
+        '/home/project/.cache/docs/v6/10_contributing/01_Code.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/testing/');
+    });
+
+    it('resolves cross-section link with numeric prefixes in all segments', () => {
+      const result = resolveMarkdownLink(
+        '../02_developer_guides/06_testing/02_unit_testing',
+        '/home/project/.cache/docs/v6/10_contributing/01_Code.md',
+        '6',
+      );
+      expect(result).toBe('/en/6/developer_guides/testing/unit_testing/');
+    });
+  });
+
   describe('edge cases', () => {
     it('handles deeply nested paths', () => {
       const result = resolveMarkdownLink(

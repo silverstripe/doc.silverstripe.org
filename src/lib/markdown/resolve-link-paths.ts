@@ -87,16 +87,28 @@ export function resolveMarkdownLink(
   }
 
   // Handle relative links without .md extension (e.g., './code', '../getting_started')
-  if ((linkPath.startsWith('./') || linkPath.startsWith('../')) && !linkPath.endsWith('.md')) {
+  // Also handles links with .md extension (e.g., '../getting_started/composer.md')
+  if (linkPath.startsWith('./') || linkPath.startsWith('../')) {
+    // Check if it's an image or static asset (don't process)
+    if (isStaticAsset(linkPath)) {
+      return linkPath;
+    }
+
     // Extract anchor if present
     const [pathOnly, ...anchorParts] = linkPath.split('#');
     const anchor = anchorParts.length > 0 ? `#${anchorParts.join('#')}` : '';
+
+    // Check if it ends with .md and remove if present
+    let cleanPathOnly = pathOnly;
+    if (cleanPathOnly.endsWith('.md')) {
+      cleanPathOnly = cleanPathOnly.slice(0, -3);
+    }
 
     // Get directory of current file
     const currentDir = path.dirname(currentFilePath);
 
     // Resolve relative path to get absolute file path
-    const resolvedPath = path.resolve(currentDir, pathOnly);
+    const resolvedPath = path.resolve(currentDir, cleanPathOnly);
 
     // Normalize to forward slashes for URLs
     const normalizedPath = resolvedPath.replace(/\\/g, '/');
