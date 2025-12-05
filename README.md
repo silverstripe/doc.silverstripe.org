@@ -218,22 +218,22 @@ npm run dev:docs      # clone + dev (happens automatically)
 
 ```bash
 # Build and verify locally
-npm run build:docs && cd out && python3 -m http.server 8000
-# Visit http://localhost:8000/en/6/
-# Kill the server when done
+npm run build:docs
 
 # Or for user help
-npm run build:user && cd out && python3 -m http.server 8000
+npm run build:user
 ```
-
-**Note:** Linting must pass before `npm run build` succeeds. Fix any ESLint errors with `npm run lint`.
 
 The test `npm run build` locally, then serve the `out/` directory with a simple HTTP server to verify the static export.
 
 ```bash
 cd out
 python3 -m http.server 8000
+# Visit http://localhost:8000/en/6/
+# Kill the server when done
 ```
+
+**Note:** Linting must pass before `npm run build` succeeds. Fix any ESLint errors with `npm run lint`.
 
 ---
 
