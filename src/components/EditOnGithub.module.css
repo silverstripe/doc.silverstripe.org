@@ -1,0 +1,11 @@
+.editLink {
+  font-size: 0.875rem;
+  color: var(--text-muted, #6b7280);
+  text-decoration: none;
+  transition: color var(--transition-standard);
+}
+
+.editLink:hover {
+  color: var(--link-hover, #374151);
+  text-decoration: underline;
+}

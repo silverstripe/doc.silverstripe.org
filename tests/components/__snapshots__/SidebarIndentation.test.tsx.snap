@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`SidebarIndentation should match snapshot for depth class structure when auto-expanded 1`] = `
+[
+  {
+    "depth": "0",
+    "hasNested": false,
+  },
+  {
+    "depth": "1",
+    "hasNested": true,
+  },
+  {
+    "depth": "2",
+    "hasNested": true,
+  },
+  {
+    "depth": "3",
+    "hasNested": true,
+  },
+]
+`;
