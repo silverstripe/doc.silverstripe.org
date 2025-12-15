@@ -1,0 +1,290 @@
+{
+  "6": {
+    "main": {
+      "repo": "developer-docs",
+      "owner": "silverstripe",
+      "branch": "6.1",
+      "docsPath": "en"
+    },
+    "optionalFeatures": {
+      "login-forms": {
+        "repo": "silverstripe-login-forms",
+        "owner": "silverstripe",
+        "branch": "6.1",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "gridfieldextensions": {
+        "repo": "silverstripe-gridfieldextensions",
+        "owner": "silverstripe",
+        "branch": "5.1",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "gridfield-bulk-editing-tools": {
+        "repo": "silverstripe-gridfield-bulk-editing-tools",
+        "owner": "silverstripe",
+        "branch": "5.1",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "realme": {
+        "repo": "silverstripe-realme",
+        "owner": "silverstripe",
+        "branch": "6.0",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "staticpublishqueue": {
+        "repo": "silverstripe-staticpublishqueue",
+        "owner": "silverstripe",
+        "branch": "7.0",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "tagfield": {
+        "repo": "silverstripe-tagfield",
+        "owner": "silverstripe",
+        "branch": "4.1",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "textextraction": {
+        "repo": "silverstripe-textextraction",
+        "owner": "silverstripe",
+        "branch": "5.0",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "advancedworkflow": {
+        "repo": "silverstripe-advancedworkflow",
+        "owner": "silverstripe",
+        "branch": "7.1",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "queuedjobs": {
+        "repo": "silverstripe-queuedjobs",
+        "owner": "silverstripe",
+        "branch": "6.1",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "fluent": {
+        "repo": "silverstripe-fluent",
+        "owner": "tractorcow-farm",
+        "branch": "8.1",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "htmleditor-tinymce": {
+        "repo": "silverstripe-htmleditor-tinymce",
+        "owner": "silverstripe",
+        "branch": "1.0",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "linkfield": {
+        "repo": "silverstripe-linkfield",
+        "owner": "silverstripe",
+        "branch": "5.1",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "userforms": {
+        "repo": "silverstripe-userforms",
+        "owner": "silverstripe",
+        "branch": "7.0",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "elemental": {
+        "repo": "silverstripe-elemental",
+        "owner": "silverstripe",
+        "branch": "6.1",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "mfa": {
+        "repo": "silverstripe-mfa",
+        "owner": "silverstripe",
+        "branch": "6.1",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "graphql": {
+        "repo": "silverstripe-graphql",
+        "owner": "silverstripe",
+        "branch": "6.1",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "totp-authenticator": {
+        "repo": "silverstripe-totp-authenticator",
+        "owner": "silverstripe",
+        "branch": "6.0",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "taxonomies": {
+        "repo": "silverstripe-taxonomy",
+        "owner": "silverstripe",
+        "branch": "4.1",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      }
+    }
+  },
+  "5": {
+    "main": {
+      "repo": "developer-docs",
+      "owner": "silverstripe",
+      "branch": "5.4",
+      "docsPath": "en"
+    },
+    "optionalFeatures": {
+      "login-forms": {
+        "repo": "silverstripe-login-forms",
+        "owner": "silverstripe",
+        "branch": "5.3",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "gridfieldextensions": {
+        "repo": "silverstripe-gridfieldextensions",
+        "owner": "silverstripe",
+        "branch": "4.1",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "gridfield-bulk-editing-tools": {
+        "repo": "silverstripe-gridfield-bulk-editing-tools",
+        "owner": "silverstripe",
+        "branch": "4.1",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "realme": {
+        "repo": "silverstripe-realme",
+        "owner": "silverstripe",
+        "branch": "5.5",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "staticpublishqueue": {
+        "repo": "silverstripe-staticpublishqueue",
+        "owner": "silverstripe",
+        "branch": "6.3",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "tagfield": {
+        "repo": "silverstripe-tagfield",
+        "owner": "silverstripe",
+        "branch": "3.4",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "textextraction": {
+        "repo": "silverstripe-textextraction",
+        "owner": "silverstripe",
+        "branch": "4.1",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "advancedworkflow": {
+        "repo": "silverstripe-advancedworkflow",
+        "owner": "silverstripe",
+        "branch": "6.4",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "queuedjobs": {
+        "repo": "silverstripe-queuedjobs",
+        "owner": "silverstripe",
+        "branch": "5.3",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "fluent": {
+        "repo": "silverstripe-fluent",
+        "owner": "tractorcow-farm",
+        "branch": "7.3",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "linkfield": {
+        "repo": "silverstripe-linkfield",
+        "owner": "silverstripe",
+        "branch": "4.2",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "userforms": {
+        "repo": "silverstripe-userforms",
+        "owner": "silverstripe",
+        "branch": "6.4",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "elemental": {
+        "repo": "silverstripe-elemental",
+        "owner": "silverstripe",
+        "branch": "5.4",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "mfa": {
+        "repo": "silverstripe-mfa",
+        "owner": "silverstripe",
+        "branch": "5.4",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "totp-authenticator": {
+        "repo": "silverstripe-totp-authenticator",
+        "owner": "silverstripe",
+        "branch": "5.3",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "webauthn-authenticator": {
+        "repo": "silverstripe-webauthn-authenticator",
+        "owner": "silverstripe",
+        "branch": "5.3",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "taxonomies": {
+        "repo": "silverstripe-taxonomy",
+        "owner": "silverstripe",
+        "branch": "3.2",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      },
+      "non-blocking-sessions": {
+        "repo": "silverstripe-non-blocking-sessions",
+        "owner": "silverstripe",
+        "branch": "1.0",
+        "docsPath": "docs/en",
+        "excludePath": "docs/en/userguide"
+      }
+    }
+  },
+  "4": {
+    "main": {
+      "repo": "developer-docs",
+      "owner": "silverstripe",
+      "branch": "4.13",
+      "docsPath": "en"
+    }
+  },
+  "3": {
+    "main": {
+      "repo": "developer-docs",
+      "owner": "silverstripe",
+      "branch": "3",
+      "docsPath": "en"
+    }
+  }
+}

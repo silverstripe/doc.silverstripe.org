@@ -1,0 +1,33 @@
+.markdownContent {
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.markdownContent > * {
+  margin-bottom: 1rem;
+}
+
+.markdownContent > h2,
+.markdownContent > h3,
+.markdownContent > h4,
+.markdownContent > h5,
+.markdownContent > h6 {
+  scroll-margin-top: var(--header-height);
+}
+
+.markdownContent > h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.markdownContent > h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Table wrapper for horizontal scrolling on overflow */
+.markdownContent > table {
+  display: block;
+  overflow-x: auto;
+}
+

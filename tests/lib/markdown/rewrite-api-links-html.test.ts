@@ -1,0 +1,109 @@
+import { rewriteApiLinksInHtml } from '@/lib/markdown/rewrite-api-links-html';
+
+describe('rewriteApiLinksInHtml', () => {
+  it('should rewrite simple API links in HTML', () => {
+    const html = '<a href="api:SilverStripe\\ORM\\DataList">DataList</a>';
+    const result = rewriteApiLinksInHtml(html, '6');
+    expect(result).toContain('href="https://api.silverstripe.org/search/lookup?q=');
+    expect(result).toContain('target="_blank"');
+    expect(result).toContain('rel="noopener noreferrer"');
+  });
+
+  it('should handle method calls in API links', () => {
+    const html = '<a href="api:SilverStripe\\ORM\\DataList::filter()">filter method</a>';
+    const result = rewriteApiLinksInHtml(html, '6');
+    expect(result).toContain('::filter()');
+    expect(result).toContain('target="_blank"');
+  });
+
+  it('should handle property access in API links', () => {
+    const html = '<a href="api:SilverStripe\\CMS\\Model\\SiteTree->enforce_strict_hierarchy">property</a>';
+    const result = rewriteApiLinksInHtml(html, '6');
+    expect(result).toContain('->enforce_strict_hierarchy');
+    expect(result).toContain('target="_blank"');
+  });
+
+  it('should handle multiple API links in HTML', () => {
+    const html = '<a href="api:DataList">DataList</a> and <a href="api:DataObject">DataObject</a>';
+    const result = rewriteApiLinksInHtml(html, '6');
+    const matches = result.match(/target="_blank"/g);
+    expect(matches).toHaveLength(2);
+  });
+
+  it('should not modify non-API links', () => {
+    const html = '<a href="https://example.com">Example</a>';
+    const result = rewriteApiLinksInHtml(html, '6');
+    expect(result).toBe(html);
+  });
+
+  it('should use the provided version parameter', () => {
+    const html = '<a href="api:DataList">DataList</a>';
+    const result = rewriteApiLinksInHtml(html, '5');
+    expect(result).toContain('&version=5');
+  });
+
+  it('should handle mixed links', () => {
+    const html = '<p><a href="api:DataList">API</a> and <a href="https://example.com">Regular</a></p>';
+    const result = rewriteApiLinksInHtml(html, '6');
+    expect(result).toContain('https://api.silverstripe.org');
+    expect(result).toContain('https://example.com">Regular</a>');
+  });
+
+  it('should handle nested HTML with API links', () => {
+    const html = '<div><p><a href="api:DataList">link</a></p></div>';
+    const result = rewriteApiLinksInHtml(html, '6');
+    expect(result).toContain('https://api.silverstripe.org/search/lookup');
+  });
+
+  it('should preserve other link attributes', () => {
+    const html = '<a class="custom" href="api:DataList">link</a>';
+    const result = rewriteApiLinksInHtml(html, '6');
+    expect(result).toContain('class="custom"');
+    expect(result).toContain('href="https://api.silverstripe.org');
+  });
+
+  it('should encode special characters properly', () => {
+    const html = '<a href="api:SilverStripe\\ORM\\DataList">link</a>';
+    const result = rewriteApiLinksInHtml(html, '6');
+    expect(result).toContain('%5C'); // backslash encoding
+    expect(result).not.toContain('%255C'); // no double encoding
+  });
+
+  it('should not double-encode pre-encoded backslashes in href', () => {
+    // If the HTML already has %5C encoded backslashes, should not become %255C
+    const html = '<a href="api:SilverStripe%5CORM%5CDataObject">link</a>';
+    const result = rewriteApiLinksInHtml(html, '6');
+    expect(result).toContain('SilverStripe%5CORM%5CDataObject');
+    expect(result).not.toContain('%255C');
+  });
+
+  it('should produce correct full URL with backslash encoding', () => {
+    const html = '<a href="api:SilverStripe\\ORM\\DataObject">DataObject</a>';
+    const result = rewriteApiLinksInHtml(html, '6');
+    expect(result).toBe('<a href="https://api.silverstripe.org/search/lookup?q=SilverStripe%5CORM%5CDataObject&version=6" target="_blank" rel="noopener noreferrer">DataObject</a>');
+  });
+
+  it('should handle Environment::getEnv() in HTML links', () => {
+    const html = '<a href="api:SilverStripe\\Core\\Environment::getEnv()">getEnv method</a>';
+    const result = rewriteApiLinksInHtml(html, '6');
+    expect(result).toBe('<a href="https://api.silverstripe.org/search/lookup?q=SilverStripe%5CCore%5CEnvironment::getEnv()&version=6" target="_blank" rel="noopener noreferrer">getEnv method</a>');
+  });
+
+  it('should ensure all API links are absolute URLs', () => {
+    const testCases = [
+      { html: '<a href="api:DataObject">DataObject</a>', version: '6' },
+      { html: '<a href="api:SilverStripe\\ORM\\DataList::filter()">filter</a>', version: '5' },
+      { html: '<a href="api:SilverStripe\\Core\\Environment::getEnv()">getEnv</a>', version: '6' },
+    ];
+
+    testCases.forEach(({ html, version }) => {
+      const result = rewriteApiLinksInHtml(html, version);
+      // Extract the href value
+      const hrefMatch = result.match(/href="([^"]+)"/);
+      expect(hrefMatch).toBeTruthy();
+      const href = hrefMatch![1];
+      // Ensure it's an absolute URL to api.silverstripe.org
+      expect(href).toMatch(/^https:\/\/api\.silverstripe\.org/);
+    });
+  });
+});

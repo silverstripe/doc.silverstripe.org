@@ -1,0 +1,71 @@
+:root {
+  --sidebar-width: 300px;
+}
+
+.layout {
+  min-height: 100vh;
+  padding-bottom: 3rem;
+}
+
+.layoutContainer {
+  width: 100%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.grid {
+  display: flex;
+}
+
+.sidebarContainer {
+  width: var(--sidebar-width);
+  /* min-width is required to stop it from collapsing in small screen widths */
+  min-width: var(--sidebar-width);
+  position: sticky;
+  top: var(--header-height);
+  max-height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+  border-right: 1px solid var(--theme-border);
+  padding-right: 2rem;
+  padding-left: 0;
+  margin-right: 2rem;
+}
+
+.mainContent {
+  padding-left: 0;
+  width: 100%;
+  max-width: 916px;
+}
+
+.bannerRow {
+  margin-bottom: 1rem;
+}
+
+/* Mobile: hide sidebar by default */
+@media (max-width: 1023px) {
+  .layout {
+    margin-left: 0;
+  }
+
+  .sidebarContainer {
+    display: none;
+    position: fixed;
+    left: 0;
+    width: var(--sidebar-width);
+    height: calc(100vh - var(--header-height));
+    padding-right: 1rem;
+    padding-left: 1rem;
+    border-right: 1px solid var(--theme-border);
+    background-color: var(--theme-bg-white);
+    z-index: 100;
+  }
+
+  /* Show sidebar when hamburger is open */
+  .sidebarOpen {
+    display: block;
+  }
+}
+
+

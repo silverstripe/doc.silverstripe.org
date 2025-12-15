@@ -1,82 +1,115 @@
-import React, { StatelessComponent, ReactElement, useContext } from 'react';
-import SearchBox from './SearchBox';
-import { Link, navigate } from 'gatsby';
-import logo from '../images/silverstripe-cms-logo.svg';
-import useDocContext from '../hooks/useDocContext';
-import useHierarchy from '../hooks/useHierarchy';
-import LayoutContext from '../contexts/LayoutContext';
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { extractVersionAndFeatureFromSlug } from '@/lib/utils/slug-utils';
+import { getDocumentGithubInfo } from '@/lib/utils/github-utils';
+import { getDefaultVersion, getVersionHomepage } from '@/lib/versions/version-utils';
+import { SearchBox } from './SearchBox';
+import { VersionSwitcher } from './VersionSwitcher';
+import { HamburgerButton } from './HamburgerButton';
+import { DarkModeToggle } from './DarkModeToggle';
+import styles from './Header.module.css';
 
 interface HeaderProps {
-  handleSidebarToggle(e: EventTarget): void
+  onMobileMenuToggle?: (isOpen: boolean) => void;
+  docsContext: 'docs' | 'user';
 }
 
-const Header: StatelessComponent<HeaderProps> = ({ handleSidebarToggle }): ReactElement => {
-    const { getHomePage, getCurrentNode, getCurrentVersion, getVersionPath, getVersionStatus } = useHierarchy();
-    const home = getHomePage();
-    const currentNode = getCurrentNode() || home;
-    const context = useDocContext();
-    const { currentGitRemote } = useContext(LayoutContext);
+/**
+ * Header component with navigation and branding
+ */
+export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [githubUrl, setGithubUrl] = useState('https://github.com/silverstripe/developer-docs');
+  const pathname = usePathname();
 
-    const handleNavigate = (e: any): void => {
-      if (typeof window === 'undefined') {
-        return;
-      }
-      
-      const ver = e.target.value;
-    
-      if (currentNode) {
-        const newPath = getVersionPath(currentNode, ver);
-        // This has to be a hard refresh, because the sidebar and searchbar need to unmount
-        navigate(newPath);
-      }
-    };
+  // Extract version and optional feature from pathname
+  const pathParts = pathname.split('/').filter(Boolean);
+  // Only use pathParts[1] as version if pathParts[0] is 'en'
+  const version = (pathParts[0] === 'en' ? pathParts[1] : null) || getDefaultVersion();
+  const slug = pathname;
+  const { optionalFeature } = extractVersionAndFeatureFromSlug(slug);
 
-    const title = context === 'user' ? 'CMS Help' : 'CMS Docs';
-    const gitHref = currentGitRemote && currentGitRemote.hasOwnProperty('href')
-       ? currentGitRemote.href.replace(/\.git$/, '') : '';
-    const currentVersion = getCurrentVersion();
+  // Detect if we're on a 404 page
+  // - Static 404.html uses pathname containing '_not-found'
+  // - Also check for invalid /en/* patterns that would indicate 404
+  const isNotFoundPath = pathname.includes('_not-found');
+  const isInvalidEnPath = pathParts[0] === 'en' && (!pathParts[1] || !/^[0-9]$/.test(pathParts[1]));
+  const isNotFound = isNotFoundPath || !pathParts[0] || isInvalidEnPath;
 
-    return (
-    <header role="banner" className="header fixed-top">	    
-        <div className="branding docs-branding">
-          <div className="container position-relative py-2 d-flex">
-            <div className="docs-logo-wrapper">
-              <div className="site-logo">
-                <Link style={{ backgroundImage: `url(${logo})`}} className="navbar-brand" to={ home ? home.slug : '/'} title="Go to the home page">                  
-                  Silverstripe CMS Documentation
-                </Link>
-                <span />
-                <span>{title}</span>
-              </div>    
+  const logoSubtitle = docsContext === 'user' ? 'User Help' : 'Docs';
 
-            </div>
+  const handleMobileMenuToggle = () => {
+    const newState = !isMobileMenuOpen;
+    setIsMobileMenuOpen(newState);
+    onMobileMenuToggle?.(newState);
 
-            <div className="docs-top-utilities d-flex justify-content-between justify-content-lg-end align-items-center">
-              <div className="top-search-box d-lg-flex">
-                {process.env.GATSBY_DOCSEARCH_API_KEY && <SearchBox />}
-              </div>
-              <ul className="social-list list-inline d-flex flex-grow-1 flex-lg-grow-0 align-items-center justify-content-lg-center justify-content-end justify-content-lg-end">
-                <li className={`list-inline-item version-select version-select--${getVersionStatus(currentVersion)}`}>
-                  <select id="version-select" value={currentVersion} onChange={handleNavigate}>
-                      <option value='6'>V6</option>
-                      <option value='5'>V5</option>
-                      <option value='4'>V4</option>
-                      <option value='3'>V3</option>
-                  </select>
-                  <i className="fas fa-chevron-down"></i>
-                </li>
-                { gitHref && <li className="d-none d-sm-inline list-inline-item"><a title="Go to the Github repository" href={gitHref}><i className="fab fa-github fa-fw" /></a></li> }
-              </ul>
-            </div>
-            <button onClick={handleSidebarToggle} id="docs-sidebar-toggler" className="docs-sidebar-toggler docs-sidebar-visible mr-2 d-xl-none" type="button">
-                <span />
-                <span />
-                <span />
-              </button>
+    // Scroll to top when opening mobile menu
+    if (newState && typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+    }
+  };
+
+  // Close menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    onMobileMenuToggle?.(false);
+  }, [pathname, onMobileMenuToggle]);
+
+  // Update GitHub URL based on optional feature
+  useEffect(() => {
+    const githubInfo = getDocumentGithubInfo(version, optionalFeature);
+    if (githubInfo) {
+      const newUrl = `https://github.com/${githubInfo.owner}/${githubInfo.repo}`;
+      setGithubUrl(newUrl);
+    } else {
+      // Fallback to main developer-docs
+      setGithubUrl('https://github.com/silverstripe/developer-docs');
+    }
+  }, [version, optionalFeature]);
+
+  return (
+    <header className={styles.header}>
+      <div className={styles.headerContent}>
+        <Link href={getVersionHomepage(version)} className={styles.logo}>
+          <img src="/logo.svg" alt="Silverstripe" className={styles.logoImage} />
+          <div className={styles.logoText}>
+            <span className={styles.logoTitle}>Silverstripe CMS</span>
+            <span className={styles.logoSubtitle}>{logoSubtitle}</span>
           </div>
-        </div>
-      </header>
-    );
-};
+        </Link>
 
-export default Header;
+        <div className={styles.searchContainer}>
+          <SearchBox />
+        </div>
+
+        <nav className={styles.nav}>
+          <div className={styles.navItem}>
+            <a href={githubUrl} className={styles.navLink} aria-label="GitHub repository">
+              <i className={`fab fa-github ${styles.githubIcon}`} />
+            </a>
+          </div>
+          <div className={styles.navItem}>
+            <DarkModeToggle />
+          </div>
+          <div className={styles.versionSwitcherWrapper}>
+            {!isNotFound && (
+              <VersionSwitcher
+                currentVersion={version}
+                currentSlug={slug}
+              />
+            )}
+          </div>
+          <div className={styles.hamburgerWrapper}>
+            <HamburgerButton
+              isOpen={isMobileMenuOpen}
+              onClick={handleMobileMenuToggle}
+            />
+          </div>
+        </nav>
+      </div>
+    </header>
+  );
+}
