@@ -239,6 +239,20 @@ async function cloneDocs() {
     const context = process.env.DOCS_CONTEXT || 'docs';
     console.log(`\n🚀 Cloning ${context} documentation...\n`);
     
+    // Delete existing cloned data for this context
+    const cacheDir = path.join(rootDir, '.cache', context);
+    if (fs.existsSync(cacheDir)) {
+      console.log(`🗑️ Removing existing ${context} data...\n`);
+      fs.rmSync(cacheDir, { recursive: true, force: true });
+    }
+
+    // Delete any temp clones
+    const tempClonesDir = path.join(rootDir, '.cache', 'temp-clones');
+    if (fs.existsSync(tempClonesDir)) {
+      console.log(`🗑️ Removing temp-clones data...\n`);
+      fs.rmSync(tempClonesDir, { recursive: true, force: true });
+    }
+
     // Build sources from embedded configuration
     const sources = buildSourcesList(context);
     

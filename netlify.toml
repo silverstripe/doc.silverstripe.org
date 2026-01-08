@@ -1,5 +1,5 @@
 [build]
-  command = "if [ \"$DOCS_CONTEXT\" = \"user\" ]; then npm run build:user; else npm run build:docs; fi"
+  command = "if [ \"$DOCS_CONTEXT\" = \"user\" ]; then npm run clone:user && npm run build:user; else npm run clone:docs && npm run build:docs; fi"
   publish = "out"
 
 [build.environment]

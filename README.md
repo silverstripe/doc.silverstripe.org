@@ -44,10 +44,10 @@ npm run mock          # Start dev with mock content
 
 ### Using Real Cloned Content
 
-For testing with actual documentation:
+First, clone documentation content, then start the dev server:
 
 ```bash
-npm run clone:docs    # Clone developer docs (or user help with clone:user)
+npm run clone:docs    # Clone developer docs (or user help with clone:user) - deletes existing data first
 npm run dev:docs      # Start dev server with cloned developer docs (or user help docs with dev:user)
 ```
 
@@ -79,9 +79,9 @@ npm install            # Install dependencies (use npm install, not npm update)
 npm run mock           # Dev server with mock data (no cloning needed)
 
 # Clone content
-npm run clone          # Clone content based on DOCS_CONTEXT (default: docs, alias for clone:docs)
-npm run clone:docs     # Clone developer docs in preparation for starting dev or build scripts
-npm run clone:user     # Clone user help docs in preparation for starting dev or build scripts
+npm run clone          # Clone content based on DOCS_CONTEXT (default: docs, alias for clone:docs) - deletes existing data first
+npm run clone:docs     # Clone developer docs - deletes existing data first
+npm run clone:user     # Clone user help docs - deletes existing data first
 
 # Development servers (after cloning)
 npm run dev            # Dev server with developer docs on port 9876  (default: docs context, alias for dev:docs)
@@ -89,9 +89,9 @@ npm run dev:docs       # Dev server with developer docs on port 9876
 npm run dev:user       # Dev server with user help on port 9876
 
 # Build static files for deployment
-npm run build          # Clone content, build static files and copy images (default: docs context, alias for build:docs)
-npm run build:docs     # Clone content, build static files and copy images for developer docs
-npm run build:user     # Clone content, build static files and copy images for user help
+npm run build          # Build static files and copy images (default: docs context, alias for build:docs)
+npm run build:docs     # Build static files and copy images for developer docs
+npm run build:user     # Build static files and copy images for user help
 
 # Testing
 npm test               # Run all tests
