@@ -19,9 +19,10 @@ npm run mock              # Dev with mock data (tests/fixtures/mock-content/)
 npm run dev               # Dev with cloned content (alias: dev:docs, DOCS_CONTEXT=docs)
 npm run dev:docs          # Dev with docs context (DOCS_CONTEXT=docs) on port 9876
 npm run dev:user          # Dev with user-help context (DOCS_CONTEXT=user) on port 9876
-npm run clone:docs        # Clone docs content (DOCS_CONTEXT=docs)
-npm run clone:user        # Clone user-help content (DOCS_CONTEXT=user)
-npm run build             # Build docs (alias: build:docs, DOCS_CONTEXT=docs)
+npm run clone             # Clone content (deletes existing, default: docs)
+npm run clone:docs        # Clone docs content (deletes existing, DOCS_CONTEXT=docs)
+npm run clone:user        # Clone user-help content (deletes existing, DOCS_CONTEXT=user)
+npm run build             # Build (alias: build:docs, DOCS_CONTEXT=docs)
 npm run build:docs        # Build with docs context (DOCS_CONTEXT=docs)
 npm run build:user        # Build with user-help context (DOCS_CONTEXT=user)
 npm run start             # Serve built static files from out/ directory on port 9877
@@ -30,7 +31,9 @@ npm run lint              # Run ESLint - must have 0 errors and 0 warnings
 npm test                  # All tests (auto uses mock data)
 ```
 
-**Note:** Image copying is now automatic during dev and build scripts. Manual image copying is available via `npm run copy-images:{docs|user|mock}` if needed. IMPORTANT: Use `npm run start` to serve built static files.
+**Warning** `npm run clone` is *very slow*. Only do this when absolutely necessary. Use `npm run mock` for development whenever possible.
+
+**Note:** Image copying is automatic during dev and build scripts. Manual image copying is available via `npm run copy-images:{docs|user|mock}` if needed. IMPORTANT: Use `npm run start` to serve built static files.
 
 **Context Switching:** The site serves two independent documentation sets controlled by `DOCS_CONTEXT`:
 - `docs` (default): Developer documentation from `.cache/docs/`
