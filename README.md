@@ -1,135 +1,202 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/98ac537e-14f6-4864-bf56-d5a60c76ccc9/deploy-status)](https://app.netlify.com/sites/ss-docs/deploys)
+# Silverstripe CMS Documentation
 
-# doc.silverstripe.org
+Next.js code for [docs.silverstripe.org](https://docs.silverstripe.org) and [userhelp.silverstripe.org](https://userhelp.silverstripe.org).
 
-This repository contains the source code powering [the Silverstripe CMS
-developer documentation website](https://docs.silverstripe.org) and
-[userhelp website](https://userhelp.silverstripe.org).
+Built with:
+- Next.js 16+
+- Node.js 24+
+- TypeScript
+- Markdown (remark/rehype)
+- Algolia DocSearch
+- Jest + RTL
 
-This application is build on [Gatsby](https://gatsbyjs.com), a static
-site generator based on [React](https://reactjs.org). It sources content
-from the [silverstripe/developer-docs](https://github.com/silverstripe/developer-docs)
-repository for each major release.
-
-**This repository does NOT contain any documentation.**
-
-The developer documentation is stored in the [silverstripe/developer-docs repository](https://github.com/silverstripe/developer-docs)),
-in the `en` folder. For example, the documentation for the
-Silverstripe CMS 4.x is stored in
-[https://github.com/silverstripe/developer-docs/tree/4/en](https://github.com/silverstripe/developer-docs/tree/4/en).
-
-The userhelp documentation is stored in the [silverstripe/silverstripe-userhelp-content repo](https://github.com/silverstripe/silverstripe-userhelp-content/).
+---
 
 ## What to update when creating a new pre-release major branch, making a stable major release, or making a major EOL
 
 When **creating a new major branch for a pre-release major version**
 
 - Make sure you've added a new major branch to both `silverstripe/developer-docs` and `silverstripe/silverstripe-userhelp-content`
-- Add the new major to `sources-docs.js` and `sources-user.js`
-- Add the new major branches for various modules as defined in `sources-docs.js` and `sources-user.js` as well
-- Add the new major to the version select in `src/components/Header.tsx`
-- Add the new major to the `PRE_RELEASE` array in the `getVersionMessage` function in `src/utils/nodes.ts`
+- Add the new major to `sources-docs.json` and `sources-user.json`
+- Add the new major branches for various modules as defined in `sources-docs.json` and `sources-user.json` as well
+- Add the new major to `ALL_VERSIONS` in `src/lib/versions/version-utils.ts`
 - Add the new major version to the [algolia crawler script](https://crawler.algolia.com/admin/crawlers/3d14ccdd-f9ae-4957-bc0a-5b21b4c29af3/configuration/edit)
 
 For **new stable releases**, you will need to do the following
 
-- Remove the major from the `PRE_RELEASE` array in the `getVersionMessage` function in `src/utils/nodes.ts`
-- Update the `getDefaultVersion` function's return value to the new stable major in `src/utils/nodes.ts`
-- Update redirects in `netlify.toml`
-- Update `src/pages/index.tsx` to navigate to the new stable major
-- Add the new major to `redirects` in `gatsby-node.js`
+- Remove the old major from `PREVIOUS_RELEASE_VERSIONS` in `src/lib/versions/version-utils.ts` (if applicable)
+- Update `PREVIOUS_RELEASE_VERSIONS` to include the previously current major in `src/lib/versions/version-utils.ts`
+- Update `CURRENT_VERSION` constant to the new stable major in `src/lib/versions/version-utils.ts`
+- Update `DEFAULT_VERSION` constant to the new stable major in `global-config.ts`
+- Update redirects in `netlify.toml` to point to the new stable major
 
-When a **major goes EOL**, add the major to the `EOL` array in the `getVersionMessage` function in `src/utils/nodes.ts`
+When a **major goes EOL**, add the major to the `EOL_VERSIONS` array in `src/lib/versions/version-utils.ts`
 
-## Installation
+## Quick Start
 
-To set up a local instance of [doc.silverstripe.org](https://github.com/silverstripe/doc.silverstripe.org):
+### Using Mock Data 
 
-* Clone this repository to an empty directory
-```
-   git clone https://github.com/silverstripe/doc.silverstripe.org path/to/ssdocs
-```
+You can develop without clone data using mock data, which is the same mock data used in tests:
 
-### Docker install
-
-No local NodeJS nor gatsby-cli is required for this option.
-
-* Make sure docker and docker-compose are installed and docker daemon is running
-* Simply use `./docker/run` to run gatsby commands
-  * `./docker/run build` would be equal to run `gatsby build` within a container
-  * `./docker/run develop -p 8000` would run `gatsby develop -p 8000` within a container.
-
-### Native install
-
-* Install [Gatsby CLI](https://gatsbyjs.com)
-
-## Developing
-
-Once cloned, from the root of the repository, run the command `yarn dev-docs`
-to instantiate a development server. This will consume all of the markdown files in both major release
-branches and allow you to browse the developer documentation site on `http://localhost:8000` by default
-(see the [Gatsby docs](https://www.gatsbyjs.org/docs/) for instructions on customising the port).
-
-## Building
-
-To test a static build of the site, first create a production environment file.
-
-```
-cp .env.development .env.production
+```bash
+npm run mock          # Start dev with mock content
 ```
 
-Then, run the build.
+### Using Real Cloned Content
 
-```
-yarn build
-yarn serve
+For testing with actual documentation:
 
-# or with docker
-./docker/run build && ./docker/run serve -p 8000
-```
-
-These commands will give you an exact representation of how the site will run on a production server, with
-statically generated html files, css purging, and server-side rendering.
-
-## Toggling between docs and userhelp
-
-Whether the application uses the `docs.silverstripe.org` content or `userhelp.silverstripe.org` is determined
-by the environment variable, `DOCS_CONTEXT`. You can set this in the `.env.development` file, or use one of
-the script shortcuts:
-
-```
-yarn dev-docs
-yarn dev-user
-yarn build-docs
-yarn build-user
+```bash
+npm run clone:docs    # Clone developer docs (or user help with clone:user)
+npm run dev:docs      # Start dev server with cloned developer docs (or user help docs with dev:user)
 ```
 
-## Authoring
+### Building Static Files (Deployment)
 
-You can make changes directly to the source markdown files and get live updates in the development
-server without having to rebuild the app or even refresh the browser. The clones of the `silverstripe/developer-docs`
-repositories are in the `.cache/gatsby-source-git` folder in the root of this project. There are subfolders
-for `3/` and `4/`, respective to their branch names. You can edit the files in `en` from there.
+Note that static files are not committed to the repository - they are built during deployment.
 
-Just don't forget to merge your changes upstream once you're done. Building the gatsby app will not preserve
-your content changes, since the remote repositories are the source of truth.
+```bash
+# Build and verify locally
+npm run build:docs
 
-## Deploying content changes
+# Or for user help
+npm run build:user
+```
 
-Once your contribution has been merged into the master branch, it will be deployed to production via a
-Github action in the repository that holds the markdown files (e.g. `silverstripe/developer-docs` for developer docs).
+To test the output of `npm run build` locally:
 
-## Deploying app changes
+```bash
+# Serve the built static site in the out/ directory on port 9877
+npm run start
+```
 
-Once your change is merged in to the `master` branch of this repository, it will be deployed to production.
+### Full Command Reference
 
-## Contribution
+```bash
+npm install            # Install dependencies (use npm install, not npm update)
 
-To contribute an improvement to the https://docs.silverstripe.org or https://userhelp.silverstripe.org functionality or
-theme, submit a pull request on the [GitHub project](https://github.com/silverstripe/doc.silverstripe.org). Any approved pull requests will make
-their way onto the https://docs.silverstripe.org or https://userhelp.silverstripe.org sites in the next release.
+# Development with mock data (intended for development without clone, uses same mock data as tests)
+npm run mock           # Dev server with mock data (no cloning needed)
 
-If you wish to edit the documentation content, submit a pull request
-on the
-[developer documentation](https://github.com/silverstripe/developer-docs) repository or the
-[userhelp documentation](https://github.com/silverstripe/silverstripe-userhelp-content) repository.
+# Clone content
+npm run clone          # Clone content based on DOCS_CONTEXT (default: docs, alias for clone:docs)
+npm run clone:docs     # Clone developer docs in preparation for starting dev or build scripts
+npm run clone:user     # Clone user help docs in preparation for starting dev or build scripts
+
+# Development servers (after cloning)
+npm run dev            # Dev server with developer docs on port 9876  (default: docs context, alias for dev:docs)
+npm run dev:docs       # Dev server with developer docs on port 9876
+npm run dev:user       # Dev server with user help on port 9876
+
+# Build static files for deployment
+npm run build          # Clone content, build static files and copy images (default: docs context, alias for build:docs)
+npm run build:docs     # Clone content, build static files and copy images for developer docs
+npm run build:user     # Clone content, build static files and copy images for user help
+
+# Testing
+npm test               # Run all tests
+npm run lint           # Run ESLint (must have 0 errors, 0 warnings)
+
+# Utility commands
+npm run start          # Serve built static files from out/ directory on port 9877
+npm run kill           # Kill processes running on ports 9876, 9877
+```
+
+---
+
+## Environment Setup
+
+### Environment Variables
+
+Create `.env.local` for local development:
+
+```bash
+# Algolia DocSearch (optional, search disabled if not set)
+# Note that the NEXT_PUBLIC_ prefix is required for Next.js to expose these to the browser
+# The NEXT_PUBLIC_DOCSEARCH_API_KEY must be a search-only API key
+NEXT_PUBLIC_DOCSEARCH_APP_ID=your_app_id
+NEXT_PUBLIC_DOCSEARCH_API_KEY=your_api_key
+NEXT_PUBLIC_DOCSEARCH_INDEX_NAME=your_index_name
+```
+
+#### Additional Environment Variables
+
+Additional environment variables, though these should not be set manually
+
+```bash
+# Force mock data for testing (automatically set by test runner in setup-tests.js)
+NEXT_USE_MOCK_DATA=true
+
+# Manual context switching - used by deployment or npm scripts to control which docs are loaded
+DOCS_CONTEXT=docs    # or DOCS_CONTEXT=user
+```
+
+---
+
+## Context Switching: Docs vs User
+
+This site serves **two independent documentation sets**:
+
+| Context | Content | Cache Location |
+|---------|---------|----------------|
+| `docs` | Developer documentation | `.cache/docs/` |
+| `user` | End-user help | `.cache/user/` |
+
+### How It Works
+
+The `DOCS_CONTEXT` environment variable controls which documentation set is loaded:
+
+- `DOCS_CONTEXT=docs` - Load developer documentation (default)
+- `DOCS_CONTEXT=user` - Load end-user help documentation
+
+### Switching Between Contexts
+
+To switch between docs and user contexts during development:
+
+1. **Stop the current dev server** (Ctrl+C)
+2. **Run the appropriate script:**
+   - `npm run dev:docs` - for developer docs
+   - `npm run dev:user` - for user help
+3. The server will start with the correct content
+
+**Important:** You must stop and restart the dev server when switching contexts. The Next.js cache (`.next/`) is automatically invalidated when the context changes, but the running process maintains its initial configuration.
+
+### Troubleshooting Context Issues
+
+If the wrong content appears:
+
+1. **Stop the dev server completely** (Ctrl+C)
+2. **Clear the Next.js cache:** `rm -rf .next`
+3. **Restart with the correct script:** `npm run dev:user` or `npm run dev:docs`
+
+### Why Scripts Use `sh -c '...'`
+
+The npm scripts wrap commands in `sh -c '...'` to ensure environment variables are properly inherited by all commands in the chain:
+
+```json
+// ❌ Wrong - DOCS_CONTEXT only applies to the first command
+"dev:user": "DOCS_CONTEXT=user npm run copy-images:user && next dev"
+
+// ✅ Correct - DOCS_CONTEXT applies to all commands
+"dev:user": "DOCS_CONTEXT=user sh -c 'npm run copy-images:user && next dev'"
+```
+
+---
+
+## Project Structure
+
+## Project Directories
+
+### Committed to repo
+- **`assets/`** - Source files we want to be exposed (e.g. for favicon and logo). These are copied to `public/` and `out/`.
+- **`src/`** - Main source code (React components, pages, lib, types, contexts)
+- **`scripts/`** - Node.js scripts for cloning docs and copying images
+- **`tests/`** - Jest tests (mirrors `src/` structure)
+
+### Directories not committed to repo
+- **`.cache/`** - Cloned documentation content
+- **`.next/`** - Next.js build cache
+- **`public/`** - Static assets for dev server (populated during `npm run dev`)
+- **`out/`** - Static HTML export and static assets (populated during `npm run build`)
+
+---

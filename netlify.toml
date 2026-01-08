@@ -1,9 +1,9 @@
 [build]
-  command = "gatsby build"
-  publish = "public"
+  command = "if [ \"$DOCS_CONTEXT\" = \"user\" ]; then npm run build:user; else npm run build:docs; fi"
+  publish = "out"
 
 [build.environment]
-  NODE_VERSION = "10"
+  NODE_VERSION = "24"
 
 [[redirects]]
   from = "https://doc.silverstripe.org/*"
@@ -61,3 +61,158 @@
 [[redirects]]
   from = "/en/6/project_governance/minor_release_policy/"
   to = "/en/6/project_governance/release_policy/"
+
+# userhelp option feature redirects after gatsby to nextjs rebuild
+
+[[redirects]]
+  from = "/en/6/optional_features/setting_up_advancedworkflow/*"
+  to = "/en/6/optional_features/advancedworkflow/:splat"
+
+[[redirects]]
+  from = "/en/6/optional_features/forms/*"
+  to = "/en/6/optional_features/userforms/:splat"
+
+[[redirects]]
+  from = "/en/6/optional_features/taxonomies/*"
+  to = "/en/6/optional_features/taxonomy/:splat"
+
+[[redirects]]
+  from = "/en/6/optional_features/content_blocks/*"
+  to = "/en/6/optional_features/elemental/:splat"
+
+[[redirects]]
+  from = "/en/6/optional_features/multi-factor_authentication/*"
+  to = "/en/6/optional_features/mfa/:splat"
+
+[[redirects]]
+  from = "/en/6/optional_features/managing_devices/*"
+  to = "/en/6/optional_features/session-manager/:splat"
+
+[[redirects]]
+  from = "/en/5/optional_features/setting_up_advancedworkflow/*"
+  to = "/en/5/optional_features/advancedworkflow/:splat"
+
+[[redirects]]
+  from = "/en/5/optional_features/online_databases_and_registries/*"
+  to = "/en/5/optional_features/registry/:splat"
+
+[[redirects]]
+  from = "/en/5/optional_features/blogs/*"
+  to = "/en/5/optional_features/blog/:splat"
+
+[[redirects]]
+  from = "/en/5/optional_features/forms/*"
+  to = "/en/5/optional_features/userforms/:splat"
+
+[[redirects]]
+  from = "/en/5/optional_features/working_with_multiple_websites/*"
+  to = "/en/5/optional_features/subsites/:splat"
+
+[[redirects]]
+  from = "/en/5/optional_features/taxonomies/*"
+  to = "/en/5/optional_features/taxonomy/:splat"
+
+[[redirects]]
+  from = "/en/5/optional_features/site_wide_rss_feeds/*"
+  to = "/en/5/optional_features/versionfeed/:splat"
+
+[[redirects]]
+  from = "/en/5/optional_features/content_blocks/*"
+  to = "/en/5/optional_features/elemental/:splat"
+
+[[redirects]]
+  from = "/en/5/optional_features/modules_report/*"
+  to = "/en/5/optional_features/maintenance/:splat"
+
+[[redirects]]
+  from = "/en/5/optional_features/multi-factor_authentication/*"
+  to = "/en/5/optional_features/mfa/:splat"
+
+[[redirects]]
+  from = "/en/5/optional_features/managing_devices/*"
+  to = "/en/5/optional_features/session-manager/:splat"
+
+[[redirects]]
+  from = "/en/4/optional_features/setting_up_advancedworkflow/*"
+  to = "/en/4/optional_features/advancedworkflow/:splat"
+
+[[redirects]]
+  from = "/en/4/optional_features/online_databases_and_registries/*"
+  to = "/en/4/optional_features/registry/:splat"
+
+[[redirects]]
+  from = "/en/4/optional_features/blogs/*"
+  to = "/en/4/optional_features/blog/:splat"
+
+[[redirects]]
+  from = "/en/4/optional_features/forms/*"
+  to = "/en/4/optional_features/userforms/:splat"
+
+[[redirects]]
+  from = "/en/4/optional_features/working_with_multiple_websites/*"
+  to = "/en/4/optional_features/subsites/:splat"
+
+[[redirects]]
+  from = "/en/4/optional_features/taxonomies/*"
+  to = "/en/4/optional_features/taxonomy/:splat"
+
+[[redirects]]
+  from = "/en/4/optional_features/site_wide_rss_feeds/*"
+  to = "/en/4/optional_features/versionfeed/:splat"
+
+[[redirects]]
+  from = "/en/4/optional_features/content_blocks/*"
+  to = "/en/4/optional_features/elemental/:splat"
+
+[[redirects]]
+  from = "/en/4/optional_features/modules_report/*"
+  to = "/en/4/optional_features/maintenance/:splat"
+
+[[redirects]]
+  from = "/en/4/optional_features/multi-factor_authentication/*"
+  to = "/en/4/optional_features/mfa/:splat"
+
+[[redirects]]
+  from = "/en/4/optional_features/managing_devices/*"
+  to = "/en/4/optional_features/session-manager/:splat"
+
+[[redirects]]
+  from = "/en/3/optional_features/setting_up_advancedworkflow/*"
+  to = "/en/3/optional_features/advancedworkflow/:splat"
+
+[[redirects]]
+  from = "/en/3/optional_features/online_databases_and_registries/*"
+  to = "/en/3/optional_features/registry/:splat"
+
+[[redirects]]
+  from = "/en/3/optional_features/forums/*"
+  to = "/en/3/optional_features/forum/:splat"
+
+[[redirects]]
+  from = "/en/3/optional_features/blogs/*"
+  to = "/en/3/optional_features/blog/:splat"
+
+[[redirects]]
+  from = "/en/3/optional_features/working_with_translations/*"
+  to = "/en/3/optional_features/translatable/:splat"
+
+[[redirects]]
+  from = "/en/3/optional_features/working_with_multiple_websites/*"
+  to = "/en/3/optional_features/subsites/:splat"
+
+[[redirects]]
+  from = "/en/3/optional_features/securing_files/*"
+  to = "/en/3/optional_features/secureassets/:splat"
+
+[[redirects]]
+  from = "/en/3/optional_features/taxonomies/*"
+  to = "/en/3/optional_features/taxonomy/:splat"
+
+[[redirects]]
+  from = "/en/3/optional_features/site_wide_rss_feeds/*"
+  to = "/en/3/optional_features/versionfeed/:splat"
+
+[[redirects]]
+  from = "/en/3/optional_features/document_management_system/*"
+  to = "/en/3/optional_features/dms/:splat"
+

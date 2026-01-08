@@ -1,51 +1,92 @@
-import React from 'react'
-import { StatelessComponent, ReactElement } from 'react';
-import { navigate } from "gatsby"
-import useHierarchy from '../hooks/useHierarchy';
-import { DocSearch } from '@docsearch/react';
+'use client';
 
+import { DocSearch } from '@docsearch/react';
+import { usePathname } from 'next/navigation';
+import { useCallback } from 'react';
+import { getDefaultVersion } from '@/lib/versions/version-utils';
+import { getConfig } from '@/lib/config/config';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import '@docsearch/css';
 
-const makeUrlRelative = (url: string) => {
-  // Use an anchor tag to parse the absolute url into a relative url
-  // eslint-disable-next-line no-undef
-  const a = document.createElement(`a`);
-  a.href = url;
-  return `${a.pathname}${a.hash}`;
-};
-
-const handleClick = (event: Event, url: string) => {
-  event.preventDefault();
-  navigate(url);
+/**
+ * Extracts the current version from the pathname
+ */
+function getVersionFromPathname(pathname: string): string {
+  // pathname format: /en/{version}/{path}
+  const parts = pathname.split('/').filter(Boolean);
+  if (parts.length >= 2 && parts[0] === 'en') {
+    return parts[1];
+  }
+  return getDefaultVersion();
 }
 
-const SearchBox: StatelessComponent = (): ReactElement|null => {
-    const { getCurrentVersion } = useHierarchy();
+/**
+ * Converts an absolute URL to a relative URL for Next.js navigation
+ */
+function makeUrlRelative(url: string): string {
+  try {
+    const a = document.createElement('a');
+    a.href = url;
+    return `${a.pathname}${a.hash}`;
+  } catch {
+    return url;
+  }
+}
 
-    return (
-      <DocSearch
-        appId={process.env.GATSBY_DOCSEARCH_APP_ID}
-        indexName={process.env.GATSBY_DOCSEARCH_INDEX}
-        apiKey={process.env.GATSBY_DOCSEARCH_API_KEY}
-        disableUserPersonalization
-        searchParameters={{
-          facetFilters: [
-            `version:${getCurrentVersion()}`,
-          ],
-          hitsPerPage: 5,
-        }}
-        // Overrides the behaviour of pressing "enter" on a search result
-        navigator={{
-          navigate: ({ itemUrl }) => navigate(makeUrlRelative(itemUrl)),
-        }}
-        // Overrides the link container for search results so we can use gatsby navigation instead of full page loads
-        hitComponent={({ hit, children }) => {
-          const relativeUrl = makeUrlRelative(hit.url);
-          // We can't use a gatsby <Link> component here - for some reason it makes the links disappear on hover
-          return <a onClick={(e) => handleClick(e, relativeUrl)} href={relativeUrl}>{children}</a>
-        }}
-      />
-    );
-};
+/**
+ * Search box component using Algolia DocSearch
+ * Displays as a search input that opens a modal with results
+ */
+export function SearchBox() {
+  const pathname = usePathname();
+  const currentVersion = getVersionFromPathname(pathname);
 
-export default SearchBox;
+  const config = getConfig();
+  const appId = config.docsearchAppId;
+  const apiKey = config.docsearchApiKey;
+  const indexName = config.docsearchIndexName;
+
+  // If not configured, don't render
+  if (!appId || !apiKey || !indexName) {
+    return null;
+  }
+
+  const handleNavigate = useCallback(({ itemUrl }: { itemUrl: string }) => {
+    const relativeUrl = makeUrlRelative(itemUrl);
+    window.location.href = relativeUrl;
+  }, []);
+
+  return (
+    <DocSearch
+      appId={appId}
+      apiKey={apiKey}
+      disableUserPersonalization
+      indices={[
+        {
+          name: indexName,
+          searchParameters: {
+            facetFilters: [`version:${currentVersion}`],
+            hitsPerPage: 5,
+          },
+        },
+      ]}
+      navigator={{
+        navigate: handleNavigate,
+      }}
+      hitComponent={({ hit, children }) => {
+        const relativeUrl = makeUrlRelative(hit.url);
+        return (
+          <a
+            href={relativeUrl}
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = relativeUrl;
+            }}
+          >
+            {children}
+          </a>
+        );
+      }}
+    />
+  );
+}
