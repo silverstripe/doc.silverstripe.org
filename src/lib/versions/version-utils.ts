@@ -137,3 +137,12 @@ export function getVersionSwitcherLabel(version: string): string {
 export function getVersionHomepage(version: string): string {
   return `/en/${version}/`;
 }
+
+/**
+ * Check if a version string is valid
+ * @param version - The version to check
+ * @returns True if the version is valid, false otherwise
+ */
+export function isValidVersion(version: string): boolean {
+  return ALL_VERSIONS.includes(version);
+}

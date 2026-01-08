@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { getDocumentByParams, getAllDocuments } from '@/lib/content/get-document';
 import { buildNavTree } from '@/lib/nav/build-nav-tree';
 import { DocsLayout } from '@/components/DocsLayout';
@@ -6,7 +6,7 @@ import { VersionBanner } from '@/components/VersionBanner';
 import EditOnGithub from '@/components/EditOnGithub';
 import { MarkdownContent } from '@/components/MarkdownContent';
 import { generatePageMetadata } from '@/lib/metadata/metadata';
-import { getDefaultVersion, getVersionPath } from '@/lib/versions/version-utils';
+import { getDefaultVersion, getVersionPath, isValidVersion } from '@/lib/versions/version-utils';
 import type { Metadata } from 'next';
 import styles from './page.module.css';
 
@@ -86,6 +86,16 @@ export default async function Page({ params: paramsPromise }: PageProps) {
 
   const params = await paramsPromise;
   const { version, slug } = params;
+
+  // If version is invalid, redirect to the same path with the default version
+  // The invalid "version" becomes the first part of the slug path
+  if (!isValidVersion(version)) {
+    const defaultVersion = getDefaultVersion();
+    const pathParts = slug ? [version, ...slug] : [version];
+    const slugPath = `/${pathParts.join('/')}/`;
+    redirect(`/en/${defaultVersion}${slugPath}`);
+  }
+
   const doc = await getDocumentByParams(version, slug);
 
   if (!doc) {

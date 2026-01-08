@@ -27,7 +27,8 @@ jest.mock('@/lib/children/replace-children-markers', () => ({
 
 jest.mock('@/lib/versions/version-utils', () => ({
   getDefaultVersion: jest.fn(),
-  getVersionPath: jest.fn()
+  getVersionPath: jest.fn(),
+  isValidVersion: jest.fn(() => true),
 }));
 
 jest.mock('@/components/DocsLayout', () => ({
