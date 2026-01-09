@@ -181,6 +181,7 @@ interface DocumentNode {
 **Names:** Components=PascalCase, utils=kebab-case, tests=`*.test.*`  
 **Imports:** Use `@/` path alias for src/ imports. Do not create index.ts barrel files in lib/ subdirectories. Import directly from specific module files.  
 **HTML Injection:** Do NOT use `dangerouslySetInnerHTML` unless it is the correct or only way to solve an issue. Prefer the use of Next.js script handling, structured JSX, or other alternatives.
+**Console Output in Tests:** Do not call `console.error()`, `console.warn()`, or other console methods directly in tests. If intentional console output in production code is unavoidable, suppress it in tests using `jest.spyOn(console, 'method').mockImplementation(() => {})` and `.mockRestore()` to prevent ugly console pollution in test output.
 **Linting:** Run `npm run lint` - must have 0 errors and 0 warnings (Airbnb style guide)
 
 ### Security Considerations

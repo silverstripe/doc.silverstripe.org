@@ -10,9 +10,11 @@ jest.mock('@/lib/utils/redirect-patterns', () => ({
 describe('NotFound component', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    // Mock window.location
+    // Mock window.location (suppress jsdom navigation errors)
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
     delete (window as any).location;
     window.location = { href: '' } as any;
+    consoleErrorSpy.mockRestore();
   });
 
   it('should render 404 heading', async () => {
