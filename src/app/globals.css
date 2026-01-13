@@ -511,6 +511,7 @@ button:hover,
   border-radius: 0.5rem;
   overflow: hidden;
   transition: all var(--transition-standard);
+  flex-grow: 1;
 }
 
 .card:hover {
@@ -523,6 +524,8 @@ button:hover,
   color: inherit;
   display: block;
   height: 100%;
+  display: flex;
+  height: auto;
 }
 
 .card-body {
