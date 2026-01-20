@@ -89,6 +89,10 @@
   to = "/en/6/optional_features/session-manager/:splat"
 
 [[redirects]]
+  from = "/en/6/optional_features/share_draft_content/*"
+  to = "/en/6/optional_features/sharedraftcontent/:splat"
+
+[[redirects]]
   from = "/en/5/optional_features/setting_up_advancedworkflow/*"
   to = "/en/5/optional_features/advancedworkflow/:splat"
 
@@ -101,8 +105,24 @@
   to = "/en/5/optional_features/blog/:splat"
 
 [[redirects]]
+  from = "/en/5/optional_features/ckan_registry/*"
+  to = "/en/5/optional_features/ckan-registry/:splat"
+
+[[redirects]]
+  from = "/en/5/optional_features/content_review/*"
+  to = "/en/5/optional_features/contentreview/:splat"
+
+[[redirects]]
+  from = "/en/5/optional_features/document_converter/*"
+  to = "/en/5/optional_features/documentconverter/:splat"
+
+[[redirects]]
   from = "/en/5/optional_features/forms/*"
   to = "/en/5/optional_features/userforms/:splat"
+
+[[redirects]]
+  from = "/en/5/optional_features/share_draft_content/*"
+  to = "/en/5/optional_features/sharedraftcontent/:splat"
 
 [[redirects]]
   from = "/en/5/optional_features/working_with_multiple_websites/*"
@@ -145,6 +165,18 @@
   to = "/en/4/optional_features/blog/:splat"
 
 [[redirects]]
+  from = "/en/4/optional_features/ckan_registry/*"
+  to = "/en/4/optional_features/ckan-registry/:splat"
+
+[[redirects]]
+  from = "/en/4/optional_features/content_review/*"
+  to = "/en/4/optional_features/contentreview/:splat"
+
+[[redirects]]
+  from = "/en/4/optional_features/document_converter/*"
+  to = "/en/4/optional_features/documentconverter/:splat"
+
+[[redirects]]
   from = "/en/4/optional_features/forms/*"
   to = "/en/4/optional_features/userforms/:splat"
 
@@ -175,6 +207,10 @@
 [[redirects]]
   from = "/en/4/optional_features/managing_devices/*"
   to = "/en/4/optional_features/session-manager/:splat"
+
+[[redirects]]
+  from = "/en/4/optional_features/share_draft_content/*"
+  to = "/en/4/optional_features/sharedraftcontent/:splat"
 
 [[redirects]]
   from = "/en/3/optional_features/setting_up_advancedworkflow/*"
@@ -215,4 +251,3 @@
 [[redirects]]
   from = "/en/3/optional_features/document_management_system/*"
   to = "/en/3/optional_features/dms/:splat"
-
