@@ -32,8 +32,9 @@
 }
 
 .searchContainer {
-  flex: 1;
+  flex: 1 1 auto;
   max-width: 400px;
+  min-width: 50px;
   margin: 0 1rem;
 }
 
@@ -66,6 +67,10 @@
   height: 32px;
   object-fit: contain;
   flex-shrink: 0;
+
+  @media (max-width: 575px) {
+    margin: 0;
+  }
 }
 
 .logoText {
@@ -100,6 +105,13 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+
+  @media (max-width: 575px) {
+    &:first-of-type {
+      margin-left: auto;
+      margin-right: 0;
+    }
+  }
 }
 
 .navLink {
@@ -159,9 +171,50 @@
   color: var(--theme-text-light);
 }
 
-@media (max-width: 1023px) {
-  .hamburgerWrapper {
-    display: flex;
+@media (max-width: 575px) {
+  .header {
+    height: auto;
+  }
+
+  .headerContent {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 0.5rem 1rem;
+    align-items: center;
+  }
+
+  /* Line 1: Logo | Search | Hamburger */
+  .logo {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .searchContainer {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0 0.5rem 0 0;
+    min-width: 120px;
+  }
+
+  /* When hamburger is moved to be direct child of headerContent */
+  .headerContent > .hamburgerWrapper {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  /* Line 2: Version | GitHub + Dark mode */
+  .versionSwitcherWrapper {
+    grid-column: 1;
+    grid-row: 2;
+    order: -1;
+  }
+
+  .nav {
+    grid-column: 1 / 4;
+    grid-row: 2;
+    margin-left: 0;
+    justify-content: flex-start;
   }
 }
 
@@ -176,7 +229,7 @@
 
   .versionSwitcherWrapper {
     display: flex;
-    order: -2;
+    order: -1;
   }
 }
 
@@ -191,5 +244,12 @@
 
   .nav {
     gap: 0.5rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hamburgerWrapper {
+    display: flex;
+    order: 999;
   }
 }
