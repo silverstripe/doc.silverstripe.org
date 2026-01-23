@@ -22,6 +22,7 @@ interface HeaderProps {
  */
 export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [githubUrl, setGithubUrl] = useState('https://github.com/silverstripe/developer-docs');
   const pathname = usePathname();
 
@@ -70,6 +71,20 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
     }
   }, [version, optionalFeature]);
 
+  // Track window width for mobile/desktop layout
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Initial check
+    checkMobile();
+
+    // Listen for resize
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <header className={styles.header}>
       <div className={styles.headerContent}>
@@ -85,7 +100,26 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
           <SearchBox />
         </div>
 
+        {/* Hamburger outside nav on mobile */}
+        {isMobile && (
+          <div className={styles.hamburgerWrapper}>
+            <HamburgerButton
+              isOpen={isMobileMenuOpen}
+              onClick={handleMobileMenuToggle}
+            />
+          </div>
+        )}
+
         <nav className={styles.nav}>
+          {/* Hamburger inside nav on tablet breakpoint */}
+          {!isMobile && (
+            <div className={styles.hamburgerWrapper}>
+              <HamburgerButton
+                isOpen={isMobileMenuOpen}
+                onClick={handleMobileMenuToggle}
+              />
+            </div>
+          )}
           <div className={styles.navItem}>
             <a href={githubUrl} className={styles.navLink} aria-label="GitHub repository">
               <i className={`fab fa-github ${styles.githubIcon}`} />
@@ -101,12 +135,6 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
                 currentSlug={slug}
               />
             )}
-          </div>
-          <div className={styles.hamburgerWrapper}>
-            <HamburgerButton
-              isOpen={isMobileMenuOpen}
-              onClick={handleMobileMenuToggle}
-            />
           </div>
         </nav>
       </div>
