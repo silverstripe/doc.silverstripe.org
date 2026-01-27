@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
+  <rect width="150" height="100" fill="#F0F0F0"/>
+  <circle cx="40" cy="50" r="20" fill="#E74C3C"/>
+  <circle cx="75" cy="50" r="20" fill="#27AE60"/>
+  <circle cx="110" cy="50" r="20" fill="#3498DB"/>
+  <text x="75" y="85" text-anchor="middle" font-size="12">Data Types</text>
+</svg>

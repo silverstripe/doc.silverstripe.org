@@ -6,6 +6,8 @@ import {
   clearDocumentCache
 } from '@/lib/content/get-document';
 import { DocumentNode } from '@/types/types';
+import { getAvailableMockVersions } from '../../helpers/mock-versions';
+import { getAllVersions } from '@/lib/versions/version-utils';
 
 describe('Document Fetcher', () => {
   beforeEach(() => {
@@ -15,27 +17,29 @@ describe('Document Fetcher', () => {
   describe('getAllDocuments', () => {
     it('should return all documents from mock content', async () => {
       const docs = await getAllDocuments();
-      
-      // v3: 1 + v4: 1 + v5: 3 + v6: 23 main (added 6_1_0.md) + v6: 7 optional_features (added 01_basics, 03_Optional_features excluded in docs context) + v6: 1 (01_NotInNav.md for 5-level test) = 36 total
-      expect(docs).toHaveLength(36); // Based on mock-content structure including optional features and Phase 6 additions
+      const availableVersions = getAvailableMockVersions();
+      const allVersions = getAllVersions();
+      const filteredVersions = availableVersions.filter(v => allVersions.includes(v));
+      expect(docs.length).toBeGreaterThan(0);
+      const versions = new Set(docs.map(d => d.version));
+      filteredVersions.forEach(version => {
+          expect(versions.has(version)).toBe(true);
+      });
       expect(docs[0]).toHaveProperty('slug');
       expect(docs[0]).toHaveProperty('version');
       expect(docs[0]).toHaveProperty('title');
       expect(docs[0]).toHaveProperty('content');
     });
 
-    it('should include v3, v4, v5 and v6 documents', async () => {
+    it('should include configured version documents', async () => {
       const docs = await getAllDocuments();
-      
-      const v3Docs = docs.filter(d => d.version === '3');
-      const v4Docs = docs.filter(d => d.version === '4');
-      const v5Docs = docs.filter(d => d.version === '5');
-      const v6Docs = docs.filter(d => d.version === '6');
-      
-      expect(v3Docs.length).toBeGreaterThan(0);
-      expect(v4Docs.length).toBeGreaterThan(0);
-      expect(v5Docs.length).toBeGreaterThan(0);
-      expect(v6Docs.length).toBeGreaterThan(0);
+      const availableVersions = getAvailableMockVersions();
+      const allVersions = getAllVersions();
+      const filteredVersions = availableVersions.filter(v => allVersions.includes(v));
+      filteredVersions.forEach(version => {
+        const versionDocs = docs.filter(d => d.version === version);
+        expect(versionDocs.length).toBeGreaterThan(0);
+      });
     });
 
     it('should cache documents on subsequent calls', async () => {

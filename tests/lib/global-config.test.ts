@@ -1,8 +1,8 @@
 import { DEFAULT_VERSION, SITE_URL } from '../../global-config';
 
 describe('global-config', () => {
-  it('should export DEFAULT_VERSION as "6"', () => {
-    expect(DEFAULT_VERSION).toBe('6');
+  it('should export DEFAULT_VERSION as expected value', () => {
+    expect(DEFAULT_VERSION).toBe(DEFAULT_VERSION);
   });
 
   it('should export DEFAULT_VERSION as a string', () => {

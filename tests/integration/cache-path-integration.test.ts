@@ -1,4 +1,5 @@
 import { getConfig } from '@/lib/config/config';
+import { getAvailableMockVersions } from '../helpers/mock-versions';
 
 /**
  * Integration test for cache path resolution across the system
@@ -102,9 +103,8 @@ describe('cache-path-integration', () => {
 
     it('should support version subdirectories', () => {
       const config = getConfig();
+      const versions = getAvailableMockVersions();
 
-      // Path structure should support: .cache/{context}/v{version}/
-      const versions = ['3', '4', '5', '6'];
       for (const version of versions) {
         const versionPath = `v${version}`;
         expect(versionPath).toMatch(/^v\d+$/);

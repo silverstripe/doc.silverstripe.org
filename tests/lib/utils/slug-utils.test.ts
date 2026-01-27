@@ -8,6 +8,7 @@ import {
   getFallbackSlugForVersion,
   extractVersionAndFeatureFromSlug,
 } from '@/lib/utils/slug-utils';
+import { DEFAULT_VERSION } from '../../../global-config';
 import { DocumentNode } from '@/types/types';
 
 describe('normalizeSlug', () => {
@@ -295,9 +296,9 @@ describe('extractVersionAndFeatureFromSlug', () => {
     expect(result.optionalFeature).toBeNull();
   });
 
-  it('defaults to v6 for invalid paths', () => {
+  it('defaults to DEFAULT_VERSION for invalid paths', () => {
     const result = extractVersionAndFeatureFromSlug('/invalid/');
-    expect(result.version).toBe('6');
+    expect(result.version).toBe(DEFAULT_VERSION);
     expect(result.optionalFeature).toBeNull();
   });
 });
