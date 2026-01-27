@@ -139,7 +139,7 @@ interface DocumentNode {
 
 ## Key Modules
 
-**Version Management:** `src/lib/versions/version-utils.ts` - centralized version constants  
+**Version Management:** `src/lib/versions/version-utils.ts` - dynamic version calculations based on `DEFAULT_VERSION`, `HIGHEST_VERSION`, and `MINIMUM_VERSION` in `global-config.ts`
 **Source Configs:** `sources-docs.ts` (developer docs), `sources-user.ts` (user help), `sources-config.ts` (wrapper) - all at project root  
 **Markdown Pipeline:** `src/lib/markdown/processor.ts` - remark→rehype with GFM, alerts, code blocks  
 **Navigation:** `src/lib/nav/build-nav-tree.ts` - hierarchical nav tree from documents  
