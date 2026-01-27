@@ -12,25 +12,21 @@ Built with:
 
 ---
 
-## What to update when creating a new pre-release major branch, making a stable major release, or making a major EOL
+## What to update when creating a new pre-release major branch or making a stable major release
 
 When **creating a new major branch for a pre-release major version**
 
 - Make sure you've added a new major branch to both `silverstripe/developer-docs` and `silverstripe/silverstripe-userhelp-content`
 - Add the new major to `sources-docs.json` and `sources-user.json`
 - Add the new major branches for various modules as defined in `sources-docs.json` and `sources-user.json` as well
-- Add the new major to `ALL_VERSIONS` in `src/lib/versions/version-utils.ts`
+- Update `HIGHEST_VERSION` in `global-config.ts` to the new pre-release major
 - Add the new major version to the [algolia crawler script](https://crawler.algolia.com/admin/crawlers/3d14ccdd-f9ae-4957-bc0a-5b21b4c29af3/configuration/edit)
 
 For **new stable releases**, you will need to do the following
 
-- Remove the old major from `PREVIOUS_RELEASE_VERSIONS` in `src/lib/versions/version-utils.ts` (if applicable)
-- Update `PREVIOUS_RELEASE_VERSIONS` to include the previously current major in `src/lib/versions/version-utils.ts`
-- Update `CURRENT_VERSION` constant to the new stable major in `src/lib/versions/version-utils.ts`
-- Update `DEFAULT_VERSION` constant to the new stable major in `global-config.ts`
+- Update `DEFAULT_VERSION` in `global-config.ts` to the new stable major
+- Update `HIGHEST_VERSION` in `global-config.ts` to match `DEFAULT_VERSION` (if it was previously set to a pre-release version)
 - Update redirects in `netlify.toml` to point to the new stable major
-
-When a **major goes EOL**, add the major to the `EOL_VERSIONS` array in `src/lib/versions/version-utils.ts`
 
 ## Quick Start
 
