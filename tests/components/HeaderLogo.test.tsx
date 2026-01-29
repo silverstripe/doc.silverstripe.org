@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Header } from '@/components/Header';
+import { DEFAULT_VERSION } from '../../global-config';
 
 // Mock next/navigation
 jest.mock('next/navigation', () => ({
@@ -73,7 +74,7 @@ describe('Phase 2: Logo Link Version Routing', () => {
     expect(logoLink).toHaveAttribute('href', '/en/6/');
   });
 
-  it('logo href uses default version (6) when version cannot be determined', () => {
+  it('logo href uses DEFAULT_VERSION when version cannot be determined', () => {
     const { usePathname } = require('next/navigation');
     usePathname.mockReturnValue('/invalid/path/');
 
@@ -81,7 +82,7 @@ describe('Phase 2: Logo Link Version Routing', () => {
 
     const logoImg = screen.getByAltText('Silverstripe');
     const logoLink = logoImg.closest('a');
-    expect(logoLink).toHaveAttribute('href', '/en/6/');
+    expect(logoLink).toHaveAttribute('href', `/en/${DEFAULT_VERSION}/`);
   });
 
   it('logo href is /en/5/ when on a v5 page', () => {
