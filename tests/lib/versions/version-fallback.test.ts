@@ -5,6 +5,7 @@
 
 import { getVersionHomepage } from '@/lib/versions/version-utils';
 import { slugExistsInVersion } from '@/lib/versions/get-available-slugs';
+import { getAvailableMockVersions } from '../../helpers/mock-versions';
 
 describe('Version Fallback', () => {
   describe('getVersionHomepage', () => {
@@ -25,7 +26,7 @@ describe('Version Fallback', () => {
     });
 
     it('should always use /en/{version}/ format', () => {
-      const versions = ['3', '4', '5', '6'];
+      const versions = getAvailableMockVersions();
       versions.forEach(v => {
         const url = getVersionHomepage(v);
         expect(url).toMatch(/^\/en\/\d+\/$/);
@@ -55,8 +56,7 @@ describe('Version Fallback', () => {
     });
 
     it('should handle different version numbers', async () => {
-      // Should not throw errors for different versions
-      const versions = ['3', '4', '5', '6'];
+      const versions = getAvailableMockVersions();
       for (const v of versions) {
         const result = await slugExistsInVersion(v, `/en/${v}/`);
         expect(typeof result).toBe('boolean');
@@ -74,7 +74,7 @@ describe('Version Fallback', () => {
     });
 
     it('should preserve homepage format across all versions', () => {
-      const allVersions = ['3', '4', '5', '6'];
+      const allVersions = getAvailableMockVersions();
       const homepages = allVersions.map(v => getVersionHomepage(v));
       
       homepages.forEach((hp, idx) => {

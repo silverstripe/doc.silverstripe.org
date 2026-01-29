@@ -6,18 +6,27 @@ import '@testing-library/jest-dom';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { VersionBanner } from '@/components/VersionBanner';
+import { DEFAULT_VERSION } from '../../global-config';
+import { getAllVersions, getVersionStatus } from '@/lib/versions/version-utils';
 
 describe('VersionBanner', () => {
-  const mockLatestVersionPath = '/en/6/';
+  const mockLatestVersionPath = `/en/${DEFAULT_VERSION}/`;
+  
+  // Dynamically find a supported version (not current, not EOL)
+  // Note that the `|| ''` is so that the `string | undefined` return type of find() will always be string type
+  const supportedVersion = getAllVersions().find(v => getVersionStatus(v) === 'supported') || '';
+  // Dynamically find an EOL version
+  // Note that the `|| ''` is so that the `string | undefined` return type of find() will always be string type
+  const eolVersion = getAllVersions().find(v => getVersionStatus(v) === 'eol') || '';
 
-  it('should render banner for version 6 with success styling and no message', () => {
+  it('should render banner for DEFAULT_VERSION with success styling and no message', () => {
     const { container } = render(
-      <VersionBanner version="6" latestVersionPath={mockLatestVersionPath} />
+      <VersionBanner version={DEFAULT_VERSION} latestVersionPath={mockLatestVersionPath} />
     );
 
     // Check for version text by looking at the title section
     const titleSection = container.querySelector('[class*="titleSection"]');
-    expect(titleSection?.textContent).toContain('Version 6');
+    expect(titleSection?.textContent).toContain(`Version ${DEFAULT_VERSION}`);
 
     // Check for Supported label
     expect(screen.getByText('Supported')).toBeInTheDocument();
@@ -30,14 +39,16 @@ describe('VersionBanner', () => {
     expect(screen.queryByText(/This version of Silverstripe CMS/)).not.toBeInTheDocument();
   });
 
-  it('should render banner for version 5 with info styling and message', () => {
+  it('should render banner for supported version with info styling and message', () => {
+    // Using dynamically determined supported version
+    // This tests the "supported" version styling and behavior
     const { container } = render(
-      <VersionBanner version="5" latestVersionPath={mockLatestVersionPath} />
+      <VersionBanner version={supportedVersion} latestVersionPath={mockLatestVersionPath} />
     );
 
     // Check for version text by looking at the title section
     const titleSection = container.querySelector('[class*="titleSection"]');
-    expect(titleSection?.textContent).toContain('Version 5');
+    expect(titleSection?.textContent).toContain(`Version ${supportedVersion}`);
 
     // Check for Supported label
     expect(screen.getByText('Supported')).toBeInTheDocument();
@@ -53,14 +64,14 @@ describe('VersionBanner', () => {
     expect(screen.getByRole('link', { name: /Go to documentation for the most recent stable version/ })).toBeInTheDocument();
   });
 
-  it('should render banner for version 4 with danger styling and EOL message', () => {
+  it('should render banner for EOL version with danger styling and EOL message', () => {
     const { container } = render(
-      <VersionBanner version="4" latestVersionPath={mockLatestVersionPath} />
+      <VersionBanner version={eolVersion} latestVersionPath={mockLatestVersionPath} />
     );
 
     // Check for version text by looking at the title section
     const titleSection = container.querySelector('[class*="titleSection"]');
-    expect(titleSection?.textContent).toContain('Version 4');
+    expect(titleSection?.textContent).toContain(`Version ${eolVersion}`);
 
     // Check for End of Life label
     expect(screen.getByText('End of Life')).toBeInTheDocument();
@@ -73,18 +84,18 @@ describe('VersionBanner', () => {
     expect(screen.getByText(/will not receive/)).toBeInTheDocument();
   });
 
-  it('should have correct icon for version 6', () => {
+  it('should have correct icon for DEFAULT_VERSION', () => {
     const { container } = render(
-      <VersionBanner version="6" latestVersionPath={mockLatestVersionPath} />
+      <VersionBanner version={DEFAULT_VERSION} latestVersionPath={mockLatestVersionPath} />
     );
 
     const icon = container.querySelector('[aria-hidden="true"]');
     expect(icon).toHaveClass('fa-circle-check');
   });
 
-  it('should have correct icon for version 4 (EOL)', () => {
+  it('should have correct icon for EOL version', () => {
     const { container } = render(
-      <VersionBanner version="4" latestVersionPath={mockLatestVersionPath} />
+      <VersionBanner version={eolVersion} latestVersionPath={mockLatestVersionPath} />
     );
 
     const icon = container.querySelector('[aria-hidden="true"]');
@@ -92,29 +103,30 @@ describe('VersionBanner', () => {
   });
 
   it('should render banner with alert role', () => {
-    render(<VersionBanner version="6" latestVersionPath={mockLatestVersionPath} />);
+    render(<VersionBanner version={DEFAULT_VERSION} latestVersionPath={mockLatestVersionPath} />);
 
     const banner = screen.getByRole('alert');
     expect(banner).toBeInTheDocument();
   });
 
-  it('should not show link to latest version when viewing version 6', () => {
+  it('should not show link to latest version when viewing DEFAULT_VERSION', () => {
     render(
-      <VersionBanner version="6" latestVersionPath={mockLatestVersionPath} />
+      <VersionBanner version={DEFAULT_VERSION} latestVersionPath={mockLatestVersionPath} />
     );
 
-    // v6 has no message, so link shouldn't appear
+    // DEFAULT_VERSION has no message, so link shouldn't appear
     expect(screen.queryByRole('link')).not.toBeInTheDocument();
   });
 
   it('should show version and stability in title section', () => {
+    // Using dynamically determined supported version
     const { container } = render(
-      <VersionBanner version="5" latestVersionPath={mockLatestVersionPath} />
+      <VersionBanner version={supportedVersion} latestVersionPath={mockLatestVersionPath} />
     );
 
     // Check for version text by looking at the title section
     const titleSection = container.querySelector('[class*="titleSection"]');
-    expect(titleSection?.textContent).toContain('Version 5');
+    expect(titleSection?.textContent).toContain(`Version ${supportedVersion}`);
     expect(screen.getByText('Supported')).toBeInTheDocument();
     
     // Verify status is displayed as a separate element with icon
@@ -123,32 +135,34 @@ describe('VersionBanner', () => {
   });
 
   it('should have correct styling classes applied', () => {
-    const { container: container6 } = render(
-      <VersionBanner version="6" latestVersionPath={mockLatestVersionPath} />
+    const { container: containerDefault } = render(
+      <VersionBanner version={DEFAULT_VERSION} latestVersionPath={mockLatestVersionPath} />
     );
-    expect(container6.querySelector('.style-success')).toBeInTheDocument();
+    expect(containerDefault.querySelector('.style-success')).toBeInTheDocument();
 
-    const { container: container5 } = render(
-      <VersionBanner version="5" latestVersionPath={mockLatestVersionPath} />
+    // Using dynamically determined supported version
+    const { container: containerSupported } = render(
+      <VersionBanner version={supportedVersion} latestVersionPath={mockLatestVersionPath} />
     );
-    expect(container5.querySelector('.style-info')).toBeInTheDocument();
+    expect(containerSupported.querySelector('.style-info')).toBeInTheDocument();
 
-    const { container: container4 } = render(
-      <VersionBanner version="4" latestVersionPath={mockLatestVersionPath} />
+    // Using dynamically determined EOL version
+    const { container: containerEol } = render(
+      <VersionBanner version={eolVersion} latestVersionPath={mockLatestVersionPath} />
     );
-    expect(container4.querySelector('.style-danger')).toBeInTheDocument();
+    expect(containerEol.querySelector('.style-danger')).toBeInTheDocument();
   });
 
   it('should render with proper structure for version without message', () => {
     const { container } = render(
-      <VersionBanner version="6" latestVersionPath={mockLatestVersionPath} />
+      <VersionBanner version={DEFAULT_VERSION} latestVersionPath={mockLatestVersionPath} />
     );
 
     // Should have header with icon and title
     expect(container.querySelector('[aria-hidden="true"]')).toBeInTheDocument();
     // Check for version text by looking at the title section
     const titleSection = container.querySelector('[class*="titleSection"]');
-    expect(titleSection?.textContent).toContain('Version 6');
+    expect(titleSection?.textContent).toContain(`Version ${DEFAULT_VERSION}`);
 
     // Should not have message section
     expect(container.querySelector('[class*="messageSection"]')).not.toBeInTheDocument();
@@ -156,7 +170,7 @@ describe('VersionBanner', () => {
 
   it('should have reduced bottom padding when no message section', () => {
     const { container } = render(
-      <VersionBanner version="6" latestVersionPath={mockLatestVersionPath} />
+      <VersionBanner version={DEFAULT_VERSION} latestVersionPath={mockLatestVersionPath} />
     );
 
     const banner = container.querySelector('[role="alert"]');
@@ -165,7 +179,7 @@ describe('VersionBanner', () => {
 
   it('should not have reduced bottom padding when message section exists', () => {
     const { container } = render(
-      <VersionBanner version="5" latestVersionPath={mockLatestVersionPath} />
+      <VersionBanner version={supportedVersion} latestVersionPath={mockLatestVersionPath} />
     );
 
     const banner = container.querySelector('[role="alert"]');
@@ -174,7 +188,7 @@ describe('VersionBanner', () => {
 
   it('should have status badge with icon aligned to the right', () => {
     const { container } = render(
-      <VersionBanner version="6" latestVersionPath={mockLatestVersionPath} />
+      <VersionBanner version={DEFAULT_VERSION} latestVersionPath={mockLatestVersionPath} />
     );
 
     const titleSection = container.querySelector('[class*="titleSection"]');
@@ -185,7 +199,7 @@ describe('VersionBanner', () => {
 
   it('should render status icon within status badge', () => {
     const { container } = render(
-      <VersionBanner version="6" latestVersionPath={mockLatestVersionPath} />
+      <VersionBanner version={DEFAULT_VERSION} latestVersionPath={mockLatestVersionPath} />
     );
 
     const status = container.querySelector('[class*="status"]');
@@ -195,7 +209,7 @@ describe('VersionBanner', () => {
 
   it('should have proper spacing between title and status badge', () => {
     const { container } = render(
-      <VersionBanner version="6" latestVersionPath={mockLatestVersionPath} />
+      <VersionBanner version={DEFAULT_VERSION} latestVersionPath={mockLatestVersionPath} />
     );
 
     const titleSection = container.querySelector('[class*="titleSection"]');
@@ -205,8 +219,9 @@ describe('VersionBanner', () => {
   });
 
   it('should render status badge with correct structure', () => {
+    // Using dynamically determined supported version
     const { container } = render(
-      <VersionBanner version="5" latestVersionPath={mockLatestVersionPath} />
+      <VersionBanner version={supportedVersion} latestVersionPath={mockLatestVersionPath} />
     );
 
     const status = container.querySelector('[class*="status"]');

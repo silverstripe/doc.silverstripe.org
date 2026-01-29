@@ -1,5 +1,6 @@
 import { generatePageMetadata, generateRootMetadata } from '@/lib/metadata/metadata';
 import type { DocumentNode } from '@/types/types';
+import { DEFAULT_VERSION } from '../../../global-config';
 
 jest.mock('@/lib/config/config', () => ({
   getConfig: () => ({
@@ -10,13 +11,13 @@ jest.mock('@/lib/config/config', () => ({
 describe('generatePageMetadata', () => {
   it('generates metadata for a document with summary', () => {
     const doc: DocumentNode = {
-      slug: '/en/6/getting-started/',
-      version: '6',
+      slug: `/en/${DEFAULT_VERSION}/getting-started/`,
+      version: DEFAULT_VERSION,
       filePath: 'getting-started.md',
       fileTitle: 'Getting Started',
       fileAbsolutePath: '/path/to/getting-started.md',
       isIndex: false,
-      parentSlug: '/en/6/',
+      parentSlug: `/en/${DEFAULT_VERSION}/`,
       title: 'Getting Started',
       content: 'Content here',
       category: 'docs',
@@ -27,21 +28,21 @@ describe('generatePageMetadata', () => {
 
     expect(metadata.title).toBe('Getting Started | Silverstripe CMS Documentation');
     expect(metadata.description).toBe('Learn how to get started with SilverStripe');
-    expect(metadata.alternates?.canonical).toBe('https://docs.silverstripe.org/en/6/getting-started/');
+    expect(metadata.alternates?.canonical).toBe(`https://docs.silverstripe.org/en/${DEFAULT_VERSION}/getting-started/`);
     expect(metadata.openGraph?.title).toBe('Getting Started | Silverstripe CMS Documentation');
     expect(metadata.openGraph?.description).toBe('Learn how to get started with SilverStripe');
-    expect(metadata.openGraph?.url).toBe('https://docs.silverstripe.org/en/6/getting-started/');
+    expect(metadata.openGraph?.url).toBe(`https://docs.silverstripe.org/en/${DEFAULT_VERSION}/getting-started/`);
   });
 
   it('uses default description when summary is missing', () => {
     const doc: DocumentNode = {
-      slug: '/en/6/advanced/',
-      version: '6',
+      slug: `/en/${DEFAULT_VERSION}/advanced/`,
+      version: DEFAULT_VERSION,
       filePath: 'advanced.md',
       fileTitle: 'Advanced',
       fileAbsolutePath: '/path/to/advanced.md',
       isIndex: false,
-      parentSlug: '/en/6/',
+      parentSlug: `/en/${DEFAULT_VERSION}/`,
       title: 'Advanced Topics',
       content: 'Content here',
       category: 'docs',
@@ -59,13 +60,13 @@ describe('generatePageMetadata', () => {
 
   it('includes OpenGraph image metadata', () => {
     const doc: DocumentNode = {
-      slug: '/en/6/test/',
-      version: '6',
+      slug: `/en/${DEFAULT_VERSION}/test/`,
+      version: DEFAULT_VERSION,
       filePath: 'test.md',
       fileTitle: 'Test',
       fileAbsolutePath: '/path/to/test.md',
       isIndex: false,
-      parentSlug: '/en/6/',
+      parentSlug: `/en/${DEFAULT_VERSION}/`,
       title: 'Test Page',
       content: 'Content here',
       category: 'docs',
@@ -86,13 +87,13 @@ describe('generatePageMetadata', () => {
 
   it('includes docsearch metadata with version and context', () => {
     const doc: DocumentNode = {
-      slug: '/en/6/test/',
-      version: '6',
+      slug: `/en/${DEFAULT_VERSION}/test/`,
+      version: DEFAULT_VERSION,
       filePath: 'test.md',
       fileTitle: 'Test',
       fileAbsolutePath: '/path/to/test.md',
       isIndex: false,
-      parentSlug: '/en/6/',
+      parentSlug: `/en/${DEFAULT_VERSION}/`,
       title: 'Test Page',
       content: 'Content here',
       category: 'docs',
@@ -100,7 +101,7 @@ describe('generatePageMetadata', () => {
 
     const metadata = generatePageMetadata(doc);
 
-    expect(metadata.other?.['docsearch:version']).toBe('6');
+    expect(metadata.other?.['docsearch:version']).toBe(DEFAULT_VERSION);
     expect(metadata.other?.['docsearch:context']).toBe('docs');
   });
 
@@ -120,7 +121,7 @@ describe('generatePageMetadata', () => {
 
     const metadata = generatePageMetadata(doc);
 
-    expect(metadata.other?.['docsearch:version']).toBe('6');
+    expect(metadata.other?.['docsearch:version']).toBe(DEFAULT_VERSION);
   });
 });
 
@@ -132,7 +133,7 @@ describe('generateRootMetadata', () => {
     expect(metadata.description).toBe(
       'Silverstripe CMS Documentation - Learn how to develop and configure Silverstripe applications.',
     );
-    expect(metadata.alternates?.canonical).toBe('https://docs.silverstripe.org/en/6/');
+    expect(metadata.alternates?.canonical).toBe(`https://docs.silverstripe.org/en/${DEFAULT_VERSION}/`);
     expect(metadata.openGraph?.title).toBe('Silverstripe CMS Documentation');
   });
 
@@ -151,7 +152,7 @@ describe('generateRootMetadata', () => {
   it('includes docsearch metadata with DEFAULT_VERSION and context', () => {
     const metadata = generateRootMetadata();
 
-    expect(metadata.other?.['docsearch:version']).toBe('6');
+    expect(metadata.other?.['docsearch:version']).toBe(DEFAULT_VERSION);
     expect(metadata.other?.['docsearch:context']).toBe('docs');
   });
 });

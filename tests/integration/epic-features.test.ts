@@ -4,6 +4,7 @@
  */
 import { getAllDocuments, clearDocumentCache } from '@/lib/content/get-document';
 import { buildNavTree } from '@/lib/nav/build-nav-tree';
+import { getAvailableMockVersions } from '../helpers/mock-versions';
 
 describe('Phase 9: Epic Features Integration', () => {
   beforeEach(() => {
@@ -77,10 +78,11 @@ describe('Phase 9: Epic Features Integration', () => {
 
       const documents = await getAllDocuments();
       const versions = new Set(documents.map(d => d.version));
+      const availableVersions = getAvailableMockVersions();
 
       expect(versions.size).toBeGreaterThan(0);
       versions.forEach(version => {
-        expect(['3', '4', '5', '6']).toContain(version);
+        expect(availableVersions).toContain(version);
       });
     });
 
