@@ -2,12 +2,43 @@
  * Version utilities for multi-version documentation support
  */
 
+import { DEFAULT_VERSION, HIGHEST_VERSION, MINIMUM_VERSION } from '../../../global-config';
+
 export type VersionStatus = 'current' | 'supported' | 'eol';
 
-const EOL_VERSIONS = ['3', '4'];
-const PREVIOUS_RELEASE_VERSIONS = ['5'];
-const CURRENT_VERSION = '6';
-const ALL_VERSIONS = ['3', '4', '5', '6'];
+// Derive all version constants dynamically from config
+const CURRENT_VERSION = DEFAULT_VERSION;
+const PREVIOUS_RELEASE_VERSION = String(parseInt(CURRENT_VERSION, 10) - 1);
+
+/**
+ * Generate array of EOL versions (MINIMUM_VERSION to PREVIOUS_RELEASE_VERSION - 1)
+ */
+function generateEolVersions(): string[] {
+  const min = parseInt(MINIMUM_VERSION, 10);
+  const prevRelease = parseInt(PREVIOUS_RELEASE_VERSION, 10);
+  const eolVersions: string[] = [];
+  for (let i = min; i < prevRelease; i += 1) {
+    eolVersions.push(String(i));
+  }
+  return eolVersions;
+}
+
+/**
+ * Generate array of all versions (MINIMUM_VERSION to HIGHEST_VERSION)
+ */
+function generateAllVersions(): string[] {
+  const min = parseInt(MINIMUM_VERSION, 10);
+  const highest = parseInt(HIGHEST_VERSION, 10);
+  const allVersions: string[] = [];
+  for (let i = min; i <= highest; i += 1) {
+    allVersions.push(String(i));
+  }
+  return allVersions;
+}
+
+const EOL_VERSIONS = generateEolVersions();
+const PREVIOUS_RELEASE_VERSIONS = [PREVIOUS_RELEASE_VERSION];
+const ALL_VERSIONS = generateAllVersions();
 
 /**
  * Get all available documentation versions
