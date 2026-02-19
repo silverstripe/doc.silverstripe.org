@@ -26,8 +26,42 @@ const HEADING_REGEX = /^(#{2,3})\s+(.+?)(?:\s*\{#([^}]+)\})?\s*$/gm;
  * Helper to determine if a position in the markdown is inside a <details> block
  * Tracks all <details> opening and closing tags up to the given position
  */
+function stripCodeFromMarkdown(markdown: string): string {
+  const lines = markdown.split('\n');
+  let inFence = false;
+  let fenceMarker = '';
+
+  return lines
+    .map((line) => {
+      const fenceMatch = line.match(/^\s*(```+|~~~+)/);
+
+      if (fenceMatch) {
+        const marker = fenceMatch[1];
+
+        if (!inFence) {
+          inFence = true;
+          fenceMarker = marker;
+          return '';
+        }
+
+        if (marker[0] === fenceMarker[0] && marker.length >= fenceMarker.length) {
+          inFence = false;
+          fenceMarker = '';
+          return '';
+        }
+      }
+
+      if (inFence) {
+        return '';
+      }
+
+      return line.replace(/`[^`]*`/g, '');
+    })
+    .join('\n');
+}
+
 function isInsideDetailsBlock(markdown: string, position: number): boolean {
-  const textBeforePosition = markdown.slice(0, position);
+  const textBeforePosition = stripCodeFromMarkdown(markdown.slice(0, position));
   let depth = 0;
 
   // Match opening <details> tags (case-insensitive, optional attributes)

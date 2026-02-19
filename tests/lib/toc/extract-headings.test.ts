@@ -2,6 +2,9 @@
  * Tests for extractHeadings function
  */
 
+import fs from 'fs';
+import path from 'path';
+
 import { extractHeadings } from '@/lib/toc/extract-headings';
 
 describe('extractHeadings', () => {
@@ -297,6 +300,20 @@ No headings here.`;
 
   describe('accordion filtering', () => {
     describe('<details> blocks', () => {
+      it('should handle a changelog fixture with inline <details> mentions', () => {
+        const fixturePath = path.join(process.cwd(), 'tests/fixtures/release-changelog-details.md');
+        const markdown = fs.readFileSync(fixturePath, 'utf8');
+
+        const headings = extractHeadings(markdown);
+
+        expect(headings.map((heading) => heading.text)).toEqual([
+          'Overview',
+          'Included Module Versions',
+          'Upgrade Notes',
+          'Breaking Changes',
+        ]);
+      });
+
       it('should exclude H2 headings inside <details> blocks', () => {
         const markdown = `## Visible Heading
 
@@ -458,6 +475,34 @@ Changes in this version.
 
         expect(headings).toHaveLength(2);
         expect(headings.map((h) => h.text)).toEqual(['Visible', 'Also Visible']);
+      });
+
+      it('should ignore <details> inside inline code spans', () => {
+        const markdown = `## Before
+
+Text with inline code \`<details>\` and \`<summary>\` that should not affect TOC.
+
+## After`;
+
+        const headings = extractHeadings(markdown);
+
+        expect(headings.map((heading) => heading.text)).toEqual(['Before', 'After']);
+      });
+
+      it('should ignore <details> inside fenced code blocks', () => {
+        const markdown = `## Start
+
+\`\`\`html
+<details>
+<summary>Example</summary>
+</details>
+\`\`\`
+
+## End`;
+
+        const headings = extractHeadings(markdown);
+
+        expect(headings.map((heading) => heading.text)).toEqual(['Start', 'End']);
       });
 
       it('should handle realistic changelog accordion structure', () => {
