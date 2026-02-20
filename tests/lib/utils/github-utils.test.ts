@@ -3,6 +3,7 @@ import {
   getDocumentGithubInfo,
 } from '@/lib/utils/github-utils';
 import { DocumentNode } from '@/types/types';
+import docsSourcesData from '../../../sources-docs.json';
 
 describe('github-utils', () => {
   describe('getOptionalFeatureFromDocument', () => {
@@ -52,11 +53,12 @@ describe('github-utils', () => {
   describe('getDocumentGithubInfo', () => {
     it('returns correct info for core v6 docs', () => {
       const info = getDocumentGithubInfo('6', null);
+      const expected = docsSourcesData['6'].main;
       expect(info).toEqual({
-        owner: 'silverstripe',
-        repo: 'developer-docs',
-        branch: '6.1',
-        docsPath: 'en',
+        owner: expected.owner,
+        repo: expected.repo,
+        branch: expected.branch,
+        docsPath: expected.docsPath,
       });
     });
 
@@ -72,21 +74,23 @@ describe('github-utils', () => {
 
     it('returns correct info for optional feature linkfield v6', () => {
       const info = getDocumentGithubInfo('6', 'linkfield');
+      const expected = docsSourcesData['6'].optionalFeatures.linkfield;
       expect(info).toEqual({
-        owner: 'silverstripe',
-        repo: 'silverstripe-linkfield',
-        branch: '5.1',
-        docsPath: 'docs/en',
+        owner: expected.owner,
+        repo: expected.repo,
+        branch: expected.branch,
+        docsPath: expected.docsPath,
       });
     });
 
     it('returns correct info for optional feature fluent v6', () => {
       const info = getDocumentGithubInfo('6', 'fluent');
+      const expected = docsSourcesData['6'].optionalFeatures.fluent;
       expect(info).toEqual({
-        owner: 'tractorcow-farm',
-        repo: 'silverstripe-fluent',
-        branch: '8.1',
-        docsPath: 'docs/en',
+        owner: expected.owner,
+        repo: expected.repo,
+        branch: expected.branch,
+        docsPath: expected.docsPath,
       });
     });
 
