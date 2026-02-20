@@ -1,9 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import EditOnGithub from '../../src/components/EditOnGithub';
+import docsSourcesData from '../../sources-docs.json';
 
 describe('EditOnGithub component', () => {
   it('generates correct URL for main docs v6', () => {
+    const v6Branch = docsSourcesData['6'].main.branch;
     render(
       <EditOnGithub
         version="6"
@@ -15,7 +17,7 @@ describe('EditOnGithub component', () => {
     const link = screen.getByRole('link', { name: /edit on github/i });
     expect(link).toHaveAttribute(
       'href',
-      'https://github.com/silverstripe/developer-docs/blob/6.1/en/02_Developer_Guides/index.md'
+      `https://github.com/silverstripe/developer-docs/blob/${v6Branch}/en/02_Developer_Guides/index.md`
     );
   });
 
@@ -36,6 +38,7 @@ describe('EditOnGithub component', () => {
   });
 
   it('generates correct URL for optional feature linkfield v6', () => {
+    const linkfieldBranch = docsSourcesData['6'].optionalFeatures.linkfield.branch;
     render(
       <EditOnGithub
         version="6"
@@ -48,7 +51,7 @@ describe('EditOnGithub component', () => {
     const link = screen.getByRole('link', { name: /edit on github/i });
     expect(link).toHaveAttribute(
       'href',
-      'https://github.com/silverstripe/silverstripe-linkfield/blob/5.1/docs/en/index.md'
+      `https://github.com/silverstripe/silverstripe-linkfield/blob/${linkfieldBranch}/docs/en/index.md`
     );
   });
 
@@ -148,6 +151,7 @@ describe('EditOnGithub component', () => {
   });
 
   it('handles advancedworkflow with correct branch for v6', () => {
+    const awBranch = docsSourcesData['6'].optionalFeatures.advancedworkflow.branch;
     render(
       <EditOnGithub
         version="6"
@@ -160,7 +164,7 @@ describe('EditOnGithub component', () => {
     const link = screen.getByRole('link', { name: /edit on github/i });
     expect(link).toHaveAttribute(
       'href',
-      'https://github.com/silverstripe/silverstripe-advancedworkflow/blob/7.1/docs/en/index.md'
+      `https://github.com/silverstripe/silverstripe-advancedworkflow/blob/${awBranch}/docs/en/index.md`
     );
   });
 
@@ -182,6 +186,7 @@ describe('EditOnGithub component', () => {
   });
 
   it('handles fluent with correct owner for v6', () => {
+    const fluentConfig = docsSourcesData['6'].optionalFeatures.fluent;
     render(
       <EditOnGithub
         version="6"
@@ -194,7 +199,7 @@ describe('EditOnGithub component', () => {
     const link = screen.getByRole('link', { name: /edit on github/i });
     expect(link).toHaveAttribute(
       'href',
-      'https://github.com/tractorcow-farm/silverstripe-fluent/blob/8.1/docs/en/index.md'
+      `https://github.com/${fluentConfig.owner}/${fluentConfig.repo}/blob/${fluentConfig.branch}/docs/en/index.md`
     );
   });
 

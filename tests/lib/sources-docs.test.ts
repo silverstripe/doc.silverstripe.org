@@ -1,14 +1,16 @@
 import { getSourceConfig, buildGithubEditUrl } from '@/../sources-config';
+import docsSourcesData from '../../sources-docs.json';
 
 describe('Sources Docs Config', () => {
   describe('getSourceConfig', () => {
     it('should return main docs config for version 6', () => {
       const config = getSourceConfig('6', undefined, 'docs');
+      const expected = docsSourcesData['6'].main;
       expect(config).toEqual({
-        repo: 'developer-docs',
-        owner: 'silverstripe',
-        branch: '6.1',
-        docsPath: 'en'
+        repo: expected.repo,
+        owner: expected.owner,
+        branch: expected.branch,
+        docsPath: expected.docsPath
       });
     });
 
@@ -24,11 +26,12 @@ describe('Sources Docs Config', () => {
 
     it('should return optional feature config for linkfield v6', () => {
       const config = getSourceConfig('6', 'linkfield', 'docs');
+      const expected = docsSourcesData['6'].optionalFeatures.linkfield;
       expect(config).toEqual({
-        repo: 'silverstripe-linkfield',
-        owner: 'silverstripe',
-        branch: '5.1',
-        docsPath: 'docs/en',
+        repo: expected.repo,
+        owner: expected.owner,
+        branch: expected.branch,
+        docsPath: expected.docsPath,
         excludePath: 'docs/en/userguide',
       });
     });
@@ -78,9 +81,10 @@ describe('Sources Docs Config', () => {
 
   describe('buildGithubEditUrl', () => {
     it('should build correct URL for main docs v6', () => {
+      const v6Branch = docsSourcesData['6'].main.branch;
       const url = buildGithubEditUrl('6', '02_Developer_Guides/index.md', undefined, 'docs');
       expect(url).toBe(
-        'https://github.com/silverstripe/developer-docs/blob/6.1/en/02_Developer_Guides/index.md'
+        `https://github.com/silverstripe/developer-docs/blob/${v6Branch}/en/02_Developer_Guides/index.md`
       );
     });
 
@@ -92,9 +96,10 @@ describe('Sources Docs Config', () => {
     });
 
     it('should build correct URL for optional feature linkfield v6', () => {
+      const linkfieldBranch = docsSourcesData['6'].optionalFeatures.linkfield.branch;
       const url = buildGithubEditUrl('6', 'index.md', 'linkfield', 'docs');
       expect(url).toBe(
-        'https://github.com/silverstripe/silverstripe-linkfield/blob/5.1/docs/en/index.md'
+        `https://github.com/silverstripe/silverstripe-linkfield/blob/${linkfieldBranch}/docs/en/index.md`
       );
     });
 
@@ -120,9 +125,10 @@ describe('Sources Docs Config', () => {
     });
 
     it('should handle advancedworkflow with correct branch for v6', () => {
+      const awBranch = docsSourcesData['6'].optionalFeatures.advancedworkflow.branch;
       const url = buildGithubEditUrl('6', 'index.md', 'advancedworkflow', 'docs');
       expect(url).toBe(
-        'https://github.com/silverstripe/silverstripe-advancedworkflow/blob/7.1/docs/en/index.md'
+        `https://github.com/silverstripe/silverstripe-advancedworkflow/blob/${awBranch}/docs/en/index.md`
       );
     });
 
@@ -134,9 +140,10 @@ describe('Sources Docs Config', () => {
     });
 
     it('should handle fluent with correct owner for v6', () => {
+      const fluentConfig = docsSourcesData['6'].optionalFeatures.fluent;
       const url = buildGithubEditUrl('6', 'index.md', 'fluent', 'docs');
       expect(url).toBe(
-        'https://github.com/tractorcow-farm/silverstripe-fluent/blob/8.1/docs/en/index.md'
+        `https://github.com/${fluentConfig.owner}/${fluentConfig.repo}/blob/${fluentConfig.branch}/docs/en/index.md`
       );
     });
 
@@ -162,16 +169,18 @@ describe('Sources Docs Config', () => {
     });
 
     it('should handle backslashes in file paths', () => {
+      const v6Branch = docsSourcesData['6'].main.branch;
       const url = buildGithubEditUrl('6', '02_Developer_Guides\\index.md', undefined, 'docs');
       expect(url).toBe(
-        'https://github.com/silverstripe/developer-docs/blob/6.1/en/02_Developer_Guides/index.md'
+        `https://github.com/silverstripe/developer-docs/blob/${v6Branch}/en/02_Developer_Guides/index.md`
       );
     });
 
     it('should handle leading/trailing slashes', () => {
+      const v6Branch = docsSourcesData['6'].main.branch;
       const url = buildGithubEditUrl('6', '/02_Developer_Guides/index.md/', undefined, 'docs');
       expect(url).toBe(
-        'https://github.com/silverstripe/developer-docs/blob/6.1/en/02_Developer_Guides/index.md'
+        `https://github.com/silverstripe/developer-docs/blob/${v6Branch}/en/02_Developer_Guides/index.md`
       );
     });
 
