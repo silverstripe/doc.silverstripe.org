@@ -90,8 +90,11 @@ describe('sources-loader', () => {
       expect(branches.v3).toBe('3');
       expect(branches.v4).toBe('4.13');
       expect(branches.v5).toBe('5.4');
-      expect(branches.v6).toBe('6.1');
-      // Note: v7 config doesn't exist yet - will be added when CMS 7 is released
+      // Dynamically verify v6 branch matches the JSON config
+      const docsSourcesData = JSON.parse(
+        require('fs').readFileSync(path.resolve(rootDir, 'sources-docs.json'), 'utf-8')
+      );
+      expect(branches.v6).toBe(docsSourcesData['6'].main.branch);
     });
 
     it('should include optional features for docs v6', () => {
