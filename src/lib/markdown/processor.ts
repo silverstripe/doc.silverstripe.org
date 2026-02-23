@@ -16,6 +16,7 @@ import { remarkLinks } from './remark-links';
 import { cleanApiTags, setCurrentVersion } from './api-links';
 import { rewriteApiLinksInHtml } from './rewrite-api-links-html';
 import { remarkCustomHeadingIds } from './remark-custom-heading-ids';
+import { rehypeWrapTables } from './rehype-wrap-tables';
 
 /**
  * Custom sanitizer schema that allows api: protocol for links and className on elements
@@ -117,6 +118,7 @@ export async function markdownToHtml(
     .use(highlightCodeBlocks)
     .use(rehypeSlug)
     .use(rehypeAutolinkHeadings, autolinkConfig)
+    .use(rehypeWrapTables)
     .use(rehypeSanitize, sanitizerSchema)
     .use(rehypeStringify);
 
