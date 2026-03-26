@@ -298,4 +298,36 @@ describe('Version Utilities', () => {
       });
     });
   });
+
+  describe('Context-aware versions', () => {
+    it('should derive versions from source JSON keys for search context', () => {
+      const versions = getAllVersions('search');
+      // sources-search.json v1 is hidden, v2 is visible
+      expect(versions).toContain('2');
+      expect(versions).not.toContain('1');
+      expect(versions).not.toContain('6');
+    });
+
+    it('should use highest visible version as default for search context', () => {
+      const defaultVersion = getDefaultVersion('search');
+      expect(defaultVersion).toBe('2');
+    });
+
+    it('should derive versions from source JSON keys for docs context', () => {
+      const versions = getAllVersions('docs');
+      expect(versions).toContain(minimumVersion);
+      expect(versions).toContain(highestVersion);
+    });
+
+    it('should use DEFAULT_VERSION for docs context when in range', () => {
+      const defaultVersion = getDefaultVersion('docs');
+      expect(defaultVersion).toBe(DEFAULT_VERSION);
+    });
+
+    it('should return same versions for docs context and no context', () => {
+      const docsVersions = getAllVersions('docs');
+      const defaultVersions = getAllVersions();
+      expect(docsVersions).toEqual(defaultVersions);
+    });
+  });
 });

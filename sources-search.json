@@ -1,9 +1,18 @@
 {
   "1": {
+    "hidden": true,
     "main": {
       "repo": "search-service-user-docs",
       "owner": "silverstripeltd",
       "branch": "1",
+      "docsPath": "docs/en"
+    }
+  },
+  "2": {
+    "main": {
+      "repo": "search-service-user-docs",
+      "owner": "silverstripeltd",
+      "branch": "2",
       "docsPath": "docs/en"
     }
   }

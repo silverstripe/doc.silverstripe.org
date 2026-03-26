@@ -1,4 +1,4 @@
-import { getSourceConfig, buildGithubEditUrl } from '../../../sources-config';
+import { getSourceConfig, buildGithubEditUrl, getSourceVersionKeys } from '../../../sources-config';
 import docsSourcesData from '../../../sources-docs.json';
 
 describe('Sources Config (Shared Functions)', () => {
@@ -256,6 +256,39 @@ describe('Sources Config (Shared Functions)', () => {
     it('should handle version 3 (user)', () => {
       const config = getSourceConfig('3', undefined, 'user');
       expect(config?.branch).toBe('3');
+    });
+  });
+
+  describe('getSourceVersionKeys', () => {
+    it('should return sorted version keys for docs context', () => {
+      const keys = getSourceVersionKeys('docs');
+      expect(keys.length).toBeGreaterThanOrEqual(4);
+      expect(keys).toContain('3');
+      expect(keys).toContain('6');
+      // Should be sorted ascending
+      for (let i = 1; i < keys.length; i += 1) {
+        expect(parseInt(keys[i], 10)).toBeGreaterThan(parseInt(keys[i - 1], 10));
+      }
+    });
+
+    it('should return sorted version keys for user context', () => {
+      const keys = getSourceVersionKeys('user');
+      expect(keys.length).toBeGreaterThanOrEqual(4);
+      expect(keys).toContain('3');
+      expect(keys).toContain('6');
+    });
+
+    it('should exclude hidden versions by default for search context', () => {
+      const keys = getSourceVersionKeys('search');
+      // sources-search.json has v1 (hidden) and v2
+      expect(keys).not.toContain('1');
+      expect(keys).toContain('2');
+    });
+
+    it('should include hidden versions when includeHidden is true', () => {
+      const keys = getSourceVersionKeys('search', true);
+      expect(keys).toContain('1');
+      expect(keys).toContain('2');
     });
   });
 });

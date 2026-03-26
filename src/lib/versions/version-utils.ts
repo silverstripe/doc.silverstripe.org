@@ -4,20 +4,25 @@
 
 import type { DocsContext } from '@/types/types';
 import { DEFAULT_VERSION, HIGHEST_VERSION, MINIMUM_VERSION } from '../../../global-config';
+import { getSourceVersionKeys } from '../../../sources-config';
 
 /**
- * Per-context version overrides
- * Contexts not listed here use the global defaults from global-config.ts
+ * Get version config for a context.
+ * When a docsContext is provided, derives the version range from the source JSON keys
+ * for that context, so adding a version to sources-{context}.json is all that's needed.
+ * When no context is provided, uses the global defaults from global-config.ts.
  */
-const CONTEXT_VERSION_OVERRIDES: Partial<Record<DocsContext, {
-  default: string; highest: string; minimum: string;
-}>> = {
-  search: { default: '1', highest: '1', minimum: '1' },
-};
-
 function getVersionConfigForContext(docsContext?: DocsContext) {
-  const override = docsContext ? CONTEXT_VERSION_OVERRIDES[docsContext] : undefined;
-  if (override) return override;
+  if (docsContext) {
+    const keys = getSourceVersionKeys(docsContext);
+    if (keys.length > 0) {
+      const minimum = keys[0];
+      const highest = keys[keys.length - 1];
+      // Use global DEFAULT_VERSION if it falls within this context's range, otherwise use highest
+      const defaultVersion = keys.includes(DEFAULT_VERSION) ? DEFAULT_VERSION : highest;
+      return { default: defaultVersion, highest, minimum };
+    }
+  }
   return { default: DEFAULT_VERSION, highest: HIGHEST_VERSION, minimum: MINIMUM_VERSION };
 }
 
