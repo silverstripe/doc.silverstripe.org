@@ -21,7 +21,7 @@
     "copy-images:user": "DOCS_CONTEXT=user node scripts/copy-images.mjs",
     "copy-images:search": "DOCS_CONTEXT=search node scripts/copy-images.mjs",
     "copy-images:mock": "NEXT_USE_MOCK_DATA=true node scripts/copy-images.mjs",
-    "lint": "eslint src/ --ext .ts,.tsx",
+    "lint": "eslint src/ sources-config.ts global-config.ts --ext .ts,.tsx",
     "test": "jest --maxWorkers=2",
     "start": "http-server out -c-1 -p 9877",
     "kill": "kill-port 9876 9877"
