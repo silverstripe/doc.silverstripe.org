@@ -3,7 +3,7 @@
  * Handles optional feature detection and GitHub link generation
  */
 
-import { DocumentNode } from '@/types/types';
+import type { DocumentNode, DocsContext } from '@/types/types';
 import { getSourceConfig } from '@/../sources-config';
 
 /**
@@ -22,8 +22,9 @@ export function getOptionalFeatureFromDocument(doc: DocumentNode | null): string
 export function getDocumentGithubInfo(
   version: string,
   optionalFeature?: string | null,
+  category?: DocsContext,
 ): { owner: string; repo: string; branch: string; docsPath?: string } | null {
-  const config = getSourceConfig(version, optionalFeature || undefined);
+  const config = getSourceConfig(version, optionalFeature || undefined, category);
   if (!config) {
     return null;
   }

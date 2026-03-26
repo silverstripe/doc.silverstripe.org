@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Rebuild of doc.silverstripe.org using **Next.js 16+ / Node.js 24+**. Two contexts: `docs` (developer) and `user` (end-user help). Static export with all pages pre-rendered at build time.
+Rebuild of doc.silverstripe.org using **Next.js 16+ / Node.js 24+**. Three contexts: `docs` (developer), `user` (end-user help), and `search` (search service). Static export with all pages pre-rendered at build time.
 
 ---
 
@@ -19,12 +19,15 @@ npm run mock              # Dev with mock data (tests/fixtures/mock-content/)
 npm run dev               # Dev with cloned content (alias: dev:docs, DOCS_CONTEXT=docs)
 npm run dev:docs          # Dev with docs context (DOCS_CONTEXT=docs) on port 9876
 npm run dev:user          # Dev with user-help context (DOCS_CONTEXT=user) on port 9876
+npm run dev:search        # Dev with search context (DOCS_CONTEXT=search) on port 9876
 npm run clone             # Clone content (deletes existing, default: docs)
 npm run clone:docs        # Clone docs content (deletes existing, DOCS_CONTEXT=docs)
 npm run clone:user        # Clone user-help content (deletes existing, DOCS_CONTEXT=user)
+npm run clone:search      # Clone search content (deletes existing, DOCS_CONTEXT=search)
 npm run build             # Build (alias: build:docs, DOCS_CONTEXT=docs)
 npm run build:docs        # Build with docs context (DOCS_CONTEXT=docs)
 npm run build:user        # Build with user-help context (DOCS_CONTEXT=user)
+npm run build:search      # Build with search context (DOCS_CONTEXT=search)
 npm run start             # Serve built static files from out/ directory on port 9877
 npm run kill              # Kill processes running on ports 9876, 9877 i.e. kill dev or start servers
 npm run lint              # Run ESLint - must have 0 errors and 0 warnings
@@ -33,11 +36,12 @@ npm test                  # All tests (auto uses mock data)
 
 **Warning** `npm run clone` is *very slow*. Only do this when absolutely necessary. Use `npm run mock` for development whenever possible.
 
-**Note:** Image copying is automatic during dev and build scripts. Manual image copying is available via `npm run copy-images:{docs|user|mock}` if needed. IMPORTANT: Use `npm run start` to serve built static files.
+**Note:** Image copying is automatic during dev and build scripts. Manual image copying is available via `npm run copy-images:{docs|user|search|mock}` if needed. IMPORTANT: Use `npm run start` to serve built static files.
 
-**Context Switching:** The site serves two independent documentation sets controlled by `DOCS_CONTEXT`:
+**Context Switching:** The site serves three independent documentation sets controlled by `DOCS_CONTEXT`:
 - `docs` (default): Developer documentation from `.cache/docs/`
 - `user`: End-user help from `.cache/user/`
+- `search`: Search service documentation from `.cache/search/`
 
 NPM scripts defined in package.json use `sh -c '...'` to ensure `DOCS_CONTEXT` is inherited by all commands in the chain. Never set `DOCS_CONTEXT` in `.env.local` as it interferes with script switching. *DO NOT* call npm scripts simply wrapped in `sh -c '...'` manually from the command line e.g. `sh -c 'npm run lint'`, call them directly e.g. `npm run lint`.
 
@@ -53,9 +57,9 @@ NPM scripts defined in package.json use `sh -c '...'` to ensure `DOCS_CONTEXT` i
 ## Architecture
 
 **Static:** `output: 'export'`, all pages pre-rendered, no SSR/ISR  
-**Content:** Git clones to `.cache/{docs|user}/`, versions 3-6  
+**Content:** Git clones to `.cache/{docs|user|search}/`, versions vary by context (docs/user: 3-6, search: 1)  
 **URLs:** `/en/{version}/{path}/` - case-insensitive, numeric prefixes stripped for URLs but kept for sorting  
-**Mock/Real:** `NEXT_USE_MOCK_DATA=true` uses `tests/fixtures/mock-content/`, false uses `.cache/{docs|user}/`
+**Mock/Real:** `NEXT_USE_MOCK_DATA=true` uses `tests/fixtures/mock-content/`, false uses `.cache/{docs|user|search}/`
 
 ---
 
@@ -76,6 +80,7 @@ NPM scripts defined in package.json use `sh -c '...'` to ensure `DOCS_CONTEXT` i
 .cache/
   docs/               # Cloned developer docs (v3-v6)
   user/               # Cloned user help docs (v3-v6)
+  search/             # Cloned search docs (v1)
 
 assets/               # Static files (favicon, logo)
 
@@ -115,6 +120,7 @@ Root-Level Configs
   jest.config.cjs     # Jest test configuration
   sources-docs.ts     # Developer docs GitHub repos config
   sources-user.ts     # User help GitHub repos config
+  sources-search.ts   # Search docs GitHub repos config
   sources-config.ts   # Unified config wrapper
   .eslintrc.json      # ESLint rules (Airbnb style guide)
 ```
@@ -127,7 +133,7 @@ Root-Level Configs
 interface DocumentNode {
   slug: string; version: string; filePath: string; fileTitle: string;
   fileAbsolutePath: string; isIndex: boolean; parentSlug: string;
-  title: string; content: string; category: 'docs' | 'user';
+  title: string; content: string; category: 'docs' | 'user' | 'search';
   summary?: string; icon?: string; hideChildren?: boolean; hideSelf?: boolean;
   order?: number; optionalFeature?: string;
 }
@@ -139,8 +145,8 @@ interface DocumentNode {
 
 ## Key Modules
 
-**Version Management:** `src/lib/versions/version-utils.ts` - dynamic version calculations based on `DEFAULT_VERSION`, `HIGHEST_VERSION`, and `MINIMUM_VERSION` in `global-config.ts`
-**Source Configs:** `sources-docs.ts` (developer docs), `sources-user.ts` (user help), `sources-config.ts` (wrapper) - all at project root  
+**Version Management:** `src/lib/versions/version-utils.ts` - dynamic version calculations based on `DEFAULT_VERSION`, `HIGHEST_VERSION`, and `MINIMUM_VERSION` in `global-config.ts`, with per-context overrides (e.g., search context uses version 1 only)
+**Source Configs:** `sources-docs.json` (developer docs), `sources-user.json` (user help), `sources-search.json` (search), `sources-config.ts` (wrapper) - all at project root  
 **Markdown Pipeline:** `src/lib/markdown/processor.ts` - remark→rehype with GFM, alerts, code blocks  
 **Navigation:** `src/lib/nav/build-nav-tree.ts` - hierarchical nav tree from documents  
 **Utilities:** `src/lib/utils/` - shared utilities (escapeHtml, slug normalization, etc)
@@ -166,7 +172,7 @@ interface DocumentNode {
 **Sidebar:** Expandable folders, localStorage state (`sidebar_state_v{version}`)  
 **Header:** Logo, GitHub icon, VersionSwitcher, DarkModeToggle, SearchBox  
 **Mobile:** Hamburger menu toggles sidebar at <1024px  
-**Edit on GitHub:** Dynamic URLs via separate `sources-docs.ts` and `sources-user.ts` configs, supports optional features  
+**Edit on GitHub:** Dynamic URLs via separate `sources-docs.json`, `sources-user.json`, and `sources-search.json` configs, supports optional features  
 **Breadcrumbs:** Auto-generated from slug path  
 **Code Blocks:** Prism.js highlighting, copy button
 
@@ -227,6 +233,7 @@ interface DocumentNode {
 - `src/lib/markdown/processor.ts` - markdown processing pipeline
 - `sources-docs.ts` - developer docs GitHub config (project root)
 - `sources-user.ts` - user help GitHub config (project root)
+- `sources-search.ts` - search docs GitHub config (project root)
 - `src/components/EditOnGithub.tsx` - uses category param to select correct config
 
 **Documentation Maintenance:**

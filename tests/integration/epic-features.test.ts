@@ -68,7 +68,7 @@ describe('Phase 9: Epic Features Integration', () => {
         expect(doc.version).toBeDefined();
         expect(doc.title).toBeDefined();
         expect(doc.category).toBeDefined();
-        expect(['docs', 'user']).toContain(doc.category);
+        expect(['docs', 'user', 'search']).toContain(doc.category);
       });
     });
 

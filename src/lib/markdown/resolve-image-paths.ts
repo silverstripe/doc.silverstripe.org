@@ -28,8 +28,8 @@ export function resolveImagePath(imagePath: string, currentFilePath: string): st
   // We want to return a path that works in the browser
 
   // Remove any leading path segments up to and including content directory
-  // Matches: mock-content, .cache/docs, .cache/user, or legacy .cache/content
-  const contentMatch = urlPath.match(/(?:mock-content|\.cache\/(?:docs|user|content))(.*)$/);
+  // Matches: mock-content, .cache/docs, .cache/user, .cache/search, or legacy .cache/content
+  const contentMatch = urlPath.match(/(?:mock-content|\.cache\/(?:docs|user|search|content))(.*)$/);
   if (contentMatch) {
     // Return as absolute path from root
     return contentMatch[1] || '/';

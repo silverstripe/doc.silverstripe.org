@@ -2,7 +2,24 @@
  * Version utilities for multi-version documentation support
  */
 
+import type { DocsContext } from '@/types/types';
 import { DEFAULT_VERSION, HIGHEST_VERSION, MINIMUM_VERSION } from '../../../global-config';
+
+/**
+ * Per-context version overrides
+ * Contexts not listed here use the global defaults from global-config.ts
+ */
+const CONTEXT_VERSION_OVERRIDES: Partial<Record<DocsContext, {
+  default: string; highest: string; minimum: string;
+}>> = {
+  search: { default: '1', highest: '1', minimum: '1' },
+};
+
+function getVersionConfigForContext(docsContext?: DocsContext) {
+  const override = docsContext ? CONTEXT_VERSION_OVERRIDES[docsContext] : undefined;
+  if (override) return override;
+  return { default: DEFAULT_VERSION, highest: HIGHEST_VERSION, minimum: MINIMUM_VERSION };
+}
 
 export type VersionStatus = 'current' | 'supported' | 'eol';
 
@@ -23,35 +40,28 @@ function generateEolVersions(): string[] {
   return eolVersions;
 }
 
-/**
- * Generate array of all versions (MINIMUM_VERSION to HIGHEST_VERSION)
- */
-function generateAllVersions(): string[] {
-  const min = parseInt(MINIMUM_VERSION, 10);
-  const highest = parseInt(HIGHEST_VERSION, 10);
-  const allVersions: string[] = [];
-  for (let i = min; i <= highest; i += 1) {
-    allVersions.push(String(i));
-  }
-  return allVersions;
-}
-
 const EOL_VERSIONS = generateEolVersions();
 const PREVIOUS_RELEASE_VERSIONS = [PREVIOUS_RELEASE_VERSION];
-const ALL_VERSIONS = generateAllVersions();
 
 /**
  * Get all available documentation versions
  */
-export function getAllVersions(): string[] {
-  return ALL_VERSIONS.slice().reverse();
+export function getAllVersions(docsContext?: DocsContext): string[] {
+  const config = getVersionConfigForContext(docsContext);
+  const min = parseInt(config.minimum, 10);
+  const highest = parseInt(config.highest, 10);
+  const versions: string[] = [];
+  for (let i = min; i <= highest; i += 1) {
+    versions.push(String(i));
+  }
+  return versions.slice().reverse();
 }
 
 /**
  * Get the default/current version
  */
-export function getDefaultVersion(): string {
-  return CURRENT_VERSION;
+export function getDefaultVersion(docsContext?: DocsContext): string {
+  return getVersionConfigForContext(docsContext).default;
 }
 
 /**

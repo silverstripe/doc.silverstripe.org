@@ -7,17 +7,21 @@ import {
   getVersionSwitcherLabel,
   getVersionStatus,
 } from '@/lib/versions/version-utils';
+import type { DocsContext } from '@/types/types';
 import styles from './VersionSwitcher.module.css';
 
 interface VersionSwitcherProps {
   currentVersion: string;
   currentSlug: string;
+  docsContext?: DocsContext;
 }
 
 /**
  * Version switcher component for changing documentation versions
  */
-export function VersionSwitcher({ currentVersion, currentSlug }: VersionSwitcherProps) {
+export function VersionSwitcher(
+  { currentVersion, currentSlug, docsContext }: VersionSwitcherProps,
+) {
   const router = useRouter();
 
   const handleVersionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -27,7 +31,7 @@ export function VersionSwitcher({ currentVersion, currentSlug }: VersionSwitcher
     router.push(newPath);
   };
 
-  const versions = getAllVersions();
+  const versions = getAllVersions(docsContext);
   const status = getVersionStatus(currentVersion);
 
   return (

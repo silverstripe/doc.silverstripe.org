@@ -47,6 +47,18 @@ describe('sources-loader', () => {
       expect(hasVersion).toBe(true);
     });
 
+    it('should load sources for search context', () => {
+      const script = `
+        import { loadSources } from './scripts/sources-loader.mjs';
+        console.log(JSON.stringify(loadSources('search')));
+      `;
+      const sources = runLoader(script) as Record<string, { main: { branch: string } }>;
+      expect(sources).toBeDefined();
+      const availableVersions = Object.keys(sources);
+      expect(availableVersions.length).toBeGreaterThan(0);
+      expect(availableVersions).toContain('1');
+    });
+
     it('should include minimum required versions for docs', () => {
       const script = `
         import { loadSources } from './scripts/sources-loader.mjs';

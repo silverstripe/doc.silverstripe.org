@@ -1,5 +1,5 @@
 import path from 'path';
-import { DocumentNode } from '@/types/types';
+import { DocumentNode, DocsContext } from '@/types/types';
 import { getConfig } from '@/lib/config/config';
 import { normalizeSlug } from '@/lib/utils/slug-utils';
 import { getAllVersions } from '@/lib/versions/version-utils';
@@ -45,7 +45,9 @@ const DEPRECATED_OPTIONAL_FEATURES = [
  * - Without clone, user context falls back to docs fallback, which returns no user content
  *   (500 error)
  */
-async function resolveContentBasePathWithContext(): Promise<{ path: string; context: 'docs' | 'user' }> {
+async function resolveContentBasePathWithContext(): Promise<{
+  path: string; context: DocsContext;
+}> {
   const config = getConfig();
 
   if (config.useMockData) {
@@ -100,8 +102,8 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
   // across parallel workers - only set cachedDocuments after fully loaded
   const localCache = new Map<string, DocumentNode[]>();
 
-  // Build versions map - v3, v4, v5, and v6
-  const versionDirs = getAllVersions().map((v) => `v${v}`);
+  // Build versions map using context-aware version list
+  const versionDirs = getAllVersions(effectiveContext).map((v) => `v${v}`);
 
   for (const versionDir of versionDirs) {
     const versionPath = path.join(contentBase, versionDir);
@@ -199,7 +201,7 @@ async function getAllDocumentsInternal(): Promise<DocumentNode[]> {
 /**
  * Filter documents by context
  */
-function filterByContext(documents: DocumentNode[], context?: 'docs' | 'user'): DocumentNode[] {
+function filterByContext(documents: DocumentNode[], context?: DocsContext): DocumentNode[] {
   const config = getConfig();
   const filterContext = context ?? config.docsContext;
   return documents.filter((doc) => doc.category === filterContext);

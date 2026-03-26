@@ -1,5 +1,7 @@
+import type { DocsContext } from '@/types/types';
+
 interface Config {
-  docsContext: 'docs' | 'user';
+  docsContext: DocsContext;
   docsearchAppId: string;
   docsearchApiKey: string;
   docsearchIndexName: string;
@@ -8,7 +10,7 @@ interface Config {
 
 export function getConfig(): Config {
   return {
-    docsContext: (process.env.DOCS_CONTEXT || 'docs') as 'docs' | 'user',
+    docsContext: (process.env.DOCS_CONTEXT || 'docs') as DocsContext,
     docsearchAppId: process.env.NEXT_PUBLIC_DOCSEARCH_APP_ID || '',
     docsearchApiKey: process.env.NEXT_PUBLIC_DOCSEARCH_API_KEY || '',
     docsearchIndexName: process.env.NEXT_PUBLIC_DOCSEARCH_INDEX || '',

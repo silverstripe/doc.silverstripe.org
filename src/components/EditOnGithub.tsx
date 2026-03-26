@@ -1,4 +1,5 @@
 import { buildGithubEditUrl } from '@/../sources-config';
+import type { DocsContext } from '@/types/types';
 import styles from './EditOnGithub.module.css';
 
 /**
@@ -9,8 +10,9 @@ interface EditOnGithubProps {
   version: string;
   /** Relative file path from the repository root (e.g., '02_Developer_Guides/index.md') */
   filePath: string;
-  /** Documentation category: 'docs' for developer docs or 'user' for user help */
-  category: 'docs' | 'user';
+  /** Documentation category: 'docs' for developer docs, 'user' for user help,
+   * or 'search' for search docs */
+  category: DocsContext;
   /** Optional feature name if document is from an optional feature
   * (e.g., 'linkfield', 'staticpublishqueue') */
   optionalFeature?: string;

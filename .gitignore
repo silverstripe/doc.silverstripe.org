@@ -26,3 +26,5 @@ next-env.d.ts
 *.log
 *.kate-swp
 
+# IDEs
+.vscode

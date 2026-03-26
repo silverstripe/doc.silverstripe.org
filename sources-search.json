@@ -1,0 +1,10 @@
+{
+  "1": {
+    "main": {
+      "repo": "search-service-user-docs",
+      "owner": "silverstripeltd",
+      "branch": "1",
+      "docsPath": "docs/en"
+    }
+  }
+}

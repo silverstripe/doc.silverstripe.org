@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import type { DocsContext } from '@/types/types';
 import { extractVersionAndFeatureFromSlug } from '@/lib/utils/slug-utils';
 import { getDocumentGithubInfo } from '@/lib/utils/github-utils';
 import { getDefaultVersion, getVersionHomepage } from '@/lib/versions/version-utils';
@@ -14,7 +15,7 @@ import styles from './Header.module.css';
 
 interface HeaderProps {
   onMobileMenuToggle?: (isOpen: boolean) => void;
-  docsContext: 'docs' | 'user';
+  docsContext: DocsContext;
 }
 
 /**
@@ -40,7 +41,9 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
   const isInvalidEnPath = pathParts[0] === 'en' && (!pathParts[1] || !/^[0-9]$/.test(pathParts[1]));
   const isNotFound = isNotFoundPath || !pathParts[0] || isInvalidEnPath;
 
-  const logoSubtitle = docsContext === 'user' ? 'User Help' : 'Docs';
+  const logoTitle = docsContext === 'search' ? 'Silverstripe Search' : 'Silverstripe CMS';
+  const logoSrc = docsContext === 'search' ? '/searchlogo.svg' : '/logo.svg';
+  const logoSubtitle = { docs: 'Docs', user: 'User Help', search: 'User guides' }[docsContext];
 
   const handleMobileMenuToggle = () => {
     const newState = !isMobileMenuOpen;
@@ -61,7 +64,7 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
 
   // Update GitHub URL based on optional feature
   useEffect(() => {
-    const githubInfo = getDocumentGithubInfo(version, optionalFeature);
+    const githubInfo = getDocumentGithubInfo(version, optionalFeature, docsContext);
     if (githubInfo) {
       const newUrl = `https://github.com/${githubInfo.owner}/${githubInfo.repo}`;
       setGithubUrl(newUrl);
@@ -69,7 +72,7 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
       // Fallback to main developer-docs
       setGithubUrl('https://github.com/silverstripe/developer-docs');
     }
-  }, [version, optionalFeature]);
+  }, [version, optionalFeature, docsContext]);
 
   // Track window width for mobile/desktop layout
   useEffect(() => {
@@ -89,9 +92,9 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
     <header className={styles.header}>
       <div className={styles.headerContent}>
         <Link href={getVersionHomepage(version)} className={styles.logo}>
-          <img src="/logo.svg" alt="Silverstripe" className={styles.logoImage} />
+          <img src={logoSrc} alt="Silverstripe" className={styles.logoImage} />
           <div className={styles.logoText}>
-            <span className={styles.logoTitle}>Silverstripe CMS</span>
+            <span className={styles.logoTitle}>{logoTitle}</span>
             <span className={styles.logoSubtitle}>{logoSubtitle}</span>
           </div>
         </Link>
@@ -133,6 +136,7 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
               <VersionSwitcher
                 currentVersion={version}
                 currentSlug={slug}
+                docsContext={docsContext}
               />
             )}
           </div>

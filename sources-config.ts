@@ -6,7 +6,9 @@
 
 import docsSourcesData from './sources-docs.json';
 import userSourcesData from './sources-user.json';
+import searchSourcesData from './sources-search.json';
 import { getConfig } from '@/lib/config/config';
+import type { DocsContext } from '@/types/types';
 
 export interface SourceConfig {
   repo: string;
@@ -27,16 +29,17 @@ type SourcesMap = {
 /**
  * Get the appropriate source data based on category
  */
-function getSourceData(category: 'docs' | 'user'): SourcesMap {
+function getSourceData(category: DocsContext): SourcesMap {
+  if (category === 'search') return searchSourcesData as SourcesMap;
   return category === 'user' ? (userSourcesData as SourcesMap) : (docsSourcesData as SourcesMap);
 }
 
 /**
  * Get the appropriate source category based on current DOCS_CONTEXT
  */
-function getCurrentCategory(): 'docs' | 'user' {
+function getCurrentCategory(): DocsContext {
   const config = getConfig();
-  return config.docsContext === 'user' ? 'user' : 'docs';
+  return config.docsContext;
 }
 
 /**
@@ -49,7 +52,7 @@ function getCurrentCategory(): 'docs' | 'user' {
 export function getSourceConfig(
   version: string,
   optionalFeature?: string,
-  category?: 'docs' | 'user'
+  category?: DocsContext
 ): SourceConfig | null {
   const targetCategory = category || getCurrentCategory();
   const sources = getSourceData(targetCategory);
@@ -78,7 +81,7 @@ export function buildGithubEditUrl(
   version: string,
   filePath: string,
   optionalFeature?: string,
-  category?: 'docs' | 'user'
+  category?: DocsContext
 ): string {
   const config = getSourceConfig(version, optionalFeature, category);
   if (!config) {
