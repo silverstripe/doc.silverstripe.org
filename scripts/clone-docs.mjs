@@ -149,7 +149,7 @@ function buildRepoConfig(sourceConfig, version) {
   const { remote, branch, patterns, name, docsPath, excludePath } = sourceConfig.options;
   
   // Extract context from name (e.g., "docs--6" or "user--6" -> "docs" or "user")
-  const contextMatch = name.match(/^(docs|user)--/);
+  const contextMatch = name.match(/^(docs|user|search)--/);
   const context = contextMatch ? contextMatch[1] : 'docs';
   
   // Determine output directory based on name
@@ -187,7 +187,7 @@ function buildRepoConfig(sourceConfig, version) {
  */
 function buildSourcesList(context) {
   const sourceConfig = loadSources(context);
-  const contextPrefix = context === 'user' ? 'user' : 'docs';
+  const contextPrefix = context;
 
   const sources = [];
 
@@ -259,7 +259,7 @@ async function cloneDocs() {
     // Group by version
     const versionMap = new Map();
     for (const source of sources) {
-      const match = source.options.name.match(/^(docs|user)--(\d+)/);
+      const match = source.options.name.match(/^(docs|user|search)--(\d+)/);
       if (!match) continue;
       
       const [, , version] = match;

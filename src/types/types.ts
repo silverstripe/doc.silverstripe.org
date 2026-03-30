@@ -1,4 +1,9 @@
 /**
+ * Documentation context type
+ */
+export type DocsContext = 'docs' | 'user' | 'search';
+
+/**
  * Core document node interface representing a parsed markdown file
  */
 export interface DocumentNode {
@@ -11,7 +16,7 @@ export interface DocumentNode {
   parentSlug: string;
   title: string;
   content: string;
-  category: 'docs' | 'user';
+  category: DocsContext;
   summary?: string;
   icon?: string;
   iconBrand?: string;

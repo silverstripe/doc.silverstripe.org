@@ -2,13 +2,14 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { MobileMenuContext } from '@/contexts/MobileMenuContext';
+import type { DocsContext } from '@/types/types';
 import { initializeCodeBlocks } from '@/lib/markdown/code-block-client';
 import { Header } from './Header';
 import { SyntaxHighlighter } from './SyntaxHighlighter';
 
 interface RootLayoutClientProps {
   children: React.ReactNode;
-  docsContext: 'docs' | 'user';
+  docsContext: DocsContext;
 }
 
 export function RootLayoutClient({ children, docsContext }: RootLayoutClientProps) {

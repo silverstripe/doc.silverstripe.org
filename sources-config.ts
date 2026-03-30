@@ -4,9 +4,11 @@
  * Provides a single import point for all components
  */
 
+import { getConfig } from '@/lib/config/config';
+import type { DocsContext } from '@/types/types';
 import docsSourcesData from './sources-docs.json';
 import userSourcesData from './sources-user.json';
-import { getConfig } from '@/lib/config/config';
+import searchSourcesData from './sources-search.json';
 
 export interface SourceConfig {
   repo: string;
@@ -18,6 +20,7 @@ export interface SourceConfig {
 type SourcesMap = {
   [version: string]: {
     main: SourceConfig;
+    hidden?: boolean;
     optionalFeatures?: {
       [featureName: string]: SourceConfig;
     };
@@ -27,16 +30,37 @@ type SourcesMap = {
 /**
  * Get the appropriate source data based on category
  */
-function getSourceData(category: 'docs' | 'user'): SourcesMap {
+function getSourceData(category: DocsContext): SourcesMap {
+  if (category === 'search') return searchSourcesData as SourcesMap;
   return category === 'user' ? (userSourcesData as SourcesMap) : (docsSourcesData as SourcesMap);
+}
+
+/**
+ * Get sorted version keys from the source JSON for a given context
+ * By default, excludes versions marked as hidden.
+ * @param category - The docs context
+ * @param includeHidden - When true, includes versions with hidden: true
+ * @returns Numeric version strings sorted ascending (e.g., ['1', '2'] or ['3', '4', '5', '6'])
+ */
+export function getSourceVersionKeys(
+  category: DocsContext,
+  includeHidden = false,
+): string[] {
+  const sources = getSourceData(category);
+  return Object.keys(sources)
+    .filter((v) => includeHidden || !sources[v].hidden)
+    .map((v) => parseInt(v, 10))
+    .filter((n) => !Number.isNaN(n))
+    .sort((a, b) => a - b)
+    .map(String);
 }
 
 /**
  * Get the appropriate source category based on current DOCS_CONTEXT
  */
-function getCurrentCategory(): 'docs' | 'user' {
+function getCurrentCategory(): DocsContext {
   const config = getConfig();
-  return config.docsContext === 'user' ? 'user' : 'docs';
+  return config.docsContext;
 }
 
 /**
@@ -49,7 +73,7 @@ function getCurrentCategory(): 'docs' | 'user' {
 export function getSourceConfig(
   version: string,
   optionalFeature?: string,
-  category?: 'docs' | 'user'
+  category?: DocsContext,
 ): SourceConfig | null {
   const targetCategory = category || getCurrentCategory();
   const sources = getSourceData(targetCategory);
@@ -78,7 +102,7 @@ export function buildGithubEditUrl(
   version: string,
   filePath: string,
   optionalFeature?: string,
-  category?: 'docs' | 'user'
+  category?: DocsContext,
 ): string {
   const config = getSourceConfig(version, optionalFeature, category);
   if (!config) {

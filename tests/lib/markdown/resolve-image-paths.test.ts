@@ -67,6 +67,13 @@ describe('resolveImagePath', () => {
     expect(result).toBe('/v6/_images/legacy.png');
   });
 
+  it('handles .cache/search paths', () => {
+    const imagePath = './_images/features-synonyms-admin1.png';
+    const filePath = '/home/project/.cache/search/v1/02_Features/04_Relevancy/03_synonyms.md';
+    const result = resolveImagePath(imagePath, filePath);
+    expect(result).toBe('/v1/02_Features/04_Relevancy/_images/features-synonyms-admin1.png');
+  });
+
   it('handles Windows-style paths', () => {
     const imagePath = '../_images/screenshot.png';
     const filePath = 'C:\\content\\v6\\01_getting_started\\index.md';

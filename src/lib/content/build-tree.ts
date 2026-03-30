@@ -1,5 +1,5 @@
 import path from 'path';
-import { DocumentNode } from '@/types/types';
+import { DocumentNode, DocsContext } from '@/types/types';
 import { readMarkdownFile, listMarkdownFiles } from './fs-utils';
 import { parseFrontmatter } from './frontmatter';
 import { fileToTitle } from './file-to-title';
@@ -22,7 +22,7 @@ function extractOrderFromName(name: string): number | undefined {
 export async function buildContentTree(
   basePath: string,
   version: string,
-  category: 'docs' | 'user' = 'docs',
+  category: DocsContext = 'docs',
   optional?: string,
   rootParentSlug?: string,
 ): Promise<DocumentNode[]> {

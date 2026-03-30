@@ -14,11 +14,16 @@ const rootDir = path.resolve(__dirname, '..');
 
 /**
  * Load sources configuration for a given context from JSON file
- * @param {'docs' | 'user'} context - The documentation context
+ * @param {'docs' | 'user' | 'search'} context - The documentation context
  * @returns {object} The SOURCES configuration object
  */
 export function loadSources(context) {
-  const fileName = context === 'user' ? 'sources-user.json' : 'sources-docs.json';
+  const fileNames = {
+    docs: 'sources-docs.json',
+    user: 'sources-user.json',
+    search: 'sources-search.json',
+  };
+  const fileName = fileNames[context] || 'sources-docs.json';
   const filePath = path.join(rootDir, fileName);
 
   if (!fs.existsSync(filePath)) {
@@ -35,7 +40,7 @@ export function loadSources(context) {
 
 /**
  * Get all versions available in the sources config
- * @param {'docs' | 'user'} context - The documentation context
+ * @param {'docs' | 'user' | 'search'} context - The documentation context
  * @returns {string[]} Array of version strings (e.g., ['3', '4', '5', '6'])
  */
 export function getVersions(context) {

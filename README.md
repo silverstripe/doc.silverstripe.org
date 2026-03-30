@@ -1,6 +1,6 @@
 # Silverstripe CMS Documentation
 
-Next.js code for [docs.silverstripe.org](https://docs.silverstripe.org) and [userhelp.silverstripe.org](https://userhelp.silverstripe.org).
+Next.js code for [docs.silverstripe.org](https://docs.silverstripe.org), [userhelp.silverstripe.org](https://userhelp.silverstripe.org), and Silverstripe Search documentation.
 
 Built with:
 - Next.js 16+
@@ -17,7 +17,7 @@ Built with:
 When **creating a new major branch for a pre-release major version**
 
 - Make sure you've added a new major branch to both `silverstripe/developer-docs` and `silverstripe/silverstripe-userhelp-content`
-- Add the new major to `sources-docs.json` and `sources-user.json`
+- Add the new major to `sources-docs.json` and `sources-user.json` (or `sources-search.json` for search)
 - Add the new major branches for various modules as defined in `sources-docs.json` and `sources-user.json` as well
 - Update `HIGHEST_VERSION` in `global-config.ts` to the new pre-release major
 - Add the new major version to the [algolia crawler script](https://crawler.algolia.com/admin/crawlers/3d14ccdd-f9ae-4957-bc0a-5b21b4c29af3/configuration/edit)
@@ -43,8 +43,8 @@ npm run mock          # Start dev with mock content
 First, clone documentation content, then start the dev server:
 
 ```bash
-npm run clone:docs    # Clone developer docs (or user help with clone:user) - deletes existing data first
-npm run dev:docs      # Start dev server with cloned developer docs (or user help docs with dev:user)
+npm run clone:docs    # Clone developer docs (or user help with clone:user, search with clone:search) - deletes existing data first
+npm run dev:docs      # Start dev server with cloned developer docs (or user help docs with dev:user, search docs with dev:search)
 ```
 
 ### Building Static Files (Deployment)
@@ -57,6 +57,9 @@ npm run build:docs
 
 # Or for user help
 npm run build:user
+
+# Or for search
+npm run build:search
 ```
 
 To test the output of `npm run build` locally:
@@ -78,16 +81,19 @@ npm run mock           # Dev server with mock data (no cloning needed)
 npm run clone          # Clone content based on DOCS_CONTEXT (default: docs, alias for clone:docs) - deletes existing data first
 npm run clone:docs     # Clone developer docs - deletes existing data first
 npm run clone:user     # Clone user help docs - deletes existing data first
+npm run clone:search   # Clone search docs - deletes existing data first
 
 # Development servers (after cloning)
 npm run dev            # Dev server with developer docs on port 9876  (default: docs context, alias for dev:docs)
 npm run dev:docs       # Dev server with developer docs on port 9876
 npm run dev:user       # Dev server with user help on port 9876
+npm run dev:search     # Dev server with search docs on port 9876
 
 # Build static files for deployment
 npm run build          # Build static files and copy images (default: docs context, alias for build:docs)
 npm run build:docs     # Build static files and copy images for developer docs
 npm run build:user     # Build static files and copy images for user help
+npm run build:search   # Build static files and copy images for search docs
 
 # Testing
 npm test               # Run all tests
@@ -131,12 +137,13 @@ DOCS_CONTEXT=docs    # or DOCS_CONTEXT=user
 
 ## Context Switching: Docs vs User
 
-This site serves **two independent documentation sets**:
+This site serves **three independent documentation sets**:
 
 | Context | Content | Cache Location |
 |---------|---------|----------------|
 | `docs` | Developer documentation | `.cache/docs/` |
 | `user` | End-user help | `.cache/user/` |
+| `search` | Search service documentation | `.cache/search/` |
 
 ### How It Works
 
@@ -144,6 +151,7 @@ The `DOCS_CONTEXT` environment variable controls which documentation set is load
 
 - `DOCS_CONTEXT=docs` - Load developer documentation (default)
 - `DOCS_CONTEXT=user` - Load end-user help documentation
+- `DOCS_CONTEXT=search` - Load search service documentation
 
 ### Switching Between Contexts
 
@@ -153,6 +161,7 @@ To switch between docs and user contexts during development:
 2. **Run the appropriate script:**
    - `npm run dev:docs` - for developer docs
    - `npm run dev:user` - for user help
+   - `npm run dev:search` - for search docs
 3. The server will start with the correct content
 
 **Important:** You must stop and restart the dev server when switching contexts. The Next.js cache (`.next/`) is automatically invalidated when the context changes, but the running process maintains its initial configuration.
@@ -163,7 +172,7 @@ If the wrong content appears:
 
 1. **Stop the dev server completely** (Ctrl+C)
 2. **Clear the Next.js cache:** `rm -rf .next`
-3. **Restart with the correct script:** `npm run dev:user` or `npm run dev:docs`
+3. **Restart with the correct script:** `npm run dev:user` or `npm run dev:docs` or `npm run dev:search`
 
 ### Why Scripts Use `sh -c '...'`
 

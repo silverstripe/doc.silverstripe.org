@@ -7,8 +7,8 @@ import path from 'path';
 function buildRepoConfig(sourceConfig: any, version: string): any {
   const { remote, branch, patterns, name, docsPath } = sourceConfig.options;
 
-  // Extract context from name (e.g., "docs--6" or "user--6" -> "docs" or "user")
-  const contextMatch = name.match(/^(docs|user)--/);
+  // Extract context from name (e.g., "docs--6" or "user--6" or "search--1" -> "docs" or "user" or "search")
+  const contextMatch = name.match(/^(docs|user|search)--/);
   const context = contextMatch ? contextMatch[1] : 'docs';
 
   // Determine output directory based on name
@@ -166,6 +166,22 @@ describe('clone-docs.mjs path construction', () => {
       expect(config.outputDir).toContain('/.cache/user/v6');
     });
 
+    it('returns correct output path for search context', () => {
+      const sourceConfig = {
+        options: {
+          remote: 'https://github.com/silverstripeltd/search-service-user-docs.git',
+          branch: '1',
+          patterns: 'docs/en/**',
+          name: 'search--1',
+          docsPath: 'docs/en',
+        },
+      };
+
+      const config = buildRepoConfig(sourceConfig, '1');
+
+      expect(config.outputDir).toBe('/mock/root/.cache/search/v1');
+    });
+
     it('preserves docsPath in returned config', () => {
       const sourceConfig = {
         options: {
@@ -262,6 +278,22 @@ describe('clone-docs.mjs path construction', () => {
       expect(docsConfig.outputDir).toContain('/.cache/docs/v6/optional_features/linkfield');
       expect(userConfig.outputDir).toContain('/.cache/user/v6/optional_features/linkfield');
     });
+
+    it('correctly identifies search context from source name', () => {
+      const sourceConfig = {
+        options: {
+          remote: 'https://github.com/silverstripeltd/search-service-user-docs.git',
+          branch: '1',
+          patterns: 'docs/en/**',
+          name: 'search--1',
+          docsPath: 'docs/en',
+        },
+      };
+
+      const config = buildRepoConfig(sourceConfig, '1');
+
+      expect(config.outputDir).toContain('/.cache/search/v1');
+    });
   });
 
   describe('path isolation between contexts', () => {
@@ -292,6 +324,31 @@ describe('clone-docs.mjs path construction', () => {
       expect(docsConfig.outputDir).toContain('/.cache/docs/v6');
       expect(userConfig.outputDir).toContain('/.cache/user/v6');
       expect(docsConfig.outputDir).not.toEqual(userConfig.outputDir);
+    });
+
+    it('ensures search context has separate cache directory from docs and user', () => {
+      const docsConfig = buildRepoConfig({
+        options: {
+          remote: 'https://github.com/silverstripe/silverstripe-cms.git',
+          branch: '6',
+          patterns: 'en/**',
+          name: 'docs--6',
+          docsPath: 'en',
+        },
+      }, '6');
+
+      const searchConfig = buildRepoConfig({
+        options: {
+          remote: 'https://github.com/silverstripeltd/search-service-user-docs.git',
+          branch: '1',
+          patterns: 'docs/en/**',
+          name: 'search--1',
+          docsPath: 'docs/en',
+        },
+      }, '1');
+
+      expect(searchConfig.outputDir).toContain('/.cache/search/v1');
+      expect(docsConfig.outputDir).not.toEqual(searchConfig.outputDir);
     });
   });
 });
