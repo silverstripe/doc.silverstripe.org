@@ -44,7 +44,7 @@
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
     "hastscript": "^9.0.1",
-    "next": "^16.1.5",
+    "next": "^16.1.7",
     "prism-react-renderer": "^2.4.1",
     "prismjs": "^1.30.0",
     "react": "^19.2.0",
