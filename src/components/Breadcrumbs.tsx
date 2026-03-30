@@ -96,7 +96,7 @@ export function Breadcrumbs({ slug, version, navTree }: BreadcrumbsProps) {
                   <Link href={crumb.slug} className={styles.link}>
                     {crumb.title}
                   </Link>
-                  <span className={styles.separator}>/</span>
+                  <span className={styles.separator} aria-hidden="true">/</span>
                 </>
               )}
             </li>

@@ -7,10 +7,14 @@ import type { DocsContext } from '@/types/types';
 import { extractVersionAndFeatureFromSlug } from '@/lib/utils/slug-utils';
 import { getDocumentGithubInfo } from '@/lib/utils/github-utils';
 import { getDefaultVersion, getVersionHomepage } from '@/lib/versions/version-utils';
+import { isSearchConfigured } from '@/lib/config/config';
 import { SearchBox } from './SearchBox';
 import { VersionSwitcher } from './VersionSwitcher';
 import { HamburgerButton } from './HamburgerButton';
 import { DarkModeToggle } from './DarkModeToggle';
+import CmsDevLogo from './logos/CmsDevLogo';
+import CmsUserLogo from './logos/CmsUserLogo';
+import SearchUserLogo from './logos/SearchUserLogo';
 import styles from './Header.module.css';
 
 interface HeaderProps {
@@ -41,9 +45,19 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
   const isInvalidEnPath = pathParts[0] === 'en' && (!pathParts[1] || !/^[0-9]$/.test(pathParts[1]));
   const isNotFound = isNotFoundPath || !pathParts[0] || isInvalidEnPath;
 
-  const logoTitle = docsContext === 'search' ? 'Silverstripe Search' : 'Silverstripe CMS';
-  const logoSrc = docsContext === 'search' ? '/searchlogo.svg' : '/logo.svg';
-  const logoSubtitle = { docs: 'Docs', user: 'User Help', search: 'User guides' }[docsContext];
+  const hasSearch = isSearchConfigured();
+
+  const logoTitle = {
+    docs: 'Silverstripe CMS Docs',
+    user: 'Silverstripe CMS User guides',
+    search: 'Silverstripe Search User guides',
+  }[docsContext];
+
+  const LogoComponent = {
+    docs: CmsDevLogo,
+    user: CmsUserLogo,
+    search: SearchUserLogo,
+  }[docsContext];
 
   const handleMobileMenuToggle = () => {
     const newState = !isMobileMenuOpen;
@@ -90,57 +104,52 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
 
   return (
     <header className={styles.header}>
-      <div className={styles.headerContent}>
-        <Link href={getVersionHomepage(version)} className={styles.logo}>
-          <img src={logoSrc} alt="Silverstripe" className={styles.logoImage} />
-          <div className={styles.logoText}>
-            <span className={styles.logoTitle}>{logoTitle}</span>
-            <span className={styles.logoSubtitle}>{logoSubtitle}</span>
-          </div>
+      <div className={styles.headerLeft}>
+        {/* Logo */}
+        <Link href={getVersionHomepage(version)} className={styles.logo} aria-label={logoTitle}>
+          <LogoComponent />
         </Link>
 
-        <div className={styles.searchContainer}>
-          <SearchBox />
-        </div>
-
-        {/* Hamburger outside nav on mobile */}
-        {isMobile && (
-          <div className={styles.hamburgerWrapper}>
-            <HamburgerButton
-              isOpen={isMobileMenuOpen}
-              onClick={handleMobileMenuToggle}
-            />
-          </div>
+        {/* Version select dropdown */}
+        {!isNotFound && (
+          <VersionSwitcher
+            currentVersion={version}
+            currentSlug={slug}
+          />
         )}
 
-        <nav className={styles.nav}>
-          {/* Hamburger inside nav on tablet breakpoint */}
-          {!isMobile && (
-            <div className={styles.hamburgerWrapper}>
-              <HamburgerButton
-                isOpen={isMobileMenuOpen}
-                onClick={handleMobileMenuToggle}
-              />
-            </div>
-          )}
-          <div className={styles.navItem}>
-            <a href={githubUrl} className={styles.navLink} aria-label="GitHub repository">
-              <i className={`fab fa-github ${styles.githubIcon}`} />
-            </a>
-          </div>
-          <div className={styles.navItem}>
-            <DarkModeToggle />
-          </div>
-          <div className={styles.versionSwitcherWrapper}>
-            {!isNotFound && (
-              <VersionSwitcher
-                currentVersion={version}
-                currentSlug={slug}
-                docsContext={docsContext}
-              />
-            )}
-          </div>
-        </nav>
+        {/* Mobile menu toggle */}
+        {isMobile && (
+          <HamburgerButton
+            isOpen={isMobileMenuOpen}
+            onClick={handleMobileMenuToggle}
+          />
+        )}
+      </div>
+
+      {/* Algolia search input */}
+      {hasSearch && (
+        <div className={styles.headerCenter}>
+          <SearchBox />
+        </div>
+      )}
+
+      <div className={styles.headerRight}>
+        {/* Github link */}
+        <a href={githubUrl} className={styles.github} aria-label="GitHub repository" target="_blank" rel="noopener noreferrer">
+          <i className="fab fa-github" aria-hidden="true" />
+        </a>
+
+        {/* Light and dark mode toggle */}
+        <DarkModeToggle />
+
+        {/* Menu toggle */}
+        {!isMobile && (
+          <HamburgerButton
+            isOpen={isMobileMenuOpen}
+            onClick={handleMobileMenuToggle}
+          />
+        )}
       </div>
     </header>
   );

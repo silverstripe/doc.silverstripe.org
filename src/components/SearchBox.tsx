@@ -4,7 +4,7 @@ import { DocSearch } from '@docsearch/react';
 import { usePathname } from 'next/navigation';
 import { useCallback } from 'react';
 import { getDefaultVersion } from '@/lib/versions/version-utils';
-import { getConfig } from '@/lib/config/config';
+import { getConfig, isSearchConfigured } from '@/lib/config/config';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import '@docsearch/css';
 
@@ -47,7 +47,7 @@ export function SearchBox() {
   const indexName = config.docsearchIndexName;
 
   // If not configured, don't render
-  if (!appId || !apiKey || !indexName) {
+  if (!isSearchConfigured()) {
     return null;
   }
 

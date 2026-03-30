@@ -7,7 +7,7 @@ describe('Dark Mode Table Striping', () => {
   beforeAll(() => {
     const globalsPath = path.join(
       __dirname,
-      '../../src/app/globals.css'
+      '../../src/app/styles/app.css',
     );
     globalsCss = fs.readFileSync(globalsPath, 'utf-8');
   });
@@ -37,7 +37,7 @@ describe('Dark Mode Table Striping', () => {
   it('dark mode rule should come after light mode rule', () => {
     const lightModeIndex = globalsCss.indexOf('table tbody tr:nth-child(odd)');
     const darkModeIndex = globalsCss.indexOf(':root.dark table tbody tr:nth-child(odd)');
-    
+
     expect(lightModeIndex).toBeGreaterThanOrEqual(0);
     expect(darkModeIndex).toBeGreaterThan(lightModeIndex);
   });

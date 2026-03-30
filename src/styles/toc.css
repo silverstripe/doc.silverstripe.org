@@ -1,0 +1,33 @@
+/**
+ * Table of contents
+ */
+
+.toc {
+  --toc-bakground: var(--theme-bg-light);
+
+  background: var(--toc-bakground);
+  border-radius: var(--border-radius-sm);
+  border: 0.1rem solid var(--theme-border);
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: var(--spacing-2xl);
+  padding: var(--spacing-lg);
+}
+
+.dark {
+  --toc-background: var(--color-blue-grey-80);
+}
+
+.toc-list {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.toc-item {
+  list-style: inside;
+
+  /* H3 - 1 level indent */
+  &[data-level="3"] {
+    padding-left: 3rem;
+  }
+}

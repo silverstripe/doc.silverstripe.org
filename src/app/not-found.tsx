@@ -44,7 +44,7 @@ export default function NotFound() {
           href={`/en/${DEFAULT_VERSION}/`}
           className={styles.link}
         >
-          Go to Latest Documentation
+          Go to the latest documentation
         </Link>
       </div>
     </main>

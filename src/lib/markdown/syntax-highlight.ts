@@ -124,7 +124,7 @@ function processCodeBlock(
             children: [
               {
                 type: 'text',
-                value: '📋 Copy',
+                value: 'Copy',
               },
             ],
           },

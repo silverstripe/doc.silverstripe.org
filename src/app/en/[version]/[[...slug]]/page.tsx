@@ -3,12 +3,12 @@ import { getDocumentByParams, getAllDocuments } from '@/lib/content/get-document
 import { buildNavTree } from '@/lib/nav/build-nav-tree';
 import { DocsLayout } from '@/components/DocsLayout';
 import { VersionBanner } from '@/components/VersionBanner';
+import { Footer } from '@/components/Footer';
 import EditOnGithub from '@/components/EditOnGithub';
 import { MarkdownContent } from '@/components/MarkdownContent';
 import { generatePageMetadata } from '@/lib/metadata/metadata';
 import { getDefaultVersion, getVersionPath } from '@/lib/versions/version-utils';
 import type { Metadata } from 'next';
-import styles from './page.module.css';
 
 interface PageParams {
   version: string;
@@ -125,18 +125,16 @@ export default async function Page({ params: paramsPromise }: PageProps) {
           latestVersionPath={latestVersionPath}
         />
 
-        <div className={styles.contentWrapper}>
-          <MarkdownContent html={htmlContent} />
-        </div>
+        <MarkdownContent html={htmlContent} />
 
-        <footer className={styles.footer}>
+        <Footer>
           <EditOnGithub
             version={doc.version}
             filePath={doc.filePath}
             category={doc.category}
             optionalFeature={doc.optionalFeature}
           />
-        </footer>
+        </Footer>
       </article>
     </DocsLayout>
   );

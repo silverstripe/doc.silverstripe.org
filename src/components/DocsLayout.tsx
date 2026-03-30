@@ -30,33 +30,30 @@ export function DocsLayout({
   return (
     <div className={styles.layout}>
       <div className={styles.layoutContainer}>
-        <div className={styles.grid}>
-          {/* Sidebar - always in DOM, shown/hidden by CSS */}
-          <div
-            className={cx(styles.sidebarContainer, {
-              [styles.sidebarOpen]: isMobileMenuOpen,
-            })}
-          >
-            <Sidebar navTree={navTree} currentSlug={currentSlug} />
-          </div>
+        {/* Sidebar - always in DOM, shown/hidden by CSS */}
+        <div
+          className={cx(styles.sidebarContainer, {
+            [styles.sidebarOpen]: isMobileMenuOpen,
+          })}
+        >
+          <Sidebar navTree={navTree} currentSlug={currentSlug} />
+        </div>
 
-          {/* Main content */}
-          <div
-            className={styles.mainContent}
-            onClick={onClose}
-            onKeyDown={(e) => {
-              if (e.key === 'Escape' || e.key === 'Enter') {
-                onClose();
-              }
-            }}
-            role="button"
-            tabIndex={0}
-          >
-            <main role="main">
-              <Breadcrumbs slug={currentSlug} version={version} navTree={navTree} />
-              {children}
-            </main>
-          </div>
+        {/* Main content */}
+        <div
+          onClick={onClose}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape' || e.key === 'Enter') {
+              onClose();
+            }
+          }}
+          role="button"
+          tabIndex={0}
+        >
+          <main className={styles.mainContent}>
+            <Breadcrumbs slug={currentSlug} version={version} navTree={navTree} />
+            {children}
+          </main>
         </div>
       </div>
     </div>

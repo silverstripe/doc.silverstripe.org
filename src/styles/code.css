@@ -1,0 +1,214 @@
+/**
+ * Code styling
+ *
+ * For code blocks and inline snippets
+ */
+
+:root {
+  --code-bg-color: var(--color-bright-blue-05);
+  --code-color: var(--color-blue-grey);
+
+  --code-font-size: var(--font-size-sm);
+
+  --code-block-header-bg-color: var(--color-grey-70);
+  --code-block-header-border-color: var(--color-grey-50);
+  --code-block-header-color: var(--color-grey-30);
+  --code-block-bg-color: var(--color-grey-90);
+  --code-block-color: var(--color-white);
+}
+
+.dark {
+  --code-bg-color: var(--color-grey-70);
+  --code-color: var(--color-blue-grey-30);
+
+  --code-block-header-bg-color: var(--color-grey-70);
+  --code-block-header-border-color: var(--color-grey-40);
+  --code-block-header-color: var(--color-blue-grey-20);
+  --code-block-bg-color: var(--color-black);
+  --code-block-color: var(--color-blue-grey-30);
+}
+
+code {
+  border-radius: var(--border-radius-xs);
+  background: var(--code-bg-color);
+  color: var(--code-color);
+  font-family: var(--font-family-monospace);
+  padding: 0.25rem 0.375rem;
+}
+
+pre {
+  background: var(--code-block-header-bg-color);
+  border-radius: var(--border-radius-sm);
+  color: var(--code-block-color);
+  font-size: var(--code-font-size);
+  padding: var(--spacing-sm);
+  overflow-x: auto;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  background: var(--code-block-bg-color);
+  font-size: var(--code-font-size);
+  margin: 0;
+  text-shadow: none;
+}
+
+:not(pre) > code[class*="language-"] {
+  background: var(--code-bg-color);
+  color: #555;
+  text-shadow: none;
+}
+
+/**
+ * Code block wrapper styling
+ */
+.code-block-wrapper {
+  background: var(--code-block-bg-color);
+  border-radius: var(--border-radius-sm);
+  margin: var(--spacing-2xl) 0;
+  overflow: hidden;
+}
+
+.code-block-header {
+  align-items: center;
+  background: var(--code-block-header-bg-color);
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-sm) 1.6rem;
+  gap: var(--spacing-sm);
+}
+
+.code-block-language {
+  color: var(--code-block-header-color);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  flex: 1;
+}
+
+.code-block-copy-btn {
+  background: transparent;
+  border-radius: var(--border-radius-xs);
+  border: 0.1rem solid var(--code-block-header-border-color);
+  color: var(--code-block-header-color);
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  padding: 0.35rem 0.75rem;
+  transition: var(--transition-color);
+
+  &:hover {
+    border-color: var(--code-block-header-color);
+  }
+
+  &:active {
+    border-color: var(--code-block-header-color);
+  }
+
+  &.copied {
+    color: #5cb377;
+  }
+}
+
+/**
+ * Prism okaidia syntax highlighting tokens
+ */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #8292a2;
+}
+
+.token.punctuation {
+  color: #f8f8f2;
+}
+
+.token.namespace {
+  opacity: 0.7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+  color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+  color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+  color: #e6db74;
+}
+
+.token.keyword {
+  color: #66d9ef;
+}
+
+/* Language-specific token colors */
+/* PHP improvements */
+.language-php .token.variable {
+  color: #f92672;  /* Magenta for variables */
+}
+
+.language-php .token.operator {
+  color: #66d9ef;  /* Cyan for operators */
+}
+
+.language-php .token.punctuation {
+  color: #a6e22e;  /* Green for punctuation */
+}
+
+/* YAML improvements */
+.language-yaml .token.punctuation {
+  color: #f92672;  /* Magenta for punctuation */
+}
+
+.language-yaml .token.key {
+  color: #a6e22e;  /* Green for keys */
+}
+
+/* Diff highlighting */
+.language-diff .token.inserted {
+  background: rgba(166, 226, 46, 0.1);
+  color: #a6e22e;  /* Green for added lines */
+}
+
+.language-diff .token.deleted {
+  background: rgba(249, 38, 114, 0.1);
+  color: #f92672;  /* Red for removed lines */
+}
+
+.language-diff .token.coord {
+  color: #66d9ef;  /* Cyan for diff coordinates */
+}

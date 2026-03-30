@@ -49,19 +49,17 @@ function renderCardGridHTML(children: DocumentNode[]): string {
         : `fas fa-${icon}`;
 
       return (
-        `<a href="${child.slug}" class="col-12 col-lg-6 py-3 card-link">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">
-                <span class="theme-icon-holder card-icon-holder me-2">
-                  <i class="${iconClass}"></i>
-                </span>
-                <span class="card-title-text">${escapeHtml(child.title)}</span>
-              </h5>
-              <div class="card-text">
-                ${escapeHtml(child.summary || '')}
-              </div>
-            </div>
+        `<a href="${child.slug}" class="card-link">
+          <div class="card">
+            <h3 class="card-title h5">
+              <span class="theme-icon-holder card-icon-holder">
+                <i class="${iconClass}"></i>
+              </span>
+              <span class="card-title-text">${escapeHtml(child.title)}</span>
+            </h3>
+            ${child.summary ? `<div class="card-text">
+              ${escapeHtml(child.summary)}
+            </div>` : ''}
           </div>
         </a>`
       );
@@ -69,8 +67,8 @@ function renderCardGridHTML(children: DocumentNode[]): string {
     .join('\n');
 
   return (
-    `<div class="docs-overview py-5">
-      <div class="row">
+    `<div class="docs-overview">
+      <div class="card-grid">
         ${cards}
       </div>
     </div>`

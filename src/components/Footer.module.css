@@ -1,0 +1,10 @@
+/**
+ * Footer styles
+ */
+
+.footer {
+  border-top: 0.1rem solid var(--theme-border);
+  margin-top: var(--spacing-2xl);
+  padding-top: var(--spacing-2xl);
+}
+

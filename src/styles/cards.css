@@ -1,0 +1,45 @@
+/**
+ * Card styles
+ */
+
+.card-grid {
+  display: grid;
+  gap: 2rem;
+  margin: var(--spacing-3xl) 0;
+
+  @media  (width >= 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.card-link {
+  border: 0.1rem solid var(--theme-border);
+  border-radius: var(--border-radius-md);
+  display: block;
+  text-decoration: none;
+
+  &:hover {
+    box-shadow: var(--box-shadow-md);
+  }
+
+  &:focus-visible {
+    border-radius: var(--border-radius-md);
+    outline-offset: 0.2rem;
+  }
+}
+
+.card {
+  align-items: start;
+  font-size: var(--font-size-sm);
+  display: grid;
+  gap: 1rem;
+  padding: 2rem;
+  width: 100%;
+}
+
+.card-title {
+  align-items: center;
+  color: var(--theme-text-primary);
+  display: flex;
+  gap: 1rem;
+}

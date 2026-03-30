@@ -1,18 +1,27 @@
 .main {
+  background-color: var(--theme-bg-white);
+  color: var(--theme-text-primary);
+  min-height: calc(100vh - var(--header-height));
   padding: 4rem 2rem;
   text-align: center;
+
+  @media (width >= 1024px) {
+    padding-top: 10rem;
+  }
 }
 
 .title {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 2rem;
+
+  @media (width >= 1024px) {
+    font-size: var(--font-size-h1-desktop);
+  }
 }
 
 .message {
-  font-size: 1rem;
-  color: var(--theme-text-secondary);
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .linkContainer {
@@ -20,20 +29,15 @@
 }
 
 .link {
+  background-color: var(--color-bright-blue);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-white);
   display: inline-block;
-  padding: 0.6rem 1.25rem;
-  background-color: var(--theme-color-primary);
-  color: white;
-  text-decoration: none;
-  border-radius: 0.375rem;
-  font-weight: 600;
-  transition: all var(--transition-standard);
-}
+  font-weight: var(--font-weight-medium);
+  padding: 1rem 2.2rem;
+  transition: var(--transition-color);
 
-.link:hover {
-  opacity: 0.9;
-}
-
-.link:active {
-  opacity: 0.8;
+  &:hover {
+    background-color: var(--color-dark-blue);
+  }
 }

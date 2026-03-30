@@ -1,0 +1,23 @@
+/**
+ * App styles
+ *
+ * Import all global variables and styles
+ */
+
+@import url('variables.css');
+@import url('global.css');
+
+/**
+ * Component styles
+ */
+@import url('buttons.css');
+@import url('callout.css');
+@import url('cards.css');
+@import url('code.css');
+@import url('details.css');
+@import url('headings.css');
+@import url('icons.css');
+@import url('links.css');
+@import url('markdown.css');
+@import url('search.css');
+@import url('toc.css');
