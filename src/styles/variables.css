@@ -160,6 +160,7 @@
 
   /* Background colors */
   --theme-bg-light: var(--color-blue-grey-05);
+  --theme-table-bg-light: var(--color-blue-grey-10);
   --theme-bg-dark: var(--color-bright-blue);
   --theme-bg-white: var(--color-white);
   --theme-bg-grey: var(--color-bright-blue-05);
@@ -204,6 +205,7 @@
 
   /* Background colors */
   --theme-bg-light: var(--color-grey-70);
+  --theme-table-bg-light: var(--color-grey-70);
   --theme-bg-dark: var(--color-grey-90);
   --theme-bg-white: var(--color-grey-90);
   --theme-bg-grey: var(--color-grey-60);

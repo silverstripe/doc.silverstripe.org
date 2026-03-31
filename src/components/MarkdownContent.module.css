@@ -119,7 +119,7 @@
   }
 
   table {
-    border: 0.1rem solid var(--theme-bg-light);
+    border: 0.1rem solid var(--theme-table-bg-light);
     border-radius: var(--border-radius-sm);
     margin-bottom: var(--spacing-lg);
     width: 100%;
@@ -131,7 +131,7 @@
     }
 
     tbody tr:nth-child(2n+1) {
-      background-color: var(--theme-bg-light);
+      background-color: var(--theme-table-bg-light);
 
       code {
         background-color: var(--theme-bg-grey);
