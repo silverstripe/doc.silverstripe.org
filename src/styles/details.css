@@ -5,16 +5,12 @@
  */
 
 details {
-  margin: 1.5rem 0;
+  border: 0.1rem solid var(--theme-border);
+  border-radius: var(--border-radius-sm);
+  margin: var(--spacing-lg) 0;
   padding: 0;
-  border: 1px solid var(--theme-border);
-  border-radius: 0.5rem;
-  background: var(--theme-bg-grey);
+  background: var(--theme-bg-light);
   overflow: hidden;
-
-  &[open] {
-    background: var(--theme-bg-light);
-  }
 }
 
 /* Remove default browser disclosure triangle */
@@ -42,15 +38,15 @@ summary {
 
 /* Custom toggle arrow */
 summary::before {
-  content: '';
-  display: inline-block;
-  width: 1rem;
-  height: 1rem;
-  margin-right: 0.75rem;
-  flex-shrink: 0;
   background: var(--theme-text-primary);
   clip-path: polygon(30% 20%, 70% 50%, 30% 80%);
+  content: '';
+  display: inline-block;
+  height: 1.8rem;
+  flex-shrink: 0;
+  margin-right: var(--spacing-md);
   transition: transform var(--transition-standard);
+  width: 1.8rem;
 }
 
 details[open] > summary::before {
@@ -58,55 +54,31 @@ details[open] > summary::before {
 }
 
 summary:hover {
-  color: var(--theme-color-primary);
-}
-
-summary strong {
-  color: var(--theme-text-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 0.1rem;
+  text-underline-offset: 0.3rem;
 }
 
 /* Content wrapper */
 details > :not(summary)
 {
-  padding: 0 1.5rem 1.5rem 1.5rem;
-  border-top: 1px solid var(--theme-border);
+  border-top: 0.1rem solid var(--theme-border);
+  padding: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md);
 }
 
 details > ul {
-  margin-left: 1.5rem;
+  margin-left: var(--spacing-md);
 }
 
 /* Ensure rounded corners on all 4 sides */
 details {
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius-sm);
 }
 
 details > summary {
-  border-radius: 0.5rem 0.5rem 0 0;
+  border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
 }
 
 details[open] > summary {
-  border-radius: 0.5rem 0.5rem 0 0;
-}
-
-/* Dark mode */
-:root.dark details {
-  background: #2a2a2a;
-  border-color: var(--theme-border);
-}
-
-:root.dark details[open] {
-  background: #2d3436;
-}
-
-:root.dark summary {
-  color: var(--theme-text-primary);
-}
-
-:root.dark summary:hover {
-  color: var(--theme-color-primary);
-}
-
-:root.dark details > :not(summary) {
-  border-top-color: var(--theme-border);
+  border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
 }
