@@ -82,28 +82,14 @@ export function Sidebar({ navTree, currentSlug }: SidebarProps) {
           {hasChildren && (
             <button
               className={styles.navToggle}
+              type="button"
               onClick={() => toggleExpanded(node.slug)}
               aria-expanded={isExpanded}
               aria-label={`Toggle ${node.title}`}
             >
               <span className={cx(styles.chevron, { [styles.expanded]: isExpanded })}>
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <polyline
-                    points="4 3 8 6 4 9"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" width="7" height="8" fill="none" viewBox="0 0 7 8" aria-hidden="true">
+                  <path fill="currentColor" d="M1.549 0a.75.75 0 0 1 .396.12l3.903 3.068c.091.096.152.192.152.312s-.061.216-.152.312L1.945 6.88A.75.75 0 0 1 1.55 7a.75.75 0 0 1-.397-.12A.36.36 0 0 1 1 6.568V.432c0-.12.03-.216.152-.312A.75.75 0 0 1 1.55 0" />
                 </svg>
               </span>
             </button>
