@@ -41,12 +41,6 @@ function buildBreadcrumbs(
   navTree: NavNode[],
 ): Array<{ slug: string; title: string }> {
   const breadcrumbs: Array<{ slug: string; title: string }> = [];
-  const homeSlug = `/en/${version}/`;
-
-  // If we're at home, return only Home
-  if (slug === homeSlug) {
-    return [{ slug: homeSlug, title: 'Home' }];
-  }
 
   // Parse slug parts: /en/6/getting-started/installation/
   // → ['en', '6', 'getting-started', 'installation']
@@ -76,8 +70,8 @@ function buildBreadcrumbs(
 export function Breadcrumbs({ slug, version, navTree }: BreadcrumbsProps) {
   const breadcrumbs = buildBreadcrumbs(slug, version, navTree);
 
-  // Don't render if no breadcrumbs
-  if (breadcrumbs.length === 0) {
+  // Don't render if no breadcrumbs or if top level
+  if (breadcrumbs.length === 0 || breadcrumbs.length === 1) {
     return null;
   }
 
