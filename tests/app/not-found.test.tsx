@@ -40,7 +40,7 @@ describe('NotFound component', () => {
 
     await waitFor(() => {
       const link = screen.queryByRole('link', {
-        name: /Go to Latest Documentation/i,
+        name: /Go to the latest documentation/i,
       });
       expect(link).toBeInTheDocument();
       expect(link).toHaveAttribute('href', expect.stringContaining('/en/'));
@@ -55,7 +55,7 @@ describe('NotFound component', () => {
       const heading = screen.queryByText('404 - Page Not Found');
       const message = screen.queryByText('The page you are looking for does not exist.');
       const link = screen.queryByRole('link', {
-        name: /Go to Latest Documentation/i,
+        name: /Go to the latest documentation/i,
       });
 
       // Verify no inline style attributes
@@ -74,7 +74,7 @@ describe('NotFound component', () => {
       const heading = screen.queryByText('404 - Page Not Found');
       const message = screen.queryByText('The page you are looking for does not exist.');
       const link = screen.queryByRole('link', {
-        name: /Go to Latest Documentation/i,
+        name: /Go to the latest documentation/i,
       });
 
       // Verify classes are applied from CSS modules

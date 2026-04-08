@@ -12,8 +12,8 @@ jest.mock('next/navigation', () => ({
 
 // Mock next/link
 jest.mock('next/link', () => {
-  return ({ children, href }: any) => (
-    <a href={href}>{children}</a>
+  return ({ children, href, ...rest }: any) => (
+    <a href={href} {...rest}>{children}</a>
   );
 });
 
@@ -47,6 +47,11 @@ jest.mock('@/components/DarkModeToggle', () => ({
   DarkModeToggle: () => <div data-testid="dark-mode-toggle">Toggle</div>,
 }));
 
+// Mock config so SearchBox rendering doesn't depend on env vars
+jest.mock('@/lib/config/config', () => ({
+  isSearchConfigured: jest.fn(() => false),
+}));
+
 describe('Phase 2: Logo Link Version Routing', () => {
   afterEach(() => {
     process.env.DOCS_CONTEXT = 'docs';
@@ -58,8 +63,7 @@ describe('Phase 2: Logo Link Version Routing', () => {
 
     render(<Header docsContext="docs" />);
 
-    const logoImg = screen.getByAltText('Silverstripe');
-    const logoLink = logoImg.closest('a');
+    const logoLink = screen.getByRole('link', { name: /Silverstripe CMS Docs/i });
     expect(logoLink).toHaveAttribute('href', '/en/3/');
   });
 
@@ -69,8 +73,7 @@ describe('Phase 2: Logo Link Version Routing', () => {
 
     render(<Header docsContext="docs" />);
 
-    const logoImg = screen.getByAltText('Silverstripe');
-    const logoLink = logoImg.closest('a');
+    const logoLink = screen.getByRole('link', { name: /Silverstripe CMS Docs/i });
     expect(logoLink).toHaveAttribute('href', '/en/6/');
   });
 
@@ -80,8 +83,7 @@ describe('Phase 2: Logo Link Version Routing', () => {
 
     render(<Header docsContext="docs" />);
 
-    const logoImg = screen.getByAltText('Silverstripe');
-    const logoLink = logoImg.closest('a');
+    const logoLink = screen.getByRole('link', { name: /Silverstripe CMS Docs/i });
     expect(logoLink).toHaveAttribute('href', `/en/${DEFAULT_VERSION}/`);
   });
 
@@ -91,8 +93,7 @@ describe('Phase 2: Logo Link Version Routing', () => {
 
     render(<Header docsContext="docs" />);
 
-    const logoImg = screen.getByAltText('Silverstripe');
-    const logoLink = logoImg.closest('a');
+    const logoLink = screen.getByRole('link', { name: /Silverstripe CMS Docs/i });
     expect(logoLink).toHaveAttribute('href', '/en/5/');
   });
 
@@ -102,35 +103,37 @@ describe('Phase 2: Logo Link Version Routing', () => {
 
     render(<Header docsContext="docs" />);
 
-    const logoImg = screen.getByAltText('Silverstripe');
-    const logoLink = logoImg.closest('a');
+    const logoLink = screen.getByRole('link', { name: /Silverstripe CMS Docs/i });
     expect(logoLink).toHaveAttribute('href', '/en/4/');
   });
 
-  it('displays "Silverstripe CMS" as logo title', () => {
+  it('displays "Silverstripe CMS Docs" as logo aria-label', () => {
     const { usePathname } = require('next/navigation');
     usePathname.mockReturnValue('/en/6/');
 
     render(<Header docsContext="docs" />);
 
-    expect(screen.getByText('Silverstripe CMS')).toBeInTheDocument();
+    const logoLink = screen.getByRole('link', { name: /Silverstripe CMS Docs/i });
+    expect(logoLink).toBeInTheDocument();
   });
 
-  it('displays "Docs" subtitle for docs context', () => {
+  it('displays "Docs" in logo aria-label for docs context', () => {
     const { usePathname } = require('next/navigation');
     usePathname.mockReturnValue('/en/6/');
 
     render(<Header docsContext="docs" />);
 
-    expect(screen.getByText('Docs')).toBeInTheDocument();
+    const logoLink = screen.getByRole('link', { name: /Silverstripe CMS Docs/i });
+    expect(logoLink).toHaveAttribute('aria-label', expect.stringContaining('Docs'));
   });
 
-  it('displays "User Help" subtitle for user context', () => {
+  it('displays "User guides" in logo aria-label for user context', () => {
     const { usePathname } = require('next/navigation');
     usePathname.mockReturnValue('/en/6/');
 
     render(<Header docsContext="user" />);
 
-    expect(screen.getByText('User Help')).toBeInTheDocument();
+    const logoLink = screen.getByRole('link', { name: /Silverstripe CMS User guides/i });
+    expect(logoLink).toBeInTheDocument();
   });
 });

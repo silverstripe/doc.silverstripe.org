@@ -141,7 +141,7 @@ describe('initializeCodeBlocks', () => {
     // Wait for state change
     await new Promise((resolve) => setTimeout(resolve, 50));
 
-    expect(button.textContent).toBe('✓ Copied!');
+    expect(button.textContent).toBe('Copied!');
     expect(button.classList.contains('copied')).toBe(true);
     expect(button.getAttribute('aria-label')).toBe('Code copied to clipboard');
 

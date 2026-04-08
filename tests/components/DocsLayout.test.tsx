@@ -95,12 +95,12 @@ describe('DocsLayout', () => {
       </DocsLayout>
     );
 
-    // Find the grid container
-    const gridContainer = container.querySelector('div[class*="grid"]');
-    expect(gridContainer).toBeInTheDocument();
+    // Find the layout container (has grid layout at desktop breakpoint)
+    const layoutContainer = container.querySelector('div[class*="layoutContainer"]');
+    expect(layoutContainer).toBeInTheDocument();
 
-    // Should have two children: sidebar and main content
-    const children = gridContainer?.children;
+    // Should have two children: sidebar and main content wrapper
+    const children = layoutContainer?.children;
     expect(children?.length).toBe(2);
   });
 
@@ -130,15 +130,13 @@ describe('DocsLayout', () => {
       </DocsLayout>
     );
 
-    const mainContent = container.querySelector('[class*="mainContent"]');
+    // mainContent IS the <main> element
+    const mainContent = container.querySelector('main[class*="mainContent"]');
     expect(mainContent).toBeInTheDocument();
-
-    // Main content should contain the children
-    expect(mainContent?.querySelector('main')).toBeInTheDocument();
     expect(screen.getByText('Test content')).toBeInTheDocument();
   });
 
-  it('should render with main role on main element', () => {
+  it('should render with main element for content', () => {
     const { container } = renderWithContext(
       <DocsLayout
         navTree={mockNavTree}
@@ -149,7 +147,7 @@ describe('DocsLayout', () => {
       </DocsLayout>
     );
 
-    const mainElement = container.querySelector('main[role="main"]');
+    const mainElement = container.querySelector('main');
     expect(mainElement).toBeInTheDocument();
   });
 

@@ -11,8 +11,8 @@ jest.mock('next/navigation', () => ({
 
 // Mock next/link
 jest.mock('next/link', () => {
-  return ({ children, href }: any) => (
-    <a href={href}>{children}</a>
+  return ({ children, href, ...rest }: any) => (
+    <a href={href} {...rest}>{children}</a>
   );
 });
 
@@ -48,35 +48,31 @@ describe('Header Component', () => {
     expect(header).toBeInTheDocument();
   });
 
-  it('should render logo image with correct src and alt text', () => {
+  it('should render logo link with correct aria-label', () => {
     render(<Header docsContext="docs" />);
-    const logoImg = screen.getByAltText('Silverstripe');
-    expect(logoImg).toBeInTheDocument();
-    expect(logoImg).toHaveAttribute('src', '/logo.svg');
+    const logoLink = screen.getByRole('link', { name: /Silverstripe CMS Docs/i });
+    expect(logoLink).toBeInTheDocument();
   });
 
-  it('should render logo text "Silverstripe CMS" and "Docs"', () => {
+  it('should render "Silverstripe CMS" in logo aria-label as title', () => {
     render(<Header docsContext="docs" />);
-    expect(screen.getByText('Silverstripe CMS')).toBeInTheDocument();
-    expect(screen.getByText('Docs')).toBeInTheDocument();
+    const logoLink = screen.getByRole('link', { name: /Silverstripe CMS Docs/i });
+    expect(logoLink).toHaveAttribute('aria-label', expect.stringContaining('Silverstripe CMS'));
   });
 
-  it('should render "Silverstripe CMS" as title', () => {
+  it('should render "Docs" in logo aria-label for docs context', () => {
     render(<Header docsContext="docs" />);
-    expect(screen.getByText('Silverstripe CMS')).toBeInTheDocument();
+    const logoLink = screen.getByRole('link', { name: /Silverstripe CMS Docs/i });
+    expect(logoLink).toHaveAttribute('aria-label', expect.stringContaining('Docs'));
   });
 
-  it('should render "Docs" subtitle for docs context', () => {
-    render(<Header docsContext="docs" />);
-    expect(screen.getByText('Docs')).toBeInTheDocument();
-  });
-
-  it('should render "User Help" subtitle for user context', () => {
+  it('should render "User guides" in logo aria-label for user context', () => {
     render(<Header docsContext="user" />);
-    expect(screen.getByText('User Help')).toBeInTheDocument();
+    const logoLink = screen.getByRole('link', { name: /Silverstripe CMS User guides/i });
+    expect(logoLink).toBeInTheDocument();
   });
 
-  it('should NOT render "Home" text link', () => {
+  it('should not render "Home" text link', () => {
     render(<Header docsContext="docs" />);
     const homeLinks = screen.queryAllByText('Home');
     expect(homeLinks).toHaveLength(0);
@@ -86,21 +82,16 @@ describe('Header Component', () => {
     render(<Header docsContext="docs" />);
     const githubLink = screen.getByRole('link', { name: /GitHub repository/ });
     expect(githubLink).toHaveAttribute('href', 'https://github.com/silverstripe/developer-docs');
-    
+
     const githubIcon = githubLink?.querySelector('i');
     expect(githubIcon).toBeInTheDocument();
     expect(githubIcon).toHaveClass('fab', 'fa-github');
   });
 
-  it('should render GitHub icon with enlarged size class', () => {
+  it('should render GitHub link with enlarged CSS class', () => {
     render(<Header docsContext="docs" />);
-    const githubLinks = screen.getAllByRole('link');
-    const githubLink = githubLinks.find(link => 
-      link.getAttribute('href') === 'https://github.com/silverstripe/developer-docs'
-    );
-    
-    const githubIcon = githubLink?.querySelector('i');
-    expect(githubIcon?.className).toMatch(/githubIcon/);
+    const githubLink = screen.getByRole('link', { name: /GitHub repository/ });
+    expect(githubLink).toHaveClass('github');
   });
 
   it('should render SearchBox component', () => {
@@ -115,7 +106,7 @@ describe('Header Component', () => {
 
   it('should have logo as link to home page', () => {
     render(<Header docsContext="docs" />);
-    const logoLink = screen.getByAltText('Silverstripe').closest('a');
+    const logoLink = screen.getByRole('link', { name: /Silverstripe CMS Docs/i });
     expect(logoLink).toHaveAttribute('href', '/en/6/');
   });
 
@@ -136,28 +127,28 @@ describe('Header Component', () => {
   it('should call onMobileMenuToggle when hamburger button is clicked', async () => {
     const mockToggle = jest.fn();
     const user = userEvent.setup();
-    
+
     render(<Header onMobileMenuToggle={mockToggle} docsContext="docs" />);
-    
+
     const hamburgerButton = screen.getByTestId('hamburger-button');
     await user.click(hamburgerButton);
-    
+
     expect(mockToggle).toHaveBeenCalled();
   });
 
   it('should toggle hamburger state when clicked', async () => {
     const mockToggle = jest.fn();
     const user = userEvent.setup();
-    
+
     const { rerender } = render(<Header onMobileMenuToggle={mockToggle} docsContext="docs" />);
-    
+
     const hamburgerButton = screen.getByTestId('hamburger-button');
-    
+
     // Initial state should be closed
     expect(hamburgerButton).toHaveAttribute('aria-expanded', 'false');
-    
+
     await user.click(hamburgerButton);
-    
+
     // After first click, toggle should be called with true
     expect(mockToggle).toHaveBeenCalledWith(true);
   });

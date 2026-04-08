@@ -7,7 +7,7 @@ import { render } from '@testing-library/react';
 import { Header } from '@/components/Header';
 
 jest.mock('next/link', () => {
-  return ({ children, href }: any) => <a href={href}>{children}</a>;
+  return ({ children, href, ...props }: any) => <a href={href} {...props}>{children}</a>;
 });
 
 jest.mock('next/navigation', () => ({
@@ -22,38 +22,63 @@ jest.mock('@/components/VersionSwitcher', () => ({
   VersionSwitcher: () => <div data-testid="version-switcher">Mock VersionSwitcher</div>,
 }));
 
+jest.mock('@/components/logos/CmsDevLogo', () => ({
+  __esModule: true,
+  default: () => <svg data-testid="logo-cms-dev" />,
+}));
+
+jest.mock('@/components/logos/CmsUserLogo', () => ({
+  __esModule: true,
+  default: () => <svg data-testid="logo-cms-user" />,
+}));
+
+jest.mock('@/components/logos/SearchUserLogo', () => ({
+  __esModule: true,
+  default: () => <svg data-testid="logo-search-user" />,
+}));
+
 describe('Header Component', () => {
-  it('renders header with SearchBox', () => {
-    const { getByTestId, getByText } = render(<Header docsContext="docs" />);
-    
-    expect(getByTestId('search-box')).toBeInTheDocument();
-    expect(getByText('Silverstripe CMS')).toBeInTheDocument();
+  it('renders header element', () => {
+    const { container } = render(<Header docsContext="docs" />);
+
+    const header = container.querySelector('header');
+    expect(header).toBeInTheDocument();
   });
 
   it('does not render Home link', () => {
     const { queryByText } = render(<Header docsContext="docs" />);
-    
+
     expect(queryByText('Home')).not.toBeInTheDocument();
   });
 
-  it('renders GitHub icon with larger size', () => {
+  it('renders GitHub icon link', () => {
     const { container } = render(<Header docsContext="docs" />);
     const githubIcon = container.querySelector('.fab.fa-github');
-    
+
     expect(githubIcon).toBeInTheDocument();
-    expect(githubIcon).toHaveClass('githubIcon');
   });
 
   it('renders version switcher', () => {
     const { getByTestId } = render(<Header docsContext="docs" />);
-    
+
     expect(getByTestId('version-switcher')).toBeInTheDocument();
   });
 
-  it('renders logo image with correct src', () => {
-    const { getByAltText } = render(<Header docsContext="docs" />);
-    const logoImg = getByAltText('Silverstripe');
-    
-    expect(logoImg).toHaveAttribute('src', '/logo.svg');
+  it('renders the CmsDevLogo for docs context', () => {
+    const { getByTestId } = render(<Header docsContext="docs" />);
+
+    expect(getByTestId('logo-cms-dev')).toBeInTheDocument();
+  });
+
+  it('renders the CmsUserLogo for user context', () => {
+    const { getByTestId } = render(<Header docsContext="user" />);
+
+    expect(getByTestId('logo-cms-user')).toBeInTheDocument();
+  });
+
+  it('renders the SearchUserLogo for search context', () => {
+    const { getByTestId } = render(<Header docsContext="search" />);
+
+    expect(getByTestId('logo-search-user')).toBeInTheDocument();
   });
 });

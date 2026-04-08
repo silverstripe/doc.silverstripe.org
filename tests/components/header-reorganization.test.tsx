@@ -60,8 +60,7 @@ describe('Header Reorganization', () => {
     });
   });
 
-  it('should move hamburger out of nav on mobile width', () => {
-    // Set mobile width (below 768px breakpoint)
+  it('should place hamburger in headerLeft on mobile width', () => {
     Object.defineProperty(window, 'innerWidth', {
       writable: true,
       configurable: true,
@@ -70,20 +69,15 @@ describe('Header Reorganization', () => {
 
     const { container } = render(<Header docsContext="docs" />);
 
-    const hamburger = container.querySelector('[data-testid="hamburger-button"]')?.parentElement;
-    const nav = container.querySelector('nav');
-    const headerContent = container.querySelector('[class*="headerContent"]');
+    const hamburgerBtn = container.querySelector('[data-testid="hamburger-button"]');
+    const headerLeft = container.querySelector('[class*="headerLeft"]');
 
-    expect(hamburger).toBeTruthy();
-    expect(nav).toBeTruthy();
-    expect(headerContent).toBeTruthy();
-
-    // Hamburger should be a direct child of headerContent on mobile
-    expect(hamburger?.parentElement).toBe(headerContent);
+    expect(hamburgerBtn).toBeTruthy();
+    expect(headerLeft).toBeTruthy();
+    expect(hamburgerBtn?.parentElement).toBe(headerLeft);
   });
 
-  it('should keep hamburger inside nav on desktop width', () => {
-    // Set desktop width
+  it('should place hamburger in headerRight on desktop width', () => {
     Object.defineProperty(window, 'innerWidth', {
       writable: true,
       configurable: true,
@@ -92,18 +86,16 @@ describe('Header Reorganization', () => {
 
     const { container } = render(<Header docsContext="docs" />);
 
-    const hamburger = container.querySelector('[data-testid="hamburger-button"]')?.parentElement;
-    const nav = container.querySelector('nav');
+    const hamburgerBtn = container.querySelector('[data-testid="hamburger-button"]');
+    const headerRight = container.querySelector('[class*="headerRight"]');
 
-    expect(hamburger).toBeTruthy();
-    expect(nav).toBeTruthy();
-
-    // Hamburger should be inside nav on desktop
-    expect(hamburger?.parentElement).toBe(nav);
+    expect(hamburgerBtn).toBeTruthy();
+    expect(headerRight).toBeTruthy();
+    expect(hamburgerBtn?.parentElement).toBe(headerRight);
   });
 
-  it('should move hamburger back to nav when resizing from mobile to desktop', async () => {
     // Start with mobile width (below 768px)
+  it('should move hamburger to headerRight when resizing from mobile to desktop', async () => {
     Object.defineProperty(window, 'innerWidth', {
       writable: true,
       configurable: true,
@@ -112,12 +104,11 @@ describe('Header Reorganization', () => {
 
     const { container } = render(<Header docsContext="docs" />);
 
-    let hamburger = container.querySelector('[data-testid="hamburger-button"]')?.parentElement;
-    const nav = container.querySelector('nav');
-    const headerContent = container.querySelector('[class*="headerContent"]');
+    const headerLeft = container.querySelector('[class*="headerLeft"]');
+    const headerRight = container.querySelector('[class*="headerRight"]');
 
-    // Initially on mobile, hamburger is direct child of headerContent
-    expect(hamburger?.parentElement).toBe(headerContent);
+    // Initially on mobile, hamburger is in headerLeft
+    expect(container.querySelector('[data-testid="hamburger-button"]')?.parentElement).toBe(headerLeft);
 
     // Resize to desktop (above 768px)
     Object.defineProperty(window, 'innerWidth', {
@@ -133,15 +124,13 @@ describe('Header Reorganization', () => {
 
     // Wait for re-render
     await waitFor(() => {
-      // Re-query hamburger after resize
-      hamburger = container.querySelector('[data-testid="hamburger-button"]')?.parentElement;
       // After resize to desktop, hamburger should be back in nav
-      expect(hamburger?.parentElement).toBe(nav);
+      expect(container.querySelector('[data-testid="hamburger-button"]')?.parentElement).toBe(headerRight);
     });
   });
 
-  it('should move hamburger out of nav when resizing from desktop to mobile', async () => {
     // Start with desktop width (above 768px)
+  it('should move hamburger to headerLeft when resizing from desktop to mobile', async () => {
     Object.defineProperty(window, 'innerWidth', {
       writable: true,
       configurable: true,
@@ -150,12 +139,11 @@ describe('Header Reorganization', () => {
 
     const { container } = render(<Header docsContext="docs" />);
 
-    let hamburger = container.querySelector('[data-testid="hamburger-button"]')?.parentElement;
-    const nav = container.querySelector('nav');
-    const headerContent = container.querySelector('[class*="headerContent"]');
+    const headerLeft = container.querySelector('[class*="headerLeft"]');
+    const headerRight = container.querySelector('[class*="headerRight"]');
 
-    // Initially on desktop, hamburger is inside nav
-    expect(hamburger?.parentElement).toBe(nav);
+    // Initially on desktop, hamburger is in headerRight
+    expect(container.querySelector('[data-testid="hamburger-button"]')?.parentElement).toBe(headerRight);
 
     // Resize to mobile (below 768px)
     Object.defineProperty(window, 'innerWidth', {
@@ -171,18 +159,16 @@ describe('Header Reorganization', () => {
 
     // Wait for re-render
     await waitFor(() => {
-      // Re-query hamburger after resize
-      hamburger = container.querySelector('[data-testid="hamburger-button"]')?.parentElement;
       // After resize to mobile, hamburger should be direct child of headerContent
-      expect(hamburger?.parentElement).toBe(headerContent);
+      expect(container.querySelector('[data-testid="hamburger-button"]')?.parentElement).toBe(headerLeft);
     });
   });
 
   it('should handle multiple resize events correctly', async () => {
     const { container } = render(<Header docsContext="docs" />);
 
-    const nav = container.querySelector('nav');
-    const headerContent = container.querySelector('[class*="headerContent"]');
+    const headerLeft = container.querySelector('[class*="headerLeft"]');
+    const headerRight = container.querySelector('[class*="headerRight"]');
 
     // Start desktop (above 768px)
     Object.defineProperty(window, 'innerWidth', {
@@ -195,8 +181,7 @@ describe('Header Reorganization', () => {
     });
 
     await waitFor(() => {
-      const hamburger = container.querySelector('[data-testid="hamburger-button"]')?.parentElement;
-      expect(hamburger?.parentElement).toBe(nav);
+      expect(container.querySelector('[data-testid="hamburger-button"]')?.parentElement).toBe(headerRight);
     });
 
     // Go mobile (below 768px)
@@ -210,8 +195,7 @@ describe('Header Reorganization', () => {
     });
 
     await waitFor(() => {
-      const hamburger = container.querySelector('[data-testid="hamburger-button"]')?.parentElement;
-      expect(hamburger?.parentElement).toBe(headerContent);
+      expect(container.querySelector('[data-testid="hamburger-button"]')?.parentElement).toBe(headerLeft);
     });
 
     // Go desktop again (above 768px)
@@ -225,8 +209,7 @@ describe('Header Reorganization', () => {
     });
 
     await waitFor(() => {
-      const hamburger = container.querySelector('[data-testid="hamburger-button"]')?.parentElement;
-      expect(hamburger?.parentElement).toBe(nav);
+      expect(container.querySelector('[data-testid="hamburger-button"]')?.parentElement).toBe(headerRight);
     });
   });
 });
