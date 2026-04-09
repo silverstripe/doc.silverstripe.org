@@ -6,7 +6,10 @@ import cx from 'classnames';
 import Link from 'next/link';
 import { isNodeOrDescendantActiveByPath, getAncestorsByPath } from '@/lib/nav/build-nav-tree';
 import type { NavNode } from '@/types/types';
+import { DarkModeToggle } from '@/components/DarkModeToggle';
+import { Github } from '@/components/Github';
 import styles from './Sidebar.module.css';
+import {SearchBox} from "@/components/SearchBox";
 
 interface SidebarProps {
   navTree: NavNode[];
@@ -136,10 +139,22 @@ export function Sidebar({ navTree }: SidebarProps) {
   };
 
   return (
-    <nav className={cx(styles.sidebar, { [styles.hydrated]: isHydrated })} role="navigation">
-      <ul className={styles.nav}>
-        {navTree.map((node) => renderNode(node, 0))}
-      </ul>
-    </nav>
+    <>
+      <div className={styles.search}>
+        <SearchBox />
+      </div>
+      <nav className={cx(styles.sidebar, { [styles.hydrated]: isHydrated })} role="navigation">
+        <ul className={styles.nav}>
+          {navTree.map((node) => renderNode(node, 0))}
+        </ul>
+      </nav>
+      <div className={styles.footer}>
+        {/* Github link */}
+        <Github />
+
+        {/* Light and dark mode toggle */}
+        <DarkModeToggle />
+      </div>
+    </>
   );
 }

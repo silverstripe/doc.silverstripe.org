@@ -5,6 +5,7 @@
 .sidebar {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   gap: 0.7rem;
   opacity: 0;
   pointer-events: none;
@@ -18,6 +19,12 @@
   &.hydrated {
     opacity: 1;
     pointer-events: auto;
+  }
+}
+
+.search {
+  @media (width >= 1024px) {
+    display: none;
   }
 }
 
@@ -55,12 +62,18 @@
   display: flex;
   justify-content: center;
   flex-shrink: 0;
-  height: 2.4rem;
+  height: 100%;
   transition: transform var(--transition-standard);
   width: 2.4rem;
 
   &:hover {
     color: var(--nav-accent-color);
+  }
+
+  &:focus-visible {
+    border-radius: var(--border-radius-xs);
+    outline: 0.2rem solid var(--color-bright-blue-70);
+    outline-offset: 0.2rem;
   }
 }
 
@@ -124,5 +137,17 @@
 
   .navLink {
     font-size: var(--font-size-sm);
+  }
+}
+
+.footer {
+  border-top: 0.1rem solid var(--theme-border);
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.5rem 0 0 0;
+
+  @media (width >= 1024px) {
+    display: none;
   }
 }

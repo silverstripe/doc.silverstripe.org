@@ -1,18 +1,30 @@
-.hamburger {
-  --line-color: var(--color-blue-grey-70);
+:root {
+  --hamburger-bg-color: transparent;
+  --hamburger-color: var(--color-charcoal);
+  --hamburger-open-bg-color: var(--color-bright-blue);
+  --hamburger-open-color: var(--color-white);
+  --hamburger-hover-bg-color: var(--color-blue-grey-10);
+  --hamburger-hover-color: var(--color-charcoal);
+}
 
+:global(.dark) {
+  --hamburger-color: var(--color-white);
+  --hamburger-hover-bg-color: var(--color-grey-70);
+  --hamburger-hover-color: var(--color-white);
+}
+
+.hamburger {
   align-items: center;
+  background-color: var(--hamburger-bg-color);
   color: var(--theme-text-primary);
-  background: none;
   border: none;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   cursor: pointer;
-  width: 4.4rem;
-  height: 4.4rem;
+  width: 5.8rem;
+  height: 5.8rem;
   justify-content: center;
-  margin-left: auto;
   transition: all var(--transition-standard);
 
   @media (width >= 1024px) {
@@ -20,21 +32,27 @@
   }
 
   &:hover {
-    --line-color: var(--color-blue-grey-40);
+    --hamburger-color: var(--hamburger-hover-color);
+    --hamburger-bg-color: var(--hamburger-hover-bg-color);
+  }
+
+  &.open {
+    --hamburger-color: var(--hamburger-open-color);
+    --hamburger-bg-color: var(--hamburger-open-bg-color);
   }
 }
 
 .line {
-  background-color: var(--line-color);
+  background-color: var(--hamburger-color);
   border-radius: 0.1rem;
   display: block;
-  height: 0.3rem;
-  width: 3rem;
+  height: 0.2rem;
+  width: 2rem;
   transition: all var(--transition-standard);
 }
 
 .hamburger.open .line:first-child {
-  transform: translateY(0.8rem) rotate(45deg);
+  transform: translateY(0.7rem) rotate(45deg);
 }
 
 .hamburger.open .line:nth-child(2) {
@@ -42,6 +60,6 @@
 }
 
 .hamburger.open .line:nth-child(3) {
-  transform: translateY(-0.8rem) rotate(-45deg);
+  transform: translateY(-0.7rem) rotate(-45deg);
 }
 

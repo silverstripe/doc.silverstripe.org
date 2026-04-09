@@ -13,7 +13,7 @@
   /* Light mode header input */
   --docsearch-key-background: var(--color-blue-grey-10);
   --docsearch-key-color: var(--color-blue-grey-70);
-  --docsearch-muted-color: var(--color-blue-grey-60);
+  --docsearch-muted-color: var(--color-blue-grey-90);
   --docsearch-subtle-color: var(--color-blue-grey-20);
 
   /* Light mode modal */
@@ -37,8 +37,8 @@
 
 .dark {
   /* Dark mode header input */
-  --docsearch-key-background: var(--color-blue-grey-20);
-  --docsearch-key-color: var(--color-blue-grey-90);
+  --docsearch-key-background: var(--color-grey-60);
+  --docsearch-key-color: var(--color-grey-30);
   --docsearch-muted-color: var(--theme-text-primary);
   --docsearch-subtle-color: var(--color-grey-60);
 
@@ -63,7 +63,7 @@
 
 /* Header input elements */
 .DocSearch-Button {
-  background-color: var(--theme-bg-light);
+  background-color: var(--theme-search-bg);
   border-color: var(--theme-search-border);
   transition: var(--transition-color);
   width: calc(100% - 1.6rem);
@@ -81,6 +81,7 @@
 }
 
 .DocSearch-Button-Placeholder {
+  display: inline-block;
   font-size: var(--font-size-sm);
 }
 

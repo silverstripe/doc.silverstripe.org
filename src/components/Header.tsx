@@ -4,14 +4,13 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { DocsContext } from '@/types/types';
-import { extractVersionAndFeatureFromSlug } from '@/lib/utils/slug-utils';
-import { getDocumentGithubInfo } from '@/lib/utils/github-utils';
 import { getDefaultVersion, getVersionHomepage } from '@/lib/versions/version-utils';
 import { isSearchConfigured } from '@/lib/config/config';
 import { SearchBox } from './SearchBox';
 import { VersionSwitcher } from './VersionSwitcher';
 import { HamburgerButton } from './HamburgerButton';
 import { DarkModeToggle } from './DarkModeToggle';
+import { Github } from './Github';
 import CmsDevLogo from './logos/CmsDevLogo';
 import CmsUserLogo from './logos/CmsUserLogo';
 import SearchUserLogo from './logos/SearchUserLogo';
@@ -27,16 +26,13 @@ interface HeaderProps {
  */
 export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [githubUrl, setGithubUrl] = useState('https://github.com/silverstripe/developer-docs');
   const pathname = usePathname();
 
-  // Extract version and optional feature from pathname
+  // Extract version from pathname
   const pathParts = pathname.split('/').filter(Boolean);
   // Only use pathParts[1] as version if pathParts[0] is 'en'
   const version = (pathParts[0] === 'en' ? pathParts[1] : null) || getDefaultVersion();
   const slug = pathname;
-  const { optionalFeature } = extractVersionAndFeatureFromSlug(slug);
 
   // Detect if we're on a 404 page
   // - Static 404.html uses pathname containing '_not-found'
@@ -76,34 +72,13 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
     onMobileMenuToggle?.(false);
   }, [pathname, onMobileMenuToggle]);
 
-  // Update GitHub URL based on optional feature
-  useEffect(() => {
-    const githubInfo = getDocumentGithubInfo(version, optionalFeature, docsContext);
-    if (githubInfo) {
-      const newUrl = `https://github.com/${githubInfo.owner}/${githubInfo.repo}`;
-      setGithubUrl(newUrl);
-    } else {
-      // Fallback to main developer-docs
-      setGithubUrl('https://github.com/silverstripe/developer-docs');
-    }
-  }, [version, optionalFeature, docsContext]);
-
-  // Track window width for mobile/desktop layout
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    // Initial check
-    checkMobile();
-
-    // Listen for resize
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
   return (
     <header className={styles.header}>
+      {/* Mobile menu toggle */}
+      <HamburgerButton
+        isOpen={isMobileMenuOpen}
+        onClick={handleMobileMenuToggle}
+      />
       <div className={styles.headerLeft}>
         {/* Logo */}
         <Link href={getVersionHomepage(version)} className={styles.logo} aria-label={logoTitle}>
@@ -117,14 +92,6 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
             currentSlug={slug}
           />
         )}
-
-        {/* Mobile menu toggle */}
-        {isMobile && (
-          <HamburgerButton
-            isOpen={isMobileMenuOpen}
-            onClick={handleMobileMenuToggle}
-          />
-        )}
       </div>
 
       {/* Algolia search input */}
@@ -136,20 +103,10 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
 
       <div className={styles.headerRight}>
         {/* Github link */}
-        <a href={githubUrl} className={styles.github} aria-label="GitHub repository" target="_blank" rel="noopener noreferrer">
-          <i className="fab fa-github" aria-hidden="true" />
-        </a>
+        <Github />
 
         {/* Light and dark mode toggle */}
         <DarkModeToggle />
-
-        {/* Menu toggle */}
-        {!isMobile && (
-          <HamburgerButton
-            isOpen={isMobileMenuOpen}
-            onClick={handleMobileMenuToggle}
-          />
-        )}
       </div>
     </header>
   );

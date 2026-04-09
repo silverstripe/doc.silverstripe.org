@@ -5,12 +5,13 @@
 .layoutContainer {
   background-color: var(--theme-bg-white);
   width: 100%;
-  max-height: calc(100% - var(--header-height));
+  max-height: calc(100% - var(--header-height-mobile));
 
   @media (width >= 1024px) {
     align-items: start;
     display: grid;
     grid-template-columns: auto 1fr;
+    max-height: calc(100% - var(--header-height));
   }
 }
 
@@ -21,13 +22,14 @@
   left: 0;
   padding: 1.5rem;
   position: fixed;
-  height: calc(100vh - var(--header-height));
+  height: calc(100vh - var(--header-height-mobile));
   overflow-y: auto;
   width: 30rem;
   flex-shrink: 0;
 
   @media (width >= 1024px) {
     display: block;
+    height: calc(100vh - var(--header-height));
     position: sticky;
     top: var(--header-height);
   }
@@ -35,7 +37,9 @@
 
 /* Show sidebar when hamburger is open */
 .sidebarOpen {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .mainContent {

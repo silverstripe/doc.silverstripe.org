@@ -90,7 +90,11 @@ export function Breadcrumbs({ slug, version, navTree }: BreadcrumbsProps) {
                   <Link href={crumb.slug} className={styles.link}>
                     {crumb.title}
                   </Link>
-                  <span className={styles.separator} aria-hidden="true">/</span>
+                  <span className={styles.separator} aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="8" fill="none" viewBox="0 0 6 8">
+                      <path fill="currentColor" d="m3.152 1.997 2.182 1.998-2.188 2.002A275 275 0 0 1 .946 8C.94 8 .726 7.807.468 7.572L0 7.144l1.717-1.572c.944-.865 1.717-1.577 1.717-1.583s-.769-.715-1.708-1.575L.018.851.482.425C.738.191.952 0 .96 0c.006 0 .993.899 2.193 1.997" />
+                    </svg>
+                  </span>
                 </>
               )}
             </li>
