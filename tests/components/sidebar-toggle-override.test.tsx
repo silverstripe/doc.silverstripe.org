@@ -1,6 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { usePathname } from 'next/navigation';
 import { Sidebar } from '@/components/Sidebar';
 import { NavNode } from '@/types/types';
 
@@ -12,7 +13,16 @@ jest.mock('next/link', () => {
   );
 });
 
+// Mock next/navigation
+jest.mock('next/navigation', () => ({
+  usePathname: jest.fn(() => '/en/6/'),
+}));
+
 describe('Sidebar Toggle Override', () => {
+  beforeEach(() => {
+    (usePathname as jest.Mock).mockReturnValue('/en/6/section_b/page_b1/');
+  });
+
   const mockNavTree: NavNode[] = [
     {
       slug: '/en/6/section_a/',
@@ -42,7 +52,7 @@ describe('Sidebar Toggle Override', () => {
           slug: '/en/6/section_b/page_b1/',
           title: 'Page B1',
           isIndex: false,
-          isActive: true,
+          isActive: false,
           hasVisibleChildren: false,
           children: [],
         },
@@ -51,7 +61,7 @@ describe('Sidebar Toggle Override', () => {
   ];
 
   it('should auto-expand parent on nested page load', () => {
-    render(<Sidebar navTree={mockNavTree} currentSlug="/en/6/section_b/page_b1/" />);
+    render(<Sidebar navTree={mockNavTree} />);
 
     const sectionBButton = screen.getByLabelText('Toggle Section B');
     expect(sectionBButton).toHaveAttribute('aria-expanded', 'true');
@@ -60,7 +70,7 @@ describe('Sidebar Toggle Override', () => {
 
   it('should allow closing auto-expanded parent by clicking toggle (manually closed ancestors stay closed when navigating away)', async () => {
     const { rerender } = render(
-      <Sidebar navTree={mockNavTree} currentSlug="/en/6/section_b/page_b1/" />
+      <Sidebar navTree={mockNavTree} />
     );
 
     // Page B1 should be visible (parent auto-expanded)
@@ -79,7 +89,8 @@ describe('Sidebar Toggle Override', () => {
     expect(sectionBButton).toHaveAttribute('aria-expanded', 'false');
 
     // Navigate away to Section A
-    rerender(<Sidebar navTree={mockNavTree} currentSlug="/en/6/section_a/page_a1/" />);
+    (usePathname as jest.Mock).mockReturnValue('/en/6/section_a/page_a1/');
+    rerender(<Sidebar navTree={mockNavTree} />);
 
     // Section B should STILL be closed (manual toggle persists)
     const updatedSectionBButton = screen.getByLabelText('Toggle Section B');
@@ -88,7 +99,7 @@ describe('Sidebar Toggle Override', () => {
   });
 
   it('should allow opening non-ancestor sections', async () => {
-    render(<Sidebar navTree={mockNavTree} currentSlug="/en/6/section_b/page_b1/" />);
+    render(<Sidebar navTree={mockNavTree} />);
 
     // Section A should be closed (not an ancestor)
     expect(screen.queryByText('Page A1')).not.toBeInTheDocument();
@@ -107,7 +118,7 @@ describe('Sidebar Toggle Override', () => {
 
   it('should keep manual toggles persistent across navigation', async () => {
     const { rerender } = render(
-      <Sidebar navTree={mockNavTree} currentSlug="/en/6/section_b/page_b1/" />
+      <Sidebar navTree={mockNavTree} />
     );
 
     // Close Section B manually
@@ -127,7 +138,8 @@ describe('Sidebar Toggle Override', () => {
     });
 
     // Navigate to a page in Section A
-    rerender(<Sidebar navTree={mockNavTree} currentSlug="/en/6/section_a/page_a1/" />);
+    (usePathname as jest.Mock).mockReturnValue('/en/6/section_a/page_a1/');
+    rerender(<Sidebar navTree={mockNavTree} />);
 
     // Section A should now ALSO be auto-expanded (it's an ancestor)
     const updatedSectionAButton = screen.getByLabelText('Toggle Section A');
@@ -141,7 +153,7 @@ describe('Sidebar Toggle Override', () => {
   });
 
   it('should allow toggling multiple sections independently', async () => {
-    render(<Sidebar navTree={mockNavTree} currentSlug="/en/6/section_b/page_b1/" />);
+    render(<Sidebar navTree={mockNavTree} />);
 
     const sectionAButton = screen.getByLabelText('Toggle Section A');
     const sectionBButton = screen.getByLabelText('Toggle Section B');

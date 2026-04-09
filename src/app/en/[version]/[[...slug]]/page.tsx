@@ -1,7 +1,5 @@
 import { notFound } from 'next/navigation';
 import { getDocumentByParams, getAllDocuments } from '@/lib/content/get-document';
-import { buildNavTree } from '@/lib/nav/build-nav-tree';
-import { DocsLayout } from '@/components/DocsLayout';
 import { VersionBanner } from '@/components/VersionBanner';
 import { Footer } from '@/components/Footer';
 import EditOnGithub from '@/components/EditOnGithub';
@@ -92,9 +90,8 @@ export default async function Page({ params: paramsPromise }: PageProps) {
     notFound();
   }
 
-  // Build navigation tree
+  // Get all documents (needed for replaceChildrenMarkers)
   const allDocs = await getAllDocuments();
-  const navTree = buildNavTree(allDocs, version, doc.slug);
 
   // Extract headings for table of contents (before HTML conversion)
   const headings = extractHeadings(doc.content);
@@ -113,29 +110,23 @@ export default async function Page({ params: paramsPromise }: PageProps) {
   const latestVersionPath = getVersionPath(doc.slug, defaultVersion);
 
   return (
-    <DocsLayout
-      navTree={navTree}
-      currentSlug={doc.slug}
-      version={version}
-    >
-      <article>
-        {/* Version Banner inside article for same width */}
-        <VersionBanner
-          version={version}
-          latestVersionPath={latestVersionPath}
+    <article>
+      {/* Version Banner inside article for same width */}
+      <VersionBanner
+        version={version}
+        latestVersionPath={latestVersionPath}
+      />
+
+      <MarkdownContent html={htmlContent} />
+
+      <Footer>
+        <EditOnGithub
+          version={doc.version}
+          filePath={doc.filePath}
+          category={doc.category}
+          optionalFeature={doc.optionalFeature}
         />
-
-        <MarkdownContent html={htmlContent} />
-
-        <Footer>
-          <EditOnGithub
-            version={doc.version}
-            filePath={doc.filePath}
-            category={doc.category}
-            optionalFeature={doc.optionalFeature}
-          />
-        </Footer>
-      </article>
-    </DocsLayout>
+      </Footer>
+    </article>
   );
 }

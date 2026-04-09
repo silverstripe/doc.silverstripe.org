@@ -74,29 +74,25 @@ export function buildNavTree(
 }
 
 /**
- * Check if a nav node or any of its descendants is active
+ * Check if a nav node or any of its descendants matches a given path string
  */
-export function isNodeOrDescendantActive(node: NavNode): boolean {
-  if (node.isActive) {
-    return true;
-  }
-  return node.children.some((child) => isNodeOrDescendantActive(child));
+export function isNodeOrDescendantActiveByPath(node: NavNode, currentPath: string): boolean {
+  if (node.slug === currentPath) return true;
+  return node.children.some((child) => isNodeOrDescendantActiveByPath(child, currentPath));
 }
 
 /**
- * Get the path to the current active node (for auto-expanding)
+ * Get ancestor slugs leading to the node matching currentPath (for auto-expanding)
  */
-export function getActiveAncestorsSlug(node: NavNode, ancestors: string[] = []): string[] {
-  if (node.isActive) {
-    return [...ancestors, node.slug];
-  }
-
+export function getAncestorsByPath(
+  node: NavNode,
+  currentPath: string,
+  ancestors: string[] = [],
+): string[] {
+  if (node.slug === currentPath) return [...ancestors, node.slug];
   for (const child of node.children) {
-    const result = getActiveAncestorsSlug(child, [...ancestors, node.slug]);
-    if (result.length > 0) {
-      return result;
-    }
+    const result = getAncestorsByPath(child, currentPath, [...ancestors, node.slug]);
+    if (result.length > 0) return result;
   }
-
   return [];
 }

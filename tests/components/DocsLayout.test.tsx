@@ -14,6 +14,11 @@ jest.mock('next/link', () => {
   );
 });
 
+// Mock next/navigation
+jest.mock('next/navigation', () => ({
+  usePathname: jest.fn(() => '/en/6/'),
+}));
+
 // Mock the VersionBanner component
 jest.mock('@/components/VersionBanner', () => ({
   VersionBanner: ({ version }: any) => <div data-testid="version-banner">Version {version}</div>,
@@ -53,7 +58,6 @@ describe('DocsLayout', () => {
     const { container } = renderWithContext(
       <DocsLayout
         navTree={mockNavTree}
-        currentSlug="/en/6/getting_started/"
         version="6"
       >
         <p>Test content</p>
@@ -69,7 +73,6 @@ describe('DocsLayout', () => {
     const { container } = renderWithContext(
       <DocsLayout
         navTree={mockNavTree}
-        currentSlug="/en/6/"
         version="6"
       >
         <p>Test content</p>
@@ -88,7 +91,6 @@ describe('DocsLayout', () => {
     const { container } = renderWithContext(
       <DocsLayout
         navTree={mockNavTree}
-        currentSlug="/en/6/"
         version="6"
       >
         <p>Test content</p>
@@ -108,7 +110,6 @@ describe('DocsLayout', () => {
     const { container } = renderWithContext(
       <DocsLayout
         navTree={mockNavTree}
-        currentSlug="/en/6/"
         version="6"
       >
         <p>Test content</p>
@@ -123,7 +124,6 @@ describe('DocsLayout', () => {
     const { container } = renderWithContext(
       <DocsLayout
         navTree={mockNavTree}
-        currentSlug="/en/6/"
         version="6"
       >
         <p>Test content</p>
@@ -140,7 +140,6 @@ describe('DocsLayout', () => {
     const { container } = renderWithContext(
       <DocsLayout
         navTree={mockNavTree}
-        currentSlug="/en/6/"
         version="6"
       >
         <p>Test content</p>
@@ -155,7 +154,6 @@ describe('DocsLayout', () => {
     renderWithContext(
       <DocsLayout
         navTree={mockNavTree}
-        currentSlug="/en/6/getting_started/"
         version="6"
       >
         <p>Test content</p>
@@ -170,7 +168,6 @@ describe('DocsLayout', () => {
     const { container } = renderWithContext(
       <DocsLayout
         navTree={mockNavTree}
-        currentSlug="/en/6/"
         version="6"
       >
         <p>Test content</p>
@@ -186,7 +183,6 @@ describe('DocsLayout', () => {
     const { container } = renderWithContext(
       <DocsLayout
         navTree={mockNavTree}
-        currentSlug="/en/6/"
         version="6"
       >
         <p>Test content</p>
@@ -203,7 +199,6 @@ describe('DocsLayout', () => {
     const { container } = renderWithContext(
       <DocsLayout
         navTree={mockNavTree}
-        currentSlug="/en/6/"
         version="6"
       >
         <p>Test content</p>
@@ -223,7 +218,6 @@ describe('DocsLayout', () => {
       const { container } = renderWithContext(
         <DocsLayout
           navTree={mockNavTree}
-          currentSlug="/en/6/"
           version="6"
         >
           <p>Test content</p>
@@ -238,7 +232,6 @@ describe('DocsLayout', () => {
       const { container } = renderWithContext(
         <DocsLayout
           navTree={mockNavTree}
-          currentSlug="/en/6/"
           version="6"
         >
           <p>Test content</p>
@@ -254,7 +247,6 @@ describe('DocsLayout', () => {
       const { container } = renderWithContext(
         <DocsLayout
           navTree={mockNavTree}
-          currentSlug="/en/6/"
           version="6"
         >
           <p>Test content</p>
@@ -268,5 +260,4 @@ describe('DocsLayout', () => {
     });
   });
 });
-
 

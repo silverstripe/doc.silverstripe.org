@@ -1,6 +1,7 @@
 'use client';
 
 import { useContext } from 'react';
+import { usePathname } from 'next/navigation';
 import cx from 'classnames';
 import { NavNode } from '@/types/types';
 import { MobileMenuContext } from '@/contexts/MobileMenuContext';
@@ -11,7 +12,6 @@ import styles from './DocsLayout.module.css';
 interface DocsLayoutProps {
   children: React.ReactNode;
   navTree: NavNode[];
-  currentSlug: string;
   version: string;
 }
 
@@ -22,10 +22,11 @@ interface DocsLayoutProps {
 export function DocsLayout({
   children,
   navTree,
-  currentSlug,
   version,
 }: DocsLayoutProps) {
   const { isMobileMenuOpen, onClose } = useContext(MobileMenuContext);
+  const pathname = usePathname();
+  const currentSlug = pathname || `/en/${version}/`;
 
   return (
     <div className={styles.layout}>
@@ -36,7 +37,7 @@ export function DocsLayout({
             [styles.sidebarOpen]: isMobileMenuOpen,
           })}
         >
-          <Sidebar navTree={navTree} currentSlug={currentSlug} />
+          <Sidebar navTree={navTree} />
         </div>
 
         {/* Main content */}
