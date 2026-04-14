@@ -121,12 +121,11 @@ describe('Breadcrumbs', () => {
         />
       );
 
-      const separators = container.querySelectorAll('span');
-      const separatorElements = Array.from(separators).filter(
-        (el) => el.textContent === '/'
-      );
-
-      expect(separatorElements.length).toBeGreaterThan(0);
+      const separators = container.querySelectorAll('.separator');
+      expect(separators.length).toBeGreaterThan(0);
+      separators.forEach((separator) => {
+        expect(separator.querySelector('svg')).toBeInTheDocument();
+      });
     });
   });
 
@@ -383,12 +382,11 @@ describe('Breadcrumbs', () => {
       );
 
       const breadcrumbsList = container.querySelector('ol');
-      const separatorSpans = breadcrumbsList?.querySelectorAll('span');
-      const separators = Array.from(separatorSpans || []).filter(span => span.textContent === '/');
+      const separators = breadcrumbsList?.querySelectorAll('.separator');
 
-      expect(separators.length).toBeGreaterThan(0);
-      separators.forEach((separator) => {
-        expect(separator).toHaveTextContent('/');
+      expect(separators?.length).toBeGreaterThan(0);
+      separators?.forEach((separator) => {
+        expect(separator.querySelector('svg')).toBeInTheDocument();
       });
     });
   });

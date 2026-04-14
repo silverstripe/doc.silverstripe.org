@@ -41,6 +41,12 @@ jest.mock('@/components/HamburgerButton', () => ({
   ),
 }));
 
+// Mock config so SearchBox renders and Github component works
+jest.mock('@/lib/config/config', () => ({
+  getConfig: jest.fn(() => ({ docsContext: 'docs' })),
+  isSearchConfigured: jest.fn(() => true),
+}));
+
 describe('Header Component', () => {
   it('should render the header', () => {
     render(<Header docsContext="docs" />);

@@ -3,7 +3,7 @@
 import { useContext } from 'react';
 import { usePathname } from 'next/navigation';
 import cx from 'classnames';
-import { NavNode } from '@/types/types';
+import { NavNode, DocsContext } from '@/types/types';
 import { MobileMenuContext } from '@/contexts/MobileMenuContext';
 import { Sidebar } from './Sidebar';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -13,6 +13,7 @@ interface DocsLayoutProps {
   children: React.ReactNode;
   navTree: NavNode[];
   version: string;
+  docsContext?: DocsContext;
 }
 
 /**
@@ -23,6 +24,7 @@ export function DocsLayout({
   children,
   navTree,
   version,
+  docsContext = 'docs',
 }: DocsLayoutProps) {
   const { isMobileMenuOpen, onClose } = useContext(MobileMenuContext);
   const pathname = usePathname();
@@ -37,7 +39,7 @@ export function DocsLayout({
             [styles.sidebarOpen]: isMobileMenuOpen,
           })}
         >
-          <Sidebar navTree={navTree} />
+          <Sidebar navTree={navTree} docsContext={docsContext} />
         </div>
 
         {/* Main content */}

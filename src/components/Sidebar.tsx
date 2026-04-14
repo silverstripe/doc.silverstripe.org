@@ -5,14 +5,15 @@ import { usePathname } from 'next/navigation';
 import cx from 'classnames';
 import Link from 'next/link';
 import { isNodeOrDescendantActiveByPath, getAncestorsByPath } from '@/lib/nav/build-nav-tree';
-import type { NavNode } from '@/types/types';
+import type { NavNode, DocsContext } from '@/types/types';
 import { DarkModeToggle } from '@/components/DarkModeToggle';
 import { Github } from '@/components/Github';
+import { SearchBox } from '@/components/SearchBox';
 import styles from './Sidebar.module.css';
-import {SearchBox} from "@/components/SearchBox";
 
 interface SidebarProps {
   navTree: NavNode[];
+  docsContext?: DocsContext;
 }
 
 /**
@@ -26,7 +27,7 @@ interface SidebarProps {
  * When a section becomes auto-expanded again (user navigates into it), it is removed
  * from manuallyClosed so it will open correctly.
  */
-export function Sidebar({ navTree }: SidebarProps) {
+export function Sidebar({ navTree, docsContext = 'docs' }: SidebarProps) {
   const [isHydrated, setIsHydrated] = useState(false);
   const [manuallyOpened, setManuallyOpened] = useState<Set<string>>(new Set());
   const [manuallyClosed, setManuallyClosed] = useState<Set<string>>(new Set());
@@ -150,7 +151,7 @@ export function Sidebar({ navTree }: SidebarProps) {
       </nav>
       <div className={styles.footer}>
         {/* Github link */}
-        <Github />
+        <Github docsContext={docsContext} />
 
         {/* Light and dark mode toggle */}
         <DarkModeToggle />

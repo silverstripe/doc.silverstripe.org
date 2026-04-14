@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { getAllDocuments } from '@/lib/content/get-document';
 import { buildNavTree } from '@/lib/nav/build-nav-tree';
+import { getConfig } from '@/lib/config/config';
 import { DocsLayout } from '@/components/DocsLayout';
 
 interface VersionLayoutProps {
@@ -21,8 +22,10 @@ export default async function VersionLayout({ children, params }: VersionLayoutP
   // client-side via usePathname() inside Sidebar and DocsLayout.
   const navTree = buildNavTree(allDocs, version);
 
+  const { docsContext } = getConfig();
+
   return (
-    <DocsLayout navTree={navTree} version={version}>
+    <DocsLayout navTree={navTree} version={version} docsContext={docsContext}>
       {children}
     </DocsLayout>
   );

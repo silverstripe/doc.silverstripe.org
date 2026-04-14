@@ -49,6 +49,7 @@ jest.mock('@/components/DarkModeToggle', () => ({
 
 // Mock config so SearchBox rendering doesn't depend on env vars
 jest.mock('@/lib/config/config', () => ({
+  getConfig: jest.fn(() => ({ docsContext: 'docs' })),
   isSearchConfigured: jest.fn(() => false),
 }));
 

@@ -31,7 +31,7 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
   // Extract version from pathname
   const pathParts = pathname.split('/').filter(Boolean);
   // Only use pathParts[1] as version if pathParts[0] is 'en'
-  const version = (pathParts[0] === 'en' ? pathParts[1] : null) || getDefaultVersion();
+  const version = (pathParts[0] === 'en' ? pathParts[1] : null) || getDefaultVersion(docsContext);
   const slug = pathname;
 
   // Detect if we're on a 404 page
@@ -90,6 +90,7 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
           <VersionSwitcher
             currentVersion={version}
             currentSlug={slug}
+            docsContext={docsContext}
           />
         )}
       </div>
@@ -103,7 +104,7 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
 
       <div className={styles.headerRight}>
         {/* Github link */}
-        <Github />
+        <Github docsContext={docsContext} />
 
         {/* Light and dark mode toggle */}
         <DarkModeToggle />

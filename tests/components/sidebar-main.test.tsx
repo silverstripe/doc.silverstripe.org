@@ -19,6 +19,19 @@ jest.mock('next/navigation', () => ({
   usePathname: jest.fn(() => '/en/6/'),
 }));
 
+// Mock components with external dependencies
+jest.mock('@/components/SearchBox', () => ({
+  SearchBox: () => <div data-testid="search-box">SearchBox</div>,
+}));
+
+jest.mock('@/components/Github', () => ({
+  Github: () => <a data-testid="github-link" href="#">GitHub</a>,
+}));
+
+jest.mock('@/components/DarkModeToggle', () => ({
+  DarkModeToggle: () => <div data-testid="dark-mode-toggle">DarkModeToggle</div>,
+}));
+
 describe('Sidebar', () => {
   beforeEach(() => {
     (usePathname as jest.Mock).mockReturnValue('/en/6/');
