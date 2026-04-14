@@ -56,14 +56,18 @@
     }
   }
 
-  > ol {
+  > ol,
+  details ol,
+  table ol {
     display: grid;
     gap: var(--spacing-sm);
     list-style: decimal;
     margin: 0 0 var(--spacing-lg) var(--spacing-3xl);
   }
 
-  > ul {
+  > ul,
+  details ul,
+  table ul {
     display: grid;
     gap: var(--spacing-sm);
     list-style: disc;
