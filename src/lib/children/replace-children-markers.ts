@@ -52,7 +52,7 @@ function renderCardGridHTML(children: DocumentNode[]): string {
         `<a href="${child.slug}" class="card-link">
           <div class="card">
             <h3 class="card-title h5">
-              <span class="theme-icon-holder card-icon-holder">
+              <span class="theme-icon-holder card-icon-holder" aria-hidden="true">
                 <i class="${iconClass}"></i>
               </span>
               <span class="card-title-text">${escapeHtml(child.title)}</span>
