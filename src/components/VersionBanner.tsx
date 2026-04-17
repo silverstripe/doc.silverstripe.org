@@ -36,7 +36,6 @@ export function VersionBanner({ version, latestVersionPath }: VersionBannerProps
     <div className={bannerClassName} role="alert">
       <div className={styles.content}>
         <div className={styles.header}>
-          <span className={`${styles.icon} ${iconClass}`} aria-hidden="true" />
           <div className={styles.titleSection}>
             <div className={styles.title}>
               <span>
@@ -61,9 +60,11 @@ export function VersionBanner({ version, latestVersionPath }: VersionBannerProps
               .
             </p>
             {!isCurrentVersion && (
-              <a href={latestVersionPath} className={styles.link}>
-                Go to documentation for the most recent stable version →
-              </a>
+              <p>
+                <a href={latestVersionPath} className={styles.link}>
+                  Go to documentation for the most recent stable version
+                </a>
+              </p>
             )}
           </div>
         )}

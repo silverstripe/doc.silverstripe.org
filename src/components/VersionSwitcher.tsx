@@ -36,10 +36,6 @@ export function VersionSwitcher(
 
   return (
     <div className={styles.versionSwitcher}>
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-      <label htmlFor="version-select" className={styles.label}>
-        Version:
-      </label>
       <select
         id="version-select"
         value={currentVersion}

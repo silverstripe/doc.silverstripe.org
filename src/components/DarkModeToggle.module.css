@@ -1,98 +1,74 @@
-.sliderContainer {
-  background: none;
-  border: none;
+/**
+ * Light and dark mode toggle styles
+ */
+
+:root {
+  --toggle-bg-color: var(--color-blue-grey-60);
+  --toggle-indicator-color: var(--color-white);
+  --toggle-color: var(--color-blue-grey-20);
+}
+
+.toggle {
+  align-items: center;
+  background-color: var(--toggle-bg-color);
+  border-radius: 1.5rem;
+  border: 0.2rem solid var(--toggle-bg-color);
   cursor: pointer;
-  padding: 0.5rem;
   display: inline-flex;
-  align-items: center;
+  gap: 0.3rem;
   justify-content: center;
-  border-radius: 0.375rem;
-  transition: all var(--transition-standard);
-}
-
-.sliderContainer:hover {
-  background-color: transparent;
-  box-shadow: initial;
-}
-
-.sliderContainer:focus {
-  outline: 2px solid var(--theme-color-primary);
-  outline-offset: 2px;
-}
-
-.sliderContainer:focus:not(:focus-visible) {
-  outline: none;
-}
-
-.sliderTrack {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
   position: relative;
-  background-color: var(--theme-bg-main);
-  border-radius: 1rem;
-  padding: 0.25rem;
-  width: 3rem;
-  height: 1.5rem;
+  transition: var(--transition-color);
+
+  &:focus {
+    outline-offset: 0.2rem;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
 }
 
-.sliderTrack:hover {
-  background-color: var(--theme-bg-light);
+.toggleIndicator {
+  background-color: var(--toggle-indicator-color);
+  border-radius: 1.3rem;
+  height: 2.6rem;
+  position: absolute;
+  width: 2.6rem;
+  left: 0;
+  transition: transform var(--transition-standard);
 }
 
-.iconSun,
-.iconMoon {
-  font-size: 1rem;
-  transition: opacity var(--transition-standard);
+.toggleIndicatorDark {
+  transform: translateX(2.9rem);
+}
+
+.icon {
+  --fa-width: 2.6rem;
+
+  align-items: center;
+  display: flex;
+  height: 2.6rem;
+  justify-items: center;
+  width: 2.6rem;
+  z-index: 999;
 }
 
 .iconSun {
-  color: var(--theme-color-warning, #f59e0b);
+  color: var(--color-orange);
 }
 
 .iconMoon {
-  color: var(--theme-color-primary, #3b82f6);
+  color: var(--color-bright-blue);
 }
 
-.sliderContainer[aria-pressed="true"] .iconSun {
-  color: var(--gray-600);
+.toggle[aria-pressed="true"] .iconSun,
+.toggle[aria-pressed="false"] .iconMoon {
+  color: var(--toggle-color);
 }
 
-.sliderContainer[aria-pressed="false"] .iconMoon {
-  color: var(--gray-400);
-}
-
-.sliderThumb {
-  position: absolute;
-  width: 1rem;
-  height: 1rem;
-  background-color: var(--theme-bg-main);
-  border-radius: 50%;
-  transition: left var(--transition-standard);
-  left: 0.25rem;
-  top: 50%;
-  transform: translateY(-50%);
-  order: 2;
-  z-index: 2;
-}
-
-.sliderThumbDark {
-  left: calc(100% - 1.25rem);
-}
-
-/* Mobile: responsive sizing */
-@media (max-width: 1023px) {
-  .sliderTrack {
-    width: 2.75rem;
-    height: 1.375rem;
-  }
-
-  .sliderThumb {
-    width: 0.875rem;
-    height: 0.875rem;
-  }
-
-  .sliderThumbDark {
-    left: calc(100% - 1.125rem);
-  }
+.toggle[aria-pressed="true"] {
+  --toggle-bg-color: var(--color-grey-60);
+  --toggle-indicator-color: var(--color-blue-grey-20);
+  --toggle-color: var(--color-blue-grey-40);
 }

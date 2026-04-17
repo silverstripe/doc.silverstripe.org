@@ -14,13 +14,13 @@ export function generateTocHtml(headings: TocHeading[]): string {
     .map((heading) => {
       const escapedText = escapeHtml(heading.text);
       const escapedId = escapeHtml(heading.id);
-      return `<li class="toc-item" data-level="${heading.level}"><a href="#${escapedId}" class="toc-link">${escapedText}</a></li>`;
+      return `<li class="toc-item" data-level="${heading.level}"><a href="#${escapedId}" class="toc-link link">${escapedText}</a></li>`;
     })
     .join('');
 
   return (
     `<nav class="toc" aria-label="Table of contents">
-      <h2 class="toc-title">On this page</h2>
+      <h2 class="toc-title h5">On this page</h2>
       <ul class="toc-list">${listItems}</ul>
     </nav>`
   );

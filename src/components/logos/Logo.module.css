@@ -1,0 +1,38 @@
+/**
+ * Logo colors
+ */
+
+.colorBrand {
+  fill: #005ae1;
+}
+
+.colorAccent {
+  fill: #c6e1ff;
+}
+
+.colorDivider {
+  fill: #d5d7db;
+}
+
+.colorText {
+  fill: #051e2d;
+}
+
+/* Dark mode */
+:global(:root.dark) {
+  .colorBrand {
+    fill: #fff;
+  }
+
+  .colorAccent {
+    fill: #ffffff66;
+  }
+
+  .colorDivider {
+    fill: #6b6c6e;
+  }
+
+  .colorText {
+    fill: #fff;
+  }
+}

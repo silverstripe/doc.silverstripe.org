@@ -1,59 +1,55 @@
-.versionSwitcher {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  background: transparent;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
+/**
+ * Version switcher styles
+ */
+:root {
+  --select-bg-color: var(--color-blue-grey-10);
+  --select-color: var(--font-color-base);
+}
 
-  @media (max-width: 575px) {
-    padding: 0;
+:global(.dark) {
+  --select-bg-color: var(--color-grey-60);
+  --select-color: var(--color-blue-grey-20);
+}
+
+.versionSwitcher {
+  position: relative;
+  display: inline-flex;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0.9rem;
+    height: 0.6rem;
+    background-color: var(--select-color);
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='black' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    pointer-events: none;
   }
 }
 
-.label {
-  font-weight: 500;
-  color: var(--theme-text-secondary);
-  white-space: nowrap;
-}
-
 .select {
-  padding: 0.375rem 0.75rem;
-  border: 1px solid var(--theme-border);
-  border-radius: 0.375rem;
-  background-color: var(--theme-bg-white);
-  color: var(--theme-text-primary);
-  font-size: 0.875rem;
+  appearance: none;
+  background: var(--select-bg-color);
+  border-radius: 1.6rem;
+  border: none;
+  font-size: var(--font-size-sm);
+  padding: 0.4rem 2.4rem 0.4rem 1.2rem;
+  color: var(--select-color);
   cursor: pointer;
-  transition: all var(--transition-standard);
-}
+  transition: var(--transition-color);
 
-.select:hover {
-  border-color: var(--theme-text-secondary);
-}
+  &:focus {
+    outline: none;
+  }
 
-.select:focus {
-  outline: none;
-  border-color: var(--theme-color-primary);
-  box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.1);
-}
-
-.select.status-current {
-  border-color: var(--theme-success);
-  background-color: var(--theme-success-light);
-  color: var(--theme-text-primary);
-}
-
-.select.status-supported {
-  border-color: var(--theme-info);
-  background-color: var(--theme-info-light);
-  color: var(--theme-text-primary);
-}
-
-.select.status-eol {
-  border-color: var(--theme-danger);
-  background-color: var(--theme-danger-light);
-  color: var(--theme-text-primary);
+  &:focus-visible {
+    border-radius: 1.6rem;
+    outline: 0.2rem solid var(--color-bright-blue-70);
+    outline-offset: 0.2rem;
+  }
 }
 

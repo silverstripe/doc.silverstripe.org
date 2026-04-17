@@ -1,0 +1,182 @@
+/**
+ * Global styles and resets
+ * Use with caution as these affect everything on the site
+ */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+
+  @media (prefers-reduced-motion) {
+    scroll-behavior: unset;
+  }
+}
+
+html.prefers-no-transition,
+html.prefers-no-transition * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* This is primarily to make the light/dark mode toggle look nice */
+html * {
+  transition:
+      background-color var(--transition-standard),
+      color var(--transition-standard);
+}
+
+/**
+ * Typography
+ *
+ * Font size is set to 10px for easy conversion of px to rem
+ * e.g. 18px = 1.8rem
+ */
+html,
+body {
+  font-size: 10px;
+
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+body,
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: var(--font-color-base);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+
+strong {
+  color: var(--theme-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-md);
+}
+
+h1,
+.h1 {
+  color: var(--theme-text-primary);
+  font-size: var(--font-size-h1);
+
+  @media (width >= 1024px) {
+    font-size: var(--font-size-h1-desktop);
+  }
+}
+
+h2,
+.h2 {
+  color: var(--theme-text-primary);
+  font-size: var(--font-size-h2);
+
+  @media (width >= 1024px) {
+    font-size: var(--font-size-h2-desktop);
+  }
+}
+
+h3,
+.h3 {
+  color: var(--theme-text-primary);
+  font-size: var(--font-size-h3);
+}
+
+h4,
+.h4 {
+  color: var(--theme-text-primary);
+  font-size: var(--font-size-h4);
+}
+
+h5,
+.h5 {
+  color: var(--theme-text-primary);
+  font-size: var(--font-size-h5);
+}
+
+h6,
+.h6 {
+  color: var(--theme-text-primary);
+  font-size: var(--font-size-h6);
+}
+
+a {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition-color);
+
+  &:focus-visible {
+    border-radius: var(--border-radius-xs);
+    outline: 0.2rem solid var(--color-bright-blue-70);
+    outline-offset: 0.2rem;
+  }
+}
+
+button {
+  appearance: unset;
+  border: unset;
+}
+
+dd,
+ol,
+ul {
+  list-style: none;
+}
+
+fieldset {
+  appearance: unset;
+  border: 0;
+}
+
+hr {
+  border: unset;
+  color: inherit;
+  height: 0;
+}
+
+iframe {
+  border: 0;
+  max-width: 100%;
+}
+
+img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+  border-color: inherit;
+  text-indent: 0;
+
+  td {
+    vertical-align: top;
+  }
+}

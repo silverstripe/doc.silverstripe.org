@@ -58,7 +58,7 @@ describe('Breadcrumbs', () => {
   ];
 
   describe('rendering', () => {
-    it('should render only Home (non-link) on home page', () => {
+    it('should not render on home page', () => {
       const { container } = render(
         <Breadcrumbs
           slug="/en/6/"
@@ -67,14 +67,12 @@ describe('Breadcrumbs', () => {
         />
       );
 
-      const home = screen.getByText('Home');
-      expect(home).toBeInTheDocument();
-      expect(home.tagName).toBe('SPAN');
-      expect(container.querySelector('a')).not.toBeInTheDocument();
+      expect(container.firstChild).toBeNull();
+      expect(screen.queryByText('Home')).not.toBeInTheDocument();
     });
 
-    it('should not show Home link for single level breadcrumb', () => {
-      render(
+    it('should not render for single level breadcrumb', () => {
+      const { container } = render(
         <Breadcrumbs
           slug="/en/6/01_getting_started/"
           version="6"
@@ -82,9 +80,7 @@ describe('Breadcrumbs', () => {
         />
       );
 
-      expect(screen.getByText('Getting Started')).toBeInTheDocument();
-      const links = screen.queryAllByRole('link');
-      expect(links.length).toBe(0);
+      expect(container.firstChild).toBeNull();
     });
 
     it('should render nested breadcrumbs without Home link', () => {
@@ -125,12 +121,11 @@ describe('Breadcrumbs', () => {
         />
       );
 
-      const separators = container.querySelectorAll('span');
-      const separatorElements = Array.from(separators).filter(
-        (el) => el.textContent === '/'
-      );
-
-      expect(separatorElements.length).toBeGreaterThan(0);
+      const separators = container.querySelectorAll('.separator');
+      expect(separators.length).toBeGreaterThan(0);
+      separators.forEach((separator) => {
+        expect(separator.querySelector('svg')).toBeInTheDocument();
+      });
     });
   });
 
@@ -192,7 +187,7 @@ describe('Breadcrumbs', () => {
     it('should have breadcrumb navigation landmark', () => {
       const { container } = render(
         <Breadcrumbs
-          slug="/en/6/01_getting_started/"
+          slug="/en/6/01_getting_started/01_installation/"
           version="6"
           navTree={mockNavTree}
         />
@@ -205,7 +200,7 @@ describe('Breadcrumbs', () => {
     it('should use ordered list for breadcrumbs', () => {
       const { container } = render(
         <Breadcrumbs
-          slug="/en/6/01_getting_started/"
+          slug="/en/6/01_getting_started/01_installation/"
           version="6"
           navTree={mockNavTree}
         />
@@ -230,8 +225,8 @@ describe('Breadcrumbs', () => {
       expect(screen.queryByText('Home')).not.toBeInTheDocument();
     });
 
-    it('should show Home when on home page with empty nav tree', () => {
-      render(
+    it('should not render on home page with empty nav tree', () => {
+      const { container } = render(
         <Breadcrumbs
           slug="/en/6/"
           version="6"
@@ -239,10 +234,11 @@ describe('Breadcrumbs', () => {
         />
       );
 
-      expect(screen.getByText('Home')).toBeInTheDocument();
+      expect(container.firstChild).toBeNull();
+      expect(screen.queryByText('Home')).not.toBeInTheDocument();
     });
 
-    it('should use version from props to build home page', () => {
+    it('should render nothing on home page regardless of nav tree', () => {
       const { container } = render(
         <Breadcrumbs
           slug="/en/6/"
@@ -251,10 +247,8 @@ describe('Breadcrumbs', () => {
         />
       );
 
-      const home = screen.getByText('Home');
-      expect(home).toBeInTheDocument();
-      // Home should be a span when on home page, not a link
-      expect(home.tagName).toBe('SPAN');
+      expect(container.firstChild).toBeNull();
+      expect(screen.queryByText('Home')).not.toBeInTheDocument();
     });
 
     it('should handle unknown slug paths without Home link', () => {
@@ -373,7 +367,7 @@ describe('Breadcrumbs', () => {
       const items = breadcrumbsList?.querySelectorAll('li');
       const lastItem = items?.[items.length - 1];
       const currentElement = lastItem?.querySelector('span');
-      
+
       expect(currentElement).toBeInTheDocument();
       expect(currentElement).toHaveTextContent('Installation');
     });
@@ -388,29 +382,12 @@ describe('Breadcrumbs', () => {
       );
 
       const breadcrumbsList = container.querySelector('ol');
-      const separatorSpans = breadcrumbsList?.querySelectorAll('span');
-      const separators = Array.from(separatorSpans || []).filter(span => span.textContent === '/');
-      
-      expect(separators.length).toBeGreaterThan(0);
-      separators.forEach((separator) => {
-        expect(separator).toHaveTextContent('/');
+      const separators = breadcrumbsList?.querySelectorAll('.separator');
+
+      expect(separators?.length).toBeGreaterThan(0);
+      separators?.forEach((separator) => {
+        expect(separator.querySelector('svg')).toBeInTheDocument();
       });
-    });
-
-    it('should not have separators when only Home is shown', () => {
-      const { container } = render(
-        <Breadcrumbs
-          slug="/en/6/"
-          version="6"
-          navTree={mockNavTree}
-        />
-      );
-
-      const breadcrumbsList = container.querySelector('ol');
-      const separatorSpans = breadcrumbsList?.querySelectorAll('span');
-      const separators = Array.from(separatorSpans || []).filter(span => span.textContent === '/');
-      
-      expect(separators.length).toBe(0);
     });
   });
 });

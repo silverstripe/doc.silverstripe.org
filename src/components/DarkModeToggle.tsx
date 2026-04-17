@@ -67,18 +67,20 @@ export function DarkModeToggle() {
 
   return (
     <button
-      className={styles.sliderContainer}
+      className={styles.toggle}
       onClick={handleToggle}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       aria-pressed={isDark}
       title={isDark ? 'Light mode' : 'Dark mode'}
       data-testid="dark-mode-toggle"
     >
-      <div className={styles.sliderTrack}>
+      <div className={styles.icon}>
         <i className={`fas fa-sun ${styles.iconSun}`} aria-hidden="true" />
-        <div className={`${styles.sliderThumb} ${isDark ? styles.sliderThumbDark : ''}`} />
+      </div>
+      <div className={styles.icon}>
         <i className={`fas fa-moon ${styles.iconMoon}`} aria-hidden="true" />
       </div>
+      <div className={`${styles.toggleIndicator} ${isDark ? styles.toggleIndicatorDark : ''}`} />
     </button>
   );
 }

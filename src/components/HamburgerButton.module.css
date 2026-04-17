@@ -1,38 +1,58 @@
+:root {
+  --hamburger-bg-color: transparent;
+  --hamburger-color: var(--color-charcoal);
+  --hamburger-open-bg-color: var(--color-bright-blue);
+  --hamburger-open-color: var(--color-white);
+  --hamburger-hover-bg-color: var(--color-blue-grey-10);
+  --hamburger-hover-color: var(--color-charcoal);
+}
+
+:global(.dark) {
+  --hamburger-color: var(--color-white);
+  --hamburger-hover-bg-color: var(--color-grey-70);
+  --hamburger-hover-color: var(--color-white);
+}
+
 .hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 0.375rem;
-  background: transparent;
-  border: none;
-  padding: 0.5rem;
-  cursor: pointer;
-  width: 44px;
-  height: 44px;
   align-items: center;
-  justify-content: center;
+  background-color: var(--hamburger-bg-color);
   color: var(--theme-text-primary);
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  cursor: pointer;
+  width: 5.8rem;
+  height: 5.8rem;
+  justify-content: center;
   transition: all var(--transition-standard);
-}
 
-.hamburger:hover {
-  opacity: 0.7;
-}
+  @media (width >= 1024px) {
+    display: none;
+  }
 
-.hamburger:active {
-  opacity: 0.5;
+  &:hover {
+    --hamburger-color: var(--hamburger-hover-color);
+    --hamburger-bg-color: var(--hamburger-hover-bg-color);
+  }
+
+  &.open {
+    --hamburger-color: var(--hamburger-open-color);
+    --hamburger-bg-color: var(--hamburger-open-bg-color);
+  }
 }
 
 .line {
+  background-color: var(--hamburger-color);
+  border-radius: 0.1rem;
   display: block;
-  width: 24px;
-  height: 2px;
-  background-color: var(--theme-text-primary);
-  border-radius: 1px;
+  height: 0.2rem;
+  width: 2rem;
   transition: all var(--transition-standard);
 }
 
 .hamburger.open .line:first-child {
-  transform: rotate(45deg) translate(8px, 8px);
+  transform: translateY(0.7rem) rotate(45deg);
 }
 
 .hamburger.open .line:nth-child(2) {
@@ -40,13 +60,6 @@
 }
 
 .hamburger.open .line:nth-child(3) {
-  transform: rotate(-45deg) translate(8px, -8px);
-}
-
-/* Show hamburger on mobile and tablet */
-@media (max-width: 1023px) {
-  .hamburger {
-    display: flex;
-  }
+  transform: translateY(-0.7rem) rotate(-45deg);
 }
 

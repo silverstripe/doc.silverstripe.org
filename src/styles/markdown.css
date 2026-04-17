@@ -1,0 +1,59 @@
+/**
+ * Markdown alert styles
+ */
+
+.markdown-alert {
+  --alert-bg-color: var(--theme-info-light);
+  --alert-border-color: var(--theme-info);
+  --alert-color: var(--theme-info-dark);
+
+  background: var(--alert-bg-color);
+  border-left: 0.5rem solid var(--alert-border-color);
+  border-radius: var(--border-radius-sm);
+  color: var(--font-color-base);
+  margin: var(--spacing-2xl) 0;
+  padding: var(--spacing-lg);
+
+  code {
+    --code-bg-color: rgb(from var(--alert-color) r g b / 10%);
+  }
+}
+
+.markdown-alert-note {
+  --alert-bg-color: var(--theme-info-light);
+  --alert-border-color: var(--theme-info);
+  --alert-color: var(--theme-info-dark);
+}
+
+.markdown-alert-important {
+  --alert-bg-color: var(--theme-success-light);
+  --alert-border-color: var(--theme-success);
+  --alert-color: var(--theme-success-dark);
+}
+
+.markdown-alert-warning {
+  --alert-bg-color: var(--theme-warning-light);
+  --alert-border-color: var(--theme-warning);
+  --alert-color: var(--theme-warning-dark);
+}
+
+.markdown-alert-caution {
+  --alert-bg-color: var(--theme-danger-light);
+  --alert-border-color: var(--theme-danger);
+  --alert-color: var(--theme-danger-dark);
+}
+
+.markdown-alert-title {
+  align-items: center;
+  color: var(--alert-color);
+  display: flex;
+  font-weight: var(--font-weight-semibold);
+  gap: 0.7rem;
+
+  svg {
+    fill: var(--alert-color);
+    flex-shrink: 0;
+    height: 1.8rem;
+    width: 1.8rem;
+  }
+}

@@ -1,0 +1,13 @@
+/**
+ * Link styles
+ */
+
+.link {
+  text-decoration: underline;
+  text-decoration-thickness: 0.1rem;
+  text-underline-offset: 0.3rem;
+
+  &:hover {
+    text-decoration-thickness: 0.15rem;
+  }
+}

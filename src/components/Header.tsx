@@ -4,13 +4,16 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { DocsContext } from '@/types/types';
-import { extractVersionAndFeatureFromSlug } from '@/lib/utils/slug-utils';
-import { getDocumentGithubInfo } from '@/lib/utils/github-utils';
 import { getDefaultVersion, getVersionHomepage } from '@/lib/versions/version-utils';
+import { isSearchConfigured } from '@/lib/config/config';
 import { SearchBox } from './SearchBox';
 import { VersionSwitcher } from './VersionSwitcher';
 import { HamburgerButton } from './HamburgerButton';
 import { DarkModeToggle } from './DarkModeToggle';
+import { Github } from './Github';
+import CmsDevLogo from './logos/CmsDevLogo';
+import CmsUserLogo from './logos/CmsUserLogo';
+import SearchUserLogo from './logos/SearchUserLogo';
 import styles from './Header.module.css';
 
 interface HeaderProps {
@@ -23,16 +26,13 @@ interface HeaderProps {
  */
 export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [githubUrl, setGithubUrl] = useState('https://github.com/silverstripe/developer-docs');
   const pathname = usePathname();
 
-  // Extract version and optional feature from pathname
+  // Extract version from pathname
   const pathParts = pathname.split('/').filter(Boolean);
   // Only use pathParts[1] as version if pathParts[0] is 'en'
-  const version = (pathParts[0] === 'en' ? pathParts[1] : null) || getDefaultVersion();
+  const version = (pathParts[0] === 'en' ? pathParts[1] : null) || getDefaultVersion(docsContext);
   const slug = pathname;
-  const { optionalFeature } = extractVersionAndFeatureFromSlug(slug);
 
   // Detect if we're on a 404 page
   // - Static 404.html uses pathname containing '_not-found'
@@ -41,9 +41,19 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
   const isInvalidEnPath = pathParts[0] === 'en' && (!pathParts[1] || !/^[0-9]$/.test(pathParts[1]));
   const isNotFound = isNotFoundPath || !pathParts[0] || isInvalidEnPath;
 
-  const logoTitle = docsContext === 'search' ? 'Silverstripe Search' : 'Silverstripe CMS';
-  const logoSrc = docsContext === 'search' ? '/searchlogo.svg' : '/logo.svg';
-  const logoSubtitle = { docs: 'Docs', user: 'User Help', search: 'User guides' }[docsContext];
+  const hasSearch = isSearchConfigured();
+
+  const logoTitle = {
+    docs: 'Silverstripe CMS Docs',
+    user: 'Silverstripe CMS User guides',
+    search: 'Silverstripe Search User guides',
+  }[docsContext];
+
+  const LogoComponent = {
+    docs: CmsDevLogo,
+    user: CmsUserLogo,
+    search: SearchUserLogo,
+  }[docsContext];
 
   const handleMobileMenuToggle = () => {
     const newState = !isMobileMenuOpen;
@@ -62,85 +72,42 @@ export function Header({ onMobileMenuToggle, docsContext }: HeaderProps) {
     onMobileMenuToggle?.(false);
   }, [pathname, onMobileMenuToggle]);
 
-  // Update GitHub URL based on optional feature
-  useEffect(() => {
-    const githubInfo = getDocumentGithubInfo(version, optionalFeature, docsContext);
-    if (githubInfo) {
-      const newUrl = `https://github.com/${githubInfo.owner}/${githubInfo.repo}`;
-      setGithubUrl(newUrl);
-    } else {
-      // Fallback to main developer-docs
-      setGithubUrl('https://github.com/silverstripe/developer-docs');
-    }
-  }, [version, optionalFeature, docsContext]);
-
-  // Track window width for mobile/desktop layout
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    // Initial check
-    checkMobile();
-
-    // Listen for resize
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
   return (
     <header className={styles.header}>
-      <div className={styles.headerContent}>
-        <Link href={getVersionHomepage(version)} className={styles.logo}>
-          <img src={logoSrc} alt="Silverstripe" className={styles.logoImage} />
-          <div className={styles.logoText}>
-            <span className={styles.logoTitle}>{logoTitle}</span>
-            <span className={styles.logoSubtitle}>{logoSubtitle}</span>
-          </div>
+      {/* Mobile menu toggle */}
+      <HamburgerButton
+        isOpen={isMobileMenuOpen}
+        onClick={handleMobileMenuToggle}
+      />
+      <div className={styles.headerLeft}>
+        {/* Logo */}
+        <Link href={getVersionHomepage(version)} className={styles.logo} aria-label={logoTitle}>
+          <LogoComponent />
         </Link>
 
-        <div className={styles.searchContainer}>
+        {/* Version select dropdown */}
+        {!isNotFound && (
+          <VersionSwitcher
+            currentVersion={version}
+            currentSlug={slug}
+            docsContext={docsContext}
+          />
+        )}
+      </div>
+
+      {/* Algolia search input */}
+      {hasSearch && (
+        <div className={styles.headerCenter}>
           <SearchBox />
         </div>
+      )}
 
-        {/* Hamburger outside nav on mobile */}
-        {isMobile && (
-          <div className={styles.hamburgerWrapper}>
-            <HamburgerButton
-              isOpen={isMobileMenuOpen}
-              onClick={handleMobileMenuToggle}
-            />
-          </div>
-        )}
+      <div className={styles.headerRight}>
+        {/* Github link */}
+        <Github docsContext={docsContext} />
 
-        <nav className={styles.nav}>
-          {/* Hamburger inside nav on tablet breakpoint */}
-          {!isMobile && (
-            <div className={styles.hamburgerWrapper}>
-              <HamburgerButton
-                isOpen={isMobileMenuOpen}
-                onClick={handleMobileMenuToggle}
-              />
-            </div>
-          )}
-          <div className={styles.navItem}>
-            <a href={githubUrl} className={styles.navLink} aria-label="GitHub repository">
-              <i className={`fab fa-github ${styles.githubIcon}`} />
-            </a>
-          </div>
-          <div className={styles.navItem}>
-            <DarkModeToggle />
-          </div>
-          <div className={styles.versionSwitcherWrapper}>
-            {!isNotFound && (
-              <VersionSwitcher
-                currentVersion={version}
-                currentSlug={slug}
-                docsContext={docsContext}
-              />
-            )}
-          </div>
-        </nav>
+        {/* Light and dark mode toggle */}
+        <DarkModeToggle />
       </div>
     </header>
   );

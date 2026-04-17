@@ -1,4 +1,4 @@
-import { buildNavTree, isNodeOrDescendantActive, getActiveAncestorsSlug } from '@/lib/nav/build-nav-tree';
+import { buildNavTree, isNodeOrDescendantActiveByPath, getAncestorsByPath } from '@/lib/nav/build-nav-tree';
 import { DocumentNode, NavNode } from '@/types/types';
 
 describe('buildNavTree', () => {
@@ -80,7 +80,7 @@ describe('buildNavTree', () => {
 
   it('should build navigation tree for a version', () => {
     const tree = buildNavTree(mockDocs, '6');
-    
+
     expect(tree).toHaveLength(2); // Getting Started and Developer Guides (Hidden Section is hidden)
     const titles = tree.map(t => t.title).sort();
     expect(titles).toContain('Getting Started');
@@ -89,7 +89,7 @@ describe('buildNavTree', () => {
 
   it('should not include root document in the tree', () => {
     const tree = buildNavTree(mockDocs, '6');
-    
+
     const hasRoot = tree.some(node => node.title === 'Home');
     expect(hasRoot).toBe(false);
   });
@@ -124,7 +124,7 @@ describe('buildNavTree', () => {
     ];
 
     const tree = buildNavTree(rootBugMockDocs, '6');
-    
+
     // Should only contain the child, not the root
     expect(tree).toHaveLength(1);
     expect(tree[0].title).toBe('Child');
@@ -132,13 +132,13 @@ describe('buildNavTree', () => {
 
   it('should filter documents by version', () => {
     const tree = buildNavTree(mockDocs, '5');
-    
+
     expect(tree).toHaveLength(0); // v5 has no children
   });
 
   it('should build nested children up to 2 levels', () => {
     const tree = buildNavTree(mockDocs, '6');
-    
+
     // Find the Getting Started node
     const gettingStarted = tree.find(n => n.title === 'Getting Started');
     expect(gettingStarted).toBeDefined();
@@ -148,21 +148,21 @@ describe('buildNavTree', () => {
 
   it('should mark current page as active', () => {
     const tree = buildNavTree(mockDocs, '6', '/en/6/getting_started/installation/');
-    
+
     const gettingStarted = tree.find(n => n.title === 'Getting Started');
     expect(gettingStarted?.children[0].isActive).toBe(true);
   });
 
   it('should exclude items with hideSelf', () => {
     const tree = buildNavTree(mockDocs, '6');
-    
+
     const hasHidden = tree.some(node => node.title === 'Hidden Section');
     expect(hasHidden).toBe(false);
   });
 
   it('should set hasVisibleChildren correctly', () => {
     const tree = buildNavTree(mockDocs, '6');
-    
+
     const gettingStarted = tree.find(n => n.title === 'Getting Started');
     const devGuides = tree.find(n => n.title === 'Developer Guides');
 
@@ -171,109 +171,95 @@ describe('buildNavTree', () => {
   });
 });
 
-describe('isNodeOrDescendantActive', () => {
-  it('should return true if node is active', () => {
-    const node = {
-      slug: '/test/',
-      title: 'Test',
-      isIndex: false,
-      isActive: true,
-      children: [],
-      hasVisibleChildren: false,
-    };
-
-    expect(isNodeOrDescendantActive(node)).toBe(true);
+describe('isNodeOrDescendantActiveByPath', () => {
+  const node = (slug: string, children: any[] = []): any => ({
+    slug,
+    title: slug,
+    isIndex: false,
+    isActive: false,
+    hasVisibleChildren: children.length > 0,
+    children,
   });
 
-  it('should return true if any descendant is active', () => {
-    const node = {
-      slug: '/test/',
-      title: 'Test',
-      isIndex: false,
-      isActive: false,
-      children: [
-        {
-          slug: '/test/child/',
-          title: 'Child',
-          isIndex: false,
-          isActive: true,
-          children: [],
-          hasVisibleChildren: false,
-        },
-      ],
-      hasVisibleChildren: true,
-    };
-
-    expect(isNodeOrDescendantActive(node)).toBe(true);
+  it('should return true when the node slug matches the path', () => {
+    expect(isNodeOrDescendantActiveByPath(node('/en/6/foo/'), '/en/6/foo/')).toBe(true);
   });
 
-  it('should return false if node and descendants are inactive', () => {
-    const node = {
-      slug: '/test/',
-      title: 'Test',
-      isIndex: false,
-      isActive: false,
-      children: [
-        {
-          slug: '/test/child/',
-          title: 'Child',
-          isIndex: false,
-          isActive: false,
-          children: [],
-          hasVisibleChildren: false,
-        },
-      ],
-      hasVisibleChildren: true,
-    };
+  it('should return false when the node slug does not match and there are no children', () => {
+    expect(isNodeOrDescendantActiveByPath(node('/en/6/foo/'), '/en/6/bar/')).toBe(false);
+  });
 
-    expect(isNodeOrDescendantActive(node)).toBe(false);
+  it('should return true when a direct child matches the path', () => {
+    const tree = node('/en/6/parent/', [node('/en/6/parent/child/')]);
+    expect(isNodeOrDescendantActiveByPath(tree, '/en/6/parent/child/')).toBe(true);
+  });
+
+  it('should return true when a deeply nested descendant matches the path', () => {
+    const tree = node('/en/6/a/', [
+      node('/en/6/a/b/', [
+        node('/en/6/a/b/c/'),
+      ]),
+    ]);
+    expect(isNodeOrDescendantActiveByPath(tree, '/en/6/a/b/c/')).toBe(true);
+  });
+
+  it('should return false when no node in the tree matches the path', () => {
+    const tree = node('/en/6/a/', [node('/en/6/a/b/')]);
+    expect(isNodeOrDescendantActiveByPath(tree, '/en/6/other/')).toBe(false);
   });
 });
 
-describe('getActiveAncestorsSlug', () => {
-  it('should return ancestor path to active node', () => {
-    const node = {
-      slug: '/test/',
-      title: 'Test',
-      isIndex: true,
-      isActive: false,
-      children: [
-        {
-          slug: '/test/child/',
-          title: 'Child',
-          isIndex: true,
-          isActive: false,
-          children: [
-            {
-              slug: '/test/child/grandchild/',
-              title: 'Grandchild',
-              isIndex: false,
-              isActive: true,
-              children: [],
-              hasVisibleChildren: false,
-            },
-          ],
-          hasVisibleChildren: true,
-        },
-      ],
-      hasVisibleChildren: true,
-    };
-
-    const result = getActiveAncestorsSlug(node);
-    expect(result).toEqual(['/test/', '/test/child/', '/test/child/grandchild/']);
+describe('getAncestorsByPath', () => {
+  const node = (slug: string, children: any[] = []): any => ({
+    slug,
+    title: slug,
+    isIndex: false,
+    isActive: false,
+    hasVisibleChildren: children.length > 0,
+    children,
   });
 
-  it('should return empty array if no active node found', () => {
-    const node = {
-      slug: '/test/',
-      title: 'Test',
-      isIndex: false,
-      isActive: false,
-      children: [],
-      hasVisibleChildren: false,
-    };
+  it('should return just the node slug when the node itself matches', () => {
+    expect(getAncestorsByPath(node('/en/6/foo/'), '/en/6/foo/')).toEqual(['/en/6/foo/']);
+  });
 
-    const result = getActiveAncestorsSlug(node);
-    expect(result).toEqual([]);
+  it('should return empty array when nothing matches', () => {
+    const tree = node('/en/6/foo/', [node('/en/6/foo/bar/')]);
+    expect(getAncestorsByPath(tree, '/en/6/other/')).toEqual([]);
+  });
+
+  it('should return ancestor path to a direct child', () => {
+    const tree = node('/en/6/parent/', [node('/en/6/parent/child/')]);
+    expect(getAncestorsByPath(tree, '/en/6/parent/child/')).toEqual([
+      '/en/6/parent/',
+      '/en/6/parent/child/',
+    ]);
+  });
+
+  it('should return full ancestor chain to a deeply nested node', () => {
+    const tree = node('/en/6/a/', [
+      node('/en/6/a/b/', [
+        node('/en/6/a/b/c/'),
+      ]),
+    ]);
+    expect(getAncestorsByPath(tree, '/en/6/a/b/c/')).toEqual([
+      '/en/6/a/',
+      '/en/6/a/b/',
+      '/en/6/a/b/c/',
+    ]);
+  });
+
+  it('should not include siblings or unrelated branches', () => {
+    const tree = node('/en/6/root/', [
+      node('/en/6/root/section-a/', [node('/en/6/root/section-a/page/')]),
+      node('/en/6/root/section-b/', [node('/en/6/root/section-b/page/')]),
+    ]);
+    const result = getAncestorsByPath(tree, '/en/6/root/section-b/page/');
+    expect(result).toEqual([
+      '/en/6/root/',
+      '/en/6/root/section-b/',
+      '/en/6/root/section-b/page/',
+    ]);
+    expect(result).not.toContain('/en/6/root/section-a/');
   });
 });

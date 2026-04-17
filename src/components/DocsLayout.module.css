@@ -1,75 +1,63 @@
-:root {
-  --sidebar-width: 300px;
-}
-
-.layout {
-  min-height: 100vh;
-  padding-bottom: 3rem;
-}
+/**
+ * Document layout styles
+*/
 
 .layoutContainer {
+  background-color: var(--theme-bg-white);
   width: 100%;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  margin-right: auto;
-  margin-left: auto;
-}
+  max-height: calc(100% - var(--header-height-mobile));
 
-.grid {
-  display: flex;
-}
-
-.sidebarContainer {
-  width: var(--sidebar-width);
-  /* min-width is required to stop it from collapsing in small screen widths */
-  min-width: var(--sidebar-width);
-  position: sticky;
-  max-height: calc(100vh - var(--header-height));
-  overflow-y: auto;
-  border-right: 1px solid var(--theme-border);
-  padding-right: 2rem;
-  padding-left: 0;
-  margin-right: 2rem;
-  top: var(--header-height);
-
-  @media (max-width: 575px) {
-    top: var(--header-height-mobile);
+  @media (width >= 1024px) {
+    align-items: start;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    max-height: calc(100% - var(--header-height));
+  
   }
 }
 
+/* fix firefox layout issue where grid children are min-width auto https://daverupert.com/2017/09/breaking-the-grid/ */
+.layoutContainer > *{
+  @media (width >= 1024px) {
+    min-width: 0;
+  }
+}
+
+.sidebarContainer {
+  background-color: var(--theme-bg-white);
+  border-right: 0.1rem solid var(--theme-border);
+  display: none;
+  left: 0;
+  padding: 1.5rem;
+  position: fixed;
+  height: calc(100vh - var(--header-height-mobile));
+  overflow-y: auto;
+  width: 30rem;
+  flex-shrink: 0;
+
+  @media (width >= 1024px) {
+    display: block;
+    height: calc(100vh - var(--header-height));
+    position: sticky;
+    top: var(--header-height);
+  }
+}
+
+/* Show sidebar when hamburger is open */
+.sidebarOpen {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 .mainContent {
-  padding-left: 0;
+  margin: 0 auto;
+  max-width: 88rem;
+  padding: 3.5rem 2rem;
   width: 100%;
-  max-width: 916px;
 }
 
 .bannerRow {
   margin-bottom: 1rem;
 }
-
-/* Mobile: hide sidebar by default */
-@media (max-width: 1023px) {
-  .layout {
-    margin-left: 0;
-  }
-
-  .sidebarContainer {
-    display: none;
-    position: fixed;
-    left: 0;
-    width: var(--sidebar-width);
-    height: calc(100vh - var(--header-height));
-    padding-right: 1rem;
-    padding-left: 1rem;
-    border-right: 1px solid var(--theme-border);
-    background-color: var(--theme-bg-white);
-    z-index: 100;
-  }
-
-  /* Show sidebar when hamburger is open */
-  .sidebarOpen {
-    display: block;
-  }
-}
-
 
