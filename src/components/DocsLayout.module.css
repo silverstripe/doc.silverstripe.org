@@ -12,6 +12,14 @@
     display: grid;
     grid-template-columns: auto 1fr;
     max-height: calc(100% - var(--header-height));
+  
+  }
+}
+
+/* fix firefox layout issue where grid children are min-width auto https://daverupert.com/2017/09/breaking-the-grid/ */
+.layoutContainer > *{
+  @media (width >= 1024px) {
+    min-width: 0;
   }
 }
 
