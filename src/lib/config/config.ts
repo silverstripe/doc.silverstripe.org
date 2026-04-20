@@ -17,3 +17,12 @@ export function getConfig(): Config {
     useMockData: process.env.NEXT_USE_MOCK_DATA === 'true',
   };
 }
+
+/**
+ * Returns true when all three Algolia DocSearch keys are present.
+ * Use this to conditionally render the search UI.
+ */
+export function isSearchConfigured(): boolean {
+  const { docsearchAppId, docsearchApiKey, docsearchIndexName } = getConfig();
+  return !!(docsearchAppId && docsearchApiKey && docsearchIndexName);
+}

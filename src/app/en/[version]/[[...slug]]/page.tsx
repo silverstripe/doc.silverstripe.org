@@ -1,14 +1,12 @@
 import { notFound } from 'next/navigation';
 import { getDocumentByParams, getAllDocuments } from '@/lib/content/get-document';
-import { buildNavTree } from '@/lib/nav/build-nav-tree';
-import { DocsLayout } from '@/components/DocsLayout';
 import { VersionBanner } from '@/components/VersionBanner';
+import { Footer } from '@/components/Footer';
 import EditOnGithub from '@/components/EditOnGithub';
 import { MarkdownContent } from '@/components/MarkdownContent';
 import { generatePageMetadata } from '@/lib/metadata/metadata';
 import { getDefaultVersion, getVersionPath } from '@/lib/versions/version-utils';
 import type { Metadata } from 'next';
-import styles from './page.module.css';
 
 interface PageParams {
   version: string;
@@ -92,9 +90,8 @@ export default async function Page({ params: paramsPromise }: PageProps) {
     notFound();
   }
 
-  // Build navigation tree
+  // Get all documents (needed for replaceChildrenMarkers)
   const allDocs = await getAllDocuments();
-  const navTree = buildNavTree(allDocs, version, doc.slug);
 
   // Extract headings for table of contents (before HTML conversion)
   const headings = extractHeadings(doc.content);
@@ -113,31 +110,23 @@ export default async function Page({ params: paramsPromise }: PageProps) {
   const latestVersionPath = getVersionPath(doc.slug, defaultVersion);
 
   return (
-    <DocsLayout
-      navTree={navTree}
-      currentSlug={doc.slug}
-      version={version}
-    >
-      <article>
-        {/* Version Banner inside article for same width */}
-        <VersionBanner
-          version={version}
-          latestVersionPath={latestVersionPath}
+    <article>
+      {/* Version Banner inside article for same width */}
+      <VersionBanner
+        version={version}
+        latestVersionPath={latestVersionPath}
+      />
+
+      <MarkdownContent html={htmlContent} />
+
+      <Footer>
+        <EditOnGithub
+          version={doc.version}
+          filePath={doc.filePath}
+          category={doc.category}
+          optionalFeature={doc.optionalFeature}
         />
-
-        <div className={styles.contentWrapper}>
-          <MarkdownContent html={htmlContent} />
-        </div>
-
-        <footer className={styles.footer}>
-          <EditOnGithub
-            version={doc.version}
-            filePath={doc.filePath}
-            category={doc.category}
-            optionalFeature={doc.optionalFeature}
-          />
-        </footer>
-      </article>
-    </DocsLayout>
+      </Footer>
+    </article>
   );
 }

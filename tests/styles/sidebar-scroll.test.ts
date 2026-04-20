@@ -20,8 +20,8 @@ describe('Sidebar Scrollbar Visibility', () => {
     expect(docsLayoutCss).toMatch(/\.sidebarContainer\s*\{[\s\S]*?top:\s*var\(--header-height\)/);
   });
 
-  it('should use max-height with viewport calculation', () => {
-    expect(docsLayoutCss).toMatch(/\.sidebarContainer\s*\{[\s\S]*?max-height:\s*calc\(100vh\s*-\s*var\(--header-height\)\)/);
+  it('should use height with viewport calculation', () => {
+    expect(docsLayoutCss).toMatch(/\.sidebarContainer\s*\{[\s\S]*?height:\s*calc\(100vh\s*-\s*var\(--header-height\)\)/);
   });
 
   it('should set overflow-y to auto', () => {
@@ -37,24 +37,25 @@ describe('Sidebar Scrollbar Visibility', () => {
     }
   });
 
-  it('should maintain mobile fixed positioning in media query', () => {
-    expect(docsLayoutCss).toMatch(/@media\s*\(max-width:\s*1023px\)\s*\{[\s\S]*?\.sidebarContainer\s*\{[\s\S]*?position:\s*fixed/);
+  it('should use fixed positioning in base sidebarContainer styles for mobile', () => {
+    // Mobile uses position: fixed in base class; desktop overrides to sticky via nested media query
+    expect(docsLayoutCss).toMatch(/\.sidebarContainer\s*\{[\s\S]*?position:\s*fixed/);
   });
 
-  it('should maintain mobile height with header-height variable', () => {
-    expect(docsLayoutCss).toMatch(/@media\s*\(max-width:\s*1023px\)\s*\{[\s\S]*?\.sidebarContainer\s*\{[\s\S]*?height:\s*calc\(100vh\s*-\s*var\(--header-height\)\)/);
+  it('should use height with header-height variable in base sidebarContainer styles', () => {
+    // Height is set in base class (not inside a media query)
+    expect(docsLayoutCss).toMatch(/\.sidebarContainer\s*\{[\s\S]*?height:\s*calc\(100vh\s*-\s*var\(--header-height\)\)/);
   });
 
   it('should maintain border-right styling', () => {
-    expect(docsLayoutCss).toMatch(/\.sidebarContainer\s*\{[\s\S]*?border-right:\s*1px solid var\(--theme-border\)/);
+    expect(docsLayoutCss).toMatch(/\.sidebarContainer\s*\{[\s\S]*?border-right:\s*0\.1rem solid var\(--theme-border\)/);
   });
 
-  it('should maintain sidebar width and min-width', () => {
+  it('should maintain sidebar width', () => {
     const rule = docsLayoutCss.match(/\.sidebarContainer\s*\{[\s\S]*?\}/);
     expect(rule).toBeTruthy();
     if (rule) {
-      expect(rule[0]).toMatch(/width:\s*var\(--sidebar-width\)/);
-      expect(rule[0]).toMatch(/min-width:\s*var\(--sidebar-width\)/);
+      expect(rule[0]).toMatch(/width:\s*30rem/);
     }
   });
 });

@@ -106,7 +106,7 @@ describe('initializeCodeBlocks', () => {
     const button = document.createElement('button');
     button.className = 'code-block-copy-btn';
     button.setAttribute('data-code', testCode);
-    button.textContent = '📋 Copy';
+    button.textContent = 'Copy';
     container.appendChild(button);
 
     button.click();
@@ -132,7 +132,7 @@ describe('initializeCodeBlocks', () => {
     const button = document.createElement('button');
     button.className = 'code-block-copy-btn';
     button.setAttribute('data-code', 'test code');
-    button.textContent = '📋 Copy';
+    button.textContent = 'Copy';
     button.setAttribute('aria-label', 'Copy code to clipboard');
     container.appendChild(button);
 
@@ -141,7 +141,7 @@ describe('initializeCodeBlocks', () => {
     // Wait for state change
     await new Promise((resolve) => setTimeout(resolve, 50));
 
-    expect(button.textContent).toBe('✓ Copied!');
+    expect(button.textContent).toBe('Copied!');
     expect(button.classList.contains('copied')).toBe(true);
     expect(button.getAttribute('aria-label')).toBe('Code copied to clipboard');
 
@@ -163,7 +163,7 @@ describe('initializeCodeBlocks', () => {
     const button = document.createElement('button');
     button.className = 'code-block-copy-btn';
     button.setAttribute('data-code', 'test');
-    button.textContent = '📋 Copy';
+    button.textContent = 'Copy';
     container.appendChild(button);
 
     button.click();
@@ -172,7 +172,7 @@ describe('initializeCodeBlocks', () => {
     jest.runAllTimers();
 
     // Button should be reset
-    expect(button.textContent).toBe('📋 Copy');
+    expect(button.textContent).toBe('Copy');
     expect(button.classList.contains('copied')).toBe(false);
 
     jest.useRealTimers();
@@ -194,7 +194,7 @@ describe('initializeCodeBlocks', () => {
     const button = document.createElement('button');
     button.className = 'code-block-copy-btn';
     button.setAttribute('data-code', 'test');
-    button.textContent = '📋 Copy';
+    button.textContent = 'Copy';
     container.appendChild(button);
 
     button.click();
@@ -203,7 +203,7 @@ describe('initializeCodeBlocks', () => {
     await new Promise((resolve) => setTimeout(resolve, 50));
 
     expect(consoleErrorSpy).toHaveBeenCalledWith('Failed to copy code:', expect.any(Error));
-    expect(button.textContent).toBe('❌ Failed');
+    expect(button.textContent).toBe('Failed');
 
     consoleErrorSpy.mockRestore();
     cleanup();

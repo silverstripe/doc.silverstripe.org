@@ -1,68 +1,98 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+import { usePathname } from 'next/navigation';
 import cx from 'classnames';
 import Link from 'next/link';
-import { isNodeOrDescendantActive, getActiveAncestorsSlug } from '@/lib/nav/build-nav-tree';
-import type { NavNode } from '@/types/types';
+import { isNodeOrDescendantActiveByPath, getAncestorsByPath } from '@/lib/nav/build-nav-tree';
+import type { NavNode, DocsContext } from '@/types/types';
+import { DarkModeToggle } from '@/components/DarkModeToggle';
+import { Github } from '@/components/Github';
+import { SearchBox } from '@/components/SearchBox';
 import styles from './Sidebar.module.css';
 
 interface SidebarProps {
   navTree: NavNode[];
-  currentSlug: string;
+  docsContext?: DocsContext;
 }
 
 /**
  * Sidebar navigation component with expandable folders
- * Automatically expands ancestors of current page, manual toggles are session-only
+ * Uses usePathname() for active state so it persists across navigations without remounting.
+ *
+ * Expansion state uses two explicit override sets instead of XOR to ensure manual
+ * closes/opens are respected correctly as the auto-expanded set changes on navigation:
+ *   - manuallyOpened: sections the user explicitly opened (not auto-expanded)
+ *   - manuallyClosed: sections the user explicitly closed (was auto-expanded)
+ * When a section becomes auto-expanded again (user navigates into it), it is removed
+ * from manuallyClosed so it will open correctly.
  */
-export function Sidebar({ navTree, currentSlug }: SidebarProps) {
+export function Sidebar({ navTree, docsContext = 'docs' }: SidebarProps) {
   const [isHydrated, setIsHydrated] = useState(false);
-  const [manuallyToggled, setManuallyToggled] = useState<Set<string>>(new Set());
+  const [manuallyOpened, setManuallyOpened] = useState<Set<string>>(new Set());
+  const [manuallyClosed, setManuallyClosed] = useState<Set<string>>(new Set());
+  const pathname = usePathname();
 
   const autoExpandedSlugs = useMemo(() => {
     const expanded = new Set<string>();
+    if (!pathname) return expanded;
     navTree.forEach((node) => {
-      const ancestors = getActiveAncestorsSlug(node);
+      const ancestors = getAncestorsByPath(node, pathname);
       ancestors.forEach((slug) => expanded.add(slug));
     });
     return expanded;
-  }, [currentSlug, navTree]);
+  }, [pathname, navTree]);
+
+  // When a section becomes an ancestor of the current page, clear any manual close for it
+  // so it auto-expands as expected.
+  useEffect(() => {
+    setManuallyClosed((prev) => {
+      const next = new Set(prev);
+      let changed = false;
+      autoExpandedSlugs.forEach((slug) => {
+        if (next.has(slug)) {
+          next.delete(slug);
+          changed = true;
+        }
+      });
+      return changed ? next : prev;
+    });
+  }, [autoExpandedSlugs]);
 
   useEffect(() => {
     setIsHydrated(true);
   }, []);
 
-  const toggleExpanded = (slug: string) => {
-    const newToggled = new Set(manuallyToggled);
-    if (newToggled.has(slug)) {
-      newToggled.delete(slug);
-    } else {
-      newToggled.add(slug);
-    }
-    setManuallyToggled(newToggled);
-  };
-
-  // Determine final expanded state using XOR logic:
-  // - If a section is toggled, its state is opposite of its auto-expansion status
-  // - This allows manually overriding auto-expansion of ancestors
-  // - And manually opening non-ancestor sections
   const allExpandedSlugs = useMemo(() => {
     const result = new Set(autoExpandedSlugs);
-    manuallyToggled.forEach((slug) => {
-      if (result.has(slug)) {
-        result.delete(slug);
-      } else {
-        result.add(slug);
-      }
-    });
+    manuallyClosed.forEach((slug) => result.delete(slug));
+    manuallyOpened.forEach((slug) => result.add(slug));
     return result;
-  }, [autoExpandedSlugs, manuallyToggled]);
+  }, [autoExpandedSlugs, manuallyClosed, manuallyOpened]);
+
+  const toggleExpanded = (slug: string, currentlyExpanded: boolean) => {
+    if (currentlyExpanded) {
+      setManuallyClosed((prev) => new Set(prev).add(slug));
+      setManuallyOpened((prev) => {
+        const next = new Set(prev);
+        next.delete(slug);
+        return next;
+      });
+    } else {
+      setManuallyOpened((prev) => new Set(prev).add(slug));
+      setManuallyClosed((prev) => {
+        const next = new Set(prev);
+        next.delete(slug);
+        return next;
+      });
+    }
+  };
 
   const renderNode = (node: NavNode, depth: number = 0): React.ReactNode => {
     const isExpanded = allExpandedSlugs.has(node.slug);
     const hasChildren = node.children.length > 0;
-    const isActive = node.isActive || isNodeOrDescendantActive(node);
+    const currentPath = pathname || '';
+    const isActive = node.slug === currentPath || isNodeOrDescendantActiveByPath(node, currentPath);
 
     const linkClasses = cx(
       styles.navLink,
@@ -82,28 +112,14 @@ export function Sidebar({ navTree, currentSlug }: SidebarProps) {
           {hasChildren && (
             <button
               className={styles.navToggle}
-              onClick={() => toggleExpanded(node.slug)}
+              type="button"
+              onClick={() => toggleExpanded(node.slug, isExpanded)}
               aria-expanded={isExpanded}
               aria-label={`Toggle ${node.title}`}
             >
               <span className={cx(styles.chevron, { [styles.expanded]: isExpanded })}>
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <polyline
-                    points="4 3 8 6 4 9"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" width="7" height="8" fill="none" viewBox="0 0 7 8" aria-hidden="true">
+                  <path fill="currentColor" d="M1.549 0a.75.75 0 0 1 .396.12l3.903 3.068c.091.096.152.192.152.312s-.061.216-.152.312L1.945 6.88A.75.75 0 0 1 1.55 7a.75.75 0 0 1-.397-.12A.36.36 0 0 1 1 6.568V.432c0-.12.03-.216.152-.312A.75.75 0 0 1 1.55 0" />
                 </svg>
               </span>
             </button>
@@ -124,10 +140,22 @@ export function Sidebar({ navTree, currentSlug }: SidebarProps) {
   };
 
   return (
-    <nav className={cx(styles.sidebar, { [styles.hydrated]: isHydrated })} role="navigation">
-      <ul className={styles.nav}>
-        {navTree.map((node) => renderNode(node, 0))}
-      </ul>
-    </nav>
+    <>
+      <div className={styles.search}>
+        <SearchBox />
+      </div>
+      <nav className={cx(styles.sidebar, { [styles.hydrated]: isHydrated })} role="navigation">
+        <ul className={styles.nav}>
+          {navTree.map((node) => renderNode(node, 0))}
+        </ul>
+      </nav>
+      <div className={styles.footer}>
+        {/* Github link */}
+        <Github docsContext={docsContext} />
+
+        {/* Light and dark mode toggle */}
+        <DarkModeToggle />
+      </div>
+    </>
   );
 }

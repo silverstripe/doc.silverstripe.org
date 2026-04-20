@@ -1,6 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { usePathname } from 'next/navigation';
 import { Sidebar } from '@/components/Sidebar';
 import { NavNode } from '@/types/types';
 
@@ -13,7 +14,29 @@ jest.mock('next/link', () => {
   );
 });
 
+// Mock next/navigation
+jest.mock('next/navigation', () => ({
+  usePathname: jest.fn(() => '/en/6/'),
+}));
+
+// Mock components with external dependencies
+jest.mock('@/components/SearchBox', () => ({
+  SearchBox: () => <div data-testid="search-box">SearchBox</div>,
+}));
+
+jest.mock('@/components/Github', () => ({
+  Github: () => <a data-testid="github-link" href="#">GitHub</a>,
+}));
+
+jest.mock('@/components/DarkModeToggle', () => ({
+  DarkModeToggle: () => <div data-testid="dark-mode-toggle">DarkModeToggle</div>,
+}));
+
 describe('Sidebar', () => {
+  beforeEach(() => {
+    (usePathname as jest.Mock).mockReturnValue('/en/6/');
+  });
+
   const mockNavTree: NavNode[] = [
     {
       slug: '/en/6/getting_started/',
@@ -43,21 +66,21 @@ describe('Sidebar', () => {
   ];
 
   it('should render navigation items', () => {
-    render(<Sidebar navTree={mockNavTree} currentSlug="/en/6/" />);
+    render(<Sidebar navTree={mockNavTree} />);
 
     expect(screen.getByText('Getting Started')).toBeInTheDocument();
     expect(screen.getByText('Developer Guides')).toBeInTheDocument();
   });
 
   it('should render toggle buttons for items with children', () => {
-    render(<Sidebar navTree={mockNavTree} currentSlug="/en/6/" />);
+    render(<Sidebar navTree={mockNavTree} />);
 
     const toggles = screen.getAllByRole('button');
     expect(toggles.length).toBeGreaterThan(0);
   });
 
   it('should expand/collapse children on toggle click', async () => {
-    render(<Sidebar navTree={mockNavTree} currentSlug="/en/6/" />);
+    render(<Sidebar navTree={mockNavTree} />);
 
     // Installation should not be visible initially (not in ancestors)
     let installation = screen.queryByText('Installation');
@@ -75,6 +98,7 @@ describe('Sidebar', () => {
   });
 
   it('should auto-expand parent of active page', async () => {
+    (usePathname as jest.Mock).mockReturnValue('/en/6/getting_started/installation/');
     const activeTree: NavNode[] = [
       {
         slug: '/en/6/getting_started/',
@@ -87,7 +111,7 @@ describe('Sidebar', () => {
             slug: '/en/6/getting_started/installation/',
             title: 'Installation',
             isIndex: false,
-            isActive: true,
+            isActive: false,
             hasVisibleChildren: false,
             children: [],
           },
@@ -95,7 +119,7 @@ describe('Sidebar', () => {
       },
     ];
 
-    render(<Sidebar navTree={activeTree} currentSlug="/en/6/getting_started/installation/" />);
+    render(<Sidebar navTree={activeTree} />);
 
     // Installation should be visible because parent is auto-expanded
     await waitFor(() => {
@@ -104,29 +128,26 @@ describe('Sidebar', () => {
   });
 
   it('should mark active page with active class', async () => {
+    (usePathname as jest.Mock).mockReturnValue('/en/6/getting_started/');
     const activeTree: NavNode[] = [
       {
         slug: '/en/6/getting_started/',
         title: 'Getting Started',
         isIndex: true,
-        isActive: true,
+        isActive: false,
         hasVisibleChildren: false,
         children: [],
       },
     ];
 
-    render(<Sidebar navTree={activeTree} currentSlug="/en/6/getting_started/" />);
+    render(<Sidebar navTree={activeTree} />);
 
     const activeLink = screen.getByText('Getting Started');
     expect(activeLink).toHaveClass('active');
   });
 
-
-
-
-
   it('should render links with correct href', () => {
-    render(<Sidebar navTree={mockNavTree} currentSlug="/en/6/" />);
+    render(<Sidebar navTree={mockNavTree} />);
 
     const links = screen.getAllByRole('link');
     expect(links[0]).toHaveAttribute('href', '/en/6/getting_started/');
@@ -134,7 +155,7 @@ describe('Sidebar', () => {
   });
 
   it('should handle empty nav tree', () => {
-    render(<Sidebar navTree={[]} currentSlug="/en/6/" />);
+    render(<Sidebar navTree={[]} />);
 
     const nav = screen.getByRole('navigation');
     expect(nav).toBeInTheDocument();
@@ -142,17 +163,18 @@ describe('Sidebar', () => {
   });
 
   it('should not render toggle for items without children', () => {
-    render(<Sidebar navTree={mockNavTree} currentSlug="/en/6/" />);
+    render(<Sidebar navTree={mockNavTree} />);
 
     const devGuidesLink = screen.getByText('Developer Guides');
     const parent = devGuidesLink.closest('li');
-    
+
     // Should have spacer instead of toggle (just verify no button for items without children)
     const toggle = parent?.querySelector('button');
     expect(toggle).not.toBeInTheDocument();
   });
 
   it('should render nested items with correct depth classes - auto-expanded only', () => {
+    (usePathname as jest.Mock).mockReturnValue('/en/6/level1/level2/level3/');
     const deepTree: NavNode[] = [
       {
         slug: '/en/6/level1/',
@@ -172,7 +194,7 @@ describe('Sidebar', () => {
                 slug: '/en/6/level1/level2/level3/',
                 title: 'Level 3',
                 isIndex: false,
-                isActive: true,
+                isActive: false,
                 hasVisibleChildren: false,
                 children: [],
               },
@@ -182,7 +204,7 @@ describe('Sidebar', () => {
       },
     ];
 
-    render(<Sidebar navTree={deepTree} currentSlug="/en/6/level1/level2/level3/" />);
+    render(<Sidebar navTree={deepTree} />);
 
     // Level 2 and 3 should be auto-expanded (ancestors of active node)
     expect(screen.getByText('Level 2')).toBeInTheDocument();
@@ -200,6 +222,7 @@ describe('Sidebar', () => {
   });
 
   it('should not apply animation class on initial mount for expanded items', async () => {
+    (usePathname as jest.Mock).mockReturnValue('/en/6/parent/active_child/');
     const autoExpandTree: NavNode[] = [
       {
         slug: '/en/6/parent/',
@@ -212,7 +235,7 @@ describe('Sidebar', () => {
             slug: '/en/6/parent/active_child/',
             title: 'Active Child',
             isIndex: false,
-            isActive: true,
+            isActive: false,
             hasVisibleChildren: false,
             children: [],
           },
@@ -220,7 +243,7 @@ describe('Sidebar', () => {
       },
     ];
 
-    render(<Sidebar navTree={autoExpandTree} currentSlug="/en/6/parent/active_child/" />);
+    render(<Sidebar navTree={autoExpandTree} />);
 
     // Auto-expanded items should be visible immediately
     await waitFor(() => {
@@ -236,11 +259,11 @@ describe('Sidebar', () => {
   });
 
   it('should apply correct margin to base level toggle', () => {
-    render(<Sidebar navTree={mockNavTree} currentSlug="/en/6/" />);
+    render(<Sidebar navTree={mockNavTree} />);
 
     const toggles = screen.getAllByRole('button');
     const baseToggle = toggles[0];
-    
+
     // Base level toggle should not have depth classes
     expect(baseToggle).toHaveClass('navToggle');
     expect(baseToggle).not.toHaveClass('depth1');
@@ -249,5 +272,4 @@ describe('Sidebar', () => {
     const baseLi = baseToggle.closest('li');
     expect(baseLi).not.toHaveClass('nested');
   });
-
 });

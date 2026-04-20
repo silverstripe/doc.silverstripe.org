@@ -1,0 +1,42 @@
+/**
+ * Button styles
+ */
+
+.btn {
+  border-radius: var(--border-radius-xs);
+  font-weight: var(--font-weight-semibold);
+  padding: 1rem 2rem;
+  transition: var(--transition-color);
+
+  & {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.btn-primary {
+  background-color: var(--theme-color-primary);
+  color: white;
+
+  &:hover {
+    background-color: #0046a6;
+  }
+}
+
+.btn-secondary {
+  background-color: var(--theme-text-secondary);
+  color: white;
+
+  &:hover {
+    background-color: var(--theme-text-primary);
+  }
+}
+
+.btn-light {
+  background-color: var(--theme-bg-light);
+  color: var(--theme-color-primary);
+
+  &:hover {
+    background-color: var(--theme-bg-light);
+  }
+}
+

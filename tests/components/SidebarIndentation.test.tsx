@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { usePathname } from 'next/navigation';
 import { Sidebar } from '@/components/Sidebar';
 import { NavNode } from '@/types/types';
 
@@ -13,7 +14,29 @@ jest.mock('next/link', () => {
   );
 });
 
+// Mock next/navigation
+jest.mock('next/navigation', () => ({
+  usePathname: jest.fn(() => '/en/6/'),
+}));
+
+// Mock components with external dependencies
+jest.mock('@/components/SearchBox', () => ({
+  SearchBox: () => <div data-testid="search-box">SearchBox</div>,
+}));
+
+jest.mock('@/components/Github', () => ({
+  Github: () => <a data-testid="github-link" href="#">GitHub</a>,
+}));
+
+jest.mock('@/components/DarkModeToggle', () => ({
+  DarkModeToggle: () => <div data-testid="dark-mode-toggle">DarkModeToggle</div>,
+}));
+
 describe('SidebarIndentation', () => {
+  beforeEach(() => {
+    (usePathname as jest.Mock).mockReturnValue('/en/6/');
+  });
+
   const mockNavTree: NavNode[] = [
     {
       slug: '/en/6/level1/',
@@ -33,7 +56,7 @@ describe('SidebarIndentation', () => {
               slug: '/en/6/level1/level2/level3/',
               title: 'Level 3',
               isIndex: false,
-              isActive: true,
+              isActive: false,
               hasVisibleChildren: true,
               children: [
                 {
@@ -63,7 +86,7 @@ describe('SidebarIndentation', () => {
 
   it('should render depth-0 class for root level items', () => {
     const { container } = render(
-      <Sidebar navTree={mockNavTree} currentSlug="/en/6/" />
+      <Sidebar navTree={mockNavTree} />
     );
 
     // Root items always render and should have depth-0
@@ -73,20 +96,20 @@ describe('SidebarIndentation', () => {
 
   it('should render only depth-0 items when no items are expanded', () => {
     const { container } = render(
-      <Sidebar navTree={mockNavTree} currentSlug="/en/6/" />
+      <Sidebar navTree={mockNavTree} />
     );
 
     // Only root (depth-0) items render by default
     const depth0Items = container.querySelectorAll('li.depth-0');
-    const depth1Items = container.querySelectorAll('li.depth-1');
-    
+
     expect(depth0Items.length).toBeGreaterThan(0);
     // Without expansion, depth-1 items won't be present (they're conditionally rendered)
   });
 
   it('should apply depth classes correctly for all nesting levels when auto-expanded', async () => {
+    (usePathname as jest.Mock).mockReturnValue('/en/6/level1/level2/level3/');
     const { container } = render(
-      <Sidebar navTree={mockNavTree} currentSlug="/en/6/level1/level2/level3/" />
+      <Sidebar navTree={mockNavTree} />
     );
 
     // Count links at each depth (auto-expansion should have happened)
@@ -103,8 +126,9 @@ describe('SidebarIndentation', () => {
   });
 
   it('should render with depth-0 class on root list items', () => {
+    (usePathname as jest.Mock).mockReturnValue('/en/6/');
     const { container } = render(
-      <Sidebar navTree={mockNavTree} currentSlug="/en/6/" />
+      <Sidebar navTree={mockNavTree} />
     );
 
     // Get root list items
@@ -117,8 +141,9 @@ describe('SidebarIndentation', () => {
   });
 
   it('should not apply nested class to depth-0 items', () => {
+    (usePathname as jest.Mock).mockReturnValue('/en/6/');
     const { container } = render(
-      <Sidebar navTree={mockNavTree} currentSlug="/en/6/" />
+      <Sidebar navTree={mockNavTree} />
     );
 
     const depth0Items = container.querySelectorAll('li.depth-0');
@@ -128,8 +153,9 @@ describe('SidebarIndentation', () => {
   });
 
   it('should have depth class consistently applied to links', () => {
+    (usePathname as jest.Mock).mockReturnValue('/en/6/');
     const { container } = render(
-      <Sidebar navTree={mockNavTree} currentSlug="/en/6/" />
+      <Sidebar navTree={mockNavTree} />
     );
 
     // All links should have a depth class
@@ -142,15 +168,16 @@ describe('SidebarIndentation', () => {
   });
 
   it('should auto-expand ancestors when rendering with nested current slug that matches isActive', () => {
+    (usePathname as jest.Mock).mockReturnValue('/en/6/level1/level2/level3/');
     const { container } = render(
-      <Sidebar navTree={mockNavTree} currentSlug="/en/6/level1/level2/level3/" />
+      <Sidebar navTree={mockNavTree} />
     );
 
-    // When rendering with a deep nested slug matching isActive node, ancestors should auto-expand
+    // When rendering with a deep nested slug, ancestors should auto-expand
     // Check that nested items are visible
     const allItems = container.querySelectorAll('li');
     const depthLevels = new Set<string>();
-    
+
     allItems.forEach(item => {
       const depthMatch = item.className.match(/depth-(\d+)/);
       if (depthMatch) {
@@ -163,8 +190,9 @@ describe('SidebarIndentation', () => {
   });
 
   it('should maintain correct depth hierarchy structure when auto-expanded', async () => {
+    (usePathname as jest.Mock).mockReturnValue('/en/6/level1/level2/level3/');
     const { container } = render(
-      <Sidebar navTree={mockNavTree} currentSlug="/en/6/level1/level2/level3/" />
+      <Sidebar navTree={mockNavTree} />
     );
 
     // Get the structure of depth classes
@@ -190,8 +218,9 @@ describe('SidebarIndentation', () => {
   });
 
   it('should match snapshot for depth class structure when auto-expanded', () => {
+    (usePathname as jest.Mock).mockReturnValue('/en/6/level1/level2/level3/');
     const { container } = render(
-      <Sidebar navTree={mockNavTree} currentSlug="/en/6/level1/level2/level3/" />
+      <Sidebar navTree={mockNavTree} />
     );
 
     // Get the structure of depth classes
@@ -207,8 +236,9 @@ describe('SidebarIndentation', () => {
 
   // New tests for data-depth attributes and visibility
   it('should apply data-depth attribute to list items', () => {
+    (usePathname as jest.Mock).mockReturnValue('/en/6/level1/level2/level3/');
     const { container } = render(
-      <Sidebar navTree={mockNavTree} currentSlug="/en/6/level1/level2/level3/" />
+      <Sidebar navTree={mockNavTree} />
     );
 
     // Check that li elements have data-depth attributes
@@ -224,8 +254,9 @@ describe('SidebarIndentation', () => {
   });
 
   it('should apply data-depth attribute to navItemContainer for CSS indentation', () => {
+    (usePathname as jest.Mock).mockReturnValue('/en/6/level1/level2/level3/');
     const { container } = render(
-      <Sidebar navTree={mockNavTree} currentSlug="/en/6/level1/level2/level3/" />
+      <Sidebar navTree={mockNavTree} />
     );
 
     // Check that navItemContainer divs have data-depth attributes
@@ -246,8 +277,9 @@ describe('SidebarIndentation', () => {
   });
 
   it('should render top-level item visible (not clipped) with depth-0', () => {
+    (usePathname as jest.Mock).mockReturnValue('/en/6/');
     const { container } = render(
-      <Sidebar navTree={mockNavTree} currentSlug="/en/6/" />
+      <Sidebar navTree={mockNavTree} />
     );
 
     // First item should have depth-0 and be visible in DOM
@@ -259,7 +291,8 @@ describe('SidebarIndentation', () => {
   });
 
   it('should render 5 depth levels when fully expanded', () => {
-    // Create a nav tree with isActive at deepest level to trigger auto-expansion
+    (usePathname as jest.Mock).mockReturnValue('/en/6/level1/level2/level3/level4/level5/');
+    // Create a nav tree with a deep path to trigger auto-expansion
     const deepNavTree: NavNode[] = [
       {
         slug: '/en/6/level1/',
@@ -293,7 +326,7 @@ describe('SidebarIndentation', () => {
                         slug: '/en/6/level1/level2/level3/level4/level5/',
                         title: 'Level 5',
                         isIndex: false,
-                        isActive: true, // Active at deepest level
+                        isActive: false,
                         hasVisibleChildren: false,
                         children: [],
                       },
@@ -308,7 +341,7 @@ describe('SidebarIndentation', () => {
     ];
 
     const { container } = render(
-      <Sidebar navTree={deepNavTree} currentSlug="/en/6/level1/level2/level3/level4/level5/" />
+      <Sidebar navTree={deepNavTree} />
     );
 
     // Should have items at all 5 depth levels
@@ -326,7 +359,7 @@ describe('SidebarIndentation', () => {
   });
 
   it('should increase indentation with each depth level via data-depth attribute', () => {
-    // Create a nav tree with isActive at deepest level to trigger auto-expansion
+    (usePathname as jest.Mock).mockReturnValue('/en/6/level1/level2/level3/level4/level5/');
     const deepNavTree: NavNode[] = [
       {
         slug: '/en/6/level1/',
@@ -360,7 +393,7 @@ describe('SidebarIndentation', () => {
                         slug: '/en/6/level1/level2/level3/level4/level5/',
                         title: 'Level 5',
                         isIndex: false,
-                        isActive: true, // Active at deepest level
+                        isActive: false,
                         hasVisibleChildren: false,
                         children: [],
                       },
@@ -375,7 +408,7 @@ describe('SidebarIndentation', () => {
     ];
 
     const { container } = render(
-      <Sidebar navTree={deepNavTree} currentSlug="/en/6/level1/level2/level3/level4/level5/" />
+      <Sidebar navTree={deepNavTree} />
     );
 
     // Verify each depth level has correct data-depth on navItemContainer

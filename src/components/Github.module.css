@@ -1,0 +1,15 @@
+.github {
+  --fa-width: 3rem;
+
+  display: flex;
+  font-size: 3rem;
+
+  &:hover {
+    color: var(--theme-color-primary);
+  }
+
+  &:focus-visible {
+    border-radius: 1.5rem;
+  }
+}
+

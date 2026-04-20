@@ -1,0 +1,9 @@
+/**
+ * Icon styles
+ */
+
+.theme-icon-holder {
+  color: var(--theme-color-primary);
+  font-size: var(--font-size-xl);
+  flex-shrink: 0;
+}

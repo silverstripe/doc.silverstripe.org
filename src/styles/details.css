@@ -1,0 +1,84 @@
+/**
+ * Details and summary styles
+ *
+ * Collapsable (accordion) content sections
+ */
+
+details {
+  border: 0.1rem solid var(--theme-border);
+  border-radius: var(--border-radius-sm);
+  margin: var(--spacing-lg) 0;
+  padding: 0;
+  background: var(--theme-bg-light);
+  overflow: hidden;
+}
+
+/* Remove default browser disclosure triangle */
+details > summary {
+  list-style: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+  user-select: none;
+  transition: all var(--transition-standard);
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  margin: 0;
+  border-bottom: none;
+  position: relative;
+}
+
+/* Custom toggle arrow */
+summary::before {
+  background: var(--theme-text-primary);
+  clip-path: polygon(30% 20%, 70% 50%, 30% 80%);
+  content: '';
+  display: inline-block;
+  height: 1.8rem;
+  flex-shrink: 0;
+  margin-right: var(--spacing-md);
+  transition: transform var(--transition-standard);
+  width: 1.8rem;
+}
+
+details[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+summary:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 0.1rem;
+  text-underline-offset: 0.3rem;
+}
+
+/* Content wrapper */
+details > :not(summary)
+{
+  border-top: 0.1rem solid var(--theme-border);
+  padding: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md);
+}
+
+details > ul {
+  margin-left: var(--spacing-md);
+}
+
+/* Ensure rounded corners on all 4 sides */
+details {
+  border-radius: var(--border-radius-sm);
+}
+
+details > summary {
+  border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+}
+
+details[open] > summary {
+  border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+}

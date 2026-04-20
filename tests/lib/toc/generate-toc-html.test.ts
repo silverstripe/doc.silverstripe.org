@@ -17,7 +17,7 @@ describe('generateTocHtml', () => {
 
       expect(html).toContain('class="toc"');
       expect(html).toContain('aria-label="Table of contents"');
-      expect(html).toContain('class="toc-title"');
+      expect(html).toContain('toc-title');
       expect(html).toContain('On this page');
       expect(html).toContain('href="#first"');
       expect(html).toContain('href="#second"');
@@ -79,10 +79,10 @@ describe('generateTocHtml', () => {
       const html = generateTocHtml(headings);
 
       expect(html).toMatch(/<nav class="toc"[^>]*>/);
-      expect(html).toContain('<h2 class="toc-title">');
+      expect(html).toContain('<h2 class="toc-title h5">');
       expect(html).toContain('<ul class="toc-list">');
       expect(html).toContain('<li class="toc-item"');
-      expect(html).toContain('<a href="#test" class="toc-link">');
+      expect(html).toContain('<a href="#test" class="toc-link link">');
       expect(html).toContain('</nav>');
     });
   });

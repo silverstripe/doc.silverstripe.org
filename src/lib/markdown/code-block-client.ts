@@ -44,7 +44,7 @@ async function handleCopyClick(button: HTMLButtonElement) {
 
     // Show feedback
     const originalText = button.textContent;
-    button.textContent = '✓ Copied!';
+    button.textContent = 'Copied!';
     button.classList.add('copied');
     button.setAttribute('aria-label', 'Code copied to clipboard');
 
@@ -56,9 +56,9 @@ async function handleCopyClick(button: HTMLButtonElement) {
     }, 2000);
   } catch (err) {
     console.error('Failed to copy code:', err);
-    button.textContent = '❌ Failed';
+    button.textContent = 'Failed';
     setTimeout(() => {
-      button.textContent = '📋 Copy';
+      button.textContent = 'Copy';
     }, 2000);
   }
 }

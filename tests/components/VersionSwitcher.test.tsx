@@ -16,7 +16,7 @@ jest.mock('next/navigation', () => ({
 describe('VersionSwitcher', () => {
   let mockPush: jest.Mock;
   let mockUsePathname: jest.Mock;
-  
+
   // Dynamically find a supported version (not current, not EOL)
   // Note that the `|| ''` is so that the `string | undefined` return type of find() will always be string type
   const supportedVersion = getAllVersions().find(v => getVersionStatus(v) === 'supported') || '';
@@ -95,13 +95,13 @@ describe('VersionSwitcher', () => {
     expect(mockPush).toHaveBeenCalledWith(`/en/${supportedVersion}/`);
   });
 
-  it('should have correct label text visible', () => {
+  it('should have accessible select with aria-label', () => {
     render(
       <VersionSwitcher currentVersion={DEFAULT_VERSION} currentSlug={`/en/${DEFAULT_VERSION}/getting-started/`} />
     );
 
-    const label = screen.getByText('Version:');
-    expect(label).toBeInTheDocument();
+    const select = screen.getByRole('combobox', { name: /select documentation version/i });
+    expect(select).toBeInTheDocument();
   });
 
   it('should display version status in option labels', () => {
