@@ -3,7 +3,7 @@
     "main": {
       "repo": "developer-docs",
       "owner": "silverstripe",
-      "branch": "6.2",
+      "branch": "6.3",
       "docsPath": "en"
     },
     "optionalFeatures": {
@@ -31,7 +31,7 @@
       "realme": {
         "repo": "silverstripe-realme",
         "owner": "silverstripe",
-        "branch": "6.0",
+        "branch": "6.1",
         "docsPath": "docs/en",
         "excludePath": "docs/en/userguide"
       },
@@ -80,7 +80,7 @@
       "htmleditor-tinymce": {
         "repo": "silverstripe-htmleditor-tinymce",
         "owner": "silverstripe",
-        "branch": "1.1",
+        "branch": "1.2",
         "docsPath": "docs/en",
         "excludePath": "docs/en/userguide"
       },
