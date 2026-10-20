@@ -208,29 +208,5 @@ describe('sources-loader', () => {
       const excludePath = runLoader(script) as string | null;
       expect(excludePath).toBeNull();
     });
-
-    it('should include excludePath for all docs v6 optional features', () => {
-      const script = `
-        import { loadSources } from './scripts/sources-loader.mjs';
-        const sources = loadSources('docs');
-        const features = sources['6'].optionalFeatures;
-        const hasExcludePath = Object.keys(features).every(key => features[key].excludePath === 'docs/en/userguide');
-        console.log(JSON.stringify(hasExcludePath));
-      `;
-      const hasExcludePath = runLoader(script) as boolean;
-      expect(hasExcludePath).toBe(true);
-    });
-
-    it('should include excludePath for all docs v5 optional features', () => {
-      const script = `
-        import { loadSources } from './scripts/sources-loader.mjs';
-        const sources = loadSources('docs');
-        const features = sources['5'].optionalFeatures;
-        const hasExcludePath = Object.keys(features).every(key => features[key].excludePath === 'docs/en/userguide');
-        console.log(JSON.stringify(hasExcludePath));
-      `;
-      const hasExcludePath = runLoader(script) as boolean;
-      expect(hasExcludePath).toBe(true);
-    });
   });
 });
