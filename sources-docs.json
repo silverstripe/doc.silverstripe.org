@@ -56,6 +56,12 @@
         "docsPath": "docs/en",
         "excludePath": "docs/en/userguide"
       },
+      "userdocs-admin": {
+        "repo": "silverstripe-userdocs-admin",
+        "owner": "silverstripe",
+        "branch": "1.0",
+        "docsPath": "docs/developers/en"
+      },
       "advancedworkflow": {
         "repo": "silverstripe-advancedworkflow",
         "owner": "silverstripe",
